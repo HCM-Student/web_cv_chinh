@@ -18,39 +18,47 @@ namespace WEB_CV.Data
         {
             base.OnModelCreating(mb);
 
-            // Khóa chính bảng nối N-N
+            // ===== User =====
+            // Email duy nhất để đăng nhập
+            mb.Entity<NguoiDung>()
+              .HasIndex(x => x.Email)
+              .IsUnique();
+
+            // ===== N-N: BaiViet <-> Tag (bảng nối) =====
             mb.Entity<BaiVietTag>().HasKey(x => new { x.BaiVietId, x.TagId });
 
-            // BaiViet → ChuyenMuc (1-n)
-            mb.Entity<BaiViet>()
-              .HasOne(x => x.ChuyenMuc)
-              .WithMany(x => x.BaiViets)
-              .HasForeignKey(x => x.ChuyenMucId)
-              .OnDelete(DeleteBehavior.Restrict);
-
-            // BaiViet → NguoiDung (tác giả) (1-n)
-            mb.Entity<BaiViet>()
-              .HasOne(x => x.TacGia)
-              .WithMany(x => x.BaiViets)
-              .HasForeignKey(x => x.TacGiaId)
-              .OnDelete(DeleteBehavior.Restrict);
-
-            // BinhLuan → BaiViet (1-n)
-            mb.Entity<BinhLuan>()
-              .HasOne(x => x.BaiViet)
-              .WithMany(x => x.BinhLuans)
-              .HasForeignKey(x => x.BaiVietId);
-
-            // N-N: BaiViet ↔ Tag
             mb.Entity<BaiVietTag>()
               .HasOne(x => x.BaiViet)
               .WithMany(x => x.BaiVietTags)
-              .HasForeignKey(x => x.BaiVietId);
+              .HasForeignKey(x => x.BaiVietId)
+              .OnDelete(DeleteBehavior.Cascade); // xoá bài -> xoá bản ghi nối
 
             mb.Entity<BaiVietTag>()
               .HasOne(x => x.Tag)
               .WithMany(x => x.BaiVietTags)
-              .HasForeignKey(x => x.TagId);
+              .HasForeignKey(x => x.TagId)
+              .OnDelete(DeleteBehavior.Cascade); // xoá tag -> xoá bản ghi nối
+
+            // ===== 1-n: BaiViet -> ChuyenMuc =====
+            mb.Entity<BaiViet>()
+              .HasOne(x => x.ChuyenMuc)
+              .WithMany(x => x.BaiViets)
+              .HasForeignKey(x => x.ChuyenMucId)
+              .OnDelete(DeleteBehavior.Restrict); // tránh xoá chuyên mục làm xoá bài
+
+            // ===== 1-n: BaiViet -> NguoiDung (TacGia) =====
+            mb.Entity<BaiViet>()
+              .HasOne(x => x.TacGia)
+              .WithMany(x => x.BaiViets)
+              .HasForeignKey(x => x.TacGiaId)
+              .OnDelete(DeleteBehavior.Restrict); // tránh xoá tác giả làm xoá bài
+
+            // ===== 1-n: BinhLuan -> BaiViet =====
+            mb.Entity<BinhLuan>()
+              .HasOne(x => x.BaiViet)
+              .WithMany(x => x.BinhLuans)
+              .HasForeignKey(x => x.BaiVietId)
+              .OnDelete(DeleteBehavior.Cascade); // xoá bài -> xoá bình luận
         }
     }
 }
