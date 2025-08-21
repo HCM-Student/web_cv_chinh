@@ -61,13 +61,13 @@ using (var scope = app.Services.CreateScope())
             VaiTro = "Admin",
             KichHoat = true
         };
-        admin.MatKhauHash = hasher.HashPassword(admin, "123456"); // nhớ đổi sau khi đăng nhập
+        admin.MatKhauHash = hasher.HashPassword(admin, "123456"); // 👉 Nhớ đổi sau khi đăng nhập
         db.NguoiDungs.Add(admin);
         db.SaveChanges();
     }
 }
 
-// routes
+// Routes (map Areas trước)
 app.MapControllerRoute(
     name: "areas",
     pattern: "{area:exists}/{controller=Dashboard}/{action=Index}/{id?}");

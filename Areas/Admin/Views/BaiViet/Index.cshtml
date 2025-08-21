@@ -1,0 +1,14 @@
+@{
+    ViewData["Title"] = "Quản lý Bài viết";
+}
+<div class="container py-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h1 class="h4 mb-0">Quản lý Bài viết</h1>
+        <a class="btn btn-primary" asp-area="Admin" asp-controller="BaiViet" asp-action="Create">+ Thêm bài viết</a>
+    </div>
+
+    <!-- Placeholder: bảng dữ liệu. Sau này đổ EF Core vào đây -->
+    <div class="alert alert-info">
+        Đây là trang quản lý Bài viết. Bạn có thể thêm/sửa/xóa khi mình cắm dữ liệu thật từ DbContext.
+    </div>
+</div>

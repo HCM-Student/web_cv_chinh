@@ -1,0 +1,40 @@
+@{
+    ViewData["Title"] = "Trang quản trị";
+}
+<div class="container py-4">
+    <h1 class="display-6 mb-1">Xin chào Quản trị 👋</h1>
+    <p class="text-muted mb-4">Đây là Dashboard của khu vực Admin.</p>
+
+    <div class="row g-3">
+        <div class="col-12 col-md-4">
+            <a class="text-decoration-none" asp-area="Admin" asp-controller="BaiViet" asp-action="Index">
+                <div class="card shadow-sm h-100">
+                    <div class="card-body">
+                        <h5 class="card-title mb-2">Bài viết</h5>
+                        <p class="card-text text-muted mb-0">Quản lý, thêm/sửa/xóa bài viết.</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-12 col-md-4">
+            <a class="text-decoration-none" asp-area="Admin" asp-controller="ChuyenMuc" asp-action="Index">
+                <div class="card shadow-sm h-100">
+                    <div class="card-body">
+                        <h5 class="card-title mb-2">Chuyên mục</h5>
+                        <p class="card-text text-muted mb-0">Quản lý phân loại bài viết.</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+        <div class="col-12 col-md-4">
+            <a class="text-decoration-none" asp-area="Admin" asp-controller="NguoiDung" asp-action="Index">
+                <div class="card shadow-sm h-100">
+                    <div class="card-body">
+                        <h5 class="card-title mb-2">Người dùng</h5>
+                        <p class="card-text text-muted mb-0">Quản lý tài khoản và quyền.</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>

@@ -31,40 +31,49 @@ namespace WEB_CV.Controllers
         {
             if (!ModelState.IsValid) return View(vm);
 
-            var user = await _db.NguoiDungs.FirstOrDefaultAsync(x => x.Email == vm.Email && x.KichHoat);
+            var user = await _db.NguoiDungs
+                .FirstOrDefaultAsync(x => x.Email == vm.Email && x.KichHoat);
+
             if (user == null)
             {
-                ModelState.AddModelError("", "Tài khoản không tồn tại hoặc đã bị khóa.");
+                ModelState.AddModelError(string.Empty, "Tài khoản không tồn tại hoặc đã bị khóa.");
                 return View(vm);
             }
 
             var verify = _hasher.VerifyHashedPassword(user, user.MatKhauHash, vm.MatKhau);
             if (verify == PasswordVerificationResult.Failed)
             {
-                ModelState.AddModelError("", "Mật khẩu không đúng.");
+                ModelState.AddModelError(string.Empty, "Mật khẩu không đúng.");
                 return View(vm);
             }
 
+            // Claims
             var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-                new Claim(ClaimTypes.Name, user.HoTen),
+                new Claim(ClaimTypes.Name, user.HoTen ?? string.Empty),
                 new Claim(ClaimTypes.Email, user.Email),
-                new Claim(ClaimTypes.Role, user.VaiTro)
+                new Claim(ClaimTypes.Role, user.VaiTro ?? "User")
             };
 
             var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
             var principal = new ClaimsPrincipal(identity);
 
-            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal,
+            await HttpContext.SignInAsync(
+                CookieAuthenticationDefaults.AuthenticationScheme,
+                principal,
                 new AuthenticationProperties { IsPersistent = vm.GhiNho });
 
+            // Ưu tiên quay lại trang cũ nếu local
             if (!string.IsNullOrEmpty(vm.ReturnUrl) && Url.IsLocalUrl(vm.ReturnUrl))
-                return Redirect(vm.ReturnUrl);
+                return LocalRedirect(vm.ReturnUrl);
 
-            return user.VaiTro == "Admin"
-                ? RedirectToAction("Index", "Dashboard", new { area = "Admin" })
-                : RedirectToAction("Index", "Home");
+            // 👉 Admin: bay thẳng vào khu vực quản trị (Bài Viết). Muốn vào Dashboard thì đổi controller = "Dashboard"
+            if (string.Equals(user.VaiTro, "Admin", StringComparison.OrdinalIgnoreCase))
+                return RedirectToAction("Index", "BaiViet", new { area = "Admin" });
+
+            // User thường
+            return RedirectToAction("Index", "Home");
         }
 
         [HttpGet, AllowAnonymous]
@@ -98,7 +107,7 @@ namespace WEB_CV.Controllers
             var claims = new List<Claim>
             {
                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-                new Claim(ClaimTypes.Name, user.HoTen),
+                new Claim(ClaimTypes.Name, user.HoTen ?? string.Empty),
                 new Claim(ClaimTypes.Email, user.Email),
                 new Claim(ClaimTypes.Role, user.VaiTro)
             };
