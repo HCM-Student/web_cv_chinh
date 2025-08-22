@@ -1,8 +1,347 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Trang chủ";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<!-- ======= HERO (full-bleed, big text, animated waves) ======= -->
+<section class="hero-wrap full-bleed">
+    <div id="mainHero" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="6000">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#mainHero" data-bs-slide-to="0" class="active" aria-current="true"></button>
+            <button type="button" data-bs-target="#mainHero" data-bs-slide-to="1"></button>
+            <button type="button" data-bs-target="#mainHero" data-bs-slide-to="2"></button>
+        </div>
+
+        <div class="carousel-inner">
+            <!-- Slide 1 -->
+            <div class="carousel-item active">
+                <div class="slide-bg" style="background-image:url('@Url.Content("~/img/hero/hero-1.jpg")')"></div>
+                <div class="slide-overlay"></div>
+
+                <div class="container position-relative z-1">
+                    <div class="row align-items-center min-vh-75 py-5">
+                        <div class="col-xl-9 col-lg-10 mx-auto text-center">
+                            <div class="eyebrow mb-3">Bộ giải pháp chuyển đổi số đa ngành</div>
+
+                            <h1 class="headline-xxl mb-2">
+                                CUNG CẤP GIẢI PHÁP BẢN ĐỒ, CSDL,<br />
+                                MÔ HÌNH 3D VÀ PHẦN MỀM ĐỊA KHÔNG GIAN
+                            </h1>
+
+                            <p class="subline-lg text-white-50 mb-4">
+                                LiDAR • UAV • 3D Tour • IoT • AI cho Smart City & doanh nghiệp
+                            </p>
+
+                            <div class="d-flex gap-2 justify-content-center">
+                                <a href="#services" class="btn btn-primary btn-lg btn-pill px-4">Khám phá dịch vụ</a>
+                                <a href="#about" class="btn btn-outline-light btn-lg btn-pill px-4">Chi tiết</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 2 -->
+            <div class="carousel-item">
+                <div class="slide-bg" style="background-image:url('@Url.Content("~/img/hero/hero-2.jpg")')"></div>
+                <div class="slide-overlay"></div>
+                <div class="container position-relative z-1">
+                    <div class="row align-items-center min-vh-75 py-5">
+                        <div class="col-xl-9 col-lg-10 mx-auto text-center">
+                            <div class="eyebrow mb-3">LiDAR · UAV · 3D Tour · IoT</div>
+                            <h2 class="headline-xxl mb-2">MÔ HÌNH 3D CHÍNH XÁC & PHÂN TÍCH THỜI GIAN THỰC</h2>
+                            <p class="subline-lg text-white-50 mb-4">Đám mây điểm, dựng 3D công trình/địa hình & dashboard ra quyết định.</p>
+                            <a href="#projects" class="btn btn-light btn-lg btn-pill px-4">Dự án tiêu biểu</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 3 -->
+            <div class="carousel-item">
+                <div class="slide-bg" style="background-image:url('@Url.Content("~/img/hero/hero-3.jpg")')"></div>
+                <div class="slide-overlay"></div>
+                <div class="container position-relative z-1">
+                    <div class="row align-items-center min-vh-75 py-5">
+                        <div class="col-xl-9 col-lg-10 mx-auto text-center">
+                            <div class="eyebrow mb-3">Smart City Platform</div>
+                            <h2 class="headline-xxl mb-2">QUẢN TRỊ CSDL ĐỊA KHÔNG GIAN TẬP TRUNG</h2>
+                            <p class="subline-lg text-white-50 mb-4">Chuẩn hóa – tích hợp – phân quyền – vận hành ổn định, mở rộng linh hoạt.</p>
+                            <a href="#contact" class="btn btn-primary btn-lg btn-pill px-4">Liên hệ tư vấn</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- arrows -->
+        <button class="carousel-control-prev" type="button" data-bs-target="#mainHero" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+            <span class="visually-hidden">Trước</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#mainHero" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+            <span class="visually-hidden">Sau</span>
+        </button>
+    </div>
+
+    <!-- WAVE ANIMATION -->
+    <div class="waves-anim" aria-hidden="true">
+        <svg class="wave w1" viewBox="0 0 1440 120" preserveAspectRatio="none">
+            <path d="M0,96 C240,144 480,48 720,72 C960,96 1200,144 1440,96 L1440,120 L0,120 Z" fill="#ffffff"/>
+        </svg>
+        <svg class="wave w2" viewBox="0 0 1440 120" preserveAspectRatio="none">
+            <path d="M0,104 C240,152 480,56 720,80 C960,104 1200,152 1440,104 L1440,120 L0,120 Z" fill="#ffffff" opacity=".65"/>
+        </svg>
+        <svg class="wave w3" viewBox="0 0 1440 120" preserveAspectRatio="none">
+            <path d="M0,112 C240,160 480,64 720,88 C960,112 1200,160 1440,112 L1440,120 L0,120 Z" fill="#ffffff" opacity=".35"/>
+        </svg>
+    </div>
+</section>
+
+<!-- ===== GLASS FEATURE STRIP ===== -->
+<div class="glass-strip">
+    <div class="container">
+        <div class="row g-3">
+            <div class="col-12 col-md-4">
+                <div class="glass-card rounded-4 p-3 h-100">
+                    <div class="d-flex align-items-start gap-3">
+                        <div class="icon-badge"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 12h18M3 6h18M3 18h18"/></svg></div>
+                        <div>
+                            <h6 class="mb-1">CSDL địa không gian tập trung</h6>
+                            <p class="mb-0 text-muted">Chuẩn hóa & kết nối dữ liệu phục vụ quản lý đô thị và hạ tầng.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-4">
+                <div class="glass-card rounded-4 p-3 h-100">
+                    <div class="d-flex align-items-start gap-3">
+                        <div class="icon-badge" style="background:#eef7ff"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 3v18M3 12h18"/></svg></div>
+                        <div>
+                            <h6 class="mb-1">Mô hình 3D – LiDAR & UAV</h6>
+                            <p class="mb-0 text-muted">Đám mây điểm chính xác, dựng 3D công trình & địa hình.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-4">
+                <div class="glass-card rounded-4 p-3 h-100">
+                    <div class="d-flex align-items-start gap-3">
+                        <div class="icon-badge" style="background:#eefcf3"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 6v12M6 12h12"/></svg></div>
+                        <div>
+                            <h6 class="mb-1">Phân tích AI & 3D Tour</h6>
+                            <p class="mb-0 text-muted">AI nhận dạng đối tượng, 3D Tour 360° tăng trải nghiệm.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>    
 </div>
+
+<!-- ===================== ABOUT ===================== -->
+<section id="about" class="section">
+    <div class="container">
+        <div class="row g-4 align-items-center">
+            <div class="col-lg-6">
+                <span class="eyebrow mb-2">Giới thiệu</span>
+                <h2 class="section-title mb-3">Giới thiệu về Công ty</h2>
+                <p class="fw-semibold mb-2">Công ty TNHH Địa chính & Xây dựng Nam Hà Nội</p>
+                <p class="section-subtitle mb-3">
+                    Chuyên cung cấp các giải pháp số về bản đồ 3D cho quản lý đô thị thông minh, giao thông vận tải,
+                    tài nguyên – khoáng sản… tích hợp công nghệ LiDAR, UAV, 3D Tour, IoT & AI.
+                </p>
+                <a class="btn btn-orange btn-pill px-4" href="#services">Xem chi tiết</a>
+            </div>
+            <div class="col-lg-6 about-mosaic">
+                <div class="row g-2">
+                    <div class="col-7">
+                        <img class="img-fluid shadow-sm" src="https://images.unsplash.com/photo-1518779578993-ec3579fee39f?q=80&w=900&auto=format&fit=crop" alt="3D LiDAR">
+                    </div>
+                    <div class="col-5">
+                        <img class="img-fluid shadow-sm mb-2" src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=600&auto=format&fit=crop" alt="Smart city">
+                        <img class="img-fluid shadow-sm" src="https://images.unsplash.com/photo-1518837695005-2083093ee35b?q=80&w=600&auto=format&fit=crop" alt="UAV Drone">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===================== SERVICES ===================== -->
+<section id="services" class="section bg-light">
+    <div class="container">
+        <div class="text-center mb-4">
+            <span class="eyebrow mb-2">Dịch vụ</span>
+            <h2 class="section-title mb-2">Năng lực cốt lõi</h2>
+            <p class="section-subtitle mx-auto">Các mảng dịch vụ chính tạo nên hệ sinh thái địa không gian.</p>
+        </div>
+
+        <div class="row g-3">
+            @{
+                var services = new (string, string)[] {
+                    ("Quét LiDAR & dựng 3D","Thu thập đám mây điểm, tái tạo công trình/địa hình độ chính xác cao."),
+                    ("Bay chụp UAV/Drone","Phục vụ đo vẽ, giám sát hạ tầng, lập bản đồ ảnh & 3D."),
+                    ("3D Tour & 360","Trải nghiệm không gian thực tế, phục vụ văn hóa – du lịch – BĐS."),
+                    ("CSDL địa không gian","Chuẩn hóa – tích hợp dữ liệu, phân quyền & quản trị tập trung."),
+                    ("Phân tích AI & IoT","Nhận dạng đối tượng, phát hiện thay đổi, cảnh báo theo thời gian thực."),
+                    ("Tư vấn & chuyển giao","Đào tạo – vận hành – chuyển giao công nghệ end-to-end.")
+                };
+            }
+            @for (int i = 0; i < services.Length; i++)
+            {
+                <div class="col-12 col-md-6 col-xl-4">
+                    <div class="card service-card h-100 rounded-4 shadow-sm">
+                        <div class="card-body p-4">
+                            <div class="d-flex align-items-start gap-3">
+                                <div class="icon-badge">
+                                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                        <circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 3"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h5 class="mb-1">@services[i].Item1</h5>
+                                    <p class="lead mb-0">@services[i].Item2</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+<!-- ===================== WHY US ===================== -->
+<section id="why" class="section">
+    <div class="container">
+        <div class="text-center mb-4">
+            <span class="eyebrow mb-2">Vì sao chọn chúng tôi</span>
+            <h2 class="section-title mb-2">Khác biệt tạo nên giá trị</h2>
+            <p class="section-subtitle mx-auto">Kinh nghiệm triển khai thực tế, công nghệ hiện đại và quy trình tối ưu.</p>
+        </div>
+
+        <div class="row g-3">
+            @{
+                var why = new (string, string)[] {
+                    ("Đội ngũ chuyên gia", "Kỹ sư giàu kinh nghiệm LiDAR, UAV, GIS & AI."),
+                    ("Công nghệ cập nhật", "Stack hiện đại, sẵn sàng tích hợp & mở rộng."),
+                    ("Triển khai nhanh", "Quy trình tinh gọn, bám sát nhu cầu thực tế."),
+                    ("Hỗ trợ tận tâm", "Đồng hành dài hạn, đào tạo & chuyển giao.")
+                };
+            }
+            @foreach (var item in why)
+            {
+                <div class="col-12 col-md-6 col-lg-3">
+                    <div class="why-item">
+                        <div class="icon">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 2l3 7h7l-5.6 4.1L18 21l-6-4-6 4 1.6-7.9L2 9h7z"/></svg>
+                        </div>
+                        <div>
+                            <h6 class="mb-1">@item.Item1</h6>
+                            <p class="mb-0 text-muted">@item.Item2</p>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+<!-- ===================== STATS ===================== -->
+<section class="section">
+    <div class="container">
+        <div class="row g-3">
+            <div class="col-6 col-lg-3">
+                <div class="stat-tile p-4 text-center">
+                    <div class="stat-num display-6 text-primary">120+</div>
+                    <div class="text-muted">Dự án</div>
+                </div>
+            </div>
+            <div class="col-6 col-lg-3">
+                <div class="stat-tile p-4 text-center">
+                    <div class="stat-num display-6 text-primary">30TB</div>
+                    <div class="text-muted">Dữ liệu 3D</div>
+                </div>
+            </div>
+            <div class="col-6 col-lg-3">
+                <div class="stat-tile p-4 text-center">
+                    <div class="stat-num display-6 text-primary">20+</div>
+                    <div class="text-muted">Tỉnh/TP</div>
+                </div>
+            </div>
+            <div class="col-6 col-lg-3">
+                <div class="stat-tile p-4 text-center">
+                    <div class="stat-num display-6 text-primary">98%</div>
+                    <div class="text-muted">Hài lòng</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===================== PROJECTS ===================== -->
+<section id="projects" class="section bg-light">
+    <div class="container">
+        <div class="d-flex align-items-center justify-content-between mb-3">
+            <div>
+                <span class="eyebrow mb-2">Case Studies</span>
+                <h2 class="section-title mb-0">Dự án tiêu biểu</h2>
+            </div>
+            <a href="#" class="btn btn-outline-primary">Xem tất cả</a>
+        </div>
+
+        <div class="row g-3">
+            @for (int i = 0; i < 3; i++)
+            {
+                <div class="col-12 col-lg-4">
+                    <div class="project-card h-100">
+                        <img class="w-100" src="https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?q=80&w=1400&auto=format&fit=crop" alt="Project">
+                        <div class="p-3">
+                            <h6 class="mb-1">Triển khai GIS đô thị thông minh</h6>
+                            <p class="text-muted mb-0">Kết nối IoT, CSDL địa không gian & dashboard ra quyết định.</p>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+<!-- ===================== PARTNERS ===================== -->
+<section class="section">
+    <div class="container">
+        <div class="text-center mb-3">
+            <span class="eyebrow">Đối tác</span>
+            <h2 class="section-title">Tin cậy & đồng hành</h2>
+        </div>
+        <div class="row row-cols-2 row-cols-md-4 row-cols-xl-6 g-3 align-items-center text-center">
+            @{
+                var logos = Enumerable.Repeat("https://dummyimage.com/160x60/ebeff6/7f8ea3&text=Logo", 12).ToArray();
+            }
+            @for (int i = 0; i < logos.Length; i++)
+            {
+                <div class="col">
+                    <img class="partner-logo img-fluid" src="@logos[i]" alt="Đối tác @i">
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+<!-- ===================== CTA / CONTACT ANCHOR ===================== -->
+<section id="contact" class="section">
+    <div class="container">
+        <div class="cta-bar p-4 p-lg-5">
+            <div class="row g-3 align-items-center">
+                <div class="col-lg-8">
+                    <h3 class="mb-2 fw-bold">Sẵn sàng bắt đầu dự án của bạn?</h3>
+                    <p class="mb-0 text-muted">Hãy để chúng tôi tư vấn giải pháp phù hợp nhất với nhu cầu của bạn.</p>
+                </div>
+                <div class="col-lg-4 text-lg-end">
+                    <a class="btn btn-primary btn-lg px-4" href="mailto:contact@example.com">Liên hệ ngay</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

@@ -13,6 +13,22 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\img\\hero\\hero-1.jpg",
+      "PackagePath": "staticwebassets\\img\\hero\\hero-1.jpg"
+    },
+    {
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\img\\hero\\hero-2.jpg",
+      "PackagePath": "staticwebassets\\img\\hero\\hero-2.jpg"
+    },
+    {
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\img\\hero\\hero-3.jpg",
+      "PackagePath": "staticwebassets\\img\\hero\\hero-3.jpg"
+    },
+    {
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\img\\hero\\tech-ring.jpg",
+      "PackagePath": "staticwebassets\\img\\hero\\tech-ring.jpg"
+    },
+    {
       "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },

@@ -1,31 +1,236 @@
+/* ==========================================================================
+   Base & Resets
+   ========================================================================== */
 html {
   font-size: 14px;
-}
-
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
-}
-
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
-
-html {
   position: relative;
   min-height: 100%;
 }
+@media (min-width: 768px) { html { font-size: 16px; } }
 
-body {
-  margin-bottom: 60px;
+body { margin: 0; } /* dùng flex layout trong _Layout nên không cần margin-bottom mặc định */
+
+/* Focus ring (giữ của template mặc định) */
+.btn:focus,
+.btn:active:focus,
+.btn-link.nav-link:focus,
+.form-control:focus,
+.form-check-input:focus {
+  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
 
-.form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
-  color: var(--bs-secondary-color);
-  text-align: end;
+/* Floating placeholder align fix (giữ rule cũ) */
+.form-floating > .form-control-plaintext::placeholder,
+.form-floating > .form-control::placeholder { color: var(--bs-secondary-color); text-align: end; }
+.form-floating > .form-control-plaintext:focus::placeholder,
+.form-floating > .form-control:focus::placeholder { text-align: start; }
+
+/* ==========================================================================
+   Header (Topbar + Navbar)
+   ========================================================================== */
+.topbar { background: #0d6efd; color: #fff; }
+.topbar .topbar-link { color: rgba(255,255,255,.9); text-decoration: none; }
+.topbar .topbar-link:hover { text-decoration: underline; }
+
+.navbar .nav-link.active { font-weight: 600; }
+
+/* ==========================================================================
+   Home – landing styles (hero gradient – tùy chọn dùng)
+   ========================================================================== */
+.hero{
+  position:relative;
+  background:
+    radial-gradient(1200px 600px at 80% -10%, rgba(13,110,253,.35), transparent 60%),
+    radial-gradient(900px 500px at 0% -10%, rgba(111,66,193,.35), transparent 60%),
+    #0b1220;
+  color:#fff; overflow:hidden;
+}
+.hero::before{
+  content:""; position:absolute; inset:0;
+  background:url('https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1600&auto=format&fit=crop') center/cover no-repeat;
+  opacity:.22; filter:saturate(1.1) contrast(1.05);
+}
+.hero-content{ position:relative; z-index:1; padding:clamp(2.5rem,6vw,5rem) 0 clamp(4rem,8vw,7rem); }
+.eyebrow{
+  display:inline-block; letter-spacing:.12em; font-size:.85rem; font-weight:700; text-transform:uppercase;
+  color:#8ab4ff; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.12);
+  padding:.35rem .6rem; border-radius:999px;
+}
+.gradient-text{ font-weight:800; line-height:1.1;
+  background:linear-gradient(90deg,#fff 0%,#b3c7ff 45%,#76a2ff 100%);
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+}
+.hero-sub{ color:rgba(255,255,255,.8); max-width:760px; }
+.hero-curve{ position:absolute; left:0; right:0; bottom:-1px; line-height:0; transform:translateY(1px); }
+.hero-curve svg{ display:block; width:100%; height:80px; }
+@media (min-width: 992px){ .hero-content{ padding-top:6rem; padding-bottom:8rem; } }
+
+/* GLASS feature strip */
+.glass-strip{ margin-top:-50px; position:relative; z-index:2; }
+.glass-card{
+  backdrop-filter:blur(8px); background:rgba(255,255,255,.72);
+  border:1px solid rgba(15,23,42,.08); box-shadow:0 8px 40px rgba(2,6,23,.08);
+  transition:transform .18s ease, box-shadow .18s ease;
+}
+.glass-card:hover{ transform:translateY(-4px); box-shadow:0 16px 48px rgba(2,6,23,.12); }
+.icon-badge{ width:44px; height:44px; border-radius:12px; display:grid; place-items:center; background:#eff4ff; }
+
+/* Section helpers */
+.section { padding: 3rem 0; }
+.section-title { font-weight: 700; letter-spacing:-.02em; }
+.section-subtitle { color: #6c757d; margin-bottom: 1.5rem; }
+
+/* About mosaic */
+.about-mosaic img { border-radius: 14px; }
+
+/* Services grid */
+.service-card { border:1px solid #eef2f7; }
+.service-card h5 { font-weight:700; }
+.service-card .lead { font-size:.95rem; color:#6b7280; }
+
+/* Stats */
+.stat-tile{
+  background:linear-gradient(0deg,#ffffff,#ffffff),
+            radial-gradient(90% 120% at 0% 0%, #e9f0ff 0%, transparent 60%);
+  border:1px solid #eef2f7; border-radius:16px; box-shadow:0 10px 30px rgba(2,6,23,.06);
+}
+.stat-num{ font-weight:800; letter-spacing:-.02em; }
+
+/* Projects */
+.project-card{ overflow:hidden; border-radius:16px; border:1px solid #eef2f7; transition:transform .18s ease, box-shadow .18s ease; }
+.project-card:hover{ transform:translateY(-4px); box-shadow:0 16px 48px rgba(2,6,23,.12); }
+.project-card img{ transition:transform .25s ease; }
+.project-card:hover img{ transform:scale(1.03); }
+
+/* Partners */
+.partner-logo{ filter:grayscale(100%); opacity:.7; max-height:60px; transition:.2s; }
+.partner-logo:hover{ filter:none; opacity:1; }
+
+/* CTA */
+.cta-bar{ border:1px solid #eef2f7; border-radius:18px; background:linear-gradient(180deg,#f9fbff,#ffffff); box-shadow:0 12px 40px rgba(2,6,23,.06); }
+
+/* ==========================================================================
+   HERO Banner kiểu “tech + wave” (carousel #mainHero) – bản chuẩn
+   ========================================================================== */
+.hero-wrap{ position:relative; background:#0c1a2a; }
+#mainHero{ position:relative; }
+#mainHero .carousel-item{ min-height:520px; }                 /* sẽ bị override phía dưới bằng 78–86vh */
+@media (min-width:1200px){ #mainHero .carousel-item{ min-height:640px; } }
+
+.slide-bg{
+  position:absolute; inset:0;
+  background-position:center; background-size:cover; background-repeat:no-repeat;
+  filter:saturate(1.05) contrast(1.05) brightness(.9);
+}
+.slide-overlay{
+  position:absolute; inset:0;
+  background:
+    radial-gradient(900px 500px at 90% 10%, rgba(80,170,255,.25), transparent 60%),
+    linear-gradient(180deg, rgba(0,0,0,.25), rgba(0,0,0,.25));
+}
+.hero-graphic{ max-height:380px; opacity:.9; filter:drop-shadow(0 8px 24px rgba(0,0,0,.35)); }
+.headline-3d{
+  text-transform:uppercase; color:#e8f4ff; letter-spacing:.04em;
+  -webkit-text-stroke:1.5px #8fe3ff;
+  text-shadow:0 3px 0 #204a7a, 0 6px 12px rgba(0,0,0,.45), 0 12px 30px rgba(0,0,0,.25);
+  font-weight:800;
+}
+.headline-3d.sub{ font-size:clamp(1.25rem,2.2vw + 1rem,2rem); -webkit-text-stroke:1px #bfe6ff; }
+.btn-pill{ border-radius:999px; }
+.btn-orange{ background:#ff7a1a; border-color:#ff7a1a; color:#fff; }
+.btn-orange:hover{ background:#ff6a00; border-color:#ff6a00; color:#fff; }
+#mainHero .carousel-indicators [data-bs-target]{ width:10px; height:10px; border-radius:50%; background:#cfe3ff; opacity:.6; }
+#mainHero .carousel-indicators .active{ background:#0d6efd; opacity:1; }
+#mainHero .carousel-control-prev-icon,
+#mainHero .carousel-control-next-icon{ filter:drop-shadow(0 2px 6px rgba(0,0,0,.4)); }
+.hero-wave{ position:relative; z-index:1; margin-top:-1px; }
+.hero-wave svg{ width:100%; height:80px; display:block; }
+
+/* ==========================================================================
+   (Optional) Old hero slider styles – an toàn giữ lại, nhưng trang chủ mới không dùng
+   ========================================================================== */
+#homeHero .carousel-item{
+  height:60vh; min-height:420px; position:relative; color:#fff;
+  background-position:center; background-size:cover; background-repeat:no-repeat;
+}
+#homeHero .overlay{ position:absolute; inset:0; background:linear-gradient(180deg, rgba(0,0,0,.45), rgba(0,0,0,.35)); }
+#homeHero .hero-content{ position:absolute; inset:0; display:grid; place-items:center; text-align:center; padding:0 1rem; }
+#homeHero h1{ font-weight:600; letter-spacing:.2px; }
+
+/* Why-us items (cũ nhưng vẫn dùng được) */
+.why-item{ display:flex; gap:.75rem; padding:1rem; border-radius:.75rem; border:1px solid #eee; background:#fff; height:100%; }
+.why-item .icon{ width:40px; height:40px; display:grid; place-items:center; border-radius:.5rem; background:#f1f5ff; }
+
+/* Simple CTA card (cũ) */
+.cta-card{ border:1px solid #eee; }
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+.site-footer .footer-top{ background:#1e293b; color:#fff; }
+.site-footer .footer-bottom{ background:#0f172a; color:#fff; border-top:1px solid rgba(255,255,255,.08); }
+.site-footer h5, .site-footer h6{ font-weight:700; }
+.site-footer .footer-link{ color:rgba(255,255,255,.85); text-decoration:none; }
+.site-footer .footer-link:hover{ color:#fff; text-decoration:underline; }
+.site-footer .footer-contacts li{ margin-bottom:.25rem; }
+
+/* ==========================================================================
+   Utilities
+   ========================================================================== */
+.text-opacity-75 { opacity: .75 !important; }
+.card-hover { transition: transform .15s ease, box-shadow .15s ease; }
+.card-hover:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(0,0,0,.08); }
+
+/* ==========================================================================
+   >>> BỔ SUNG: Hero FULL-BLEED + chữ lớn + sóng động (override/extend)
+   ========================================================================== */
+
+/* Kéo hero tràn full màn hình khi nằm trong .container của _Layout */
+.hero-wrap.full-bleed{
+  width:100vw;
+  position:relative;
+  left:50%;
+  right:50%;
+  margin-left:-50vw;
+  margin-right:-50vw;
 }
 
-.form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
-  text-align: start;
+/* Làm banner cao, bự – override min-height ở phần trên */
+#mainHero .carousel-item{ min-height:78vh; }
+@media (min-width:1400px){ #mainHero .carousel-item{ min-height:86vh; } }
+
+/* Typography lớn, đẹp */
+.headline-xxl{
+  font-weight:800;
+  text-transform:uppercase;
+  color:#fff;
+  letter-spacing:.02em;
+  line-height:1.15;
+  text-shadow:0 6px 24px rgba(0,0,0,.45);
+  font-size:clamp(1.6rem, 3.2vw + 1rem, 4rem);
 }
+.subline-lg{ font-size:clamp(1rem, 1vw + .8rem, 1.25rem); }
+
+/* Sóng động ở chân banner */
+.waves-anim{
+  position:relative;
+  height:110px;
+  margin-top:-1px;
+  overflow:hidden;
+}
+.waves-anim .wave{
+  position:absolute; left:-25%; right:-25%; bottom:0;
+  width:150%; height:110px;
+  transform:translateX(0);
+}
+.waves-anim .w1{ animation:waveDrift 12s ease-in-out infinite alternate; }
+.waves-anim .w2{ animation:waveDrift 18s ease-in-out infinite alternate-reverse; }
+.waves-anim .w3{ animation:waveDrift 24s ease-in-out infinite alternate; opacity:.8; }
+
+@keyframes waveDrift{
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-10%); }
+}
+
+/* Hỗ trợ canh giữa nội dung theo chiều dọc hero */
+.min-vh-75{ min-height:75vh; }
