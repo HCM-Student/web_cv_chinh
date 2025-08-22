@@ -15,19 +15,62 @@ body{margin:0}
 .form-floating>.form-control-plaintext:focus::placeholder,
 .form-floating>.form-control:focus::placeholder{text-align:start}
 
-/* ========= NEW: khoảng hở giữa vòm & dải thẻ ngay sau hero ========= */
+/* khoảng hở giữa vòm & dải thẻ ngay sau hero */
 :root{
-  /* chỉnh khoảng hở ở đây nếu muốn (18–40px tùy viewport) */
   --hero-curve-gap: clamp(18px, 2.8vw, 40px);
+  --nav-gap: clamp(.75rem, 3vw, 2.25rem);  /* giãn thưa menu */
 }
 
 /* ==========================================================================
-   Header (Topbar + Navbar)
+   HEADER (BRANDBAR + NAVSTRIP)
    ========================================================================== */
-.topbar{background:#0d6efd;color:#fff}
-.topbar .topbar-link{color:rgba(255,255,255,.9);text-decoration:none}
-.topbar .topbar-link:hover{text-decoration:underline}
-.navbar .nav-link.active{font-weight:600}
+/* Hàng trên: logo + tên + liên hệ */
+.brandbar{background:#fff;border-bottom:1px solid #eef2f7}
+.brand-link{color:inherit}
+.brand-logo{height:48px;border-radius:10px;object-fit:contain}
+@media (max-width:575.98px){ .brand-logo{height:40px} }
+
+.brand-title{font-weight:800;letter-spacing:.02em;color:#1f2937;line-height:1}
+.brand-sub{font-weight:800;letter-spacing:.02em;color:#1f2937;line-height:1}
+.brand-slogan{font-size:.72rem;color:#6b7280;line-height:1;margin-top:.15rem}
+
+.contact-box .vr{height:18px;opacity:.25}
+.contact-item{display:flex;align-items:center;color:#3b82f6;font-weight:600}
+
+/* Hàng dưới: thanh menu */
+.navstrip{background:#f8fafc;border-bottom:1px solid #eef2f7}
+.navstrip .navbar-nav .nav-link{
+  white-space:nowrap;font-weight:500;
+  padding:.9rem 0.75rem;        /* tăng chiều cao để “bằng” logo (cảm giác) */
+}
+.navstrip .navbar-nav .nav-link.active{color:#f97316;font-weight:700}
+
+/* menu ở giữa + giãn thưa */
+.nav-center{gap:var(--nav-gap)}
+.navbar .navbar-collapse{align-items:center}
+
+/* ===== Auth / Avatar ở HÀNG DƯỚI (bên phải) ===== */
+.header-auth .btn{ padding:.35rem .9rem }
+.avatar-chip{
+  background:#ffffff;border:1px solid #e2e8f0;
+  box-shadow:0 2px 8px rgba(2,6,23,.06);
+}
+.avatar-img{
+  width:28px;height:28px;border-radius:50%;
+  object-fit:cover;display:block;
+  box-shadow:0 1px 2px rgba(2,6,23,.06);
+}
+.avatar-circle{
+  width:28px;height:28px;border-radius:50%;
+  background:#0d6efd;color:#fff;display:grid;place-items:center;
+  font-weight:700;font-size:.8rem;letter-spacing:.01em;
+  box-shadow:0 2px 10px rgba(13,110,253,.25);
+}
+
+/* Dropdown mềm mại */
+.dropdown-menu{ border-radius:12px; }
+.dropdown-item{ border-radius:8px; }
+.dropdown-item:hover{ background:#f2f6ff; }
 
 /* ==========================================================================
    Sections – helpers
@@ -37,11 +80,7 @@ body{margin:0}
 .section-subtitle{color:#6c757d;margin-bottom:1.5rem}
 
 /* Cards / tiles */
-/* ========= CHANGED: bỏ margin-top âm, thay bằng khoảng hở dương ========= */
-.glass-strip{
-  margin-top: var(--hero-curve-gap) !important; /* trước đây: -50px */
-  position:relative; z-index:3;
-}
+.glass-strip{ margin-top: var(--hero-curve-gap) !important; position:relative; z-index:3; }
 .glass-card{backdrop-filter:blur(8px);background:rgba(255,255,255,.72);border:1px solid rgba(15,23,42,.08);box-shadow:0 8px 40px rgba(2,6,23,.08);transition:.18s}
 .glass-card:hover{transform:translateY(-4px);box-shadow:0 16px 48px rgba(2,6,23,.12)}
 .icon-badge{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:#eff4ff}
@@ -53,155 +92,313 @@ body{margin:0}
 .project-card:hover{transform:translateY(-4px);box-shadow:0 16px 48px rgba(2,6,23,.12)}
 .project-card img{transition:.25s}
 .project-card:hover img{transform:scale(1.03)}
-.partner-logo{filter:grayscale(100%);opacity:.7;max-height:60px;transition:.2s}
-.partner-logo:hover{filter:none;opacity:1}
+
+/* Logo đối tác – MẶC ĐỊNH có màu */
+.partner-logo{
+  max-height:60px;
+  transition:transform .2s ease;
+  filter:none;
+  opacity:1;
+}
+.partner-logo:hover{ transform:scale(1.03) }
+
 .cta-bar{border:1px solid #eef2f7;border-radius:18px;background:linear-gradient(180deg,#f9fbff,#fff);box-shadow:0 12px 40px rgba(2,6,23,.06)}
 
 /* ==========================================================================
-   HERO “tech + curve”
+   HERO
    ========================================================================== */
-.hero-wrap{
-  position:relative;
-  z-index:0;
-  overflow:visible;
-  background:#fff;              /* tránh lộ dải tối nếu có hở */
-  --arc-height:170px;           /* độ võng mặc định */
-}
-@media (min-width:1200px){
-  .hero-wrap{ --arc-height:190px; } /* sâu hơn ở màn hình lớn */
-}
+.hero-wrap{position:relative;z-index:0;overflow:visible;background:#fff;--arc-height:170px}
+@media (min-width:1200px){.hero-wrap{--arc-height:190px}}
 .hero-wrap.full-bleed{width:100vw;position:relative;left:50%;right:50%;margin-left:-50vw;margin-right:-50vw}
-
 #mainHero{position:relative}
 #mainHero .carousel-item{min-height:78vh;position:relative;overflow:hidden}
 @media (min-width:1400px){#mainHero .carousel-item{min-height:86vh}}
 @media (max-width:575.98px){#mainHero .carousel-item{min-height:72vh}}
-
-/* KHÔNG chèn khoảng trống dưới carousel nữa */
 #mainHero .carousel-inner{padding-bottom:0 !important}
-
-/* Ảnh nền – làm SÁNG */
-.slide-bg{
-  position:absolute;inset:0;background-position:center;background-size:cover;background-repeat:no-repeat;
-  filter:saturate(1.12) contrast(1.06) brightness(1.1);
-  z-index:0;
-}
-
-/* Lớp phủ sáng */
-.slide-overlay{
-  position:absolute;inset:0;pointer-events:none;mix-blend-mode:screen;z-index:0;
-  background:
-    radial-gradient(1100px 600px at 85% 15%, rgba(120,200,255,.35), transparent 60%),
-    radial-gradient(900px 520px at 12% 8%, rgba(180,140,255,.22), transparent 60%),
-    linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.12));
-}
-
-/* KenBurns */
+.slide-bg{position:absolute;inset:0;background-position:center;background-size:cover;background-repeat:no-repeat;filter:saturate(1.12) contrast(1.06) brightness(1.1);z-index:0}
+.slide-overlay{position:absolute;inset:0;pointer-events:none;mix-blend-mode:screen;z-index:0;background:
+  radial-gradient(1100px 600px at 85% 15%, rgba(120,200,255,.35), transparent 60%),
+  radial-gradient(900px 520px at 12% 8%, rgba(180,140,255,.22), transparent 60%),
+  linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.12));}
 .kenburns{animation:kenburnsZoom 14s ease-in-out infinite alternate;transform-origin:center}
 @keyframes kenburnsZoom{
   0%{transform:scale(1.05) translate3d(0,0,0)}
   100%{transform:scale(1.16) translate3d(-1.5%,-1.5%,0)}
 }
-
-/* City lights */
-.city-lights{
-  position:absolute;inset:0;pointer-events:none;opacity:.6;mix-blend-mode:screen;z-index:0;
-  background:
-    repeating-linear-gradient(to right, rgba(55,155,255,.10) 0 2px, transparent 2px 6px),
-    repeating-linear-gradient(to bottom, rgba(0,150,255,.07) 0 3px, transparent 3px 12px);
-  animation:skylineSweep 16s linear infinite;
-}
-@keyframes skylineSweep{
-  0%{background-position:0 0,0 0}
-  100%{background-position:-600px 0,0 -320px}
-}
-
-/* Tech rings */
+.city-lights{position:absolute;inset:0;pointer-events:none;opacity:.6;mix-blend-mode:screen;z-index:0;background:
+  repeating-linear-gradient(to right, rgba(55,155,255,.10) 0 2px, transparent 2px 6px),
+  repeating-linear-gradient(to bottom, rgba(0,150,255,.07) 0 3px, transparent 3px 12px);animation:skylineSweep 16s linear infinite}
+@keyframes skylineSweep{0%{background-position:0 0,0 0}100%{background-position:-600px 0,0 -320px}}
 .tech-ring{position:absolute;filter:drop-shadow(0 12px 32px rgba(0,0,0,.35));opacity:.65;mix-blend-mode:screen;pointer-events:none;z-index:0}
 .ring-1{width:420px;right:6%;top:10%;animation:ringSpin 40s linear infinite, ringFloat 8s ease-in-out infinite}
 .ring-2{width:280px;right:18%;bottom:14%;animation:ringSpinReverse 32s linear infinite, ringFloat 7s ease-in-out infinite}
 .ring-3{width:340px;left:10%;top:12%;animation:ringSpin 36s linear infinite, ringFloat 9s ease-in-out infinite}
 .ring-4{width:300px;left:16%;bottom:10%;animation:ringSpinReverse 30s linear infinite, ringFloat 7.5s ease-in-out infinite}
 @keyframes ringSpin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
-@keyframes ringSpinReverse{from{transform:rotate(360deg)}to{transform:rotate(0)}}
+@keyframes ringSpinReverse{from{transform:rotate(360)}to{transform:rotate(0)}}
 @keyframes ringFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
-
-/* Dots, arrows */
 #mainHero .carousel-indicators [data-bs-target]{width:10px;height:10px;border-radius:50%;background:#cfe3ff;opacity:.8}
 #mainHero .carousel-indicators .active{background:#0d6efd;opacity:1}
 #mainHero .carousel-control-prev-icon,#mainHero .carousel-control-next-icon{filter:drop-shadow(0 2px 6px rgba(0,0,0,.4))}
 
-/* Vòm cong trắng – ABSOLUTE OVERLAY */
-.hero-curve{
-  position:absolute;left:0;right:0;bottom:-1px;
-  height:var(--arc-height);
-  background:transparent;
-  overflow:hidden;
-  pointer-events:none;
-  z-index:2;
-}
-.hero-curve svg{
-  display:block;width:100%;height:100%;
-  animation:curveBob 6s ease-in-out infinite;
-  filter:drop-shadow(0 -8px 14px rgba(0,0,0,.18));
-}
+/* Vòm cong phía dưới hero */
+.hero-curve{position:absolute;left:0;right:0;bottom:-1px;height:var(--arc-height);background:transparent;overflow:hidden;pointer-events:none;z-index:2}
+.hero-curve svg{display:block;width:100%;height:100%;animation:curveBob 6s ease-in-out infinite;filter:drop-shadow(0 -8px 14px rgba(0,0,0,.18))}
 @keyframes curveBob{0%,100%{transform:translateY(0)}50%{transform:translateY(2px)}}
 
-/* (Tùy chọn) Waves cũ – vẫn giữ nếu cần */
+/* Waves (nếu dùng) */
 .waves-anim{position:relative;height:var(--arc-height);margin-top:-1px;overflow:hidden;z-index:1;pointer-events:none}
-.waves-anim .wave{
-  position:absolute;left:50%;bottom:-1px;transform:translateX(-50%);width:200%;height:100%;display:block
-}
+.waves-anim .wave{position:absolute;left:50%;bottom:-1px;transform:translateX(-50%);width:200%;height:100%;display:block}
 .waves-anim .w1{animation:waveX 22s linear infinite, waveBob 6s ease-in-out infinite}
 .waves-anim .w2{animation:waveX 32s linear infinite reverse, waveBob 7s ease-in-out infinite .2s}
 .waves-anim .w3{animation:waveX 44s linear infinite, waveBob 8s ease-in-out infinite .4s}
 @keyframes waveX{from{transform:translate(-50%,0)}to{transform:translate(-60%,0)}}
-/* >>> SỬA LỖI ở dòng dưới: đóng đủ dấu ngoặc và bỏ dấu ) thừa */
 @keyframes waveBob{0%,100%{bottom:-1px}50%{bottom:2px}}
 
-/* Nội dung trong hero nếu có – nổi hơn vòm */
-#mainHero .container{position:relative;z-index:3}
-
-/* ==========================================================================
-   Footer
-   ========================================================================== */
-.site-footer .footer-top{background:#1e293b;color:#fff}
-.site-footer .footer-mini{background:#0f172a;color:#fff;border-top:1px solid rgba(255,255,255,.08)}
-.site-footer h5,.site-footer h6{font-weight:700}
-.site-footer .footer-link{color:rgba(255,255,255,.85);text-decoration:none}
-.site-footer .footer-link:hover{color:#fff;text-decoration:underline}
-.site-footer .footer-contacts li{margin-bottom:.25rem}
-
-/* Utilities */
-.text-opacity-75{opacity:.75!important}
-.card-hover{transition:transform .15s ease,box-shadow .15s ease}
-.card-hover:hover{transform:translateY(-2px);box-shadow:0 6px 24px rgba(0,0,0,.08)}
-
-/* ===== Header – auth buttons & avatar ===== */
-.header-auth{ gap:.5rem }
-.header-auth .btn{ padding:.35rem .9rem }
-
-.avatar-circle{
-  width:28px;height:28px;border-radius:50%;
-  background:#0d6efd;color:#fff;display:grid;place-items:center;
-  font-weight:700;font-size:.8rem; letter-spacing:.01em;
-  box-shadow:0 2px 10px rgba(13,110,253,.25);
+/* === Hiệu ứng động trên ĐƯỜNG CONG hero (shine + dash + sparkles) === */
+.heroCurveSvg{ display:block; width:100%; height:100%; }
+.curve-dash{
+  stroke:rgba(255,255,255,.9);
+  stroke-width:2;
+  stroke-dasharray:60 420;
+  animation:curveDash 7s linear infinite;
+  opacity:.8;
+  filter:drop-shadow(0 0 8px rgba(255,255,255,.7));
+}
+@keyframes curveDash{ to{ stroke-dashoffset:-480; } }
+/* Tôn trọng reduce-motion */
+@media (prefers-reduced-motion:reduce){
+  .curve-dash{ animation:none }
 }
 
-/* Dropdown mềm mại */
-.dropdown-menu{ border-radius:12px; }
-.dropdown-item{ border-radius:8px; }
-.dropdown-item:hover{ background:#f2f6ff; }
+/* ==========================================================================
+   FOOTER (mới)
+   ========================================================================== */
+.site-footer .footer-top{
+  position:relative;
+  color:#fff;
+  background:#26495B;
+  background-image:
+    radial-gradient(1200px 600px at 70% -10%, rgba(255,255,255,.06), transparent 60%),
+    linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.06));
+}
+.site-footer .footer-mini{background:#102733;color:#fff;border-top:1px solid rgba(255,255,255,.08)}
 
-/* Khi ở thanh topbar nền tối (nếu đặt auth ở topbar) */
-.topbar .header-auth .btn-outline-primary{ border-color:#fff;color:#fff }
-.topbar .header-auth .btn-outline-primary:hover{ background:#fff;color:#0d6efd }
-.topbar .header-auth .btn-primary{ background:#fff;border-color:#fff;color:#0d6efd }
-.topbar .header-auth .btn-primary:hover{ filter:brightness(.95) }
+.footer-logo{
+  width:72px;height:72px;border-radius:14px;object-fit:contain;
+  background:#fff;padding:6px;box-shadow:0 6px 24px rgba(0,0,0,.18);
+}
+.site-footer .brand-title{font-weight:800;letter-spacing:.02em;line-height:1}
+.site-footer .brand-sub{font-weight:800;letter-spacing:.02em;line-height:1}
+.site-footer .brand-slogan{font-size:.78rem;color:rgba(255,255,255,.75);margin-top:.2rem}
 
-/* Navbar active link một chút nổi bật */
-.navbar .nav-link.active{ font-weight:600; }
+/* Info list (địa chỉ/điện thoại/email) */
+.footer-info .fi{
+  width:22px;min-width:22px;height:22px;
+  margin-right:.6rem;margin-top:.1rem;
+  display:inline-grid;place-items:center;border-radius:50%;
+  background:rgba(255,255,255,.12);
+}
+.footer-info .fi::before{content:"";display:block;width:12px;height:12px;border-radius:2px;background:#fff}
+.footer-info .fi.fi-pin::before{clip-path:polygon(50% 0,60% 20%,80% 40%,50% 100%,20% 40%,40% 20%)}
+.footer-info .fi.fi-phone::before{clip-path:polygon(15% 35%,25% 25%,45% 35%,60% 50%,70% 70%,60% 75%,50% 60%,40% 50%,25% 45%)}
+.footer-info .fi.fi-mail::before{clip-path:polygon(10% 25%,90% 25%,90% 75%,10% 75%,10% 25%,50% 55%,90% 25%)}
+.footer-info p{color:rgba(255,255,255,.9)}
 
-/* Topbar link */
-.topbar .topbar-link{ color:rgba(255,255,255,.9); text-decoration:none; }
-.topbar .topbar-link:hover{ text-decoration:underline; }
+/* Heading có gạch màu cam */
+.footer-heading{
+  position:relative;padding-top:.25rem;margin-bottom:.75rem;font-weight:800;
+}
+.footer-heading::after{
+  content:"";display:block;width:72px;height:4px;margin-top:.35rem;
+  background:#f97316;border-radius:2px;
+}
+
+/* Link list cột dịch vụ */
+.footer-list{list-style:none;margin:0;padding:0}
+.footer-list li{padding:.55rem 0;border-bottom:1px dashed rgba(255,255,255,.15)}
+.footer-list li:last-child{border-bottom:none}
+.footer-list a{color:rgba(255,255,255,.9);text-decoration:none}
+.footer-list a:hover{color:#fff;text-decoration:underline}
+
+/* Subscribe */
+.footer-subscribe .input-group-text{
+  background:rgba(255,255,255,.08); color:#fff; border:1px solid rgba(255,255,255,.2);
+}
+.footer-subscribe .form-control{
+  background:rgba(255,255,255,.06); color:#fff; border:1px solid rgba(255,255,255,.2);
+}
+.footer-subscribe .form-control::placeholder{color:rgba(255,255,255,.8)}
+.btn-send{
+  background:#f97316;border-color:#f97316;color:#fff;
+}
+.btn-send:hover{filter:brightness(.95);color:#fff}
+
+/* Social */
+.footer-social{display:flex;gap:.6rem}
+.footer-social .social-btn{
+  width:36px;height:36px;border-radius:50%;
+  display:grid;place-items:center;text-decoration:none;border:1px solid rgba(255,255,255,.2);
+  background:rgba(255,255,255,.1);color:#fff
+}
+.footer-social .social-btn:hover{background:rgba(255,255,255,.2)}
+.footer-social .fb{background:#1877F2;color:#fff;border-color:#1877F2}
+.footer-social .yt{background:#FF0000;color:#fff;border-color:#FF0000}
+.footer-social .in{background:#0A66C2;color:#fff;border-color:#0A66C2}
+
+/* Links & text ở mini bar */
+.site-footer .footer-link{color:rgba(255,255,255,.85);text-decoration:none}
+.site-footer .footer-link:hover{color:#fff;text-decoration:underline}
+
+/* ===== Floating Hotline ===== */
+.hotline-float{
+  position:fixed; left:18px; bottom:18px; z-index:1050;
+  display:flex; align-items:center; gap:.7rem;
+  text-decoration:none; color:#fff;
+  background:linear-gradient(180deg,#e11d2e,#b20d16);
+  border-radius:999px; padding:.45rem .9rem .45rem .45rem;
+  box-shadow:0 10px 28px rgba(176,13,22,.35), inset 0 1px 0 rgba(255,255,255,.15);
+}
+.hotline-float:hover{ filter:brightness(.98) }
+
+/* icon tròn + hiệu ứng ripple */
+.hl-icon{
+  position:relative; width:38px; height:38px; border-radius:50%;
+  display:grid; place-items:center; background:linear-gradient(180deg,#ff4d5e,#e11d2e);
+  box-shadow:0 6px 18px rgba(225,29,46,.45);
+}
+.hl-icon svg{ color:#fff; animation:hl-wiggle 1.2s ease-in-out infinite; transform-origin:50% 50% }
+
+/* 2 vòng ripple */
+.hl-icon::before, .hl-icon::after{
+  content:""; position:absolute; inset:-6px; border-radius:50%;
+  border:2px solid rgba(255,255,255,.55); opacity:.8;
+  animation:hl-ring 1.8s ease-out infinite;
+}
+.hl-icon::after{ inset:-12px; opacity:.5; animation-delay:.6s }
+
+/* text */
+.hl-text{ display:flex; flex-direction:column; line-height:1.05 }
+.hl-label{ font-weight:700; font-size:.9rem; opacity:.95 }
+.hl-number{ font-weight:800; font-size:1.05rem; letter-spacing:.02em }
+
+/* mobile: chỉ hiện icon để gọn */
+@media (max-width:575.98px){
+  .hotline-float{ padding:.45rem; }
+  .hl-text{ display:none; }
+}
+
+/* tôn trọng người dùng giảm chuyển động */
+@media (prefers-reduced-motion:reduce){
+  .hl-icon::before,.hl-icon::after,.hl-icon svg{ animation:none }
+}
+
+/* animations */
+@keyframes hl-ring{
+  0%{ transform:scale(.6); opacity:.85 }
+  70%{ transform:scale(1.15); opacity:.0 }
+  100%{ transform:scale(1.25); opacity:0 }
+}
+@keyframes hl-wiggle{
+  0%,100%{ transform:rotate(0) }
+  20%{ transform:rotate(18deg) }
+  40%{ transform:rotate(-14deg) }
+  60%{ transform:rotate(10deg) }
+  80%{ transform:rotate(-6deg) }
+}
+
+/* ===== Partners grid (final) ===== */
+#partners{
+  padding-top:4.5rem;            /* khoảng cách trên */
+  padding-bottom:4.5rem;         /* khoảng cách dưới */
+}
+/* TIÊU ĐỀ: cao hơn, đậm hơn, giãn dòng hợp lý */
+#partners .section-title{
+  font-size:clamp(2.6rem, 6vw, 3.8rem); /* tăng giảm theo ý */
+  line-height:1.05;
+  margin-bottom:2.25rem;         /* khoảng cách giữa tiêu đề và logo */
+  font-weight:800;
+}
+/* căn giữa logo trong mỗi .col (markup Bootstrap) */
+#partners .col{
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+/* logo có màu + responsive size */
+#partners .partner-logo{
+  max-height:84px;
+  height:auto;
+  filter:none !important;
+  opacity:1 !important;
+  transition:transform .2s ease;
+}
+#partners .partner-logo:hover{ transform:scale(1.03); }
+/* Mobile */
+@media (max-width:575.98px){
+  #partners .section-title{ font-size:2.2rem; }
+  #partners .partner-logo{ max-height:64px; }
+}
+/* ≥ LG */
+@media (min-width:992px){
+  #partners .partner-logo{ max-height:96px; }
+}
+
+/* ===== News: đẹp & đồng nhất ảnh ===== */
+:root{
+  /* chỉnh nhanh chiều cao ảnh theo từng breakpoint nếu muốn */
+  --news-thumb-sm: 190px;
+  --news-thumb-md: 210px;
+  --news-thumb-lg: 230px;
+}
+.news-card{
+  border-radius:16px;
+  overflow:hidden;
+  transition:transform .18s ease, box-shadow .18s ease;
+  background:#fff;
+}
+.news-card:hover{
+  transform:translateY(-4px);
+  box-shadow:0 16px 48px rgba(2,6,23,.12);
+}
+/* Ảnh luôn bằng nhau (cùng chiều cao), không méo */
+.news-card .news-thumb{
+  display:block;
+  width:100%;
+  height:var(--news-thumb-sm);
+  object-fit:cover;
+}
+@media (min-width:768px){
+  .news-card .news-thumb{ height:var(--news-thumb-md); }
+}
+@media (min-width:1200px){
+  .news-card .news-thumb{ height:var(--news-thumb-lg); }
+}
+/* Typography + cắt dòng gọn gàng */
+.news-title{ font-weight:700; line-height:1.25; margin-bottom:.35rem; }
+.news-desc{ color:#6b7280; margin-bottom:.75rem; }
+.clamp-2{ display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+.clamp-3{ display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+/* Meta chips */
+.news-meta{ display:flex; flex-wrap:wrap; gap:.35rem; color:#64748b; }
+.news-meta .chip{
+  background:#f1f5f9; color:#334155;
+  border:1px solid #e2e8f0;
+  padding:.15rem .5rem; border-radius:999px;
+}
+
+/* Fix curve dash fill = none để không bị mảng đen */
+.hero-curve .curve-dash{
+  fill: none !important;                    /* <-- quan trọng */
+  stroke: rgba(255,255,255,.9);
+  stroke-width: 2;
+  vector-effect: non-scaling-stroke;
+  stroke-dasharray: 60 420;
+  animation: curveDash 7s linear infinite;
+  filter: drop-shadow(0 0 6px rgba(255,255,255,.55));
+}
+
+/* Đảm bảo phần nền cong vẫn trắng */
+.hero-curve .curve-fill{
+  fill: #fff !important;
+}

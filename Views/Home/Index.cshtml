@@ -61,13 +61,68 @@
         </button>
     </div>
 
-    <!-- VÒM TRẮNG LƯỢN – đặt ABSOLUTE để CHỒNG lên ảnh -->
-    <div class="hero-curve" aria-hidden="true">
-        <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
-            <!-- chỉnh 40/140 để nông/sâu hơn -->
-            <path d="M0,90 C 360,40 1080,140 1440,90 L1440,120 L0,120 Z" fill="#ffffff"/>
-        </svg>
-    </div>
+   <!-- VÒM TRẮNG + HIỆU ỨNG ĐỘNG -->
+<div class="hero-curve" aria-hidden="true">
+  <svg viewBox="0 0 1440 120" preserveAspectRatio="none" class="heroCurveSvg">
+    <defs>
+      <!-- Path vòm cong (dùng lại nhiều lần) -->
+      <path id="curvePath-d" d="M0,90 C 360,40 1080,140 1440,90 L1440,120 L0,120 Z"/>
+      <path id="curveLine-d" d="M0,90 C 360,40 1080,140 1440,90"/>
+
+      <!-- Gradient ánh sáng chạy dọc mép cong -->
+      <linearGradient id="curveShine" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%"   stop-color="rgba(255,255,255,0)"/>
+        <stop offset="45%"  stop-color="rgba(255,255,255,.9)"/>
+        <stop offset="55%"  stop-color="rgba(255,255,255,.9)"/>
+        <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+        <!-- di chuyển gradient từ trái sang phải -->
+        <animateTransform attributeName="gradientTransform" type="translate"
+                          from="-1 0" to="1 0" dur="6s" repeatCount="indefinite"/>
+      </linearGradient>
+
+      <!-- Glow nhẹ cho dải sáng -->
+      <filter id="curveGlow">
+        <feGaussianBlur stdDeviation="4.5" result="b"/>
+        <feMerge>
+          <feMergeNode in="b"/>
+          <feMergeNode in="SourceGraphic"/>
+        </feMerge>
+      </filter>
+    </defs>
+
+    <!-- NỀN vòm cong trắng -->
+    <use href="#curvePath-d" fill="#ffffff"/>
+
+    <!-- BÓNG MỀM mép trên (rất nhẹ) -->
+    <use href="#curveLine-d" stroke="rgba(0,0,0,.08)" stroke-width="10" opacity=".25" />
+
+    <!-- DẢI SÁNG CHẠY dọc mép cong -->
+    <use href="#curveLine-d" stroke="url(#curveShine)" stroke-width="16" opacity=".65" filter="url(#curveGlow)"/>
+
+    <!-- VẠCH ĐỘNG (gạch đứt di chuyển) -->
+    <use href="#curveLine-d" class="curve-dash"/>
+
+    <!-- SPARKLES: vài hạt sáng chạy theo đường cong (nhẹ nhàng) -->
+    <g fill="#fff" opacity=".9">
+      <circle r="2">
+        <animateMotion dur="9s" repeatCount="indefinite" rotate="auto">
+          <mpath xlink:href="#curveLine-d" href="#curveLine-d"/>
+        </animateMotion>
+      </circle>
+      <circle r="2">
+        <animateMotion dur="12s" begin="1.5s" repeatCount="indefinite" rotate="auto">
+          <mpath xlink:href="#curveLine-d" href="#curveLine-d"/>
+        </animateMotion>
+      </circle>
+      <circle r="2">
+        <animateMotion dur="10s" begin="3s" repeatCount="indefinite" rotate="auto">
+          <mpath xlink:href="#curveLine-d" href="#curveLine-d"/>
+        </animateMotion>
+      </circle>
+    </g>
+  </svg>
+</div>
+
 </section>
 
 <!-- ===== GLASS FEATURE STRIP ===== -->
@@ -158,36 +213,36 @@
         </div>
 
         <div class="row g-3">
-            @{
-                var services = new (string, string)[] {
-                    ("Quét LiDAR & dựng 3D","Thu thập đám mây điểm, tái tạo công trình/địa hình độ chính xác cao."),
-                    ("Bay chụp UAV/Drone","Phục vụ đo vẽ, giám sát hạ tầng, lập bản đồ ảnh & 3D."),
-                    ("3D Tour & 360","Trải nghiệm không gian thực tế, phục vụ văn hóa – du lịch – BĐS."),
-                    ("CSDL địa không gian","Chuẩn hóa – tích hợp dữ liệu, phân quyền & quản trị tập trung."),
-                    ("Phân tích AI & IoT","Nhận dạng đối tượng, phát hiện thay đổi, cảnh báo theo thời gian thực."),
-                    ("Tư vấn & chuyển giao","Đào tạo – vận hành – chuyển giao công nghệ end-to-end.")
-                };
-            }
-            @for (int i = 0; i < services.Length; i++)
-            {
-                <div class="col-12 col-md-6 col-xl-4">
-                    <div class="card service-card h-100 rounded-4 shadow-sm">
-                        <div class="card-body p-4">
-                            <div class="d-flex align-items-start gap-3">
-                                <div class="icon-badge">
-                                    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                        <circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 3"/>
-                                    </svg>
-                                </div>
-                                <div>
-                                    <h5 class="mb-1">@services[i].Item1</h5>
-                                    <p class="lead mb-0">@services[i].Item2</p>
-                                </div>
-                            </div>
-                        </div>
+@{
+    var services = new (string, string)[] {
+        ("Quét LiDAR & dựng 3D","Thu thập đám mây điểm, tái tạo công trình/địa hình độ chính xác cao."),
+        ("Bay chụp UAV/Drone","Phục vụ đo vẽ, giám sát hạ tầng, lập bản đồ ảnh & 3D."),
+        ("3D Tour & 360","Trải nghiệm không gian thực tế, phục vụ văn hóa – du lịch – BĐS."),
+        ("CSDL địa không gian","Chuẩn hóa – tích hợp dữ liệu, phân quyền & quản trị tập trung."),
+        ("Phân tích AI & IoT","Nhận dạng đối tượng, phát hiện thay đổi, cảnh báo theo thời gian thực."),
+        ("Tư vấn & chuyển giao","Đào tạo – vận hành – chuyển giao công nghệ end-to-end.")
+    };
+}
+@for (int i = 0; i < services.Length; i++)
+{
+    <div class="col-12 col-md-6 col-xl-4">
+        <div class="card service-card h-100 rounded-4 shadow-sm">
+            <div class="card-body p-4">
+                <div class="d-flex align-items-start gap-3">
+                    <div class="icon-badge">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            <circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 3"/>
+                        </svg>
+                    </div>
+                    <div>
+                        <h5 class="mb-1">@services[i].Item1</h5>
+                        <p class="lead mb-0">@services[i].Item2</p>
                     </div>
                 </div>
-            }
+            </div>
+        </div>
+    </div>
+}
         </div>
     </div>
 </section>
@@ -202,28 +257,28 @@
         </div>
 
         <div class="row g-3">
-            @{
-                var why = new (string, string)[] {
-                    ("Đội ngũ chuyên gia", "Kỹ sư giàu kinh nghiệm LiDAR, UAV, GIS & AI."),
-                    ("Công nghệ cập nhật", "Stack hiện đại, sẵn sàng tích hợp & mở rộng."),
-                    ("Triển khai nhanh", "Quy trình tinh gọn, bám sát nhu cầu thực tế."),
-                    ("Hỗ trợ tận tâm", "Đồng hành dài hạn, đào tạo & chuyển giao.")
-                };
-            }
-            @foreach (var item in why)
-            {
-                <div class="col-12 col-md-6 col-lg-3">
-                    <div class="why-item">
-                        <div class="icon">
-                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 2l3 7h7l-5.6 4.1L18 21l-6-4-6 4 1.6-7.9L2 9h7z"/></svg>
-                        </div>
-                        <div>
-                            <h6 class="mb-1">@item.Item1</h6>
-                            <p class="mb-0 text-muted">@item.Item2</p>
-                        </div>
-                    </div>
-                </div>
-            }
+@{
+    var why = new (string, string)[] {
+        ("Đội ngũ chuyên gia", "Kỹ sư giàu kinh nghiệm LiDAR, UAV, GIS & AI."),
+        ("Công nghệ cập nhật", "Stack hiện đại, sẵn sàng tích hợp & mở rộng."),
+        ("Triển khai nhanh", "Quy trình tinh gọn, bám sát nhu cầu thực tế."),
+        ("Hỗ trợ tận tâm", "Đồng hành dài hạn, đào tạo & chuyển giao.")
+    };
+}
+@foreach (var item in why)
+{
+    <div class="col-12 col-md-6 col-lg-3">
+        <div class="why-item">
+            <div class="icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 2l3 7h7l-5.6 4.1L18 21l-6-4-6 4 1.6-7.9L2 9h7z"/></svg>
+            </div>
+            <div>
+                <h6 class="mb-1">@item.Item1</h6>
+                <p class="mb-0 text-muted">@item.Item2</p>
+            </div>
+        </div>
+    </div>
+}
         </div>
     </div>
 </section>
@@ -260,68 +315,91 @@
     </div>
 </section>
 
-<!-- ===================== PROJECTS ===================== -->
-<section id="projects" class="section bg-light">
-    <div class="container">
-        <div class="d-flex align-items-center justify-content-between mb-3">
-            <div>
-                <span class="eyebrow mb-2">Case Studies</span>
-                <h2 class="section-title mb-0">Dự án tiêu biểu</h2>
-            </div>
-            <a href="#" class="btn btn-outline-primary">Xem tất cả</a>
-        </div>
-
-        <div class="row g-3">
-            @for (int i = 0; i < 3; i++)
-            {
-                <div class="col-12 col-lg-4">
-                    <div class="project-card h-100">
-                        <img class="w-100" src="https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?q=80&w=1400&auto=format&fit=crop" alt="Project">
-                        <div class="p-3">
-                            <h6 class="mb-1">Triển khai GIS đô thị thông minh</h6>
-                            <p class="text-muted mb-0">Kết nối IoT, CSDL địa không gian & dashboard ra quyết định.</p>
-                        </div>
-                    </div>
-                </div>
-            }
-        </div>
+<!-- ===================== NEWS (3 bài) ===================== -->
+<section id="news" class="section bg-light">
+  <div class="container">
+    <div class="d-flex align-items-end justify-content-between mb-3">
+      <div>
+        <span class="eyebrow mb-2">Tin tức</span>
+        <h2 class="section-title mb-0">Tin tức & Sự kiện</h2>
+      </div>
+      <a class="btn btn-outline-primary" href="#">Xem tất cả</a>
     </div>
+
+    <div class="row g-3">
+      <!-- Bài 1 -->
+      <div class="col-12 col-md-6 col-lg-4">
+        <article class="card news-card h-100 border-0 shadow-sm">
+          <img class="news-thumb" src="https://images.unsplash.com/photo-1581092921461-eab62e97a780?q=80&w=1400&auto=format&fit=crop" alt="Ứng dụng LiDAR">
+          <div class="card-body d-flex flex-column">
+            <h5 class="news-title clamp-2">Ứng dụng LiDAR trong quản lý đô thị thông minh</h5>
+            <p class="news-desc clamp-3">Chuẩn hóa, cập nhật hạ tầng 3D theo thời gian thực giúp tối ưu quản lý.</p>
+            <div class="news-meta small mt-auto">
+              <span class="chip">20/08/2025</span>
+              <span class="chip">LiDAR</span>
+              <span class="chip">Smart City</span>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <!-- Bài 2 -->
+      <div class="col-12 col-md-6 col-lg-4">
+        <article class="card news-card h-100 border-0 shadow-sm">
+          <img class="news-thumb" src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1400&auto=format&fit=crop" alt="Tour 3D">
+          <div class="card-body d-flex flex-column">
+            <h5 class="news-title clamp-2">Trải nghiệm Tour 3D – số hoá công trình thực</h5>
+            <p class="news-desc clamp-3">Tạo tour 360° cho bảo tàng, trường học, nhà máy… ngay trên trình duyệt.</p>
+            <div class="news-meta small mt-auto">
+              <span class="chip">12/08/2025</span>
+              <span class="chip">3D Tour</span>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <!-- Bài 3 -->
+      <div class="col-12 col-md-6 col-lg-4">
+        <article class="card news-card h-100 border-0 shadow-sm">
+          <img class="news-thumb" src="https://images.unsplash.com/photo-1518779578993-ec3579fee39f?q=80&w=1400&auto=format&fit=crop" alt="UAV thế hệ mới">
+          <div class="card-body d-flex flex-column">
+            <h5 class="news-title clamp-2">UAV chụp ảnh quang học thế hệ mới</h5>
+            <p class="news-desc clamp-3">Độ phân giải cao, bay tự động, tích hợp pipeline xử lý ảnh &amp; 3D.</p>
+            <div class="news-meta small mt-auto">
+              <span class="chip">02/08/2025</span>
+              <span class="chip">UAV/Drone</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
 </section>
 
-<!-- ===================== PARTNERS ===================== -->
-<section class="section">
+<!-- ===================== PARTNERS (phóng to + tiêu đề cao hơn) ===================== -->
+<section id="partners" class="section">
     <div class="container">
-        <div class="text-center mb-3">
+        <div class="text-center mb-4">
             <span class="eyebrow">Đối tác</span>
-            <h2 class="section-title">Tin cậy & đồng hành</h2>
+            <h2 class="section-title partners-title">Tin cậy & đồng hành</h2>
         </div>
-        <div class="row row-cols-2 row-cols-md-4 row-cols-xl-6 g-3 align-items-center text-center">
-            @{
-                var logos = Enumerable.Repeat("https://dummyimage.com/160x60/ebeff6/7f8ea3&text=Logo", 12).ToArray();
-            }
-            @for (int i = 0; i < logos.Length; i++)
-            {
-                <div class="col">
-                    <img class="partner-logo img-fluid" src="@logos[i]" alt="Đối tác @i">
-                </div>
-            }
+
+        <div class="row row-cols-2 row-cols-md-4 row-cols-xl-6 g-4 align-items-center text-center">
+            <div class="col"><img class="partner-logo img-fluid" src="~/img/thuonghieu/logo-1.jpg"  asp-append-version="true" alt="Đối tác 1"></div>
+            <div class="col"><img class="partner-logo img-fluid" src="~/img/thuonghieu/logo-2.jpg"  asp-append-version="true" alt="Đối tác 2"></div>
+            <div class="col"><img class="partner-logo img-fluid" src="~/img/thuonghieu/logo-3.jpg"  asp-append-version="true" alt="Đối tác 3"></div>
+            <div class="col"><img class="partner-logo img-fluid" src="~/img/thuonghieu/logo-4.jpg"  asp-append-version="true" alt="Đối tác 4"></div>
+            <div class="col"><img class="partner-logo img-fluid" src="~/img/thuonghieu/logo-5.jpg"  asp-append-version="true" alt="Đối tác 5"></div>
+            <div class="col"><img class="partner-logo img-fluid" src="~/img/thuonghieu/logo-6.jpg"  asp-append-version="true" alt="Đối tác 6"></div>
+            <div class="col"><img class="partner-logo img-fluid" src="~/img/thuonghieu/logo-7.jpg"  asp-append-version="true" alt="Đối tác 7"></div>
+            <div class="col"><img class="partner-logo img-fluid" src="~/img/thuonghieu/logo-8.jpg"  asp-append-version="true" alt="Đối tác 8"></div>
+            <div class="col"><img class="partner-logo img-fluid" src="~/img/thuonghieu/logo-9.jpg"  asp-append-version="true" alt="Đối tác 9"></div>
+            <div class="col"><img class="partner-logo img-fluid" src="~/img/thuonghieu/logo-10.jpg" asp-append-version="true" alt="Đối tác 10"></div>
+            <div class="col"><img class="partner-logo img-fluid" src="~/img/thuonghieu/logo-11.png" asp-append-version="true" alt="Đối tác 11"></div>
+            <div class="col"><img class="partner-logo img-fluid" src="~/img/thuonghieu/logo-12.png" asp-append-version="true" alt="Đối tác 12"></div>
         </div>
     </div>
 </section>
 
-<!-- ===================== CTA / CONTACT ANCHOR ===================== -->
-<section id="contact" class="section">
-    <div class="container">
-        <div class="cta-bar p-4 p-lg-5">
-            <div class="row g-3 align-items-center">
-                <div class="col-lg-8">
-                    <h3 class="mb-2 fw-bold">Sẵn sàng bắt đầu dự án của bạn?</h3>
-                    <p class="mb-0 text-muted">Hãy để chúng tôi tư vấn giải pháp phù hợp nhất với nhu cầu của bạn.</p>
-                </div>
-                <div class="col-lg-4 text-lg-end">
-                    <a class="btn btn-primary btn-lg px-4" href="mailto:contact@example.com">Liên hệ ngay</a>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+<!-- Shim anchor để #contact vẫn hoạt động -->
+<div id="contact" class="visually-hidden"></div>

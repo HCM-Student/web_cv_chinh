@@ -1,92 +1,95 @@
 @* Views/Shared/_Footer.cshtml *@
-<footer class="site-footer mt-auto text-white">
-    <!-- Top -->
-    <div class="footer-top position-relative overflow-hidden">
-        <div class="footer-bg"></div>
-
-        <div class="container position-relative">
-            <div class="row gy-4 py-5 align-items-start">
-                <!-- Brand + About + Contacts -->
+<footer class="site-footer">
+    <!-- ===== KHU TRÊN ===== -->
+    <div class="footer-top">
+        <div class="container py-4 py-lg-5">
+            <div class="row gy-4">
+                <!-- Cột 1: Logo + địa chỉ + hotline + email -->
                 <div class="col-12 col-lg-5">
                     <div class="d-flex align-items-center mb-3">
-                        <img src="~/img/logo.png" style="height:44px" class="me-2" alt="logo" />
+                        <img src="~/img/logo.jpg" asp-append-version="true" alt="Logo" class="footer-logo me-3" />
                         <div>
-                            <h5 class="mb-0 fw-bold">web_cv</h5>
-                            <div class="small text-white-50">Sáng tạo cho cuộc sống tốt đẹp</div>
+                            <div class="brand-title">TTDL PHÍA NAM</div>
+                            <div class="brand-sub text-uppercase">cục chuyển đổi số</div>
+                            <div class="brand-slogan">SÁNG TẠO CHO CUỘC SỐNG TỐT ĐẸP</div>
                         </div>
                     </div>
 
-                    <p class="mb-3 text-white-50">
-                        Giải pháp bản đồ, CSDL, mô hình 3D và phần mềm địa không gian phục vụ đô thị thông minh, giao thông, tài nguyên &amp; khoáng sản.
-                    </p>
-
-                    <ul class="list-unstyled ft-contacts mb-0 small">
-                        <li class="mb-2 d-flex">
-                            <span class="ft-ico me-2" aria-hidden="true">
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 2C8 2 5 5 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-4-3-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg>
-                            </span>
-                            <span><strong>Trụ sở:</strong> 81 Tuệ Tĩnh, Hai Bà Trưng, Hà Nội</span>
-                        </li>
-                        <li class="mb-2 d-flex">
-                            <span class="ft-ico me-2" aria-hidden="true">
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M22 16.92V21a2 2 0 0 1-2.18 2A19.8 19.8 0 0 1 3 6.18 2 2 0 0 1 5 4h4.09a2 2 0 0 1 2 1.72l.45 2.63a2 2 0 0 1-.54 1.82L9.91 12a16 16 0 0 0 6.18 6.18l1.83-1.09a2 2 0 0 1 1.82-.22l2.63.45A2 2 0 0 1 22 16.92z"/></svg>
-                            </span>
-                            <span><strong>Hotline:</strong> 0963 612 168</span>
+                    <ul class="footer-info list-unstyled mb-0">
+                        <li class="d-flex">
+                            <span class="fi fi-pin"></span>
+                            <p class="mb-2">
+                                Trụ sở: Tòa nhà 81 Tuệ Tĩnh, Phường Nguyễn Du, Quận Hai Bà Trưng, Hà Nội.
+                            </p>
                         </li>
                         <li class="d-flex">
-                            <span class="ft-ico me-2" aria-hidden="true">
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M4 4h16v16H4z"/><path d="M22 6 12 13 2 6"/></svg>
-                            </span>
-                            <span><strong>Email:</strong> contact@example.com</span>
+                            <span class="fi fi-pin"></span>
+                            <p class="mb-2">
+                                Chi nhánh miền Nam: Chung cư Phú Gia Hưng, Lê Đức Thọ, P.15, Gò Vấp, TP. Hồ Chí Minh.
+                            </p>
+                        </li>
+                        <li class="d-flex">
+                            <span class="fi fi-phone"></span>
+                            <p class="mb-2">Hotline: 0963 612 168 – 0985 826 519</p>
+                        </li>
+                        <li class="d-flex">
+                            <span class="fi fi-mail"></span>
+                            <p class="mb-0">Email: <a href="mailto:contact@3dgisnhn.vn" class="footer-link">contact@3dgisnhn.vn</a></p>
                         </li>
                     </ul>
                 </div>
 
-                <!-- Links -->
-                <div class="col-6 col-lg-2">
-                    <h6 class="ft-ttl">Liên kết</h6>
-                    <ul class="list-unstyled ft-links">
-                        <li><a class="footer-link" asp-area="" asp-controller="Home" asp-action="Index">Trang chủ</a></li>
-                        <li><a class="footer-link" href="/#services">Dịch vụ</a></li>
-                        <li><a class="footer-link" href="/#why">Vì sao chọn</a></li>
-                        <li><a class="footer-link" href="/#contact">Liên hệ</a></li>
-                        <li><a class="footer-link" asp-area="" asp-controller="Home" asp-action="Privacy">Chính sách</a></li>
+                <!-- Cột 2: Dịch vụ -->
+                <div class="col-12 col-md-6 col-lg-4">
+                    <h5 class="footer-heading">Dịch vụ của chúng tôi</h5>
+                    <ul class="footer-list">
+                        <li><a href="/#services">Giải pháp công nghệ quét Lidar và xây dựng mô hình 3D công trình</a></li>
+                        <li><a href="/#services">Giải pháp công nghệ 3D Tour và 360 du lịch thông minh</a></li>
+                        <li><a href="/#services">Giải pháp khảo sát sử dụng công nghệ bay chụp ảnh và Lidar UAV</a></li>
+                        <li><a href="/#services">Các giải pháp chuyển đổi số CSDL phục vụ các dự án thành phố thông minh</a></li>
+                        <li><a href="/#services">Dịch vụ khác</a></li>
                     </ul>
                 </div>
 
-                <!-- Services -->
-                <div class="col-6 col-lg-3">
-                    <h6 class="ft-ttl">Dịch vụ</h6>
-                    <ul class="list-unstyled ft-links">
-                        <li><a class="footer-link" href="/#services">LiDAR &amp; 3D</a></li>
-                        <li><a class="footer-link" href="/#services">3D Tour &amp; 360</a></li>
-                        <li><a class="footer-link" href="/#services">UAV / Drone</a></li>
-                        <li><a class="footer-link" href="/#services">Smart City Data</a></li>
-                    </ul>
-                </div>
-
-                <!-- Subscribe + Social -->
-                <div class="col-12 col-lg-2">
-                    <h6 class="ft-ttl">Nhận bản tin</h6>
-                    <form class="mb-3" onsubmit="return false;">
-                        <div class="input-group input-group-sm">
-                            <input type="email" class="form-control ft-input" placeholder="Email" />
-                            <button type="submit" class="btn btn-orange">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M22 2 11 13"/><path d="M22 2 15 22l-4-9-9-4 20-7z"/></svg>
+                <!-- Cột 3: Đăng ký nhận tin + mạng xã hội -->
+                <div class="col-12 col-md-6 col-lg-3">
+                    <h5 class="footer-heading">Đăng ký để nhận tin</h5>
+                    <form method="post" action="#">
+                        <div class="footer-subscribe input-group mb-3">
+                            <span class="input-group-text">
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                                    <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v.217L8 8 0 4.217V4z"/>
+                                    <path d="M0 6.383V12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6.383l-7.555 3.64a1 1 0 0 1-.89 0L0 6.383z"/>
+                                </svg>
+                            </span>
+                            <input type="email" class="form-control" placeholder="Email" aria-label="Email">
+                            <button class="btn btn-send" type="submit" aria-label="Gửi">
+                                <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                                    <path d="M15.964.686a.5.5 0 0 0-.65-.65L.767 5.855a.5.5 0 0 0 .03.94l5.94 1.98 1.98 5.94a.5.5 0 0 0 .94.03L15.964.686zM6.832 8.59l-.948 3.218 1.89-1.89-.942-1.328z"/>
+                                </svg>
                             </button>
                         </div>
-                        <small class="text-white-50 d-block mt-2">Chúng tôi chỉ gửi tin hữu ích.</small>
                     </form>
 
-                    <div class="d-flex gap-2">
-                        <a class="btn btn-outline-light btn-sm ft-social" href="#" aria-label="Facebook">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M22 12a10 10 0 1 0-11.6 9.9v-7h-2.5v-3h2.5V9.5c0-2.5 1.5-3.9 3.8-3.9 1.1 0 2.3.2 2.3.2v2.6h-1.3c-1.3 0-1.7.8-1.7 1.6V12h2.9l-.5 3h-2.4v7A10 10 0 0 0 22 12z"/></svg>
+                    <h5 class="footer-heading mt-4">Theo dõi chúng tôi</h5>
+                    <div class="footer-social">
+                        <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer"
+                           class="social-btn fb" aria-label="Facebook (mở tab mới)" title="Facebook">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M8.94 6.5H10V5H8.94a2.22 2.22 0 0 0-2.22 2.22V8H5v1.5h1.72V14h1.68V9.5H10L10.25 8H8.4V7.22c0-.4.32-.72.72-.72z"/>
+                            </svg>
                         </a>
-                        <a class="btn btn-outline-light btn-sm ft-social" href="#" aria-label="YouTube">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.6 3.5 12 3.5 12 3.5s-7.6 0-9.4.6A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.8.6 9.4.6 9.4.6s7.6 0 9.4-.6a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.8 15.5v-7l6 3.5-6 3.5z"/></svg>
+                        <a href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer"
+                           class="social-btn yt" aria-label="YouTube (mở tab mới)" title="YouTube">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M15.8 4.6a2 2 0 0 0-1.4-1.4C13 2.9 8 2.9 8 2.9s-5 0-6.4.3A2 2 0 0 0 .2 4.6 21 21 0 0 0 0 8a21 21 0 0 0 .2 3.4 2 2 0 0 0 1.4 1.4C3 13.1 8 13.1 8 13.1s5 0 6.4-.3a2 2 0 0 0 1.4-1.4A21 21 0 0 0 16 8a21 21 0 0 0-.2-3.4zM6.5 10.4V5.6L10.2 8 6.5 10.4z"/>
+                            </svg>
                         </a>
-                        <a class="btn btn-outline-light btn-sm ft-social" href="#" aria-label="LinkedIn">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 1 1 0 5.001 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM14.5 9c-2.2 0-3.2 1.2-3.7 2V9H7v12h3.8v-6.8c0-1.8.8-2.8 2.3-2.8 1.4 0 2 .9 2 2.8V21H19v-7.1C19 10.8 17.5 9 14.5 9z"/></svg>
+                        <a href="https://www.linkedin.com/" target="_blank" rel="noopener noreferrer"
+                           class="social-btn in" aria-label="LinkedIn (mở tab mới)" title="LinkedIn">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                                <path d="M1.5 1.5A1.5 1.5 0 0 1 3 0a1.5 1.5 0 1 1-1.5 1.5zM0 16h3V5H0v11zM5 5h3v1.5h.04A3.29 3.29 0 0 1 11 5c3 0 3.5 2 3.5 4.5V16h-3V10c0-1.5 0-3.5-2-3.5S7 8.2 7 10V16H5V5z"/>
+                            </svg>
                         </a>
                     </div>
                 </div>
@@ -94,14 +97,30 @@
         </div>
     </div>
 
-    <!-- Bottom -->
-    <div class="footer-bottom small">
-        <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center py-3">
-            <div class="text-white-50">© @DateTime.Now.Year - web_cv</div>
-            <div class="d-flex gap-3">
-                <a class="footer-link" asp-area="" asp-controller="Home" asp-action="Privacy">Điều khoản &amp; Quyền riêng tư</a>
-                <a class="footer-link" href="/#contact">Hỗ trợ</a>
+    <!-- ===== KHU DƯỚI ===== -->
+    <div class="footer-mini">
+        <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center small py-3">
+            <div class="text-white-50">
+                All Rights Reserved © @DateTime.Now.Year · TTDL PHÍA NAM – cục chuyển đổi số
+            </div>
+            <div class="text-white-50 mt-2 mt-md-0">
+                <a href="/#privacy" class="footer-link">Điều khoản</a> ·
+                <a href="/#contact" class="footer-link">Liên hệ</a>
             </div>
         </div>
     </div>
 </footer>
+
+<!-- ===== NÚT HOTLINE TƯ VẤN (động) ===== -->
+<a href="tel:0378695597" class="hotline-float" aria-label="Gọi hotline tư vấn 0378695597" title="Gọi 0378695597">
+    <span class="hl-icon">
+        <!-- phone -->
+        <svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+            <path d="M1.885.511a1.745 1.745 0 0 0-1.69 1.352C.187 4.478 1.2 7.095 3.223 9.117c2.02 2.02 4.637 3.036 7.252 3.027a1.745 1.745 0 0 0 1.352-1.691l-.036-.288a1.745 1.745 0 0 0-1.02-1.23l-2.26-.904a1.745 1.745 0 0 0-1.64.231l-.223.167a9.05 9.05 0 0 1-3.11-3.11l.167-.223a1.745 1.745 0 0 0 .231-1.64L3.134 1.53A1.745 1.745 0 0 0 1.885.511"/>
+        </svg>
+    </span>
+    <span class="hl-text">
+        <span class="hl-label">Hotline tư vấn:</span>
+        <span class="hl-number">0378695597</span>
+    </span>
+</a>

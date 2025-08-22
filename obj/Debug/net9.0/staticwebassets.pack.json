@@ -13,6 +13,10 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\img\\avatar.jpg",
+      "PackagePath": "staticwebassets\\img\\avatar.jpg"
+    },
+    {
       "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\img\\hero\\hero-1.jpg",
       "PackagePath": "staticwebassets\\img\\hero\\hero-1.jpg"
     },
@@ -31,6 +35,54 @@
     {
       "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\img\\logo.jpg",
       "PackagePath": "staticwebassets\\img\\logo.jpg"
+    },
+    {
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\img\\thuonghieu\\logo-1.jpg",
+      "PackagePath": "staticwebassets\\img\\thuonghieu\\logo-1.jpg"
+    },
+    {
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\img\\thuonghieu\\logo-10.jpg",
+      "PackagePath": "staticwebassets\\img\\thuonghieu\\logo-10.jpg"
+    },
+    {
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\img\\thuonghieu\\logo-11.png",
+      "PackagePath": "staticwebassets\\img\\thuonghieu\\logo-11.png"
+    },
+    {
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\img\\thuonghieu\\logo-12.png",
+      "PackagePath": "staticwebassets\\img\\thuonghieu\\logo-12.png"
+    },
+    {
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\img\\thuonghieu\\logo-2.jpg",
+      "PackagePath": "staticwebassets\\img\\thuonghieu\\logo-2.jpg"
+    },
+    {
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\img\\thuonghieu\\logo-3.jpg",
+      "PackagePath": "staticwebassets\\img\\thuonghieu\\logo-3.jpg"
+    },
+    {
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\img\\thuonghieu\\logo-4.jpg",
+      "PackagePath": "staticwebassets\\img\\thuonghieu\\logo-4.jpg"
+    },
+    {
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\img\\thuonghieu\\logo-5.jpg",
+      "PackagePath": "staticwebassets\\img\\thuonghieu\\logo-5.jpg"
+    },
+    {
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\img\\thuonghieu\\logo-6.jpg",
+      "PackagePath": "staticwebassets\\img\\thuonghieu\\logo-6.jpg"
+    },
+    {
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\img\\thuonghieu\\logo-7.jpg",
+      "PackagePath": "staticwebassets\\img\\thuonghieu\\logo-7.jpg"
+    },
+    {
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\img\\thuonghieu\\logo-8.jpg",
+      "PackagePath": "staticwebassets\\img\\thuonghieu\\logo-8.jpg"
+    },
+    {
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\img\\thuonghieu\\logo-9.jpg",
+      "PackagePath": "staticwebassets\\img\\thuonghieu\\logo-9.jpg"
     },
     {
       "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\js\\site.js",
