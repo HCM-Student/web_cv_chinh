@@ -2,7 +2,7 @@
     ViewData["Title"] = "Trang chủ";
 }
 
-<!-- ======= HERO (full-bleed, no text, animated kenburns + rings + waves) ======= -->
+<!-- ======= HERO (full-bleed, kenburns + rings + white curve) ======= -->
 <section class="hero-wrap full-bleed">
     <div id="mainHero" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="6000">
         <div class="carousel-indicators">
@@ -18,8 +18,8 @@
                 <div class="slide-overlay"></div>
                 <div class="city-lights"></div>
 
-                <img src="~/img/hero/tech-ring.jpg" alt="" class="tech-ring ring-1 d-none d-md-block" />
-                <img src="~/img/hero/tech-ring.jpg" alt="" class="tech-ring ring-2 d-none d-xl-block" />
+                <img src="~/img/hero/tech-ring.png" alt="" class="tech-ring ring-1 d-none d-md-block" />
+                <img src="~/img/hero/tech-ring.png" alt="" class="tech-ring ring-2 d-none d-xl-block" />
 
                 <div class="container position-relative z-1">
                     <div class="row align-items-center min-vh-75 py-5"><div class="col"></div></div>
@@ -32,7 +32,7 @@
                 <div class="slide-overlay"></div>
                 <div class="city-lights"></div>
 
-                <img src="~/img/hero/tech-ring.jpg" alt="" class="tech-ring ring-3 d-none d-lg-block" />
+                <img src="~/img/hero/tech-ring.png" alt="" class="tech-ring ring-3 d-none d-lg-block" />
                 <div class="container position-relative z-1">
                     <div class="row align-items-center min-vh-75 py-5"><div class="col"></div></div>
                 </div>
@@ -44,14 +44,13 @@
                 <div class="slide-overlay"></div>
                 <div class="city-lights"></div>
 
-                <img src="~/img/hero/tech-ring.jpg" alt="" class="tech-ring ring-4 d-none d-lg-block" />
+                <img src="~/img/hero/tech-ring.png" alt="" class="tech-ring ring-4 d-none d-lg-block" />
                 <div class="container position-relative z-1">
                     <div class="row align-items-center min-vh-75 py-5"><div class="col"></div></div>
                 </div>
             </div>
         </div>
 
-        <!-- arrows -->
         <button class="carousel-control-prev" type="button" data-bs-target="#mainHero" data-bs-slide="prev">
             <span class="carousel-control-prev-icon"></span>
             <span class="visually-hidden">Trước</span>
@@ -62,16 +61,11 @@
         </button>
     </div>
 
-    <!-- WAVE ANIMATION -->
-    <div class="waves-anim" aria-hidden="true">
-        <svg class="wave w1" viewBox="0 0 1440 120" preserveAspectRatio="none">
-            <path d="M0,96 C240,144 480,48 720,72 C960,96 1200,144 1440,96 L1440,120 L0,120 Z" fill="#ffffff"/>
-        </svg>
-        <svg class="wave w2" viewBox="0 0 1440 120" preserveAspectRatio="none">
-            <path d="M0,104 C240,152 480,56 720,80 C960,104 1200,152 1440,104 L1440,120 L0,120 Z" fill="#ffffff" opacity=".65"/>
-        </svg>
-        <svg class="wave w3" viewBox="0 0 1440 120" preserveAspectRatio="none">
-            <path d="M0,112 C240,160 480,64 720,88 C960,112 1200,160 1440,112 L1440,120 L0,120 Z" fill="#ffffff" opacity=".35"/>
+    <!-- VÒM TRẮNG LƯỢN – đặt ABSOLUTE để CHỒNG lên ảnh -->
+    <div class="hero-curve" aria-hidden="true">
+        <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
+            <!-- chỉnh 40/140 để nông/sâu hơn -->
+            <path d="M0,90 C 360,40 1080,140 1440,90 L1440,120 L0,120 Z" fill="#ffffff"/>
         </svg>
     </div>
 </section>
