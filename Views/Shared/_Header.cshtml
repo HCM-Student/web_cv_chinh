@@ -1,67 +1,57 @@
 @* Views/Shared/_Header.cshtml *@
 @{
+    var currentArea = (string?)ViewContext.RouteData.Values["area"] ?? "";
     var currentController = (string?)ViewContext.RouteData.Values["controller"] ?? "";
     var currentAction = (string?)ViewContext.RouteData.Values["action"] ?? "";
 }
 
-<!-- HEADER TOP: Logo + contact -->
-<div class="header-top">
-    <div class="container py-2">
-        <div class="d-flex align-items-center justify-content-between">
-            <!-- Brand -->
-            <a class="brand d-flex align-items-center text-decoration-none" asp-area="" asp-controller="Home" asp-action="Index">
-                <img src="~/img/logo.png" alt="web_cv" class="brand-logo me-2" />
-                @* Nếu logo đã có chữ thì có thể bỏ span bên dưới *@
-                <span class="fw-semibold text-dark d-none d-md-inline">web_cv</span>
-            </a>
+<!-- TOPBAR -->
+<div class="topbar text-white small">
+    <div class="container d-flex align-items-center justify-content-between py-1">
+        <div class="d-flex align-items-center gap-3">
+            <span class="d-none d-md-inline">
+                <svg class="me-1" xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor"><path d="M3 2a1 1 0 0 0-1 1v.278c0 .31.146.602.395.79l2.528 1.895c.35.262.45.744.232 1.129L4.39 9.12a11.19 11.19 0 0 0 4.49 4.49l1.83-1.765c.385-.218.867-.118 1.129.232l1.895 2.528c.188.249.48.395.79.395H15a1 1 0 0 0 1-1v-1a2 2 0 0 0-2-2h-.5A12.5 12.5 0 0 1 3 3.5V3a1 1 0 0 0-1-1Z"/></svg>
+                Hotline: <strong>0963 612 168</strong>
+            </span>
+            <span class="d-none d-md-inline">
+                <svg class="me-1" xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor"><path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v.217L8 8.5 0 4.217V4Zm0 1.383V12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V5.383l-7.555 4.53a1 1 0 0 1-1.01 0L0 5.383Z"/></svg>
+                Email: <strong><a class="link-light text-decoration-underline" href="mailto:contact@example.com">contact@example.com</a></strong>
+            </span>
+        </div>
 
-            <!-- Contacts -->
-            <div class="d-none d-md-flex align-items-center gap-4">
-                <div class="contact-chip">
-                    <svg width="18" height="18" viewBox="0 0 16 16" fill="currentColor" class="me-1">
-                        <path d="M3 2a1 1 0 0 0-1 1v.278c0 .31.146.602.395.79l2.528 1.895c.35.262.45.744.232 1.129L4.39 9.12a11.19 11.19 0 0 0 4.49 4.49l1.83-1.765c.385-.218.867-.118 1.129.232l1.895 2.528c.188.249.48.395.79.395H15a1 1 0 0 0 1-1v-1a2 2 0 0 0-2-2h-.5A12.5 12.5 0 0 1 3 3.5V3a1 1 0 0 0-1-1Z"/>
-                    </svg>
-                    <a class="link-primary fw-600" href="tel:0963612168">0963 612 168</a>
-                </div>
-
-                <div class="vr d-none d-lg-inline-block"></div>
-
-                <div class="contact-chip">
-                    <svg width="18" height="18" viewBox="0 0 16 16" fill="currentColor" class="me-1">
-                        <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v.217L8 8.5 0 4.217V4Zm0 1.383V12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V5.383l-7.555 4.53a1 1 0 0 1-1.01 0L0 5.383Z"/>
-                    </svg>
-                    <a class="link-primary fw-600" href="mailto:contact@example.com">contact@example.com</a>
-                </div>
-            </div>
+        <div class="d-flex align-items-center gap-3">
+            <a class="topbar-link" asp-area="" asp-controller="Home" asp-action="Privacy">Điều khoản</a>
+            <a class="topbar-link" href="/#contact">Liên hệ</a>
         </div>
     </div>
 </div>
 
-<!-- NAV MAIN: centered menu -->
-<nav class="navbar navbar-expand-lg navbar-main sticky-top">
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
     <div class="container">
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainMenu"
-                aria-controls="mainMenu" aria-expanded="false" aria-label="Toggle navigation">
+        <a class="navbar-brand fw-semibold d-flex align-items-center" asp-area="" asp-controller="Home" asp-action="Index">
+            <img src="@(Url.Content("~/img/logo.jpg"))" asp-append-version="true" alt="web_cv logo"
+                 class="me-2 object-fit-contain rounded-1" style="height:32px" />
+            <span class="d-none d-sm-inline">web_cv</span>
+        </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar"
+                aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <div id="mainMenu" class="collapse navbar-collapse">
-            <ul class="navbar-nav mx-auto gap-lg-2">
+        <div id="mainNavbar" class="collapse navbar-collapse">
+            <!-- Left menu -->
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
-                    <a class="nav-link px-3 py-3 @(currentController=="Home" && currentAction=="Index" ? "active" : "")"
+                    <a class="nav-link @(currentController=="Home" && currentAction=="Index" ? "active" : "")"
                        asp-area="" asp-controller="Home" asp-action="Index">Trang chủ</a>
                 </li>
-
-                <li class="nav-item">
-                    <a class="nav-link px-3 py-3" href="/#about">Giới thiệu</a>
-                </li>
+                <li class="nav-item"><a class="nav-link" href="/#about">Giới thiệu</a></li>
 
                 <li class="nav-item dropdown">
-                    <a class="nav-link px-3 py-3 dropdown-toggle" href="#" id="svcDrop" role="button"
-                       data-bs-toggle="dropdown" aria-expanded="false">
-                        Dịch vụ
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="svcDrop">
+                    <a class="nav-link dropdown-toggle" href="#" id="svcDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Dịch vụ</a>
+                    <ul class="dropdown-menu" aria-labelledby="svcDropdown">
                         <li><a class="dropdown-item" href="/#services">LiDAR & 3D</a></li>
                         <li><a class="dropdown-item" href="/#services">3D Tour & 360</a></li>
                         <li><a class="dropdown-item" href="/#services">UAV/Drone</a></li>
@@ -69,26 +59,75 @@
                     </ul>
                 </li>
 
-                <li class="nav-item">
-                    <a class="nav-link px-3 py-3" href="/#devices">Thiết bị</a>
-                </li>
+                <li class="nav-item"><a class="nav-link" href="/#projects">Thiết bị</a></li>
+                <li class="nav-item"><a class="nav-link" href="/#news">Tin tức – Sự kiện</a></li>
+                <li class="nav-item"><a class="nav-link" href="/#careers">Tuyển dụng</a></li>
+                <li class="nav-item"><a class="nav-link" href="/#pricing">Báo giá</a></li>
+                <li class="nav-item"><a class="nav-link" href="/#contact">Liên hệ</a></li>
 
-                <li class="nav-item">
-                    <a class="nav-link px-3 py-3" href="/#news">Tin tức – Sự kiện</a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link px-3 py-3" href="/#careers">Tuyển dụng</a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link px-3 py-3" href="/#pricing">Báo giá</a>
-                </li>
-
-                <li class="nav-item">
-                    <a class="nav-link px-3 py-3" href="/#contact">Liên hệ</a>
-                </li>
+                @* Link nhanh vào Admin nếu có quyền *@
+                @if (User?.Identity?.IsAuthenticated ?? false)
+                {
+                    if (User.IsInRole("Admin"))
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="Admin" asp-controller="Dashboard" asp-action="Index">Quản trị</a>
+                        </li>
+                    }
+                }
             </ul>
+
+            <!-- Right: Auth -->
+            <div class="ms-lg-3 d-flex align-items-center header-auth gap-2">
+                @if (User?.Identity?.IsAuthenticated ?? false)
+                {
+                    <div class="dropdown">
+                        <a class="d-flex align-items-center gap-2 text-decoration-none text-body"
+                           href="#" data-bs-toggle="dropdown" aria-expanded="false">
+                            <span class="avatar-circle">@((User.Identity!.Name ?? "U")[0].ToString().ToUpper())</span>
+                            <span class="fw-semibold d-none d-sm-inline">@User.Identity!.Name</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end shadow-sm">
+                            <li><a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Index">Tài khoản</a></li>
+
+                            @if (User.IsInRole("Admin"))
+                            {
+                                <li><hr class="dropdown-divider" /></li>
+                                <li class="px-3 pt-1 pb-1 text-muted small">Quản trị</li>
+                                <li><a class="dropdown-item" asp-area="Admin" asp-controller="Dashboard" asp-action="Index">Bảng điều khiển</a></li>
+                                <li><a class="dropdown-item" asp-area="Admin" asp-controller="BaiViet" asp-action="Index">Bài viết</a></li>
+                                <li><a class="dropdown-item" asp-area="Admin" asp-controller="ChuyenMuc" asp-action="Index">Chuyên mục</a></li>
+                                <li><a class="dropdown-item" asp-area="Admin" asp-controller="NguoiDung" asp-action="Index">Người dùng</a></li>
+                            }
+
+                            <li><hr class="dropdown-divider" /></li>
+                            <li>
+                                <!-- Link gọi submit form ẩn để logout (an toàn & ổn định) -->
+                                <a class="dropdown-item" href="javascript:void(0)" onclick="document.getElementById('logout-form').submit();">
+                                    Đăng xuất
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                }
+                else
+                {
+                    <a class="btn btn-outline-primary btn-sm rounded-pill px-3"
+                       asp-area="Identity" asp-page="/Account/Login">Đăng nhập</a>
+                    <a class="btn btn-primary btn-sm rounded-pill px-3"
+                       asp-area="Identity" asp-page="/Account/Register">Đăng ký</a>
+                }
+            </div>
         </div>
     </div>
 </nav>
+
+<!-- FORM ẨN DÙNG CHO LOGOUT (đặt ngoài dropdown để submit ổn định) -->
+<form id="logout-form"
+      method="post"
+      asp-area="Identity"
+      asp-page="/Account/Logout"
+      asp-route-returnUrl="@Url.Action("Index","Home", new { area = "" })"
+      class="d-none">
+    @Html.AntiForgeryToken()
+</form>

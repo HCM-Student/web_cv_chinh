@@ -29,6 +29,10 @@
       "PackagePath": "staticwebassets\\img\\hero\\tech-ring.jpg"
     },
     {
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\img\\logo.jpg",
+      "PackagePath": "staticwebassets\\img\\logo.jpg"
+    },
+    {
       "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },
