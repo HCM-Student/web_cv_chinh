@@ -1,0 +1,50 @@
+@model IEnumerable<WEB_CV.Models.ChuyenMuc>
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    ViewData["Title"] = "Quản lý Chuyên mục";
+}
+<div class="container py-4">
+    @if (TempData["msg"] != null)
+    {
+        <div class="alert alert-success">@TempData["msg"]</div>
+    }
+
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h1 class="h4 mb-0">Quản lý Chuyên mục</h1>
+        <a class="btn btn-primary" asp-area="Admin" asp-controller="ChuyenMuc" asp-action="Create">+ Thêm chuyên mục</a>
+    </div>
+
+    <form method="get" class="row g-2 mb-3">
+        <div class="col-md-4">
+            <input class="form-control" name="q" value="@ViewBag.Q" placeholder="Tìm theo tên chuyên mục" />
+        </div>
+        <div class="col-auto">
+            <button class="btn btn-outline-secondary" type="submit">Tìm</button>
+        </div>
+    </form>
+
+    <div class="table-responsive">
+        <table class="table table-bordered align-middle">
+            <thead>
+                <tr>
+                    <th style="width:80px;">ID</th>
+                    <th>Tên</th>
+                    <th style="width:140px;"></th>
+                </tr>
+            </thead>
+            <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.Ten</td>
+                    <td class="text-end">
+                        <a class="btn btn-sm btn-outline-primary" asp-area="Admin" asp-controller="ChuyenMuc" asp-action="Edit" asp-route-id="@item.Id">Sửa</a>
+                        <a class="btn btn-sm btn-outline-danger ms-1" asp-area="Admin" asp-controller="ChuyenMuc" asp-action="Delete" asp-route-id="@item.Id">Xoá</a>
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+</div>

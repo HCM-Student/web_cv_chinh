@@ -1,3 +1,5 @@
+using System;
+using System.Linq;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -6,14 +8,12 @@ using WEB_CV.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// DbContext
+// ===================== Services =====================
 builder.Services.AddDbContext<NewsDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-// MVC
 builder.Services.AddControllersWithViews();
 
-// Cookie Auth
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>
     {
@@ -25,11 +25,12 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
 
 builder.Services.AddAuthorization();
 
-// PasswordHasher cho NguoiDung
+// Hash mật khẩu cho NguoiDung (tự quản)
 builder.Services.AddSingleton<IPasswordHasher<NguoiDung>, PasswordHasher<NguoiDung>>();
 
 var app = builder.Build();
 
+// ===================== Middleware =====================
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
@@ -44,14 +45,16 @@ app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
-// Seed DB + tạo admin mặc định nếu chưa có
+// ===================== Seed dữ liệu =====================
 using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<NewsDbContext>();
     var hasher = scope.ServiceProvider.GetRequiredService<IPasswordHasher<NguoiDung>>();
 
+    // Tự động chạy migration nếu chưa có
     db.Database.Migrate();
 
+    // Seed Admin mặc định (đổi mật khẩu sau khi đăng nhập)
     if (!db.NguoiDungs.Any(x => x.VaiTro == "Admin"))
     {
         var admin = new NguoiDung
@@ -61,13 +64,25 @@ using (var scope = app.Services.CreateScope())
             VaiTro = "Admin",
             KichHoat = true
         };
-        admin.MatKhauHash = hasher.HashPassword(admin, "123456"); // 👉 Nhớ đổi sau khi đăng nhập
+        admin.MatKhauHash = hasher.HashPassword(admin, "123456");
         db.NguoiDungs.Add(admin);
+        db.SaveChanges();
+    }
+
+    // Seed vài Chuyên mục mẫu nếu bảng đang rỗng
+    if (!db.ChuyenMucs.Any())
+    {
+        db.ChuyenMucs.AddRange(
+            new ChuyenMuc { Ten = "Tin tức" },
+            new ChuyenMuc { Ten = "Sự kiện" },
+            new ChuyenMuc { Ten = "Thông báo" },
+            new ChuyenMuc { Ten = "Hướng dẫn" }
+        );
         db.SaveChanges();
     }
 }
 
-// Routes (map Areas trước)
+// ===================== Routes =====================
 app.MapControllerRoute(
     name: "areas",
     pattern: "{area:exists}/{controller=Dashboard}/{action=Index}/{id?}");

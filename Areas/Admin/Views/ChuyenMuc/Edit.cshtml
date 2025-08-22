@@ -1,0 +1,16 @@
+@model WEB_CV.Models.ChuyenMuc
+@{
+    ViewData["Title"] = "Sửa chuyên mục";
+}
+<div class="container py-4">
+    <h1 class="h4 mb-3">Sửa chuyên mục</h1>
+    <form asp-area="Admin" asp-controller="ChuyenMuc" asp-action="Edit" method="post">
+        <input type="hidden" asp-for="Id" />
+        <partial name="_Form" model="Model" />
+        <div class="mt-3 d-flex gap-2">
+            <button type="submit" class="btn btn-primary">Cập nhật</button>
+            <a asp-area="Admin" asp-controller="ChuyenMuc" asp-action="Index" class="btn btn-secondary">Hủy</a>
+        </div>
+    </form>
+</div>
+@section Scripts { <partial name="_ValidationScriptsPartial" /> }

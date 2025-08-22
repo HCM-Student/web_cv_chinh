@@ -1,14 +1,64 @@
+@model IEnumerable<WEB_CV.Models.BaiViet>
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @{
     ViewData["Title"] = "Quản lý Bài viết";
+    var q = ViewBag.Q as string;
 }
 <div class="container py-4">
+
+    @if (TempData["msg"] != null)
+    {
+        <div class="alert alert-success">@TempData["msg"]</div>
+    }
+
     <div class="d-flex justify-content-between align-items-center mb-3">
         <h1 class="h4 mb-0">Quản lý Bài viết</h1>
         <a class="btn btn-primary" asp-area="Admin" asp-controller="BaiViet" asp-action="Create">+ Thêm bài viết</a>
     </div>
 
-    <!-- Placeholder: bảng dữ liệu. Sau này đổ EF Core vào đây -->
-    <div class="alert alert-info">
-        Đây là trang quản lý Bài viết. Bạn có thể thêm/sửa/xóa khi mình cắm dữ liệu thật từ DbContext.
+    <form method="get" class="row g-2 mb-3">
+        <div class="col-md-4">
+            <input class="form-control" name="q" value="@q" placeholder="Tìm theo tiêu đề, tóm tắt, CM, tác giả..." />
+        </div>
+        <div class="col-auto">
+            <button class="btn btn-outline-secondary" type="submit">Tìm</button>
+        </div>
+    </form>
+
+    <div class="table-responsive">
+        <table class="table table-bordered align-middle">
+            <thead>
+                <tr>
+                    <th style="width:60px;">ID</th>
+                    <th>Tiêu đề</th>
+                    <th>Chuyên mục</th>
+                    <th>Tác giả</th>
+                    <th style="width:160px;">Ngày đăng</th>
+                    <th style="width:140px;"></th>
+                </tr>
+            </thead>
+            <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td class="text-break">
+                        <div class="fw-semibold">@item.TieuDe</div>
+                        @if (!string.IsNullOrWhiteSpace(item.TomTat))
+                        {
+                            <div class="text-muted small">@item.TomTat</div>
+                        }
+                    </td>
+                    <td>@item.ChuyenMuc?.Ten</td>
+                    <td>@item.TacGia?.HoTen</td>
+                    <td>@item.NgayDang.ToString("yyyy-MM-dd HH:mm")</td>
+                    <td class="text-end">
+                        <a class="btn btn-sm btn-outline-primary" asp-area="Admin" asp-controller="BaiViet" asp-action="Edit" asp-route-id="@item.Id">Sửa</a>
+                        <a class="btn btn-sm btn-outline-danger ms-1" asp-area="Admin" asp-controller="BaiViet" asp-action="Delete" asp-route-id="@item.Id">Xoá</a>
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
     </div>
 </div>
