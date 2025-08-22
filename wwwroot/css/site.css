@@ -1,6 +1,12 @@
 /* ==========================================================================
    Base & Resets
    ========================================================================== */
+:root{
+  --brand-blue:#0d6efd;
+  --brand-accent:#ff7a1a;
+  --ink:#0f3357;
+}
+
 html {
   font-size: 14px;
   position: relative;
@@ -8,9 +14,9 @@ html {
 }
 @media (min-width: 768px) { html { font-size: 16px; } }
 
-body { margin: 0; } /* dùng flex layout trong _Layout nên không cần margin-bottom mặc định */
+body { margin: 0; }
 
-/* Focus ring (giữ của template mặc định) */
+/* Focus ring (template mặc định) */
 .btn:focus,
 .btn:active:focus,
 .btn-link.nav-link:focus,
@@ -19,20 +25,53 @@ body { margin: 0; } /* dùng flex layout trong _Layout nên không cần margin-
   box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
 
-/* Floating placeholder align fix (giữ rule cũ) */
+/* Floating placeholder align fix */
 .form-floating > .form-control-plaintext::placeholder,
 .form-floating > .form-control::placeholder { color: var(--bs-secondary-color); text-align: end; }
 .form-floating > .form-control-plaintext:focus::placeholder,
 .form-floating > .form-control:focus::placeholder { text-align: start; }
 
 /* ==========================================================================
-   Header (Topbar + Navbar)
+   HEADER
    ========================================================================== */
-.topbar { background: #0d6efd; color: #fff; }
+/* (legacy) topbar – hiện không dùng, giữ lại nếu cần */
+.topbar { background: var(--brand-blue); color: #fff; }
 .topbar .topbar-link { color: rgba(255,255,255,.9); text-decoration: none; }
 .topbar .topbar-link:hover { text-decoration: underline; }
 
-.navbar .nav-link.active { font-weight: 600; }
+/* Header 2 tầng theo mẫu: logo + hotline/email (trên) & menu (dưới) */
+.header-top{
+  background:#ffffff;
+  border-bottom:1px solid #eef2f7;
+}
+.brand-logo{ height:44px; }
+.fw-600{ font-weight:600; }
+.header-top .contact-chip{ display:flex; align-items:center; font-size:.95rem; color:#4b5563; }
+.header-top .contact-chip a{ text-decoration:none; }
+.header-top .contact-chip a:hover{ text-decoration:underline; }
+
+.navbar-main{
+  background:#f8fafc;
+  border-bottom:1px solid #eef2f7;
+}
+.navbar-main .navbar-toggler{ border:0; }
+.navbar-main .navbar-toggler:focus{ box-shadow:none; }
+.navbar-main .navbar-nav{ align-items:center; }
+.navbar-main .nav-link{
+  font-weight:700;
+  color:var(--ink);
+  opacity:.95;
+}
+.navbar-main .nav-link:hover{ color:var(--brand-blue); }
+.navbar-main .nav-link.active{
+  color:var(--brand-accent);
+}
+.navbar-main .dropdown-menu{
+  border-radius:12px;
+  padding:.5rem;
+  border:1px solid #eef2f7;
+  box-shadow:0 10px 30px rgba(2,6,23,.08);
+}
 
 /* ==========================================================================
    Home – landing styles (hero gradient – tùy chọn dùng)
@@ -110,24 +149,30 @@ body { margin: 0; } /* dùng flex layout trong _Layout nên không cần margin-
 .cta-bar{ border:1px solid #eef2f7; border-radius:18px; background:linear-gradient(180deg,#f9fbff,#ffffff); box-shadow:0 12px 40px rgba(2,6,23,.06); }
 
 /* ==========================================================================
-   HERO Banner kiểu “tech + wave” (carousel #mainHero) – bản chuẩn
+   HERO Banner “tech + wave” (carousel #mainHero)
    ========================================================================== */
 .hero-wrap{ position:relative; background:#0c1a2a; }
 #mainHero{ position:relative; }
-#mainHero .carousel-item{ min-height:520px; }                 /* sẽ bị override phía dưới bằng 78–86vh */
+#mainHero .carousel-item{ min-height:520px; }
 @media (min-width:1200px){ #mainHero .carousel-item{ min-height:640px; } }
 
+/* Ảnh nền mỗi slide – làm sáng */
 .slide-bg{
   position:absolute; inset:0;
   background-position:center; background-size:cover; background-repeat:no-repeat;
-  filter:saturate(1.05) contrast(1.05) brightness(.9);
+  filter:saturate(1.08) contrast(1.04) brightness(1.06);
 }
+
+/* Lớp phủ làm sáng, không còn tối */
 .slide-overlay{
-  position:absolute; inset:0;
+  position:absolute; inset:0; pointer-events:none;
   background:
-    radial-gradient(900px 500px at 90% 10%, rgba(80,170,255,.25), transparent 60%),
-    linear-gradient(180deg, rgba(0,0,0,.25), rgba(0,0,0,.25));
+    radial-gradient(1000px 550px at 85% 20%, rgba(120,200,255,.28), transparent 60%),
+    radial-gradient(800px 480px at 10% 10%, rgba(180,140,255,.18), transparent 60%),
+    linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.08));
 }
+
+/* Đồ họa phụ */
 .hero-graphic{ max-height:380px; opacity:.9; filter:drop-shadow(0 8px 24px rgba(0,0,0,.35)); }
 .headline-3d{
   text-transform:uppercase; color:#e8f4ff; letter-spacing:.04em;
@@ -137,17 +182,17 @@ body { margin: 0; } /* dùng flex layout trong _Layout nên không cần margin-
 }
 .headline-3d.sub{ font-size:clamp(1.25rem,2.2vw + 1rem,2rem); -webkit-text-stroke:1px #bfe6ff; }
 .btn-pill{ border-radius:999px; }
-.btn-orange{ background:#ff7a1a; border-color:#ff7a1a; color:#fff; }
+.btn-orange{ background:var(--brand-accent); border-color:var(--brand-accent); color:#fff; }
 .btn-orange:hover{ background:#ff6a00; border-color:#ff6a00; color:#fff; }
-#mainHero .carousel-indicators [data-bs-target]{ width:10px; height:10px; border-radius:50%; background:#cfe3ff; opacity:.6; }
-#mainHero .carousel-indicators .active{ background:#0d6efd; opacity:1; }
+#mainHero .carousel-indicators [data-bs-target]{ width:10px; height:10px; border-radius:50%; background:#cfe3ff; opacity:.7; }
+#mainHero .carousel-indicators .active{ background:var(--brand-blue); opacity:1; }
 #mainHero .carousel-control-prev-icon,
 #mainHero .carousel-control-next-icon{ filter:drop-shadow(0 2px 6px rgba(0,0,0,.4)); }
 .hero-wave{ position:relative; z-index:1; margin-top:-1px; }
 .hero-wave svg{ width:100%; height:80px; display:block; }
 
 /* ==========================================================================
-   (Optional) Old hero slider styles – an toàn giữ lại, nhưng trang chủ mới không dùng
+   (Optional) Old hero slider styles – giữ cho trang cũ
    ========================================================================== */
 #homeHero .carousel-item{
   height:60vh; min-height:420px; position:relative; color:#fff;
@@ -157,22 +202,42 @@ body { margin: 0; } /* dùng flex layout trong _Layout nên không cần margin-
 #homeHero .hero-content{ position:absolute; inset:0; display:grid; place-items:center; text-align:center; padding:0 1rem; }
 #homeHero h1{ font-weight:600; letter-spacing:.2px; }
 
-/* Why-us items (cũ nhưng vẫn dùng được) */
+/* Why-us items */
 .why-item{ display:flex; gap:.75rem; padding:1rem; border-radius:.75rem; border:1px solid #eee; background:#fff; height:100%; }
 .why-item .icon{ width:40px; height:40px; display:grid; place-items:center; border-radius:.5rem; background:#f1f5ff; }
 
-/* Simple CTA card (cũ) */
+/* Simple CTA card */
 .cta-card{ border:1px solid #eee; }
 
 /* ==========================================================================
-   Footer
+   FOOTER
    ========================================================================== */
-.site-footer .footer-top{ background:#1e293b; color:#fff; }
-.site-footer .footer-bottom{ background:#0f172a; color:#fff; border-top:1px solid rgba(255,255,255,.08); }
+.site-footer .footer-top{
+  background:#102536; color:#fff; position:relative;
+}
+.site-footer .footer-top::before{
+  content:""; position:absolute; inset:0; pointer-events:none;
+  background:radial-gradient(1200px 600px at 90% 0, rgba(255,255,255,.06), transparent 60%);
+  opacity:.45;
+}
+.site-footer .footer-mini{ background:#0f172a; color:#fff; border-top:1px solid rgba(255,255,255,.08); }
 .site-footer h5, .site-footer h6{ font-weight:700; }
 .site-footer .footer-link{ color:rgba(255,255,255,.85); text-decoration:none; }
 .site-footer .footer-link:hover{ color:#fff; text-decoration:underline; }
 .site-footer .footer-contacts li{ margin-bottom:.25rem; }
+
+/* Social rounded chips */
+.social-circle a{
+  width:34px; height:34px; display:grid; place-items:center;
+  border-radius:999px; text-decoration:none; font-weight:700; font-size:.8rem;
+  background:rgba(255,255,255,.08); color:#fff; border:1px solid rgba(255,255,255,.2);
+}
+.social-circle a:hover{ background:#ffffff; color:#0f172a; }
+
+/* Newsletter input shape */
+.news-input .form-control{ border:0; background:#fff; }
+.news-input .input-group .form-control{ border-radius:999px 0 0 999px; }
+.news-input .input-group .btn{ border-radius:0 999px 999px 0; padding-inline:1rem; }
 
 /* ==========================================================================
    Utilities
@@ -182,10 +247,8 @@ body { margin: 0; } /* dùng flex layout trong _Layout nên không cần margin-
 .card-hover:hover { transform: translateY(-2px); box-shadow: 0 6px 24px rgba(0,0,0,.08); }
 
 /* ==========================================================================
-   >>> BỔ SUNG: Hero FULL-BLEED + chữ lớn + sóng động (override/extend)
+   >>> Hero FULL-BLEED + sóng động (override/extend)
    ========================================================================== */
-
-/* Kéo hero tràn full màn hình khi nằm trong .container của _Layout */
 .hero-wrap.full-bleed{
   width:100vw;
   position:relative;
@@ -195,11 +258,11 @@ body { margin: 0; } /* dùng flex layout trong _Layout nên không cần margin-
   margin-right:-50vw;
 }
 
-/* Làm banner cao, bự – override min-height ở phần trên */
+/* Banner cao, bự */
 #mainHero .carousel-item{ min-height:78vh; }
 @media (min-width:1400px){ #mainHero .carousel-item{ min-height:86vh; } }
 
-/* Typography lớn, đẹp */
+/* Typography lớn (nếu dùng chữ) */
 .headline-xxl{
   font-weight:800;
   text-transform:uppercase;
@@ -211,7 +274,7 @@ body { margin: 0; } /* dùng flex layout trong _Layout nên không cần margin-
 }
 .subline-lg{ font-size:clamp(1rem, 1vw + .8rem, 1.25rem); }
 
-/* Sóng động ở chân banner */
+/* Waves */
 .waves-anim{
   position:relative;
   height:110px;
@@ -226,7 +289,6 @@ body { margin: 0; } /* dùng flex layout trong _Layout nên không cần margin-
 .waves-anim .w1{ animation:waveDrift 12s ease-in-out infinite alternate; }
 .waves-anim .w2{ animation:waveDrift 18s ease-in-out infinite alternate-reverse; }
 .waves-anim .w3{ animation:waveDrift 24s ease-in-out infinite alternate; opacity:.8; }
-
 @keyframes waveDrift{
   0%   { transform: translateX(0); }
   100% { transform: translateX(-10%); }
@@ -234,3 +296,52 @@ body { margin: 0; } /* dùng flex layout trong _Layout nên không cần margin-
 
 /* Hỗ trợ canh giữa nội dung theo chiều dọc hero */
 .min-vh-75{ min-height:75vh; }
+
+/* ==========================================================================
+   >>> Hiệu ứng chuyển động: KenBurns, City-lights, Tech-rings
+   ========================================================================== */
+
+/* KenBurns (zoom + pan nhẹ) */
+.kenburns{
+  animation: kenburnsZoom 12s ease-in-out infinite alternate;
+  transform-origin: center;
+  filter:saturate(1.1) contrast(1.05) brightness(1.04);
+}
+@keyframes kenburnsZoom{
+  0%   { transform: scale(1.05) translate3d(0, 0, 0); }
+  100% { transform: scale(1.15) translate3d(-1.5%, -1.5%, 0); }
+}
+
+/* City lights (vạch sáng quét) */
+.city-lights{
+  position:absolute; inset:0; pointer-events:none; opacity:.6; mix-blend-mode:screen;
+  background:
+    repeating-linear-gradient( to right,
+      rgba(55, 155, 255, .10) 0 2px,
+      transparent 2px 6px),
+    repeating-linear-gradient( to bottom,
+      rgba(0, 150, 255, .07) 0 3px,
+      transparent 3px 12px );
+  animation: skylineSweep 16s linear infinite;
+}
+@keyframes skylineSweep{
+  0%   { background-position:    0 0,    0 0; }
+  100% { background-position: -600px 0, 0 -320px; }
+}
+
+/* Floating tech rings */
+.tech-ring{
+  position:absolute; filter:drop-shadow(0 12px 32px rgba(0,0,0,.4));
+  opacity:.55; mix-blend-mode:screen; pointer-events:none;
+}
+.ring-1{ width:400px; right:6%; top:10%; animation: ringSpin 40s linear infinite, ringFloat 8s ease-in-out infinite; }
+.ring-2{ width:260px; right:18%; bottom:14%; animation: ringSpinReverse 32s linear infinite, ringFloat 7s ease-in-out infinite; }
+.ring-3{ width:320px; left:10%; top:12%; animation: ringSpin 36s linear infinite, ringFloat 9s ease-in-out infinite; }
+.ring-4{ width:280px; left:16%; bottom:10%; animation: ringSpinReverse 30s linear infinite, ringFloat 7.5s ease-in-out infinite; }
+
+@keyframes ringSpin{ from{ transform:rotate(0deg); } to{ transform:rotate(360deg); } }
+@keyframes ringSpinReverse{ from{ transform:rotate(360deg); } to{ transform:rotate(0deg); } }
+@keyframes ringFloat{
+  0%,100%{ transform: translateY(0); }
+  50%    { transform: translateY(-10px); }
+}

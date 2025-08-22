@@ -2,7 +2,7 @@
     ViewData["Title"] = "Trang chủ";
 }
 
-<!-- ======= HERO (full-bleed, big text, animated waves) ======= -->
+<!-- ======= HERO (full-bleed, no text, animated kenburns + rings + waves) ======= -->
 <section class="hero-wrap full-bleed">
     <div id="mainHero" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="6000">
         <div class="carousel-indicators">
@@ -14,61 +14,39 @@
         <div class="carousel-inner">
             <!-- Slide 1 -->
             <div class="carousel-item active">
-                <div class="slide-bg" style="background-image:url('@Url.Content("~/img/hero/hero-1.jpg")')"></div>
+                <div class="slide-bg kenburns" style="background-image:url('@Url.Content("~/img/hero/hero-1.jpg")')"></div>
                 <div class="slide-overlay"></div>
+                <div class="city-lights"></div>
+
+                <img src="~/img/hero/tech-ring.jpg" alt="" class="tech-ring ring-1 d-none d-md-block" />
+                <img src="~/img/hero/tech-ring.jpg" alt="" class="tech-ring ring-2 d-none d-xl-block" />
 
                 <div class="container position-relative z-1">
-                    <div class="row align-items-center min-vh-75 py-5">
-                        <div class="col-xl-9 col-lg-10 mx-auto text-center">
-                            <div class="eyebrow mb-3">Bộ giải pháp chuyển đổi số đa ngành</div>
-
-                            <h1 class="headline-xxl mb-2">
-                                CUNG CẤP GIẢI PHÁP BẢN ĐỒ, CSDL,<br />
-                                MÔ HÌNH 3D VÀ PHẦN MỀM ĐỊA KHÔNG GIAN
-                            </h1>
-
-                            <p class="subline-lg text-white-50 mb-4">
-                                LiDAR • UAV • 3D Tour • IoT • AI cho Smart City & doanh nghiệp
-                            </p>
-
-                            <div class="d-flex gap-2 justify-content-center">
-                                <a href="#services" class="btn btn-primary btn-lg btn-pill px-4">Khám phá dịch vụ</a>
-                                <a href="#about" class="btn btn-outline-light btn-lg btn-pill px-4">Chi tiết</a>
-                            </div>
-                        </div>
-                    </div>
+                    <div class="row align-items-center min-vh-75 py-5"><div class="col"></div></div>
                 </div>
             </div>
 
             <!-- Slide 2 -->
             <div class="carousel-item">
-                <div class="slide-bg" style="background-image:url('@Url.Content("~/img/hero/hero-2.jpg")')"></div>
+                <div class="slide-bg kenburns" style="background-image:url('@Url.Content("~/img/hero/hero-2.jpg")')"></div>
                 <div class="slide-overlay"></div>
+                <div class="city-lights"></div>
+
+                <img src="~/img/hero/tech-ring.jpg" alt="" class="tech-ring ring-3 d-none d-lg-block" />
                 <div class="container position-relative z-1">
-                    <div class="row align-items-center min-vh-75 py-5">
-                        <div class="col-xl-9 col-lg-10 mx-auto text-center">
-                            <div class="eyebrow mb-3">LiDAR · UAV · 3D Tour · IoT</div>
-                            <h2 class="headline-xxl mb-2">MÔ HÌNH 3D CHÍNH XÁC & PHÂN TÍCH THỜI GIAN THỰC</h2>
-                            <p class="subline-lg text-white-50 mb-4">Đám mây điểm, dựng 3D công trình/địa hình & dashboard ra quyết định.</p>
-                            <a href="#projects" class="btn btn-light btn-lg btn-pill px-4">Dự án tiêu biểu</a>
-                        </div>
-                    </div>
+                    <div class="row align-items-center min-vh-75 py-5"><div class="col"></div></div>
                 </div>
             </div>
 
             <!-- Slide 3 -->
             <div class="carousel-item">
-                <div class="slide-bg" style="background-image:url('@Url.Content("~/img/hero/hero-3.jpg")')"></div>
+                <div class="slide-bg kenburns" style="background-image:url('@Url.Content("~/img/hero/hero-3.jpg")')"></div>
                 <div class="slide-overlay"></div>
+                <div class="city-lights"></div>
+
+                <img src="~/img/hero/tech-ring.jpg" alt="" class="tech-ring ring-4 d-none d-lg-block" />
                 <div class="container position-relative z-1">
-                    <div class="row align-items-center min-vh-75 py-5">
-                        <div class="col-xl-9 col-lg-10 mx-auto text-center">
-                            <div class="eyebrow mb-3">Smart City Platform</div>
-                            <h2 class="headline-xxl mb-2">QUẢN TRỊ CSDL ĐỊA KHÔNG GIAN TẬP TRUNG</h2>
-                            <p class="subline-lg text-white-50 mb-4">Chuẩn hóa – tích hợp – phân quyền – vận hành ổn định, mở rộng linh hoạt.</p>
-                            <a href="#contact" class="btn btn-primary btn-lg btn-pill px-4">Liên hệ tư vấn</a>
-                        </div>
-                    </div>
+                    <div class="row align-items-center min-vh-75 py-5"><div class="col"></div></div>
                 </div>
             </div>
         </div>
@@ -105,7 +83,9 @@
             <div class="col-12 col-md-4">
                 <div class="glass-card rounded-4 p-3 h-100">
                     <div class="d-flex align-items-start gap-3">
-                        <div class="icon-badge"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 12h18M3 6h18M3 18h18"/></svg></div>
+                        <div class="icon-badge">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+                        </div>
                         <div>
                             <h6 class="mb-1">CSDL địa không gian tập trung</h6>
                             <p class="mb-0 text-muted">Chuẩn hóa & kết nối dữ liệu phục vụ quản lý đô thị và hạ tầng.</p>
@@ -113,10 +93,13 @@
                     </div>
                 </div>
             </div>
+
             <div class="col-12 col-md-4">
                 <div class="glass-card rounded-4 p-3 h-100">
                     <div class="d-flex align-items-start gap-3">
-                        <div class="icon-badge" style="background:#eef7ff"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 3v18M3 12h18"/></svg></div>
+                        <div class="icon-badge" style="background:#eef7ff">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 3v18M3 12h18"/></svg>
+                        </div>
                         <div>
                             <h6 class="mb-1">Mô hình 3D – LiDAR & UAV</h6>
                             <p class="mb-0 text-muted">Đám mây điểm chính xác, dựng 3D công trình & địa hình.</p>
@@ -124,10 +107,13 @@
                     </div>
                 </div>
             </div>
+
             <div class="col-12 col-md-4">
                 <div class="glass-card rounded-4 p-3 h-100">
                     <div class="d-flex align-items-start gap-3">
-                        <div class="icon-badge" style="background:#eefcf3"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 6v12M6 12h12"/></svg></div>
+                        <div class="icon-badge" style="background:#eefcf3">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 6v12M6 12h12"/></svg>
+                        </div>
                         <div>
                             <h6 class="mb-1">Phân tích AI & 3D Tour</h6>
                             <p class="mb-0 text-muted">AI nhận dạng đối tượng, 3D Tour 360° tăng trải nghiệm.</p>

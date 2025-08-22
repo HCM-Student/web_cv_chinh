@@ -1,7 +1,6 @@
 ﻿@* Views/Shared/_Layout.cshtml *@
 @{
     Layout = null;
-    var currentArea = (string?)ViewContext.RouteData.Values["area"] ?? "";
     var currentController = (string?)ViewContext.RouteData.Values["controller"] ?? "";
     var currentAction = (string?)ViewContext.RouteData.Values["action"] ?? "";
 }
@@ -18,186 +17,30 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/web_cv.styles.css" asp-append-version="true" />
-
     @await RenderSectionAsync("Styles", required: false)
 </head>
 <body class="d-flex flex-column min-vh-100">
 
-    <!-- TOPBAR -->
-    <div class="topbar text-white small">
-        <div class="container d-flex align-items-center justify-content-between py-1">
-            <div class="d-flex align-items-center gap-3">
-                <span class="d-none d-md-inline">
-                    <svg class="me-1" xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor"><path d="M3 2a1 1 0 0 0-1 1v.278c0 .31.146.602.395.79l2.528 1.895c.35.262.45.744.232 1.129L4.39 9.12a11.19 11.19 0 0 0 4.49 4.49l1.83-1.765c.385-.218.867-.118 1.129.232l1.895 2.528c.188.249.48.395.79.395H15a1 1 0 0 0 1-1v-1a2 2 0 0 0-2-2h-.5A12.5 12.5 0 0 1 3 3.5V3a1 1 0 0 0-1-1Z"/></svg>
-                    Hotline: <strong>0963 612 168</strong>
-                </span>
-                <span class="d-none d-md-inline">
-                    <svg class="me-1" xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor"><path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v.217L8 8.5 0 4.217V4Zm0 1.383V12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V5.383l-7.555 4.53a1 1 0 0 1-1.01 0L0 5.383Z"/></svg>
-                    Email: <strong>contact@example.com</strong>
-                </span>
-            </div>
-
-            <div class="d-flex align-items-center gap-3">
-                <a class="topbar-link" asp-area="" asp-controller="Home" asp-action="Privacy">Điều khoản</a>
-                <a class="topbar-link" href="/#contact">Liên hệ</a>
-            </div>
-        </div>
-    </div>
-
-    <!-- MAIN NAVBAR -->
-    <header>
-        <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
-            <div class="container">
-                <a class="navbar-brand fw-semibold d-flex align-items-center" asp-area="" asp-controller="Home" asp-action="Index">
-                    <img src="~/img/logo.png" alt="web_cv" class="me-2" style="height:36px" />
-                    <span class="d-none d-sm-inline">web_cv</span>
-                </a>
-
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar"
-                        aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div id="mainNavbar" class="collapse navbar-collapse">
-                    <!-- Left menu -->
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link @(currentController=="Home" && currentAction=="Index" ? "active" : "")"
-                               asp-area="" asp-controller="Home" asp-action="Index">Trang chủ</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="/#services">Dịch vụ</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="/#why">Vì sao chọn chúng tôi</a>
-                        </li>
-
-                        <li class="nav-item">
-                            <a class="nav-link" href="/#contact">Liên hệ</a>
-                        </li>
-                    </ul>
-
-                    <!-- Right menu -->
-                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-                        @if (User?.Identity?.IsAuthenticated ?? false)
-                        {
-                            <li class="nav-item d-flex align-items-center me-2 text-muted">
-                                <span class="nav-link px-2">Xin chào, @User.Identity!.Name</span>
-                            </li>
-
-                            @if (User.IsInRole("Admin"))
-                            {
-                                <li class="nav-item dropdown">
-                                    <a class="nav-link dropdown-toggle" href="#" id="adminDropdown" role="button"
-                                       data-bs-toggle="dropdown" aria-expanded="false">
-                                        Quản trị
-                                    </a>
-                                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="adminDropdown">
-                                        <li><a class="dropdown-item" asp-area="Admin" asp-controller="Dashboard" asp-action="Index">Bảng điều khiển</a></li>
-                                        <li><a class="dropdown-item" asp-area="Admin" asp-controller="BaiViet" asp-action="Index">Bài viết</a></li>
-                                        <li><a class="dropdown-item" asp-area="Admin" asp-controller="ChuyenMuc" asp-action="Index">Chuyên mục</a></li>
-                                        <li><a class="dropdown-item" asp-area="Admin" asp-controller="NguoiDung" asp-action="Index">Người dùng</a></li>
-                                    </ul>
-                                </li>
-                            }
-
-                            <li class="nav-item ms-lg-2">
-                                <form asp-area="" asp-controller="Account" asp-action="Logout" method="post" class="d-inline">
-                                    @Html.AntiForgeryToken()
-                                    <button class="btn btn-primary btn-sm" type="submit">Đăng xuất</button>
-                                </form>
-                            </li>
-                        }
-                        else
-                        {
-                            <li class="nav-item">
-                                <a class="btn btn-outline-primary btn-sm me-2" asp-area="" asp-controller="Account" asp-action="Login">Đăng nhập</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="btn btn-primary btn-sm" asp-area="" asp-controller="Account" asp-action="Register">Đăng ký</a>
-                            </li>
-                        }
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
+    <!-- HEADER (topbar + navbar) -->
+    <partial name="_Header" />
 
     <!-- PAGE CONTENT -->
-    <div class="container flex-grow-1">
-        <main role="main" class="pb-3">
+    @* Trang chủ full-bleed; các trang khác bọc container *@
+    <main id="main" role="main" class="flex-grow-1">
+        @if (currentController == "Home" && currentAction == "Index")
+        {
             @RenderBody()
-        </main>
-    </div>
+        }
+        else
+        {
+            <div class="container py-3">
+                @RenderBody()
+            </div>
+        }
+    </main>
 
     <!-- FOOTER -->
-    <footer class="site-footer mt-auto">
-        <!-- top -->
-        <div class="footer-top">
-            <div class="container py-5">
-                <div class="row g-4">
-                    <div class="col-12 col-lg-4">
-                        <div class="d-flex align-items-center mb-3">
-                            <img src="~/img/logo.png" style="height:36px" class="me-2" alt="logo" />
-                            <h5 class="mb-0">web_cv</h5>
-                        </div>
-                        <p class="text-opacity-75">
-                            Giải pháp bản đồ, CSDL, mô hình 3D và phần mềm địa không gian cho đô thị thông minh.
-                        </p>
-                        <div class="d-flex gap-2">
-                            <a class="btn btn-outline-light btn-sm" href="#" aria-label="Facebook">Fb</a>
-                            <a class="btn btn-outline-light btn-sm" href="#" aria-label="YouTube">Yt</a>
-                            <a class="btn btn-outline-light btn-sm" href="#" aria-label="Zalo">Za</a>
-                        </div>
-                    </div>
-
-                    <div class="col-6 col-lg-2">
-                        <h6 class="text-uppercase mb-3">Liên kết</h6>
-                        <ul class="list-unstyled footer-links">
-                            <li><a class="footer-link" asp-area="" asp-controller="Home" asp-action="Index">Trang chủ</a></li>
-                            <li><a class="footer-link" href="/#services">Dịch vụ</a></li>
-                            <li><a class="footer-link" href="/#why">Vì sao chọn</a></li>
-                            <li><a class="footer-link" href="/#contact">Liên hệ</a></li>
-                            <li><a class="footer-link" asp-area="" asp-controller="Home" asp-action="Privacy">Chính sách</a></li>
-                        </ul>
-                    </div>
-
-                    <div class="col-6 col-lg-3">
-                        <h6 class="text-uppercase mb-3">Dịch vụ</h6>
-                        <ul class="list-unstyled footer-links">
-                            <li><a class="footer-link" href="/#services">LiDAR & 3D</a></li>
-                            <li><a class="footer-link" href="/#services">3D Tour & 360</a></li>
-                            <li><a class="footer-link" href="/#services">UAV/Drone</a></li>
-                            <li><a class="footer-link" href="/#services">Smart City Data</a></li>
-                        </ul>
-                    </div>
-
-                    <div class="col-12 col-lg-3">
-                        <h6 class="text-uppercase mb-3">Liên hệ</h6>
-                        <ul class="list-unstyled footer-contacts mb-3">
-                            <li><strong>Trụ sở:</strong> 81 Tuệ Tĩnh, Hai Bà Trưng, Hà Nội</li>
-                            <li><strong>Hotline:</strong> 0963 612 168</li>
-                            <li><strong>Email:</strong> contact@example.com</li>
-                        </ul>
-                        <a class="btn btn-primary btn-sm" href="/#contact">Gửi yêu cầu</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- bottom -->
-        <div class="footer-bottom">
-            <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center py-3 small">
-                <div class="text-opacity-75">© @DateTime.Now.Year - web_cv</div>
-                <div class="d-flex gap-3">
-                    <a class="footer-link" asp-area="" asp-controller="Home" asp-action="Privacy">Điều khoản & Quyền riêng tư</a>
-                    <a class="footer-link" href="/#contact">Hỗ trợ</a>
-                </div>
-            </div>
-        </div>
-    </footer>
+    <partial name="_Footer" />
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
