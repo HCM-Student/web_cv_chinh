@@ -4,315 +4,315 @@
 
 <!-- ======= HERO (full-bleed, kenburns + rings + white curve) ======= -->
 <section class="hero-wrap full-bleed">
-    <div id="mainHero" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="6000">
-        <div class="carousel-indicators">
-            <button type="button" data-bs-target="#mainHero" data-bs-slide-to="0" class="active" aria-current="true"></button>
-            <button type="button" data-bs-target="#mainHero" data-bs-slide-to="1"></button>
-            <button type="button" data-bs-target="#mainHero" data-bs-slide-to="2"></button>
-        </div>
-
-        <div class="carousel-inner">
-            <!-- Slide 1 -->
-            <div class="carousel-item active">
-                <div class="slide-bg kenburns" style="background-image:url('@Url.Content("~/img/hero/hero-1.jpg")')"></div>
-                <div class="slide-overlay"></div>
-                <div class="city-lights"></div>
-
-                <img src="~/img/hero/tech-ring.png" alt="" class="tech-ring ring-1 d-none d-md-block" />
-                <img src="~/img/hero/tech-ring.png" alt="" class="tech-ring ring-2 d-none d-xl-block" />
-
-                <div class="container position-relative z-1">
-                    <div class="row align-items-center min-vh-75 py-5"><div class="col"></div></div>
-                </div>
-            </div>
-
-            <!-- Slide 2 -->
-            <div class="carousel-item">
-                <div class="slide-bg kenburns" style="background-image:url('@Url.Content("~/img/hero/hero-2.jpg")')"></div>
-                <div class="slide-overlay"></div>
-                <div class="city-lights"></div>
-
-                <img src="~/img/hero/tech-ring.png" alt="" class="tech-ring ring-3 d-none d-lg-block" />
-                <div class="container position-relative z-1">
-                    <div class="row align-items-center min-vh-75 py-5"><div class="col"></div></div>
-                </div>
-            </div>
-
-            <!-- Slide 3 -->
-            <div class="carousel-item">
-                <div class="slide-bg kenburns" style="background-image:url('@Url.Content("~/img/hero/hero-3.jpg")')"></div>
-                <div class="slide-overlay"></div>
-                <div class="city-lights"></div>
-
-                <img src="~/img/hero/tech-ring.png" alt="" class="tech-ring ring-4 d-none d-lg-block" />
-                <div class="container position-relative z-1">
-                    <div class="row align-items-center min-vh-75 py-5"><div class="col"></div></div>
-                </div>
-            </div>
-        </div>
-
-        <button class="carousel-control-prev" type="button" data-bs-target="#mainHero" data-bs-slide="prev">
-            <span class="carousel-control-prev-icon"></span>
-            <span class="visually-hidden">Trước</span>
-        </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#mainHero" data-bs-slide="next">
-            <span class="carousel-control-next-icon"></span>
-            <span class="visually-hidden">Sau</span>
-        </button>
+  <div id="mainHero" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="6000">
+    <!-- Dots -->
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#mainHero" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+      <button type="button" data-bs-target="#mainHero" data-bs-slide-to="1" aria-label="Slide 2"></button>
+      <button type="button" data-bs-target="#mainHero" data-bs-slide-to="2" aria-label="Slide 3"></button>
+      <button type="button" data-bs-target="#mainHero" data-bs-slide-to="3" aria-label="Slide 4"></button>
     </div>
 
-   <!-- VÒM TRẮNG + HIỆU ỨNG ĐỘNG -->
-<div class="hero-curve" aria-hidden="true">
-  <svg viewBox="0 0 1440 120" preserveAspectRatio="none" class="heroCurveSvg">
-    <defs>
-      <!-- Path vòm cong (dùng lại nhiều lần) -->
-      <path id="curvePath-d" d="M0,90 C 360,40 1080,140 1440,90 L1440,120 L0,120 Z"/>
-      <path id="curveLine-d" d="M0,90 C 360,40 1080,140 1440,90"/>
+    <div class="carousel-inner">
+      <!-- Slide 1 -->
+      <div class="carousel-item active">
+        <div class="slide-bg kenburns" style="background-image:url('@Url.Content("~/img/hero/hero-1.jpg")')"></div>
+        <div class="slide-overlay"></div>
+        <div class="city-lights"></div>
 
-      <!-- Gradient ánh sáng chạy dọc mép cong -->
-      <linearGradient id="curveShine" x1="0%" y1="0%" x2="100%" y2="0%">
-        <stop offset="0%"   stop-color="rgba(255,255,255,0)"/>
-        <stop offset="45%"  stop-color="rgba(255,255,255,.9)"/>
-        <stop offset="55%"  stop-color="rgba(255,255,255,.9)"/>
-        <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
-        <!-- di chuyển gradient từ trái sang phải -->
-        <animateTransform attributeName="gradientTransform" type="translate"
-                          from="-1 0" to="1 0" dur="6s" repeatCount="indefinite"/>
-      </linearGradient>
+        <img src="~/img/hero/tech-ring.png" alt="" class="tech-ring ring-1 d-none d-md-block" />
+        <img src="~/img/hero/tech-ring.png" alt="" class="tech-ring ring-2 d-none d-xl-block" />
 
-      <!-- Glow nhẹ cho dải sáng -->
-      <filter id="curveGlow">
-        <feGaussianBlur stdDeviation="4.5" result="b"/>
-        <feMerge>
-          <feMergeNode in="b"/>
-          <feMergeNode in="SourceGraphic"/>
-        </feMerge>
-      </filter>
-    </defs>
+        <div class="container position-relative z-1">
+          <div class="row align-items-center min-vh-75 py-5"><div class="col"></div></div>
+        </div>
+      </div>
 
-    <!-- NỀN vòm cong trắng -->
-    <use href="#curvePath-d" fill="#ffffff"/>
+      <!-- Slide 2 -->
+      <div class="carousel-item">
+        <div class="slide-bg kenburns" style="background-image:url('@Url.Content("~/img/hero/hero-2.jpg")')"></div>
+        <div class="slide-overlay"></div>
+        <div class="city-lights"></div>
 
-    <!-- BÓNG MỀM mép trên (rất nhẹ) -->
-    <use href="#curveLine-d" stroke="rgba(0,0,0,.08)" stroke-width="10" opacity=".25" />
+        <img src="~/img/hero/tech-ring.png" alt="" class="tech-ring ring-3 d-none d-lg-block" />
+        <div class="container position-relative z-1">
+          <div class="row align-items-center min-vh-75 py-5"><div class="col"></div></div>
+        </div>
+      </div>
 
-    <!-- DẢI SÁNG CHẠY dọc mép cong -->
-    <use href="#curveLine-d" stroke="url(#curveShine)" stroke-width="16" opacity=".65" filter="url(#curveGlow)"/>
+      <!-- Slide 3 -->
+      <div class="carousel-item">
+        <div class="slide-bg kenburns" style="background-image:url('@Url.Content("~/img/hero/hero-3.jpg")')"></div>
+        <div class="slide-overlay"></div>
+        <div class="city-lights"></div>
 
-    <!-- VẠCH ĐỘNG (gạch đứt di chuyển) -->
-    <use href="#curveLine-d" class="curve-dash"/>
+        <img src="~/img/hero/tech-ring.png" alt="" class="tech-ring ring-4 d-none d-lg-block" />
+        <div class="container position-relative z-1">
+          <div class="row align-items-center min-vh-75 py-5"><div class="col"></div></div>
+        </div>
+      </div>
 
-    <!-- SPARKLES: vài hạt sáng chạy theo đường cong (nhẹ nhàng) -->
-    <g fill="#fff" opacity=".9">
-      <circle r="2">
-        <animateMotion dur="9s" repeatCount="indefinite" rotate="auto">
-          <mpath xlink:href="#curveLine-d" href="#curveLine-d"/>
-        </animateMotion>
-      </circle>
-      <circle r="2">
-        <animateMotion dur="12s" begin="1.5s" repeatCount="indefinite" rotate="auto">
-          <mpath xlink:href="#curveLine-d" href="#curveLine-d"/>
-        </animateMotion>
-      </circle>
-      <circle r="2">
-        <animateMotion dur="10s" begin="3s" repeatCount="indefinite" rotate="auto">
-          <mpath xlink:href="#curveLine-d" href="#curveLine-d"/>
-        </animateMotion>
-      </circle>
-    </g>
-  </svg>
-</div>
+      <!-- Slide 4 -->
+      <div class="carousel-item">
+        <div class="slide-bg kenburns" style="background-image:url('@Url.Content("~/img/hero/tech-ring.jpg")')"></div>
+        <div class="slide-overlay"></div>
+        <div class="city-lights"></div>
 
+        <!-- dùng lại hai vòng trang trí -->
+        <img src="~/img/hero/tech-ring.png" alt="" class="tech-ring ring-2 d-none d-lg-block" />
+        <img src="~/img/hero/tech-ring.png" alt="" class="tech-ring ring-3 d-none d-xl-block" />
+
+        <div class="container position-relative z-1">
+          <div class="row align-items-center min-vh-75 py-5"><div class="col"></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Controls -->
+    <button class="carousel-control-prev" type="button" data-bs-target="#mainHero" data-bs-slide="prev" aria-label="Slide trước">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Trước</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#mainHero" data-bs-slide="next" aria-label="Slide sau">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Sau</span>
+    </button>
+  </div>
+
+  <!-- VÒM TRẮNG + HIỆU ỨNG ĐỘNG -->
+  <div class="hero-curve" aria-hidden="true">
+    <svg viewBox="0 0 1440 120" preserveAspectRatio="none" class="heroCurveSvg">
+      <defs>
+        <path id="curvePath-d" d="M0,90 C 360,40 1080,140 1440,90 L1440,120 L0,120 Z"/>
+        <path id="curveLine-d" d="M0,90 C 360,40 1080,140 1440,90"/>
+        <linearGradient id="curveShine" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%"   stop-color="rgba(255,255,255,0)"/>
+          <stop offset="45%"  stop-color="rgba(255,255,255,.9)"/>
+          <stop offset="55%"  stop-color="rgba(255,255,255,.9)"/>
+          <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+          <animateTransform attributeName="gradientTransform" type="translate" from="-1 0" to="1 0" dur="6s" repeatCount="indefinite"/>
+        </linearGradient>
+        <filter id="curveGlow">
+          <feGaussianBlur stdDeviation="4.5" result="b"/>
+          <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+      </defs>
+
+      <use href="#curvePath-d" class="curve-fill" fill="#ffffff"/>
+      <use href="#curveLine-d" stroke="rgba(0,0,0,.08)" stroke-width="10" opacity=".25" />
+      <use href="#curveLine-d" stroke="url(#curveShine)" stroke-width="16" opacity=".65" filter="url(#curveGlow)"/>
+      <use href="#curveLine-d" class="curve-dash"/>
+
+      <g fill="#fff" opacity=".9">
+        <circle r="2">
+          <animateMotion dur="9s" repeatCount="indefinite" rotate="auto">
+            <mpath href="#curveLine-d"/>
+          </animateMotion>
+        </circle>
+        <circle r="2">
+          <animateMotion dur="12s" begin="1.5s" repeatCount="indefinite" rotate="auto">
+            <mpath href="#curveLine-d"/>
+          </animateMotion>
+        </circle>
+        <circle r="2">
+          <animateMotion dur="10s" begin="3s" repeatCount="indefinite" rotate="auto">
+            <mpath href="#curveLine-d"/>
+          </animateMotion>
+        </circle>
+      </g>
+    </svg>
+  </div>
 </section>
 
 <!-- ===== GLASS FEATURE STRIP ===== -->
 <div class="glass-strip">
-    <div class="container">
-        <div class="row g-3">
-            <div class="col-12 col-md-4">
-                <div class="glass-card rounded-4 p-3 h-100">
-                    <div class="d-flex align-items-start gap-3">
-                        <div class="icon-badge">
-                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
-                        </div>
-                        <div>
-                            <h6 class="mb-1">CSDL địa không gian tập trung</h6>
-                            <p class="mb-0 text-muted">Chuẩn hóa & kết nối dữ liệu phục vụ quản lý đô thị và hạ tầng.</p>
-                        </div>
-                    </div>
-                </div>
+  <div class="container">
+    <div class="row g-3">
+      <div class="col-12 col-md-4">
+        <div class="glass-card rounded-4 p-3 h-100">
+          <div class="d-flex align-items-start gap-3">
+            <div class="icon-badge">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
             </div>
-
-            <div class="col-12 col-md-4">
-                <div class="glass-card rounded-4 p-3 h-100">
-                    <div class="d-flex align-items-start gap-3">
-                        <div class="icon-badge" style="background:#eef7ff">
-                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 3v18M3 12h18"/></svg>
-                        </div>
-                        <div>
-                            <h6 class="mb-1">Mô hình 3D – LiDAR & UAV</h6>
-                            <p class="mb-0 text-muted">Đám mây điểm chính xác, dựng 3D công trình & địa hình.</p>
-                        </div>
-                    </div>
-                </div>
+            <div>
+              <h6 class="mb-1">CSDL địa không gian tập trung</h6>
+              <p class="mb-0 text-muted">Chuẩn hóa & kết nối dữ liệu phục vụ quản lý đô thị và hạ tầng.</p>
             </div>
-
-            <div class="col-12 col-md-4">
-                <div class="glass-card rounded-4 p-3 h-100">
-                    <div class="d-flex align-items-start gap-3">
-                        <div class="icon-badge" style="background:#eefcf3">
-                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 6v12M6 12h12"/></svg>
-                        </div>
-                        <div>
-                            <h6 class="mb-1">Phân tích AI & 3D Tour</h6>
-                            <p class="mb-0 text-muted">AI nhận dạng đối tượng, 3D Tour 360° tăng trải nghiệm.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+          </div>
         </div>
-    </div>    
+      </div>
+
+      <div class="col-12 col-md-4">
+        <div class="glass-card rounded-4 p-3 h-100">
+          <div class="d-flex align-items-start gap-3">
+            <div class="icon-badge" style="background:#eef7ff">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 3v18M3 12h18"/></svg>
+            </div>
+            <div>
+              <h6 class="mb-1">Mô hình 3D – LiDAR & UAV</h6>
+              <p class="mb-0 text-muted">Đám mây điểm chính xác, dựng 3D công trình & địa hình.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-4">
+        <div class="glass-card rounded-4 p-3 h-100">
+          <div class="d-flex align-items-start gap-3">
+            <div class="icon-badge" style="background:#eefcf3">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 6v12M6 12h12"/></svg>
+            </div>
+            <div>
+              <h6 class="mb-1">Phân tích AI & 3D Tour</h6>
+              <p class="mb-0 text-muted">AI nhận dạng đối tượng, 3D Tour 360° tăng trải nghiệm.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>    
 </div>
 
 <!-- ===================== ABOUT ===================== -->
 <section id="about" class="section">
-    <div class="container">
-        <div class="row g-4 align-items-center">
-            <div class="col-lg-6">
-                <span class="eyebrow mb-2">Giới thiệu</span>
-                <h2 class="section-title mb-3">Giới thiệu về Công ty</h2>
-                <p class="fw-semibold mb-2">Công ty TNHH Địa chính & Xây dựng Nam Hà Nội</p>
-                <p class="section-subtitle mb-3">
-                    Chuyên cung cấp các giải pháp số về bản đồ 3D cho quản lý đô thị thông minh, giao thông vận tải,
-                    tài nguyên – khoáng sản… tích hợp công nghệ LiDAR, UAV, 3D Tour, IoT & AI.
-                </p>
-                <a class="btn btn-orange btn-pill px-4" href="#services">Xem chi tiết</a>
-            </div>
-            <div class="col-lg-6 about-mosaic">
-                <div class="row g-2">
-                    <div class="col-7">
-                        <img class="img-fluid shadow-sm" src="https://images.unsplash.com/photo-1518779578993-ec3579fee39f?q=80&w=900&auto=format&fit=crop" alt="3D LiDAR">
-                    </div>
-                    <div class="col-5">
-                        <img class="img-fluid shadow-sm mb-2" src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=600&auto=format&fit=crop" alt="Smart city">
-                        <img class="img-fluid shadow-sm" src="https://images.unsplash.com/photo-1518837695005-2083093ee35b?q=80&w=600&auto=format&fit=crop" alt="UAV Drone">
-                    </div>
-                </div>
-            </div>
+  <div class="container">
+    <div class="row g-4 align-items-center">
+      <div class="col-lg-6">
+        <span class="eyebrow mb-2">Giới thiệu</span>
+        <h2 class="section-title mb-3">Giới thiệu về Công ty</h2>
+        <p class="fw-semibold mb-2">Công ty TNHH Địa chính & Xây dựng Nam Hà Nội</p>
+        <p class="section-subtitle mb-3">
+          Chuyên cung cấp các giải pháp số về bản đồ 3D cho quản lý đô thị thông minh, giao thông vận tải,
+          tài nguyên – khoáng sản… tích hợp công nghệ LiDAR, UAV, 3D Tour, IoT & AI.
+        </p>
+        <a class="btn btn-orange btn-pill px-4" href="#services">Xem chi tiết</a>
+      </div>
+      <div class="col-lg-6 about-mosaic">
+        <div class="row g-2">
+          <div class="col-7">
+            <img class="img-fluid shadow-sm" src="https://images.unsplash.com/photo-1518779578993-ec3579fee39f?q=80&w=900&auto=format&fit=crop" alt="3D LiDAR">
+          </div>
+          <div class="col-5">
+            <img class="img-fluid shadow-sm mb-2" src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=600&auto=format&fit=crop" alt="Smart city">
+            <img class="img-fluid shadow-sm" src="https://images.unsplash.com/photo-1518837695005-2083093ee35b?q=80&w=600&auto=format&fit=crop" alt="UAV Drone">
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 </section>
 
 <!-- ===================== SERVICES ===================== -->
 <section id="services" class="section bg-light">
-    <div class="container">
-        <div class="text-center mb-4">
-            <span class="eyebrow mb-2">Dịch vụ</span>
-            <h2 class="section-title mb-2">Năng lực cốt lõi</h2>
-            <p class="section-subtitle mx-auto">Các mảng dịch vụ chính tạo nên hệ sinh thái địa không gian.</p>
-        </div>
+  <div class="container">
+    <div class="text-center mb-4">
+      <span class="eyebrow mb-2">Dịch vụ</span>
+      <h2 class="section-title mb-2">Năng lực cốt lõi</h2>
+      <p class="section-subtitle mx-auto">Các mảng dịch vụ chính tạo nên hệ sinh thái địa không gian.</p>
+    </div>
 
-        <div class="row g-3">
+    <div class="row g-3">
 @{
-    var services = new (string, string)[] {
-        ("Quét LiDAR & dựng 3D","Thu thập đám mây điểm, tái tạo công trình/địa hình độ chính xác cao."),
-        ("Bay chụp UAV/Drone","Phục vụ đo vẽ, giám sát hạ tầng, lập bản đồ ảnh & 3D."),
-        ("3D Tour & 360","Trải nghiệm không gian thực tế, phục vụ văn hóa – du lịch – BĐS."),
-        ("CSDL địa không gian","Chuẩn hóa – tích hợp dữ liệu, phân quyền & quản trị tập trung."),
-        ("Phân tích AI & IoT","Nhận dạng đối tượng, phát hiện thay đổi, cảnh báo theo thời gian thực."),
-        ("Tư vấn & chuyển giao","Đào tạo – vận hành – chuyển giao công nghệ end-to-end.")
-    };
+  var services = new (string, string)[] {
+    ("Quét LiDAR & dựng 3D","Thu thập đám mây điểm, tái tạo công trình/địa hình độ chính xác cao."),
+    ("Bay chụp UAV/Drone","Phục vụ đo vẽ, giám sát hạ tầng, lập bản đồ ảnh & 3D."),
+    ("3D Tour & 360","Trải nghiệm không gian thực tế, phục vụ văn hóa – du lịch – BĐS."),
+    ("CSDL địa không gian","Chuẩn hóa – tích hợp dữ liệu, phân quyền & quản trị tập trung."),
+    ("Phân tích AI & IoT","Nhận dạng đối tượng, phát hiện thay đổi, cảnh báo theo thời gian thực."),
+    ("Tư vấn & chuyển giao","Đào tạo – vận hành – chuyển giao công nghệ end-to-end.")
+  };
 }
 @for (int i = 0; i < services.Length; i++)
 {
-    <div class="col-12 col-md-6 col-xl-4">
-        <div class="card service-card h-100 rounded-4 shadow-sm">
-            <div class="card-body p-4">
-                <div class="d-flex align-items-start gap-3">
-                    <div class="icon-badge">
-                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                            <circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 3"/>
-                        </svg>
-                    </div>
-                    <div>
-                        <h5 class="mb-1">@services[i].Item1</h5>
-                        <p class="lead mb-0">@services[i].Item2</p>
-                    </div>
-                </div>
-            </div>
+  <div class="col-12 col-md-6 col-xl-4">
+    <div class="card service-card h-100 rounded-4 shadow-sm">
+      <div class="card-body p-4">
+        <div class="d-flex align-items-start gap-3">
+          <div class="icon-badge">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 3"/>
+            </svg>
+          </div>
+          <div>
+            <h5 class="mb-1">@services[i].Item1</h5>
+            <p class="lead mb-0">@services[i].Item2</p>
+          </div>
         </div>
+      </div>
     </div>
+  </div>
 }
-        </div>
     </div>
+  </div>
 </section>
 
 <!-- ===================== WHY US ===================== -->
 <section id="why" class="section">
-    <div class="container">
-        <div class="text-center mb-4">
-            <span class="eyebrow mb-2">Vì sao chọn chúng tôi</span>
-            <h2 class="section-title mb-2">Khác biệt tạo nên giá trị</h2>
-            <p class="section-subtitle mx-auto">Kinh nghiệm triển khai thực tế, công nghệ hiện đại và quy trình tối ưu.</p>
-        </div>
+  <div class="container">
+    <div class="text-center mb-4">
+      <span class="eyebrow mb-2">Vì sao chọn chúng tôi</span>
+      <h2 class="section-title mb-2">Khác biệt tạo nên giá trị</h2>
+      <p class="section-subtitle mx-auto">Kinh nghiệm triển khai thực tế, công nghệ hiện đại và quy trình tối ưu.</p>
+    </div>
 
-        <div class="row g-3">
+    <div class="row g-3">
 @{
-    var why = new (string, string)[] {
-        ("Đội ngũ chuyên gia", "Kỹ sư giàu kinh nghiệm LiDAR, UAV, GIS & AI."),
-        ("Công nghệ cập nhật", "Stack hiện đại, sẵn sàng tích hợp & mở rộng."),
-        ("Triển khai nhanh", "Quy trình tinh gọn, bám sát nhu cầu thực tế."),
-        ("Hỗ trợ tận tâm", "Đồng hành dài hạn, đào tạo & chuyển giao.")
-    };
+  var why = new (string, string)[] {
+    ("Đội ngũ chuyên gia", "Kỹ sư giàu kinh nghiệm LiDAR, UAV, GIS & AI."),
+    ("Công nghệ cập nhật", "Stack hiện đại, sẵn sàng tích hợp & mở rộng."),
+    ("Triển khai nhanh", "Quy trình tinh gọn, bám sát nhu cầu thực tế."),
+    ("Hỗ trợ tận tâm", "Đồng hành dài hạn, đào tạo & chuyển giao.")
+  };
 }
 @foreach (var item in why)
 {
-    <div class="col-12 col-md-6 col-lg-3">
-        <div class="why-item">
-            <div class="icon">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 2l3 7h7l-5.6 4.1L18 21l-6-4-6 4 1.6-7.9L2 9h7z"/></svg>
-            </div>
-            <div>
-                <h6 class="mb-1">@item.Item1</h6>
-                <p class="mb-0 text-muted">@item.Item2</p>
-            </div>
-        </div>
+  <div class="col-12 col-md-6 col-lg-3">
+    <div class="why-item">
+      <div class="icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M12 2l3 7h7l-5.6 4.1L18 21l-6-4-6 4 1.6-7.9L2 9h7z"/></svg>
+      </div>
+      <div>
+        <h6 class="mb-1">@item.Item1</h6>
+        <p class="mb-0 text-muted">@item.Item2</p>
+      </div>
     </div>
+  </div>
 }
-        </div>
     </div>
+  </div>
 </section>
 
 <!-- ===================== STATS ===================== -->
 <section class="section">
-    <div class="container">
-        <div class="row g-3">
-            <div class="col-6 col-lg-3">
-                <div class="stat-tile p-4 text-center">
-                    <div class="stat-num display-6 text-primary">120+</div>
-                    <div class="text-muted">Dự án</div>
-                </div>
-            </div>
-            <div class="col-6 col-lg-3">
-                <div class="stat-tile p-4 text-center">
-                    <div class="stat-num display-6 text-primary">30TB</div>
-                    <div class="text-muted">Dữ liệu 3D</div>
-                </div>
-            </div>
-            <div class="col-6 col-lg-3">
-                <div class="stat-tile p-4 text-center">
-                    <div class="stat-num display-6 text-primary">20+</div>
-                    <div class="text-muted">Tỉnh/TP</div>
-                </div>
-            </div>
-            <div class="col-6 col-lg-3">
-                <div class="stat-tile p-4 text-center">
-                    <div class="stat-num display-6 text-primary">98%</div>
-                    <div class="text-muted">Hài lòng</div>
-                </div>
-            </div>
+  <div class="container">
+    <div class="row g-3">
+      <div class="col-6 col-lg-3">
+        <div class="stat-tile p-4 text-center">
+          <div class="stat-num display-6 text-primary">120+</div>
+          <div class="text-muted">Dự án</div>
         </div>
+      </div>
+      <div class="col-6 col-lg-3">
+        <div class="stat-tile p-4 text-center">
+          <div class="stat-num display-6 text-primary">30TB</div>
+          <div class="text-muted">Dữ liệu 3D</div>
+        </div>
+      </div>
+      <div class="col-6 col-lg-3">
+        <div class="stat-tile p-4 text-center">
+          <div class="stat-num display-6 text-primary">20+</div>
+          <div class="text-muted">Tỉnh/TP</div>
+        </div>
+      </div>
+      <div class="col-6 col-lg-3">
+        <div class="stat-tile p-4 text-center">
+          <div class="stat-num display-6 text-primary">98%</div>
+          <div class="text-muted">Hài lòng</div>
+        </div>
+      </div>
     </div>
+  </div>
 </section>
 
 <!-- ===================== NEWS (3 bài) ===================== -->
@@ -323,7 +323,7 @@
         <span class="eyebrow mb-2">Tin tức</span>
         <h2 class="section-title mb-0">Tin tức & Sự kiện</h2>
       </div>
-      <a class="btn btn-outline-primary" href="#">Xem tất cả</a>
+        <a class="btn btn-outline-primary" href="#">Xem tất cả</a>
     </div>
 
     <div class="row g-3">
@@ -378,27 +378,27 @@
 
 <!-- ===================== PARTNERS (phóng to + tiêu đề cao hơn) ===================== -->
 <section id="partners" class="section">
-    <div class="container">
-        <div class="text-center mb-4">
-            <span class="eyebrow">Đối tác</span>
-            <h2 class="section-title partners-title">Tin cậy & đồng hành</h2>
-        </div>
-
-        <div class="row row-cols-2 row-cols-md-4 row-cols-xl-6 g-4 align-items-center text-center">
-            <div class="col"><img class="partner-logo img-fluid" src="~/img/thuonghieu/logo-1.jpg"  asp-append-version="true" alt="Đối tác 1"></div>
-            <div class="col"><img class="partner-logo img-fluid" src="~/img/thuonghieu/logo-2.jpg"  asp-append-version="true" alt="Đối tác 2"></div>
-            <div class="col"><img class="partner-logo img-fluid" src="~/img/thuonghieu/logo-3.jpg"  asp-append-version="true" alt="Đối tác 3"></div>
-            <div class="col"><img class="partner-logo img-fluid" src="~/img/thuonghieu/logo-4.jpg"  asp-append-version="true" alt="Đối tác 4"></div>
-            <div class="col"><img class="partner-logo img-fluid" src="~/img/thuonghieu/logo-5.jpg"  asp-append-version="true" alt="Đối tác 5"></div>
-            <div class="col"><img class="partner-logo img-fluid" src="~/img/thuonghieu/logo-6.jpg"  asp-append-version="true" alt="Đối tác 6"></div>
-            <div class="col"><img class="partner-logo img-fluid" src="~/img/thuonghieu/logo-7.jpg"  asp-append-version="true" alt="Đối tác 7"></div>
-            <div class="col"><img class="partner-logo img-fluid" src="~/img/thuonghieu/logo-8.jpg"  asp-append-version="true" alt="Đối tác 8"></div>
-            <div class="col"><img class="partner-logo img-fluid" src="~/img/thuonghieu/logo-9.jpg"  asp-append-version="true" alt="Đối tác 9"></div>
-            <div class="col"><img class="partner-logo img-fluid" src="~/img/thuonghieu/logo-10.jpg" asp-append-version="true" alt="Đối tác 10"></div>
-            <div class="col"><img class="partner-logo img-fluid" src="~/img/thuonghieu/logo-11.png" asp-append-version="true" alt="Đối tác 11"></div>
-            <div class="col"><img class="partner-logo img-fluid" src="~/img/thuonghieu/logo-12.png" asp-append-version="true" alt="Đối tác 12"></div>
-        </div>
+  <div class="container">
+    <div class="text-center mb-4">
+      <span class="eyebrow">Đối tác</span>
+      <h2 class="section-title partners-title">Tin cậy & đồng hành</h2>
     </div>
+
+    <div class="row row-cols-2 row-cols-md-4 row-cols-xl-6 g-4 align-items-center text-center">
+      <div class="col"><img class="partner-logo img-fluid" src="~/img/thuonghieu/logo-1.jpg"  asp-append-version="true" alt="Đối tác 1"></div>
+      <div class="col"><img class="partner-logo img-fluid" src="~/img/thuonghieu/logo-2.jpg"  asp-append-version="true" alt="Đối tác 2"></div>
+      <div class="col"><img class="partner-logo img-fluid" src="~/img/thuonghieu/logo-3.jpg"  asp-append-version="true" alt="Đối tác 3"></div>
+      <div class="col"><img class="partner-logo img-fluid" src="~/img/thuonghieu/logo-4.jpg"  asp-append-version="true" alt="Đối tác 4"></div>
+      <div class="col"><img class="partner-logo img-fluid" src="~/img/thuonghieu/logo-5.jpg"  asp-append-version="true" alt="Đối tác 5"></div>
+      <div class="col"><img class="partner-logo img-fluid" src="~/img/thuonghieu/logo-6.jpg"  asp-append-version="true" alt="Đối tác 6"></div>
+      <div class="col"><img class="partner-logo img-fluid" src="~/img/thuonghieu/logo-7.jpg"  asp-append-version="true" alt="Đối tác 7"></div>
+      <div class="col"><img class="partner-logo img-fluid" src="~/img/thuonghieu/logo-8.jpg"  asp-append-version="true" alt="Đối tác 8"></div>
+      <div class="col"><img class="partner-logo img-fluid" src="~/img/thuonghieu/logo-9.jpg"  asp-append-version="true" alt="Đối tác 9"></div>
+      <div class="col"><img class="partner-logo img-fluid" src="~/img/thuonghieu/logo-10.jpg" asp-append-version="true" alt="Đối tác 10"></div>
+      <div class="col"><img class="partner-logo img-fluid" src="~/img/thuonghieu/logo-11.png" asp-append-version="true" alt="Đối tác 11"></div>
+      <div class="col"><img class="partner-logo img-fluid" src="~/img/thuonghieu/logo-12.png" asp-append-version="true" alt="Đối tác 12"></div>
+    </div>
+  </div>
 </section>
 
 <!-- Shim anchor để #contact vẫn hoạt động -->
