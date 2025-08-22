@@ -8,7 +8,10 @@
 <div class="brandbar">
     <div class="container d-flex align-items-center justify-content-between py-2">
         <!-- LEFT: LOGO + TÊN -->
-        <a class="d-flex align-items-center gap-3 text-decoration-none brand-link" asp-area="" asp-controller="Home" asp-action="Index">
+        <a class="d-flex align-items-center gap-3 text-decoration-none brand-link"
+           asp-area=""
+           asp-controller="Home"
+           asp-action="Index">
             <img src="~/img/logo.jpg" asp-append-version="true" alt="Logo" class="brand-logo" />
             <div class="brand-text d-none d-md-block">
                 <div class="brand-title">TTDL PHÍA NAM</div>
@@ -47,25 +50,30 @@
                     <a class="nav-link @(currentController=="Home" && currentAction=="Index" ? "active" : "")"
                        asp-area="" asp-controller="Home" asp-action="Index">Trang chủ</a>
                 </li>
-                <li class="nav-item"><a class="nav-link" href="/#about">Giới thiệu</a></li>
+
+                <!-- CHUYỂN TRANG GIỚI THIỆU -->
+                <li class="nav-item">
+                    <a class="nav-link @(currentController=="Home" && currentAction=="GioiThieu" ? "active" : "")"
+                       asp-area="" asp-controller="Home" asp-action="GioiThieu">Giới thiệu</a>
+                </li>
 
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="svcDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Dịch vụ</a>
                     <ul class="dropdown-menu" aria-labelledby="svcDropdown">
-                        <li><a class="dropdown-item" href="/#services">LiDAR &amp; 3D</a></li>
-                        <li><a class="dropdown-item" href="/#services">GIS</a></li>
-                        <li><a class="dropdown-item" href="/#services">Khảo sát</a></li>
+                        <li><a class="dropdown-item" href="@($"{Url.Action("Index","Home")}#services")">LiDAR &amp; 3D</a></li>
+                        <li><a class="dropdown-item" href="@($"{Url.Action("Index","Home")}#services")">GIS</a></li>
+                        <li><a class="dropdown-item" href="@($"{Url.Action("Index","Home")}#services")">Khảo sát</a></li>
                     </ul>
                 </li>
 
-                <li class="nav-item"><a class="nav-link" href="/#devices">Thiết bị</a></li>
-                <li class="nav-item"><a class="nav-link" href="/#news">Tin tức – Sự kiện</a></li>
-                <li class="nav-item"><a class="nav-link" href="/#careers">Tuyển dụng</a></li>
-                <li class="nav-item"><a class="nav-link" href="/#pricing">Báo giá</a></li>
-                <li class="nav-item"><a class="nav-link" href="/#contact">Liên hệ</a></li>
+                <li class="nav-item"><a class="nav-link" href="@($"{Url.Action("Index","Home")}#devices")">Thiết bị</a></li>
+                <li class="nav-item"><a class="nav-link" href="@($"{Url.Action("Index","Home")}#news")">Tin tức – Sự kiện</a></li>
+                <li class="nav-item"><a class="nav-link" href="@($"{Url.Action("Index","Home")}#careers")">Tuyển dụng</a></li>
+                <li class="nav-item"><a class="nav-link" href="@($"{Url.Action("Index","Home")}#pricing")">Báo giá</a></li>
+                <li class="nav-item"><a class="nav-link" href="@($"{Url.Action("Index","Home")}#contact")">Liên hệ</a></li>
             </ul>
 
-            <!-- AUTH BÊN PHẢI (ĐÃ CHUYỂN XUỐNG HÀNG DƯỚI) -->
+            <!-- AUTH BÊN PHẢI -->
             <div class="ms-lg-auto d-flex align-items-center gap-2 header-auth">
                 @if (User?.Identity?.IsAuthenticated ?? false)
                 {

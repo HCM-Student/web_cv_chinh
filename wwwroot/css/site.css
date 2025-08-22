@@ -453,3 +453,60 @@ body{margin:0}
 }
 /* Đảm bảo phần nền cong vẫn trắng */
 .hero-curve .curve-fill{ fill:#fff !important; }
+
+/* ===== About page ===== */
+.page-hero{
+  background: radial-gradient(1200px 420px at 60% -10%, rgba(255,255,255,.08), transparent 60%),
+              linear-gradient(180deg,#0b3a5b,#103e63 60%, #0b3a5b);
+  color:#fff;
+  padding: 2.25rem 0;
+  border-bottom: 4px solid #0d3a58;
+}
+.page-hero-title{
+  font-weight:800;
+  letter-spacing:.01em;
+  font-size: clamp(1.4rem, 3vw, 1.85rem);
+  margin: .25rem 0 0 0;
+}
+
+.about-list{ margin: .25rem 0 1rem 0; }
+.about-list li{ margin-bottom:.35rem; }
+
+.about-card{
+  overflow:hidden;
+  border-radius:14px;
+  box-shadow:0 8px 28px rgba(2,6,23,.08);
+  background:#fff;
+}
+.about-card-thumb{
+  width:100%;
+  height:210px;
+  object-fit:cover;
+}
+@media (min-width:768px){
+  .about-card-thumb{ height:230px; }
+}
+
+.about-figure img{ border-radius:12px; }
+
+/* ===== Org Chart (simple & responsive) ===== */
+.org-row{
+  display:flex; flex-wrap:wrap; justify-content:center; gap:.6rem;
+  margin-bottom:.6rem;
+}
+.org-node{
+  background:linear-gradient(180deg,#0ea5e9,#0284c7);
+  color:#fff; border-radius:14px; padding:.55rem .9rem; font-weight:700;
+  box-shadow:0 10px 24px rgba(2,132,199,.25);
+}
+.org-node.org-head{
+  background:linear-gradient(180deg,#2563eb,#1d4ed8);
+}
+.org-node.sm{ font-weight:600; background:linear-gradient(180deg,#22c55e,#16a34a); }
+.org-node.xs{ font-weight:600; background:linear-gradient(180deg,#60a5fa,#3b82f6); }
+
+.org-connector{
+  height:16px; width:100%;
+  background: radial-gradient(circle at 50% 50%, rgba(2,6,23,.08), transparent 50%);
+  margin: 4px 0 6px 0;
+}
