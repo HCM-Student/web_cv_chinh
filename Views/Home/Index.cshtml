@@ -178,30 +178,56 @@
 <section id="about" class="section">
   <div class="container">
     <div class="row g-4 align-items-center">
+      <!-- Text -->
       <div class="col-lg-6">
         <span class="eyebrow mb-2">Giới thiệu</span>
-        <h2 class="section-title mb-3">Giới thiệu về Công ty</h2>
-        <p class="fw-semibold mb-2">Công ty TNHH Địa chính & Xây dựng Nam Hà Nội</p>
+        <h2 class="section-title mb-3 text-uppercase">
+          CỤC CHUYỂN ĐỔI SỐ<br class="d-none d-md-block" />
+          TRUNG TÂM DỮ LIỆU THÔNG TIN PHÍA NAM
+        </h2>
         <p class="section-subtitle mb-3">
-          Chuyên cung cấp các giải pháp số về bản đồ 3D cho quản lý đô thị thông minh, giao thông vận tải,
-          tài nguyên – khoáng sản… tích hợp công nghệ LiDAR, UAV, 3D Tour, IoT & AI.
+          Phụ trách triển khai hạ tầng dữ liệu số, tích hợp – chia sẻ dữ liệu quốc gia,
+          nền tảng đô thị thông minh (Smart City), IoT và phân tích AI/Big Data.
         </p>
         <a class="btn btn-orange btn-pill px-4" href="#services">Xem chi tiết</a>
       </div>
-      <div class="col-lg-6 about-mosaic">
-        <div class="row g-2">
-          <div class="col-7">
-            <img class="img-fluid shadow-sm" src="https://images.unsplash.com/photo-1518779578993-ec3579fee39f?q=80&w=900&auto=format&fit=crop" alt="3D LiDAR">
-          </div>
-          <div class="col-5">
-            <img class="img-fluid shadow-sm mb-2" src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=600&auto=format&fit=crop" alt="Smart city">
-            <img class="img-fluid shadow-sm" src="https://images.unsplash.com/photo-1518837695005-2083093ee35b?q=80&w=600&auto=format&fit=crop" alt="UAV Drone">
-          </div>
+
+      <!-- Images (mosaic, 2 trái + 1 dọc phải) -->
+      <div class="col-lg-6">
+        <div class="mosaic-3">
+          <!-- Trái trên -->
+          <img class="tile h h-top"
+               loading="lazy" decoding="async" referrerpolicy="no-referrer"
+               src="https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d?q=80&w=1200&auto=format&fit=crop"
+               onerror="this.onerror=null; this.src='@Url.Content("~/img/about/gis-network.png")';"
+               alt="Kết nối dữ liệu · Data & GIS" />
+
+          <!-- Trái dưới -->
+          <img class="tile h h-bottom"
+               loading="lazy" decoding="async" referrerpolicy="no-referrer"
+               src="https://images.unsplash.com/photo-1505765050516-f72dcac9c60b?q=80&w=1200&auto=format&fit=crop"
+               onerror="this.onerror=null; this.src='@Url.Content("~/img/about/smart-city.png")';"
+               alt="Đô thị thông minh · Smart City" />
+
+          <!-- Phải dọc (span 2 hàng) -->
+          <img class="tile v"
+               loading="lazy" decoding="async" referrerpolicy="no-referrer"
+               src="https://images.unsplash.com/photo-1581091870627-3ffcade74b86?q=80&w=900&auto=format&fit=crop"
+               onerror="this.onerror=null; this.src='@Url.Content("~/img/about/datacenter.png")';"
+               alt="Trung tâm dữ liệu · Data Center" />
         </div>
       </div>
     </div>
   </div>
 </section>
+
+<!-- ========== placeholder #services để nút không lỗi ========== -->
+<section id="services" class="py-5 d-none">
+  <div class="container"><div class="row"><div class="col-12">
+    <h3>Dịch vụ</h3>
+  </div></div></div>
+</section>
+
 
 <!-- ===================== SERVICES ===================== -->
 <section id="services" class="section bg-light">

@@ -4716,11 +4716,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\acer\\Downloads\\web_cv-1\\web_cv.csproj",
+      "projectUniqueName": "C:\\Users\\acer\\Downloads\\web_cv\\web_cv.csproj",
       "projectName": "web_cv",
-      "projectPath": "C:\\Users\\acer\\Downloads\\web_cv-1\\web_cv.csproj",
+      "projectPath": "C:\\Users\\acer\\Downloads\\web_cv\\web_cv.csproj",
       "packagesPath": "C:\\Users\\acer\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\acer\\Downloads\\web_cv-1\\obj\\",
+      "outputPath": "C:\\Users\\acer\\Downloads\\web_cv\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

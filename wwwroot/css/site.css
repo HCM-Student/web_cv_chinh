@@ -510,3 +510,34 @@ body{margin:0}
   background: radial-gradient(circle at 50% 50%, rgba(2,6,23,.08), transparent 50%);
   margin: 4px 0 6px 0;
 }
+
+/* ===== ABOUT: mosaic 2 trái + 1 dọc phải ===== */
+.mosaic-3{
+  --gap: 14px;
+  --left-ratio: 16/10;   /* hai ảnh ngang bên trái */
+  --right-ratio: 9/16;   /* ảnh dọc bên phải */
+  display: grid;
+  gap: var(--gap);
+}
+.mosaic-3 .tile{
+  width: 100%;
+  display: block;
+  border-radius: 16px;
+  box-shadow: 0 10px 28px rgba(0,0,0,.12);
+  background: #f3f6f9; /* tránh nháy trắng */
+  object-fit: cover;
+}
+.mosaic-3 .h{ aspect-ratio: var(--left-ratio); }
+.mosaic-3 .v{ aspect-ratio: var(--right-ratio); }
+
+/* Desktop: chia 2 cột (7/5), ảnh phải cao bằng 2 ảnh trái */
+@media (min-width: 992px){
+  .mosaic-3{
+    grid-template-columns: 7fr 5fr;
+    grid-template-rows: auto auto;
+    align-items: stretch;
+  }
+  .mosaic-3 .h-top   { grid-column: 1; grid-row: 1; height: 100%; }
+  .mosaic-3 .h-bottom{ grid-column: 1; grid-row: 2; height: 100%; }
+  .mosaic-3 .v       { grid-column: 2; grid-row: 1 / span 2; height: 100%; }
+}
