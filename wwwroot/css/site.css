@@ -542,103 +542,143 @@ body{margin:0}
   .mosaic-3 .v       { grid-column: 2; grid-row: 1 / span 2; height: 100%; }
 }
 
-/* Slide gọn */
+/* ============== Layout giữ nguyên ============== */
 .carousel .carousel-item{ position:relative; overflow:hidden; }
-
-/* Căn giữa */
-.hero-wheel-ultra{ position:absolute; left:50%; top:50%; transform:translate(-50%,-50%); z-index:3; pointer-events:none; }
-
-.hero-wheel-ultra .wu-core{
-  position:relative; --size: clamp(540px, min(54vw, 70vh), 920px);
+.wheel-split{
+  position:absolute; inset:0;
+  display:grid; grid-template-columns:1fr 1fr; align-items:center; justify-items:center;
+  gap:clamp(12px,2vw,28px); pointer-events:none;
+}
+.wu-core{
+  position:relative;
+  --size: clamp(460px, 44vw, 640px);
   width:var(--size); aspect-ratio:1/1; transform-style:preserve-3d;
-  filter: drop-shadow(0 0 28px rgba(110,231,255,.16));
+  filter: drop-shadow(0 0 24px rgba(110,231,255,.12));
+  transform: perspective(1100px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));
+  transition: transform .35s cubic-bezier(.2,.7,.2,1);
 }
 
-/* SVG + anims */
-.hero-wheel-ultra .wheel-ultra{ width:100%; height:100% }
-@keyframes u-rot{ to{ transform:rotate(360deg) } }
-@keyframes u-rot-rev{ to{ transform:rotate(-360deg) } }
-@keyframes u-dash1{ to{ stroke-dashoffset:-1106 } }
-@keyframes u-dash2{ to{ stroke-dashoffset:-1106 } }
-@keyframes u-dash3{ to{ stroke-dashoffset:-1106 } }
-.u-spin{ animation:u-rot 110s linear infinite; transform-origin:50% 50% }
-.u-rev{ animation-name:u-rot-rev; animation-duration:130s }
-.u-sweep.s1{ animation:u-dash1 11s linear infinite; mix-blend-mode:screen }
-.u-sweep.s2{ animation:u-dash2 15s linear infinite; mix-blend-mode:screen }
-.u-sweep.s3{ animation:u-dash3 19s linear infinite; mix-blend-mode:screen; opacity:.8 }
-.u-ticks{ animation:u-rot-rev 40s linear infinite; transform-origin:50% 50% }
-
-/* Text trên vòng */
-.u-ring-text text{
-  font:900 13px/1.05 Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial;
-  letter-spacing:.14em; fill:rgba(255,255,255,.96);
-  stroke:rgba(15,22,32,.60); stroke-width:.9; paint-order:stroke fill; text-transform:uppercase;
+/* ============== Nền & aurora (rất nhẹ, không che chữ) ============== */
+.slide-overlay::after{
+  content:""; position:absolute; inset:-8%; pointer-events:none;
+  background:
+    radial-gradient(70% 35% at 25% 22%, rgba(110,231,255,.07), transparent 60%),
+    radial-gradient(60% 40% at 75% 68%, rgba(167,139,250,.07), transparent 58%);
+  animation: bg-float 18s ease-in-out infinite alternate;
+  filter: blur(1.2px);
 }
+@keyframes bg-float{ 0%{transform:translate3d(-16px,-4px,0)} 100%{transform:translate3d(16px,4px,0)} }
 
-/* Aurora + logo + pulse */
-.hero-wheel-ultra .wu-aurora{
+.wu-aurora{
   position:absolute; inset:-6%; border-radius:50%;
-  background: radial-gradient(70% 60% at 40% 38%, rgba(167,139,250,.16), transparent 60%),
-              radial-gradient(60% 60% at 60% 62%, rgba(110,231,255,.14), transparent 58%);
-  filter: blur(18px); animation: wu-aur 16s ease-in-out infinite alternate; transform: translateZ(-1px);
+  background:
+    radial-gradient(70% 60% at 40% 38%, rgba(167,139,250,.12), transparent 60%),
+    radial-gradient(60% 60% at 60% 62%, rgba(110,231,255,.12), transparent 58%);
+  filter: blur(16px);
+  animation: aur-move 12s ease-in-out infinite alternate;
 }
-@keyframes wu-aur{ 0%{transform:translateZ(-1px) rotate(0)} 100%{transform:translateZ(-1px) rotate(15deg)} }
+@keyframes aur-move{ 0%{transform:translate3d(-6px,-4px,0)} 100%{transform:translate3d(6px,4px,0)} }
 
-.hero-wheel-ultra .wu-logo{
+/* ============== Vòng sáng ============== */
+.wheel-ultra{ width:100%; height:100% }
+.ring-title{
+  font: 900 12px/1 Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial;
+  letter-spacing:.14em; fill:rgba(255,255,255,.96);
+  stroke:rgba(15,22,32,.55); stroke-width:.9; paint-order:stroke fill; text-transform:uppercase;
+}
+.ring-sheen{
+  animation: ring-dash 10s linear infinite;
+  opacity:.92; stroke-linecap:round; stroke-dasharray:110 990;
+}
+@keyframes ring-dash{ from{ stroke-dashoffset:0 } to{ stroke-dashoffset:-1100 } }
+
+/* ============== Logo & pulse (mềm) ============== */
+.wu-logo{
   position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);
-  width: calc(var(--size)*.28); height: calc(var(--size)*.28);
-  border-radius:50%; object-fit:contain;
+  width: calc(var(--size)*.24); height: calc(var(--size)*.24); border-radius:50%;
   background: radial-gradient(circle at 50% 45%, rgba(255,255,255,.12), rgba(255,255,255,0) 60%), rgba(7,12,20,.55);
-  padding: clamp(16px,2vw,26px);
-  box-shadow: 0 18px 42px rgba(0,0,0,.38), 0 0 0 14px rgba(0,0,0,.18) inset,
-              0 0 56px rgba(167,139,250,.30), 0 0 52px rgba(110,231,255,.22);
+  padding: clamp(14px,1.8vw,22px);
+  box-shadow: 0 16px 36px rgba(0,0,0,.34), 0 0 0 12px rgba(0,0,0,.16) inset,
+              0 0 40px rgba(167,139,250,.26), 0 0 34px rgba(110,231,255,.18);
+  animation: logo-glow 6s ease-in-out infinite alternate;
   pointer-events:auto;
 }
-.hero-wheel-ultra .wu-pulse{
+@keyframes logo-glow{
+  0%  { filter: brightness(1)   drop-shadow(0 0 6px rgba(110,231,255,.22)); }
+  100%{ filter: brightness(1.05) drop-shadow(0 0 10px rgba(167,139,250,.24)); }
+}
+.wu-pulse{
   position:absolute; left:50%; top:50%; translate:-50% -50%;
-  width: calc(var(--size)*.38); aspect-ratio:1/1; border-radius:50%;
-  border:2px solid rgba(110,231,255,.28); filter: blur(1px); animation: wu-pulse 3.2s ease-out infinite;
+  width: calc(var(--size)*.34); aspect-ratio:1/1; border-radius:50%;
+  border:2px solid rgba(110,231,255,.22); filter: blur(.6px);
+  animation: pulse 3.2s ease-out infinite;
 }
-@keyframes wu-pulse{ 0%{opacity:.35; transform:scale(.80)} 80%,100%{opacity:0; transform:scale(1.15)} }
+@keyframes pulse{ 0%{opacity:.35; transform:scale(.82)} 80%,100%{opacity:0; transform:scale(1.12)} }
 
-/* ===== CHIPS (dễ đọc) ===== */
-.wu-topics{ position:absolute; inset:0; list-style:none; margin:0; padding:0; pointer-events:none; }
-.wu-topics li{ position:absolute; left:50%; top:50%; translate:-50% -50%; }
+/* ============== Twinkles (rất nhẹ) ============== */
+.wu-twinkles{ position:absolute; inset:0; pointer-events:none }
+.wu-twinkles i{
+  position:absolute; width:7px; height:7px; border-radius:50%;
+  background: radial-gradient(circle, #fff 0 40%, #6ee7ff 45% 70%, transparent 75%);
+  box-shadow: 0 0 8px rgba(110,231,255,.6);
+  left:var(--x); top:var(--y); opacity:.75;
+  animation: twinkle var(--d,4s) cubic-bezier(.3,.7,.3,1) infinite alternate;
+}
+@keyframes twinkle{ 0%{ transform:scale(.6); opacity:.35 } 100%{ transform:scale(1.0); opacity:.9 } }
 
-.wu-topics .chip{
-  display:inline-block;
-  min-width:110px; max-width:120px;     /* hẹp để không đè nhau */
-  text-align:center; font-weight:800; line-height:1.18; font-size:.82rem;
-  color:#0f1620; letter-spacing:.01em;
-  background:linear-gradient(180deg,rgba(255,255,255,.96),rgba(255,255,255,.86));
-  border:1px solid rgba(15,22,32,.06);
-  padding:.50rem .66rem; border-radius:16px;
-  box-shadow:0 8px 20px rgba(0,0,0,.18), 0 0 12px rgba(167,139,250,.14), 0 0 10px rgba(110,231,255,.12);
+/* ============== CHIP – ƯU TIÊN ĐỌC RÕ ============== */
+.ring-chips{ position:absolute; inset:0; list-style:none; margin:0; padding:0; pointer-events:none; }
+.ring-chips li{ position:absolute; left:50%; top:50%; translate:-50% -50%; }
+.ring-chips .chip{
+  display:inline-block; text-align:center;
+  font-weight:800; line-height:1.22; font-size:.86rem; letter-spacing:.01em;
+  color:#0f1620; background:#fffffff8; /* gần như trắng đặc */
+  border:1px solid #e6eef5; border-radius:16px;
+  padding:.56rem .8rem;
+  box-shadow: 0 8px 18px rgba(15,23,42,.16), 0 0 0 1px rgba(15,23,42,.03) inset;
   white-space:normal; word-break:break-word; hyphens:auto; pointer-events:auto;
+  position:relative; overflow:hidden;
+  transition: transform .22s cubic-bezier(.2,.7,.2,1), box-shadow .22s ease, filter .22s ease;
 }
+/* halo cực mỏng phía sau để nổi card trên nền sáng */
+.ring-chips .chip::after{
+  content:""; position:absolute; inset:-8px; border-radius:inherit; z-index:-1;
+  box-shadow: 0 14px 24px rgba(15,23,42,.20);
+  opacity:.0; transition:opacity .25s ease;
+}
+/* sheen nhỏ trên mặt chip khi hover (nhưng không chói) */
+.ring-chips .chip::before{
+  content:""; position:absolute; inset:-25%;
+  background: linear-gradient(120deg, transparent 40%, rgba(255,255,255,.6) 50%, transparent 60%);
+  transform: translateX(-140%) rotate(8deg);
+  transition: transform .7s ease; pointer-events:none;
+}
+.ring-chips .chip:hover::before{ transform: translateX(140%) rotate(8deg); }
+.ring-chips .chip:hover{
+  transform: translateY(-3px);
+  box-shadow: 0 12px 22px rgba(15,23,42,.20), 0 0 0 1px rgba(15,23,42,.06) inset;
+}
+.ring-chips .chip:hover::after{ opacity:.22 }
 
-/* ===== 2 VÒNG ===== */
-.wu-topics.two.outer2{
-  --N:16;
-  --radius: calc(var(--size)/2 - 36px);    /* sát mép ngoài để tối đa khoảng trống */
-  animation:u-rot 110s linear infinite;
-}
-.wu-topics.two.inner2{
-  --N:15;
-  --radius: calc(var(--size)/2 - 156px);   /* sâu vào trong, lệch góc */
-  animation:u-rot-rev 130s linear infinite;
-}
-
-/* công thức đặt chip: xoay -> translate -> xoay ngược cho chữ đứng thẳng */
-.wu-topics.two.outer2 li,
-.wu-topics.two.inner2 li{
+/* Đặt quanh vòng – chữ luôn đứng thẳng */
+.ring-chips li{
   transform:
     rotate(calc(var(--start,0deg) + (var(--k) * 360deg / var(--N))))
-    translate(var(--radius))
+    translate(calc(var(--size)/2 - 36px))
     rotate(calc(-1 * (var(--start,0deg) + (var(--k) * 360deg / var(--N)))));
 }
 
-/* Responsive */
-@media (max-width:1199.98px){ .hero-wheel-ultra .wu-core{ --size:74vw } }
-@media (max-width:991.98px){  .hero-wheel-ultra .wu-core{ --size:86vw } }
-@media (max-width:767.98px){  .hero-wheel-ultra{ display:none } }
+/* Kích thước theo nhóm nội dung */
+.wheel-left  .ring-chips.short .chip{ max-width:150px; }
+.wheel-right .ring-chips.long  .chip{ max-width:210px; }
+
+/* Tôn trọng người dùng muốn giảm chuyển động */
+@media (prefers-reduced-motion: reduce) {
+  .ring-sheen, .wu-aurora, .wu-pulse, .wu-twinkles i,
+  .ring-chips .chip::before, .wu-logo { animation: none !important }
+}
+
+/* Ẩn hai bánh ở màn nhỏ (tuỳ bạn giữ/ẩn) */
+@media (max-width: 991.98px){
+  .wheel-split{ display:none; }
+}

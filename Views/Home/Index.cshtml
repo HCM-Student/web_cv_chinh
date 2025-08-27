@@ -28,7 +28,7 @@
         </div>
       </div>
 
-<!-- ====================== SLIDE 2 (2 VÒNG) ====================== -->
+<!-- ====================== SLIDE 2 — HAI VÒNG TRÁI/PHẢI (READABLE FX) ====================== -->
 <div class="carousel-item">
   <div class="slide-bg" style="
       background:
@@ -37,109 +37,125 @@
         #0f1620;"></div>
   <div class="slide-overlay"></div>
 
-  <div class="hero-wheel-ultra d-none d-md-block">
-    <div class="wu-core">
+  <div class="wheel-split d-none d-md-grid">
+    <!-- ================== BÁNH TRÁI: 16 mục NGẮN ================== -->
+    <div class="wu-core wheel-left">
       <div class="wu-aurora"></div>
 
-      <!-- Vòng phát sáng + textPath -->
       <svg class="wheel-ultra" viewBox="0 0 400 400" aria-hidden="true">
         <defs>
-          <linearGradient id="uG1" x1="0" y1="0" x2="1" y2="1">
+          <linearGradient id="gL1" x1="0" y1="0" x2="1" y2="1">
             <stop offset="0%"  stop-color="#6ee7ff"/>
             <stop offset="100%" stop-color="#a78bfa"/>
           </linearGradient>
-          <linearGradient id="uG2" x1="1" y1="0" x2="0" y2="1">
-            <stop offset="0%"  stop-color="#a78bfa"/>
-            <stop offset="100%" stop-color="#6ee7ff"/>
-          </linearGradient>
-          <filter id="uGlow" x="-50%" y="-50%" width="200%" height="200%">
-            <feGaussianBlur stdDeviation="3" result="b"/>
+          <filter id="glowL" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="2.2" result="b"/>
             <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
           </filter>
-          <circle id="uOuter" cx="200" cy="200" r="176"></circle>
-          <circle id="uInner" cx="200" cy="200" r="136"></circle>
-          <circle id="uTicks" cx="200" cy="200" r="156"></circle>
+          <circle id="ringL" cx="200" cy="200" r="170"></circle>
         </defs>
 
-        <use href="#uOuter" fill="none" stroke="rgba(255,255,255,.06)" stroke-width="26"></use>
-        <use href="#uInner" fill="none" stroke="rgba(255,255,255,.05)" stroke-width="14"></use>
+        <!-- Track -->
+        <use href="#ringL" fill="none" stroke="rgba(255,255,255,.07)" stroke-width="26"></use>
+        <!-- Shimmer nhẹ, chuyên nghiệp -->
+        <use href="#ringL" class="ring-sheen" fill="none" stroke="url(#gL1)"
+             stroke-width="26" stroke-linecap="round" stroke-dasharray="110 990"
+             filter="url(#glowL)"></use>
 
-        <g class="u-spin" filter="url(#uGlow)">
-          <use href="#uOuter" fill="none" stroke="url(#uG1)" stroke-width="26" stroke-linecap="round" stroke-dasharray="133 12"></use>
-          <use href="#uOuter" fill="none" stroke="url(#uG2)" stroke-width="26" stroke-linecap="round" stroke-dasharray="133 12" transform="rotate(45 200 200)"></use>
-          <use href="#uOuter" class="u-sweep s1" fill="none" stroke="#fff" stroke-opacity=".28" stroke-width="3" stroke-dasharray="70 1036"></use>
-          <use href="#uOuter" class="u-sweep s2" fill="none" stroke="#fff" stroke-opacity=".18" stroke-width="3" stroke-dasharray="50 1056"></use>
-          <use href="#uOuter" class="u-sweep s3" fill="none" stroke="#fff" stroke-opacity=".14" stroke-width="2" stroke-dasharray="36 1070"></use>
-        </g>
-
-        <g class="u-spin u-rev" filter="url(#uGlow)">
-          <use href="#uInner" fill="none" stroke="url(#uG1)" stroke-width="14" stroke-linecap="round" stroke-dasharray="101 9"></use>
-          <use href="#uInner" fill="none" stroke="url(#uG2)" stroke-width="14" stroke-linecap="round" stroke-dasharray="101 9" transform="rotate(45 200 200)"></use>
-        </g>
-
-        <use href="#uTicks" class="u-ticks" fill="none" stroke="#a8c7ff" stroke-opacity=".35" stroke-width="2" stroke-dasharray="6 18"></use>
-
-        <g class="u-ring-text">
-          <text text-anchor="middle" dominant-baseline="middle">
-            <textPath href="#uOuter" startOffset="50%">NÔNG NGHIỆP &amp; PHÁT TRIỂN NÔNG THÔN</textPath>
-          </text>
-          <text text-anchor="middle" dominant-baseline="middle">
-            <textPath href="#uInner" startOffset="50%">TÀI NGUYÊN &amp; MÔI TRƯỜNG</textPath>
-          </text>
-        </g>
+        <text class="ring-title" text-anchor="middle" dominant-baseline="middle">
+          <textPath href="#ringL" startOffset="50%">NÔNG NGHIỆP &amp; PHÁT TRIỂN NÔNG THÔN</textPath>
+        </text>
       </svg>
 
-      <!-- Logo -->
-      <img class="wu-logo" src="~/img/logo.png" alt="Logo" />
+      <img class="wu-logo" src="~/img/logo.png" alt="Logo">
       <span class="wu-pulse"></span>
 
-      <!-- ===== 2 VÒNG CHỦ ĐỀ ===== -->
-      <!-- OUTER: 16 mục -->
-      <ul class="wu-topics two outer2" style="--N:16; --start:-10deg;">
-        <li style="--k:0"><span class="chip">Trồng trọt<br>và BVTV</span></li>
-        <li style="--k:1"><span class="chip">Chăn nuôi<br>&amp; thú y</span></li>
-        <li style="--k:2"><span class="chip">Lâm nghiệp</span></li>
-        <li style="--k:3"><span class="chip">Diêm nghiệp</span></li>
-        <li style="--k:4"><span class="chip">Thủy sản</span></li>
-        <li style="--k:5"><span class="chip">Thủy lợi</span></li>
-        <li style="--k:6"><span class="chip">QL đê điều<br>&amp; PCTT</span></li>
-        <li style="--k:7"><span class="chip">Phát triển<br>nông thôn</span></li>
-        <li style="--k:8"><span class="chip">ATTP nông, lâm,<br>thủy sản &amp; muối</span></li>
-        <li style="--k:9"><span class="chip">QL chất lượng<br>giống/vật tư/dv</span></li>
-        <li style="--k:10"><span class="chip">Bảo quản, chế biến,<br>vận chuyển NLTS</span></li>
-        <li style="--k:11"><span class="chip">Thương mại<br>NLTS &amp; muối</span></li>
-        <li style="--k:12"><span class="chip">Khuyến nông</span></li>
-        <li style="--k:13"><span class="chip">HTX &amp; mô hình<br>KT tập thể/tư nhân</span></li>
-        <li style="--k:14"><span class="chip">Giảm nghèo</span></li>
-        <li style="--k:15"><span class="chip">QL đầu tư,<br>đầu tư xây dựng</span></li>
-      </ul>
+      <div class="wu-twinkles">
+        <i style="--x:78%; --y:22%; --d:3.8s"></i><i style="--x:20%; --y:30%; --d:4.6s"></i>
+        <i style="--x:86%; --y:58%; --d:5.4s"></i><i style="--x:14%; --y:66%; --d:3.2s"></i>
+        <i style="--x:50%; --y:12%; --d:6.2s"></i><i style="--x:36%; --y:84%; --d:4.0s"></i>
+      </div>
 
-      <!-- INNER: 15 mục -->
-      <ul class="wu-topics two inner2" style="--N:15; --start:10deg;">
-        <li style="--k:0"><span class="chip">Đất đai</span></li>
-        <li style="--k:1"><span class="chip">Tài nguyên nước</span></li>
-        <li style="--k:2"><span class="chip">Địa chất &amp;<br>khoáng sản</span></li>
-        <li style="--k:3"><span class="chip">Môi trường</span></li>
-        <li style="--k:4"><span class="chip">Bảo tồn thiên nhiên<br>&amp; đa dạng sinh học</span></li>
-        <li style="--k:5"><span class="chip">Khí tượng thủy văn</span></li>
-        <li style="--k:6"><span class="chip">Biến đổi khí hậu</span></li>
-        <li style="--k:7"><span class="chip">Đo đạc, bản đồ<br>&amp; thông tin địa lý</span></li>
-        <li style="--k:8"><span class="chip">QL tổng hợp TNTN<br>&amp; BVMT biển, hải đảo</span></li>
-        <li style="--k:9"><span class="chip">Viễn thám</span></li>
-        <li style="--k:10"><span class="chip">Thủy lợi (hạ tầng)</span></li>
-        <li style="--k:11"><span class="chip">Lâm nghiệp (QL rừng)</span></li>
-        <li style="--k:12"><span class="chip">Thủy sản (nguồn lợi)</span></li>
-        <li style="--k:13"><span class="chip">Tài nguyên biển</span></li>
-        <li style="--k:14"><span class="chip">Ứng phó thiên tai</span></li>
+      <!-- Chip NGẮN (16) -->
+      <ul class="ring-chips short" style="--N:16; --start:-6deg;">
+        <li style="--k:0"><span class="chip">Viễn thám</span></li>
+        <li style="--k:1"><span class="chip">Môi trường</span></li>
+        <li style="--k:2"><span class="chip">Địa chất &amp; khoáng sản</span></li>
+        <li style="--k:3"><span class="chip">Tài nguyên nước</span></li>
+        <li style="--k:4"><span class="chip">Đất đai</span></li>
+        <li style="--k:5"><span class="chip">Giảm nghèo</span></li>
+        <li style="--k:6"><span class="chip">Khuyến nông</span></li>
+        <li style="--k:7"><span class="chip">Thủy lợi</span></li>
+        <li style="--k:8"><span class="chip">Thủy sản</span></li>
+        <li style="--k:9"><span class="chip">Diêm nghiệp</span></li>
+        <li style="--k:10"><span class="chip">Lâm nghiệp</span></li>
+        <li style="--k:11"><span class="chip">Chăn nuôi &amp; thú y</span></li>
+        <li style="--k:12"><span class="chip">Khí tượng thủy văn</span></li>
+        <li style="--k:13"><span class="chip">Ứng phó thiên tai</span></li>
+        <li style="--k:14"><span class="chip">Lâm nghiệp (QL rừng)</span></li>
+        <li style="--k:15"><span class="chip">Tài nguyên biển</span></li>
+      </ul>
+    </div>
+
+    <!-- ================== BÁNH PHẢI: 15 mục DÀI ================== -->
+    <div class="wu-core wheel-right">
+      <div class="wu-aurora"></div>
+
+      <svg class="wheel-ultra" viewBox="0 0 400 400" aria-hidden="true">
+        <defs>
+          <linearGradient id="gR1" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0%"  stop-color="#6ee7ff"/>
+            <stop offset="100%" stop-color="#a78bfa"/>
+          </linearGradient>
+          <filter id="glowR" x="-50%" y="-50%" width="200%" height="200%">
+            <feGaussianBlur stdDeviation="2.2" result="b"/>
+            <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+          <circle id="ringR" cx="200" cy="200" r="170"></circle>
+        </defs>
+
+        <use href="#ringR" fill="none" stroke="rgba(255,255,255,.07)" stroke-width="26"></use>
+        <use href="#ringR" class="ring-sheen" fill="none" stroke="url(#gR1)"
+             stroke-width="26" stroke-linecap="round" stroke-dasharray="110 990"
+             filter="url(#glowR)"></use>
+
+        <text class="ring-title" text-anchor="middle" dominant-baseline="middle">
+          <textPath href="#ringR" startOffset="50%">TÀI NGUYÊN &amp; MÔI TRƯỜNG · NHÓM DÀI</textPath>
+        </text>
+      </svg>
+
+      <img class="wu-logo" src="~/img/logo.png" alt="Logo">
+      <span class="wu-pulse"></span>
+
+      <div class="wu-twinkles">
+        <i style="--x:18%; --y:22%; --d:4.6s"></i><i style="--x:82%; --y:28%; --d:5.4s"></i>
+        <i style="--x:10%; --y:56%; --d:3.6s"></i><i style="--x:88%; --y:64%; --d:6.0s"></i>
+        <i style="--x:52%; --y:86%; --d:4.2s"></i><i style="--x:44%; --y:12%; --d:3.8s"></i>
+      </div>
+
+      <!-- Chip DÀI (15) -->
+      <ul class="ring-chips long" style="--N:15; --start:8deg;">
+        <li style="--k:0"><span class="chip">Trồng trọt &amp; bảo vệ thực vật</span></li>
+        <li style="--k:1"><span class="chip">ATTP nông, lâm, thủy sản &amp; muối</span></li>
+        <li style="--k:2"><span class="chip">QL chất lượng giống/vật tư/dịch vụ</span></li>
+        <li style="--k:3"><span class="chip">Bảo quản, chế biến, vận chuyển NLTS</span></li>
+        <li style="--k:4"><span class="chip">Thương mại NLTS &amp; muối</span></li>
+        <li style="--k:5"><span class="chip">Phát triển nông thôn</span></li>
+        <li style="--k:6"><span class="chip">Quản lý đê điều &amp; PCTT</span></li>
+        <li style="--k:7"><span class="chip">QL đầu tư, đầu tư xây dựng</span></li>
+        <li style="--k:8"><span class="chip">Bảo tồn thiên nhiên &amp; đa dạng sinh học</span></li>
+        <li style="--k:9"><span class="chip">Đo đạc, bản đồ &amp; thông tin địa lý</span></li>
+        <li style="--k:10"><span class="chip">QL tổng hợp TNTN &amp; BVMT biển, hải đảo</span></li>
+        <li style="--k:11"><span class="chip">Biến đổi khí hậu</span></li>
+        <li style="--k:12"><span class="chip">HTX &amp; mô hình KT tập thể/tư nhân</span></li>
+        <li style="--k:13"><span class="chip">Tài nguyên biển (quản lý tổng hợp)</span></li>
+        <li style="--k:14"><span class="chip">Khuyến nông (dịch vụ hỗ trợ)</span></li>
       </ul>
     </div>
   </div>
 
-  <div class="container position-relative z-1">
-    <div class="row align-items-center min-vh-75 py-5"><div class="col"></div></div>
-  </div>
+  <div style="height:1px"></div>
 </div>
-
 
       <!-- Slide 3 -->
       <div class="carousel-item">
@@ -530,3 +546,4 @@
 
 <!-- Shim anchor để #contact vẫn hoạt động -->
 <div id="contact" class="visually-hidden"></div>
+
