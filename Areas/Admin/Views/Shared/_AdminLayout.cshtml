@@ -90,7 +90,7 @@
     </div>
 
     <!-- Logout Form -->
-    <form id="logout-form" method="post" asp-controller="Account" asp-action="Logout" class="d-none">
+    <form id="logout-form" method="post" asp-area="" asp-controller="Account" asp-action="Logout" class="d-none">
         @Html.AntiForgeryToken()
     </form>
 

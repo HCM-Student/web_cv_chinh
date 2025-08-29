@@ -23,12 +23,12 @@
         <!-- RIGHT: CONTACT INFO -->
     <div class="d-none d-lg-flex align-items-center gap-4 contact-right">
   <div class="contact-item-header">
-    <i class="bi bi-telephone-fill contact-icon" aria-hidden="true"></i>
+    <span class="contact-icon">📞</span>
     <span class="contact-text">0378 695 597</span>
   </div>
 
   <div class="contact-item-header">
-    <i class="bi bi-envelope-fill contact-icon" aria-hidden="true"></i>
+    <span class="contact-icon">✉️</span>
     <a href="mailto:luanha2003@gmail.com" class="contact-text contact-link">luanha2003@gmail.com</a>
   </div>
 </div>
@@ -132,8 +132,14 @@
                 }
                 else
                 {
-                    <a class="btn btn-outline-primary btn-sm rounded-pill px-3" asp-area="" asp-controller="Account" asp-action="Login">Đăng nhập</a>
-                    <a class="btn btn-primary btn-sm rounded-pill px-3" asp-area="" asp-controller="Account" asp-action="Register">Đăng ký</a>
+                    <a class="btn btn-outline-primary btn-sm rounded-pill px-3 d-flex align-items-center gap-1" asp-area="" asp-controller="Account" asp-action="Login">
+                        <span>🔑</span>
+                        <span>Đăng nhập</span>
+                    </a>
+                    <a class="btn btn-primary btn-sm rounded-pill px-3 d-flex align-items-center gap-1" asp-area="" asp-controller="Account" asp-action="Register">
+                        <span>👤</span>
+                        <span>Đăng ký</span>
+                    </a>
                 }
             </div>
         </div>
@@ -141,6 +147,6 @@
 </nav>
 
 <!-- FORM ẨN LOGOUT -->
-<form id="logout-form" method="post" asp-controller="Account" asp-action="Logout" class="d-none">
+<form id="logout-form" method="post" asp-area="" asp-controller="Account" asp-action="Logout" class="d-none">
     @Html.AntiForgeryToken()
 </form>
