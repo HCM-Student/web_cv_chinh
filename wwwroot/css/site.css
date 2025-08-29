@@ -3332,17 +3332,17 @@ a {
     height: 1px;
     background: linear-gradient(270deg, 
         transparent 0%,
-        rgba(102, 126, 234, 0.3) 30%, 
-        rgba(102, 126, 234, 0.8) 100%);
+        rgba(102, 126, 234, 0.4) 30%, 
+        rgba(102, 126, 234, 0.7) 100%);
     transform-origin: right center;
-    z-index: -1;
+    z-index: 5;
     pointer-events: none;
-    opacity: 0.8;
+    opacity: 1;
 }
 
 .service-item:nth-child(1) .service-dot::after {
     transform: translateY(-50%) rotate(-30deg);
-    width: 280px;
+    width: 320px;
 }
 
 .service-item:nth-child(2) .service-dot::after {
