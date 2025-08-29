@@ -135,3 +135,84 @@ window.addEventListener('pageshow', function() {
     updateActiveNavigation();
     handleScrollAnimations();
 });
+
+// ========== INTERACTIVE SERVICES FUNCTIONALITY ==========
+function initInteractiveServices() {
+    const serviceItems = document.querySelectorAll('.service-item');
+    const serviceImage = document.getElementById('serviceImage');
+    const imageLabel = document.getElementById('imageLabel');
+    
+    if (!serviceItems.length || !serviceImage || !imageLabel) return;
+    
+    serviceItems.forEach(item => {
+        item.addEventListener('click', function() {
+            // Remove active class from all items
+            serviceItems.forEach(otherItem => {
+                otherItem.classList.remove('active');
+            });
+            
+            // Add active class to clicked item
+            this.classList.add('active');
+            
+            // Get new image and label data
+            const newImageSrc = this.getAttribute('data-image');
+            const newLabel = this.getAttribute('data-label');
+            
+            // Update image with fade effect
+            if (newImageSrc && newImageSrc !== serviceImage.src) {
+                serviceImage.style.opacity = '0.7';
+                serviceImage.style.transform = 'scale(0.95)';
+                
+                setTimeout(() => {
+                    serviceImage.src = newImageSrc;
+                    serviceImage.onload = function() {
+                        serviceImage.style.opacity = '1';
+                        serviceImage.style.transform = 'scale(1)';
+                    };
+                }, 200);
+            }
+            
+            // Update label with slide effect
+            if (newLabel) {
+                const labelText = imageLabel.querySelector('.label-text');
+                if (labelText) {
+                    labelText.style.opacity = '0';
+                    labelText.style.transform = 'translateY(10px)';
+                    
+                    setTimeout(() => {
+                        labelText.textContent = newLabel;
+                        labelText.style.opacity = '1';
+                        labelText.style.transform = 'translateY(0)';
+                    }, 150);
+                }
+            }
+            
+            // Add visual feedback
+            this.style.transform = 'translateX(8px)';
+            setTimeout(() => {
+                this.style.transform = '';
+            }, 200);
+        });
+        
+        // Add hover effects
+        item.addEventListener('mouseenter', function() {
+            if (!this.classList.contains('active')) {
+                this.style.background = 'rgba(0, 123, 255, 0.03)';
+            }
+        });
+        
+        item.addEventListener('mouseleave', function() {
+            if (!this.classList.contains('active')) {
+                this.style.background = '';
+            }
+        });
+    });
+}
+
+// Initialize interactive services when DOM is ready
+document.addEventListener('DOMContentLoaded', function() {
+    // Add delay to ensure all elements are loaded
+    setTimeout(() => {
+        initInteractiveServices();
+    }, 500);
+});
