@@ -1,0 +1,239 @@
+@using WEB_CV.Models
+@model List<BaiViet>
+@{
+    ViewData["Title"] = "Tin tức - Sự kiện";
+}
+
+<!-- ===================== TIN TỨC HERO ===================== -->
+<section class="news-hero">
+    <div class="news-bg">
+        <div class="news-overlay"></div>
+        <div class="container position-relative" style="z-index: 15;">
+            <div class="row align-items-center py-5">
+                <div class="col-lg-8 mx-auto text-center">
+                    <div class="news-content">
+                        <span class="eyebrow text-white-50 mb-3 d-block">Cập nhật thường xuyên</span>
+                        <h1 class="news-title display-4 fw-bold text-white mb-4">Tin tức - Sự kiện</h1>
+                        <p class="text-white-75 fs-5 mb-4">Theo dõi những tin tức mới nhất, sự kiện và xu hướng công nghệ trong lĩnh vực GIS</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===================== BỘ LỌC TIN TỨC ===================== -->
+<section class="section bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="news-sidebar">
+                    <h5 class="sidebar-title">Bộ lọc</h5>
+                    
+                    <div class="filter-group">
+                        <h6>Chuyên mục</h6>
+                        <div class="filter-options">
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="all" checked>
+                                <label class="form-check-label" for="all">Tất cả</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="tin-tuc">
+                                <label class="form-check-label" for="tin-tuc">Tin tức</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="su-kien">
+                                <label class="form-check-label" for="su-kien">Sự kiện</label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="cong-nghe">
+                                <label class="form-check-label" for="cong-nghe">Công nghệ</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <h6>Thời gian</h6>
+                        <select class="form-select">
+                            <option value="">Tất cả</option>
+                            <option value="7">7 ngày qua</option>
+                            <option value="30">30 ngày qua</option>
+                            <option value="90">3 tháng qua</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <h6>Tìm kiếm</h6>
+                        <div class="search-box">
+                            <input type="text" class="form-control" placeholder="Nhập từ khóa...">
+                            <button class="btn btn-primary btn-sm">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-9">
+                @if (Model?.Any() == true)
+                {
+                    <!-- ===================== BÀI VIẾT NỔI BẬT ===================== -->
+                    @if (Model.Count > 0)
+                    {
+                        var featuredPost = Model.First();
+                        <div class="featured-post mb-5">
+                            <div class="row g-0">
+                                <div class="col-md-6">
+                                    <div class="featured-image">
+                                                                <img src="~/img/hero/hero-1.jpg" alt="@featuredPost.TieuDe" class="img-fluid">
+                                        <div class="featured-badge">Nổi bật</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="featured-content">
+                                        <div class="post-meta">
+                                            <span class="category">@featuredPost.ChuyenMuc?.Ten</span>
+                                            <span class="date">@featuredPost.NgayDang.ToString("dd/MM/yyyy")</span>
+                                        </div>
+                                        <h3 class="featured-title">
+                                            <a href="@Url.Action("ChiTietBaiViet", "Home", new { id = featuredPost.Id })">
+                                                @featuredPost.TieuDe
+                                            </a>
+                                        </h3>
+                                        <p class="featured-excerpt">@(featuredPost.TomTat ?? (featuredPost.NoiDung.Length > 200 ? featuredPost.NoiDung.Substring(0, 200) + "..." : featuredPost.NoiDung))</p>
+                                        <a href="@Url.Action("ChiTietBaiViet", "Home", new { id = featuredPost.Id })" class="btn btn-primary">
+                                            Đọc thêm <i class="fas fa-arrow-right ms-1"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    
+                    <!-- ===================== DANH SÁCH BÀI VIẾT ===================== -->
+                    <div class="news-grid">
+                        <div class="d-flex justify-content-between align-items-center mb-4">
+                            <h4>Tin tức mới nhất</h4>
+                            <div class="view-options">
+                                <button class="btn btn-sm btn-outline-secondary active" data-view="grid">
+                                    <i class="fas fa-th-large"></i>
+                                </button>
+                                <button class="btn btn-sm btn-outline-secondary" data-view="list">
+                                    <i class="fas fa-list"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="row g-4" id="news-container">
+                            @foreach (var baiViet in Model.Skip(1)) // Bỏ qua bài đầu tiên đã hiển thị featured
+                            {
+                                <div class="col-lg-4 col-md-6">
+                                    <div class="news-card">
+                                        <div class="news-image">
+                                            <img src="~/img/hero/hero-2.jpg" alt="@baiViet.TieuDe" class="img-fluid">
+                                            <div class="news-category">@baiViet.ChuyenMuc?.Ten</div>
+                                        </div>
+                                        <div class="news-content">
+                                            <div class="news-meta">
+                                                <span class="news-date">
+                                                    <i class="fas fa-calendar me-1"></i>
+                                                    @baiViet.NgayDang.ToString("dd/MM/yyyy")
+                                                </span>
+                                                <span class="news-author">
+                                                    <i class="fas fa-user me-1"></i>
+                                                    @(baiViet.TacGia?.HoTen ?? "Admin")
+                                                </span>
+                                            </div>
+                                            <h5 class="news-title">
+                                                <a href="@Url.Action("ChiTietBaiViet", "Home", new { id = baiViet.Id })">
+                                                    @baiViet.TieuDe
+                                                </a>
+                                            </h5>
+                                            <p class="news-excerpt">
+                                                @(baiViet.TomTat ?? (baiViet.NoiDung.Length > 120 ? baiViet.NoiDung.Substring(0, 120) + "..." : baiViet.NoiDung))
+                                            </p>
+                                            <div class="news-footer">
+                                                <a href="@Url.Action("ChiTietBaiViet", "Home", new { id = baiViet.Id })" class="read-more">
+                                                    Đọc thêm <i class="fas fa-arrow-right"></i>
+                                                </a>
+                                                @if (baiViet.BaiVietTags?.Any() == true)
+                                                {
+                                                    <div class="news-tags">
+                                                        @foreach (var baiVietTag in baiViet.BaiVietTags.Take(2))
+                                                        {
+                                                            <span class="tag">#@baiVietTag.Tag?.Ten</span>
+                                                        }
+                                                    </div>
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    
+                    <!-- ===================== PHÂN TRANG ===================== -->
+                    <div class="pagination-wrapper text-center mt-5">
+                        <nav aria-label="Phân trang tin tức">
+                            <ul class="pagination justify-content-center">
+                                <li class="page-item disabled">
+                                    <a class="page-link" href="#" aria-label="Trang trước">
+                                        <i class="fas fa-chevron-left"></i>
+                                    </a>
+                                </li>
+                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                                <li class="page-item">
+                                    <a class="page-link" href="#" aria-label="Trang sau">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                }
+                else
+                {
+                    <!-- ===================== KHÔNG CÓ BÀI VIẾT ===================== -->
+                    <div class="no-posts text-center py-5">
+                        <div class="no-posts-icon mb-4">
+                            <i class="fas fa-newspaper fa-4x text-muted"></i>
+                        </div>
+                        <h4 class="text-muted">Chưa có bài viết nào</h4>
+                        <p class="text-muted">Hiện tại chưa có bài viết nào được đăng. Vui lòng quay lại sau.</p>
+                        <a href="@Url.Action("Index", "Home")" class="btn btn-primary">
+                            <i class="fas fa-home me-2"></i>Về trang chủ
+                        </a>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===================== NEWSLETTER SIGNUP ===================== -->
+<section class="section newsletter-section">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 text-center">
+                <div class="newsletter-content">
+                    <h3 class="newsletter-title">Đăng ký nhận tin tức</h3>
+                    <p class="newsletter-desc">Nhận thông tin cập nhật mới nhất về công nghệ GIS và các sự kiện sắp tới</p>
+                    <form class="newsletter-form">
+                        <div class="input-group">
+                            <input type="email" class="form-control" placeholder="Nhập email của bạn...">
+                            <button class="btn btn-primary" type="submit">
+                                <i class="fas fa-paper-plane me-2"></i>Đăng ký
+                            </button>
+                        </div>
+                        <small class="form-text text-muted mt-2">
+                            Chúng tôi cam kết bảo mật thông tin cá nhân của bạn
+                        </small>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

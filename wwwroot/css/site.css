@@ -986,3 +986,1558 @@ body{margin:0}
     --size: clamp(380px, 36vw, 480px);
   }
 }
+
+/* Responsive cho transition cards */
+@media (max-width: 768px) {
+    .transition-card {
+        padding: 1.5rem;
+    }
+    
+    .transition-icon {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .transition-card h4 {
+        font-size: 1.1rem;
+    }
+    
+    .transition-card p {
+        font-size: 0.9rem;
+    }
+}
+
+/* ===================== DEVICE CARDS ===================== */
+.device-card {
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.device-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+}
+
+.device-image {
+    position: relative;
+    height: 200px;
+    overflow: hidden;
+}
+
+.device-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.device-card:hover .device-image img {
+    transform: scale(1.05);
+}
+
+.device-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(45deg, rgba(0,0,0,0.1), transparent);
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-end;
+    padding: 1rem;
+}
+
+.device-badge {
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.device-content {
+    padding: 1.5rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.device-actions {
+    margin-top: auto;
+    padding-top: 1rem;
+}
+
+.device-content h4 {
+    margin-bottom: 0.75rem;
+    color: #333;
+}
+
+.device-specs {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0;
+}
+
+.device-specs li {
+    padding: 0.25rem 0;
+    font-size: 0.9rem;
+}
+
+.device-status {
+    font-size: 0.75rem;
+}
+
+/* ===================== JOB CARDS ===================== */
+.job-card {
+    background: white;
+    border-radius: 16px;
+    padding: 1.75rem;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    height: 100%;
+    border-left: 4px solid #667eea;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Job card layout improvements */
+@media (min-width: 992px) {
+    .job-cards-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1.5rem;
+    }
+    
+    .job-cards-row .col-lg-6 {
+        max-width: calc(50% - 0.75rem);
+        flex: 0 0 calc(50% - 0.75rem);
+    }
+}
+
+.job-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+}
+
+.job-meta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.job-type {
+    font-size: 0.75rem;
+}
+
+.job-location {
+    font-size: 0.875rem;
+}
+
+.job-title {
+    color: #333;
+    margin-bottom: 0.75rem;
+}
+
+.job-summary {
+    color: #666;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+.requirements-list {
+    list-style: none;
+    padding: 0;
+    margin: 0.5rem 0 1.5rem 0;
+}
+
+.requirements-list li {
+    padding: 0.25rem 0;
+    color: #666;
+    font-size: 0.9rem;
+    position: relative;
+    padding-left: 1rem;
+}
+
+.requirements-list li:before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: #667eea;
+    font-weight: bold;
+}
+
+.benefits-tags {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin: 0.5rem 0 1.5rem 0;
+}
+
+.benefit-tag {
+    background: #f8f9fa;
+    color: #667eea;
+    padding: 0.25rem 0.75rem;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.job-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.job-description {
+    flex-grow: 1;
+    margin-bottom: 1.5rem;
+}
+
+.job-actions {
+    margin-top: auto;
+    display: flex;
+    gap: 1rem;
+    padding-top: 1rem;
+}
+
+.job-actions .btn {
+    flex: 1;
+}
+
+/* ===================== PRICING CARDS ===================== */
+.pricing-card {
+    background: white;
+    border-radius: 16px;
+    padding: 1.75rem;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+    transition: all 0.3s ease;
+    height: 100%;
+    position: relative;
+    border: 1px solid #e2e8f0;
+    display: flex;
+    flex-direction: column;
+    overflow: visible;
+}
+
+.pricing-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+}
+
+.pricing-card.featured {
+    border-color: #3b82f6;
+    border-width: 2px;
+    box-shadow: 0 10px 40px rgba(59, 130, 246, 0.15);
+}
+
+.pricing-card.featured:hover {
+    transform: scale(1.05) translateY(-5px);
+}
+
+/* Enhanced pricing card structure */
+.pricing-content {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.pricing-features {
+    flex-grow: 1;
+    margin: 1.5rem 0;
+}
+
+.pricing-features ul, 
+.pricing-features .features-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.pricing-features li {
+    padding: 0.625rem 0;
+    color: #475569;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    line-height: 1.4;
+}
+
+.pricing-features li i {
+    width: 18px;
+    text-align: center;
+    margin-right: 0.5rem;
+    flex-shrink: 0;
+}
+
+.pricing-features li i.fa-check {
+    color: #10b981;
+}
+
+.pricing-features li i.fa-times {
+    color: #94a3b8;
+}
+
+.pricing-action {
+    margin-top: auto;
+    padding-top: 1.5rem;
+}
+
+/* Enhanced pricing badge */
+.pricing-badge {
+    position: absolute;
+    top: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: linear-gradient(135deg, #3b82f6, #6366f1);
+    color: white;
+    padding: 0.4rem 1.2rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+    z-index: 10;
+    white-space: nowrap;
+}
+
+.pricing-header {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    padding-top: 0.5rem;
+}
+
+.pricing-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #1e293b;
+    margin-bottom: 1rem;
+}
+
+.pricing-price {
+    margin-bottom: 0;
+}
+
+.price-amount {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #3b82f6;
+    display: block;
+    line-height: 1;
+}
+
+.price-period {
+    font-size: 0.875rem;
+    color: #64748b;
+    font-weight: 500;
+}
+
+.pricing-badge {
+    background: #f8f9fa;
+    color: #667eea;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: 600;
+    display: inline-block;
+    margin-bottom: 1rem;
+}
+
+.featured-badge {
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    color: white;
+}
+
+.pricing-title {
+    color: #333;
+    margin-bottom: 1rem;
+}
+
+.pricing-price {
+    margin-bottom: 1.5rem;
+}
+
+.price-amount {
+    font-size: 2.5rem;
+    font-weight: bold;
+    color: #667eea;
+    display: block;
+}
+
+.price-period {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.features-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 2rem 0;
+}
+
+.features-list li {
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #f0f0f0;
+    font-size: 0.9rem;
+}
+
+.features-list li:last-child {
+    border-bottom: none;
+}
+
+.pricing-action .btn {
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.pricing-action .btn:hover {
+    transform: translateY(-2px);
+}
+
+/* ===================== CONTACT SECTION ===================== */
+.contact-map iframe {
+    width: 100%;
+    height: 400px;
+    border-radius: 12px;
+}
+
+.contact-card {
+    background: white;
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    margin-bottom: 1.5rem;
+}
+
+.contact-title {
+    color: #333;
+    font-size: 1.25rem;
+}
+
+.contact-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.contact-item:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.contact-icon {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    flex-shrink: 0;
+}
+
+.contact-details h6 {
+    color: #333;
+    margin-bottom: 0.25rem;
+    font-weight: 600;
+}
+
+.contact-details p {
+    color: #666;
+    margin: 0;
+    line-height: 1.5;
+}
+
+.contact-form {
+    background: #f8f9fa;
+    border-radius: 12px;
+    padding: 1.5rem;
+}
+
+.contact-form .form-control {
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+    padding: 0.75rem 1rem;
+}
+
+.contact-form .form-control:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+}
+
+/* ===================== RESPONSIVE STYLES ===================== */
+@media (max-width: 768px) {
+    .device-card, .job-card, .pricing-card {
+        margin-bottom: 1.5rem;
+    }
+    
+    .job-actions {
+        flex-direction: column;
+    }
+    
+    .pricing-card.featured {
+        transform: none;
+    }
+    
+    .pricing-card.featured:hover {
+        transform: translateY(-5px);
+    }
+    
+    .contact-item {
+        align-items: center;
+    }
+    
+    .contact-details h6 {
+        font-size: 0.9rem;
+    }
+    
+    .contact-details p {
+        font-size: 0.85rem;
+    }
+}
+
+/* ===================== HERO SECTIONS FOR PAGES ===================== */
+.devices-hero, .careers-hero, .pricing-hero, .contact-hero, .news-hero {
+    position: relative;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    overflow: hidden;
+}
+
+/* Specific hero backgrounds for each page */
+.devices-hero {
+    background-color: #667eea;
+    background-image: linear-gradient(135deg, rgba(102, 126, 234, 0.85), rgba(118, 75, 162, 0.85)), 
+                      url('../img/about/datacenter.png');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.careers-hero {
+    background-color: #3498db;
+    background-image: linear-gradient(135deg, rgba(52, 152, 219, 0.85), rgba(155, 89, 182, 0.85)),
+                      url('../img/about/smart-city.png');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.pricing-hero {
+    background-color: #2ecc71;
+    background-image: linear-gradient(135deg, rgba(46, 204, 113, 0.85), rgba(39, 174, 96, 0.85)),
+                      url('../img/about/gis-network.png');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.contact-hero {
+    background-color: #e67e22;
+    background-image: linear-gradient(135deg, rgba(230, 126, 34, 0.75), rgba(231, 76, 60, 0.75)),
+                      url('../img/contact-hero.webp');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.news-hero {
+    background-color: #8e44ad;
+    background-image: linear-gradient(135deg, rgba(142, 68, 173, 0.85), rgba(74, 144, 226, 0.85)),
+                      url('../img/hero/hero-1.jpg');
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.devices-bg, .careers-bg, .pricing-bg, .contact-bg, .news-bg {
+    position: relative;
+    min-height: 40vh;
+    display: flex;
+    align-items: center;
+    padding: 3.5rem 0;
+}
+
+.devices-overlay, .careers-overlay, .pricing-overlay, .contact-overlay, .news-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.3);
+    z-index: 1;
+}
+
+.devices-content, .careers-content, .pricing-content, .contact-content, .news-content {
+    animation: fadeInUp 1s ease-out;
+}
+
+/* Floating elements for hero sections */
+.floating-elements {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.floating-icon {
+    position: absolute;
+    color: rgba(255, 255, 255, 0.1);
+    animation: float 6s ease-in-out infinite;
+}
+
+.floating-icon:nth-child(1) { top: 20%; left: 10%; animation-delay: 0s; }
+.floating-icon:nth-child(2) { top: 30%; right: 15%; animation-delay: 1s; }
+.floating-icon:nth-child(3) { bottom: 25%; left: 20%; animation-delay: 2s; }
+.floating-icon:nth-child(4) { bottom: 35%; right: 10%; animation-delay: 3s; }
+.floating-icon:nth-child(5) { top: 60%; left: 50%; animation-delay: 4s; }
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    33% { transform: translateY(-20px) rotate(5deg); }
+    66% { transform: translateY(-10px) rotate(-5deg); }
+}
+
+/* Stats overlay */
+.stats-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+    padding: 1.25rem 0;
+    z-index: 1;
+}
+
+.stat-item {
+    text-align: center;
+    color: white;
+}
+
+.stat-number {
+    font-size: 2rem;
+    font-weight: bold;
+    display: block;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.stat-label {
+    font-size: 0.85rem;
+    opacity: 0.9;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Hero buttons styling */
+.hero-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.hero-buttons .btn {
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-radius: 50px;
+    padding: 0.875rem 2rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.hero-buttons .btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+}
+
+.hero-buttons .btn-light:hover {
+    background: rgba(255,255,255,0.95);
+    color: #333;
+}
+
+.hero-buttons .btn-outline-light:hover {
+    background: rgba(255,255,255,0.2);
+    border-color: rgba(255,255,255,0.5);
+}
+
+/* Enhanced eyebrow styling */
+.eyebrow {
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 0.5rem 1.5rem;
+    background: rgba(255,255,255,0.15);
+    border-radius: 25px;
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255,255,255,0.3);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+}
+
+/* Page frame improvements */
+.section {
+    position: relative;
+    overflow: hidden;
+}
+
+.section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(0,0,0,0.1), transparent);
+}
+
+/* Card enhancements */
+.device-card, .job-card, .pricing-card, .contact-info, .news-card {
+    border: 1px solid rgba(0,0,0,0.08);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    background: white;
+    position: relative;
+    overflow: hidden;
+}
+
+.device-card::before, .job-card::before, .pricing-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #667eea, #764ba2);
+}
+
+.device-card:hover, .job-card:hover, .pricing-card:hover, .news-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+}
+
+/* Content wrapper improvements */
+.container {
+    position: relative;
+    z-index: 5;
+}
+
+/* Hero content depth */
+.devices-content, .careers-content, .pricing-content, .contact-content, .news-content {
+    position: relative;
+    z-index: 10;
+    text-shadow: 2px 4px 8px rgba(0,0,0,0.3);
+}
+
+/* Hero styling with more space */
+.devices-content h1, .careers-content h1, .pricing-content h1, 
+.contact-content h1, .news-content h1 {
+    font-size: 2.75rem !important;
+    line-height: 1.2;
+    margin-bottom: 1.25rem !important;
+}
+
+.devices-content p, .careers-content p, .pricing-content p, 
+.contact-content p, .news-content p {
+    font-size: 1.1rem !important;
+    margin-bottom: 2rem !important;
+    line-height: 1.6;
+}
+
+.hero-buttons {
+    margin-top: 1.25rem !important;
+    position: relative;
+    z-index: 15;
+}
+
+.hero-buttons .btn {
+    padding: 0.75rem 1.5rem;
+    font-size: 0.95rem;
+    margin: 0.25rem;
+}
+
+/* Background blur effect */
+.devices-bg, .careers-bg, .pricing-bg, .contact-bg, .news-bg {
+    backdrop-filter: blur(2px);
+}
+
+.devices-title, .careers-title, .pricing-title, .contact-title {
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+/* Government/Official styling themes */
+.government-section {
+    background: linear-gradient(135deg, #f8f9ff, #e8f2ff);
+    border-top: 4px solid #1e3a8a;
+    position: relative;
+}
+
+.government-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #dc2626, #fbbf24, #16a34a, #2563eb);
+}
+
+.official-badge {
+    display: inline-flex;
+    align-items: center;
+    background: linear-gradient(45deg, #1e3a8a, #3b82f6);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 50px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 12px rgba(30, 58, 138, 0.3);
+    margin-bottom: 1rem;
+}
+
+.official-badge::before {
+    content: '🏛️';
+    margin-right: 0.5rem;
+}
+
+/* Technology section styling */
+.tech-section {
+    background: linear-gradient(135deg, #0f172a, #1e293b);
+    color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+.tech-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="1" fill="rgba(59,130,246,0.1)"/><circle cx="80" cy="20" r="1" fill="rgba(59,130,246,0.1)"/><circle cx="20" cy="80" r="1" fill="rgba(59,130,246,0.1)"/><circle cx="80" cy="80" r="1" fill="rgba(59,130,246,0.1)"/><circle cx="50" cy="50" r="1" fill="rgba(59,130,246,0.1)"/></svg>');
+    background-size: 80px 80px;
+    z-index: 1;
+}
+
+.tech-section .container {
+    position: relative;
+    z-index: 2;
+}
+
+/* Enhanced section transitions */
+.section-transition {
+    height: 100px;
+    background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.02));
+    position: relative;
+}
+
+.section-transition::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60px;
+    height: 4px;
+    background: linear-gradient(90deg, #667eea, #764ba2);
+    border-radius: 2px;
+    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+}
+
+/* Professional content blocks */
+.content-block {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    margin: 2rem 0;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+    border-left: 4px solid #3b82f6;
+    position: relative;
+}
+
+.content-block::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    right: -1px;
+    bottom: -1px;
+    background: linear-gradient(45deg, #3b82f6, #8b5cf6);
+    border-radius: 12px;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.content-block:hover::before {
+    opacity: 0.1;
+}
+
+/* ===================== DEVICE PRICING CARDS ===================== */
+.device-pricing-card {
+    background: white;
+    border-radius: 16px;
+    padding: 2rem;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    height: 100%;
+}
+
+.device-pricing-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+}
+
+.device-pricing-header h4 {
+    color: #333;
+    margin-bottom: 0.5rem;
+}
+
+.device-pricing-content {
+    margin: 1.5rem 0;
+}
+
+.pricing-option {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.pricing-option:last-child {
+    border-bottom: none;
+}
+
+.pricing-option .period {
+    color: #666;
+    font-weight: 500;
+}
+
+.pricing-option .price {
+    color: #667eea;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.included-items {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid #f0f0f0;
+}
+
+/* ===================== TECH ITEMS ===================== */
+.tech-item {
+    text-align: center;
+    padding: 2rem 1rem;
+}
+
+.tech-icon {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 2rem;
+    margin: 0 auto 1.5rem auto;
+}
+
+/* ===================== PROCESS STEPS ===================== */
+.process-step {
+    margin-bottom: 2rem;
+}
+
+.step-number {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 0 auto 1rem auto;
+}
+
+/* ===================== CONTACT METHODS ===================== */
+.contact-method {
+    padding: 2rem 1rem;
+    margin-bottom: 2rem;
+}
+
+.method-icon {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 2rem;
+    margin: 0 auto 1.5rem auto;
+}
+
+/* ===================== BENEFIT ITEMS ===================== */
+.benefit-item {
+    padding: 2rem 1rem;
+    margin-bottom: 2rem;
+}
+
+.benefit-icon {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 2rem;
+    margin: 0 auto 1.5rem auto;
+}
+
+/* ===================== CONTACT FORM WRAPPER ===================== */
+.contact-form-wrapper {
+    background: white;
+    border-radius: 20px;
+    padding: 3rem;
+    box-shadow: 0 4px 30px rgba(0,0,0,0.1);
+}
+
+.contact-form .form-label {
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 0.5rem;
+}
+
+.contact-form .form-control,
+.contact-form .form-select {
+    border-radius: 10px;
+    border: 2px solid #e0e0e0;
+    padding: 0.75rem 1rem;
+    transition: all 0.3s ease;
+}
+
+.contact-form .form-control:focus,
+.contact-form .form-select:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+}
+
+/* ===================== RESPONSIVE FOR NEW PAGES ===================== */
+@media (max-width: 768px) {
+    .device-pricing-card, .contact-method, .benefit-item {
+        margin-bottom: 1.5rem;
+    }
+    
+    .contact-form-wrapper {
+        padding: 2rem 1.5rem;
+    }
+    
+    .step-number, .method-icon, .benefit-icon, .tech-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 1.5rem;
+    }
+    
+    .devices-title, .careers-title, .pricing-title, .contact-title, .news-title {
+        font-size: 2rem;
+    }
+}
+
+/* ===================== NEWS PAGE STYLES ===================== */
+.news-sidebar {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    margin-bottom: 2rem;
+}
+
+.sidebar-title {
+    color: #333;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #667eea;
+}
+
+.filter-group {
+    margin-bottom: 2rem;
+}
+
+.filter-group h6 {
+    color: #666;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.filter-options .form-check {
+    margin-bottom: 0.5rem;
+}
+
+.search-box {
+    position: relative;
+}
+
+.search-box .btn {
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* Featured Post */
+.featured-post {
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 30px rgba(0,0,0,0.1);
+}
+
+.featured-image {
+    position: relative;
+    height: 300px;
+    overflow: hidden;
+}
+
+.featured-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.featured-badge {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.875rem;
+    font-weight: 600;
+}
+
+.featured-content {
+    padding: 2rem;
+}
+
+.post-meta {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.post-meta .category {
+    background: #f8f9fa;
+    color: #667eea;
+    padding: 0.25rem 0.75rem;
+    border-radius: 15px;
+    font-size: 0.875rem;
+    font-weight: 500;
+}
+
+.post-meta .date {
+    color: #666;
+    font-size: 0.875rem;
+}
+
+.featured-title {
+    color: #333;
+    margin-bottom: 1rem;
+    line-height: 1.3;
+}
+
+.featured-title a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.featured-title a:hover {
+    color: #667eea;
+}
+
+.featured-excerpt {
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+/* News Cards */
+.news-card {
+    background: white;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    height: 100%;
+}
+
+.news-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+}
+
+.news-image {
+    position: relative;
+    height: 200px;
+    overflow: hidden;
+}
+
+.news-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.news-card:hover .news-image img {
+    transform: scale(1.05);
+}
+
+.news-category {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    background: rgba(102, 126, 234, 0.9);
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.news-content {
+    padding: 1.5rem;
+}
+
+.news-meta {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    font-size: 0.875rem;
+    color: #666;
+}
+
+.news-title {
+    margin-bottom: 1rem;
+}
+
+.news-title a {
+    color: #333;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.news-title a:hover {
+    color: #667eea;
+}
+
+.news-excerpt {
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.news-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.read-more {
+    color: #667eea;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.read-more:hover {
+    color: #764ba2;
+}
+
+.news-tags {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.tag {
+    background: #f8f9fa;
+    color: #667eea;
+    padding: 0.25rem 0.5rem;
+    border-radius: 10px;
+    font-size: 0.75rem;
+    font-weight: 500;
+}
+
+/* Newsletter Section */
+.newsletter-section {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.newsletter-title {
+    color: white;
+    margin-bottom: 1rem;
+}
+
+.newsletter-desc {
+    color: rgba(255,255,255,0.8);
+    margin-bottom: 2rem;
+}
+
+.newsletter-form .input-group {
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.newsletter-form .form-control {
+    border: none;
+    border-radius: 50px 0 0 50px;
+    padding: 1rem 1.5rem;
+}
+
+.newsletter-form .btn {
+    border-radius: 0 50px 50px 0;
+    padding: 1rem 2rem;
+    background: rgba(255,255,255,0.2);
+    border-color: rgba(255,255,255,0.3);
+}
+
+.newsletter-form .btn:hover {
+    background: rgba(255,255,255,0.3);
+}
+
+/* Article Detail Styles */
+.article-hero {
+    padding: 2rem 0;
+    background: #f8f9fa;
+}
+
+.breadcrumb {
+    background: none;
+    padding: 0;
+}
+
+.breadcrumb-item a {
+    color: #667eea;
+    text-decoration: none;
+}
+
+.article-header {
+    text-align: center;
+}
+
+.article-meta {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.article-title {
+    color: #333;
+    margin-bottom: 1rem;
+    line-height: 1.3;
+}
+
+.article-lead {
+    font-size: 1.2rem;
+    color: #666;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+}
+
+.social-share {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.share-label {
+    color: #666;
+    font-weight: 500;
+}
+
+.share-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.share-btn.facebook { background: #3b5998; }
+.share-btn.twitter { background: #1da1f2; }
+.share-btn.linkedin { background: #0077b5; }
+.share-btn.copy { background: #666; }
+
+.share-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.article-body {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #333;
+}
+
+.article-body p {
+    margin-bottom: 1.5rem;
+}
+
+.article-body h2, .article-body h3, .article-body h4 {
+    color: #333;
+    margin: 2rem 0 1rem 0;
+}
+
+.article-tags .tags-list {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+/* Sidebar Styles */
+.article-sidebar {
+    position: sticky;
+    top: 2rem;
+}
+
+.sidebar-widget {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    margin-bottom: 2rem;
+}
+
+.widget-title {
+    color: #333;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #667eea;
+}
+
+.related-post {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.related-post:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.related-image {
+    width: 80px;
+    height: 60px;
+    border-radius: 8px;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.related-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.related-content h6 {
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    line-height: 1.4;
+}
+
+.related-content a {
+    color: #333;
+    text-decoration: none;
+}
+
+.related-content a:hover {
+    color: #667eea;
+}
+
+.contact-sidebar .contact-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+/* Responsive News Styles */
+@media (max-width: 768px) {
+    .featured-post .row {
+        flex-direction: column;
+    }
+    
+    .featured-image {
+        height: 200px;
+    }
+    
+    .news-card {
+        margin-bottom: 1.5rem;
+    }
+    
+    .article-meta {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .social-share {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .related-post {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .related-image {
+        width: 100%;
+        height: 120px;
+        margin: 0 auto;
+    }
+}

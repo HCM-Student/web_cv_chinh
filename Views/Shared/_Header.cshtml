@@ -57,8 +57,10 @@
                        asp-area="" asp-controller="Home" asp-action="GioiThieu">Giới thiệu</a>
                 </li>
 
+
+
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="svcDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Dịch vụ</a>
+                    <a class="nav-link dropdown-toggle" href="#" id="svcDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Chuyên môn</a>
                     <ul class="dropdown-menu" aria-labelledby="svcDropdown">
                         <li><a class="dropdown-item" href="@($"{Url.Action("Index","Home")}#services")">LiDAR &amp; 3D</a></li>
                         <li><a class="dropdown-item" href="@($"{Url.Action("Index","Home")}#services")">GIS</a></li>
@@ -66,11 +68,26 @@
                     </ul>
                 </li>
 
-                <li class="nav-item"><a class="nav-link" href="@($"{Url.Action("Index","Home")}#devices")">Thiết bị</a></li>
-                <li class="nav-item"><a class="nav-link" href="@($"{Url.Action("Index","Home")}#news")">Tin tức – Sự kiện</a></li>
-                <li class="nav-item"><a class="nav-link" href="@($"{Url.Action("Index","Home")}#careers")">Tuyển dụng</a></li>
-                <li class="nav-item"><a class="nav-link" href="@($"{Url.Action("Index","Home")}#pricing")">Báo giá</a></li>
-                <li class="nav-item"><a class="nav-link" href="@($"{Url.Action("Index","Home")}#contact")">Liên hệ</a></li>
+                <li class="nav-item">
+                    <a class="nav-link @(currentController=="Home" && currentAction=="ThietBi" ? "active" : "")"
+                       asp-area="" asp-controller="Home" asp-action="ThietBi">Thiết bị</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link @(currentController=="Home" && currentAction=="TinTuc" ? "active" : "")"
+                       asp-area="" asp-controller="Home" asp-action="TinTuc">Tin tức – Sự kiện</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link @(currentController=="Home" && currentAction=="TuyenDung" ? "active" : "")"
+                       asp-area="" asp-controller="Home" asp-action="TuyenDung">Tuyển dụng</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link @(currentController=="Home" && currentAction=="BaoGia" ? "active" : "")"
+                       asp-area="" asp-controller="Home" asp-action="BaoGia">Báo giá</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link @(currentController=="Home" && currentAction=="LienHe" ? "active" : "")"
+                       asp-area="" asp-controller="Home" asp-action="LienHe">Liên hệ</a>
+                </li>
             </ul>
 
             <!-- AUTH BÊN PHẢI -->

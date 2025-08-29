@@ -1,0 +1,308 @@
+@{
+    ViewData["Title"] = "Tuyển dụng";
+}
+
+<!-- ===================== TUYỂN DỤNG HERO ===================== -->
+<section class="careers-hero">
+    <div class="careers-bg">
+        <div class="careers-overlay"></div>
+        
+        <!-- Floating Elements -->
+        <div class="floating-elements">
+            <div class="floating-icon" style="font-size: 3rem;"><i class="fas fa-users"></i></div>
+            <div class="floating-icon" style="font-size: 2.5rem;"><i class="fas fa-handshake"></i></div>
+            <div class="floating-icon" style="font-size: 3.5rem;"><i class="fas fa-graduation-cap"></i></div>
+            <div class="floating-icon" style="font-size: 2rem;"><i class="fas fa-briefcase"></i></div>
+            <div class="floating-icon" style="font-size: 2.8rem;"><i class="fas fa-rocket"></i></div>
+        </div>
+        
+        <div class="container position-relative" style="z-index: 15;">
+            <div class="row align-items-center py-5">
+                <div class="col-lg-8 mx-auto text-center">
+                    <div class="careers-content">
+                        <span class="eyebrow text-white-50 mb-3 d-block">💼 Tham gia đội ngũ</span>
+                        <h1 class="careers-title display-4 fw-bold text-white mb-4">Cơ hội nghề nghiệp tại Nam Hà Nội</h1>
+                        <p class="text-white-75 fs-5 mb-4">Khởi đầu sự nghiệp với công ty hàng đầu trong lĩnh vực GIS và công nghệ số. Môi trường năng động, chế độ đãi ngộ hấp dẫn.</p>
+                        <div class="hero-buttons mt-4">
+                            <a href="#jobs-list" class="btn btn-light btn-lg me-3">
+                                <i class="fas fa-search me-2"></i>Xem việc làm
+                            </a>
+                            <a href="@Url.Action("LienHe", "Home")" class="btn btn-outline-light btn-lg">
+                                <i class="fas fa-paper-plane me-2"></i>Gửi CV tự do
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Stats Overlay -->
+        <div class="stats-overlay">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3 col-6">
+                        <div class="stat-item">
+                            <span class="stat-number">50+</span>
+                            <span class="stat-label">Nhân viên tài năng</span>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-6">
+                        <div class="stat-item">
+                            <span class="stat-number">5</span>
+                            <span class="stat-label">Vị trí tuyển dụng</span>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-6">
+                        <div class="stat-item">
+                            <span class="stat-number">95%</span>
+                            <span class="stat-label">Nhân viên hài lòng</span>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-6">
+                        <div class="stat-item">
+                            <span class="stat-number">10</span>
+                            <span class="stat-label">Năm kinh nghiệm</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ===================== DANH SÁCH TUYỂN DỤNG ===================== -->
+<div class="section-transition"></div>
+<section id="jobs-list" class="section government-section">
+    <div class="container">
+        <div class="text-center mb-5">
+            <div class="official-badge">Tuyển dụng Nhân sự Chất lượng cao</div>
+            <h2 class="section-title mb-3">Cơ hội Nghề nghiệp tại Cục Chuyển Đổi Số</h2>
+            <p class="text-muted fs-5">Tham gia đội ngũ chuyên gia công nghệ hàng đầu trong lĩnh vực GIS và chuyển đổi số quốc gia</p>
+        </div>
+        <div class="row g-4 job-cards-row">
+            <div class="col-lg-6">
+                <div class="job-card">
+                    <div class="job-content">
+                        <div class="job-header">
+                            <div class="job-meta">
+                                <span class="job-type badge bg-primary">Toàn thời gian</span>
+                                <span class="job-location text-muted"><i class="fas fa-map-marker-alt me-1"></i>Hà Nội</span>
+                            </div>
+                            <h4 class="job-title">Chuyên viên phân tích dữ liệu (Business Analyst)</h4>
+                            <p class="job-summary">Phân tích và xử lý dữ liệu không gian, hỗ trợ ra quyết định kinh doanh.</p>
+                        </div>
+                        
+                        <div class="job-description">
+                            <div class="job-requirements">
+                                <h6 class="text-dark">Yêu cầu:</h6>
+                                <ul class="requirements-list">
+                                    <li>Tốt nghiệp đại học chuyên ngành liên quan</li>
+                                    <li>Kinh nghiệm 2+ năm làm việc với dữ liệu</li>
+                                    <li>Thành thạo Excel, SQL, Python</li>
+                                    <li>Kỹ năng giao tiếp tốt</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="job-benefits">
+                                <h6 class="text-dark">Quyền lợi:</h6>
+                                <div class="benefits-tags">
+                                    <span class="benefit-tag">Lương cạnh tranh</span>
+                                    <span class="benefit-tag">Bảo hiểm đầy đủ</span>
+                                    <span class="benefit-tag">Đào tạo</span>
+                                    <span class="benefit-tag">Team building</span>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                        
+                        <div class="job-actions">
+                            <button class="btn btn-primary">Ứng tuyển ngay</button>
+                            <button class="btn btn-outline-secondary">Lưu tin</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-6">
+                <div class="job-card">
+                    <div class="job-content">
+                        <div class="job-header">
+                        <div class="job-meta">
+                            <span class="job-type badge bg-success">Part-time</span>
+                            <span class="job-location text-muted"><i class="fas fa-map-marker-alt me-1"></i>Remote</span>
+                        </div>
+                        <h4 class="job-title">Kỹ sư GIS</h4>
+                        <p class="job-summary">Phát triển và duy trì hệ thống thông tin địa lý, xử lý dữ liệu không gian.</p>
+                                            </div>
+                        
+                        <div class="job-description">
+                            <div class="job-requirements">
+                        <h6 class="text-dark">Yêu cầu:</h6>
+                        <ul class="requirements-list">
+                            <li>Tốt nghiệp chuyên ngành GIS, Địa lý</li>
+                            <li>Kinh nghiệm với ArcGIS, QGIS</li>
+                            <li>Biết lập trình Python, JavaScript</li>
+                            <li>Kinh nghiệm làm việc nhóm</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="job-benefits">
+                        <h6 class="text-dark">Quyền lợi:</h6>
+                        <div class="benefits-tags">
+                            <span class="benefit-tag">Flexible time</span>
+                            <span class="benefit-tag">Remote work</span>
+                            <span class="benefit-tag">Skill training</span>
+                            <span class="benefit-tag">Career path</span>
+                        </div>
+                    </div>
+                    
+                        <div class="job-actions">
+                            <button class="btn btn-primary">Ứng tuyển ngay</button>
+                            <button class="btn btn-outline-secondary">Lưu tin</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="job-card">
+                    <div class="job-content">
+                        <div class="job-header">
+                        <div class="job-meta">
+                            <span class="job-type badge bg-warning">Thực tập</span>
+                            <span class="job-location text-muted"><i class="fas fa-map-marker-alt me-1"></i>Hà Nội</span>
+                        </div>
+                        <h4 class="job-title">Thực tập sinh Công nghệ</h4>
+                        <p class="job-summary">Cơ hội thực tập tại môi trường công nghệ hiện đại, học hỏi kinh nghiệm thực tế.</p>
+                                            </div>
+                        
+                        <div class="job-description">
+                            <div class="job-requirements">
+                        <h6 class="text-dark">Yêu cầu:</h6>
+                        <ul class="requirements-list">
+                            <li>Sinh viên năm cuối các ngành CNTT, GIS</li>
+                            <li>Có kiến thức cơ bản về lập trình</li>
+                            <li>Nhiệt tình, ham học hỏi</li>
+                            <li>Cam kết thực tập ít nhất 3 tháng</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="job-benefits">
+                        <h6 class="text-dark">Quyền lợi:</h6>
+                        <div class="benefits-tags">
+                            <span class="benefit-tag">Phụ cấp thực tập</span>
+                            <span class="benefit-tag">Mentor 1-1</span>
+                            <span class="benefit-tag">Dự án thực tế</span>
+                            <span class="benefit-tag">Chứng chỉ</span>
+                        </div>
+                    </div>
+                    
+                        <div class="job-actions">
+                            <button class="btn btn-primary">Ứng tuyển ngay</button>
+                            <button class="btn btn-outline-secondary">Lưu tin</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="job-card">
+                    <div class="job-content">
+                        <div class="job-header">
+                        <div class="job-meta">
+                            <span class="job-type badge bg-info">Freelance</span>
+                            <span class="job-location text-muted"><i class="fas fa-map-marker-alt me-1"></i>Remote</span>
+                        </div>
+                        <h4 class="job-title">Chuyên gia UAV/Drone</h4>
+                        <p class="job-summary">Điều khiển UAV thực hiện khảo sát, chụp ảnh và thu thập dữ liệu cho các dự án.</p>
+                                            </div>
+                        
+                        <div class="job-description">
+                            <div class="job-requirements">
+                        <h6 class="text-dark">Yêu cầu:</h6>
+                        <ul class="requirements-list">
+                            <li>Có bằng lái UAV (nếu có)</li>
+                            <li>Kinh nghiệm điều khiển drone mapping</li>
+                            <li>Hiểu biết về photogrammetry</li>
+                            <li>Làm việc theo dự án</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="job-benefits">
+                        <h6 class="text-dark">Quyền lợi:</h6>
+                        <div class="benefits-tags">
+                            <span class="benefit-tag">Phí theo dự án</span>
+                            <span class="benefit-tag">Trang bị thiết bị</span>
+                            <span class="benefit-tag">Đào tạo</span>
+                            <span class="benefit-tag">Hợp tác dài hạn</span>
+                        </div>
+                    </div>
+                    
+                        <div class="job-actions">
+                            <button class="btn btn-primary">Ứng tuyển ngay</button>
+                            <button class="btn btn-outline-secondary">Lưu tin</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="text-center mt-5">
+            <h4 class="mb-3">Không tìm thấy vị trí phù hợp?</h4>
+            <p class="text-muted mb-4">Gửi CV của bạn để chúng tôi có thể liên hệ khi có cơ hội phù hợp</p>
+            <a href="@Url.Action("LienHe", "Home")" class="btn btn-outline-primary btn-lg">Gửi CV tự do</a>
+        </div>
+    </div>
+</section>
+
+<!-- ===================== TẠI SAO CHỌN CHÚNG TÔI ===================== -->
+<section class="section bg-light">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="section-title mb-3">Tại sao chọn chúng tôi?</h2>
+            <p class="text-muted">Môi trường làm việc hiện đại và cơ hội phát triển</p>
+        </div>
+        
+        <div class="row g-4">
+            <div class="col-lg-3 col-md-6">
+                <div class="benefit-item text-center">
+                    <div class="benefit-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h5>Công nghệ hiện đại</h5>
+                    <p class="text-muted">Làm việc với các công nghệ và thiết bị tiên tiến nhất</p>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6">
+                <div class="benefit-item text-center">
+                    <div class="benefit-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h5>Đội ngũ chuyên nghiệp</h5>
+                    <p class="text-muted">Học hỏi từ những chuyên gia hàng đầu trong lĩnh vực</p>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6">
+                <div class="benefit-item text-center">
+                    <div class="benefit-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h5>Cơ hội thăng tiến</h5>
+                    <p class="text-muted">Lộ trình phát triển nghề nghiệp rõ ràng và minh bạch</p>
+                </div>
+            </div>
+            
+            <div class="col-lg-3 col-md-6">
+                <div class="benefit-item text-center">
+                    <div class="benefit-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h5>Môi trường thân thiện</h5>
+                    <p class="text-muted">Văn hóa doanh nghiệp tích cực và đồng nghiệp hỗ trợ</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
