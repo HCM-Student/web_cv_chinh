@@ -2891,3 +2891,5 @@ a {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
+/* Ensure Font Awesome icons line up in header */
+.contact-item-header .contact-icon { display:inline-block; line-height:1; }
