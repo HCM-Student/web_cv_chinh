@@ -27,7 +27,7 @@ body{margin:0}
 /* Hàng trên: logo + tên + liên hệ */
 .brandbar{background:#fff;border-bottom:1px solid #eef2f7}
 .brand-link{color:inherit}
-.brand-logo{height:48px;border-radius:10px;object-fit:contain}
+.brand-logo{height:48px;width:auto;max-width:48px;border-radius:10px;object-fit:contain;display:block}
 @media (max-width:575.98px){ .brand-logo{height:40px} }
 
 .brand-title{font-weight:800;letter-spacing:.02em;color:#1f2937;line-height:1}
@@ -130,10 +130,10 @@ body{margin:0}
   repeating-linear-gradient(to bottom, rgba(0,150,255,.07) 0 3px, transparent 3px 12px);animation:skylineSweep 16s linear infinite}
 @keyframes skylineSweep{0%{background-position:0 0,0 0}100%{background-position:-600px 0,0 -320px}}
 .tech-ring{position:absolute;filter:drop-shadow(0 12px 32px rgba(0,0,0,.35));opacity:.65;mix-blend-mode:screen;pointer-events:none;z-index:0}
-.ring-1{width:420px;right:6%;top:10%;animation:ringSpin 40s linear infinite, ringFloat 8s ease-in-out infinite}
-.ring-2{width:280px;right:18%;bottom:14%;animation:ringSpinReverse 32s linear infinite, ringFloat 7s ease-in-out infinite}
-.ring-3{width:340px;left:10%;top:12%;animation:ringSpin 36s linear infinite, ringFloat 9s ease-in-out infinite}
-.ring-4{width:300px;left:16%;bottom:10%;animation:ringSpinReverse 30s linear infinite, ringFloat 7.5s ease-in-out infinite}
+.ring-1{width:520px;right:6%;top:10%;animation:ringSpin 40s linear infinite, ringFloat 8s ease-in-out infinite}
+.ring-2{width:380px;right:18%;bottom:14%;animation:ringSpinReverse 32s linear infinite, ringFloat 7s ease-in-out infinite}
+.ring-3{width:440px;left:10%;top:12%;animation:ringSpin 36s linear infinite, ringFloat 9s ease-in-out infinite}
+.ring-4{width:400px;left:16%;bottom:10%;animation:ringSpinReverse 30s linear infinite, ringFloat 7.5s ease-in-out infinite}
 @keyframes ringSpin{from{transform:rotate(0)}to{transform:rotate(360deg)}}
 @keyframes ringSpinReverse{from{transform:rotate(360)}to{transform:rotate(0)}}
 @keyframes ringFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
@@ -313,9 +313,63 @@ body{margin:0}
 .site-footer .footer-link{color:rgba(255,255,255,.85);text-decoration:none}
 .site-footer .footer-link:hover{color:#fff;text-decoration:underline}
 
+/* ===== Contact Info Layout ===== */
+.contact-item-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.contact-icon {
+    font-size: 1rem;
+    color: #007bff;
+    width: 16px;
+    text-align: center;
+}
+
+.contact-text {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.contact-link {
+    text-decoration: none;
+    color: #2c3e50;
+    font-weight: 600;
+}
+
+.contact-link:hover {
+    color: #007bff;
+    text-decoration: none;
+}
+
+/* Footer contact alignment */
+.footer-info li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.footer-info li .fi {
+    margin-right: 0.75rem;
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.footer-info li p {
+    margin-bottom: 0;
+    line-height: 1.4;
+    vertical-align: middle;
+}
+
 /* ===== Floating Hotline ===== */
 .hotline-float{
-  position:fixed; left:18px; bottom:18px; z-index:1050;
+  position:fixed; left:18px; bottom:18px; z-index:900;
   display:flex; align-items:center; gap:.7rem;
   text-decoration:none; color:#fff;
   background:linear-gradient(180deg,#e11d2e,#b20d16);
@@ -551,7 +605,7 @@ body{margin:0}
 }
 .wu-core{
   position:relative;
-  --size: clamp(400px, 38vw, 540px);
+  --size: clamp(480px, 42vw, 620px);
   width:var(--size); aspect-ratio:1/1; transform-style:preserve-3d;
   filter: drop-shadow(0 0 24px rgba(110,231,255,.12));
   transform: perspective(1100px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));
@@ -669,7 +723,7 @@ body{margin:0}
 /* ============== Vòng sáng ============== */
 .wheel-ultra{ width:100%; height:100% }
 .ring-title{
-  font: 900 10px/1 Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial;
+  font: 900 12px/1 Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial;
   letter-spacing:.1em; fill:rgba(255,255,255,.96);
   stroke:rgba(15,22,32,.55); stroke-width:.8; paint-order:stroke fill; text-transform:uppercase;
 }
@@ -689,7 +743,7 @@ body{margin:0}
 /* ============== Logo & pulse (mềm) ============== */
 .wu-logo{
   position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);
-  width: calc(var(--size)*.22); height: calc(var(--size)*.22); border-radius:50%;
+  width: calc(var(--size)*.24); height: calc(var(--size)*.24); border-radius:50%;
   background: 
     radial-gradient(circle at 50% 45%, rgba(255,255,255,.15), rgba(255,255,255,0) 60%), 
     radial-gradient(circle at 30% 30%, rgba(167,139,250,.1), transparent 50%),
@@ -789,7 +843,7 @@ body{margin:0}
 .ring-chips li{ position:absolute; left:50%; top:50%; translate:-50% -50%; }
 .ring-chips .chip{
   display:inline-block; text-align:center;
-  font-weight:700; line-height:1.3; font-size:.8rem; letter-spacing:.01em;
+  font-weight:700; line-height:1.3; font-size:.9rem; letter-spacing:.01em;
   color:#0f1620; 
   background: linear-gradient(135deg, #fffffff8 0%, #f8fafc 100%);
   border:1px solid #e6eef5; border-radius:12px;
@@ -1096,30 +1150,33 @@ body{margin:0}
 }
 
 /* ===================== JOB CARDS ===================== */
+/* Job card layout - Force stable 2x2 grid */
 .job-card {
-    background: white;
-    border-radius: 16px;
-    padding: 1.75rem;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
-    transition: all 0.3s ease;
     height: 100%;
-    border-left: 4px solid #667eea;
     display: flex;
     flex-direction: column;
+    border: 1px solid #e9ecef;
+    border-left: 4px solid #667eea;
+    border-radius: 15px;
+    padding: 1.75rem;
+    background: white;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
 }
 
-/* Job card layout improvements */
-@media (min-width: 992px) {
-    .job-cards-row {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 1.5rem;
-    }
-    
-    .job-cards-row .col-lg-6 {
-        max-width: calc(50% - 0.75rem);
-        flex: 0 0 calc(50% - 0.75rem);
-    }
+/* Full width job cards layout */
+.job-cards-full-width {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.job-card-full {
+    width: 100%;
+}
+
+.job-card {
+    min-height: 300px;
 }
 
 .job-card:hover {
@@ -1991,6 +2048,83 @@ body{margin:0}
     margin: 0 auto 1rem auto;
 }
 
+/* ===================== CONTACT INFO ICONS ===================== */
+.contact-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    border-left: 4px solid #667eea;
+    transition: all 0.3s ease;
+}
+
+.contact-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateX(5px);
+}
+
+.contact-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 1rem;
+    flex-shrink: 0;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+    transition: all 0.3s ease;
+}
+
+.contact-icon:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+.contact-icon i {
+    color: white;
+    font-size: 1.2rem;
+}
+
+.contact-details h6 {
+    margin-bottom: 0.5rem;
+    color: #333;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.contact-details p {
+    margin-bottom: 0;
+    color: #666;
+    line-height: 1.5;
+}
+
+/* Specific icon colors */
+.contact-item:nth-child(1) .contact-icon {
+    background: linear-gradient(135deg, #e74c3c, #c0392b);
+}
+
+.contact-item:nth-child(2) .contact-icon {
+    background: linear-gradient(135deg, #f39c12, #e67e22);
+}
+
+.contact-item:nth-child(3) .contact-icon {
+    background: linear-gradient(135deg, #27ae60, #2ecc71);
+}
+
+.contact-item:nth-child(4) .contact-icon {
+    background: linear-gradient(135deg, #3498db, #2980b9);
+}
+
+.contact-item:nth-child(5) .contact-icon {
+    background: linear-gradient(135deg, #9b59b6, #8e44ad);
+}
+
 /* ===================== CONTACT METHODS ===================== */
 .contact-method {
     padding: 2rem 1rem;
@@ -2000,7 +2134,6 @@ body{margin:0}
 .method-icon {
     width: 80px;
     height: 80px;
-    background: linear-gradient(45deg, #667eea, #764ba2);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -2008,6 +2141,80 @@ body{margin:0}
     color: white;
     font-size: 2rem;
     margin: 0 auto 1.5rem auto;
+    transition: all 0.3s ease;
+    border: 3px solid rgba(255,255,255,0.2);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.method-icon:hover {
+    transform: scale(1.1) rotate(5deg);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+}
+
+/* Icon backgrounds with local images */
+.method-icon.phone-icon {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    position: relative;
+}
+
+.method-icon.phone-icon::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 40px;
+    height: 40px;
+    background: url('/img/icon/PHONE.webp') no-repeat center;
+    background-size: contain;
+    transform: translate(-50%, -50%);
+}
+
+.method-icon.email-icon {
+    background: linear-gradient(135deg, #f093fb, #f5576c);
+    position: relative;
+}
+
+.method-icon.email-icon::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 40px;
+    height: 40px;
+    background: url('/img/icon/MAIL.webp') no-repeat center;
+    background-size: contain;
+    transform: translate(-50%, -50%);
+}
+
+.method-icon.messenger-icon {
+    background: linear-gradient(135deg, #0084ff, #00c6ff);
+    position: relative;
+}
+
+.method-icon.messenger-icon::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 40px;
+    height: 40px;
+    background: url('/img/icon/MES.webp') no-repeat center;
+    background-size: contain;
+    transform: translate(-50%, -50%);
+}
+
+.method-icon.whatsapp-icon {
+    background: linear-gradient(135deg, #25d366, #128c7e);
+    position: relative;
+}
+
+.method-icon.whatsapp-icon::before {
+    content: '📱';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-size: 32px;
+    transform: translate(-50%, -50%);
 }
 
 /* ===================== BENEFIT ITEMS ===================== */
@@ -2540,4 +2747,147 @@ body{margin:0}
         height: 120px;
         margin: 0 auto;
     }
+}
+
+/* ========== SIMPLE PAGE EFFECTS ========== */
+
+/* Simple body transitions */
+body {
+    transition: opacity 0.4s ease-in-out;
+}
+
+body.loaded {
+    opacity: 1;
+}
+
+/* Smooth page transitions */
+.page-container {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+@keyframes fadeInUp {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Navigation link hover effects */
+.navbar-nav .nav-link {
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+.navbar-nav .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #667eea, #764ba2);
+    transition: all 0.3s ease;
+    transform: translateX(-50%);
+}
+
+.navbar-nav .nav-link:hover::after,
+.navbar-nav .nav-link.active::after {
+    width: 100%;
+}
+
+/* Enhanced button click effects */
+.btn {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    transition: all 0.6s ease;
+    transform: translate(-50%, -50%);
+}
+
+.btn:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+/* Enhanced card hover animations */
+.device-card, .job-card, .pricing-card, .news-card {
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.device-card:hover, .job-card:hover, .pricing-card:hover, .news-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+}
+
+/* Scroll animations */
+.fade-in-section {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: all 0.8s ease-out;
+}
+
+.fade-in-section.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Link transition effects */
+a {
+    transition: all 0.3s ease;
+}
+
+/* Form input focus effects */
+.form-control:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+    transform: translateY(-2px);
+    transition: all 0.3s ease;
+}
+
+/* Ripple effect for buttons */
+.ripple {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.6);
+    transform: scale(0);
+    animation: ripple-animation 0.6s linear;
+    pointer-events: none;
+}
+
+@keyframes ripple-animation {
+    to {
+        transform: scale(1);
+        opacity: 0;
+    }
+}
+
+/* Enhanced navigation underline animation */
+.navbar-nav .nav-link:hover {
+    color: #667eea !important;
+}
+
+/* Page transition improvements */
+.page-container {
+    will-change: transform, opacity;
+}
+
+/* Smooth transform for better performance */
+* {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }

@@ -20,18 +20,19 @@
             </div>
         </a>
 
-        <!-- RIGHT: LIÊN HỆ -->
-        <div class="d-none d-lg-flex align-items-center gap-4 me-1 contact-box">
-            <div class="contact-item">
-                <svg width="18" height="18" viewBox="0 0 16 16" fill="currentColor"><path d="M1.885.511a1.745 1.745 0 0 0-1.69 1.352C.187 4.478 1.2 7.095 3.223 9.117c2.02 2.02 4.637 3.036 7.252 3.027a1.745 1.745 0 0 0 1.352-1.691l-.036-.288a1.745 1.745 0 0 0-1.02-1.23l-2.26-.904a1.745 1.745 0 0 0-1.64.231l-.223.167a9.05 9.05 0 0 1-3.11-3.11l.167-.223a1.745 1.745 0 0 0 .231-1.64L3.134 1.53A1.745 1.745 0 0 0 1.885.511"/></svg>
-                <span class="ms-2">0378 695 597</span>
+        <!-- RIGHT: CONTACT INFO -->
+        <div class="d-none d-lg-flex align-items-center gap-4">
+            <div class="contact-item-header">
+                <i class="fas fa-phone contact-icon"></i>
+                <span class="contact-text">0378 695 597</span>
             </div>
-            <div class="vr"></div>
-            <div class="contact-item">
-                <svg width="18" height="18" viewBox="0 0 16 16" fill="currentColor"><path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v.217L8 8 0 4.217V4z"/><path d="M0 6.383V12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6.383l-7.555 3.64a1 1 0 0 1-.89 0L0 6.383z"/></svg>
-                <a href="mailto:luanha2003@gmail.com" class="ms-2 link-body-emphasis text-decoration-none">luanha2003@gmail.com</a>
+            <div class="contact-item-header">
+                <i class="fas fa-envelope contact-icon"></i>
+                <a href="mailto:luanha2003@gmail.com" class="contact-text contact-link">luanha2003@gmail.com</a>
             </div>
         </div>
+
+
     </div>
 </div>
 
@@ -58,6 +59,18 @@
                 </li>
 
 
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="serviceDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Dịch vụ</a>
+                    <ul class="dropdown-menu" aria-labelledby="serviceDropdown">
+                        <li><a class="dropdown-item" href="#">Giải pháp chuyển đổi số bản đồ nền 3D phục vụ thành phố thông minh</a></li>
+                        <li><a class="dropdown-item" href="#">Giải pháp công nghệ quét Lidar và mô hình hóa 3D</a></li>
+                        <li><a class="dropdown-item" href="#">Giải pháp công nghệ chuyển đổi số du lịch</a></li>
+                        <li><a class="dropdown-item" href="#">Giải pháp khảo sát công trình sử dụng công nghệ bay chụp ảnh và Lidar UAV</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="#">Dịch vụ khác</a></li>
+                    </ul>
+                </li>
 
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="svcDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Chuyên môn</a>
@@ -108,6 +121,7 @@
                                 <li class="px-3 pt-1 pb-1 text-muted small">Quản trị</li>
                                 <li><a class="dropdown-item" asp-area="Admin" asp-controller="Dashboard" asp-action="Index">Bảng điều khiển</a></li>
                                 <li><a class="dropdown-item" asp-area="Admin" asp-controller="BaiViet" asp-action="Index">Bài viết</a></li>
+                                <li><a class="dropdown-item" asp-area="Admin" asp-controller="NguoiDung" asp-action="Index">Người dùng</a></li>
                             }
                             <li><hr class="dropdown-divider" /></li>
                             <li><a class="dropdown-item" href="javascript:void(0)" onclick="document.getElementById('logout-form').submit();">Đăng xuất</a></li>

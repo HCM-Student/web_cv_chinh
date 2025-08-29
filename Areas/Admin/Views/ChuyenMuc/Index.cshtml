@@ -1,50 +1,332 @@
+@using WEB_CV.Data
+@inject NewsDbContext Context
 @model IEnumerable<WEB_CV.Models.ChuyenMuc>
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 @{
     ViewData["Title"] = "Quản lý Chuyên mục";
+    var totalChuyenMuc = Model.Count();
+    var chuyenMucCoSuDung = Context.BaiViets.Select(b => b.ChuyenMucId).Distinct().Count();
+    var tongBaiViet = Context.BaiViets.Count();
 }
-<div class="container py-4">
+
+<div class="admin-categories-page">
     @if (TempData["msg"] != null)
     {
-        <div class="alert alert-success">@TempData["msg"]</div>
+        <div class="alert alert-success alert-dismissible fade show">
+            @TempData["msg"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
     }
 
-    <div class="d-flex justify-content-between align-items-center mb-3">
-        <h1 class="h4 mb-0">Quản lý Chuyên mục</h1>
-        <a class="btn btn-primary" asp-area="Admin" asp-controller="ChuyenMuc" asp-action="Create">+ Thêm chuyên mục</a>
+    <!-- Header Section -->
+    <div class="page-header mb-4">
+        <div class="d-flex justify-content-between align-items-center">
+            <div>
+                <h1 class="page-title">
+                    <i class="fas fa-folder-open text-primary me-2"></i>
+                    Quản lý Chuyên mục
+                </h1>
+                <p class="page-subtitle text-muted">Tổ chức và phân loại nội dung theo chuyên mục</p>
+            </div>
+            <div>
+                <a class="btn btn-primary btn-lg" asp-area="Admin" asp-controller="ChuyenMuc" asp-action="Create">
+                    <i class="fas fa-plus me-2"></i>Thêm chuyên mục
+                </a>
+            </div>
+        </div>
     </div>
 
-    <form method="get" class="row g-2 mb-3">
-        <div class="col-md-4">
-            <input class="form-control" name="q" value="@ViewBag.Q" placeholder="Tìm theo tên chuyên mục" />
+    <!-- Stats Cards -->
+    <div class="row g-3 mb-4">
+        <div class="col-md-3">
+            <div class="stat-card">
+                <div class="stat-icon bg-primary">
+                    <i class="fas fa-folder"></i>
+                </div>
+                <div class="stat-content">
+                    <h3 class="stat-number">@totalChuyenMuc</h3>
+                    <p class="stat-label">Tổng chuyên mục</p>
+                </div>
+            </div>
         </div>
-        <div class="col-auto">
-            <button class="btn btn-outline-secondary" type="submit">Tìm</button>
+        <div class="col-md-3">
+            <div class="stat-card">
+                <div class="stat-icon bg-success">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <div class="stat-content">
+                    <h3 class="stat-number">@chuyenMucCoSuDung</h3>
+                    <p class="stat-label">Đang sử dụng</p>
+                </div>
+            </div>
         </div>
-    </form>
+        <div class="col-md-3">
+            <div class="stat-card">
+                <div class="stat-icon bg-warning">
+                    <i class="fas fa-newspaper"></i>
+                </div>
+                <div class="stat-content">
+                    <h3 class="stat-number">@tongBaiViet</h3>
+                    <p class="stat-label">Tổng bài viết</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="stat-card">
+                <div class="stat-icon bg-info">
+                    <i class="fas fa-chart-bar"></i>
+                </div>
+                <div class="stat-content">
+                    <h3 class="stat-number">@(totalChuyenMuc > 0 ? (tongBaiViet / totalChuyenMuc).ToString("F1") : "0")</h3>
+                    <p class="stat-label">Bài/chuyên mục</p>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <div class="table-responsive">
-        <table class="table table-bordered align-middle">
-            <thead>
-                <tr>
-                    <th style="width:80px;">ID</th>
-                    <th>Tên</th>
-                    <th style="width:140px;"></th>
-                </tr>
-            </thead>
-            <tbody>
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>@item.Id</td>
-                    <td>@item.Ten</td>
-                    <td class="text-end">
-                        <a class="btn btn-sm btn-outline-primary" asp-area="Admin" asp-controller="ChuyenMuc" asp-action="Edit" asp-route-id="@item.Id">Sửa</a>
-                        <a class="btn btn-sm btn-outline-danger ms-1" asp-area="Admin" asp-controller="ChuyenMuc" asp-action="Delete" asp-route-id="@item.Id">Xoá</a>
-                    </td>
-                </tr>
-            }
-            </tbody>
-        </table>
+    <!-- Search and Filter -->
+    <div class="card mb-4">
+        <div class="card-body">
+            <form method="get" class="row g-3">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="form-label">Tìm kiếm chuyên mục</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="fas fa-search"></i></span>
+                            <input class="form-control" name="q" value="@ViewBag.Q" placeholder="Tìm theo tên chuyên mục..." />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="form-label">&nbsp;</label>
+                        <button class="btn btn-primary w-100" type="submit">
+                            <i class="fas fa-search me-2"></i>Tìm kiếm
+                        </button>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="form-label">&nbsp;</label>
+                        <a class="btn btn-outline-secondary w-100" href="?">
+                            <i class="fas fa-times me-2"></i>Xóa bộ lọc
+                        </a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Categories Table -->
+    <div class="card">
+        <div class="card-header">
+            <h5 class="card-title mb-0">
+                <i class="fas fa-list me-2"></i>Danh sách chuyên mục
+            </h5>
+        </div>
+        <div class="card-body p-0">
+            <div class="table-responsive">
+                <table class="table table-hover mb-0" id="categoriesTable">
+                    <thead class="table-light">
+                        <tr>
+                            <th><i class="fas fa-hashtag me-1"></i>ID</th>
+                            <th><i class="fas fa-folder me-1"></i>Tên chuyên mục</th>
+                            <th><i class="fas fa-newspaper me-1"></i>Số bài viết</th>
+                            <th><i class="fas fa-chart-line me-1"></i>Tỷ lệ</th>
+                            <th><i class="fas fa-toggle-on me-1"></i>Trạng thái</th>
+                            <th class="text-center"><i class="fas fa-cogs me-1"></i>Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            var baiVietCount = Context.BaiViets.Count(b => b.ChuyenMucId == item.Id);
+                            var percentage = tongBaiViet > 0 ? (baiVietCount * 100.0 / tongBaiViet) : 0;
+                            
+                            <tr>
+                                <td>
+                                    <span class="badge bg-light text-dark">#@item.Id</span>
+                                </td>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <div class="category-icon me-2">
+                                            <i class="fas fa-folder text-primary"></i>
+                                        </div>
+                                        <div>
+                                            <strong class="category-name">@item.Ten</strong>
+                                            <div class="category-description text-muted">Chuyên mục phân loại bài viết</div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <span class="badge bg-info">@baiVietCount bài</span>
+                                </td>
+                                <td>
+                                    <div class="progress" style="height: 8px;">
+                                        <div class="progress-bar bg-success" role="progressbar" style="width: @percentage.ToString("F1")%" aria-valuenow="@percentage" aria-valuemin="0" aria-valuemax="100"></div>
+                                    </div>
+                                    <small class="text-muted">@percentage.ToString("F1")%</small>
+                                </td>
+                                <td>
+                                    @if (baiVietCount > 0)
+                                    {
+                                        <span class="badge bg-success">
+                                            <i class="fas fa-check-circle me-1"></i>Đang dùng
+                                        </span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-warning">
+                                            <i class="fas fa-exclamation-circle me-1"></i>Chưa dùng
+                                        </span>
+                                    }
+                                </td>
+                                <td class="text-center">
+                                    <div class="btn-group" role="group">
+                                        <a class="btn btn-sm btn-outline-info" asp-area="Admin" asp-controller="ChuyenMuc" asp-action="Details" asp-route-id="@item.Id" title="Xem chi tiết">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
+                                        <a class="btn btn-sm btn-outline-primary" asp-area="Admin" asp-controller="ChuyenMuc" asp-action="Edit" asp-route-id="@item.Id" title="Chỉnh sửa">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                        @if (baiVietCount == 0)
+                                        {
+                                            <a class="btn btn-sm btn-outline-danger" asp-area="Admin" asp-controller="ChuyenMuc" asp-action="Delete" asp-route-id="@item.Id" title="Xóa">
+                                                <i class="fas fa-trash"></i>
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <button class="btn btn-sm btn-outline-secondary" disabled title="Không thể xóa vì có bài viết">
+                                                <i class="fas fa-lock"></i>
+                                            </button>
+                                        }
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 </div>
+
+<style>
+.admin-categories-page {
+    padding: 1.5rem;
+    background: #f8f9fa;
+    min-height: 100vh;
+    max-width: 100%;
+}
+
+.page-header {
+    margin-bottom: 2rem;
+}
+
+.page-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0;
+    color: #2c3e50;
+}
+
+.page-subtitle {
+    font-size: 1.1rem;
+    margin: 0.5rem 0 0 0;
+}
+
+.stat-card {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    display: flex;
+    align-items: center;
+    transition: transform 0.2s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-2px);
+}
+
+.stat-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 1rem;
+    font-size: 1.5rem;
+    color: white;
+}
+
+.stat-number {
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0;
+    color: #2c3e50;
+}
+
+.stat-label {
+    font-size: 0.9rem;
+    color: #6c757d;
+    margin: 0;
+}
+
+.card {
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    width: 100%;
+}
+
+.table {
+    width: 100%;
+    min-width: 900px;
+}
+
+.table th {
+    font-weight: 600;
+    border-top: none;
+    color: #495057;
+}
+
+.category-icon {
+    font-size: 1.3rem;
+}
+
+.category-name {
+    display: block;
+    color: #2c3e50;
+    margin-bottom: 0.25rem;
+}
+
+.category-description {
+    font-size: 0.85rem;
+    line-height: 1.3;
+}
+
+.btn-group .btn {
+    margin: 0 2px;
+}
+
+.form-label {
+    font-weight: 600;
+    color: #495057;
+}
+
+.container-fluid {
+    max-width: 100%;
+    padding: 0;
+}
+
+.table-responsive {
+    width: 100%;
+}
+
+.progress {
+    margin-bottom: 0.25rem;
+}
+</style>

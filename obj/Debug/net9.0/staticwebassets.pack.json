@@ -49,6 +49,18 @@
       "PackagePath": "staticwebassets\\img\\hero\\tech-ring.jpg"
     },
     {
+      "Id": "D:\\web_cv\\wwwroot\\img\\icon\\MAIL.webp",
+      "PackagePath": "staticwebassets\\img\\icon\\MAIL.webp"
+    },
+    {
+      "Id": "D:\\web_cv\\wwwroot\\img\\icon\\MES.webp",
+      "PackagePath": "staticwebassets\\img\\icon\\MES.webp"
+    },
+    {
+      "Id": "D:\\web_cv\\wwwroot\\img\\icon\\PHONE.webp",
+      "PackagePath": "staticwebassets\\img\\icon\\PHONE.webp"
+    },
+    {
       "Id": "D:\\web_cv\\wwwroot\\img\\logo.png",
       "PackagePath": "staticwebassets\\img\\logo.png"
     },

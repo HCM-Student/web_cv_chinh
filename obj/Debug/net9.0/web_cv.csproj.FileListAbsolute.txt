@@ -616,7 +616,6 @@ D:\web_cv\obj\Debug\net9.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
 D:\web_cv\obj\Debug\net9.0\scopedcss\bundle\web_cv.styles.css
 D:\web_cv\obj\Debug\net9.0\scopedcss\projectbundle\web_cv.bundle.scp.css
 D:\web_cv\obj\Debug\net9.0\compressed\5plpkf1etw-61n19gt1b8.gz
-D:\web_cv\obj\Debug\net9.0\compressed\wl5u8lnr8q-xtxxf3hu2r.gz
 D:\web_cv\obj\Debug\net9.0\compressed\utohzzp81r-t1cqhe9u97.gz
 D:\web_cv\obj\Debug\net9.0\compressed\pninum09oy-c2jlpeoesf.gz
 D:\web_cv\obj\Debug\net9.0\compressed\d2nzm2vtm2-sejl45xvog.gz
@@ -693,4 +692,5 @@ D:\web_cv\obj\Debug\net9.0\refint\web_cv.dll
 D:\web_cv\obj\Debug\net9.0\web_cv.pdb
 D:\web_cv\obj\Debug\net9.0\web_cv.genruntimeconfig.cache
 D:\web_cv\obj\Debug\net9.0\ref\web_cv.dll
-D:\web_cv\obj\Debug\net9.0\compressed\6h9kldcc6f-a7ilbvzsxo.gz
+D:\web_cv\obj\Debug\net9.0\compressed\wl5u8lnr8q-4rmg69xeym.gz
+D:\web_cv\obj\Debug\net9.0\compressed\6h9kldcc6f-646nr95to5.gz
