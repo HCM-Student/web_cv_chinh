@@ -2,134 +2,615 @@
     ViewData["Title"] = "Giới thiệu";
 }
 
-<!-- BANNER GIỚI THIỆU -->
-<section class="page-hero about-hero">
-  <div class="container">
-    <div class="row">
-      <div class="col">
-        <h1 class="page-hero-title">Hiểu về chúng tôi để kết nối và hợp tác</h1>
-      </div>
+@section Styles {
+    <link rel="stylesheet" href="~/css/about.css" asp-append-version="true" />
+}
+
+<!-- HERO SECTION WITH PARALLAX -->
+<section class="about-hero-section">
+    <div class="hero-overlay"></div>
+    <div class="hero-particles" id="particles-js"></div>
+    <div class="container">
+        <div class="hero-content">
+            <span class="hero-badge">VỀ CHÚNG TÔI</span>
+            <h1 class="hero-title">
+                Kiến tạo <span class="text-gradient">Tương lai số</span><br>
+                Cho đô thị thông minh
+            </h1>
+            <p class="hero-subtitle">
+                Tiên phong trong công nghệ địa không gian 3D và chuyển đổi số
+            </p>
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <span class="stat-number" data-target="10">0</span><span class="stat-suffix">+</span>
+                    <span class="stat-label">Năm kinh nghiệm</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" data-target="500">0</span><span class="stat-suffix">+</span>
+                    <span class="stat-label">Dự án hoàn thành</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number" data-target="100">0</span><span class="stat-suffix">+</span>
+                    <span class="stat-label">Đối tác & Khách hàng</span>
+                </div>
+            </div>
+            <a href="#about-intro" class="scroll-indicator">
+                <span></span>
+                <span></span>
+                <span></span>
+            </a>
+        </div>
     </div>
-  </div>
 </section>
 
-<!-- KHỐI GIỚI THIỆU CHUNG -->
-<section class="section">
-  <div class="container">
-    <h2 class="section-title mb-3">Giới thiệu về Công ty TNHH Địa chính và Xây dựng Nam Hà Nội</h2>
-    <div class="row g-4">
-      <div class="col-lg-7">
-        <p>
-          Thương hiệu <strong>Nam Hà Nội</strong> là đối tác triển khai nhiều dự án chuyển đổi số ngành địa chính – xây dựng,
-          bản đồ số 3D &amp; GIS cho các địa phương/đơn vị trên cả nước. Chúng tôi ứng dụng công nghệ
-          <em>UAV/Drone, LiDAR, 3D Tour, IoT &amp; AI</em> để số hoá – phân tích – trực quan dữ liệu phục vụ quản lý đô thị, tài nguyên, hạ tầng.
-        </p>
+<!-- INTRODUCTION SECTION -->
+<section id="about-intro" class="intro-section">
+    <div class="container">
+        <div class="row align-items-center g-5">
+            <div class="col-lg-6">
+                <div class="intro-content">
+                    <span class="section-badge">GIỚI THIỆU</span>
+                    <h2 class="section-title">
+                        Công ty TNHH Địa chính và<br>
+                        Xây dựng <span class="text-primary">Nam Hà Nội</span>
+                    </h2>
+                    <div class="intro-text">
+                        <p>
+                            <strong>Nam Hà Nội</strong> là đơn vị hàng đầu trong lĩnh vực chuyển đổi số ngành địa chính - xây dựng, 
+                            tiên phong ứng dụng công nghệ hiện đại vào quản lý đô thị thông minh.
+                        </p>
+                        <p>
+                            Với đội ngũ chuyên gia giàu kinh nghiệm và hệ thống công nghệ tiên tiến, chúng tôi cung cấp 
+                            giải pháp toàn diện từ khảo sát, số hóa đến quản lý dữ liệu không gian 3D.
+                        </p>
+                    </div>
+                    
+                    <div class="tech-stack">
+                        <h6 class="tech-title">Công nghệ cốt lõi:</h6>
+                        <div class="tech-tags">
+                            <span class="tech-tag">UAV/Drone</span>
+                            <span class="tech-tag">LiDAR</span>
+                            <span class="tech-tag">3D Mapping</span>
+                            <span class="tech-tag">GIS</span>
+                            <span class="tech-tag">IoT</span>
+                            <span class="tech-tag">AI/ML</span>
+                            <span class="tech-tag">BIM</span>
+                            <span class="tech-tag">Digital Twin</span>
+                        </div>
+                    </div>
 
-        <p class="mb-1 fw-semibold">Năng lực &amp; phạm vi dịch vụ chính:</p>
-        <ul class="about-list">
-          <li>Quét LiDAR, bay chụp UAV/Drone và dựng mô hình 3D (địa hình/công trình).</li>
-          <li>Xây dựng CSDL địa không gian, chuẩn hóa – tích hợp – quản trị tập trung.</li>
-          <li>Phát triển phần mềm bản đồ số, dashboard quản trị, cổng tra cứu BĐS.</li>
-          <li>Phân tích AI: nhận dạng đối tượng, theo dõi thay đổi, cảnh báo theo thời gian thực.</li>
-          <li>Đào tạo – chuyển giao – vận hành hệ thống cho đơn vị sử dụng.</li>
-        </ul>
-        <p>Cam kết của chúng tôi là <strong>hiệu quả, minh bạch và đồng hành dài hạn</strong> với khách hàng.</p>
-      </div>
-
-      <div class="col-lg-5">
-        <figure class="about-figure">
-          <!-- Ảnh online: LiDAR/UAV -->
-          <img
-            src="https://images.unsplash.com/photo-1518779578993-ec3579fee39f?q=80&w=1200&auto=format&fit=crop"
-            class="img-fluid rounded-3 shadow-sm"
-            alt="LiDAR &amp; UAV"
-            loading="lazy" decoding="async">
-        </figure>
-      </div>
+                    <div class="intro-actions">
+                        <a href="/lien-he" class="btn btn-primary btn-lg">
+                            <i class="fas fa-handshake me-2"></i>Hợp tác với chúng tôi
+                        </a>
+                        <a href="/bao-gia" class="btn btn-outline-primary btn-lg">
+                            <i class="fas fa-file-invoice me-2"></i>Báo giá dịch vụ
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="intro-media">
+                    <div class="media-wrapper">
+                        <img src="https://images.unsplash.com/photo-1611532736597-de2d4265fba3?q=80&w=1400" 
+                             alt="3D Mapping Technology" class="intro-image">
+                        <div class="floating-card card-1">
+                            <i class="fas fa-satellite"></i>
+                            <span>GPS/RTK</span>
+                        </div>
+                        <div class="floating-card card-2">
+                            <i class="fas fa-cube"></i>
+                            <span>3D Model</span>
+                        </div>
+                        <div class="floating-card card-3">
+                            <i class="fas fa-map-marked-alt"></i>
+                            <span>GIS Map</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
 </section>
 
-<!-- TẦM NHÌN & SỨ MỆNH -->
-<section class="section pt-0">
-  <div class="container">
-    <div class="row g-3">
-      <div class="col-md-6">
-        <article class="card about-card h-100 border-0">
-          <!-- Ảnh online: Vision -->
-          <img
-            src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1400&auto=format&fit=crop"
-            class="about-card-thumb"
-            alt="Tầm nhìn"
-            loading="lazy" decoding="async">
-          <div class="card-body">
-            <h5 class="mb-1">Tầm nhìn</h5>
-            <p class="mb-0 text-muted">Trở thành Công ty Nam Hà Nội tiên phong trong chuyển đổi số địa chính – xây dựng, dẫn dắt hệ sinh thái bản đồ số và 3D tại Việt Nam.</p>
-          </div>
-        </article>
-      </div>
-      <div class="col-md-6">
-        <article class="card about-card h-100 border-0">
-          <!-- Ảnh online: Mission -->
-          <img
-            src="https://images.unsplash.com/photo-1518837695005-2083093ee35b?q=80&w=1400&auto=format&fit=crop"
-            class="about-card-thumb"
-            alt="Sứ mệnh"
-            loading="lazy" decoding="async">
-          <div class="card-body">
-            <h5 class="mb-1">Sứ mệnh</h5>
-            <p class="mb-0 text-muted">Ứng dụng công nghệ hiện đại để số hoá hạ tầng dữ liệu đô thị, nâng cao hiệu quả quản lý, minh bạch thông tin và mang lại giá trị bền vững cho cộng đồng.</p>
-          </div>
-        </article>
-      </div>
+<!-- VISION & MISSION -->
+<section class="vision-mission-section">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-lg-6">
+                <div class="vm-card vision-card">
+                    <div class="vm-icon">
+                        <i class="fas fa-eye"></i>
+                    </div>
+                    <h3 class="vm-title">Tầm nhìn</h3>
+                    <p class="vm-text">
+                        Trở thành đơn vị tiên phong trong chuyển đổi số địa chính - xây dựng, 
+                        dẫn dắt hệ sinh thái bản đồ số và công nghệ 3D tại Việt Nam, 
+                        hướng tới vị thế hàng đầu khu vực Đông Nam Á.
+                    </p>
+                    <div class="vm-decoration"></div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="vm-card mission-card">
+                    <div class="vm-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h3 class="vm-title">Sứ mệnh</h3>
+                    <p class="vm-text">
+                        Ứng dụng công nghệ tiên tiến để số hóa hạ tầng đô thị, 
+                        nâng cao hiệu quả quản lý nhà nước, minh bạch thông tin 
+                        và mang lại giá trị bền vững cho cộng đồng và xã hội.
+                    </p>
+                    <div class="vm-decoration"></div>
+                </div>
+            </div>
+        </div>
     </div>
-  </div>
 </section>
 
-<!-- MÔ HÌNH TỔ CHỨC -->
-<section class="section pt-0">
-  <div class="container">
-    <h3 class="text-center fw-bold mb-3">MÔ HÌNH TỔ CHỨC CỦA CÔNG TY TNHH ĐỊA CHÍNH VÀ XÂY DỰNG NAM HÀ NỘI</h3>
-
-    <!-- Level 0 -->
-    <div class="org-row">
-      <div class="org-node org-head">Hội đồng thành viên</div>
+<!-- CORE VALUES -->
+<section class="values-section">
+    <div class="container">
+        <div class="text-center mb-5">
+            <span class="section-badge">GIÁ TRỊ CỐT LÕI</span>
+            <h2 class="section-title">Cam kết của chúng tôi</h2>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-3 col-sm-6">
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-award"></i>
+                    </div>
+                    <h4>Chất lượng</h4>
+                    <p>Đảm bảo độ chính xác cao nhất trong mọi dự án</p>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-lightbulb"></i>
+                    </div>
+                    <h4>Sáng tạo</h4>
+                    <p>Luôn đổi mới và ứng dụng công nghệ tiên tiến</p>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <h4>Tin cậy</h4>
+                    <p>Minh bạch và đồng hành cùng khách hàng</p>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6">
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h4>Bảo mật</h4>
+                    <p>An toàn tuyệt đối cho dữ liệu khách hàng</p>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="org-connector"></div>
-
-    <!-- Level 1 -->
-    <div class="org-row">
-      <div class="org-node org-head">Giám đốc công ty</div>
-    </div>
-    <div class="org-connector"></div>
-
-    <!-- Level 2 -->
-    <div class="org-row">
-      <div class="org-node">Phó Giám đốc Sản xuất</div>
-      <div class="org-node">Phó Giám đốc Kỹ thuật</div>
-      <div class="org-node">Phó Giám đốc Kinh doanh</div>
-    </div>
-    <div class="org-connector"></div>
-
-    <!-- Level 3 -->
-    <div class="org-row">
-      <div class="org-node sm">Phòng Khảo sát – Đo đạc</div>
-      <div class="org-node sm">Phòng Bản đồ – GIS</div>
-      <div class="org-node sm">Tổ UAV/Drone</div>
-      <div class="org-node sm">Tổ LiDAR – 3D</div>
-      <div class="org-node sm">Phòng Phần mềm</div>
-      <div class="org-node sm">Phòng Kinh doanh</div>
-    </div>
-
-    <!-- Level 4 -->
-    <div class="org-connector"></div>
-    <div class="org-row">
-      <div class="org-node xs">Đội khảo sát 1</div>
-      <div class="org-node xs">Đội khảo sát 2</div>
-      <div class="org-node xs">Đội xử lý ảnh</div>
-      <div class="org-node xs">Nhóm 3D Tour</div>
-      <div class="org-node xs">Nhóm AI phân tích</div>
-      <div class="org-node xs">CSKH</div>
-    </div>
-  </div>
 </section>
+
+<!-- SERVICES OVERVIEW -->
+<section class="services-overview">
+    <div class="container">
+        <div class="text-center mb-5">
+            <span class="section-badge">NĂNG LỰC CHÍNH</span>
+            <h2 class="section-title">Dịch vụ & Giải pháp</h2>
+        </div>
+        <div class="services-grid">
+            <div class="service-item">
+                <div class="service-icon">
+                    <img src="https://img.icons8.com/fluency/96/000000/drone.png" alt="UAV">
+                </div>
+                <h4>Bay chụp UAV/Drone</h4>
+                <p>Khảo sát địa hình, thu thập dữ liệu không gian với độ phân giải cao</p>
+                <a href="/dich-vu" class="service-link">Tìm hiểu thêm <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="service-item">
+                <div class="service-icon">
+                    <img src="https://img.icons8.com/fluency/96/000000/laser-beam.png" alt="LiDAR">
+                </div>
+                <h4>Quét LiDAR 3D</h4>
+                <p>Công nghệ quét laser chính xác cao cho mô hình hóa công trình</p>
+                <a href="/dich-vu" class="service-link">Tìm hiểu thêm <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="service-item">
+                <div class="service-icon">
+                    <img src="https://img.icons8.com/fluency/96/000000/map.png" alt="GIS">
+                </div>
+                <h4>Bản đồ số & GIS</h4>
+                <p>Xây dựng hệ thống thông tin địa lý và bản đồ số thông minh</p>
+                <a href="/dich-vu" class="service-link">Tìm hiểu thêm <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="service-item">
+                <div class="service-icon">
+                    <img src="https://img.icons8.com/fluency/96/000000/3d-object.png" alt="3D Model">
+                </div>
+                <h4>Mô hình 3D/BIM</h4>
+                <p>Dựng mô hình 3D công trình, tích hợp BIM cho quản lý xây dựng</p>
+                <a href="/dich-vu" class="service-link">Tìm hiểu thêm <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="service-item">
+                <div class="service-icon">
+                    <img src="https://img.icons8.com/fluency/96/000000/virtual-reality.png" alt="3D Tour">
+                </div>
+                <h4>3D Tour & 360°</h4>
+                <p>Công nghệ thực tế ảo cho du lịch số và bảo tồn di sản</p>
+                <a href="/dich-vu" class="service-link">Tìm hiểu thêm <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="service-item">
+                <div class="service-icon">
+                    <img src="https://img.icons8.com/fluency/96/000000/artificial-intelligence.png" alt="AI">
+                </div>
+                <h4>AI & Phân tích</h4>
+                <p>Trí tuệ nhân tạo phân tích dữ liệu và dự báo xu hướng</p>
+                <a href="/dich-vu" class="service-link">Tìm hiểu thêm <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ORGANIZATION STRUCTURE -->
+<section class="organization-section">
+    <div class="container">
+        <div class="text-center mb-5">
+            <span class="section-badge">TỔ CHỨC</span>
+            <h2 class="section-title">Cơ cấu tổ chức</h2>
+        </div>
+        
+        <div class="org-chart">
+            <!-- Top Level -->
+            <div class="org-level level-0">
+                <div class="org-box ceo">
+                    <div class="org-title">Hội đồng thành viên</div>
+                    <div class="org-desc">Ban lãnh đạo chiến lược</div>
+                </div>
+            </div>
+            
+            <!-- Level 1 -->
+            <div class="org-level level-1">
+                <div class="org-box director">
+                    <div class="org-title">Giám đốc điều hành</div>
+                    <div class="org-desc">CEO</div>
+                </div>
+            </div>
+            
+            <!-- Level 2 -->
+            <div class="org-level level-2">
+                <div class="org-box deputy">
+                    <div class="org-title">Phó GĐ Sản xuất</div>
+                    <div class="org-desc">Production</div>
+                </div>
+                <div class="org-box deputy">
+                    <div class="org-title">Phó GĐ Kỹ thuật</div>
+                    <div class="org-desc">Technology</div>
+                </div>
+                <div class="org-box deputy">
+                    <div class="org-title">Phó GĐ Kinh doanh</div>
+                    <div class="org-desc">Business</div>
+                </div>
+            </div>
+            
+            <!-- Level 3 -->
+            <div class="org-level level-3">
+                <div class="org-box dept">
+                    <i class="fas fa-compass"></i>
+                    <div class="org-title">Khảo sát</div>
+                </div>
+                <div class="org-box dept">
+                    <i class="fas fa-map"></i>
+                    <div class="org-title">GIS/Bản đồ</div>
+                </div>
+                <div class="org-box dept">
+                    <i class="fas fa-helicopter"></i>
+                    <div class="org-title">UAV/Drone</div>
+                </div>
+                <div class="org-box dept">
+                    <i class="fas fa-cube"></i>
+                    <div class="org-title">LiDAR/3D</div>
+                </div>
+                <div class="org-box dept">
+                    <i class="fas fa-code"></i>
+                    <div class="org-title">Phần mềm</div>
+                </div>
+                <div class="org-box dept">
+                    <i class="fas fa-users"></i>
+                    <div class="org-title">Kinh doanh</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ACHIEVEMENTS -->
+<section class="achievements-section">
+    <div class="container">
+        <div class="row align-items-center g-5">
+            <div class="col-lg-5">
+                <span class="section-badge">THÀNH TỰU</span>
+                <h2 class="section-title mb-4">Con đường phát triển</h2>
+                <p class="lead">
+                    Hơn 10 năm xây dựng và phát triển, Nam Hà Nội tự hào là đối tác tin cậy 
+                    của hàng trăm cơ quan, doanh nghiệp trong và ngoài nước.
+                </p>
+                <div class="achievement-stats">
+                    <div class="ach-stat">
+                        <i class="fas fa-trophy"></i>
+                        <div>
+                            <strong>15+</strong>
+                            <span>Giải thưởng</span>
+                        </div>
+                    </div>
+                    <div class="ach-stat">
+                        <i class="fas fa-certificate"></i>
+                        <div>
+                            <strong>ISO 9001</strong>
+                            <span>Chứng nhận</span>
+                        </div>
+                    </div>
+                    <div class="ach-stat">
+                        <i class="fas fa-globe"></i>
+                        <div>
+                            <strong>63/63</strong>
+                            <span>Tỉnh thành</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-7">
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-year">2014</div>
+                        <div class="timeline-content">
+                            <h5>Thành lập công ty</h5>
+                            <p>Khởi đầu với đội ngũ 5 người, tập trung vào khảo sát địa chính</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">2017</div>
+                        <div class="timeline-content">
+                            <h5>Mở rộng công nghệ</h5>
+                            <p>Đầu tư hệ thống UAV/Drone và phần mềm GIS chuyên nghiệp</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">2019</div>
+                        <div class="timeline-content">
+                            <h5>Đột phá với LiDAR</h5>
+                            <p>Tiên phong ứng dụng công nghệ quét LiDAR tại Việt Nam</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">2021</div>
+                        <div class="timeline-content">
+                            <h5>Chuyển đổi số toàn diện</h5>
+                            <p>Ra mắt nền tảng Smart City và giải pháp Digital Twin</p>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-year">2024</div>
+                        <div class="timeline-content">
+                            <h5>Vươn tầm quốc tế</h5>
+                            <p>Hợp tác với đối tác nước ngoài, mở rộng thị trường ASEAN</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- PARTNERS -->
+<section class="partners-section">
+    <div class="container">
+        <div class="text-center mb-5">
+            <span class="section-badge">ĐỐI TÁC</span>
+            <h2 class="section-title">Khách hàng & Đối tác chiến lược</h2>
+        </div>
+        <div class="partners-grid">
+            <div class="partner-logo">
+                <img src="/img/thuonghieu/logo-1.jpg" alt="Partner 1">
+            </div>
+            <div class="partner-logo">
+                <img src="/img/thuonghieu/logo-2.jpg" alt="Partner 2">
+            </div>
+            <div class="partner-logo">
+                <img src="/img/thuonghieu/logo-3.jpg" alt="Partner 3">
+            </div>
+            <div class="partner-logo">
+                <img src="/img/thuonghieu/logo-4.jpg" alt="Partner 4">
+            </div>
+            <div class="partner-logo">
+                <img src="/img/thuonghieu/logo-5.jpg" alt="Partner 5">
+            </div>
+            <div class="partner-logo">
+                <img src="/img/thuonghieu/logo-6.jpg" alt="Partner 6">
+            </div>
+            <div class="partner-logo">
+                <img src="/img/thuonghieu/logo-7.jpg" alt="Partner 7">
+            </div>
+            <div class="partner-logo">
+                <img src="/img/thuonghieu/logo-8.jpg" alt="Partner 8">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- OFFICES -->
+<section class="offices-section">
+    <div class="container">
+        <div class="text-center mb-5">
+            <span class="section-badge">LIÊN HỆ</span>
+            <h2 class="section-title">Văn phòng & Chi nhánh</h2>
+        </div>
+        <div class="row g-4">
+            <div class="col-lg-6">
+                <div class="office-card">
+                    <div class="office-header">
+                        <i class="fas fa-building"></i>
+                        <h4>Trụ sở chính - Hà Nội</h4>
+                    </div>
+                    <div class="office-body">
+                        <p><i class="fas fa-map-marker-alt"></i> Tòa nhà 81 Tuệ Tĩnh, P. Nguyễn Du, Q. Hai Bà Trưng, Hà Nội</p>
+                        <p><i class="fas fa-phone"></i> Hotline: 0378 695 597</p>
+                        <p><i class="fas fa-envelope"></i> Email: luanha2003@gmail.com</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="office-card">
+                    <div class="office-header">
+                        <i class="fas fa-building"></i>
+                        <h4>Chi nhánh - TP. Hồ Chí Minh</h4>
+                    </div>
+                    <div class="office-body">
+                        <p><i class="fas fa-map-marker-alt"></i> Chung cư Phú Gia Hưng, Lê Đức Thọ, P.15, Gò Vấp, TP.HCM</p>
+                        <p><i class="fas fa-phone"></i> Hotline: 0985 826 519</p>
+                        <p><i class="fas fa-envelope"></i> Email: contact.hcm@namhanoi.vn</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA SECTION -->
+<section class="cta-section">
+    <div class="container">
+        <div class="cta-wrapper">
+            <div class="cta-content">
+                <h2 class="cta-title">Sẵn sàng chuyển đổi số cùng chúng tôi?</h2>
+                <p class="cta-text">
+                    Liên hệ ngay để được tư vấn giải pháp phù hợp nhất cho dự án của bạn
+                </p>
+            </div>
+            <div class="cta-buttons">
+                <a href="/lien-he" class="btn btn-white btn-lg">
+                    <i class="fas fa-comments me-2"></i>Tư vấn miễn phí
+                </a>
+                <a href="/bao-gia" class="btn btn-outline-white btn-lg">
+                    <i class="fas fa-calculator me-2"></i>Báo giá nhanh
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+// Counter Animation
+function animateCounter() {
+    const counters = document.querySelectorAll('.stat-number');
+    const speed = 200;
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const counter = entry.target;
+                const target = +counter.getAttribute('data-target');
+                const increment = target / speed;
+                
+                const updateCounter = () => {
+                    const current = +counter.innerText;
+                    if (current < target) {
+                        counter.innerText = Math.ceil(current + increment);
+                        setTimeout(updateCounter, 10);
+                    } else {
+                        counter.innerText = target;
+                    }
+                };
+                
+                updateCounter();
+                observer.unobserve(counter);
+            }
+        });
+    });
+    
+    counters.forEach(counter => {
+        observer.observe(counter);
+    });
+}
+
+// Smooth Scroll
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+    });
+});
+
+// Initialize animations on load
+document.addEventListener('DOMContentLoaded', function() {
+    animateCounter();
+    
+    // Add scroll animations
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -100px 0px'
+    };
+    
+    const scrollObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.animation = 'fadeInUp 0.8s ease forwards';
+                scrollObserver.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+    
+    document.querySelectorAll('.value-card, .service-item, .timeline-item, .office-card').forEach(el => {
+        el.style.opacity = '0';
+        scrollObserver.observe(el);
+    });
+});
+
+// Particles.js configuration (optional - requires particles.js library)
+if (typeof particlesJS !== 'undefined') {
+    particlesJS('particles-js', {
+        particles: {
+            number: { value: 80 },
+            color: { value: '#ffffff' },
+            shape: { type: 'circle' },
+            opacity: { value: 0.5, random: false },
+            size: { value: 3, random: true },
+            line_linked: {
+                enable: true,
+                distance: 150,
+                color: '#ffffff',
+                opacity: 0.4,
+                width: 1
+            },
+            move: {
+                enable: true,
+                speed: 2,
+                direction: 'none',
+                random: false,
+                straight: false,
+                out_mode: 'out',
+                bounce: false
+            }
+        },
+        interactivity: {
+            detect_on: 'canvas',
+            events: {
+                onhover: { enable: true, mode: 'repulse' },
+                onclick: { enable: true, mode: 'push' },
+                resize: true
+            }
+        },
+        retina_detect: true
+    });
+}
+</script>

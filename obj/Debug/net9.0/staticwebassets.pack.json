@@ -5,6 +5,22 @@
       "PackagePath": "staticwebassets\\web_cv.dn1lzfaoul.bundle.scp.css"
     },
     {
+      "Id": "D:\\web_cv\\wwwroot\\css\\about.css",
+      "PackagePath": "staticwebassets\\css\\about.css"
+    },
+    {
+      "Id": "D:\\web_cv\\wwwroot\\css\\admin.css",
+      "PackagePath": "staticwebassets\\css\\admin.css"
+    },
+    {
+      "Id": "D:\\web_cv\\wwwroot\\css\\contact.css",
+      "PackagePath": "staticwebassets\\css\\contact.css"
+    },
+    {
+      "Id": "D:\\web_cv\\wwwroot\\css\\site-backup.css",
+      "PackagePath": "staticwebassets\\css\\site-backup.css"
+    },
+    {
       "Id": "D:\\web_cv\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },

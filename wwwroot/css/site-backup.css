@@ -20,7 +20,7 @@ body{margin:0}
   --hero-curve-gap: clamp(18px, 2.8vw, 40px);
   
   /* Unified Color Scheme */
-
+  --primary-color: #0061ff;
   --secondary-color: #f8fafc;
   --success-color: #10b981;
   --dark-color: #1e293b;
