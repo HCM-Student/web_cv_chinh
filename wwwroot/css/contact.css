@@ -333,3 +333,15 @@
     }
 }
 
+/* Equal height row so the map grows down to the last info card */
+.equal-cols{ align-items: stretch; }
+.equal-cols > [class^="col-"], .equal-cols > [class*=" col-"]{ display:flex; }
+.equal-cols .contact-map{ flex:1; height:100%; }
+.equal-cols .contact-map iframe{ display:block; width:100%; height:100%; }
+
+/* Mobile: keep map reasonable */
+@media (max-width:991.98px){
+  .equal-cols > [class^="col-"], .equal-cols > [class*=" col-"]{ display:block; }
+  .equal-cols .contact-map iframe{ height:420px; }
+}
+

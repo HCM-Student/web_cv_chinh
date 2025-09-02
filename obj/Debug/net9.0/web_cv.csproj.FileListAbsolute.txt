@@ -690,11 +690,15 @@ D:\web_cv\obj\Debug\net9.0\refint\web_cv.dll
 D:\web_cv\obj\Debug\net9.0\web_cv.pdb
 D:\web_cv\obj\Debug\net9.0\web_cv.genruntimeconfig.cache
 D:\web_cv\obj\Debug\net9.0\ref\web_cv.dll
-C:\Users\acer\Downloads\web_cv\obj\Debug\net9.0\compressed\wl5u8lnr8q-4rmg69xeym.gz
-C:\Users\acer\Downloads\web_cv\obj\Debug\net9.0\compressed\6h9kldcc6f-d3kfzymll4.gz
 D:\web_cv\obj\Debug\net9.0\compressed\wl5u8lnr8q-adhl46mj9b.gz
 D:\web_cv\obj\Debug\net9.0\compressed\riannmx8j6-spmja8sx3e.gz
 D:\web_cv\obj\Debug\net9.0\compressed\tqxi9wgfru-lxzhr0190m.gz
 D:\web_cv\obj\Debug\net9.0\compressed\sz760lp45r-bi9rp9p7u0.gz
 D:\web_cv\obj\Debug\net9.0\compressed\6h9kldcc6f-lxar1b0qty.gz
 D:\web_cv\obj\Debug\net9.0\compressed\k4z65zi8kg-li4lhrbg9c.gz
+C:\Users\acer\Downloads\web_cv\obj\Debug\net9.0\compressed\tqxi9wgfru-lxzhr0190m.gz
+C:\Users\acer\Downloads\web_cv\obj\Debug\net9.0\compressed\sz760lp45r-bi9rp9p7u0.gz
+C:\Users\acer\Downloads\web_cv\obj\Debug\net9.0\compressed\riannmx8j6-spmja8sx3e.gz
+C:\Users\acer\Downloads\web_cv\obj\Debug\net9.0\compressed\wl5u8lnr8q-adhl46mj9b.gz
+C:\Users\acer\Downloads\web_cv\obj\Debug\net9.0\compressed\k4z65zi8kg-fww8iajayl.gz
+C:\Users\acer\Downloads\web_cv\obj\Debug\net9.0\compressed\6h9kldcc6f-dermit3quj.gz
