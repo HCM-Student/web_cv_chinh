@@ -1,10 +1,40 @@
 @model WEB_CV.Models.ChuyenMuc
-@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
-<div asp-validation-summary="ModelOnly" class="text-danger mb-2"></div>
+<div class="page-form">
+  <div class="form-section card shadow-sm mb-4">
+    <div class="card-header bg-white d-flex align-items-center gap-2">
+      <span class="section-chip"><i class="fas fa-folder-open"></i></span>
+      <h5 class="mb-0">Thông tin chuyên mục</h5>
+    </div>
+    <div class="card-body">
+      <div asp-validation-summary="ModelOnly" class="alert alert-danger small mb-3"></div>
 
-<div class="mb-3">
-    <label asp-for="Ten" class="form-label"></label>
-    <input asp-for="Ten" class="form-control" placeholder="VD: Tin tức, Sự kiện..." />
-    <span asp-validation-for="Ten" class="text-danger"></span>
+      <div class="row g-3">
+        <div class="col-md-6">
+          <label asp-for="Ten" class="form-label">Tên chuyên mục <span class="text-danger">*</span></label>
+          <div class="input-group">
+            <span class="input-group-text"><i class="fas fa-tag"></i></span>
+            <input asp-for="Ten" class="form-control" placeholder="VD: Tin tức, Sự kiện..." />
+          </div>
+          <span asp-validation-for="Ten" class="text-danger small"></span>
+        </div>
+
+        <div class="col-md-6">
+          <label asp-for="Slug" class="form-label">Slug</label>
+          <div class="input-group">
+            <span class="input-group-text"><i class="fas fa-link"></i></span>
+            <input asp-for="Slug" class="form-control" placeholder="vd: tin-tuc" />
+          </div>
+          <div class="form-text">Để trống để hệ thống tự tạo từ tên.</div>
+          <span asp-validation-for="Slug" class="text-danger small"></span>
+        </div>
+
+        <div class="col-12">
+          <label asp-for="MoTa" class="form-label">Mô tả</label>
+          <textarea asp-for="MoTa" class="form-control autosize" rows="3" placeholder="Mô tả ngắn..."></textarea>
+          <span asp-validation-for="MoTa" class="text-danger small"></span>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

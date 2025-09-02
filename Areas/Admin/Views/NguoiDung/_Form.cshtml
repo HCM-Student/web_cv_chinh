@@ -1,0 +1,59 @@
+@model WEB_CV.Models.NguoiDung
+
+<div class="page-form">
+  <div class="form-section card shadow-sm mb-4">
+    <div class="card-header bg-white d-flex align-items-center gap-2">
+      <span class="section-chip"><i class="fas fa-id-card"></i></span>
+      <h5 class="mb-0">Thông tin người dùng</h5>
+    </div>
+    <div class="card-body">
+      <div asp-validation-summary="ModelOnly" class="alert alert-danger small mb-4"></div>
+
+      <div class="row g-3">
+        <div class="col-md-6">
+          <label asp-for="HoTen" class="form-label">Họ và tên <span class="text-danger">*</span></label>
+          <div class="input-group">
+            <span class="input-group-text"><i class="fas fa-user"></i></span>
+            <input asp-for="HoTen" class="form-control" placeholder="VD: Nguyễn Văn A" />
+          </div>
+          <span asp-validation-for="HoTen" class="text-danger small"></span>
+        </div>
+
+        <div class="col-md-6">
+          <label asp-for="Email" class="form-label">Email <span class="text-danger">*</span></label>
+          <div class="input-group">
+            <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+            <input asp-for="Email" class="form-control" placeholder="name@example.com" />
+          </div>
+          <span asp-validation-for="Email" class="text-danger small"></span>
+        </div>
+
+        <div class="col-md-6">
+          <label asp-for="MatKhauHash" class="form-label">Mật khẩu</label>
+          <div class="input-group">
+            <span class="input-group-text"><i class="fas fa-lock"></i></span>
+            <input asp-for="MatKhauHash" class="form-control" type="password" placeholder="Tối thiểu 6 ký tự" />
+          </div>
+          <span asp-validation-for="MatKhauHash" class="text-danger small"></span>
+        </div>
+
+        <div class="col-md-4">
+          <label asp-for="VaiTro" class="form-label">Vai trò</label>
+          <select asp-for="VaiTro" class="form-select">
+            <option value="User">User</option>
+            <option value="Admin">Admin</option>
+          </select>
+          <span asp-validation-for="VaiTro" class="text-danger small"></span>
+        </div>
+
+        <div class="col-md-2">
+          <label class="form-label d-block">Kích hoạt</label>
+          <div class="form-check form-switch">
+            <input class="form-check-input" asp-for="KichHoat">
+            <label class="form-check-label" asp-for="KichHoat">Bật</label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

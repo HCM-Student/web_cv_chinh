@@ -1,49 +1,84 @@
 @model WEB_CV.Models.BaiViet
-@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
-<div asp-validation-summary="ModelOnly" class="text-danger"></div>
-
-<div class="mb-3">
-    <label asp-for="TieuDe" class="form-label"></label>
-    <input asp-for="TieuDe" class="form-control" />
-    <span asp-validation-for="TieuDe" class="text-danger"></span>
-</div>
-
-<div class="mb-3">
-    <label asp-for="TomTat" class="form-label"></label>
-    <textarea asp-for="TomTat" class="form-control" rows="2"></textarea>
-    <span asp-validation-for="TomTat" class="text-danger"></span>
-</div>
-
-<div class="mb-3">
-    <label asp-for="NoiDung" class="form-label"></label>
-    <textarea asp-for="NoiDung" class="form-control" rows="8"></textarea>
-    <span asp-validation-for="NoiDung" class="text-danger"></span>
-</div>
-
-<div class="row">
-    <div class="col-md-6 mb-3">
-        <label asp-for="ChuyenMucId" class="form-label"></label>
-        <select asp-for="ChuyenMucId" class="form-select" asp-items="ViewBag.ChuyenMucId">
-            <option value="">-- chọn chuyên mục --</option>
-        </select>
-        <span asp-validation-for="ChuyenMucId" class="text-danger"></span>
+<div class="page-form">
+  <!-- Thông tin cơ bản -->
+  <div class="form-section card shadow-sm mb-4">
+    <div class="card-header bg-white d-flex align-items-center gap-2">
+      <span class="section-chip"><i class="fas fa-info-circle"></i></span>
+      <h5 class="mb-0">Thông tin cơ bản</h5>
     </div>
-    <div class="col-md-6 mb-3">
-        <label asp-for="TacGiaId" class="form-label"></label>
-        <select asp-for="TacGiaId" class="form-select" asp-items="ViewBag.TacGiaId">
-            <option value="">-- chọn tác giả --</option>
-        </select>
-        <span asp-validation-for="TacGiaId" class="text-danger"></span>
-    </div>
-</div>
+    <div class="card-body">
+      <div asp-validation-summary="ModelOnly" class="alert alert-danger small mb-4"></div>
 
-@if (Model != null && Model.Id > 0)
-{
-    <div class="mb-3">
-        <label asp-for="NgayDang" class="form-label"></label>
-        <input asp-for="NgayDang" class="form-control" />
-        <span class="form-text">Bạn có thể giữ nguyên nếu không muốn chỉnh.</span>
-        <span asp-validation-for="NgayDang" class="text-danger"></span>
+      <div class="row g-3">
+        <div class="col-12">
+          <label asp-for="TieuDe" class="form-label">Tiêu đề <span class="text-danger">*</span></label>
+          <div class="input-group">
+            <span class="input-group-text"><i class="fas fa-heading"></i></span>
+            <input asp-for="TieuDe" class="form-control" placeholder="Nhập tiêu đề bài viết" />
+          </div>
+          <span asp-validation-for="TieuDe" class="text-danger small"></span>
+        </div>
+
+        <div class="col-12">
+          <label asp-for="TomTat" class="form-label">Tóm tắt</label>
+          <textarea asp-for="TomTat" class="form-control autosize" rows="3" placeholder="Mô tả ngắn..."></textarea>
+          <span asp-validation-for="TomTat" class="text-danger small"></span>
+        </div>
+      </div>
     </div>
-}
+  </div>
+
+  <!-- Nội dung -->
+  <div class="form-section card shadow-sm mb-4">
+    <div class="card-header bg-white d-flex align-items-center gap-2">
+      <span class="section-chip"><i class="fas fa-align-left"></i></span>
+      <h5 class="mb-0">Nội dung</h5>
+    </div>
+    <div class="card-body">
+      <label asp-for="NoiDung" class="form-label">Nội dung</label>
+      <textarea asp-for="NoiDung" class="form-control autosize" rows="12" placeholder="Soạn thảo nội dung..."></textarea>
+      <span asp-validation-for="NoiDung" class="text-danger small"></span>
+      <div class="form-text mt-2">Bạn có thể dán HTML/đoạn văn bản đã định dạng.</div>
+    </div>
+  </div>
+
+  <!-- Phân loại -->
+  <div class="form-section card shadow-sm mb-4">
+    <div class="card-header bg-white d-flex align-items-center gap-2">
+      <span class="section-chip"><i class="fas fa-sitemap"></i></span>
+      <h5 class="mb-0">Phân loại</h5>
+    </div>
+    <div class="card-body">
+      <div class="row g-3 align-items-end">
+        <div class="col-lg-6">
+          <label asp-for="ChuyenMucId" class="form-label">Chuyên mục <span class="text-danger">*</span></label>
+          <div class="input-group">
+            <span class="input-group-text"><i class="fas fa-folder-tree"></i></span>
+            <select asp-for="ChuyenMucId" class="form-select" asp-items="ViewBag.ChuyenMucId">
+              <option value="">-- chọn chuyên mục --</option>
+            </select>
+          </div>
+          <span asp-validation-for="ChuyenMucId" class="text-danger small"></span>
+        </div>
+
+        <div class="col-auto">
+          <a asp-area="Admin" asp-controller="ChuyenMuc" asp-action="Create" target="_blank" class="btn btn-outline-secondary">
+            <i class="fas fa-plus"></i> Thêm
+          </a>
+        </div>
+
+        <div class="col-lg-6">
+          <label asp-for="TacGiaId" class="form-label">Tác giả <span class="text-danger">*</span></label>
+          <div class="input-group">
+            <span class="input-group-text"><i class="fas fa-user-pen"></i></span>
+            <select asp-for="TacGiaId" class="form-select" asp-items="ViewBag.TacGiaId">
+              <option value="">-- chọn tác giả --</option>
+            </select>
+          </div>
+          <span asp-validation-for="TacGiaId" class="text-danger small"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

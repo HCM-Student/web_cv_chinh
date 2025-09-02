@@ -942,3 +942,22 @@
 .nav-item:nth-child(3) .nav-link { animation-delay: 0.2s; }
 .nav-item:nth-child(4) .nav-link { animation-delay: 0.25s; }
 
+/* ========== Pretty admin forms ========== */
+.page-form .card { border: 1px solid #eef1f5; }
+.section-chip{
+  display:inline-flex; width:28px; height:28px; align-items:center; justify-content:center;
+  border-radius:8px; background:linear-gradient(135deg,#60a5fa,#2563eb); color:#fff;
+  box-shadow:0 6px 14px rgba(37,99,235,.25);
+}
+.form-label{ font-weight:700; }
+.input-group-text{ background:#f8fafc; }
+
+textarea.autosize{ resize: vertical; }
+
+/* sticky toolbar bottom */
+.toolbar-sticky{
+  position: sticky; bottom: 0; left: 0; right: 0;
+  padding:.75rem; background: rgba(255,255,255,.85); backdrop-filter: blur(6px);
+  border-top:1px solid #e5e7eb; z-index: 10;
+}
+.btn-save.disabled{ pointer-events:none; opacity:.8; }
