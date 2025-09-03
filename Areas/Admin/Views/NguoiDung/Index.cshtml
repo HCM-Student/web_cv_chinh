@@ -5,6 +5,15 @@
 }
 
 <div class="admin-page">
+    @if (TempData["SuccessMessage"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <i class="fas fa-check-circle me-2"></i>
+            @TempData["SuccessMessage"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
     <!-- Header Section -->
     <div class="page-header mb-4">
         <div class="d-flex justify-content-between align-items-center">

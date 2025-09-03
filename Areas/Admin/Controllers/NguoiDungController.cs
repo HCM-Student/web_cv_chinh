@@ -1,8 +1,10 @@
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WEB_CV.Data;
 using WEB_CV.Models;
+using WEB_CV.Models.Account;
 
 namespace WEB_CV.Areas.Admin.Controllers
 {
@@ -11,10 +13,12 @@ namespace WEB_CV.Areas.Admin.Controllers
     public class NguoiDungController : Controller
     {
         private readonly NewsDbContext _context;
+        private readonly IPasswordHasher<NguoiDung> _passwordHasher;
 
-        public NguoiDungController(NewsDbContext context)
+        public NguoiDungController(NewsDbContext context, IPasswordHasher<NguoiDung> passwordHasher)
         {
             _context = context;
+            _passwordHasher = passwordHasher;
         }
 
         // GET: Admin/NguoiDung
@@ -51,16 +55,56 @@ namespace WEB_CV.Areas.Admin.Controllers
         // POST: Admin/NguoiDung/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,HoTen,Email,MatKhauHash,VaiTro,NgayTao,KichHoat")] NguoiDung nguoiDung)
+        public async Task<IActionResult> Create(NguoiDungCreateVM model)
         {
             if (ModelState.IsValid)
             {
-                nguoiDung.NgayTao = DateTime.Now;
-                _context.Add(nguoiDung);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                // Kiểm tra email trùng lặp
+                var existingUser = await _context.NguoiDungs
+                    .FirstOrDefaultAsync(u => u.Email.ToLower() == model.Email.ToLower());
+
+                if (existingUser != null)
+                {
+                    ModelState.AddModelError("Email", "Email này đã được sử dụng. Vui lòng chọn email khác.");
+                    return View(model);
+                }
+
+                // Tạo người dùng mới
+                var nguoiDung = new NguoiDung
+                {
+                    HoTen = model.HoTen,
+                    Email = model.Email.ToLower(),
+                    VaiTro = model.VaiTro,
+                    KichHoat = model.KichHoat,
+                    NgayTao = DateTime.Now
+                };
+
+                // Hash mật khẩu
+                nguoiDung.MatKhauHash = _passwordHasher.HashPassword(nguoiDung, model.MatKhau);
+
+                try
+                {
+                    _context.Add(nguoiDung);
+                    await _context.SaveChangesAsync();
+                    
+                    TempData["SuccessMessage"] = $"Đã tạo người dùng '{model.HoTen}' thành công!";
+                    return RedirectToAction(nameof(Index));
+                }
+                catch (DbUpdateException ex)
+                {
+                    // Xử lý lỗi database
+                    if (ex.InnerException?.Message.Contains("duplicate key") == true)
+                    {
+                        ModelState.AddModelError("Email", "Email này đã được sử dụng. Vui lòng chọn email khác.");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "Có lỗi xảy ra khi tạo người dùng. Vui lòng thử lại.");
+                    }
+                }
             }
-            return View(nguoiDung);
+
+            return View(model);
         }
 
         // GET: Admin/NguoiDung/Edit/5
@@ -76,29 +120,71 @@ namespace WEB_CV.Areas.Admin.Controllers
             {
                 return NotFound();
             }
-            return View(nguoiDung);
+
+            var model = new NguoiDungEditVM
+            {
+                Id = nguoiDung.Id,
+                HoTen = nguoiDung.HoTen,
+                Email = nguoiDung.Email,
+                VaiTro = nguoiDung.VaiTro,
+                KichHoat = nguoiDung.KichHoat,
+                NgayTao = nguoiDung.NgayTao
+            };
+
+            return View(model);
         }
 
         // POST: Admin/NguoiDung/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,HoTen,Email,MatKhauHash,VaiTro,NgayTao,KichHoat")] NguoiDung nguoiDung)
+        public async Task<IActionResult> Edit(int id, NguoiDungEditVM model)
         {
-            if (id != nguoiDung.Id)
+            if (id != model.Id)
             {
                 return NotFound();
             }
 
             if (ModelState.IsValid)
             {
+                // Kiểm tra email trùng lặp (ngoại trừ user hiện tại)
+                var existingUser = await _context.NguoiDungs
+                    .FirstOrDefaultAsync(u => u.Email.ToLower() == model.Email.ToLower() && u.Id != id);
+
+                if (existingUser != null)
+                {
+                    ModelState.AddModelError("Email", "Email này đã được sử dụng. Vui lòng chọn email khác.");
+                    return View(model);
+                }
+
                 try
                 {
+                    var nguoiDung = await _context.NguoiDungs.FindAsync(id);
+                    if (nguoiDung == null)
+                    {
+                        return NotFound();
+                    }
+
+                    // Cập nhật thông tin
+                    nguoiDung.HoTen = model.HoTen;
+                    nguoiDung.Email = model.Email.ToLower();
+                    nguoiDung.VaiTro = model.VaiTro;
+                    nguoiDung.KichHoat = model.KichHoat;
+
+                    // Chỉ cập nhật mật khẩu nếu có nhập mật khẩu mới
+                    if (!string.IsNullOrEmpty(model.MatKhauMoi))
+                    {
+                        nguoiDung.MatKhauHash = _passwordHasher.HashPassword(nguoiDung, model.MatKhauMoi);
+                    }
+
                     _context.Update(nguoiDung);
                     await _context.SaveChangesAsync();
+                    
+                    TempData["SuccessMessage"] = $"Đã cập nhật người dùng '{model.HoTen}' thành công!";
+                    return RedirectToAction(nameof(Index));
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!NguoiDungExists(nguoiDung.Id))
+                    if (!NguoiDungExists(model.Id))
                     {
                         return NotFound();
                     }
@@ -107,9 +193,19 @@ namespace WEB_CV.Areas.Admin.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                catch (DbUpdateException ex)
+                {
+                    if (ex.InnerException?.Message.Contains("duplicate key") == true)
+                    {
+                        ModelState.AddModelError("Email", "Email này đã được sử dụng. Vui lòng chọn email khác.");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "Có lỗi xảy ra khi cập nhật người dùng. Vui lòng thử lại.");
+                    }
+                }
             }
-            return View(nguoiDung);
+            return View(model);
         }
 
         // GET: Admin/NguoiDung/Delete/5

@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using WEB_CV.Data;
 using WEB_CV.Models;
+using WEB_CV.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -28,6 +29,9 @@ builder.Services.AddAuthorization();
 // Hash mật khẩu cho NguoiDung (tự quản)
 builder.Services.AddSingleton<IPasswordHasher<NguoiDung>, PasswordHasher<NguoiDung>>();
 
+// Register Services
+builder.Services.AddScoped<ICaiDatService, CaiDatService>();
+
 var app = builder.Build();
 
 // ===================== Middleware =====================
@@ -50,6 +54,7 @@ using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<NewsDbContext>();
     var hasher = scope.ServiceProvider.GetRequiredService<IPasswordHasher<NguoiDung>>();
+    var caiDatService = scope.ServiceProvider.GetRequiredService<ICaiDatService>();
 
     // Tự động chạy migration nếu chưa có
     db.Database.Migrate();
@@ -80,6 +85,9 @@ using (var scope = app.Services.CreateScope())
         );
         db.SaveChanges();
     }
+
+    // Initialize default settings
+    await caiDatService.InitializeDefaultSettingsAsync();
 }
 
 // ===================== Routes =====================

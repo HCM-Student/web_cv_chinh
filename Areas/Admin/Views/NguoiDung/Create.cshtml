@@ -1,20 +1,139 @@
-@model WEB_CV.Models.NguoiDung
+@model WEB_CV.Models.Account.NguoiDungCreateVM
 @{
     ViewData["Title"] = "Thêm người dùng";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
-<div class="card mb-4">
-  <div class="card-body">
-    <h3 class="mb-3">Thêm người dùng</h3>
-    <form asp-action="Create" method="post">
-      @Html.AntiForgeryToken()
-      <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-      <partial name="_Form" />
-      <div class="mt-4 d-flex gap-2">
-        <button type="submit" class="btn btn-primary"><i class="fas fa-save me-2"></i>Lưu</button>
-        <a asp-action="Index" class="btn btn-secondary">Quay lại</a>
-      </div>
-    </form>
-  </div>
+
+<div class="page-header">
+    <div class="page-header-content">
+        <div class="page-title-section">
+            <h1 class="page-title">
+                <i class="fas fa-user-plus me-3"></i>Thêm người dùng mới
+            </h1>
+            <p class="page-subtitle">Tạo tài khoản người dùng mới cho hệ thống</p>
+        </div>
+    </div>
+    <div class="page-breadcrumb">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb mb-0">
+                <li class="breadcrumb-item"><a asp-area="Admin" asp-controller="Dashboard" asp-action="Index">Admin</a></li>
+                <li class="breadcrumb-item"><a asp-area="Admin" asp-controller="NguoiDung" asp-action="Index">Người dùng</a></li>
+                <li class="breadcrumb-item active">Thêm mới</li>
+            </ol>
+        </nav>
+    </div>
 </div>
-@section Scripts{ <partial name="_ValidationScriptsPartial" /> }
+
+<div class="content-card">
+    <div class="content-card-body">
+        <form asp-action="Create" method="post" novalidate>
+            @Html.AntiForgeryToken()
+            
+            <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+            
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="HoTen" class="form-label">Họ tên <span class="text-danger">*</span></label>
+                        <input asp-for="HoTen" class="form-control" placeholder="Nhập họ tên đầy đủ" />
+                        <span asp-validation-for="HoTen" class="text-danger"></span>
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="Email" class="form-label">Email <span class="text-danger">*</span></label>
+                        <input asp-for="Email" class="form-control" placeholder="user@example.com" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="MatKhau" class="form-label">Mật khẩu <span class="text-danger">*</span></label>
+                        <div class="input-group">
+                            <input asp-for="MatKhau" type="password" class="form-control" placeholder="Nhập mật khẩu" />
+                            <button class="btn btn-outline-secondary" type="button" onclick="togglePassword('MatKhau')">
+                                <i class="fas fa-eye" id="MatKhau-icon"></i>
+                            </button>
+                        </div>
+                        <span asp-validation-for="MatKhau" class="text-danger"></span>
+                        <div class="form-text">Mật khẩu phải có ít nhất 6 ký tự</div>
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="XacNhanMatKhau" class="form-label">Xác nhận mật khẩu <span class="text-danger">*</span></label>
+                        <div class="input-group">
+                            <input asp-for="XacNhanMatKhau" type="password" class="form-control" placeholder="Nhập lại mật khẩu" />
+                            <button class="btn btn-outline-secondary" type="button" onclick="togglePassword('XacNhanMatKhau')">
+                                <i class="fas fa-eye" id="XacNhanMatKhau-icon"></i>
+                            </button>
+                        </div>
+                        <span asp-validation-for="XacNhanMatKhau" class="text-danger"></span>
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label asp-for="VaiTro" class="form-label">Vai trò <span class="text-danger">*</span></label>
+                        <select asp-for="VaiTro" class="form-select">
+                            <option value="User">Người dùng</option>
+                            <option value="Editor">Biên tập viên</option>
+                            <option value="Admin">Quản trị viên</option>
+                        </select>
+                        <span asp-validation-for="VaiTro" class="text-danger"></span>
+                    </div>
+                </div>
+                
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="form-label">Trạng thái tài khoản</label>
+                        <div class="form-check form-switch">
+                            <input asp-for="KichHoat" class="form-check-input" type="checkbox" />
+                            <label asp-for="KichHoat" class="form-check-label">
+                                Kích hoạt tài khoản
+                            </label>
+                        </div>
+                        <div class="form-text">Tài khoản sẽ có thể đăng nhập ngay sau khi tạo</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-actions mt-4">
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-save me-2"></i>Tạo người dùng
+                </button>
+                <a asp-action="Index" class="btn btn-outline-secondary ms-2">
+                    <i class="fas fa-arrow-left me-2"></i>Quay lại
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        function togglePassword(inputName) {
+            const input = document.getElementById(inputName);
+            const icon = document.getElementById(inputName + '-icon');
+            
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                input.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        }
+
+        // Auto-focus first input
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('HoTen')?.focus();
+        });
+    </script>
+}

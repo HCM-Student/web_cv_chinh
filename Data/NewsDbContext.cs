@@ -13,6 +13,7 @@ namespace WEB_CV.Data
         public DbSet<BinhLuan> BinhLuans { get; set; }
         public DbSet<Tag> Tags { get; set; }
         public DbSet<BaiVietTag> BaiVietTags { get; set; }
+        public DbSet<CaiDat> CaiDats { get; set; }
 
         protected override void OnModelCreating(ModelBuilder mb)
         {
@@ -67,6 +68,16 @@ namespace WEB_CV.Data
         e.Property(x => x.Slug).HasMaxLength(200);     // <— THÊM
         e.Property(x => x.MoTa).HasMaxLength(1000);    // <— THÊM
     });
+
+            // ===== Ràng buộc CaiDat =====
+            mb.Entity<CaiDat>(e =>
+            {
+                e.HasIndex(x => x.Key).IsUnique();
+                e.Property(x => x.Key).IsRequired().HasMaxLength(50);
+                e.Property(x => x.Value).IsRequired();
+                e.Property(x => x.Type).HasDefaultValue("string");
+                e.Property(x => x.NgayCapNhat).HasDefaultValueSql("GETDATE()");
+            });
 
         }
     }
