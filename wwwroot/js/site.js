@@ -128,6 +128,20 @@ document.addEventListener('DOMContentLoaded', function() {
     if (mainContent) {
         mainContent.classList.add('page-container');
     }
+    
+    // Prepare reveal-on-scroll for pricing/device cards
+    document.querySelectorAll('.pricing-card, .device-pricing-card').forEach(el => {
+        el.classList.add('reveal-on-scroll', 'tilt-ready', 'glow-hover');
+    });
+    
+    // Initialize counters on BaoGia hero
+    initHeroCounters();
+    
+    // Initialize tilt interactions
+    initTiltHover();
+    
+    // Back-to-top behavior
+    initBackToTop();
 });
 
 // Re-run animations on page navigation (for SPA-like behavior)
@@ -135,6 +149,102 @@ window.addEventListener('pageshow', function() {
     updateActiveNavigation();
     handleScrollAnimations();
 });
+
+// ========== BACK TO TOP ==========
+function initBackToTop(){
+    const btn = document.getElementById('backToTop');
+    if(!btn) return;
+    const onScroll = () => {
+        if(window.scrollY > 300){
+            btn.classList.add('show');
+        } else {
+            btn.classList.remove('show');
+        }
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+    btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+}
+
+// ========== REVEAL ON SCROLL (extend) ==========
+// Extend existing observer to support '.reveal-on-scroll'
+function handleScrollAnimations() {
+    const sections = document.querySelectorAll('.fade-in-section, .reveal-on-scroll');
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('is-visible');
+            }
+        });
+    }, {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    });
+
+    sections.forEach(section => observer.observe(section));
+}
+
+// ========== TILT HOVER ==========
+function initTiltHover(){
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const maxTilt = 8; // degrees
+    const cards = document.querySelectorAll('.tilt-ready');
+    cards.forEach(card => {
+        const onMove = (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            const px = (x / rect.width) - 0.5;   // -0.5 -> 0.5
+            const py = (y / rect.height) - 0.5;
+            const rx = (py * maxTilt * -1).toFixed(2);
+            const ry = (px * maxTilt).toFixed(2);
+            card.style.transform = `perspective(800px) rotateX(${rx}deg) rotateY(${ry}deg) scale(1.01)`;
+            card.classList.add('tilt-hover');
+        };
+        const reset = () => {
+            card.style.transform = '';
+            card.classList.remove('tilt-hover');
+        };
+        card.addEventListener('mousemove', onMove);
+        card.addEventListener('mouseleave', reset);
+    });
+}
+
+// ========== HERO COUNTERS ==========
+function initHeroCounters(){
+    const counters = document.querySelectorAll('.stat-number[data-target], .pricing-hero .stat-number, .about-hero-section .stat-number');
+    if(!counters.length) return;
+    const animate = (el) => {
+        const raw = (el.textContent || '').trim();
+        const hasTarget = el.hasAttribute('data-target');
+        const parsed = raw.match(/([0-9]+(?:[\.,][0-9]+)?)/);
+        // Prefer data-target when present
+        const endValue = hasTarget ? parseFloat(el.getAttribute('data-target')) : (parsed ? parseFloat(parsed[0].replace(',', '.')) : NaN);
+        if(Number.isNaN(endValue)) return;
+        const numberToken = hasTarget ? (parsed ? parsed[0] : '0') : (parsed ? parsed[0] : '');
+        const prefix = raw && numberToken ? raw.slice(0, raw.indexOf(numberToken)) : '';
+        const suffix = raw && numberToken ? raw.slice(raw.indexOf(numberToken) + numberToken.length) : '';
+        const duration = 1200;
+        const start = performance.now();
+        const step = (now) => {
+            const p = Math.min(1, (now - start) / duration);
+            const val = Math.floor(endValue * p);
+            el.textContent = `${prefix}${val.toLocaleString()}${suffix}`;
+            if(p < 1) requestAnimationFrame(step);
+        };
+        requestAnimationFrame(step);
+    };
+    const io = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+            if(entry.isIntersecting){
+                animate(entry.target);
+                obs.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.4 });
+    counters.forEach(c => io.observe(c));
+}
 
 // ========== INTERACTIVE SERVICES FUNCTIONALITY ==========
 function initInteractiveServices() {

@@ -21,6 +21,7 @@ html, body { max-width: 100%; overflow-x: clip; }
 /* khoảng hở giữa vòm & dải thẻ ngay sau hero */
 :root{
   --hero-curve-gap: clamp(18px, 2.8vw, 40px);
+  --primary-color: #1e6fff; /* brand primary used across pages */
   
   /* Unified Color Scheme */
 
@@ -2968,6 +2969,43 @@ a {
 }
 
 /* Enhanced navigation underline animation */
+
+/* ===================== GLOBAL ADD-ONS (effects) ===================== */
+/* Back-to-top floating button */
+#backToTop.back-to-top{
+  position: fixed;
+  right: 18px;
+  bottom: 22px;
+  width: 42px;
+  height: 42px;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+  color: #fff;
+  display: grid;
+  place-items: center;
+  box-shadow: 0 10px 25px rgba(29,78,216,.35);
+  opacity: 0;
+  transform: translateY(12px) scale(.9);
+  transition: opacity .25s ease, transform .25s ease;
+  z-index: 1050;
+}
+#backToTop.back-to-top.show{ opacity:1; transform: translateY(0) scale(1); }
+#backToTop.back-to-top:hover{ filter: brightness(1.07); }
+
+/* Reveal-on-scroll utility (works with JS observer) */
+.reveal-on-scroll{ opacity: 0; transform: translateY(18px); transition: all .6s ease; }
+.reveal-on-scroll.is-visible{ opacity: 1; transform: translateY(0); }
+
+/* Subtle 3D tilt card hover (progressively enhanced in JS) */
+.tilt-ready{ will-change: transform; transition: transform .12s ease-out, box-shadow .2s ease; }
+.tilt-hover{ box-shadow: 0 14px 30px rgba(0,0,0,.15); }
+
+/* Small glow when hovering interactive cards */
+.glow-hover:hover{ box-shadow: 0 10px 30px rgba(59,130,246,.25); }
+
+/* Make pricing/device cards opt-in for reveal + tilt by default */
+.pricing-card, .device-pricing-card{ contain: layout paint; }
 .navbar-nav .nav-link:hover {
     color: #667eea !important;
 }

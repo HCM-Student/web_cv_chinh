@@ -214,7 +214,7 @@ html, body {
 .media-wrapper {
     position: relative;
     border-radius: 20px;
-    overflow: hidden;
+    overflow: visible; /* allow floating labels to overflow nicely */
     box-shadow: 0 30px 60px rgba(0, 0, 0, 0.1);
 }
 
@@ -222,6 +222,7 @@ html, body {
     width: 100%;
     height: auto;
     display: block;
+    border-radius: 20px; /* keep rounded corners when wrapper overflows */
 }
 
 .floating-card {
@@ -236,12 +237,15 @@ html, body {
     font-weight: 600;
     font-size: 14px;
     animation: float 3s ease-in-out infinite;
+    z-index: 5; /* ensure visible above image */
 }
 
 .floating-card i {
     font-size: 20px;
     color: var(--primary-color);
 }
+
+.floating-card span{ color:#0f172a; }
 
 .card-1 {
     top: 20%;
