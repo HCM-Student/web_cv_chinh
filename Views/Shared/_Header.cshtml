@@ -65,23 +65,23 @@
 
 
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="serviceDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Dịch vụ</a>
+                    <a class="nav-link dropdown-toggle @(currentController=="Services" ? "active" : "")" href="#" id="serviceDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Dịch vụ</a>
                     <ul class="dropdown-menu" aria-labelledby="serviceDropdown">
-                        <li><a class="dropdown-item" href="#">Giải pháp chuyển đổi số bản đồ nền 3D phục vụ thành phố thông minh</a></li>
-                        <li><a class="dropdown-item" href="#">Giải pháp công nghệ quét Lidar và mô hình hóa 3D</a></li>
-                        <li><a class="dropdown-item" href="#">Giải pháp công nghệ chuyển đổi số du lịch</a></li>
-                        <li><a class="dropdown-item" href="#">Giải pháp khảo sát công trình sử dụng công nghệ bay chụp ảnh và Lidar UAV</a></li>
+                        <li><a class="dropdown-item @(currentController=="Services" && currentAction=="SmartCity3D" ? "active" : "")" asp-controller="Services" asp-action="SmartCity3D">Giải pháp chuyển đổi số bản đồ nền 3D phục vụ thành phố thông minh</a></li>
+                        <li><a class="dropdown-item @(currentController=="Services" && currentAction=="LidarAndModeling" ? "active" : "")" asp-controller="Services" asp-action="LidarAndModeling">Giải pháp công nghệ quét Lidar và mô hình hóa 3D</a></li>
+                        <li><a class="dropdown-item @(currentController=="Services" && currentAction=="DigitalTourism" ? "active" : "")" asp-controller="Services" asp-action="DigitalTourism">Giải pháp công nghệ chuyển đổi số du lịch</a></li>
+                        <li><a class="dropdown-item @(currentController=="Services" && currentAction=="SurveyServices" ? "active" : "")" asp-controller="Services" asp-action="SurveyServices">Giải pháp khảo sát công trình sử dụng công nghệ bay chụp ảnh và Lidar UAV</a></li>
                         <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item" href="#">Dịch vụ khác</a></li>
+                        <li><a class="dropdown-item @(currentController=="Services" && currentAction=="OtherServices" ? "active" : "")" asp-controller="Services" asp-action="OtherServices">Dịch vụ khác</a></li>
                     </ul>
                 </li>
 
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="svcDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Chuyên môn</a>
+                    <a class="nav-link dropdown-toggle @(currentController=="Services" && (currentAction=="LidarAndModeling" || currentAction=="GIS" || currentAction=="SurveyServices") ? "active" : "")" href="#" id="svcDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Chuyên môn</a>
                     <ul class="dropdown-menu" aria-labelledby="svcDropdown">
-                        <li><a class="dropdown-item" href="@($"{Url.Action("Index","Home")}#services")">LiDAR &amp; 3D</a></li>
-                        <li><a class="dropdown-item" href="@($"{Url.Action("Index","Home")}#services")">GIS</a></li>
-                        <li><a class="dropdown-item" href="@($"{Url.Action("Index","Home")}#services")">Khảo sát</a></li>
+                        <li><a class="dropdown-item" asp-controller="Services" asp-action="LidarAndModeling">LiDAR &amp; 3D</a></li>
+                        <li><a class="dropdown-item" asp-controller="Services" asp-action="GIS">GIS</a></li>
+                        <li><a class="dropdown-item" asp-controller="Services" asp-action="SurveyServices">Khảo sát</a></li>
                     </ul>
                 </li>
 

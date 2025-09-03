@@ -1,0 +1,167 @@
+@{
+    ViewData["Title"] = "Dịch vụ khác";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/services.css" asp-append-version="true" />
+}
+
+<!-- Hero Section -->
+<div class="services-hero other-hero">
+    <div class="hero-overlay"></div>
+    <div class="floating-elements">
+        <div class="floating-icon">🔧</div>
+        <div class="floating-icon">💡</div>
+        <div class="floating-icon">📚</div>
+        <div class="floating-icon">🎯</div>
+        <div class="floating-icon">⚡</div>
+    </div>
+    <div class="container">
+        <div class="hero-content">
+            <div class="eyebrow">Dịch vụ chuyên môn</div>
+            <h1 class="hero-title">@ViewData["Title"]</h1>
+            <p class="hero-description">
+                Công ty Nam Hà Nội cung cấp các gói dịch vụ kết hợp kiến thức chuyên gia trong nước và quốc tế 
+                cho khách hàng Việt Nam trong các lĩnh vực sản xuất và dịch vụ khác nhau.
+            </p>
+        </div>
+    </div>
+</div>
+
+<!-- Main Content -->
+<section class="section">
+    <div class="container">
+        <div class="row">
+            <!-- Left Sidebar -->
+            <div class="col-lg-3">
+                <div class="services-sidebar">
+                    <h3 class="sidebar-title">DỊCH VỤ</h3>
+                    <ul class="services-list">
+                        <li><a href="/Services/SmartCity3D">Giải pháp chuyển đổi số bản đồ nền 3D phục vụ thành phố thông minh</a></li>
+                        <li><a href="/Services/LidarAndModeling">Giải pháp công nghệ quét Lidar và mô hình hóa 3D</a></li>
+                        <li><a href="/Services/DigitalTourism">Giải pháp công nghệ chuyển đổi số du lịch</a></li>
+                        <li><a href="/Services/SurveyServices">Giải pháp khảo sát công trình sử dụng công nghệ bay chụp ảnh và Lidar UAV</a></li>
+                        <li class="active"><a href="/Services/OtherServices">Dịch vụ khác</a></li>
+                    </ul>
+                    
+                    <!-- Contact Box -->
+                    <div class="contact-box">
+                        <h4>Gọi ngay</h4>
+                        <div class="phone-number">0988 795 218</div>
+                        <p>Hoặc gửi trực tiếp</p>
+                        <a href="/Home/LienHe" class="btn btn-warning btn-block">GỬI YÊU CẦU</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Main Content -->
+            <div class="col-lg-9">
+                <div class="main-content">
+                    <div class="intro-text">
+                        <p>
+                            Công ty Nam Hà Nội cung cấp các gói dịch vụ kết hợp kiến thức chuyên gia trong nước và quốc tế 
+                            cho khách hàng Việt Nam trong các lĩnh vực sản xuất và dịch vụ khác nhau. Chúng tôi tích hợp 
+                            dịch vụ định vị nội bộ và tại chỗ, theo dõi nhân sự và tài sản, và an toàn lao động vào các dự án sắp tới.
+                        </p>
+                    </div>
+
+                    <!-- Service 1 -->
+                    <div class="service-section">
+                        <h3>1. Dịch vụ tư vấn & Triển khai</h3>
+                        <p>
+                            Chúng tôi có chuyên môn trong việc tư vấn, khía cạnh kỹ thuật và triển khai. 
+                            Dịch vụ của chúng tôi bao gồm:
+                        </p>
+                        <ul class="service-features">
+                            <li>Tư vấn đầu tư dự án</li>
+                            <li>Chuẩn bị tài liệu đấu thầu</li>
+                            <li>Phát triển quy trình công nghệ</li>
+                            <li>Thiết kế hệ thống</li>
+                            <li>Định giá thành phần</li>
+                            <li>Khảo sát hiện trường</li>
+                            <li>Kiểm tra hệ thống và tính toán ROI</li>
+                            <li>Lắp đặt thiết bị tại chỗ</li>
+                            <li>Tích hợp thiết bị giám sát và cảm biến</li>
+                            <li>Cấu hình giao diện</li>
+                            <li>Bảo trì định kỳ tùy chỉnh, nâng cấp hệ thống, khắc phục sự cố và dịch vụ thay thế</li>
+                        </ul>
+                    </div>
+
+                    <!-- Service 2 -->
+                    <div class="service-section">
+                        <h3>2. Huấn luyện & Đào tạo</h3>
+                        <p>
+                            Chúng tôi cung cấp dịch vụ đào tạo tùy chỉnh tại địa điểm do khách hàng chỉ định. 
+                            Các lĩnh vực tập trung chính của chúng tôi bao gồm:
+                        </p>
+                        <ul class="service-features">
+                            <li><strong>Ứng dụng công nghệ GNSS:</strong> Đào tạo sử dụng hệ thống định vị vệ tinh toàn cầu</li>
+                            <li><strong>Sử dụng hệ thống ECDIS:</strong> Hướng dẫn sử dụng hệ thống hiển thị thông tin điện tử và bản đồ</li>
+                            <li><strong>Hệ thống theo dõi RFID & GNSS:</strong> Đào tạo tích hợp công nghệ RFID và GNSS cho theo dõi tài sản</li>
+                        </ul>
+                    </div>
+
+                    <!-- Service 3 -->
+                    <div class="service-section">
+                        <h3>3. Phát triển phần mềm & Tùy biến ứng dụng</h3>
+                        <p>
+                            Chúng tôi có khả năng phát triển và tùy chỉnh các ứng dụng phần mềm để đáp ứng 
+                            các yêu cầu cụ thể của khách hàng. Các ứng dụng bao gồm:
+                        </p>
+                        <ul class="service-features">
+                            <li>Ứng dụng định vị đối tượng</li>
+                            <li>Giám sát công trình</li>
+                            <li>Theo dõi nhân sự và tài sản thời gian thực</li>
+                            <li>Thu thập dữ liệu bản đồ và GIS</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Company Values Section -->
+<section class="section bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h4>Uy tín hàng đầu</h4>
+                    <p>
+                        <strong>Công ty Nam Hà Nội</strong> đã xử lý thành công hàng trăm trường hợp đo đạc của khách hàng. 
+                        Các chuyên gia của chúng tôi có kinh nghiệm phân tích rủi ro, đánh giá độ tin cậy của giao dịch 
+                        để tư vấn cho khách hàng phương án tối ưu nhất.
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <h4>Bảo vệ khách hàng</h4>
+                    <p>
+                        Chúng tôi luôn nỗ lực bảo vệ lợi ích của khách hàng tối đa bằng cách cung cấp những hỗ trợ 
+                        tốt nhất nhằm giúp hạn chế rủi ro khách hàng có thể gặp phải.
+                    </p>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="fas fa-comments-dollar"></i>
+                    </div>
+                    <h4>Tư vấn miễn phí</h4>
+                    <p>
+                        Đội ngũ chuyên viên tư vấn của <strong>Công ty Nam Hà Nội</strong> luôn sẵn sàng hỗ trợ 
+                        giải đáp mọi thắc mắc của khách hàng một cách hoàn toàn miễn phí.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

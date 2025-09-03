@@ -1,0 +1,212 @@
+@{
+    ViewData["Title"] = "Giải pháp khảo sát công trình";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/services.css" asp-append-version="true" />
+}
+
+<!-- Hero Section -->
+<div class="services-hero survey-hero">
+    <div class="hero-overlay"></div>
+    <div class="floating-elements">
+        <div class="floating-icon">🚁</div>
+        <div class="floating-icon">📏</div>
+        <div class="floating-icon">📊</div>
+        <div class="floating-icon">🎯</div>
+        <div class="floating-icon">⚡</div>
+    </div>
+    <div class="container">
+        <div class="hero-content">
+            <div class="eyebrow">Khảo sát chuyên nghiệp</div>
+            <h1 class="hero-title">@ViewData["Title"]</h1>
+            <p class="hero-description">
+                Giải pháp khảo sát sử dụng công nghệ bay chụp ảnh và Lidar UAV, mang đến phương pháp khảo sát 
+                hiện đại, chính xác và hiệu quả cho các dự án quy mô lớn và phức tạp.
+            </p>
+            <div class="hero-buttons">
+                <a href="#overview" class="btn btn-light btn-lg">Tìm hiểu thêm</a>
+                <a href="#contact" class="btn btn-outline-light btn-lg">Liên hệ tư vấn</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Main Content -->
+<section class="section">
+    <div class="container">
+        <div class="row">
+            <!-- Left Sidebar -->
+            <div class="col-lg-3">
+                <div class="services-sidebar">
+                    <h3 class="sidebar-title">DỊCH VỤ</h3>
+                    <ul class="services-list">
+                        <li><a href="/Services/SmartCity3D">Giải pháp chuyển đổi số bản đồ nền 3D phục vụ thành phố thông minh</a></li>
+                        <li><a href="/Services/LidarAndModeling">Giải pháp công nghệ quét Lidar và mô hình hóa 3D</a></li>
+                        <li><a href="/Services/DigitalTourism">Giải pháp công nghệ chuyển đổi số du lịch</a></li>
+                        <li class="active"><a href="/Services/SurveyServices">Giải pháp khảo sát công trình sử dụng công nghệ bay chụp ảnh và Lidar UAV</a></li>
+                        <li><a href="/Services/OtherServices">Dịch vụ khác</a></li>
+                    </ul>
+                    
+                    <!-- Contact Box -->
+                    <div class="contact-box">
+                        <h4>Gọi ngay</h4>
+                        <div class="phone-number">0378695597</div>
+                        <p>Hoặc gửi trực tiếp</p>
+                        <a href="/Home/LienHe" class="btn btn-warning btn-block">GỬI YÊU CẦU</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Main Content -->
+            <div class="col-lg-9">
+                <div class="main-content">
+                    <div class="intro-text">
+                        <p>
+                            Công nghệ bay chụp ảnh và Lidar UAV cho phép khảo sát các khu vực rộng lớn, 
+                            địa hình phức tạp một cách nhanh chóng và chính xác. Với khả năng bay cao và 
+                            thu thập dữ liệu từ nhiều góc độ khác nhau, UAV mang lại hiệu quả vượt trội 
+                            so với phương pháp khảo sát truyền thống.
+                        </p>
+                    </div>
+
+                    <!-- Service 1 -->
+                    <div class="service-section">
+                        <h3>1. Khảo sát từ trên không</h3>
+                        <p>
+                            UAV có thể bay cao và tiếp cận các khu vực khó khăn, nguy hiểm mà con người không thể tiếp cận. 
+                            Công nghệ UAV cho phép khảo sát an toàn và hiệu quả các địa hình phức tạp, 
+                            đảm bảo độ chính xác cao trong việc thu thập dữ liệu.
+                        </p>
+                        <ul class="service-features">
+                            <li>Tiếp cận khu vực khó khăn</li>
+                            <li>Khảo sát an toàn từ trên không</li>
+                            <li>Địa hình phức tạp</li>
+                            <li>Độ chính xác cao</li>
+                            <li>Thu thập dữ liệu hiệu quả</li>
+                        </ul>
+                    </div>
+
+                    <!-- Service 2 -->
+                    <div class="service-section">
+                        <h3>2. Thu thập dữ liệu đa dạng</h3>
+                        <p>
+                            Kết hợp chụp ảnh và Lidar để thu thập dữ liệu địa hình, kiến trúc và môi trường. 
+                            Công nghệ UAV tích hợp nhiều loại cảm biến khác nhau, cho phép thu thập dữ liệu 
+                            đa dạng và toàn diện về môi trường khảo sát.
+                        </p>
+                        <ul class="service-features">
+                            <li>Kết hợp chụp ảnh và Lidar</li>
+                            <li>Dữ liệu địa hình chi tiết</li>
+                            <li>Thông tin kiến trúc</li>
+                            <li>Phân tích môi trường</li>
+                            <li>Dữ liệu đa dạng</li>
+                        </ul>
+                    </div>
+
+                    <!-- Service 3 -->
+                    <div class="service-section">
+                        <h3>3. Hiệu quả vượt trội</h3>
+                        <p>
+                            Khảo sát diện tích lớn trong thời gian ngắn với độ chính xác cao. 
+                            Công nghệ UAV mang lại hiệu quả vượt trội so với phương pháp khảo sát truyền thống, 
+                            giúp tiết kiệm thời gian và chi phí cho các dự án khảo sát.
+                        </p>
+                        <ul class="service-features">
+                            <li>Khảo sát diện tích lớn</li>
+                            <li>Thời gian ngắn</li>
+                            <li>Độ chính xác cao</li>
+                            <li>Tiết kiệm chi phí</li>
+                            <li>Hiệu quả vượt trội</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Services Section -->
+<section class="section bg-light">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="section-title">Dịch vụ chuyên nghiệp</h2>
+            <p class="section-subtitle">Các dịch vụ khảo sát công trình toàn diện</p>
+        </div>
+        <div class="row">
+            <div class="col-lg-6 col-md-6 mb-4">
+                <div class="feature-card fade-in-section">
+                    <div class="feature-card-icon">
+                        <i class="fas fa-map"></i>
+                    </div>
+                    <h4>Khảo sát và đo đạc địa hình</h4>
+                    <p>Khảo sát địa hình chi tiết với độ chính xác cao</p>
+                    <ul class="feature-list">
+                        <li>Đo đạc địa hình 3D</li>
+                        <li>Bản đồ địa hình chi tiết</li>
+                        <li>Phân tích độ cao</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 mb-4">
+                <div class="feature-card fade-in-section">
+                    <div class="feature-card-icon">
+                        <i class="fas fa-eye"></i>
+                    </div>
+                    <h4>Giám sát tiến độ công trình</h4>
+                    <p>Giám sát tiến độ công trình từ trên không</p>
+                    <ul class="feature-list">
+                        <li>Theo dõi tiến độ</li>
+                        <li>Báo cáo định kỳ</li>
+                        <li>Phân tích thay đổi</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 mb-4">
+                <div class="feature-card fade-in-section">
+                    <div class="feature-card-icon">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <h4>Báo cáo kỹ thuật chi tiết</h4>
+                    <p>Tạo báo cáo kỹ thuật chi tiết và chuyên nghiệp</p>
+                    <ul class="feature-list">
+                        <li>Báo cáo đầy đủ</li>
+                        <li>Dữ liệu chính xác</li>
+                        <li>Phân tích chuyên sâu</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 mb-4">
+                <div class="feature-card fade-in-section">
+                    <div class="feature-card-icon">
+                        <i class="fas fa-chart-bar"></i>
+                    </div>
+                    <h4>Phân tích dữ liệu và lập kế hoạch</h4>
+                    <p>Phân tích dữ liệu và lập kế hoạch cho dự án</p>
+                    <ul class="feature-list">
+                        <li>Phân tích dữ liệu</li>
+                        <li>Lập kế hoạch</li>
+                        <li>Tư vấn chuyên môn</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section id="contact" class="section cta-section">
+    <div class="container">
+        <div class="cta-content text-center">
+            <h2 class="cta-title">Cần dịch vụ khảo sát chuyên nghiệp?</h2>
+            <p class="cta-description">
+                Liên hệ với chúng tôi ngay hôm nay để được tư vấn miễn phí về dịch vụ 
+                khảo sát công trình phù hợp với dự án của bạn.
+            </p>
+            <div class="cta-buttons">
+                <a href="/Home/LienHe" class="btn btn-primary btn-lg">Liên hệ ngay</a>
+                <a href="/Home/BaoGia" class="btn btn-outline-primary btn-lg">Yêu cầu báo giá</a>
+            </div>
+        </div>
+    </div>
+</section>

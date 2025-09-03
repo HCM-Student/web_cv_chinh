@@ -1,0 +1,251 @@
+@{
+    ViewData["Title"] = "Giải pháp công nghệ chuyển đổi số du lịch";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/services.css" asp-append-version="true" />
+}
+
+<!-- Hero Section -->
+<div class="services-hero tourism-hero">
+    <div class="hero-overlay"></div>
+    <div class="floating-elements">
+        <div class="floating-icon">🏖️</div>
+        <div class="floating-icon">📱</div>
+        <div class="floating-icon">🗺️</div>
+        <div class="floating-icon">🎯</div>
+        <div class="floating-icon">✨</div>
+    </div>
+    <div class="container">
+        <div class="hero-content">
+            <div class="eyebrow">Chuyển đổi số du lịch</div>
+            <h1 class="hero-title">@ViewData["Title"]</h1>
+            <p class="hero-description">
+                Giải pháp công nghệ 3D Tour và 360 du lịch thông minh, mang đến trải nghiệm du lịch sống động 
+                và hiện đại cho du khách với công nghệ thực tế ảo và tương tác.
+            </p>
+            <div class="hero-buttons">
+                <a href="#overview" class="btn btn-light btn-lg">Tìm hiểu thêm</a>
+                <a href="#contact" class="btn btn-outline-light btn-lg">Liên hệ tư vấn</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Main Content -->
+<section class="section">
+    <div class="container">
+        <div class="row">
+            <!-- Left Sidebar -->
+            <div class="col-lg-3">
+                <div class="services-sidebar">
+                    <h3 class="sidebar-title">DỊCH VỤ</h3>
+                    <ul class="services-list">
+                        <li><a href="/Services/SmartCity3D">Giải pháp chuyển đổi số bản đồ nền 3D phục vụ thành phố thông minh</a></li>
+                        <li><a href="/Services/LidarAndModeling">Giải pháp công nghệ quét Lidar và mô hình hóa 3D</a></li>
+                        <li class="active"><a href="/Services/DigitalTourism">Giải pháp công nghệ chuyển đổi số du lịch</a></li>
+                        <li><a href="/Services/SurveyServices">Giải pháp khảo sát công trình sử dụng công nghệ bay chụp ảnh và Lidar UAV</a></li>
+                        <li><a href="/Services/OtherServices">Dịch vụ khác</a></li>
+                    </ul>
+                    
+                    <!-- Contact Box -->
+                    <div class="contact-box">
+                        <h4>Gọi ngay</h4>
+                        <div class="phone-number">0378695597</div>
+                        <p>Hoặc gửi trực tiếp</p>
+                        <a href="/Home/LienHe" class="btn btn-warning btn-block">GỬI YÊU CẦU</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Main Content -->
+            <div class="col-lg-9">
+                <div class="main-content">
+                    <div class="intro-text">
+                        <p>
+                            Công nghệ 3D Tour và 360 độ du lịch thông minh giúp du khách có thể khám phá các điểm đến 
+                            một cách chân thực và sống động ngay từ xa. Với công nghệ thực tế ảo (VR) và thực tế tăng cường (AR), 
+                            chúng tôi tạo ra những trải nghiệm du lịch độc đáo và hấp dẫn.
+                        </p>
+                    </div>
+
+                    <!-- Service 1 -->
+                    <div class="service-section">
+                        <h3>1. 3D Tour tương tác</h3>
+                        <p>
+                            Khám phá điểm đến với công nghệ 3D Tour cho trải nghiệm chân thực và sống động. 
+                            Du khách có thể tham quan các địa điểm du lịch một cách trực quan và tương tác, 
+                            tạo ra trải nghiệm du lịch độc đáo và hấp dẫn.
+                        </p>
+                        <ul class="service-features">
+                            <li>Trải nghiệm du lịch chân thực</li>
+                            <li>Tương tác trực quan với điểm đến</li>
+                            <li>Khám phá không gian 3D</li>
+                            <li>Hướng dẫn du lịch thông minh</li>
+                            <li>Tích hợp thông tin chi tiết</li>
+                        </ul>
+                    </div>
+
+                    <!-- Service 2 -->
+                    <div class="service-section">
+                        <h3>2. 360 độ toàn cảnh</h3>
+                        <p>
+                            Công nghệ 360 độ cho phép du khách xem toàn cảnh điểm đến một cách chi tiết. 
+                            Với khả năng xoay 360 độ, du khách có thể khám phá mọi góc độ của địa điểm du lịch, 
+                            tạo ra trải nghiệm toàn diện và sống động.
+                        </p>
+                        <ul class="service-features">
+                            <li>Xem toàn cảnh 360 độ</li>
+                            <li>Khám phá mọi góc độ</li>
+                            <li>Trải nghiệm toàn diện</li>
+                            <li>Chất lượng hình ảnh cao</li>
+                            <li>Tương tác mượt mà</li>
+                        </ul>
+                    </div>
+
+                    <!-- Service 3 -->
+                    <div class="service-section">
+                        <h3>3. Du lịch thông minh</h3>
+                        <p>
+                            Tích hợp AI và IoT để tạo ra hệ thống du lịch thông minh và hiện đại. 
+                            Công nghệ thực tế ảo (VR) và thực tế tăng cường (AR) mang đến những trải nghiệm 
+                            du lịch độc đáo, giúp du khách có thể khám phá điểm đến ngay từ xa.
+                        </p>
+                        <ul class="service-features">
+                            <li>Tích hợp AI và IoT</li>
+                            <li>Công nghệ VR và AR</li>
+                            <li>Hệ thống thông minh</li>
+                            <li>Trải nghiệm từ xa</li>
+                            <li>Du lịch hiện đại</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="section bg-light">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="section-title">Tính năng nổi bật</h2>
+            <p class="section-subtitle">Các công nghệ tiên tiến cho ngành du lịch</p>
+        </div>
+        <div class="row">
+            <div class="col-lg-6 col-md-6 mb-4">
+                <div class="feature-card fade-in-section">
+                    <div class="feature-card-icon">
+                        <i class="fas fa-map-marked-alt"></i>
+                    </div>
+                    <h4>Bản đồ 3D điểm du lịch</h4>
+                    <p>Tạo bản đồ 3D tương tác cho các điểm du lịch với thông tin chi tiết</p>
+                    <ul class="feature-list">
+                        <li>Mô hình 3D điểm tham quan</li>
+                        <li>Thông tin thời gian thực</li>
+                        <li>Định vị GPS chính xác</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 mb-4">
+                <div class="feature-card fade-in-section">
+                    <div class="feature-card-icon">
+                        <i class="fas fa-vr-cardboard"></i>
+                    </div>
+                    <h4>Tour ảo tương tác</h4>
+                    <p>Phát triển tour ảo tương tác với công nghệ VR/AR tiên tiến</p>
+                    <ul class="feature-list">
+                        <li>Trải nghiệm VR 360°</li>
+                        <li>Tương tác thực tế ảo</li>
+                        <li>Hướng dẫn thông minh</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 mb-4">
+                <div class="feature-card fade-in-section">
+                    <div class="feature-card-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h4>Ứng dụng du lịch thông minh</h4>
+                    <p>Tích hợp thông tin du lịch thông minh vào ứng dụng di động</p>
+                    <ul class="feature-list">
+                        <li>Thông báo thời gian thực</li>
+                        <li>Đề xuất cá nhân hóa</li>
+                        <li>Thanh toán tích hợp</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-6 col-md-6 mb-4">
+                <div class="feature-card fade-in-section">
+                    <div class="feature-card-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h4>Hệ thống quản lý điểm đến</h4>
+                    <p>Hệ thống quản lý điểm đến du lịch toàn diện và hiệu quả</p>
+                    <ul class="feature-list">
+                        <li>Quản lý lưu lượng khách</li>
+                        <li>Phân tích dữ liệu du lịch</li>
+                        <li>Báo cáo tự động</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Process Section -->
+<section class="section">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="section-title">Quy trình thực hiện</h2>
+            <p class="section-subtitle">Quy trình chuyên nghiệp đảm bảo chất lượng tối ưu</p>
+        </div>
+        <div class="process-timeline">
+            <div class="process-step fade-in-section">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <h4>Phân tích & Lập kế hoạch</h4>
+                    <p>Phân tích nhu cầu và lập kế hoạch chi tiết cho dự án chuyển đổi số du lịch</p>
+                </div>
+            </div>
+            <div class="process-step fade-in-section">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <h4>Thu thập & Xử lý dữ liệu</h4>
+                    <p>Thu thập dữ liệu điểm du lịch và xử lý để tạo nền tảng số hóa</p>
+                </div>
+            </div>
+            <div class="process-step fade-in-section">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <h4>Phát triển ứng dụng</h4>
+                    <p>Phát triển ứng dụng du lịch thông minh với các tính năng tương tác</p>
+                </div>
+            </div>
+            <div class="process-step fade-in-section">
+                <div class="step-number">4</div>
+                <div class="step-content">
+                    <h4>Triển khai & Hỗ trợ</h4>
+                    <p>Triển khai hệ thống và cung cấp hỗ trợ kỹ thuật liên tục</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section id="contact" class="section cta-section">
+    <div class="container">
+        <div class="cta-content text-center">
+            <h2 class="cta-title">Sẵn sàng chuyển đổi số du lịch?</h2>
+            <p class="cta-description">
+                Liên hệ với chúng tôi ngay hôm nay để được tư vấn miễn phí về giải pháp 
+                chuyển đổi số du lịch phù hợp với điểm đến của bạn.
+            </p>
+            <div class="cta-buttons">
+                <a href="/Home/LienHe" class="btn btn-primary btn-lg">Liên hệ ngay</a>
+                <a href="/Home/BaoGia" class="btn btn-outline-primary btn-lg">Yêu cầu báo giá</a>
+            </div>
+        </div>
+    </div>
+</section>

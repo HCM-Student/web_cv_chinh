@@ -1,0 +1,279 @@
+@{
+    ViewData["Title"] = "Giải pháp GIS";
+}
+
+@section Styles {
+    <link rel="stylesheet" href="~/css/services.css" asp-append-version="true" />
+}
+
+<!-- Hero Section -->
+<div class="services-hero gis-hero">
+    <div class="hero-overlay"></div>
+    <div class="floating-elements">
+        <div class="floating-icon">🗺️</div>
+        <div class="floating-icon">📊</div>
+        <div class="floating-icon">🌐</div>
+        <div class="floating-icon">🎯</div>
+        <div class="floating-icon">⚡</div>
+    </div>
+    <div class="container">
+        <div class="hero-content">
+            <div class="eyebrow">Hệ thống thông tin địa lý</div>
+            <h1 class="hero-title">@ViewData["Title"]</h1>
+            <p class="hero-description">
+                Giải pháp GIS toàn diện cho việc quản lý, phân tích và trực quan hóa dữ liệu không gian, 
+                hỗ trợ ra quyết định thông minh trong mọi lĩnh vực.
+            </p>
+            <div class="hero-buttons">
+                <a href="#overview" class="btn btn-light btn-lg">Tìm hiểu thêm</a>
+                <a href="#contact" class="btn btn-outline-light btn-lg">Liên hệ tư vấn</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Main Content -->
+<section class="section">
+    <div class="container">
+        <div class="row">
+            <!-- Left Sidebar -->
+            <div class="col-lg-3">
+                <div class="services-sidebar">
+                    <h3 class="sidebar-title">DỊCH VỤ</h3>
+                    <ul class="services-list">
+                        <li><a href="/Services/SmartCity3D">Giải pháp chuyển đổi số bản đồ nền 3D phục vụ thành phố thông minh</a></li>
+                        <li><a href="/Services/LidarAndModeling">Giải pháp công nghệ quét Lidar và mô hình hóa 3D</a></li>
+                        <li><a href="/Services/DigitalTourism">Giải pháp công nghệ chuyển đổi số du lịch</a></li>
+                        <li><a href="/Services/SurveyServices">Giải pháp khảo sát công trình sử dụng công nghệ bay chụp ảnh và Lidar UAV</a></li>
+                        <li><a href="/Services/OtherServices">Dịch vụ khác</a></li>
+                    </ul>
+                    
+                    <!-- Contact Box -->
+                    <div class="contact-box">
+                        <h4>Gọi ngay</h4>
+                        <div class="phone-number">0378695597</div>
+                        <p>Hoặc gửi trực tiếp</p>
+                        <a href="/Home/LienHe" class="btn btn-warning btn-block">GỬI YÊU CẦU</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Main Content -->
+            <div class="col-lg-9">
+                <div class="main-content">
+                    <div class="intro-text">
+                        <p>
+                            Chúng tôi cung cấp giải pháp GIS toàn diện cho việc quản lý, phân tích và trực quan hóa 
+                            dữ liệu không gian. Với công nghệ tiên tiến và đội ngũ chuyên gia giàu kinh nghiệm, 
+                            chúng tôi mang đến giải pháp GIS phù hợp với mọi nhu cầu.
+                        </p>
+                    </div>
+
+                    <!-- Service 1 -->
+                    <div class="service-section">
+                        <h3>1. Bản đồ tương tác</h3>
+                        <p>
+                            Tạo và quản lý bản đồ tương tác với dữ liệu không gian chi tiết. 
+                            Hệ thống bản đồ web tương tác cho phép người dùng khám phá và phân tích dữ liệu 
+                            không gian một cách trực quan và hiệu quả.
+                        </p>
+                        <ul class="service-features">
+                            <li>Bản đồ web tương tác</li>
+                            <li>Lớp dữ liệu đa dạng</li>
+                            <li>Hiển thị thời gian thực</li>
+                            <li>Giao diện thân thiện</li>
+                            <li>Tương tác trực quan</li>
+                        </ul>
+                    </div>
+
+                    <!-- Service 2 -->
+                    <div class="service-section">
+                        <h3>2. Phân tích không gian</h3>
+                        <p>
+                            Phân tích dữ liệu không gian với các công cụ chuyên nghiệp. 
+                            Hệ thống GIS cung cấp các công cụ phân tích mạnh mẽ để xử lý và phân tích 
+                            dữ liệu không gian, hỗ trợ ra quyết định thông minh.
+                        </p>
+                        <ul class="service-features">
+                            <li>Phân tích thống kê</li>
+                            <li>Mô hình hóa không gian</li>
+                            <li>Dự đoán xu hướng</li>
+                            <li>Công cụ phân tích chuyên nghiệp</li>
+                            <li>Hỗ trợ ra quyết định</li>
+                        </ul>
+                    </div>
+
+                    <!-- Service 3 -->
+                    <div class="service-section">
+                        <h3>3. Quản lý dữ liệu</h3>
+                        <p>
+                            Quản lý và lưu trữ dữ liệu không gian với hệ thống chuyên nghiệp. 
+                            Cơ sở dữ liệu không gian được thiết kế để lưu trữ, quản lý và truy xuất 
+                            dữ liệu không gian một cách hiệu quả và an toàn.
+                        </p>
+                        <ul class="service-features">
+                            <li>Cơ sở dữ liệu không gian</li>
+                            <li>Backup và khôi phục</li>
+                            <li>Đồng bộ hóa dữ liệu</li>
+                            <li>Quản lý phiên bản</li>
+                            <li>Bảo mật dữ liệu</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Features Section -->
+<section class="section bg-light">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="section-title">Tính năng nổi bật</h2>
+            <p class="section-subtitle">Các công nghệ GIS tiên tiến được tích hợp</p>
+        </div>
+        <div class="row">
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="feature-card fade-in-section">
+                    <div class="feature-card-icon">
+                        <i class="fas fa-map"></i>
+                    </div>
+                    <h4>Bản đồ tương tác</h4>
+                    <p>Tạo và quản lý bản đồ tương tác với dữ liệu không gian chi tiết</p>
+                    <ul class="feature-list">
+                        <li>Bản đồ web tương tác</li>
+                        <li>Lớp dữ liệu đa dạng</li>
+                        <li>Hiển thị thời gian thực</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="feature-card fade-in-section">
+                    <div class="feature-card-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h4>Phân tích không gian</h4>
+                    <p>Phân tích dữ liệu không gian với các công cụ chuyên nghiệp</p>
+                    <ul class="feature-list">
+                        <li>Phân tích thống kê</li>
+                        <li>Mô hình hóa không gian</li>
+                        <li>Dự đoán xu hướng</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="feature-card fade-in-section">
+                    <div class="feature-card-icon">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <h4>Quản lý dữ liệu</h4>
+                    <p>Quản lý và lưu trữ dữ liệu không gian với hệ thống chuyên nghiệp</p>
+                    <ul class="feature-list">
+                        <li>Cơ sở dữ liệu không gian</li>
+                        <li>Backup và khôi phục</li>
+                        <li>Đồng bộ hóa dữ liệu</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="feature-card fade-in-section">
+                    <div class="feature-card-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <h4>Ứng dụng di động</h4>
+                    <p>Phát triển ứng dụng GIS di động cho việc thu thập dữ liệu thực địa</p>
+                    <ul class="feature-list">
+                        <li>GPS tích hợp</li>
+                        <li>Offline capability</li>
+                        <li>Đồng bộ dữ liệu</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="feature-card fade-in-section">
+                    <div class="feature-card-icon">
+                        <i class="fas fa-cloud"></i>
+                    </div>
+                    <h4>Cloud GIS</h4>
+                    <p>Giải pháp GIS trên nền tảng đám mây với khả năng mở rộng cao</p>
+                    <ul class="feature-list">
+                        <li>Scalable infrastructure</li>
+                        <li>API services</li>
+                        <li>Real-time collaboration</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 mb-4">
+                <div class="feature-card fade-in-section">
+                    <div class="feature-card-icon">
+                        <i class="fas fa-cogs"></i>
+                    </div>
+                    <h4>Tích hợp hệ thống</h4>
+                    <p>Tích hợp GIS với các hệ thống quản lý hiện có</p>
+                    <ul class="feature-list">
+                        <li>API integration</li>
+                        <li>Data synchronization</li>
+                        <li>Workflow automation</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Process Section -->
+<section class="section">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="section-title">Quy trình thực hiện</h2>
+            <p class="section-subtitle">Quy trình chuyên nghiệp đảm bảo chất lượng tối ưu</p>
+        </div>
+        <div class="process-timeline">
+            <div class="process-step fade-in-section">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <h4>Phân tích & Thiết kế</h4>
+                    <p>Phân tích nhu cầu và thiết kế kiến trúc hệ thống GIS phù hợp</p>
+                </div>
+            </div>
+            <div class="process-step fade-in-section">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <h4>Thu thập & Xử lý dữ liệu</h4>
+                    <p>Thu thập, xử lý và chuẩn hóa dữ liệu không gian</p>
+                </div>
+            </div>
+            <div class="process-step fade-in-section">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <h4>Phát triển hệ thống</h4>
+                    <p>Phát triển và triển khai hệ thống GIS với các tính năng tùy chỉnh</p>
+                </div>
+            </div>
+            <div class="process-step fade-in-section">
+                <div class="step-number">4</div>
+                <div class="step-content">
+                    <h4>Đào tạo & Hỗ trợ</h4>
+                    <p>Đào tạo người dùng và cung cấp hỗ trợ kỹ thuật liên tục</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+<section id="contact" class="section cta-section">
+    <div class="container">
+        <div class="cta-content text-center">
+            <h2 class="cta-title">Cần giải pháp GIS chuyên nghiệp?</h2>
+            <p class="cta-description">
+                Liên hệ với chúng tôi ngay hôm nay để được tư vấn miễn phí về giải pháp 
+                GIS phù hợp với nhu cầu của bạn.
+            </p>
+            <div class="cta-buttons">
+                <a href="/Home/LienHe" class="btn btn-primary btn-lg">Liên hệ ngay</a>
+                <a href="/Home/BaoGia" class="btn btn-outline-primary btn-lg">Yêu cầu báo giá</a>
+            </div>
+        </div>
+    </div>
+</section>
