@@ -127,57 +127,57 @@
                                             <input type="email" name="EmailLienHe" class="form-control" value="@(caiDatChung?.EmailLienHe ?? "contact@chuyen-doi-so.gov.vn")" placeholder="email@domain.com">
                                         </div>
                                     </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label class="form-label">Số điện thoại</label>
-                                            <input type="tel" class="form-control" value="(024) 1234-5678" placeholder="+84 xxx xxx xxx">
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="form-group">
-                                            <label class="form-label">Múi giờ</label>
-                                            <select class="form-select">
-                                                <option selected>UTC+7 (Vietnam)</option>
-                                                <option>UTC+0 (GMT)</option>
-                                                <option>UTC+8 (China)</option>
-                                            </select>
-                                        </div>
-                                    </div>
+                                                                         <div class="col-md-4">
+                                         <div class="form-group">
+                                             <label class="form-label">Số điện thoại</label>
+                                             <input type="tel" name="SoDienThoai" class="form-control" value="@(caiDatChung?.SoDienThoai ?? "(024) 1234-5678")" placeholder="+84 xxx xxx xxx">
+                                         </div>
+                                     </div>
+                                     <div class="col-md-4">
+                                         <div class="form-group">
+                                             <label class="form-label">Múi giờ</label>
+                                             <select name="MuiGio" class="form-select">
+                                                 <option value="UTC+7" selected="@(caiDatChung?.MuiGio == "UTC+7")">UTC+7 (Vietnam)</option>
+                                                 <option value="UTC+0" selected="@(caiDatChung?.MuiGio == "UTC+0")">UTC+0 (GMT)</option>
+                                                 <option value="UTC+8" selected="@(caiDatChung?.MuiGio == "UTC+8")">UTC+8 (China)</option>
+                                             </select>
+                                         </div>
+                                     </div>
                                 </div>
 
                                 <div class="settings-section mt-4">
                                     <h6 class="section-title">Thiết lập hiển thị</h6>
                                     <div class="row g-3">
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label class="form-label">Số bài viết/trang</label>
-                                                <select class="form-select">
-                                                    <option>5</option>
-                                                    <option selected>10</option>
-                                                    <option>20</option>
-                                                    <option>50</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label class="form-label">Định dạng ngày</label>
-                                                <select class="form-select">
-                                                    <option selected>dd/MM/yyyy</option>
-                                                    <option>MM/dd/yyyy</option>
-                                                    <option>yyyy-MM-dd</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="form-group">
-                                                <label class="form-label">Ngôn ngữ mặc định</label>
-                                                <select class="form-select">
-                                                    <option selected>Tiếng Việt</option>
-                                                    <option>English</option>
-                                                </select>
-                                            </div>
-                                        </div>
+                                                                                 <div class="col-md-4">
+                                             <div class="form-group">
+                                                 <label class="form-label">Số bài viết/trang</label>
+                                                 <select name="SoBaiVietMoiTrang" class="form-select">
+                                                     <option value="5" selected="@(caiDatChung?.SoBaiVietMoiTrang == 5)">5</option>
+                                                     <option value="10" selected="@(caiDatChung?.SoBaiVietMoiTrang == 10 || caiDatChung?.SoBaiVietMoiTrang == 0)">10</option>
+                                                     <option value="20" selected="@(caiDatChung?.SoBaiVietMoiTrang == 20)">20</option>
+                                                     <option value="50" selected="@(caiDatChung?.SoBaiVietMoiTrang == 50)">50</option>
+                                                 </select>
+                                             </div>
+                                         </div>
+                                         <div class="col-md-4">
+                                             <div class="form-group">
+                                                 <label class="form-label">Định dạng ngày</label>
+                                                 <select name="DinhDangNgay" class="form-select">
+                                                     <option value="dd/MM/yyyy" selected="@(caiDatChung?.DinhDangNgay == "dd/MM/yyyy" || string.IsNullOrEmpty(caiDatChung?.DinhDangNgay))">dd/MM/yyyy</option>
+                                                     <option value="MM/dd/yyyy" selected="@(caiDatChung?.DinhDangNgay == "MM/dd/yyyy")">MM/dd/yyyy</option>
+                                                     <option value="yyyy-MM-dd" selected="@(caiDatChung?.DinhDangNgay == "yyyy-MM-dd")">yyyy-MM-dd</option>
+                                                 </select>
+                                             </div>
+                                         </div>
+                                         <div class="col-md-4">
+                                             <div class="form-group">
+                                                 <label class="form-label">Ngôn ngữ mặc định</label>
+                                                 <select name="NgonNguMacDinh" class="form-select">
+                                                     <option value="vi" selected="@(caiDatChung?.NgonNguMacDinh == "vi" || string.IsNullOrEmpty(caiDatChung?.NgonNguMacDinh))">Tiếng Việt</option>
+                                                     <option value="en" selected="@(caiDatChung?.NgonNguMacDinh == "en")">English</option>
+                                                 </select>
+                                             </div>
+                                         </div>
                                     </div>
                                 </div>
 
@@ -204,36 +204,36 @@
                                 <div class="settings-section">
                                     <h6 class="section-title">Chính sách mật khẩu</h6>
                                     <div class="row g-3">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label class="form-label">Độ dài tối thiểu</label>
-                                                <select class="form-select">
-                                                    <option>6</option>
-                                                    <option selected>8</option>
-                                                    <option>10</option>
-                                                    <option>12</option>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label class="form-label">Thời gian hết hạn (ngày)</label>
-                                                <input type="number" class="form-control" value="90" min="30" max="365">
-                                            </div>
-                                        </div>
+                                                                                 <div class="col-md-6">
+                                             <div class="form-group">
+                                                 <label class="form-label">Độ dài tối thiểu</label>
+                                                 <select name="DoDaiMatKhauToiThieu" class="form-select">
+                                                     <option value="6" selected="@(caiDatBaoMat?.DoDaiMatKhauToiThieu == 6)">6</option>
+                                                     <option value="8" selected="@(caiDatBaoMat?.DoDaiMatKhauToiThieu == 8 || caiDatBaoMat?.DoDaiMatKhauToiThieu == 0)">8</option>
+                                                     <option value="10" selected="@(caiDatBaoMat?.DoDaiMatKhauToiThieu == 10)">10</option>
+                                                     <option value="12" selected="@(caiDatBaoMat?.DoDaiMatKhauToiThieu == 12)">12</option>
+                                                 </select>
+                                             </div>
+                                         </div>
+                                         <div class="col-md-6">
+                                             <div class="form-group">
+                                                 <label class="form-label">Thời gian hết hạn (ngày)</label>
+                                                 <input type="number" name="ThoiGianHetHanMatKhau" class="form-control" value="@(caiDatBaoMat?.ThoiGianHetHanMatKhau ?? 90)" min="30" max="365">
+                                             </div>
+                                         </div>
                                     </div>
                                     <div class="row g-3 mt-2">
                                         <div class="col-12">
                                             <div class="form-check form-switch">
-                                                <input class="form-check-input" type="checkbox" id="requireUppercase" checked>
+                                                <input class="form-check-input" type="checkbox" name="YeuCauChuHoa" id="requireUppercase" @(caiDatBaoMat?.YeuCauChuHoa == true ? "checked" : "")>
                                                 <label class="form-check-label" for="requireUppercase">Yêu cầu chữ hoa</label>
                                             </div>
                                             <div class="form-check form-switch">
-                                                <input class="form-check-input" type="checkbox" id="requireNumbers" checked>
+                                                <input class="form-check-input" type="checkbox" name="YeuCauSo" id="requireNumbers" @(caiDatBaoMat?.YeuCauSo == true ? "checked" : "")>
                                                 <label class="form-check-label" for="requireNumbers">Yêu cầu số</label>
                                             </div>
                                             <div class="form-check form-switch">
-                                                <input class="form-check-input" type="checkbox" id="requireSpecialChars" checked>
+                                                <input class="form-check-input" type="checkbox" name="YeuCauKyTuDacBiet" id="requireSpecialChars" @(caiDatBaoMat?.YeuCauKyTuDacBiet == true ? "checked" : "")>
                                                 <label class="form-check-label" for="requireSpecialChars">Yêu cầu ký tự đặc biệt</label>
                                             </div>
                                         </div>
@@ -243,27 +243,27 @@
                                 <div class="settings-section mt-4">
                                     <h6 class="section-title">Bảo mật đăng nhập</h6>
                                     <div class="row g-3">
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label class="form-label">Số lần đăng nhập sai tối đa</label>
-                                                <input type="number" class="form-control" value="5" min="3" max="10">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-group">
-                                                <label class="form-label">Thời gian khóa tài khoản (phút)</label>
-                                                <input type="number" class="form-control" value="30" min="5" max="1440">
-                                            </div>
-                                        </div>
+                                                                                 <div class="col-md-6">
+                                             <div class="form-group">
+                                                 <label class="form-label">Số lần đăng nhập sai tối đa</label>
+                                                 <input type="number" name="SoLanDangNhapSaiToiDa" class="form-control" value="@(caiDatBaoMat?.SoLanDangNhapSaiToiDa ?? 5)" min="3" max="10">
+                                             </div>
+                                         </div>
+                                         <div class="col-md-6">
+                                             <div class="form-group">
+                                                 <label class="form-label">Thời gian khóa tài khoản (phút)</label>
+                                                 <input type="number" name="ThoiGianKhoaTaiKhoan" class="form-control" value="@(caiDatBaoMat?.ThoiGianKhoaTaiKhoan ?? 30)" min="5" max="1440">
+                                             </div>
+                                         </div>
                                     </div>
                                     <div class="form-check form-switch mt-3">
-                                        <input class="form-check-input" type="checkbox" id="enableTwoFactor">
+                                        <input class="form-check-input" type="checkbox" name="KichHoatXacThuc2YeuTo" id="enableTwoFactor" @(caiDatBaoMat?.KichHoatXacThuc2YeuTo == true ? "checked" : "")>
                                         <label class="form-check-label" for="enableTwoFactor">
                                             Kích hoạt xác thực 2 yếu tố (2FA)
                                         </label>
                                     </div>
                                     <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" id="enableLoginNotification" checked>
+                                        <input class="form-check-input" type="checkbox" name="GuiThongBaoDangNhapMoi" id="enableLoginNotification" @(caiDatBaoMat?.GuiThongBaoDangNhapMoi == true ? "checked" : "")>
                                         <label class="form-check-label" for="enableLoginNotification">
                                             Gửi thông báo khi đăng nhập từ thiết bị mới
                                         </label>
@@ -296,36 +296,36 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="form-label">Máy chủ SMTP</label>
-                                                <input type="text" class="form-control" value="smtp.gmail.com" placeholder="smtp.example.com">
+                                                <input type="text" name="MayKhuSMTP" class="form-control" value="@(caiDatEmail?.MayKhuSMTP ?? "smtp.gmail.com")" placeholder="smtp.example.com">
                                             </div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <label class="form-label">Cổng</label>
-                                                <input type="number" class="form-control" value="587" placeholder="587">
+                                                <input type="number" name="CongSMTP" class="form-control" value="@(caiDatEmail?.CongSMTP ?? 587)" placeholder="587">
                                             </div>
                                         </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <label class="form-label">Bảo mật</label>
-                                                <select class="form-select">
-                                                    <option>None</option>
-                                                    <option selected>TLS</option>
-                                                    <option>SSL</option>
+                                                <select name="BaoMatSMTP" class="form-select">
+                                                    <option value="None" selected="@(caiDatEmail?.BaoMatSMTP == "None")">None</option>
+                                                    <option value="TLS" selected="@(caiDatEmail?.BaoMatSMTP == "TLS" || string.IsNullOrEmpty(caiDatEmail?.BaoMatSMTP))">TLS</option>
+                                                    <option value="SSL" selected="@(caiDatEmail?.BaoMatSMTP == "SSL")">SSL</option>
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="form-label">Tên đăng nhập</label>
-                                                <input type="email" class="form-control" value="system@chuyen-doi-so.gov.vn" placeholder="user@example.com">
+                                                <input type="email" name="TenDangNhap" class="form-control" value="@(caiDatEmail?.TenDangNhap ?? "system@chuyen-doi-so.gov.vn")" placeholder="user@example.com">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="form-label">Mật khẩu</label>
                                                 <div class="input-group">
-                                                    <input type="password" class="form-control" value="••••••••••••" id="emailPassword">
+                                                    <input type="password" name="MatKhau" class="form-control" value="@(caiDatEmail?.MatKhau ?? "")" id="emailPassword" placeholder="Nhập mật khẩu">
                                                     <button class="btn btn-outline-secondary" type="button" onclick="togglePassword('emailPassword')">
                                                         <i class="fas fa-eye"></i>
                                                     </button>
@@ -341,13 +341,13 @@
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="form-label">Tên người gửi</label>
-                                                <input type="text" class="form-control" value="Cục Chuyển đổi số" placeholder="Tên hiển thị">
+                                                <input type="text" name="TenNguoiGui" class="form-control" value="@(caiDatEmail?.TenNguoiGui ?? "Cục Chuyển đổi số")" placeholder="Tên hiển thị">
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="form-label">Email người gửi</label>
-                                                <input type="email" class="form-control" value="noreply@chuyen-doi-so.gov.vn" placeholder="noreply@example.com">
+                                                <input type="email" name="EmailNguoiGui" class="form-control" value="@(caiDatEmail?.EmailNguoiGui ?? "noreply@chuyen-doi-so.gov.vn")" placeholder="noreply@example.com">
                                             </div>
                                         </div>
                                     </div>
@@ -356,19 +356,19 @@
                                 <div class="settings-section mt-4">
                                     <h6 class="section-title">Thông báo email</h6>
                                     <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" id="emailNewUser" checked>
+                                        <input class="form-check-input" type="checkbox" name="GuiEmailNguoiDungMoi" id="emailNewUser" @(caiDatEmail?.GuiEmailNguoiDungMoi == true ? "checked" : "")>
                                         <label class="form-check-label" for="emailNewUser">
                                             Gửi email chào mừng người dùng mới
                                         </label>
                                     </div>
                                     <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" id="emailNewPost" checked>
+                                        <input class="form-check-input" type="checkbox" name="ThongBaoBaiVietMoi" id="emailNewPost" @(caiDatEmail?.ThongBaoBaiVietMoi == true ? "checked" : "")>
                                         <label class="form-check-label" for="emailNewPost">
                                             Thông báo bài viết mới cho subscriber
                                         </label>
                                     </div>
                                     <div class="form-check form-switch">
-                                        <input class="form-check-input" type="checkbox" id="emailCommentReply">
+                                        <input class="form-check-input" type="checkbox" name="ThongBaoPhanHoi" id="emailCommentReply" @(caiDatEmail?.ThongBaoPhanHoi == true ? "checked" : "")>
                                         <label class="form-check-label" for="emailCommentReply">
                                             Thông báo phản hồi bình luận
                                         </label>
@@ -396,47 +396,52 @@
                             <p class="mb-0">Tùy chỉnh màu sắc và giao diện website</p>
                         </div>
                         <div class="settings-card-body">
-                            <div class="settings-section">
-                                <h6 class="section-title">Chủ đề màu sắc</h6>
-                                <div class="row g-3">
-                                    <div class="col-12">
-                                        <div class="theme-options">
-                                            <div class="theme-option active" data-theme="blue">
-                                                <div class="theme-colors">
-                                                    <span style="background: #3b82f6;"></span>
-                                                    <span style="background: #1d4ed8;"></span>
-                                                    <span style="background: #1e40af;"></span>
-                                                </div>
-                                                <span class="theme-name">Xanh dương (Mặc định)</span>
-                                            </div>
-                                            <div class="theme-option" data-theme="green">
-                                                <div class="theme-colors">
-                                                    <span style="background: #10b981;"></span>
-                                                    <span style="background: #059669;"></span>
-                                                    <span style="background: #047857;"></span>
-                                                </div>
-                                                <span class="theme-name">Xanh lá</span>
-                                            </div>
-                                            <div class="theme-option" data-theme="purple">
-                                                <div class="theme-colors">
-                                                    <span style="background: #8b5cf6;"></span>
-                                                    <span style="background: #7c3aed;"></span>
-                                                    <span style="background: #6d28d9;"></span>
-                                                </div>
-                                                <span class="theme-name">Tím</span>
-                                            </div>
-                                            <div class="theme-option" data-theme="red">
-                                                <div class="theme-colors">
-                                                    <span style="background: #ef4444;"></span>
-                                                    <span style="background: #dc2626;"></span>
-                                                    <span style="background: #b91c1c;"></span>
-                                                </div>
-                                                <span class="theme-name">Đỏ</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                                                         <form asp-action="UpdateAppearanceSettings" method="post">
+                                 <div class="settings-section">
+                                     <h6 class="section-title">Chủ đề màu sắc</h6>
+                                     <div class="row g-3">
+                                         <div class="col-12">
+                                             <div class="theme-options">
+                                                 <div class="theme-option @(caiDatGiaoDien?.ChuDeManSac == "blue" || string.IsNullOrEmpty(caiDatGiaoDien?.ChuDeManSac) ? "active" : "")" data-theme="blue">
+                                                     <input type="radio" name="ChuDeManSac" value="blue" @(caiDatGiaoDien?.ChuDeManSac == "blue" || string.IsNullOrEmpty(caiDatGiaoDien?.ChuDeManSac) ? "checked" : "") style="display: none;">
+                                                     <div class="theme-colors">
+                                                         <span style="background: #3b82f6;"></span>
+                                                         <span style="background: #1d4ed8;"></span>
+                                                         <span style="background: #1e40af;"></span>
+                                                     </div>
+                                                     <span class="theme-name">Xanh dương (Mặc định)</span>
+                                                 </div>
+                                                 <div class="theme-option @(caiDatGiaoDien?.ChuDeManSac == "green" ? "active" : "")" data-theme="green">
+                                                     <input type="radio" name="ChuDeManSac" value="green" @(caiDatGiaoDien?.ChuDeManSac == "green" ? "checked" : "") style="display: none;">
+                                                     <div class="theme-colors">
+                                                         <span style="background: #10b981;"></span>
+                                                         <span style="background: #059669;"></span>
+                                                         <span style="background: #047857;"></span>
+                                                     </div>
+                                                     <span class="theme-name">Xanh lá</span>
+                                                 </div>
+                                                 <div class="theme-option @(caiDatGiaoDien?.ChuDeManSac == "purple" ? "active" : "")" data-theme="purple">
+                                                     <input type="radio" name="ChuDeManSac" value="purple" @(caiDatGiaoDien?.ChuDeManSac == "purple" ? "checked" : "") style="display: none;">
+                                                     <div class="theme-colors">
+                                                         <span style="background: #8b5cf6;"></span>
+                                                         <span style="background: #7c3aed;"></span>
+                                                         <span style="background: #6d28d9;"></span>
+                                                     </div>
+                                                     <span class="theme-name">Tím</span>
+                                                 </div>
+                                                 <div class="theme-option @(caiDatGiaoDien?.ChuDeManSac == "red" ? "active" : "")" data-theme="red">
+                                                     <input type="radio" name="ChuDeManSac" value="red" @(caiDatGiaoDien?.ChuDeManSac == "red" ? "checked" : "") style="display: none;">
+                                                     <div class="theme-colors">
+                                                         <span style="background: #ef4444;"></span>
+                                                         <span style="background: #dc2626;"></span>
+                                                         <span style="background: #b91c1c;"></span>
+                                                     </div>
+                                                     <span class="theme-name">Đỏ</span>
+                                                 </div>
+                                             </div>
+                                         </div>
+                                     </div>
+                                 </div>
 
                             <div class="settings-section mt-4">
                                 <h6 class="section-title">Logo & Favicon</h6>
@@ -470,23 +475,24 @@
                                 </div>
                             </div>
 
-                            <div class="settings-section mt-4">
-                                <h6 class="section-title">Tùy chỉnh CSS</h6>
-                                <div class="form-group">
-                                    <label class="form-label">Custom CSS</label>
-                                    <textarea class="form-control code-editor" rows="8" placeholder="/* Nhập CSS tùy chỉnh ở đây */"></textarea>
-                                    <div class="form-text">CSS sẽ được áp dụng cho toàn bộ website</div>
-                                </div>
-                            </div>
+                                                             <div class="settings-section mt-4">
+                                     <h6 class="section-title">Tùy chỉnh CSS</h6>
+                                     <div class="form-group">
+                                         <label class="form-label">Custom CSS</label>
+                                         <textarea name="CustomCSS" class="form-control code-editor" rows="8" placeholder="/* Nhập CSS tùy chỉnh ở đây */">@(caiDatGiaoDien?.CustomCSS ?? "")</textarea>
+                                         <div class="form-text">CSS sẽ được áp dụng cho toàn bộ website</div>
+                                     </div>
+                                 </div>
 
-                            <div class="settings-actions mt-4">
-                                <button type="button" class="btn btn-primary">
-                                    <i class="fas fa-save me-2"></i>Lưu giao diện
-                                </button>
-                                <button type="button" class="btn btn-outline-info ms-2" onclick="previewChanges()">
-                                    <i class="fas fa-eye me-2"></i>Xem trước
-                                </button>
-                            </div>
+                                 <div class="settings-actions mt-4">
+                                     <button type="submit" class="btn btn-primary">
+                                         <i class="fas fa-save me-2"></i>Lưu giao diện
+                                     </button>
+                                     <button type="button" class="btn btn-outline-info ms-2" onclick="previewChanges()">
+                                         <i class="fas fa-eye me-2"></i>Xem trước
+                                     </button>
+                                 </div>
+                             </form>
                         </div>
                     </div>
                 </div>
@@ -650,11 +656,11 @@
                                         <div class="info-list">
                                             <div class="info-item">
                                                 <span class="info-label">Phiên bản hệ thống:</span>
-                                                <span class="info-value">2.1.0</span>
+                                                <span class="info-value" data-info="version">2.1.0</span>
                                             </div>
                                             <div class="info-item">
                                                 <span class="info-label">.NET Version:</span>
-                                                <span class="info-value">9.0</span>
+                                                <span class="info-value" data-info="dotnet">9.0</span>
                                             </div>
                                             <div class="info-item">
                                                 <span class="info-label">Entity Framework:</span>
@@ -677,23 +683,23 @@
                                         <div class="info-list">
                                             <div class="info-item">
                                                 <span class="info-label">Thời gian chạy:</span>
-                                                <span class="info-value">15 ngày 8 giờ</span>
+                                                <span class="info-value" data-info="uptime">15 ngày 8 giờ</span>
                                             </div>
                                             <div class="info-item">
                                                 <span class="info-label">Bộ nhớ sử dụng:</span>
-                                                <span class="info-value">245 MB</span>
+                                                <span class="info-value" data-info="memory">245 MB</span>
                                             </div>
                                             <div class="info-item">
                                                 <span class="info-label">Dung lượng Database:</span>
-                                                <span class="info-value">127.8 MB</span>
+                                                <span class="info-value" data-info="dbsize">127.8 MB</span>
                                             </div>
                                             <div class="info-item">
                                                 <span class="info-label">Dung lượng Files:</span>
-                                                <span class="info-value">2.3 GB</span>
+                                                <span class="info-value" data-info="filessize">2.3 GB</span>
                                             </div>
                                             <div class="info-item">
                                                 <span class="info-label">Kết nối Database:</span>
-                                                <span class="info-value text-success"><i class="fas fa-check-circle me-1"></i>Hoạt động tốt</span>
+                                                <span class="info-value text-success" data-info="dbstatus"><i class="fas fa-check-circle me-1"></i>Hoạt động tốt</span>
                                             </div>
                                         </div>
                                     </div>
@@ -1095,8 +1101,64 @@
     font-size: 0.875rem;
 }
 
-/* Responsive */
-@@media (max-width: 991px) {
+ /* Theme switching */
+ :root {
+     --primary-color: #3b82f6;
+     --primary-dark: #1d4ed8;
+     --primary-darker: #1e40af;
+ }
+
+ .theme-blue {
+     --primary-color: #3b82f6;
+     --primary-dark: #1d4ed8;
+     --primary-darker: #1e40af;
+ }
+
+ .theme-green {
+     --primary-color: #10b981;
+     --primary-dark: #059669;
+     --primary-darker: #047857;
+ }
+
+ .theme-purple {
+     --primary-color: #8b5cf6;
+     --primary-dark: #7c3aed;
+     --primary-darker: #6d28d9;
+ }
+
+ .theme-red {
+     --primary-color: #ef4444;
+     --primary-dark: #dc2626;
+     --primary-darker: #b91c1c;
+ }
+
+ /* Apply theme colors to buttons and links */
+ .btn-primary {
+     background-color: var(--primary-color);
+     border-color: var(--primary-color);
+ }
+
+ .btn-primary:hover {
+     background-color: var(--primary-dark);
+     border-color: var(--primary-dark);
+ }
+
+ .settings-nav .nav-link.active {
+     background: var(--primary-color);
+ }
+
+ .settings-nav .nav-link:hover {
+     background: rgba(var(--primary-color), 0.1);
+     color: var(--primary-color);
+ }
+
+ .theme-option.active {
+     border-color: var(--primary-color);
+     background: rgba(var(--primary-color), 0.05);
+ }
+
+ /* Responsive */
+ @@media (max-width: 991px) {
     .settings-sidebar {
         position: static;
         margin-bottom: 1.5rem;
@@ -1145,14 +1207,27 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Theme selection
-    const themeOptions = document.querySelectorAll('.theme-option');
-    themeOptions.forEach(option => {
-        option.addEventListener('click', function() {
-            themeOptions.forEach(o => o.classList.remove('active'));
-            this.classList.add('active');
-        });
-    });
+         // Theme selection
+     const themeOptions = document.querySelectorAll('.theme-option');
+     themeOptions.forEach(option => {
+         option.addEventListener('click', function() {
+             // Remove active class from all options
+             themeOptions.forEach(o => o.classList.remove('active'));
+             
+             // Add active class to clicked option
+             this.classList.add('active');
+             
+             // Update radio button
+             const radio = this.querySelector('input[type="radio"]');
+             if (radio) {
+                 radio.checked = true;
+             }
+             
+             // Apply theme preview
+             const theme = this.getAttribute('data-theme');
+             applyThemePreview(theme);
+         });
+     });
 });
 
 // Utility functions
@@ -1229,10 +1304,20 @@ async function testEmailConnection() {
     btn.disabled = true;
     
     try {
+        // Lấy dữ liệu từ form
+        const formData = new FormData();
+        formData.append('MayKhuSMTP', document.querySelector('input[name="MayKhuSMTP"]')?.value || '');
+        formData.append('CongSMTP', document.querySelector('input[name="CongSMTP"]')?.value || '');
+        formData.append('BaoMatSMTP', document.querySelector('select[name="BaoMatSMTP"]')?.value || '');
+        formData.append('TenDangNhap', document.querySelector('input[name="TenDangNhap"]')?.value || '');
+        formData.append('MatKhau', document.querySelector('input[name="MatKhau"]')?.value || '');
+        formData.append('TenNguoiGui', document.querySelector('input[name="TenNguoiGui"]')?.value || '');
+        formData.append('EmailNguoiGui', document.querySelector('input[name="EmailNguoiGui"]')?.value || '');
+        
         const response = await fetch('/Admin/CaiDat/TestEmailConnection', {
             method: 'POST',
+            body: formData,
             headers: {
-                'Content-Type': 'application/json',
                 'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]')?.value || ''
             }
         });
@@ -1253,7 +1338,70 @@ async function testEmailConnection() {
 }
 
 function previewChanges() {
-    alert('Tính năng xem trước sẽ được triển khai trong phiên bản tiếp theo!');
+    const selectedTheme = document.querySelector('input[name="ChuDeManSac"]:checked')?.value || 'blue';
+    const customCSS = document.querySelector('textarea[name="CustomCSS"]')?.value || '';
+    
+    // Apply theme preview
+    applyThemePreview(selectedTheme);
+    
+    // Apply custom CSS preview
+    if (customCSS.trim()) {
+        applyCustomCSSPreview(customCSS);
+    }
+    
+    showNotification('Đã áp dụng xem trước! Nhấn F5 để tải lại trang nếu muốn xem thay đổi.', 'info');
+}
+
+function applyThemePreview(theme) {
+    // Remove existing theme classes
+    document.body.classList.remove('theme-blue', 'theme-green', 'theme-purple', 'theme-red');
+    
+    // Add new theme class
+    document.body.classList.add(`theme-${theme}`);
+    
+    // Update CSS variables for preview
+    const root = document.documentElement;
+    const themes = {
+        blue: {
+            '--primary-color': '#3b82f6',
+            '--primary-dark': '#1d4ed8',
+            '--primary-darker': '#1e40af'
+        },
+        green: {
+            '--primary-color': '#10b981',
+            '--primary-dark': '#059669',
+            '--primary-darker': '#047857'
+        },
+        purple: {
+            '--primary-color': '#8b5cf6',
+            '--primary-dark': '#7c3aed',
+            '--primary-darker': '#6d28d9'
+        },
+        red: {
+            '--primary-color': '#ef4444',
+            '--primary-dark': '#dc2626',
+            '--primary-darker': '#b91c1c'
+        }
+    };
+    
+    const themeColors = themes[theme] || themes.blue;
+    Object.entries(themeColors).forEach(([property, value]) => {
+        root.style.setProperty(property, value);
+    });
+}
+
+function applyCustomCSSPreview(css) {
+    // Remove existing preview style
+    let previewStyle = document.getElementById('custom-css-preview');
+    if (previewStyle) {
+        previewStyle.remove();
+    }
+    
+    // Add new preview style
+    previewStyle = document.createElement('style');
+    previewStyle.id = 'custom-css-preview';
+    previewStyle.textContent = css;
+    document.head.appendChild(previewStyle);
 }
 
 // Notification function
@@ -1358,17 +1506,29 @@ function deleteBackup(filename) {
 }
 
 // System functions
-function refreshSystemInfo() {
+async function refreshSystemInfo() {
     const btn = event.target;
     const originalText = btn.innerHTML;
     btn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Đang làm mới...';
     btn.disabled = true;
     
-    setTimeout(() => {
+    try {
+        const response = await fetch('/Admin/CaiDat/GetSystemInfo');
+        const result = await response.json();
+        
+        if (result.success) {
+            // Update system info display
+            updateSystemInfoDisplay(result.data);
+            showNotification('Thông tin hệ thống đã được cập nhật!', 'success');
+        } else {
+            showNotification('Không thể cập nhật thông tin hệ thống', 'error');
+        }
+    } catch (error) {
+        showNotification('Có lỗi xảy ra khi cập nhật thông tin', 'error');
+    } finally {
         btn.innerHTML = originalText;
         btn.disabled = false;
-        alert('Thông tin hệ thống đã được cập nhật!');
-    }, 2000);
+    }
 }
 
 function runSystemCheck() {
@@ -1384,18 +1544,59 @@ function runSystemCheck() {
     }, 4000);
 }
 
-function clearCache() {
+async function clearCache() {
     if (confirm('Xóa toàn bộ cache hệ thống?')) {
         const btn = event.target;
         const originalText = btn.innerHTML;
         btn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Đang xóa...';
         btn.disabled = true;
         
-        setTimeout(() => {
+        try {
+            const response = await fetch('/Admin/CaiDat/ClearCache', {
+                method: 'POST',
+                headers: {
+                    'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]')?.value || ''
+                }
+            });
+            
+            const result = await response.json();
+            
+            if (result.success) {
+                showNotification(result.message, 'success');
+            } else {
+                showNotification(result.message, 'error');
+            }
+        } catch (error) {
+            showNotification('Có lỗi xảy ra khi xóa cache', 'error');
+        } finally {
             btn.innerHTML = originalText;
             btn.disabled = false;
-            alert('Cache đã được xóa thành công!');
-        }, 2000);
+        }
     }
+}
+
+// Helper function to update system info display
+function updateSystemInfoDisplay(data) {
+    // Update version info
+    const versionElements = document.querySelectorAll('[data-info="version"]');
+    versionElements.forEach(el => el.textContent = data.version);
+    
+    const dotnetElements = document.querySelectorAll('[data-info="dotnet"]');
+    dotnetElements.forEach(el => el.textContent = data.dotnetVersion);
+    
+    const uptimeElements = document.querySelectorAll('[data-info="uptime"]');
+    uptimeElements.forEach(el => el.textContent = data.uptime);
+    
+    const memoryElements = document.querySelectorAll('[data-info="memory"]');
+    memoryElements.forEach(el => el.textContent = data.memoryUsage);
+    
+    const dbSizeElements = document.querySelectorAll('[data-info="dbsize"]');
+    dbSizeElements.forEach(el => el.textContent = data.databaseSize);
+    
+    const filesSizeElements = document.querySelectorAll('[data-info="filessize"]');
+    filesSizeElements.forEach(el => el.textContent = data.filesSize);
+    
+    const dbStatusElements = document.querySelectorAll('[data-info="dbstatus"]');
+    dbStatusElements.forEach(el => el.textContent = data.databaseStatus);
 }
 </script>
