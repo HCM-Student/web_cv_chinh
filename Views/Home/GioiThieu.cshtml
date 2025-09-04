@@ -407,8 +407,8 @@
     </div>
 </section>
 
-<!-- PARTNERS -->
-<section class="partners-section reveal-on-scroll">
+<!-- PARTNERS (removed as duplicate with homepage) -->
+<section class="partners-section reveal-on-scroll d-none">
     <div class="container">
         <div class="text-center mb-5">
             <span class="section-badge">ĐỐI TÁC</span>
@@ -539,6 +539,20 @@ document.addEventListener('DOMContentLoaded', function() {
         el.style.opacity = '0';
         scrollObserver.observe(el);
     });
+
+    // Trigger top-down animation for org chart when section enters view
+    const orgSection = document.querySelector('.organization-section');
+    if (orgSection) {
+        const orgObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    orgSection.classList.add('in-view');
+                    orgObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.2, rootMargin: '0px 0px -80px 0px' });
+        orgObserver.observe(orgSection);
+    }
 });
 
 // Particles.js configuration (optional - requires particles.js library)
@@ -579,4 +593,3 @@ if (typeof particlesJS !== 'undefined') {
     });
 }
 </script>
-

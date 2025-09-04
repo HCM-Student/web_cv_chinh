@@ -185,9 +185,9 @@
 }
 
 .nav-link.active {
-    background: var(--primary-color);
+    background: linear-gradient(135deg, var(--primary-color), #1d4ed8);
     color: #fff;
-    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3);
+    box-shadow: 0 8px 22px rgba(29,78,216,.28);
 }
 
 .nav-icon {
@@ -294,10 +294,10 @@
 
 .search-input {
     width: 100%;
-    padding: 0.625rem 1rem 0.625rem 2.75rem;
+    padding: 0.8rem 1rem 0.8rem 2.75rem; /* taller */
     border: 2px solid var(--border-color);
-    border-radius: 10px;
-    font-size: 0.9rem;
+    border-radius: 12px;
+    font-size: 0.95rem;
     transition: all 0.2s ease;
 }
 
@@ -320,9 +320,9 @@
 .topbar-btn {
     background: none;
     border: none;
-    width: 40px;
-    height: 40px;
-    border-radius: 10px;
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -332,9 +332,7 @@
     position: relative;
 }
 
-.topbar-btn:hover {
-    background: var(--light-bg);
-}
+.topbar-btn:hover { background: #f3f6fb; box-shadow: 0 6px 18px rgba(2,6,23,.08); }
 
 .notification-badge {
     position: absolute;

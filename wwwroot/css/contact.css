@@ -1,26 +1,12 @@
-/* ========================================
+﻿/* ========================================
    CONTACT PAGE STYLES
    ======================================== */
 
 /* Contact Hero */
-.contact-hero {
-    position: relative;
-    min-height: 78vh;
-    display: flex;
-    align-items: center;
-    overflow: hidden;
-}
+.contact-hero { position: relative; min-height: 82vh; display: flex; align-items: center; overflow: hidden; }
 
 .contact-bg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: url('../img/contact-hero.webp') center center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
+    position: relative; /* same structure as pricing */
 }
 
 .contact-overlay {
@@ -72,9 +58,9 @@
 }
 
 .hero-buttons .btn {
-    padding: 12px 30px;
+    padding: .95rem 1.65rem; /* match global */
     font-weight: 600;
-    border-radius: 8px;
+    border-radius: 999px;
     transition: all 0.3s ease;
 }
 
@@ -145,7 +131,7 @@
 }
 
 .official-badge::before {
-    content: '🏛️';
+    content: 'ðŸ›ï¸';
     margin-right: 0.5rem;
 }
 
@@ -294,9 +280,7 @@
 
 /* Responsive */
 @media (max-width: 768px) {
-    .contact-hero {
-        min-height: 65vh;
-    }
+    .contact-hero { position: relative; min-height: 82vh; display: flex; align-items: center; overflow: hidden; }
     
     .section {
         padding: 60px 0;
@@ -344,4 +328,5 @@
   .equal-cols > [class^="col-"], .equal-cols > [class*=" col-"]{ display:block; }
   .equal-cols .contact-map iframe{ height:420px; }
 }
+
 

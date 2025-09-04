@@ -612,6 +612,10 @@ html, body {
     text-align: center;
     position: relative;
     transition: all 0.3s ease;
+    z-index: 1; /* above connector lines */
+    /* prepare for top-down reveal */
+    opacity: 0;
+    transform: translateY(-16px);
 }
 
 .org-box:hover {
@@ -659,6 +663,46 @@ html, body {
 
 .org-box.ceo .org-desc {
     color: rgba(255, 255, 255, 0.9);
+}
+
+/* Top-down cascade animation when section enters view */
+@keyframes fadeInDown {
+    from { opacity: 0; transform: translateY(-16px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+.organization-section.in-view .level-0 .org-box { animation: fadeInDown .55s ease forwards; animation-delay: 0s; }
+.organization-section.in-view .level-1 .org-box { animation: fadeInDown .55s ease forwards; animation-delay: .15s; }
+.organization-section.in-view .level-2 .org-box { animation: fadeInDown .55s ease forwards; animation-delay: .30s; }
+.organization-section.in-view .level-3 .org-box { animation: fadeInDown .55s ease forwards; animation-delay: .45s; }
+
+/* Connector lines between levels */
+.organization-section{ --org-line: rgba(30,111,255,.6); --org-line-strong: rgba(30,111,255,.8); }
+
+/* From Level 0 (HĐTV) to Level 1 (Giám đốc) */
+.level-1::before{
+  content:""; position:absolute; top:-22px; left:50%; transform:translateX(-50%);
+  width:2px; height:22px; background:var(--org-line-strong);
+}
+
+/* Baseline above Level 2 and vertical drops to each deputy */
+.level-2{ padding-top:10px; }
+.level-2::before{
+  content:""; position:absolute; left:40px; right:40px; top:-10px; height:2px; background:var(--org-line);
+}
+.level-2 .org-box::before{
+  content:""; position:absolute; top:-10px; left:50%; transform:translateX(-50%);
+  width:2px; height:10px; background:var(--org-line);
+}
+
+/* Baseline above Level 3 and vertical drops to each department */
+.level-3{ padding-top:12px; }
+.level-3::before{
+  content:""; position:absolute; left:20px; right:20px; top:-12px; height:2px; background:var(--org-line);
+}
+.level-3 .org-box::before{
+  content:""; position:absolute; top:-12px; left:50%; transform:translateX(-50%);
+  width:2px; height:12px; background:var(--org-line);
 }
 
 /* Offices */

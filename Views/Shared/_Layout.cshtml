@@ -26,8 +26,24 @@
 
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/web_cv.styles.css" asp-append-version="true" />
+    <style>
+      /* Minimal visual polish — unify brand color usage */
+      .btn-primary{color:#fff;background-color:var(--primary-color);border-color:var(--primary-color)}
+      .btn-primary:hover,.btn-primary:focus{filter:brightness(.96);color:#fff;box-shadow:0 6px 16px rgba(30,111,255,.25)}
+
+      .navstrip .navbar-nav .nav-link{position:relative}
+      .navstrip .navbar-nav .nav-link::after{content:"";position:absolute;left:.35rem;right:.35rem;bottom:.35rem;height:2px;background:var(--primary-color);transform-origin:left;transform:scaleX(0);transition:transform .18s ease}
+      .navstrip .navbar-nav .nav-link:hover{color:var(--primary-color)!important}
+      .navstrip .navbar-nav .nav-link:hover::after{transform:scaleX(1)}
+      .navstrip .navbar-nav .nav-link.active{color:var(--primary-color)!important;font-weight:700}
+      .navstrip .navbar-nav .nav-link.active::after{transform:scaleX(1)}
+
+      .nav-item.dropdown .dropdown-item:hover{color:var(--primary-color)!important}
+      .nav-item.dropdown .dropdown-item.active{background:var(--primary-color)!important;color:#fff!important}
+      .nav-item.dropdown .dropdown-toggle:hover{color:var(--primary-color)!important}
+    </style>
     @await RenderSectionAsync("Styles", required: false)
-</head>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap&subset=vietnamese" rel="stylesheet">\n</head>
 <body class="d-flex flex-column min-vh-100">
 
     <!-- HEADER (topbar + navbar) -->
@@ -55,6 +71,24 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script>
+    // Dynamic admin badges (runs safely on all pages; no-op outside Admin)
+    (function(){
+      async function refreshBadges(){
+        try{
+          const res = await fetch('/Admin/Dashboard/RecentActivities?take=6', { cache:'no-store' });
+          if(!res.ok) return;
+          const data = await res.json();
+          var b = document.getElementById('notifBellCount');
+          var m = document.getElementById('notifMailCount');
+          if(b) b.textContent = (data.bellCount ?? (data.activities||[]).length).toString();
+          if(m) m.textContent = (data.mailCount ?? 0).toString();
+        }catch(e){}
+      }
+      refreshBadges();
+      setInterval(refreshBadges, 30000);
+    })();
+    </script>
     @await RenderSectionAsync("Scripts", required: false)
 
     <!-- Back to top button -->
@@ -63,3 +97,4 @@
     </button>
 </body>
 </html>
+

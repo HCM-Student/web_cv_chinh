@@ -1,4 +1,4 @@
-@using WEB_CV.Data
+﻿@using WEB_CV.Data
 @using System.Text.Json
 @inject NewsDbContext Context
 
@@ -10,16 +10,16 @@
     var totalNguoiDung = Context.NguoiDungs.Count();
     var baiVietMoi = Context.BaiViets.Where(b => b.NgayDang >= DateTime.Today.AddDays(-7)).Count();
 
-    // ====== DỮ LIỆU BIỂU ĐỒ VÒNG TRÒN (phân bố vai trò người dùng) ======
+    // ====== Dá»® LIá»†U BIá»‚U Äá»’ VÃ’NG TRÃ’N (phÃ¢n bá»‘ vai trÃ² ngÆ°á»i dÃ¹ng) ======
     var roleCounts = Context.NguoiDungs
-        .GroupBy(u => string.IsNullOrWhiteSpace(u.VaiTro) ? "Khác" : u.VaiTro)
+        .GroupBy(u => string.IsNullOrWhiteSpace(u.VaiTro) ? "KhÃ¡c" : u.VaiTro)
         .Select(g => new { Role = g.Key, Count = g.Count() })
         .OrderByDescending(x => x.Count)
         .ToList();
     var roleLabels = roleCounts.Select(x => x.Role).ToArray();
     var roleData   = roleCounts.Select(x => x.Count).ToArray();
 
-    // (tuỳ chọn) line chart 7 ngày gần nhất cho bài viết
+    // (tuá»³ chá»n) line chart 7 ngÃ y gáº§n nháº¥t cho bÃ i viáº¿t
     var start = DateTime.Today.AddDays(-6);
     var days = Enumerable.Range(0, 7).Select(i => start.AddDays(i)).ToList();
     var dayLabels = days.Select(d => d.ToString("dd/MM")).ToArray();
@@ -39,7 +39,7 @@
                     <i class="fas fa-download me-2"></i>Export
                 </button>
                 <a class="btn btn-primary" asp-area="Admin" asp-controller="BaiViet" asp-action="Create">
-                    <i class="fas fa-plus me-2"></i>Tạo bài viết
+                    <i class="fas fa-plus me-2"></i>Táº¡o bÃ i viáº¿t
                 </a>
             </div>
         </div>
@@ -207,7 +207,7 @@
 
     <!-- Charts Row -->
     <div class="row g-4 mb-4">
-        <!-- Xu hướng 7 ngày (line) -->
+        <!-- Xu hÆ°á»›ng 7 ngÃ y (line) -->
         <div class="col-lg-6">
             <div class="content-card h-100">
                 <div class="content-card-header">
@@ -219,11 +219,11 @@
             </div>
         </div>
 
-        <!-- Vòng tròn khách quan -->
+        <!-- VÃ²ng trÃ²n khÃ¡ch quan -->
         <div class="col-lg-6">
             <div class="content-card h-100">
                 <div class="content-card-header">
-                    <h5 class="card-title"><i class="fas fa-chart-pie me-2"></i>Phân bố vai trò người dùng</h5>
+                    <h5 class="card-title"><i class="fas fa-chart-pie me-2"></i>Phân bổ vai trò người dùng</h5>
                 </div>
                 <div class="content-card-body d-flex justify-content-center align-items-center">
                     <canvas id="userRoleChart" style="max-height:260px;"></canvas>
@@ -238,41 +238,12 @@
         <div class="col-lg-8">
             <div class="content-card">
                 <div class="content-card-header">
-                    <h5 class="card-title"><i class="fas fa-history me-2"></i>Hoạt động gần đây</h5>
+                    <h5 class="card-title"><i class="fas fa-history me-2"></i>Ho&#x1EA1;t &#273;&#x1ED9;ng g&#x1EA7;n &#273;&#xE2;y</h5>
                     <button class="btn btn-sm btn-outline-secondary"><i class="fas fa-filter"></i></button>
                 </div>
                 <div class="content-card-body">
-                    <div class="activity-list">
-                        <div class="activity-item">
-                            <div class="activity-icon bg-primary"><i class="fas fa-file-alt"></i></div>
-                            <div class="activity-content">
-                                <p class="activity-text"><strong>Admin</strong> đã tạo bài viết mới
-                                    <span class="text-primary">"Giới thiệu công nghệ AI"</span></p>
-                                <span class="activity-time">2 phút trước</span>
-                            </div>
-                        </div>
-                        <div class="activity-item">
-                            <div class="activity-icon bg-success"><i class="fas fa-user-plus"></i></div>
-                            <div class="activity-content">
-                                <p class="activity-text"><strong>User123</strong> đã đăng ký tài khoản mới</p>
-                                <span class="activity-time">15 phút trước</span>
-                            </div>
-                        </div>
-                        <div class="activity-item">
-                            <div class="activity-icon bg-warning"><i class="fas fa-edit"></i></div>
-                            <div class="activity-content">
-                                <p class="activity-text"><strong>Editor</strong> đã cập nhật chuyên mục
-                                    <span class="text-warning">"Công nghệ"</span></p>
-                                <span class="activity-time">1 giờ trước</span>
-                            </div>
-                        </div>
-                        <div class="activity-item">
-                            <div class="activity-icon bg-danger"><i class="fas fa-trash"></i></div>
-                            <div class="activity-content">
-                                <p class="activity-text"><strong>Admin</strong> đã xóa 3 bài viết cũ</p>
-                                <span class="activity-time">2 giờ trước</span>
-                            </div>
-                        </div>
+                    <div id="recentActivities" class="activity-list">
+                        <div class="text-muted small">&#x110;ang t&#x1EA3;i ho&#x1EA1;t &#273;&#x1ED9;ng g&#x1EA7;n &#273;&#xE2;y...</div>
                     </div>
                 </div>
             </div>
@@ -282,25 +253,20 @@
         <div class="col-lg-4">
             <div class="content-card">
                 <div class="content-card-header">
-                    <h5 class="card-title"><i class="fas fa-star me-2"></i>Top chuyên mục</h5>
-                </div>
+                    <h5 class="card-title"><i class="fas fa-star me-2"></i>Top chuy&#xEA;n m&#x1EE5;c</h5>
                 <div class="content-card-body">
                     <div class="category-list">
                         <div class="category-item">
-                            <div class="category-info"><span class="category-name">Công nghệ</span><span class="category-count">45 bài</span></div>
-                            <div class="category-bar"><div class="bar-fill" style="width: 85%;"></div></div>
+                            <div class="category-info"><span class="category-name">C&#xF4;ng ngh&#x1EC7;</span><span class="category-count">45 b&#xE0;i</span></div>
                         </div>
                         <div class="category-item">
-                            <div class="category-info"><span class="category-name">Giải pháp</span><span class="category-count">32 bài</span></div>
-                            <div class="category-bar"><div class="bar-fill" style="width: 65%;"></div></div>
+                            <div class="category-info"><span class="category-name">Gi&#x1EA3;i ph&#xE1;p</span><span class="category-count">32 b&#xE0;i</span></div>
                         </div>
                         <div class="category-item">
-                            <div class="category-info"><span class="category-name">Tin tức</span><span class="category-count">28 bài</span></div>
-                            <div class="category-bar"><div class="bar-fill" style="width: 55%;"></div></div>
+                            <div class="category-info"><span class="category-name">Tin t&#x1EE9;c</span><span class="category-count">28 b&#xE0;i</span></div>
                         </div>
                         <div class="category-item">
-                            <div class="category-info"><span class="category-name">Tuyển dụng</span><span class="category-count">15 bài</span></div>
-                            <div class="category-bar"><div class="bar-fill" style="width: 30%;"></div></div>
+                            <div class="category-info"><span class="category-name">Tuy&#x1EC3;n d&#x1EE5;ng</span><span class="category-count">15 b&#xE0;i</span></div>
                         </div>
                     </div>
                 </div>
@@ -323,7 +289,7 @@ function updateTime() {
 }
 setInterval(updateTime, 60000); updateTime();
 
-// ===== Doughnut: phân bố vai trò người dùng =====
+// ===== Doughnut: phÃ¢n bá»‘ vai trÃ² ngÆ°á»i dÃ¹ng =====
 const roleLabels = @Html.Raw(JsonSerializer.Serialize(roleLabels));
 const roleData   = @Html.Raw(JsonSerializer.Serialize(roleData));
 const palette = ["#3b82f6","#ef4444","#10b981","#f59e0b","#8b5cf6","#06b6d4","#f97316","#84cc16","#e11d48","#0891b2"];
@@ -349,7 +315,7 @@ new Chart(document.getElementById('userRoleChart'), {
     }
 });
 
-// ===== Line: xu hướng bài viết 7 ngày =====
+// ===== Line: xu hÆ°á»›ng bÃ i viáº¿t 7 ngÃ y =====
 const dayLabels = @Html.Raw(JsonSerializer.Serialize(dayLabels));
 const postPerDay = @Html.Raw(JsonSerializer.Serialize(postPerDay));
 
@@ -371,3 +337,50 @@ new Chart(document.getElementById('postTrend'), {
     }
 });
 </script>
+<script>
+function timeAgo(iso){
+  const t = new Date(iso);
+  const s = Math.floor((Date.now() - t.getTime())/1000);
+  const m = Math.floor(s/60), h=Math.floor(m/60), d=Math.floor(h/24);
+  if (s < 60) return ${s}s tru?c;
+  if (m < 60) return ${m} phút tru?c;
+  if (h < 24) return ${h} gi? tru?c;
+  return ${d} ngày tru?c;
+}
+function iconFor(type){
+  if(type==='user') return { cls:'bg-success', icon:'fa-user-plus' };
+  if(type==='post') return { cls:'bg-primary', icon:'fa-file-alt' };
+  return { cls:'bg-secondary', icon:'fa-bell' };
+}
+async function loadActivities(){
+  try{
+    const res = await fetch('/Admin/Dashboard/RecentActivities?take=8', { cache:'no-store' });
+    const data = await res.json();
+    const list = document.getElementById('recentActivities');
+    if(list){
+      if(!Array.isArray(data.activities) || data.activities.length===0){ list.innerHTML = '<div class="text-muted small">Không có ho?t d?ng.</div>'; }
+      else {
+        list.innerHTML = data.activities.map(a=>{
+          const ic = iconFor(a.type);
+          return 
+            <div class="activity-item">
+              <div class="activity-icon "><i class="fas "></i></div>
+              <div class="activity-content">
+                <p class="activity-text"></p>
+                <span class="activity-time"></span>
+              </div>
+            </div>;
+        }).join('');
+      }
+    }
+    const bell = document.getElementById('notifBellCount');
+    const mail = document.getElementById('notifMailCount');
+    if (bell) bell.textContent = (data.bellCount ?? data.activities.length).toString();
+    if (mail) mail.textContent = (data.mailCount ?? 0).toString();
+  }catch(e){ console.error(e); }
+}
+loadActivities();
+setInterval(loadActivities, 30000);
+</script>
+
+

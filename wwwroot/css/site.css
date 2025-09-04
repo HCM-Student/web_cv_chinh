@@ -1,4 +1,4 @@
-/* ==========================================================================
+﻿/* ==========================================================================
    Base & Resets
    ========================================================================== */
 html{font-size:14px;position:relative;min-height:100%}
@@ -18,7 +18,7 @@ html, body { max-width: 100%; overflow-x: clip; }
 .form-floating>.form-control-plaintext:focus::placeholder,
 .form-floating>.form-control:focus::placeholder{text-align:start}
 
-/* khoảng hở giữa vòm & dải thẻ ngay sau hero */
+/* khoáº£ng há»Ÿ giá»¯a vÃ²m & dáº£i tháº» ngay sau hero */
 :root{
   --hero-curve-gap: clamp(18px, 2.8vw, 40px);
   --primary-color: #1e6fff; /* brand primary used across pages */
@@ -30,13 +30,13 @@ html, body { max-width: 100%; overflow-x: clip; }
   --dark-color: #1e293b;
   --text-muted: #64748b;
   --nav-gap: clamp(.75rem, 3vw, 2.25rem);
- /* giãn thưa menu */
+ /* giÃ£n thÆ°a menu */
 }
 
 /* ==========================================================================
    HEADER (BRANDBAR + NAVSTRIP)
    ========================================================================== */
-/* Hàng trên: logo + tên + liên hệ */
+/* HÃ ng trÃªn: logo + tÃªn + liÃªn há»‡ */
 .brandbar{background:#fff;border-bottom:1px solid #eef2f7}
 .brand-link{color:inherit}
 .brand-logo{height:48px;width:auto;max-width:48px;border-radius:10px;object-fit:contain;display:block}
@@ -61,28 +61,28 @@ html, body { max-width: 100%; overflow-x: clip; }
   color: #fff;
   box-shadow: 0 6px 18px rgba(37,99,235,.35);
   margin-right: .5rem;
-  font-size: 1rem; /* kích thước biểu tượng */
+  font-size: 1rem; /* kÃ­ch thÆ°á»›c biá»ƒu tÆ°á»£ng */
 }
 
-/* Cách xa nhau giữa phone & email */
+/* CÃ¡ch xa nhau giá»¯a phone & email */
 .brandbar .contact-right{ gap: 1.25rem; }
 
-/* Text đậm & màu tối trong brandbar */
+/* Text Ä‘áº­m & mÃ u tá»‘i trong brandbar */
 .brandbar .contact-text{ color:#1f2937; font-weight:700; }
 
-/* Hàng dưới: thanh menu */
+/* HÃ ng dÆ°á»›i: thanh menu */
 .navstrip{background:#f8fafc;border-bottom:1px solid #eef2f7}
 .navstrip .navbar-nav .nav-link{
   white-space:nowrap;font-weight:500;
-  padding:.9rem 0.75rem;        /* tăng chiều cao để “bằng” logo (cảm giác) */
+  padding:.9rem 0.75rem;        /* tÄƒng chiá»u cao Ä‘á»ƒ â€œbáº±ngâ€ logo (cáº£m giÃ¡c) */
 }
 .navstrip .navbar-nav .nav-link.active{color:#f97316;font-weight:700}
 
-/* menu ở giữa + giãn thưa */
+/* menu á»Ÿ giá»¯a + giÃ£n thÆ°a */
 .nav-center{gap:var(--nav-gap)}
 .navbar .navbar-collapse{align-items:center}
 
-/* ===== Auth / Avatar ở HÀNG DƯỚI (bên phải) ===== */
+/* ===== Auth / Avatar á»Ÿ HÃ€NG DÆ¯á»šI (bÃªn pháº£i) ===== */
 .header-auth .btn{ padding:.35rem .9rem }
 .header-auth .btn span:first-child {
     font-size: 0.9rem;
@@ -108,9 +108,9 @@ html, body { max-width: 100%; overflow-x: clip; }
 }
 
 /* ===================== ENHANCED DROPDOWN MENUS (MINIMAL) ===================== */
-/* Giữ nguyên giao diện Bootstrap cơ bản, chỉ thêm hiệu ứng nhẹ */
+/* Giá»¯ nguyÃªn giao diá»‡n Bootstrap cÆ¡ báº£n, chá»‰ thÃªm hiá»‡u á»©ng nháº¹ */
 
-/* Dropdown menu container - chỉ thêm shadow nhẹ */
+/* Dropdown menu container - chá»‰ thÃªm shadow nháº¹ */
 .nav-item.dropdown .dropdown-menu {
     border-radius: 8px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
@@ -129,14 +129,14 @@ html, body { max-width: 100%; overflow-x: clip; }
     }
 }
 
-/* Dropdown items - giữ nguyên padding Bootstrap, chỉ thêm hover effect */
+/* Dropdown items - giá»¯ nguyÃªn padding Bootstrap, chá»‰ thÃªm hover effect */
 .nav-item.dropdown .dropdown-item {
     transition: all 0.2s ease;
     border-radius: 4px;
     margin: 2px 4px;
 }
 
-/* Hover effect nhẹ nhàng */
+/* Hover effect nháº¹ nhÃ ng */
 .nav-item.dropdown .dropdown-item:hover {
     background: #f8f9fa;
     color: #667eea;
@@ -149,7 +149,7 @@ html, body { max-width: 100%; overflow-x: clip; }
     color: white;
 }
 
-/* Dropdown toggle - chỉ thêm hover effect nhẹ */
+/* Dropdown toggle - chá»‰ thÃªm hover effect nháº¹ */
 .nav-item.dropdown .dropdown-toggle {
     transition: color 0.2s ease;
 }
@@ -168,7 +168,7 @@ html, body { max-width: 100%; overflow-x: clip; }
 }
 
 /* ==========================================================================
-   Sections – helpers
+   Sections â€“ helpers
    ========================================================================== */
 .section{padding:3rem 0; position:relative; z-index:3;}
 .section-title{font-weight:700;letter-spacing:-.02em}
@@ -188,7 +188,7 @@ html, body { max-width: 100%; overflow-x: clip; }
 .project-card img{transition:.25s}
 .project-card:hover img{transform:scale(1.03)}
 
-/* Logo đối tác – MẶC ĐỊNH có màu */
+/* Logo Ä‘á»‘i tÃ¡c â€“ Máº¶C Äá»ŠNH cÃ³ mÃ u */
 .partner-logo{
   max-height:60px;
   transition:transform .2s ease;
@@ -248,10 +248,10 @@ html, body { max-width: 100%; overflow-x: clip; }
 @keyframes ringFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
 #mainHero .carousel-indicators [data-bs-target]{width:10px;height:10px;border-radius:50%;background:#cfe3ff;opacity:.8}
 #mainHero .carousel-indicators .active{background:#0d6efd;opacity:1}
-/* bóng nhẹ cho icon (giữ lại) */
+/* bÃ³ng nháº¹ cho icon (giá»¯ láº¡i) */
 #mainHero .carousel-control-prev-icon,#mainHero .carousel-control-next-icon{filter:drop-shadow(0 2px 6px rgba(0,0,0,.4))}
 
-/* ===== FIX: mũi tên chuyển slide luôn hiện + nằm trên mọi overlay ===== */
+/* ===== FIX: mÅ©i tÃªn chuyá»ƒn slide luÃ´n hiá»‡n + náº±m trÃªn má»i overlay ===== */
 #mainHero .carousel-control-prev,
 #mainHero .carousel-control-next{
   width: clamp(48px, 6vw, 72px);
@@ -270,14 +270,14 @@ html, body { max-width: 100%; overflow-x: clip; }
   border-radius:999px;
   filter:drop-shadow(0 2px 8px rgba(0,0,0,.35));
 }
-/* SVG riêng để không phụ thuộc background-image mặc định của Bootstrap */
+/* SVG riÃªng Ä‘á»ƒ khÃ´ng phá»¥ thuá»™c background-image máº·c Ä‘á»‹nh cá»§a Bootstrap */
 #mainHero .carousel-control-prev-icon{
   background-image:url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none'%3e%3cpath d='M10.5 2L4 8l6.5 6' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3e%3c/svg%3e");
 }
 #mainHero .carousel-control-next-icon{
   background-image:url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none'%3e%3cpath d='M5.5 2L12 8l-6.5 6' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3e%3c/svg%3e");
 }
-/* đảm bảo tất cả lớp “trang trí” không chặn click */
+/* Ä‘áº£m báº£o táº¥t cáº£ lá»›p â€œtrang trÃ­â€ khÃ´ng cháº·n click */
 .hero-wrap .slide-overlay,
 .hero-wrap .city-lights,
 .hero-wrap .tech-ring,
@@ -285,40 +285,40 @@ html, body { max-width: 100%; overflow-x: clip; }
   pointer-events:none;
 }
 
-/* ===== Dots dưới vòm trắng (giống ảnh) ===== */
+/* ===== Dots dÆ°á»›i vÃ²m tráº¯ng (giá»‘ng áº£nh) ===== */
 #mainHero .carousel-indicators{
   position:absolute;
   left:50%;
   transform:translateX(-50%);
-  bottom:-26px;                 /* đẩy ra ngoài, nằm dưới vòm */
+  bottom:-26px;                 /* Ä‘áº©y ra ngoÃ i, náº±m dÆ°á»›i vÃ²m */
   gap:.35rem;
   margin:0;
-  z-index:5;                    /* nổi trên vòm */
+  z-index:5;                    /* ná»•i trÃªn vÃ²m */
 }
 #mainHero .carousel-indicators [data-bs-target]{
   width:8px;
   height:8px;
   border-radius:50%;
   border:0;
-  background:#555;             /* chấm xám */
+  background:#555;             /* cháº¥m xÃ¡m */
   opacity:.9;
   box-shadow:0 1px 2px rgba(0,0,0,.15);
 }
 #mainHero .carousel-indicators .active{
-  background:#1e6fff;          /* chấm active xanh */
+  background:#1e6fff;          /* cháº¥m active xanh */
   opacity:1;
-  box-shadow:0 0 0 3px #fff, 0 1px 3px rgba(0,0,0,.2); /* viền trắng nổi bật */
+  box-shadow:0 0 0 3px #fff, 0 1px 3px rgba(0,0,0,.2); /* viá»n tráº¯ng ná»•i báº­t */
 }
 @media (max-width:575.98px){
   #mainHero .carousel-indicators{ bottom:-20px; }
 }
 
-/* Vòm cong phía dưới hero */
+/* VÃ²m cong phÃ­a dÆ°á»›i hero */
 .hero-curve{position:absolute;left:0;right:0;bottom:-1px;height:var(--arc-height);background:transparent;overflow:hidden;pointer-events:none;z-index:2}
 .hero-curve svg{display:block;width:100%;height:100%;animation:curveBob 6s ease-in-out infinite;filter:drop-shadow(0 -8px 14px rgba(0,0,0,.18))}
 @keyframes curveBob{0%,100%{transform:translateY(0)}50%{transform:translateY(2px)}}
 
-/* Waves (nếu dùng) */
+/* Waves (náº¿u dÃ¹ng) */
 .waves-anim{position:relative;height:var(--arc-height);margin-top:-1px;overflow:hidden;z-index:1;pointer-events:none}
 .waves-anim .wave{position:absolute;left:50%;bottom:-1px;transform:translateX(-50%);width:200%;height:100%;display:block}
 .waves-anim .w1{animation:waveX 22s linear infinite, waveBob 6s ease-in-out infinite}
@@ -327,7 +327,7 @@ html, body { max-width: 100%; overflow-x: clip; }
 @keyframes waveX{from{transform:translate(-50%,0)}to{transform:translate(-60%,0)}}
 @keyframes waveBob{0%,100%{bottom:-1px}50%{bottom:2px}}
 
-/* === Hiệu ứng động trên ĐƯỜNG CONG hero (shine + dash + sparkles) === */
+/* === Hiá»‡u á»©ng Ä‘á»™ng trÃªn ÄÆ¯á»œNG CONG hero (shine + dash + sparkles) === */
 .heroCurveSvg{ display:block; width:100%; height:100%; }
 .curve-dash{
   stroke:rgba(255,255,255,.9);
@@ -338,13 +338,13 @@ html, body { max-width: 100%; overflow-x: clip; }
   filter:drop-shadow(0 0 8px rgba(255,255,255,.7));
 }
 @keyframes curveDash{ to{ stroke-dashoffset:-480; } }
-/* Tôn trọng reduce-motion */
+/* TÃ´n trá»ng reduce-motion */
 @media (prefers-reduced-motion:reduce){
   .curve-dash{ animation:none }
 }
 
 /* ==========================================================================
-   FOOTER (mới)
+   FOOTER (má»›i)
    ========================================================================== */
 .site-footer .footer-top{
   position:relative;
@@ -360,11 +360,11 @@ html, body { max-width: 100%; overflow-x: clip; }
   width:72px;height:72px;border-radius:14px;object-fit:contain;
   background:#fff;padding:6px;box-shadow:0 6px 24px rgba(0,0,0,.18);
 }
-.site-footer .brand-title{font-weight:800;letter-spacing:.02em;line-height:1}
-.site-footer .brand-sub{font-weight:800;letter-spacing:.02em;line-height:1}
+.site-footer .brand-title{font-weight:800;letter-spacing:.02em;line-height:1;color:#fff}
+.site-footer .brand-sub{font-weight:800;letter-spacing:.02em;line-height:1;color:#fff}
 .site-footer .brand-slogan{font-size:.78rem;color:rgba(255,255,255,.75);margin-top:.2rem}
 
-/* Info list (địa chỉ/điện thoại/email) */
+/* Info list (Ä‘á»‹a chá»‰/Ä‘iá»‡n thoáº¡i/email) */
 .footer-info .fi{
   width:22px;min-width:22px;height:22px;
   margin-right:.6rem;margin-top:.1rem;
@@ -377,7 +377,7 @@ html, body { max-width: 100%; overflow-x: clip; }
 .footer-info .fi.fi-mail::before{clip-path:polygon(10% 25%,90% 25%,90% 75%,10% 75%,10% 25%,50% 55%,90% 25%)}
 .footer-info p{color:rgba(255,255,255,.9)}
 
-/* Heading có gạch màu cam */
+/* Heading cÃ³ gáº¡ch mÃ u cam */
 .footer-heading{
   position:relative;padding-top:.25rem;margin-bottom:.75rem;font-weight:800;
 }
@@ -386,7 +386,7 @@ html, body { max-width: 100%; overflow-x: clip; }
   background:#f97316;border-radius:2px;
 }
 
-/* Link list cột dịch vụ */
+/* Link list cá»™t dá»‹ch vá»¥ */
 .footer-list{list-style:none;margin:0;padding:0}
 .footer-list li{padding:.55rem 0;border-bottom:1px dashed rgba(255,255,255,.15)}
 .footer-list li:last-child{border-bottom:none}
@@ -418,7 +418,7 @@ html, body { max-width: 100%; overflow-x: clip; }
 .footer-social .yt{background:#FF0000;color:#fff;border-color:#FF0000}
 .footer-social .in{background:#0A66C2;color:#fff;border-color:#0A66C2}
 
-/* Links & text ở mini bar */
+/* Links & text á»Ÿ mini bar */
 .site-footer .footer-link{color:rgba(255,255,255,.85);text-decoration:none}
 .site-footer .footer-link:hover{color:#fff;text-decoration:underline}
 
@@ -483,7 +483,7 @@ html, body { max-width: 100%; overflow-x: clip; }
 }
 .hotline-float:hover{ filter:brightness(.98) }
 
-/* icon tròn + hiệu ứng ripple */
+/* icon trÃ²n + hiá»‡u á»©ng ripple */
 .hl-icon{
   position:relative; width:38px; height:38px; border-radius:50%;
   display:grid; place-items:center; background:linear-gradient(180deg,#ff4d5e,#e11d2e);
@@ -491,7 +491,7 @@ html, body { max-width: 100%; overflow-x: clip; }
 }
 .hl-icon svg{ color:#fff; animation:hl-wiggle 1.2s ease-in-out infinite; transform-origin:50% 50% }
 
-/* 2 vòng ripple */
+/* 2 vÃ²ng ripple */
 .hl-icon::before, .hl-icon::after{
   content:""; position:absolute; inset:-6px; border-radius:50%;
   border:2px solid rgba(255,255,255,.55); opacity:.8;
@@ -504,13 +504,13 @@ html, body { max-width: 100%; overflow-x: clip; }
 .hl-label{ font-weight:700; font-size:.9rem; opacity:.95 }
 .hl-number{ font-weight:800; font-size:1.05rem; letter-spacing:.02em }
 
-/* mobile: chỉ hiện icon để gọn */
+/* mobile: chá»‰ hiá»‡n icon Ä‘á»ƒ gá»n */
 @media (max-width:575.98px){
   .hotline-float{ padding:.45rem; }
   .hl-text{ display:none; }
 }
 
-/* tôn trọng người dùng giảm chuyển động */
+/* tÃ´n trá»ng ngÆ°á»i dÃ¹ng giáº£m chuyá»ƒn Ä‘á»™ng */
 @media (prefers-reduced-motion:reduce){
   .hl-icon::before,.hl-icon::after,.hl-icon svg{ animation:none }
 }
@@ -531,8 +531,8 @@ html, body { max-width: 100%; overflow-x: clip; }
 
 /* ===== Partners grid (final) ===== */
 #partners{
-  padding-top:4.5rem;            /* khoảng cách trên */
-  padding-bottom:4.5rem;         /* khoảng cách dưới */
+  padding-top:4.5rem;            /* khoáº£ng cÃ¡ch trÃªn */
+  padding-bottom:4.5rem;         /* khoáº£ng cÃ¡ch dÆ°á»›i */
 }
 #partners .section-title{
   font-size:clamp(2.6rem, 6vw, 3.8rem);
@@ -561,7 +561,7 @@ html, body { max-width: 100%; overflow-x: clip; }
   #partners .partner-logo{ max-height:96px; }
 }
 
-/* ===== News: đẹp & đồng nhất ảnh ===== */
+/* ===== News: Ä‘áº¹p & Ä‘á»“ng nháº¥t áº£nh ===== */
 :root{
   --news-thumb-sm: 190px;
   --news-thumb-md: 210px;
@@ -600,7 +600,7 @@ html, body { max-width: 100%; overflow-x: clip; }
   padding:.15rem .5rem; border-radius:999px;
 }
 
-/* Fix curve dash fill = none để không bị mảng đen */
+/* Fix curve dash fill = none Ä‘á»ƒ khÃ´ng bá»‹ máº£ng Ä‘en */
 .hero-curve .curve-dash{
   fill: none !important;
   stroke: rgba(255,255,255,.9);
@@ -610,7 +610,7 @@ html, body { max-width: 100%; overflow-x: clip; }
   animation: curveDash 7s linear infinite;
   filter: drop-shadow(0 0 6px rgba(255,255,255,.55));
 }
-/* Đảm bảo phần nền cong vẫn trắng */
+/* Äáº£m báº£o pháº§n ná»n cong váº«n tráº¯ng */
 .hero-curve .curve-fill{ fill:#fff !important; }
 
 /* ===== About page ===== */
@@ -670,11 +670,11 @@ html, body { max-width: 100%; overflow-x: clip; }
   margin: 4px 0 6px 0;
 }
 
-/* ===== ABOUT: mosaic 2 trái + 1 dọc phải ===== */
+/* ===== ABOUT: mosaic 2 trÃ¡i + 1 dá»c pháº£i ===== */
 .mosaic-3{
   --gap: 14px;
-  --left-ratio: 16/10;   /* hai ảnh ngang bên trái */
-  --right-ratio: 9/16;   /* ảnh dọc bên phải */
+  --left-ratio: 16/10;   /* hai áº£nh ngang bÃªn trÃ¡i */
+  --right-ratio: 9/16;   /* áº£nh dá»c bÃªn pháº£i */
   display: grid;
   gap: var(--gap);
 }
@@ -683,13 +683,13 @@ html, body { max-width: 100%; overflow-x: clip; }
   display: block;
   border-radius: 16px;
   box-shadow: 0 10px 28px rgba(0,0,0,.12);
-  background: #f3f6f9; /* tránh nháy trắng */
+  background: #f3f6f9; /* trÃ¡nh nhÃ¡y tráº¯ng */
   object-fit: cover;
 }
 .mosaic-3 .h{ aspect-ratio: var(--left-ratio); }
 .mosaic-3 .v{ aspect-ratio: var(--right-ratio); }
 
-/* Desktop: chia 2 cột (7/5), ảnh phải cao bằng 2 ảnh trái */
+/* Desktop: chia 2 cá»™t (7/5), áº£nh pháº£i cao báº±ng 2 áº£nh trÃ¡i */
 @media (min-width: 992px){
   .mosaic-3{
     grid-template-columns: 7fr 5fr;
@@ -701,7 +701,7 @@ html, body { max-width: 100%; overflow-x: clip; }
   .mosaic-3 .v       { grid-column: 2; grid-row: 1 / span 2; height: 100%; }
 }
 
-/* ============== Layout giữ nguyên ============== */
+/* ============== Layout giá»¯ nguyÃªn ============== */
 .carousel .carousel-item{ position:relative; overflow:hidden; }
 .wheel-split{
   position:absolute; inset:0;
@@ -718,7 +718,7 @@ html, body { max-width: 100%; overflow-x: clip; }
   animation: wheelFloat 8s ease-in-out infinite, wheelGlow 6s ease-in-out infinite alternate;
 }
 
-/* Thêm hiệu ứng bên ngoài wheel */
+/* ThÃªm hiá»‡u á»©ng bÃªn ngoÃ i wheel */
 .wu-core::before,
 .wu-core::after{
   content: "";
@@ -782,7 +782,7 @@ html, body { max-width: 100%; overflow-x: clip; }
   }
 }
 
-/* ============== Nền & aurora (rất nhẹ, không che chữ) ============== */
+/* ============== Ná»n & aurora (ráº¥t nháº¹, khÃ´ng che chá»¯) ============== */
 .slide-overlay::after{
   content:""; position:absolute; inset:-8%; pointer-events:none;
   background:
@@ -825,7 +825,7 @@ html, body { max-width: 100%; overflow-x: clip; }
   50% { opacity: 1.2; }
 }
 
-/* ============== Vòng sáng ============== */
+/* ============== VÃ²ng sÃ¡ng ============== */
 .wheel-ultra{ width:100%; height:100% }
 .ring-title{
   font: 900 12px/1 Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial;
@@ -845,7 +845,7 @@ html, body { max-width: 100%; overflow-x: clip; }
   50% { stroke-width: 28; opacity: 1; }
 }
 
-/* ============== Logo & pulse (mềm) ============== */
+/* ============== Logo & pulse (má»m) ============== */
 .wu-logo{
   position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);
   width: calc(var(--size)*.24); height: calc(var(--size)*.24); border-radius:50%;
@@ -908,7 +908,7 @@ html, body { max-width: 100%; overflow-x: clip; }
   100%{opacity:0; transform:scale(1.3)}
 }
 
-/* ============== Twinkles (rất nhẹ) ============== */
+/* ============== Twinkles (ráº¥t nháº¹) ============== */
 .wu-twinkles{ position:absolute; inset:0; pointer-events:none }
 .wu-twinkles i{
   position:absolute; width:4px; height:4px; border-radius:50%;
@@ -943,7 +943,7 @@ html, body { max-width: 100%; overflow-x: clip; }
   50% { opacity: 0.6; transform: scale(1.2); }
 }
 
-/* ============== CHIP – ƯU TIÊN ĐỌC RÕ ============== */
+/* ============== CHIP â€“ Æ¯U TIÃŠN Äá»ŒC RÃ• ============== */
 .ring-chips{ position:absolute; inset:0; list-style:none; margin:0; padding:0; pointer-events:none; }
 .ring-chips li{ position:absolute; left:50%; top:50%; translate:-50% -50%; }
 .ring-chips .chip{
@@ -965,7 +965,7 @@ html, body { max-width: 100%; overflow-x: clip; }
   cursor: pointer;
   animation: chip-float 6s ease-in-out infinite;
 }
-/* halo cực mỏng phía sau để nổi card trên nền sáng */
+/* halo cá»±c má»ng phÃ­a sau Ä‘á»ƒ ná»•i card trÃªn ná»n sÃ¡ng */
 .ring-chips .chip::after{
   content:""; position:absolute; inset:-8px; border-radius:inherit; z-index:-1;
   box-shadow: 0 14px 24px rgba(15,23,42,.20);
@@ -976,7 +976,7 @@ html, body { max-width: 100%; overflow-x: clip; }
   0%, 100% { transform: translateY(0px); }
   50% { transform: translateY(-2px); }
 }
-/* sheen nhỏ trên mặt chip khi hover (nhưng không chói) */
+/* sheen nhá» trÃªn máº·t chip khi hover (nhÆ°ng khÃ´ng chÃ³i) */
 .ring-chips .chip::before{
   content:""; position:absolute; inset:-25%;
   background: linear-gradient(120deg, transparent 40%, rgba(255,255,255,.6) 50%, transparent 60%);
@@ -996,7 +996,7 @@ html, body { max-width: 100%; overflow-x: clip; }
 }
 .ring-chips .chip:hover::after{ opacity:.22 }
 
-/* Đặt quanh vòng – chữ luôn đứng thẳng và không bị chồng */
+/* Äáº·t quanh vÃ²ng â€“ chá»¯ luÃ´n Ä‘á»©ng tháº³ng vÃ  khÃ´ng bá»‹ chá»“ng */
 .ring-chips li{
   transform:
     rotate(calc(var(--start,0deg) + (var(--k) * 360deg / var(--N))))
@@ -1004,7 +1004,7 @@ html, body { max-width: 100%; overflow-x: clip; }
     rotate(calc(-1 * (var(--start,0deg) + (var(--k) * 360deg / var(--N)))));
 }
 
-/* Kích thước theo nhóm nội dung - tối ưu để không bị chồng */
+/* KÃ­ch thÆ°á»›c theo nhÃ³m ná»™i dung - tá»‘i Æ°u Ä‘á»ƒ khÃ´ng bá»‹ chá»“ng */
 .wheel-left  .ring-chips.short .chip{ 
   --chip-width: 100px; 
   font-size: .65rem;
@@ -1018,7 +1018,7 @@ html, body { max-width: 100%; overflow-x: clip; }
   line-height: 1.15;
 }
 
-/* Tối ưu khoảng cách cho từng wheel - xen kẽ để tránh chồng */
+/* Tá»‘i Æ°u khoáº£ng cÃ¡ch cho tá»«ng wheel - xen káº½ Ä‘á»ƒ trÃ¡nh chá»“ng */
 .wheel-left .ring-chips.short li:nth-child(odd) {
   transform:
     rotate(calc(var(--start,0deg) + (var(--k) * 360deg / var(--N))))
@@ -1047,7 +1047,7 @@ html, body { max-width: 100%; overflow-x: clip; }
     rotate(calc(-1 * (var(--start,0deg) + (var(--k) * 360deg / var(--N)))));
 }
 
-/* Thêm hiệu ứng hover đẹp hơn */
+/* ThÃªm hiá»‡u á»©ng hover Ä‘áº¹p hÆ¡n */
 .ring-chips .chip{
   position: relative;
   overflow: hidden;
@@ -1076,19 +1076,19 @@ html, body { max-width: 100%; overflow-x: clip; }
   filter: brightness(1.1);
 }
 
-/* Hiệu ứng ripple khi click */
+/* Hiá»‡u á»©ng ripple khi click */
 .ring-chips .chip:active{
   transform: translateY(-2px) scale(1.02);
   transition: all .1s ease;
 }
 
-/* Tôn trọng người dùng muốn giảm chuyển động */
+/* TÃ´n trá»ng ngÆ°á»i dÃ¹ng muá»‘n giáº£m chuyá»ƒn Ä‘á»™ng */
 @media (prefers-reduced-motion: reduce) {
   .ring-sheen, .wu-aurora, .wu-pulse, .wu-twinkles i,
   .ring-chips .chip::before, .wu-logo, .wu-core, .ring-chips .chip { animation: none !important }
 }
 
-/* Thêm hiệu ứng particle floating */
+/* ThÃªm hiá»‡u á»©ng particle floating */
 .wheel-split::before{
   content: "";
   position: absolute;
@@ -1108,12 +1108,12 @@ html, body { max-width: 100%; overflow-x: clip; }
   100% { background-position: 100% 100%, -100% -100%, 50% -50%, -50% 50%; }
 }
 
-/* Ẩn hai bánh ở màn nhỏ (tuỳ bạn giữ/ẩn) */
+/* áº¨n hai bÃ¡nh á»Ÿ mÃ n nhá» (tuá»³ báº¡n giá»¯/áº©n) */
 @media (max-width: 991.98px){
   .wheel-split{ display:none; }
 }
 
-/* Responsive cho màn hình trung bình */
+/* Responsive cho mÃ n hÃ¬nh trung bÃ¬nh */
 @media (max-width: 1200px) {
   .wu-core {
     --size: clamp(340px, 32vw, 440px);
@@ -1126,7 +1126,7 @@ html, body { max-width: 100%; overflow-x: clip; }
   .wheel-right .ring-chips.long .chip { --chip-width: 130px; }
 }
 
-/* Responsive cho màn hình nhỏ */
+/* Responsive cho mÃ n hÃ¬nh nhá» */
 @media (max-width: 1400px) {
   .wheel-split {
     gap: clamp(20px, 3vw, 35px);
@@ -1136,7 +1136,7 @@ html, body { max-width: 100%; overflow-x: clip; }
   }
 }
 
-/* Responsive cho màn hình rất nhỏ */
+/* Responsive cho mÃ n hÃ¬nh ráº¥t nhá» */
 @media (max-width: 1600px) {
   .wheel-split {
     gap: clamp(18px, 2.5vw, 30px);
@@ -1330,7 +1330,7 @@ html, body { max-width: 100%; overflow-x: clip; }
 }
 
 .requirements-list li:before {
-    content: "•";
+    content: "â€¢";
     position: absolute;
     left: 0;
     color: #667eea;
@@ -1693,7 +1693,7 @@ html, body { max-width: 100%; overflow-x: clip; }
     background-color: #2ecc71;
     background-image: linear-gradient(135deg, rgba(46, 204, 113, 0.85), rgba(39, 174, 96, 0.85)),
                       url('../img/about/gis-network.png');
-    background-size: contain;
+    background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -1703,7 +1703,7 @@ html, body { max-width: 100%; overflow-x: clip; }
     background-color: #e67e22;
     background-image: linear-gradient(135deg, rgba(230, 126, 34, 0.75), rgba(231, 76, 60, 0.75)),
                       url('../img/contact-hero.webp');
-    background-size: contain;
+    background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -1926,9 +1926,10 @@ html, body { max-width: 100%; overflow-x: clip; }
 }
 
 .hero-buttons .btn {
-    padding: 0.75rem 1.5rem;
-    font-size: 0.95rem;
+    padding: 0.95rem 1.65rem; /* slightly taller across pages */
+    font-size: 1rem;
     margin: 0.25rem;
+    border-radius: 999px;
 }
 
 /* Background blur effect */
@@ -1973,7 +1974,7 @@ html, body { max-width: 100%; overflow-x: clip; }
 }
 
 .official-badge::before {
-    content: '🏛️';
+    content: 'ðŸ›ï¸';
     margin-right: 0.5rem;
 }
 
@@ -2301,7 +2302,7 @@ html, body { max-width: 100%; overflow-x: clip; }
 }
 
 .method-icon.whatsapp-icon::before {
-    content: '📱';
+    content: 'ðŸ“±';
     position: absolute;
     top: 50%;
     left: 50%;
@@ -3646,3 +3647,7 @@ a {
         transform: scale(1.3);
     }
 }
+/* Utility whites for readability over images */
+.text-white-75{ color: rgba(255,255,255,.78) !important; }
+.text-white-85{ color: rgba(255,255,255,.85) !important; }
+
