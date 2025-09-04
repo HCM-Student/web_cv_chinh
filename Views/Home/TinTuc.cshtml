@@ -4,17 +4,71 @@
     ViewData["Title"] = "Tin tức - Sự kiện";
 }
 
+@section Styles {
+    <link rel="stylesheet" href="~/css/news-hero.css" asp-append-version="true" />
+}
+
 <!-- ===================== TIN TỨC HERO ===================== -->
 <section class="news-hero">
     <div class="news-bg">
         <div class="news-overlay"></div>
+        
+        <!-- Floating Elements -->
+        <div class="floating-elements">
+            <div class="floating-icon" style="font-size: 3rem;"><i class="fas fa-newspaper"></i></div>
+            <div class="floating-icon" style="font-size: 2.5rem;"><i class="fas fa-calendar-alt"></i></div>
+            <div class="floating-icon" style="font-size: 3.5rem;"><i class="fas fa-bullhorn"></i></div>
+            <div class="floating-icon" style="font-size: 2rem;"><i class="fas fa-globe"></i></div>
+            <div class="floating-icon" style="font-size: 2.8rem;"><i class="fas fa-trending-up"></i></div>
+        </div>
+        
         <div class="container position-relative" style="z-index: 15;">
             <div class="row align-items-center py-5">
-                <div class="col-lg-8 mx-auto text-center">
-                    <div class="news-content">
-                        <span class="eyebrow text-white-50 mb-3 d-block">Cập nhật thường xuyên</span>
-                        <h1 class="news-title display-4 fw-bold text-white mb-4">Tin tức - Sự kiện</h1>
-                        <p class="text-white-75 fs-5 mb-4">Theo dõi những tin tức mới nhất, sự kiện và xu hướng công nghệ trong lĩnh vực GIS</p>
+                <div class="col-lg-10 mx-auto">
+                    <div class="news-content-wrapper">
+                        <div class="news-content">
+                            <span class="eyebrow text-white-50 mb-3 d-block">📰 Cập nhật thường xuyên</span>
+                            <h1 class="news-title display-4 fw-bold text-white mb-4">Tin tức - Sự kiện</h1>
+                            <p class="text-white-75 fs-5 mb-4">Theo dõi những tin tức mới nhất, sự kiện và xu hướng công nghệ trong lĩnh vực GIS</p>
+                            <div class="hero-buttons mt-4">
+                                <a href="#news-container" class="btn btn-light btn-lg me-3">
+                                    <i class="fas fa-list me-2"></i>Xem tin tức
+                                </a>
+                                <a href="@Url.Action("LienHe", "Home")" class="btn btn-outline-light btn-lg">
+                                    <i class="fas fa-envelope me-2"></i>Liên hệ
+                                </a>
+                            </div>
+                        </div>
+                        
+                        <!-- Stats Section -->
+                        <div class="news-stats-section">
+                            <div class="row">
+                                <div class="col-lg-3 col-6">
+                                    <div class="stat-item">
+                                        <span class="stat-number">@(Model?.Count ?? 0)</span>
+                                        <span class="stat-label">Bài viết mới</span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-6">
+                                    <div class="stat-item">
+                                        <span class="stat-number">24/7</span>
+                                        <span class="stat-label">Cập nhật</span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-6">
+                                    <div class="stat-item">
+                                        <span class="stat-number">100%</span>
+                                        <span class="stat-label">Tin cậy</span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-6">
+                                    <div class="stat-item">
+                                        <span class="stat-number">GIS</span>
+                                        <span class="stat-label">Chuyên ngành</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

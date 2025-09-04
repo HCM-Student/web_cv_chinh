@@ -5,6 +5,10 @@
       "PackagePath": "staticwebassets\\web_cv.dn1lzfaoul.bundle.scp.css"
     },
     {
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\css\\about-hero.css",
+      "PackagePath": "staticwebassets\\css\\about-hero.css"
+    },
+    {
       "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\css\\about.css",
       "PackagePath": "staticwebassets\\css\\about.css"
     },
@@ -13,8 +17,28 @@
       "PackagePath": "staticwebassets\\css\\admin.css"
     },
     {
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\css\\careers-hero.css",
+      "PackagePath": "staticwebassets\\css\\careers-hero.css"
+    },
+    {
       "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\css\\contact.css",
       "PackagePath": "staticwebassets\\css\\contact.css"
+    },
+    {
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\css\\devices-hero.css",
+      "PackagePath": "staticwebassets\\css\\devices-hero.css"
+    },
+    {
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\css\\hero-common.css",
+      "PackagePath": "staticwebassets\\css\\hero-common.css"
+    },
+    {
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\css\\news-hero.css",
+      "PackagePath": "staticwebassets\\css\\news-hero.css"
+    },
+    {
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\css\\pricing-hero.css",
+      "PackagePath": "staticwebassets\\css\\pricing-hero.css"
     },
     {
       "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\css\\services.css",

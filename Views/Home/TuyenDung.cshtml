@@ -2,6 +2,10 @@
     ViewData["Title"] = "Tuyển dụng";
 }
 
+@section Styles {
+    <link rel="stylesheet" href="~/css/careers-hero.css" asp-append-version="true" />
+}
+
 <!-- ===================== TUYỂN DỤNG HERO ===================== -->
 <section class="careers-hero">
     <div class="careers-bg">
@@ -18,50 +22,50 @@
         
         <div class="container position-relative" style="z-index: 15;">
             <div class="row align-items-center py-5">
-                <div class="col-lg-8 mx-auto text-center">
-                    <div class="careers-content">
-                        <span class="eyebrow text-white-50 mb-3 d-block">💼 Tham gia đội ngũ</span>
-                        <h1 class="careers-title display-4 fw-bold text-white mb-4">Cơ hội nghề nghiệp tại Nam Hà Nội</h1>
-                        <p class="text-white-75 fs-5 mb-4">Khởi đầu sự nghiệp với công ty hàng đầu trong lĩnh vực GIS và công nghệ số. Môi trường năng động, chế độ đãi ngộ hấp dẫn.</p>
-                        <div class="hero-buttons mt-4">
-                            <a href="#jobs-list" class="btn btn-light btn-lg me-3">
-                                <i class="fas fa-search me-2"></i>Xem việc làm
-                            </a>
-                            <a href="@Url.Action("LienHe", "Home")" class="btn btn-outline-light btn-lg">
-                                <i class="fas fa-paper-plane me-2"></i>Gửi CV tự do
-                            </a>
+                <div class="col-lg-10 mx-auto">
+                    <div class="careers-content-wrapper">
+                        <div class="careers-content">
+                            <span class="eyebrow text-white-50 mb-3 d-block">💼 Tham gia đội ngũ</span>
+                            <h1 class="careers-title display-4 fw-bold text-white mb-4">Cơ hội nghề nghiệp tại Nam Hà Nội</h1>
+                            <p class="text-white-75 fs-5 mb-4">Khởi đầu sự nghiệp với công ty hàng đầu trong lĩnh vực GIS và công nghệ số. Môi trường năng động, chế độ đãi ngộ hấp dẫn.</p>
+                            <div class="hero-buttons mt-4">
+                                <a href="#jobs-list" class="btn btn-light btn-lg me-3">
+                                    <i class="fas fa-search me-2"></i>Xem việc làm
+                                </a>
+                                <a href="@Url.Action("LienHe", "Home")" class="btn btn-outline-light btn-lg">
+                                    <i class="fas fa-paper-plane me-2"></i>Gửi CV tự do
+                                </a>
+                            </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Stats Overlay -->
-        <div class="stats-overlay">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-3 col-6">
-                        <div class="stat-item">
-                            <span class="stat-number">50+</span>
-                            <span class="stat-label">Nhân viên tài năng</span>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-6">
-                        <div class="stat-item">
-                            <span class="stat-number">5</span>
-                            <span class="stat-label">Vị trí tuyển dụng</span>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-6">
-                        <div class="stat-item">
-                            <span class="stat-number">95%</span>
-                            <span class="stat-label">Nhân viên hài lòng</span>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-6">
-                        <div class="stat-item">
-                            <span class="stat-number">10</span>
-                            <span class="stat-label">Năm kinh nghiệm</span>
+                        
+                        <!-- Stats Section -->
+                        <div class="careers-stats-section">
+                            <div class="row">
+                                <div class="col-lg-3 col-6">
+                                    <div class="stat-item">
+                                        <span class="stat-number">50+</span>
+                                        <span class="stat-label">Nhân viên tài năng</span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-6">
+                                    <div class="stat-item">
+                                        <span class="stat-number">5</span>
+                                        <span class="stat-label">Vị trí tuyển dụng</span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-6">
+                                    <div class="stat-item">
+                                        <span class="stat-number">95%</span>
+                                        <span class="stat-label">Nhân viên hài lòng</span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-6">
+                                    <div class="stat-item">
+                                        <span class="stat-number">10</span>
+                                        <span class="stat-label">Năm kinh nghiệm</span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

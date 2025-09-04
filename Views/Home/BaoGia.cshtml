@@ -2,6 +2,10 @@
     ViewData["Title"] = "Báo giá Dịch vụ - Thiết bị";
 }
 
+@section Styles {
+    <link rel="stylesheet" href="~/css/pricing-hero.css" asp-append-version="true" />
+}
+
 <!-- ===================== BÁO GIÁ HERO ===================== -->
 <section class="pricing-hero">
     <div class="pricing-bg">
@@ -18,50 +22,50 @@
         
         <div class="container position-relative" style="z-index: 15;">
             <div class="row align-items-center py-5">
-                <div class="col-lg-8 mx-auto text-center">
-                    <div class="pricing-content">
-                        <span class="eyebrow text-white-50 mb-3 d-block">💰 Dịch vụ & Giá cả</span>
-                        <h1 class="pricing-title display-4 fw-bold text-white mb-4">Báo giá Dịch vụ - Thiết bị</h1>
-                        <p class="text-white-75 fs-5 mb-4">Các gói dịch vụ và thiết bị với mức giá cạnh tranh nhất thị trường. Tư vấn miễn phí, báo giá chi tiết theo yêu cầu dự án.</p>
-                        <div class="hero-buttons mt-4">
-                            <a href="#service-packages" class="btn btn-light btn-lg me-3">
-                                <i class="fas fa-list me-2"></i>Xem gói dịch vụ
-                            </a>
-                            <a href="@Url.Action("LienHe", "Home")" class="btn btn-outline-light btn-lg">
-                                <i class="fas fa-phone me-2"></i>Tư vấn trực tiếp
-                            </a>
+                <div class="col-lg-10 mx-auto">
+                    <div class="pricing-content-wrapper">
+                        <div class="pricing-content">
+                            <span class="eyebrow text-white-50 mb-3 d-block">💰 Dịch vụ & Giá cả</span>
+                            <h1 class="pricing-title display-4 fw-bold text-white mb-4">Báo giá Dịch vụ - Thiết bị</h1>
+                            <p class="text-white-75 fs-5 mb-4">Các gói dịch vụ và thiết bị với mức giá cạnh tranh nhất thị trường. Tư vấn miễn phí, báo giá chi tiết theo yêu cầu dự án.</p>
+                            <div class="hero-buttons mt-4">
+                                <a href="#service-packages" class="btn btn-light btn-lg me-3">
+                                    <i class="fas fa-list me-2"></i>Xem gói dịch vụ
+                                </a>
+                                <a href="@Url.Action("LienHe", "Home")" class="btn btn-outline-light btn-lg">
+                                    <i class="fas fa-phone me-2"></i>Tư vấn trực tiếp
+                                </a>
+                            </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Stats Overlay -->
-        <div class="stats-overlay">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-3 col-6">
-                        <div class="stat-item">
-                            <span class="stat-number">30%</span>
-                            <span class="stat-label">Tiết kiệm chi phí</span>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-6">
-                        <div class="stat-item">
-                            <span class="stat-number">48h</span>
-                            <span class="stat-label">Phản hồi báo giá</span>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-6">
-                        <div class="stat-item">
-                            <span class="stat-number">1000+</span>
-                            <span class="stat-label">Khách hàng tin tưởng</span>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-6">
-                        <div class="stat-item">
-                            <span class="stat-number">0₫</span>
-                            <span class="stat-label">Phí tư vấn</span>
+                        
+                        <!-- Stats Section -->
+                        <div class="pricing-stats-section">
+                            <div class="row">
+                                <div class="col-lg-3 col-6">
+                                    <div class="stat-item">
+                                        <span class="stat-number">30%</span>
+                                        <span class="stat-label">Tiết kiệm chi phí</span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-6">
+                                    <div class="stat-item">
+                                        <span class="stat-number">48h</span>
+                                        <span class="stat-label">Phản hồi báo giá</span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-6">
+                                    <div class="stat-item">
+                                        <span class="stat-number">1000+</span>
+                                        <span class="stat-label">Khách hàng tin tưởng</span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-6">
+                                    <div class="stat-item">
+                                        <span class="stat-number">0₫</span>
+                                        <span class="stat-label">Phí tư vấn</span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -4,41 +4,76 @@
 
 @section Styles {
     <link rel="stylesheet" href="~/css/about.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/about-hero.css" asp-append-version="true" />
 }
 
-<!-- HERO SECTION WITH PARALLAX -->
-<section class="about-hero-section">
-    <div class="hero-overlay"></div>
-    <div class="hero-particles" id="particles-js"></div>
-    <div class="container">
-        <div class="hero-content">
-            <span class="hero-badge">VỀ CHÚNG TÔI</span>
-            <h1 class="hero-title">
-                Kiến tạo <span class="text-gradient">Tương lai số</span><br>
-                Cho đô thị thông minh
-            </h1>
-            <p class="hero-subtitle">
-                Tiên phong trong công nghệ địa không gian 3D và chuyển đổi số
-            </p>
-            <div class="hero-stats">
-                <div class="stat-item">
-                    <span class="stat-number" data-target="10">0</span><span class="stat-suffix">+</span>
-                    <span class="stat-label">Năm kinh nghiệm</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number" data-target="500">0</span><span class="stat-suffix">+</span>
-                    <span class="stat-label">Dự án hoàn thành</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-number" data-target="100">0</span><span class="stat-suffix">+</span>
-                    <span class="stat-label">Đối tác & Khách hàng</span>
+<!-- HERO SECTION (Unified layout) -->
+<section class="about-hero">
+    <div class="about-hero-bg">
+        <div class="about-hero-overlay"></div>
+
+        <!-- Floating Elements -->
+        <div class="floating-elements">
+            <div class="floating-icon" style="font-size: 3rem;"><i class="fas fa-building"></i></div>
+            <div class="floating-icon" style="font-size: 2.5rem;"><i class="fas fa-cogs"></i></div>
+            <div class="floating-icon" style="font-size: 3.5rem;"><i class="fas fa-satellite"></i></div>
+            <div class="floating-icon" style="font-size: 2rem;"><i class="fas fa-chart-line"></i></div>
+            <div class="floating-icon" style="font-size: 2.8rem;"><i class="fas fa-award"></i></div>
+        </div>
+
+        <div class="container position-relative" style="z-index: 15;">
+            <div class="row align-items-center py-5">
+                <div class="col-lg-10 mx-auto">
+                    <div class="about-content-wrapper">
+                        <div class="about-content">
+                            <span class="eyebrow text-white-50 mb-3 d-block">🏢 VỀ CHÚNG TÔI</span>
+                            <h1 class="about-title display-4 fw-bold text-white mb-4">
+                                Kiến tạo <span class="text-gradient">Tương lai số</span><br>
+                                Cho đô thị thông minh
+                            </h1>
+                            <p class="text-white-75 fs-5 mb-4">Tiên phong trong công nghệ địa không gian 3D và chuyển đổi số</p>
+                            <div class="hero-buttons mt-4">
+                                <a href="#about-intro" class="btn btn-light btn-lg me-3">
+                                    <i class="fas fa-info-circle me-2"></i>Tìm hiểu thêm
+                                </a>
+                                <a href="@Url.Action("LienHe", "Home")" class="btn btn-outline-light btn-lg">
+                                    <i class="fas fa-handshake me-2"></i>Hợp tác
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Stats Section inside wrapper -->
+                        <div class="about-stats-section">
+                            <div class="row">
+                                <div class="col-lg-3 col-6">
+                                    <div class="stat-item">
+                                        <span class="stat-number">10+</span>
+                                        <span class="stat-label">NĂM KINH NGHIỆM</span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-6">
+                                    <div class="stat-item">
+                                        <span class="stat-number">500+</span>
+                                        <span class="stat-label">DỰ ÁN HOÀN THÀNH</span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-6">
+                                    <div class="stat-item">
+                                        <span class="stat-number">100+</span>
+                                        <span class="stat-label">ĐỐI TÁC & KHÁCH HÀNG</span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-6">
+                                    <div class="stat-item">
+                                        <span class="stat-number">15+</span>
+                                        <span class="stat-label">GIẢI THƯỞNG</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <a href="#about-intro" class="scroll-indicator">
-                <span></span>
-                <span></span>
-                <span></span>
-            </a>
         </div>
     </div>
 </section>

@@ -2,6 +2,10 @@
     ViewData["Title"] = "Thiết bị & Công nghệ";
 }
 
+@section Styles {
+    <link rel="stylesheet" href="~/css/devices-hero.css" asp-append-version="true" />
+}
+
 <!-- ===================== THIẾT BỊ HERO ===================== -->
 <section class="devices-hero">
     <div class="devices-bg">
@@ -18,50 +22,50 @@
         
         <div class="container position-relative" style="z-index: 15;">
             <div class="row align-items-center py-5">
-                <div class="col-lg-8 mx-auto text-center">
-                    <div class="devices-content">
-                        <span class="eyebrow text-white-50 mb-3 d-block">🔬 Công nghệ tiên tiến</span>
-                        <h1 class="devices-title display-4 fw-bold text-white mb-4">Thiết bị & Công nghệ GIS</h1>
-                        <p class="text-white-75 fs-5 mb-4">Trang bị thiết bị hiện đại nhất phục vụ khảo sát địa hình, đo đạc bản đồ và phân tích dữ liệu không gian</p>
-                        <div class="hero-buttons mt-4">
-                            <a href="#devices-main" class="btn btn-light btn-lg me-3">
-                                <i class="fas fa-eye me-2"></i>Xem thiết bị
-                            </a>
-                            <a href="@Url.Action("BaoGia", "Home")" class="btn btn-outline-light btn-lg">
-                                <i class="fas fa-calculator me-2"></i>Báo giá thuê
-                            </a>
+                <div class="col-lg-10 mx-auto">
+                    <div class="devices-content-wrapper">
+                        <div class="devices-content">
+                            <span class="eyebrow text-white-50 mb-3 d-block">🔬 CÔNG NGHỆ TIÊN TIẾN</span>
+                            <h1 class="devices-title display-4 fw-bold text-white mb-4">Thiết bị & Công nghệ GIS</h1>
+                            <p class="text-white-75 fs-5 mb-4">Trang bị thiết bị hiện đại nhất phục vụ khảo sát địa hình, đo đạc bản đồ và phân tích dữ liệu không gian</p>
+                            <div class="hero-buttons mt-4">
+                                <a href="#devices-main" class="btn btn-light btn-lg me-3">
+                                    <i class="fas fa-eye me-2"></i>Xem thiết bị
+                                </a>
+                                <a href="@Url.Action("BaoGia", "Home")" class="btn btn-outline-light btn-lg">
+                                    <i class="fas fa-calculator me-2"></i>Báo giá thuê
+                                </a>
+                            </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Stats Overlay -->
-        <div class="stats-overlay">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-3 col-6">
-                        <div class="stat-item">
-                            <span class="stat-number">15+</span>
-                            <span class="stat-label">Thiết bị hiện đại</span>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-6">
-                        <div class="stat-item">
-                            <span class="stat-number">500+</span>
-                            <span class="stat-label">Dự án hoàn thành</span>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-6">
-                        <div class="stat-item">
-                            <span class="stat-number">99.8%</span>
-                            <span class="stat-label">Độ chính xác</span>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-6">
-                        <div class="stat-item">
-                            <span class="stat-number">24/7</span>
-                            <span class="stat-label">Hỗ trợ kỹ thuật</span>
+
+                        <!-- Stats inside wrapper -->
+                        <div class="devices-stats-section">
+                            <div class="row">
+                                <div class="col-lg-3 col-6">
+                                    <div class="stat-item">
+                                        <span class="stat-number">15+</span>
+                                        <span class="stat-label">THIẾT BỊ HIỆN ĐẠI</span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-6">
+                                    <div class="stat-item">
+                                        <span class="stat-number">500+</span>
+                                        <span class="stat-label">DỰ ÁN HOÀN THÀNH</span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-6">
+                                    <div class="stat-item">
+                                        <span class="stat-number">99.8%</span>
+                                        <span class="stat-label">ĐỘ CHÍNH XÁC</span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-6">
+                                    <div class="stat-item">
+                                        <span class="stat-number">24/7</span>
+                                        <span class="stat-label">HỖ TRỢ KỸ THUẬT</span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

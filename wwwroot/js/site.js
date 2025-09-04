@@ -213,7 +213,15 @@ function initTiltHover(){
 
 // ========== HERO COUNTERS ==========
 function initHeroCounters(){
-    const counters = document.querySelectorAll('.stat-number[data-target], .pricing-hero .stat-number, .about-hero-section .stat-number');
+    const counters = document.querySelectorAll(
+        '.stat-number[data-target],\
+        .contact-hero .stat-number,\
+        .pricing-hero .stat-number,\
+        .careers-hero .stat-number,\
+        .news-hero .stat-number,\
+        .devices-hero .stat-number,\
+        .about-hero .stat-number'
+    );
     if(!counters.length) return;
     const animate = (el) => {
         const raw = (el.textContent || '').trim();

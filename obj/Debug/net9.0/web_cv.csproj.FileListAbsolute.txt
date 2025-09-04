@@ -698,8 +698,14 @@ D:\web_cv\obj\Debug\net9.0\compressed\sz760lp45r-6n0iduocqo.gz
 D:\web_cv\obj\Debug\net9.0\compressed\k4z65zi8kg-fww8iajayl.gz
 D:\web_cv\obj\Debug\net9.0\compressed\6h9kldcc6f-dermit3quj.gz
 C:\Users\acer\Downloads\web_cv\obj\Debug\net9.0\compressed\r8y5prb04o-9ae2hgzmpe.gz
-C:\Users\acer\Downloads\web_cv\obj\Debug\net9.0\compressed\wl5u8lnr8q-bp7fgz4nzd.gz
 C:\Users\acer\Downloads\web_cv\obj\Debug\net9.0\compressed\tqxi9wgfru-3lnkbdfj9d.gz
 C:\Users\acer\Downloads\web_cv\obj\Debug\net9.0\compressed\sz760lp45r-q8qhnsdvhq.gz
 C:\Users\acer\Downloads\web_cv\obj\Debug\net9.0\compressed\6h9kldcc6f-d2xly3d5vg.gz
-C:\Users\acer\Downloads\web_cv\obj\Debug\net9.0\compressed\k4z65zi8kg-lmm71isfeb.gz
+C:\Users\acer\Downloads\web_cv\obj\Debug\net9.0\compressed\k4z65zi8kg-afazyu7d1b.gz
+C:\Users\acer\Downloads\web_cv\obj\Debug\net9.0\compressed\ey0rfhkquq-qm723280em.gz
+C:\Users\acer\Downloads\web_cv\obj\Debug\net9.0\compressed\1woyse1sag-s6mevybppk.gz
+C:\Users\acer\Downloads\web_cv\obj\Debug\net9.0\compressed\qmx9es4dqj-05hgl83j9n.gz
+C:\Users\acer\Downloads\web_cv\obj\Debug\net9.0\compressed\yn6qr84kcm-xblg9m61li.gz
+C:\Users\acer\Downloads\web_cv\obj\Debug\net9.0\compressed\jvqeclajf3-17c3z66hv5.gz
+C:\Users\acer\Downloads\web_cv\obj\Debug\net9.0\compressed\5c39lythn3-1pznk2yjnw.gz
+C:\Users\acer\Downloads\web_cv\obj\Debug\net9.0\compressed\wl5u8lnr8q-cpwy8omj60.gz
