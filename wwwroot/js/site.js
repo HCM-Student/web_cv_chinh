@@ -233,11 +233,13 @@ function initHeroCounters(){
         const numberToken = hasTarget ? (parsed ? parsed[0] : '0') : (parsed ? parsed[0] : '');
         const prefix = raw && numberToken ? raw.slice(0, raw.indexOf(numberToken)) : '';
         const suffix = raw && numberToken ? raw.slice(raw.indexOf(numberToken) + numberToken.length) : '';
-        const duration = 1200;
+        const duration = 2000;
         const start = performance.now();
         const step = (now) => {
             const p = Math.min(1, (now - start) / duration);
-            const val = Math.floor(endValue * p);
+            // Easing function: ease-out (starts fast, slows down)
+            const easedP = 1 - Math.pow(1 - p, 3);
+            const val = Math.floor(endValue * easedP);
             el.textContent = `${prefix}${val.toLocaleString()}${suffix}`;
             if(p < 1) requestAnimationFrame(step);
         };
