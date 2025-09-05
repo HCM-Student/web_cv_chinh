@@ -109,6 +109,21 @@
       .chat-modal-content {
         height: 80vh;
         max-height: 600px;
+        border-radius: 12px;
+        overflow: hidden;
+      }
+
+      @@media (max-width: 768px) {
+        .chat-modal-content {
+          height: 90vh;
+          max-height: none;
+          margin: 10px;
+        }
+        
+        .modal-dialog {
+          margin: 0;
+          max-width: none;
+        }
       }
 
       .chat-modal-header {
@@ -119,7 +134,7 @@
       }
 
       .conversation-list {
-        height: calc(80vh - 60px);
+        height: calc(80vh - 120px);
         display: flex;
         flex-direction: column;
       }
@@ -140,10 +155,11 @@
         padding: 1rem 1.5rem;
         border-bottom: 1px solid #f0f0f0;
         cursor: pointer;
-        transition: background-color 0.2s;
+        transition: all 0.2s ease;
         display: flex;
         align-items: center;
         gap: 12px;
+        position: relative;
       }
 
       .conversation-item:hover {
@@ -156,18 +172,37 @@
       }
 
       .admin-chat-item {
-        background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+        background: linear-gradient(135deg, #e8f5e8, #f0f8f0);
         border-left: 4px solid #28a745;
         font-weight: 600;
+        position: relative;
+      }
+
+      .admin-chat-item::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(135deg, rgba(40, 167, 69, 0.05), rgba(32, 201, 151, 0.05));
+        opacity: 0;
+        transition: opacity 0.2s ease;
       }
 
       .admin-chat-item:hover {
         background: linear-gradient(135deg, #e3f2fd, #f8f9fa);
+        transform: translateX(2px);
+      }
+
+      .admin-chat-item:hover::before {
+        opacity: 1;
       }
 
       .admin-chat-item.active {
         background: linear-gradient(135deg, #d4edda, #c3e6cb);
         border-left: 4px solid #28a745;
+        box-shadow: inset 0 0 0 1px rgba(40, 167, 69, 0.2);
       }
 
       .conversation-avatar {
@@ -215,7 +250,7 @@
       }
 
       .chat-window {
-        height: calc(80vh - 60px);
+        height: calc(80vh - 120px);
         display: flex;
         flex-direction: column;
       }
@@ -742,8 +777,8 @@
                     <i class="fas fa-comments"></i>
                 </div>
                 <div class="chat-text">
-                    <div class="chat-label">Hỗ trợ</div>
-                    <div class="chat-subtitle">Nhắn tin</div>
+                    <div class="chat-label">Nhắn tin</div>
+                    <div class="chat-subtitle">với chúng tôi</div>
                 </div>
             </button>
         </div>
@@ -754,7 +789,7 @@
                 <div class="modal-content chat-modal-content">
                     <div class="modal-header chat-modal-header">
                         <h5 class="modal-title" id="chatModalLabel">
-                            <i class="fas fa-comments me-2"></i>Tin nhắn với quản trị
+                            <i class="fas fa-comments me-2"></i>Nhắn tin với chúng tôi
                         </h5>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>

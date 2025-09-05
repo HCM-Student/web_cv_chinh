@@ -710,3 +710,4 @@ C:\Users\acer\Downloads\web_cv\obj\Debug\net9.0\compressed\tqxi9wgfru-i5xoo8gxtn
 C:\Users\acer\Downloads\web_cv\obj\Debug\net9.0\compressed\sz760lp45r-3fjxvfvj44.gz
 C:\Users\acer\Downloads\web_cv\obj\Debug\net9.0\compressed\6h9kldcc6f-3vr26cfono.gz
 C:\Users\acer\Downloads\web_cv\bin\Debug\net9.0\App_Data\messages.json
+C:\Users\acer\Downloads\web_cv\obj\Debug\net9.0\compressed\vetgwtkxeu-f0pn282mje.gz

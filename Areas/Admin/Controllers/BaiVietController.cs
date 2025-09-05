@@ -47,7 +47,7 @@ namespace WEB_CV.Areas.Admin.Controllers
             return View(new BaiViet());
         }
 
-chuyện        // GET: /Admin/BaiViet/CreateEvent
+        // GET: /Admin/BaiViet/CreateEvent
         public async Task<IActionResult> CreateEvent()
         {
             await LoadDropdowns();

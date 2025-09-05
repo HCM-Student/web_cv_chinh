@@ -19,8 +19,13 @@ namespace WEB_CV.Services
 
         public async Task<List<Conversation>> GetConversationsAsync(int currentUserId)
         {
-            var conversations = await _db.Messages
+            // Get all messages for current user
+            var messages = await _db.Messages
                 .Where(m => m.FromUserId == currentUserId || m.ToUserId == currentUserId)
+                .ToListAsync();
+
+            // Group by other user ID
+            var groupedMessages = messages
                 .GroupBy(m => m.FromUserId == currentUserId ? m.ToUserId : m.FromUserId)
                 .Select(g => new
                 {
@@ -29,9 +34,9 @@ namespace WEB_CV.Services
                     UnreadCount = g.Count(x => x.ToUserId == currentUserId && !x.IsRead)
                 })
                 .OrderByDescending(x => x.LastMessage.SentAtUtc)
-                .ToListAsync();
+                .ToList();
 
-            return conversations.Select(x => new Conversation
+            return groupedMessages.Select(x => new Conversation
             {
                 UserAId = currentUserId,
                 UserBId = x.OtherUserId,

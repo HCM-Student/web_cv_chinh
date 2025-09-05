@@ -36,6 +36,18 @@
       <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-cVT4WlYh/3T77WvtRL2sS6vPx28AyDq4RcUh5tfHMaU="}]]]></EndpointProperties>
       <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"19016"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022cVT4WlYh/3T77WvtRL2sS6vPx28AyDq4RcUh5tfHMaU=\u0022"},{"Name":"Last-Modified","Value":"Fri, 05 Sep 2025 15:00:15 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/web_cv/css/auth.css">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\auth.css'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-X\u002BAr0bUgi9IKDjY\u002BwOOnlF8HYuH0L2l8bZPu4G02c7A="}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"no-cache"},{"Name":"Content-Length","Value":"13537"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022X\u002BAr0bUgi9IKDjY\u002BwOOnlF8HYuH0L2l8bZPu4G02c7A=\u0022"},{"Name":"Last-Modified","Value":"Fri, 05 Sep 2025 16:32:37 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/web_cv/css/auth.f0pn282mje.css">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\auth.css'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"f0pn282mje"},{"Name":"integrity","Value":"sha256-X\u002BAr0bUgi9IKDjY\u002BwOOnlF8HYuH0L2l8bZPu4G02c7A="},{"Name":"label","Value":"_content/web_cv/css/auth.css"}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"13537"},{"Name":"Content-Type","Value":"text/css"},{"Name":"ETag","Value":"\u0022X\u002BAr0bUgi9IKDjY\u002BwOOnlF8HYuH0L2l8bZPu4G02c7A=\u0022"},{"Name":"Last-Modified","Value":"Fri, 05 Sep 2025 16:32:37 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/web_cv/css/careers-hero.css">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\careers-hero.css'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
