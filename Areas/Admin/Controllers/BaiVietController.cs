@@ -47,6 +47,21 @@ namespace WEB_CV.Areas.Admin.Controllers
             return View(new BaiViet());
         }
 
+chuyện        // GET: /Admin/BaiViet/CreateEvent
+        public async Task<IActionResult> CreateEvent()
+        {
+            await LoadDropdowns();
+            // Tìm chuyên mục "Sự kiện" (nếu có) để chọn sẵn
+            var suKien = await _db.ChuyenMucs.FirstOrDefaultAsync(x => x.Ten == "Sự kiện");
+            var model = new BaiViet
+            {
+                ChuyenMucId = suKien?.Id ?? 0,
+                NgayDang = DateTime.UtcNow
+            };
+            ViewData["PresetCategoryName"] = suKien?.Ten ?? "";
+            return View("Create", model);
+        }
+
         // POST: /Admin/BaiViet/Create
         [HttpPost]
         [ValidateAntiForgeryToken]

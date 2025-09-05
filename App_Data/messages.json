@@ -1,0 +1,76 @@
+{
+  "Messages": [
+    {
+      "Id": "f76b9fae-75aa-44d0-973a-ace5b12d6715",
+      "FromUserId": 1,
+      "ToUserId": 1,
+      "Content": "wearthing",
+      "SentAtUtc": "2025-09-05T15:29:46.4326553Z",
+      "IsRead": true
+    },
+    {
+      "Id": "3a6154cd-5147-42e8-a2bc-e61ec8b0ff0d",
+      "FromUserId": 2,
+      "ToUserId": 1,
+      "Content": "10",
+      "SentAtUtc": "2025-09-05T15:30:09.9665788Z",
+      "IsRead": true
+    },
+    {
+      "Id": "f36ffb0a-54e5-4163-b214-d6d5a8707ac7",
+      "FromUserId": 1,
+      "ToUserId": 2,
+      "Content": "wearthing",
+      "SentAtUtc": "2025-09-05T15:30:24.4439129Z",
+      "IsRead": true
+    },
+    {
+      "Id": "0725fa8d-d0f7-431d-9b23-654bafd5dba4",
+      "FromUserId": 2,
+      "ToUserId": 1,
+      "Content": "123",
+      "SentAtUtc": "2025-09-05T15:37:25.5446737Z",
+      "IsRead": true
+    },
+    {
+      "Id": "a449303b-1919-4745-b54f-5a6d491a69e8",
+      "FromUserId": 1,
+      "ToUserId": 2,
+      "Content": "ch\u00E0o b\u1EA1n",
+      "SentAtUtc": "2025-09-05T15:37:47.5468653Z",
+      "IsRead": true
+    },
+    {
+      "Id": "441af6f7-d9e4-4a49-9ef9-97f7aef9cbb6",
+      "FromUserId": 2,
+      "ToUserId": 1,
+      "Content": "123",
+      "SentAtUtc": "2025-09-05T15:41:47.1475135Z",
+      "IsRead": true
+    },
+    {
+      "Id": "cee0ecdd-ff79-4419-8c01-051bcf2b43f4",
+      "FromUserId": 1,
+      "ToUserId": 2,
+      "Content": "123",
+      "SentAtUtc": "2025-09-05T15:42:05.5669541Z",
+      "IsRead": true
+    },
+    {
+      "Id": "e2f66791-db7a-454b-8159-1dd60206339a",
+      "FromUserId": 2,
+      "ToUserId": 1,
+      "Content": "123",
+      "SentAtUtc": "2025-09-05T15:42:32.5264727Z",
+      "IsRead": false
+    },
+    {
+      "Id": "1c9da68f-7b10-4787-b911-0128af2e28d5",
+      "FromUserId": 2,
+      "ToUserId": 1,
+      "Content": "123",
+      "SentAtUtc": "2025-09-05T15:42:35.672495Z",
+      "IsRead": false
+    }
+  ]
+}

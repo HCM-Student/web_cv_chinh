@@ -1,0 +1,30 @@
+@model WEB_CV.Models.BaiViet
+@{
+    ViewData["Title"] = "Xóa sự kiện";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="card">
+  <div class="card-header">
+    <h5 class="mb-0"><i class="fas fa-trash me-2"></i>Xác nhận xoá sự kiện</h5>
+  </div>
+  <div class="card-body">
+    <dl class="row">
+      <dt class="col-sm-2">Tiêu đề</dt>
+      <dd class="col-sm-10">@Model.TieuDe</dd>
+      <dt class="col-sm-2">Tóm tắt</dt>
+      <dd class="col-sm-10">@Model.TomTat</dd>
+      <dt class="col-sm-2">Ngày đăng</dt>
+      <dd class="col-sm-10">@Model.NgayDang.ToString("dd/MM/yyyy HH:mm")</dd>
+    </dl>
+
+    <form asp-action="Delete" method="post">
+      @Html.AntiForgeryToken()
+      <input type="hidden" asp-for="Id" />
+      <a asp-action="Index" class="btn btn-secondary">Hủy</a>
+      <button type="submit" class="btn btn-danger"><i class="fas fa-trash me-2"></i>Xoá</button>
+    </form>
+  </div>
+</div>
+
+

@@ -41,6 +41,333 @@
       .nav-item.dropdown .dropdown-item:hover{color:var(--primary-color)!important}
       .nav-item.dropdown .dropdown-item.active{background:var(--primary-color)!important;color:#fff!important}
       .nav-item.dropdown .dropdown-toggle:hover{color:var(--primary-color)!important}
+
+      /* Floating Chat Widget */
+      .floating-chat-widget {
+        position: fixed;
+        right: 20px;
+        bottom: 20px;
+        z-index: 1000;
+        animation: float 3s ease-in-out infinite;
+      }
+
+      .chat-button {
+        display: flex;
+        align-items: center;
+        background: linear-gradient(135deg, #28a745, #20c997);
+        color: white;
+        text-decoration: none;
+        padding: 12px 16px;
+        border-radius: 50px;
+        box-shadow: 0 4px 20px rgba(40, 167, 69, 0.3);
+        transition: all 0.3s ease;
+        min-width: 140px;
+      }
+
+      .chat-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 25px rgba(40, 167, 69, 0.4);
+        color: white;
+        text-decoration: none;
+      }
+
+      .chat-icon {
+        background: rgba(255, 255, 255, 0.2);
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 12px;
+        font-size: 18px;
+      }
+
+      .chat-text {
+        display: flex;
+        flex-direction: column;
+        line-height: 1.2;
+      }
+
+      .chat-label {
+        font-weight: 600;
+        font-size: 14px;
+        margin-bottom: 2px;
+      }
+
+      .chat-subtitle {
+        font-size: 12px;
+        opacity: 0.9;
+      }
+
+      @@keyframes float {
+        0%, 100% { transform: translateY(0px); }
+        50% { transform: translateY(-10px); }
+      }
+
+      /* Chat Modal Styles */
+      .chat-modal-content {
+        height: 80vh;
+        max-height: 600px;
+      }
+
+      .chat-modal-header {
+        background: linear-gradient(135deg, #007bff, #0056b3);
+        color: white;
+        border-bottom: none;
+        padding: 1rem 1.5rem;
+      }
+
+      .conversation-list {
+        height: calc(80vh - 60px);
+        display: flex;
+        flex-direction: column;
+      }
+
+      .conversation-header {
+        padding: 1rem 1.5rem;
+        background: #f8f9fa;
+        border-bottom: 1px solid #dee2e6;
+      }
+
+      .conversation-items {
+        flex: 1;
+        overflow-y: auto;
+        padding: 0.5rem 0;
+      }
+
+      .conversation-item {
+        padding: 1rem 1.5rem;
+        border-bottom: 1px solid #f0f0f0;
+        cursor: pointer;
+        transition: background-color 0.2s;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .conversation-item:hover {
+        background-color: #f8f9fa;
+      }
+
+      .conversation-item.active {
+        background-color: #e3f2fd;
+        border-left: 4px solid #007bff;
+      }
+
+      .admin-chat-item {
+        background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+        border-left: 4px solid #28a745;
+        font-weight: 600;
+      }
+
+      .admin-chat-item:hover {
+        background: linear-gradient(135deg, #e3f2fd, #f8f9fa);
+      }
+
+      .admin-chat-item.active {
+        background: linear-gradient(135deg, #d4edda, #c3e6cb);
+        border-left: 4px solid #28a745;
+      }
+
+      .conversation-avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #007bff, #0056b3);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 16px;
+      }
+
+      .conversation-info {
+        flex: 1;
+        min-width: 0;
+      }
+
+      .conversation-name {
+        font-weight: 600;
+        margin-bottom: 2px;
+        color: #333;
+      }
+
+      .conversation-preview {
+        font-size: 0.875rem;
+        color: #666;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      .conversation-badge {
+        background: #dc3545;
+        color: white;
+        border-radius: 50%;
+        width: 20px;
+        height: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.75rem;
+        font-weight: 600;
+      }
+
+      .chat-window {
+        height: calc(80vh - 60px);
+        display: flex;
+        flex-direction: column;
+      }
+
+      .chat-header {
+        padding: 1rem 1.5rem;
+        background: #f8f9fa;
+        border-bottom: 1px solid #dee2e6;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .chat-avatar {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, #28a745, #20c997);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 16px;
+      }
+
+      .chat-user-details h6 {
+        color: #333;
+        margin: 0;
+      }
+
+      .chat-messages {
+        flex: 1;
+        overflow-y: auto;
+        padding: 1rem;
+        background: #fafafa;
+      }
+
+      .message {
+        margin-bottom: 1rem;
+        display: flex;
+        align-items: flex-end;
+        gap: 8px;
+      }
+
+      .message.sent {
+        justify-content: flex-end;
+      }
+
+      .message.received {
+        justify-content: flex-start;
+      }
+
+      .message-bubble {
+        max-width: 70%;
+        padding: 0.75rem 1rem;
+        border-radius: 18px;
+        position: relative;
+      }
+
+      .message.sent .message-bubble {
+        background: linear-gradient(135deg, #007bff, #0056b3);
+        color: white;
+        border-bottom-right-radius: 4px;
+      }
+
+      .message.received .message-bubble {
+        background: white;
+        color: #333;
+        border: 1px solid #e0e0e0;
+        border-bottom-left-radius: 4px;
+      }
+
+      .message-time {
+        font-size: 0.75rem;
+        color: #666;
+        margin-top: 4px;
+      }
+
+      .message.sent .message-time {
+        text-align: right;
+      }
+
+      .chat-input {
+        padding: 1rem 1.5rem;
+        background: white;
+        border-top: 1px solid #dee2e6;
+      }
+
+      .chat-input form {
+        display: flex;
+        gap: 0.5rem;
+      }
+
+      .chat-input input {
+        border-radius: 20px;
+        border: 1px solid #ddd;
+        padding: 0.5rem 1rem;
+      }
+
+      .chat-input input:focus {
+        border-color: #007bff;
+        box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+      }
+
+      .chat-input button {
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      /* Mobile responsive */
+      @@media (max-width: 768px) {
+        .floating-chat-widget {
+          right: 15px;
+          bottom: 15px;
+        }
+        
+        .chat-button {
+          padding: 10px 14px;
+          min-width: 120px;
+        }
+        
+        .chat-icon {
+          width: 35px;
+          height: 35px;
+          font-size: 16px;
+          margin-right: 10px;
+        }
+        
+        .chat-label {
+          font-size: 13px;
+        }
+        
+        .chat-subtitle {
+          font-size: 11px;
+        }
+
+        .chat-modal-content {
+          height: 90vh;
+        }
+
+        .conversation-list {
+          height: calc(90vh - 60px);
+        }
+
+        .chat-window {
+          height: calc(90vh - 60px);
+        }
+      }
     </style>
     @await RenderSectionAsync("Styles", required: false)
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap&subset=vietnamese" rel="stylesheet">\n</head>
@@ -88,6 +415,316 @@
       refreshBadges();
       setInterval(refreshBadges, 30000);
     })();
+
+    // Chat Modal Functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      const chatModal = document.getElementById('chatModal');
+      const conversationList = document.getElementById('conversationList');
+      const chatMessages = document.getElementById('chatMessages');
+      const chatInput = document.getElementById('chatInput');
+      const messageForm = document.getElementById('messageForm');
+      const messageText = document.getElementById('messageText');
+      
+      let currentChatUserId = null;
+
+      // Load conversations when modal opens
+      chatModal.addEventListener('show.bs.modal', function() {
+        loadConversations();
+      });
+
+      // Load conversations
+      async function loadConversations() {
+        conversationList.innerHTML = '';
+        
+        // Always show "Start chat with admin" option first
+        const adminItem = createAdminChatItem();
+        conversationList.appendChild(adminItem);
+        
+        try {
+          const response = await fetch('/Messages');
+          if (!response.ok) {
+            // If no conversations, auto-select admin
+            adminItem.click();
+            return;
+          }
+          
+          const html = await response.text();
+          const parser = new DOMParser();
+          const doc = parser.parseFromString(html, 'text/html');
+          const conversations = doc.querySelectorAll('.list-group-item');
+          
+          // Add existing conversations
+          conversations.forEach(conv => {
+            const href = conv.getAttribute('href');
+            const userId = href ? href.split('with=')[1] : null;
+            if (userId) {
+              const conversationItem = createConversationItem(conv.textContent.trim(), userId);
+              conversationList.appendChild(conversationItem);
+            }
+          });
+          
+          // Auto-select admin chat if no conversations exist
+          if (conversations.length === 0) {
+            adminItem.click();
+          }
+        } catch (error) {
+          console.error('Error loading conversations:', error);
+          // Auto-select admin chat on error
+          adminItem.click();
+        }
+      }
+
+      // Create admin chat item
+      function createAdminChatItem() {
+        const item = document.createElement('div');
+        item.className = 'conversation-item admin-chat-item';
+        item.dataset.userId = 'admin';
+        
+        item.innerHTML = `
+          <div class="conversation-avatar" style="background: linear-gradient(135deg, #28a745, #20c997);">
+            <i class="fas fa-user-shield"></i>
+          </div>
+          <div class="conversation-info">
+            <div class="conversation-name">Quản trị viên</div>
+            <div class="conversation-preview">Bắt đầu chat với admin</div>
+          </div>
+        `;
+        
+        item.addEventListener('click', function(e) {
+          e.preventDefault();
+          console.log('Admin chat item clicked!');
+          startChatWithAdmin();
+        });
+        
+        // Add cursor pointer style
+        item.style.cursor = 'pointer';
+        
+        return item;
+      }
+
+      // Create conversation item
+      function createConversationItem(name, userId) {
+        const item = document.createElement('div');
+        item.className = 'conversation-item';
+        item.dataset.userId = userId;
+        
+        item.innerHTML = `
+          <div class="conversation-avatar">
+            <i class="fas fa-user"></i>
+          </div>
+          <div class="conversation-info">
+            <div class="conversation-name">${name}</div>
+            <div class="conversation-preview">Nhấn để bắt đầu trò chuyện</div>
+          </div>
+        `;
+        
+        item.addEventListener('click', () => selectConversation(userId, name));
+        return item;
+      }
+
+      // Start chat with admin
+      async function startChatWithAdmin() {
+        console.log('Starting chat with admin...');
+        try {
+          // Get admin user ID
+          const adminUserId = await getAdminUserId();
+          console.log('Admin user ID:', adminUserId);
+          
+          if (adminUserId) {
+            selectConversation(adminUserId, 'Quản trị viên');
+            await loadMessages(adminUserId);
+          } else {
+            // Fallback: use admin ID 1
+            selectConversation('1', 'Quản trị viên');
+            await loadMessages('1');
+          }
+        } catch (error) {
+          console.error('Error starting chat with admin:', error);
+          // Fallback: use admin ID 1
+          selectConversation('1', 'Quản trị viên');
+          await loadMessages('1');
+        }
+      }
+
+      // Get admin user ID
+      async function getAdminUserId() {
+        try {
+          const response = await fetch('/api/admin/user-id');
+          if (response.ok) {
+            const data = await response.json();
+            return data.userId;
+          }
+        } catch (error) {
+          console.error('Error getting admin user ID:', error);
+        }
+        return '1'; // Fallback to admin ID 1
+      }
+
+      // Select conversation
+      function selectConversation(userId, userName) {
+        console.log('Selecting conversation:', userId, userName);
+        currentChatUserId = userId;
+        
+        // Update active state
+        document.querySelectorAll('.conversation-item').forEach(item => {
+          item.classList.remove('active');
+        });
+        
+        const activeItem = document.querySelector(`[data-user-id="${userId}"]`) || 
+                          document.querySelector('.admin-chat-item');
+        if (activeItem) {
+          activeItem.classList.add('active');
+        }
+        
+        // Update chat header
+        const chatHeader = document.getElementById('chatHeader');
+        chatHeader.innerHTML = `
+          <div class="chat-user-info">
+            <div class="chat-avatar">
+              <i class="fas fa-user-shield"></i>
+            </div>
+            <div class="chat-user-details">
+              <h6 class="mb-0">${userName}</h6>
+              <small class="text-muted">Đang hoạt động</small>
+            </div>
+          </div>
+        `;
+        
+        // Show chat input
+        chatInput.style.display = 'block';
+        
+        // Clear messages first
+        chatMessages.innerHTML = `
+          <div class="text-center p-4">
+            <div class="spinner-border text-primary" role="status">
+              <span class="visually-hidden">Loading...</span>
+            </div>
+            <p class="mt-3">Đang tải tin nhắn...</p>
+          </div>
+        `;
+      }
+
+      // Load messages
+      async function loadMessages(userId, existingMessages = null) {
+        console.log('Loading messages for user:', userId);
+        
+        if (existingMessages) {
+          displayMessages(existingMessages);
+          return;
+        }
+
+        try {
+          const response = await fetch(`/Messages/Chat?with=${userId}`);
+          console.log('Messages response status:', response.status);
+          
+          if (!response.ok) {
+            console.error('Failed to load messages:', response.status);
+            displayNoMessages();
+            return;
+          }
+          
+          const html = await response.text();
+          const parser = new DOMParser();
+          const doc = parser.parseFromString(html, 'text/html');
+          const messages = doc.querySelectorAll('.message');
+          
+          console.log('Found messages:', messages.length);
+          displayMessages(messages);
+        } catch (error) {
+          console.error('Error loading messages:', error);
+          displayNoMessages();
+        }
+      }
+
+      // Display no messages state
+      function displayNoMessages() {
+        chatMessages.innerHTML = `
+          <div class="text-center p-4">
+            <i class="fas fa-comments text-muted mb-3" style="font-size: 3rem;"></i>
+            <p class="text-muted">Chưa có tin nhắn nào. Hãy bắt đầu cuộc trò chuyện!</p>
+          </div>
+        `;
+      }
+
+      // Display messages
+      function displayMessages(messages) {
+        chatMessages.innerHTML = '';
+        
+        if (messages.length === 0) {
+          chatMessages.innerHTML = `
+            <div class="text-center p-4">
+              <i class="fas fa-comments text-muted mb-3" style="font-size: 3rem;"></i>
+              <p class="text-muted">Chưa có tin nhắn nào. Hãy bắt đầu cuộc trò chuyện!</p>
+            </div>
+          `;
+          return;
+        }
+
+        messages.forEach(msg => {
+          const timeElement = msg.querySelector('.small');
+          const contentElement = msg.querySelector('.p-2');
+          
+          if (timeElement && contentElement) {
+            const time = timeElement.textContent.trim();
+            const content = contentElement.textContent.trim();
+            
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message sent'; // Default to sent, you can adjust based on your logic
+            messageDiv.innerHTML = `
+              <div class="message-bubble">
+                <div>${content}</div>
+                <div class="message-time">${time}</div>
+              </div>
+            `;
+            
+            chatMessages.appendChild(messageDiv);
+          }
+        });
+        
+        // Scroll to bottom
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+      }
+
+      // Send message
+      messageForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        const content = messageText.value.trim();
+        if (!content || !currentChatUserId) return;
+        
+        try {
+          const formData = new FormData();
+          formData.append('toUserId', currentChatUserId);
+          formData.append('content', content);
+          formData.append('__RequestVerificationToken', document.querySelector('input[name="__RequestVerificationToken"]').value);
+          
+          const response = await fetch('/Messages/Send', {
+            method: 'POST',
+            body: formData
+          });
+          
+          if (response.ok) {
+            // Add message to UI immediately
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'message sent';
+            messageDiv.innerHTML = `
+              <div class="message-bubble">
+                <div>${content}</div>
+                <div class="message-time">Vừa gửi</div>
+              </div>
+            `;
+            
+            chatMessages.appendChild(messageDiv);
+            messageText.value = '';
+            
+            // Scroll to bottom
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+          }
+        } catch (error) {
+          console.error('Error sending message:', error);
+        }
+      });
+    });
     </script>
     @await RenderSectionAsync("Scripts", required: false)
 
@@ -95,6 +732,84 @@
     <button id="backToTop" class="back-to-top" aria-label="Lên đầu trang" title="Lên đầu trang">
         <i class="bi bi-arrow-up-short"></i>
     </button>
+
+    <!-- Floating Chat Button -->
+    @if (User?.Identity?.IsAuthenticated ?? false)
+    {
+        <div class="floating-chat-widget">
+            <button type="button" class="chat-button" data-bs-toggle="modal" data-bs-target="#chatModal" title="Nhắn tin với quản trị">
+                <div class="chat-icon">
+                    <i class="fas fa-comments"></i>
+                </div>
+                <div class="chat-text">
+                    <div class="chat-label">Hỗ trợ</div>
+                    <div class="chat-subtitle">Nhắn tin</div>
+                </div>
+            </button>
+        </div>
+
+        <!-- Chat Modal -->
+        <div class="modal fade" id="chatModal" tabindex="-1" aria-labelledby="chatModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-xl">
+                <div class="modal-content chat-modal-content">
+                    <div class="modal-header chat-modal-header">
+                        <h5 class="modal-title" id="chatModalLabel">
+                            <i class="fas fa-comments me-2"></i>Tin nhắn với quản trị
+                        </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body p-0">
+                        <div class="row g-0 h-100">
+                            <!-- Left Panel - Conversation List -->
+                            <div class="col-md-4 border-end">
+                                <div class="conversation-list">
+                                    <div class="conversation-header">
+                                        <h6 class="mb-0">Cuộc trò chuyện</h6>
+                                    </div>
+                                    <div class="conversation-items" id="conversationList">
+                                        <!-- Conversations will be loaded here -->
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Right Panel - Chat Window -->
+                            <div class="col-md-8">
+                                <div class="chat-window">
+                                    <div class="chat-header" id="chatHeader">
+                                        <div class="chat-user-info">
+                                            <div class="chat-avatar">
+                                                <i class="fas fa-user-shield"></i>
+                                            </div>
+                                            <div class="chat-user-details">
+                                                <h6 class="mb-0">Quản trị viên</h6>
+                                                <small class="text-muted">Đang hoạt động</small>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="chat-messages" id="chatMessages">
+                                        <div class="text-center p-4">
+                                            <i class="fas fa-comments text-muted mb-3" style="font-size: 3rem;"></i>
+                                            <p class="text-muted">Chọn cuộc trò chuyện để bắt đầu</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="chat-input" id="chatInput" style="display: none;">
+                                        <form id="messageForm" class="d-flex">
+                                            <input type="text" class="form-control" id="messageText" placeholder="Nhập tin nhắn..." autocomplete="off">
+                                            <button type="submit" class="btn btn-primary ms-2">
+                                                <i class="fas fa-paper-plane"></i>
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
 </body>
 </html>
 

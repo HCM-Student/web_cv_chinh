@@ -1,0 +1,23 @@
+@model WEB_CV.Models.BaiViet
+@{
+    ViewData["Title"] = "Thêm sự kiện";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+<form asp-action="Create" method="post">
+  @Html.AntiForgeryToken()
+  <partial name="~/Areas/Admin/Views/BaiViet/_Form.cshtml" />
+  <div class="toolbar-sticky">
+    <div class="container-fluid d-flex justify-content-end gap-2">
+      <a asp-action="Index" class="btn btn-light">Hủy</a>
+      <button type="submit" class="btn btn-success btn-save">
+        <i class="fas fa-save me-2"></i> Lưu sự kiện
+      </button>
+    </div>
+  </div>
+</form>
+
+@section Scripts{
+  <partial name="_ValidationScriptsPartial" />
+}
+
+
