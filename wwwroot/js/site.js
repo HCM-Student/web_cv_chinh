@@ -260,9 +260,8 @@ function initHeroCounters(){
 function initInteractiveServices() {
     const serviceItems = document.querySelectorAll('.service-item');
     const serviceImage = document.getElementById('serviceImage');
-    const imageLabel = document.getElementById('imageLabel');
     
-    if (!serviceItems.length || !serviceImage || !imageLabel) return;
+    if (!serviceItems.length || !serviceImage) return;
     
     serviceItems.forEach(item => {
         item.addEventListener('click', function() {
@@ -292,20 +291,7 @@ function initInteractiveServices() {
                 }, 200);
             }
             
-            // Update label with slide effect
-            if (newLabel) {
-                const labelText = imageLabel.querySelector('.label-text');
-                if (labelText) {
-                    labelText.style.opacity = '0';
-                    labelText.style.transform = 'translateY(10px)';
-                    
-                    setTimeout(() => {
-                        labelText.textContent = newLabel;
-                        labelText.style.opacity = '1';
-                        labelText.style.transform = 'translateY(0)';
-                    }, 150);
-                }
-            }
+            // Label functionality removed - no longer needed
             
             // Add visual feedback
             this.style.transform = 'translateX(8px)';

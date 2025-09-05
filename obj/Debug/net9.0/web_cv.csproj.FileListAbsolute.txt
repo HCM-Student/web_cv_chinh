@@ -705,9 +705,9 @@ C:\Users\acer\Downloads\web_cv\obj\Debug\net9.0\compressed\qmx9es4dqj-05hgl83j9n
 C:\Users\acer\Downloads\web_cv\obj\Debug\net9.0\compressed\yn6qr84kcm-xblg9m61li.gz
 C:\Users\acer\Downloads\web_cv\obj\Debug\net9.0\compressed\jvqeclajf3-17c3z66hv5.gz
 C:\Users\acer\Downloads\web_cv\obj\Debug\net9.0\compressed\5c39lythn3-1pznk2yjnw.gz
-C:\Users\acer\Downloads\web_cv\obj\Debug\net9.0\compressed\wl5u8lnr8q-d2a00klfkl.gz
 C:\Users\acer\Downloads\web_cv\obj\Debug\net9.0\compressed\tqxi9wgfru-i5xoo8gxtn.gz
 C:\Users\acer\Downloads\web_cv\obj\Debug\net9.0\compressed\sz760lp45r-3fjxvfvj44.gz
-C:\Users\acer\Downloads\web_cv\obj\Debug\net9.0\compressed\6h9kldcc6f-3vr26cfono.gz
 C:\Users\acer\Downloads\web_cv\bin\Debug\net9.0\App_Data\messages.json
 C:\Users\acer\Downloads\web_cv\obj\Debug\net9.0\compressed\vetgwtkxeu-f0pn282mje.gz
+C:\Users\acer\Downloads\web_cv\obj\Debug\net9.0\compressed\wl5u8lnr8q-e4ruvbz8s0.gz
+C:\Users\acer\Downloads\web_cv\obj\Debug\net9.0\compressed\6h9kldcc6f-y4xw8jbmlt.gz
