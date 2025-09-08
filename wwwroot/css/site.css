@@ -3590,3 +3590,90 @@ a {
 /* Utility whites for readability over images */
 .text-white-75{ color: rgba(255,255,255,.78) !important; }
 .text-white-85{ color: rgba(255,255,255,.85) !important; }
+
+/* ===== Slide 4 custom styles (typewriter + layout + overlay + CTA) ===== */
+#mainHero .carousel-item.slide-4 .caption-wrap{
+  min-height: 75vh;
+  display:flex; align-items:center; justify-content:center;
+  transform: translateY(6vh);
+}
+@media (max-width: 991.98px){
+  #mainHero .carousel-item.slide-4 .caption-wrap{ transform: translateY(2vh); }
+}
+#mainHero .carousel-item.slide-4 .headline{
+  font-size: clamp(2rem, 2.4vw + 0.6rem, 3.2rem);
+  line-height: 1.15;
+  letter-spacing: .5px;
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align:center;
+}
+/* Purple overlay tint */
+#mainHero .carousel-item.slide-4 .overlay-purple{
+  background: linear-gradient(180deg, rgba(81,33,165,.55) 0%, rgba(124,58,237,.35) 40%, rgba(49,46,129,.45) 100%);
+  mix-blend-mode: multiply;
+  opacity: 1;
+}
+/* Typewriter caret */
+.tw-cursor{ display:inline-block; margin-left:2px; animation: twBlink 1s step-end infinite; }
+@keyframes twBlink { 50% { opacity: 0; } }
+/* CTA: default white, on hover/active blue */
+.btn-cta{
+  --cta-blue: var(--primary-color, #2f6bff);
+  background:#fff; color: var(--cta-blue);
+  border: 2px solid var(--cta-blue);
+  box-shadow: 0 8px 24px rgba(0,0,0,.18);
+  padding:.9rem 1.6rem; font-weight:700; border-radius:999px;
+  opacity:0; transform:translateY(8px);
+  transition: opacity .25s ease, transform .25s ease,
+             background-color .2s, color .2s, border-color .2s, box-shadow .2s;
+}
+.btn-cta.show{ opacity:1; transform:none; }
+.btn-cta:hover, .btn-cta:focus, .btn-cta:active,
+.btn-cta:focus-visible{
+  background: var(--cta-blue);
+  color:#fff; border-color: var(--cta-blue);
+  box-shadow: 0 10px 32px rgba(47,107,255,.35);
+}
+
+/* ===== Override: make CTA more visible on busy background ===== */
+/* ===== Consolidated CTA for Slide 4 (scoped & clean) ===== */
+/* === CTA: gray glass background, rõ trên nền ảnh === */
+#mainHero .carousel-item.slide-4 .btn-cta{
+  --cta-blue: #1da1f2;          /* xanh nước biển */
+  --cta-blue-active: #0f8bd6;   /* xanh đậm khi nhấn */
+  background: rgba(240,243,248,.92);             /* xám sáng hơi đục */
+  color: var(--cta-blue);
+  border: 1px solid rgba(29,161,242,.35);        /* viền xanh nhạt */
+  font-weight: 700;
+  font-size: clamp(.95rem, .8vw + .5rem, 1.125rem);
+  padding: .9rem 1.8rem;
+  border-radius: 999px;
+  box-shadow: 0 10px 28px rgba(0,0,0,.35);       /* đổ bóng để nổi khỏi nền */
+  -webkit-backdrop-filter: blur(6px) saturate(120%);
+  backdrop-filter: blur(6px) saturate(120%);     /* hiệu ứng glass */
+  mix-blend-mode: normal;                        /* tránh bị ảnh hưởng bởi overlay multiply */
+  z-index: 2;                                    /* luôn nằm trên ảnh */
+}
+
+/* Nếu trước đó bạn có halo ::after làm rìa tối, tắt đi: */
+#mainHero .carousel-item.slide-4 .btn-cta::after{ display:none; }
+
+/* Hover/focus: xanh nước biển – chữ trắng */
+#mainHero .carousel-item.slide-4 .btn-cta:hover,
+#mainHero .carousel-item.slide-4 .btn-cta:focus,
+#mainHero .carousel-item.slide-4 .btn-cta:focus-visible{
+  background: var(--cta-blue);
+  border-color: var(--cta-blue);
+  color:#fff;
+  box-shadow: 0 16px 42px rgba(29,161,242,.45);
+}
+
+/* Active: xanh đậm + “ấn” nhẹ */
+#mainHero .carousel-item.slide-4 .btn-cta:active{
+  background: var(--cta-blue-active);
+  border-color: var(--cta-blue-active);
+  color:#fff;
+  transform: translateY(1px) scale(0.99);
+  box-shadow: 0 10px 28px rgba(13, 94, 168, .45);
+}

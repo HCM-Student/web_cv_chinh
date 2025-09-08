@@ -322,3 +322,49 @@ document.addEventListener('DOMContentLoaded', function() {
         initInteractiveServices();
     }, 500);
 });
+
+// ========== Slide 4 Typewriter (robust, handles \n as new line) ==========
+(function () {
+  const carousel = document.getElementById('mainHero');
+  const slide = document.querySelector('#mainHero .carousel-item.slide-4');
+  if (!carousel || !slide) return;
+
+  const titleEl = slide.querySelector('.typing-title');
+  const cta = slide.querySelector('.btn-cta');
+  if (!titleEl || !cta) return;
+
+  const original = (titleEl.getAttribute('data-typing') || '').replace(/\\n/g, '\n').trim();
+  let timerId = null, aborted = false;
+  const clearTimer = () => { if (timerId) { clearTimeout(timerId); timerId = null; } };
+  const resetTyping = () => { aborted = true; clearTimer(); titleEl.innerHTML = ''; cta.classList.remove('show'); };
+
+  function typewriter(text, done){
+    aborted = false;
+    titleEl.textContent = '';
+    const cursor = document.createElement('span');
+    cursor.className = 'tw-cursor'; cursor.textContent = '|';
+    titleEl.appendChild(cursor);
+    const chars = text.split(''); let i = 0;
+    const tick = () => {
+      if (aborted) { cursor.remove(); return; }
+      if (i < chars.length) {
+        const ch = chars[i++]; cursor.remove();
+        if (ch === '\n') titleEl.appendChild(document.createElement('br'));
+        else titleEl.appendChild(document.createTextNode(ch));
+        titleEl.appendChild(cursor);
+        timerId = setTimeout(tick, ch === ' ' ? 15 : 30);
+      } else { cursor.remove(); done && done(); }
+    };
+    tick();
+  }
+  const run = () => { resetTyping(); typewriter(original, () => cta.classList.add('show')); };
+
+  if (slide.classList.contains('active')) run();
+  carousel.addEventListener('slide.bs.carousel', () => {
+    const active = carousel.querySelector('.carousel-item.active');
+    if (active === slide) resetTyping(); // rời slide 4
+  });
+  carousel.addEventListener('slid.bs.carousel', (e) => {
+    if (e.relatedTarget === slide) run(); // quay lại slide 4
+  });
+})();
