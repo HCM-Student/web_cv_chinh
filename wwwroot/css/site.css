@@ -12,6 +12,13 @@ body{margin:0}
 html, body { max-width: 100%; overflow-x: clip; }
 @supports not (overflow: clip){ html, body { overflow-x: hidden; } }
 
+/* === Disable distracting hero animations globally === */
+/* Stop all floating/rotating badges and hero rings */
+.floating-icon{ animation: none !important; transform: none !important; }
+.floating-card{ animation: none !important; }
+.kenburns{ animation: none !important; }
+.tech-ring{ animation: none !important; }
+
 /* Floating placeholder keep */
 .form-floating>.form-control-plaintext::placeholder,
 .form-floating>.form-control::placeholder{color:var(--bs-secondary-color);text-align:end}
@@ -41,6 +48,13 @@ html, body { max-width: 100%; overflow-x: clip; }
 .brand-link{color:inherit}
 .brand-logo{height:48px;width:auto;max-width:48px;border-radius:10px;object-fit:contain;display:block}
 @media (max-width:575.98px){ .brand-logo{height:40px} }
+
+/* Compact logo inside sticky navbar */
+.brand-logo-sm{height:32px;width:auto;max-width:32px;border-radius:8px;object-fit:contain;display:block}
+/* Ẩn logo nhỏ theo mặc định; chỉ hiện khi nav đã dính */
+.navstrip .navbar-brand{padding-top:.35rem;padding-bottom:.35rem;margin-right:.75rem; display:none !important;}
+/* Chỉ hiện logo nhỏ khi thanh nav đã dính (đang cuộn) */
+.navstrip.is-stuck .navbar-brand{ display:flex !important; }
 
 .brand-title{font-weight:800;letter-spacing:.02em;color:#1f2937;line-height:1}
 .brand-sub{font-weight:800;letter-spacing:.02em;color:#1f2937;line-height:1}
@@ -72,6 +86,10 @@ html, body { max-width: 100%; overflow-x: clip; }
 
 /* HÃ ng dÆ°á»›i: thanh menu */
 .navstrip{background:#f8fafc;border-bottom:1px solid #eef2f7}
+/* Keep the menu bar visible while scrolling */
+.navstrip{ position: sticky; top: 0; z-index: 1040; }
+/* Optional subtle shadow when it sticks (always on keeps it simple) */
+.navstrip{ box-shadow: 0 2px 12px rgba(2,6,23,.06); }
 .navstrip .navbar-nav .nav-link{
   white-space:nowrap;font-weight:500;
   padding:.9rem 0.75rem;        /* tÄƒng chiá»u cao Ä‘á»ƒ â€œbáº±ngâ€ logo (cáº£m giÃ¡c) */
@@ -3324,53 +3342,36 @@ a {
 .service-item {
     display: flex;
     align-items: flex-start;
-    gap: 1.2rem;
-    padding: 1.75rem 1.5rem;
-    margin-bottom: 1rem;
-    min-height: 220px;
-    background: rgba(255, 255, 255, 0.8);
-    backdrop-filter: blur(10px);
-    border-radius: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    gap: 1rem;
+    padding: 1.15rem 1.15rem;
+    margin-bottom: .9rem;
+    min-height: 0;
+    background: rgba(255, 255, 255, 0.78); /* khung sáng vừa phải*/
+    backdrop-filter: blur(4px);
+    border-radius: 16px;
+    border: 1px solid rgba(2, 6, 23, 0.06); /* viền mảnh */
     cursor: pointer;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.25s ease;
     position: relative;
     overflow: visible;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 6px 18px rgba(2, 6, 23, 0.06); /* bóng nhẹ */
 }
 
-.service-item::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
-    transition: left 0.6s ease;
-    z-index: 1;
-}
+/* bỏ hiệu ứng lóe trắng để khung gọn hơn */
+.service-item::before { display: none; }
 
 .service-item:hover::before {
     left: 100%;
 }
 
 .service-item:hover {
-    transform: translateY(-4px) translateX(8px);
-    background: rgba(255, 255, 255, 0.95);
-    border-color: rgba(102, 126, 234, 0.2);
-    box-shadow: 
-        0 12px 40px rgba(0, 0, 0, 0.1),
-        0 0 0 1px rgba(102, 126, 234, 0.1);
+    transform: translateX(6px);
 }
 
 .service-item.active {
-    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(255, 255, 255, 0.9));
-    border-color: rgba(102, 126, 234, 0.3);
-    transform: translateY(-2px) translateX(12px);
-    box-shadow: 
-        0 15px 45px rgba(102, 126, 234, 0.2),
-        0 0 0 1px rgba(102, 126, 234, 0.15);
+    background: linear-gradient(135deg, rgba(102,126,234,0.10), rgba(255,255,255,0.95));
+    border-color: rgba(102,126,234,0.25);
+    transform: translateX(10px);
 }
 
 .service-item.active .service-title {
@@ -3405,42 +3406,25 @@ a {
     position: absolute;
     top: 50%;
     right: 100%;
-    width: 200px;
+    width: var(--line-len, 200px);
     height: 1px;
-    background: linear-gradient(270deg, 
+    background: linear-gradient(270deg,
         transparent 0%,
-        rgba(102, 126, 234, 0.4) 30%, 
-        rgba(102, 126, 234, 0.7) 100%);
+        rgba(102,126,234,0.4) 30%,
+        rgba(102,126,234,0.7) 100%);
     transform-origin: right center;
+    transform: translateY(-50%) rotate(var(--line-rot, 0deg));
     z-index: 5;
     pointer-events: none;
     opacity: 1;
 }
 
-.service-item:nth-child(1) .service-dot::after {
-    transform: translateY(-50%) rotate(-30deg);
-    width: 320px;
-}
-
-.service-item:nth-child(2) .service-dot::after {
-    transform: translateY(-50%) rotate(-15deg);
-    width: 210px;
-}
-
-.service-item:nth-child(3) .service-dot::after {
-    transform: translateY(-50%) rotate(0deg);
-    width: 200px;
-}
-
-.service-item:nth-child(4) .service-dot::after {
-    transform: translateY(-50%) rotate(15deg);
-    width: 210px;
-}
-
-.service-item:nth-child(5) .service-dot::after {
-    transform: translateY(-50%) rotate(30deg);
-    width: 280px;
-}
+/* Fallback angles/lengths (will be overridden by JS for perfect alignment) */
+.service-item:nth-child(1) .service-dot{ --line-rot:-28deg; --line-len:320px; }
+.service-item:nth-child(2) .service-dot{ --line-rot:-14deg; --line-len:220px; }
+.service-item:nth-child(3) .service-dot{ --line-rot:0deg;   --line-len:210px; }
+.service-item:nth-child(4) .service-dot{ --line-rot:14deg;  --line-len:220px; }
+.service-item:nth-child(5) .service-dot{ --line-rot:28deg;  --line-len:280px; }
 
 .dot-blue {
     background: linear-gradient(135deg, #3b82f6, #1d4ed8);
@@ -3606,4 +3590,3 @@ a {
 /* Utility whites for readability over images */
 .text-white-75{ color: rgba(255,255,255,.78) !important; }
 .text-white-85{ color: rgba(255,255,255,.85) !important; }
-

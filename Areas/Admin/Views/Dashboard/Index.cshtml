@@ -336,6 +336,14 @@ new Chart(document.getElementById('postTrend'), {
         plugins: { legend: { display: false } }
     }
 });
+
+// Fix mojibake text if file encoding is wrong
+document.addEventListener('DOMContentLoaded', function(){
+    const createBtn = document.querySelector('.page-actions a.btn.btn-primary');
+    if (createBtn) {
+        createBtn.innerHTML = '<i class="fas fa-plus me-2"></i>Tạo bài viết';
+    }
+});
 </script>
 <script>
 function timeAgo(iso){

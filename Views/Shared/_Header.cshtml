@@ -43,6 +43,10 @@
 <!-- HÀNG DƯỚI: MENU (GIỮA) + AUTH (BÊN PHẢI) -->
 <nav class="navbar navbar-expand-lg navbar-light navstrip">
     <div class="container">
+        <!-- Sticky row also shows a small brand logo -->
+        <a class="navbar-brand d-flex align-items-center gap-2" asp-area="" asp-controller="Home" asp-action="Index">
+            <img src="~/img/logo.png" asp-append-version="true" alt="Logo" class="brand-logo-sm" />
+        </a>
         <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav"
                 aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -139,6 +143,28 @@
         </div>
     </div>
 </nav>
+
+<script>
+// Chỉ hiện logo nhỏ khi nav đã dính lên đỉnh (scroll qua brandbar)
+document.addEventListener('DOMContentLoaded', function () {
+  const nav = document.querySelector('.navstrip');
+  const brandbar = document.querySelector('.brandbar');
+  if (!nav) return;
+  let threshold = (brandbar?.offsetHeight || 0);
+
+  const update = () => {
+    threshold = (brandbar?.offsetHeight || 0);
+    if (window.scrollY > threshold) {
+      nav.classList.add('is-stuck');
+    } else {
+      nav.classList.remove('is-stuck');
+    }
+  };
+  update();
+  window.addEventListener('scroll', update, { passive: true });
+  window.addEventListener('resize', update);
+});
+</script>
 
 <!-- FORM ẨN LOGOUT -->
 <form id="logout-form" method="post" asp-area="" asp-controller="Account" asp-action="Logout" class="d-none">

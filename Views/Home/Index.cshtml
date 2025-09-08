@@ -82,7 +82,7 @@
       <ul class="ring-chips short" style="--N:16; --start:-10deg;">
         <li style="--k:0"><span class="chip">Viễn thám</span></li>
         <li style="--k:1"><span class="chip">Môi trường</span></li>
-        <li style="--k:2"><span class="chip">Địa chất</span></li>
+        <li style="--k:2"><span class="chip">Ứng phó thiên tai</span></li>
         <li style="--k:3"><span class="chip">Tài nguyên nước</span></li>
         <li style="--k:4"><span class="chip">Đất đai</span></li>
         <li style="--k:5"><span class="chip">Giảm nghèo</span></li>
@@ -93,7 +93,7 @@
         <li style="--k:10"><span class="chip">Quản lý đê điều</span></li>
         <li style="--k:11"><span class="chip">Chăn nuôi</span></li>
         <li style="--k:12"><span class="chip">Thủy sản</span></li>
-        <li style="--k:13"><span class="chip">Ứng phó thiên tai</span></li>
+        <li style="--k:13"><span class="chip">Địa chất</span></li>
         <li style="--k:14"><span class="chip">Lâm nghiệp</span></li>
         <li style="--k:15"><span class="chip">Tài nguyên biển</span></li>
       </ul>
@@ -241,7 +241,42 @@
       </g>
     </svg>
   </div>
-</section>
+ </section>
+
+<script>
+// Tính toán lại đường nối từ mỗi chấm tới tâm ảnh tròn bên trái
+function updateServiceLines() {
+  const imgWrap = document.querySelector('.interactive-image-container .service-image-wrapper');
+  const items = document.querySelectorAll('.services-list .service-item');
+  if (!imgWrap || !items.length) return;
+
+  const imgRect = imgWrap.getBoundingClientRect();
+  const centerX = imgRect.left + imgRect.width / 2;
+  const centerY = imgRect.top + imgRect.height / 2;
+  const radius = imgRect.width / 2;
+
+  items.forEach(item => {
+    const dot = item.querySelector('.service-dot');
+    if (!dot) return;
+    const dr = dot.getBoundingClientRect();
+    const dotCX = dr.left + dr.width / 2;
+    const dotCY = dr.top + dr.height / 2;
+    const dx = centerX - dotCX;
+    const dy = centerY - dotCY;
+    const angle = Math.atan2(dy, dx) * 180 / Math.PI - 180; // 0deg là kéo ngang sang trái
+    let len = Math.hypot(dx, dy) - radius + 6; // chạm mép hình tròn
+    len = Math.max(80, Math.min(len, 700));
+    dot.style.setProperty('--line-rot', angle.toFixed(2) + 'deg');
+    dot.style.setProperty('--line-len', Math.round(len) + 'px');
+  });
+}
+
+window.addEventListener('load', () => {
+  updateServiceLines();
+  window.addEventListener('resize', updateServiceLines);
+  window.addEventListener('scroll', () => { window.requestAnimationFrame(updateServiceLines); }, { passive: true });
+});
+</script>
 
 <!-- ===== GLASS FEATURE STRIP ===== -->
 <div class="glass-strip">
@@ -339,6 +374,32 @@
     </div>
   </div>
 </section>
+
+<script>
+// Chuyển hình khi lia chuột vào từng mục (không cần bấm)
+document.addEventListener('DOMContentLoaded', function(){
+  const items = document.querySelectorAll('.services-list .service-item');
+  const image = document.getElementById('serviceImage');
+  if (!items.length || !image) return;
+
+  const makeActive = (el) => {
+    items.forEach(i => i.classList.remove('active'));
+    el.classList.add('active');
+    const url = el.getAttribute('data-image');
+    if (url) image.src = url;
+    if (typeof updateServiceLines === 'function') {
+      requestAnimationFrame(updateServiceLines);
+    }
+  };
+
+  items.forEach(el => {
+    el.addEventListener('mouseenter', () => makeActive(el));
+    el.addEventListener('focus', () => makeActive(el));
+    // hỗ trợ cảm ứng: chạm nhẹ cũng đổi nhưng không cần click điều hướng
+    el.addEventListener('touchstart', () => makeActive(el), {passive:true});
+  });
+});
+</script>
 
 <!-- ========== placeholder #services để nút không lỗi ========== -->
 <section id="services" class="py-5 d-none">

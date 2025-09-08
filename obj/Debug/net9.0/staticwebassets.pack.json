@@ -161,6 +161,10 @@
       "PackagePath": "staticwebassets\\img\\thuonghieu\\logo-9.jpg"
     },
     {
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\img\\trang-chu-gioi-thieu-min-1.png",
+      "PackagePath": "staticwebassets\\img\\trang-chu-gioi-thieu-min-1.png"
+    },
+    {
       "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },

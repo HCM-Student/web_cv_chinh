@@ -31,7 +31,7 @@ builder.Services.AddSingleton<IPasswordHasher<NguoiDung>, PasswordHasher<NguoiDu
 
 // Register Services
 builder.Services.AddScoped<ICaiDatService, CaiDatService>();
-// Messaging disabled
+// Messaging service is not used anywhere; remove registration to avoid missing type error
 
 var app = builder.Build();
 
