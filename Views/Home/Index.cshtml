@@ -353,31 +353,19 @@ window.addEventListener('load', () => {
         </p>
         <a class="btn btn-orange btn-pill px-4" href="#services">Xem chi tiết</a>
       </div>
-
-      <!-- Images (mosaic, 2 trái + 1 dọc phải) -->
+      <!-- Image -->
       <div class="col-lg-6">
-        <div class="mosaic-3">
-          <!-- Trái trên -->
-          <img class="tile h h-top"
-               loading="lazy" decoding="async" referrerpolicy="no-referrer"
-               src="https://images.unsplash.com/photo-1496307042754-b4aa456c4a2d?q=80&w=1200&auto=format&fit=crop"
-               onerror="this.onerror=null; this.src='@Url.Content("~/img/about/gis-network.png")';"
-               alt="Kết nối dữ liệu · Data & GIS" />
+  <div class="position-relative">
+    <img
+      src="~/img/trang-chu-gioi-thieu-min-1.png"
+      alt="Giới thiệu"
+      class="img-fluid w-100 object-fit-cover"
+      style="aspect-ratio: 4 / 3; border:0; box-shadow:none; outline:0;"
+    />
+      </div>
+      </div>
 
-          <!-- Trái dưới -->
-          <img class="tile h h-bottom"
-               loading="lazy" decoding="async" referrerpolicy="no-referrer"
-               src="https://images.unsplash.com/photo-1505765050516-f72dcac9c60b?q=80&w=1200&auto=format&fit=crop"
-               onerror="this.onerror=null; this.src='@Url.Content("~/img/about/smart-city.png")';"
-               alt="Đô thị thông minh · Smart City" />
 
-          <!-- Phải dọc (span 2 hàng) -->
-          <img class="tile v"
-               loading="lazy" decoding="async" referrerpolicy="no-referrer"
-               src="https://images.unsplash.com/photo-1581091870627-3ffcade74b86?q=80&w=900&auto=format&fit=crop"
-               onerror="this.onerror=null; this.src='@Url.Content("~/img/about/datacenter.png")';"
-               alt="Trung tâm dữ liệu · Data Center" />
-        </div>
       </div>
     </div>
   </div>
