@@ -110,7 +110,7 @@
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end shadow-sm" aria-labelledby="userMenu">
                             <li><a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Login">Tài khoản</a></li>
-                            <li><a class="dropdown-item" asp-area="" asp-controller="Messages" asp-action="Admin">Nhắn với quản trị</a></li>
+                            
                             @if (User.IsInRole("Admin"))
                             {
                                 <li><hr class="dropdown-divider" /></li>

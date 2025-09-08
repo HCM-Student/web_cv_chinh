@@ -5,7 +5,7 @@
 /* Devices Hero - giữ nguyên màu tím/xanh gốc của trang thiết bị */
 .devices-hero { 
     position: relative; 
-    min-height: 100vh; 
+    min-height: 25vh; 
     display: flex; 
     align-items: center; 
     overflow: hidden; 
@@ -67,7 +67,7 @@
 
 /* Responsive */
 @media (max-width:768px){
-  .devices-hero{ min-height:100vh; }
+  .devices-hero{ min-height:25vh; }
   .devices-content-wrapper{ padding:2rem; margin:1rem; }
   .hero-buttons{ display:flex; flex-direction:column; gap:1rem; }
   .hero-buttons .btn{ width:100%; }

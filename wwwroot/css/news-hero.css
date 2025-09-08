@@ -5,7 +5,7 @@
 /* News Hero - giữ nguyên màu sắc gốc */
 .news-hero { 
     position: relative; 
-    min-height: 100vh; 
+    min-height: 25vh; 
     display: flex; 
     align-items: center; 
     overflow: hidden; 
@@ -53,10 +53,10 @@
 
 .news-content-wrapper {
     background: rgba(124, 58, 237, 0.9);
-    border-radius: 20px;
-    padding: 3rem;
+    border-radius: 16px;
+    padding: 2rem;
     backdrop-filter: blur(10px);
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 14px 40px rgba(0, 0, 0, 0.28);
     position: relative;
     z-index: 10;
 }
@@ -80,7 +80,7 @@
 }
 
 .hero-buttons .btn {
-    padding: .95rem 1.65rem;
+    padding: .75rem 1.25rem;
     font-weight: 600;
     border-radius: 999px;
     transition: all 0.3s ease;
@@ -93,8 +93,8 @@
 
 /* Stats Section */
 .news-stats-section {
-    margin-top: 3rem;
-    padding-top: 2rem;
+    margin-top: 1.5rem;
+    padding-top: 1rem;
     border-top: 1px solid rgba(255, 255, 255, 0.2);
 }
 
@@ -105,15 +105,24 @@
 
 .stat-number {
     display: block;
-    font-size: 2rem;
+    font-size: 1.6rem;
     font-weight: 800;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.25rem;
 }
 
 .stat-label {
     font-size: 0.9rem;
     opacity: 0.9;
 }
+
+/* Grid/List toggle helpers */
+.view-options .btn.active{ filter: brightness(1.05); }
+
+#news-container.list-view .news-card{
+    display:flex; gap:16px; align-items:stretch;
+}
+#news-container.list-view .news-image{ width:260px; min-height:160px; }
+#news-container.list-view .news-content{ flex:1; }
 
 /* Animations */
 @keyframes float {

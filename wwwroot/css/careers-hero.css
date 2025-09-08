@@ -5,7 +5,7 @@
 /* Careers Hero - giữ nguyên màu sắc gốc */
 .careers-hero { 
     position: relative; 
-    min-height: 100vh; 
+    min-height: 25vh; 
     display: flex; 
     align-items: center; 
     overflow: hidden; 
@@ -125,7 +125,7 @@
 @media (max-width: 768px) {
     .careers-hero { 
         position: relative; 
-        min-height: 100vh; 
+        min-height: 25vh; 
         display: flex; 
         align-items: center; 
         overflow: hidden; 

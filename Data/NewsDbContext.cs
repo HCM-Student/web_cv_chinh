@@ -14,7 +14,7 @@ namespace WEB_CV.Data
         public DbSet<Tag> Tags { get; set; }
         public DbSet<BaiVietTag> BaiVietTags { get; set; }
         public DbSet<CaiDat> CaiDats { get; set; }
-        public DbSet<Message> Messages { get; set; }
+        // public DbSet<Message> Messages { get; set; }
 
         protected override void OnModelCreating(ModelBuilder mb)
         {
@@ -80,17 +80,7 @@ namespace WEB_CV.Data
                 e.Property(x => x.NgayCapNhat).HasDefaultValueSql("GETDATE()");
             });
 
-            // ===== Ràng buộc Message =====
-            mb.Entity<Message>(e =>
-            {
-                e.Property(x => x.Id).IsRequired().HasMaxLength(50);
-                e.Property(x => x.Content).IsRequired().HasMaxLength(2000);
-                e.Property(x => x.SentAtUtc).HasDefaultValueSql("GETUTCDATE()");
-                e.Property(x => x.IsRead).HasDefaultValue(false);
-                
-                e.HasIndex(x => new { x.FromUserId, x.ToUserId });
-                e.HasIndex(x => x.SentAtUtc);
-            });
+            // Messaging removed
 
         }
     }

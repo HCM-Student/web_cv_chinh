@@ -81,7 +81,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-3">
-                <div class="news-sidebar">
+                <div class="news-sidebar sticky-top" style="top: 90px;">
                     <h5 class="sidebar-title">Bộ lọc</h5>
                     
                     <div class="filter-group">
@@ -120,7 +120,7 @@
                         <h6>Tìm kiếm</h6>
                         <div class="search-box">
                             <input type="text" class="form-control" placeholder="Nhập từ khóa...">
-                            <button class="btn btn-primary btn-sm">
+                            <button class="btn btn-primary btn-sm" type="button">
                                 <i class="fas fa-search"></i>
                             </button>
                         </div>
@@ -168,20 +168,27 @@
                     <div class="news-grid">
                         <div class="d-flex justify-content-between align-items-center mb-4">
                             <h4>Tin tức mới nhất</h4>
-                            <div class="view-options">
-                                <button class="btn btn-sm btn-outline-secondary active" data-view="grid">
+                            <div class="d-flex align-items-center gap-2">
+                                <select id="sortSelect" class="form-select form-select-sm w-auto">
+                                    <option value="newest">Mới nhất</option>
+                                    <option value="oldest">Cũ nhất</option>
+                                    <option value="title">Theo tiêu đề (A-Z)</option>
+                                </select>
+                                <div class="view-options">
+                                <button class="btn btn-sm btn-outline-primary active" data-view="grid" title="Lưới">
                                     <i class="fas fa-th-large"></i>
                                 </button>
-                                <button class="btn btn-sm btn-outline-secondary" data-view="list">
+                                <button class="btn btn-sm btn-outline-primary" data-view="list" title="Danh sách">
                                     <i class="fas fa-list"></i>
                                 </button>
+                                </div>
                             </div>
                         </div>
                         
                         <div class="row g-4" id="news-container">
                             @foreach (var baiViet in Model.Skip(1)) // Bỏ qua bài đầu tiên đã hiển thị featured
                             {
-                                <div class="col-lg-4 col-md-6">
+                                <div class="col-lg-4 col-md-6 news-item">
                                     <div class="news-card">
                                         <div class="news-image">
                                             <img src="~/img/hero/hero-2.jpg" alt="@baiViet.TieuDe" class="img-fluid">
@@ -266,6 +273,54 @@
         </div>
     </div>
 </section>
+
+@section Scripts {
+    <script>
+        (function(){
+            const container = document.getElementById('news-container');
+            const toggleBtns = document.querySelectorAll('.view-options [data-view]');
+
+            toggleBtns.forEach(btn => {
+                btn.addEventListener('click', function(){
+                    toggleBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+
+                    const view = this.getAttribute('data-view');
+                    if(view === 'list'){
+                        container.classList.add('list-view');
+                        document.querySelectorAll('#news-container .news-item').forEach(col => {
+                            col.classList.remove('col-lg-4','col-md-6');
+                            col.classList.add('col-12');
+                        });
+                    } else {
+                        container.classList.remove('list-view');
+                        document.querySelectorAll('#news-container .news-item').forEach(col => {
+                            col.classList.add('col-lg-4','col-md-6');
+                            col.classList.remove('col-12');
+                        });
+                    }
+                });
+            });
+
+            // Basic client-side sort (by date text or title)
+            const sortSelect = document.getElementById('sortSelect');
+            if (sortSelect){
+                sortSelect.addEventListener('change', function(){
+                    const items = Array.from(container.children);
+                    const val = this.value;
+                    items.sort((a,b)=>{
+                        const getDate = el => new Date(el.querySelector('.news-date')?.textContent.trim().split(/\s+/).pop().split('/').reverse().join('-'));
+                        const getTitle = el => (el.querySelector('.news-title a')?.textContent || '').toLowerCase();
+                        if(val==='oldest') return getDate(a)-getDate(b);
+                        if(val==='title') return getTitle(a).localeCompare(getTitle(b));
+                        return getDate(b)-getDate(a);
+                    });
+                    items.forEach(el=>container.appendChild(el));
+                });
+            }
+        })();
+    </script>
+}
 
 <!-- ===================== NEWSLETTER SIGNUP ===================== -->
 <section class="section newsletter-section">

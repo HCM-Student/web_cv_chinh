@@ -21,7 +21,7 @@ html, body { max-width: 100%; overflow-x: clip; }
 /* khoáº£ng há»Ÿ giá»¯a vÃ²m & dáº£i tháº» ngay sau hero */
 :root{
   --hero-curve-gap: clamp(18px, 2.8vw, 40px);
-  --primary-color: #1e6fff; /* brand primary used across pages */
+  --primary-color: #f97316; /* brand primary (orange) */
   
   /* Unified Color Scheme */
 
@@ -1330,7 +1330,7 @@ html, body { max-width: 100%; overflow-x: clip; }
 }
 
 .requirements-list li:before {
-    content: "â€¢";
+    content: "\2022";
     position: absolute;
     left: 0;
     color: #667eea;
@@ -1721,7 +1721,7 @@ html, body { max-width: 100%; overflow-x: clip; }
 
 .devices-bg, .careers-bg, .pricing-bg, .contact-bg, .news-bg {
     position: relative;
-    min-height: 40vh;
+    min-height: 25vh;
     display: flex;
     align-items: center;
     padding: 3.5rem 0;
@@ -2302,7 +2302,7 @@ html, body { max-width: 100%; overflow-x: clip; }
 }
 
 .method-icon.whatsapp-icon::before {
-    content: 'ðŸ“±';
+    content: 'ðŸ"±';
     position: absolute;
     top: 50%;
     left: 50%;
@@ -2976,7 +2976,7 @@ a {
 #backToTop.back-to-top{
   position: fixed;
   right: 18px;
-  bottom: 80px;
+  bottom: 24px;
   width: 42px;
   height: 42px;
   border: none;
@@ -3327,6 +3327,7 @@ a {
     gap: 1.2rem;
     padding: 1.75rem 1.5rem;
     margin-bottom: 1rem;
+    min-height: 220px;
     background: rgba(255, 255, 255, 0.8);
     backdrop-filter: blur(10px);
     border-radius: 20px;
@@ -3548,6 +3549,7 @@ a {
     
     .service-item {
         padding: 1.25rem 1rem;
+        min-height: 180px;
         gap: 1rem;
         border-radius: 16px;
     }
@@ -3575,6 +3577,7 @@ a {
     
     .service-item {
         padding: 1rem 0.8rem;
+        min-height: 160px;
         gap: 0.8rem;
         margin-bottom: 0.6rem;
         border-radius: 14px;

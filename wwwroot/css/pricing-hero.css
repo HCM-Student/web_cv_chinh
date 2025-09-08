@@ -5,7 +5,7 @@
 /* Pricing Hero - giữ nguyên màu sắc gốc */
 .pricing-hero { 
     position: relative; 
-    min-height: 100vh; 
+    min-height: 25vh; 
     display: flex; 
     align-items: center; 
     overflow: hidden; 
@@ -125,7 +125,7 @@
 @media (max-width: 768px) {
     .pricing-hero { 
         position: relative; 
-        min-height: 100vh; 
+        min-height: 25vh; 
         display: flex; 
         align-items: center; 
         overflow: hidden; 

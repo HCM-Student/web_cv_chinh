@@ -11,7 +11,7 @@ html, body {
 /* Hero Section */
 .about-hero-section {
     position: relative;
-    min-height: 100vh;
+    min-height: 25vh;
     display: flex;
     align-items: center;
     background: linear-gradient(135deg, var(--primary-color) 0%, #0052d4 100%);

@@ -5,7 +5,7 @@
 /* Contact Hero */
 .contact-hero { 
     position: relative; 
-    min-height: 100vh; 
+    min-height: 25vh; 
     display: flex; 
     align-items: center; 
     overflow: hidden; 
@@ -302,7 +302,7 @@
 @media (max-width: 768px) {
     .contact-hero { 
         position: relative; 
-        min-height: 100vh; 
+        min-height: 25vh; 
         display: flex; 
         align-items: center; 
         overflow: hidden; 

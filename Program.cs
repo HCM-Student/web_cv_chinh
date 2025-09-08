@@ -31,7 +31,7 @@ builder.Services.AddSingleton<IPasswordHasher<NguoiDung>, PasswordHasher<NguoiDu
 
 // Register Services
 builder.Services.AddScoped<ICaiDatService, CaiDatService>();
-builder.Services.AddScoped<IMessagingService, MessagingService>();
+// Messaging disabled
 
 var app = builder.Build();
 
