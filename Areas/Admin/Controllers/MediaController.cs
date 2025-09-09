@@ -86,10 +86,11 @@ namespace WEB_CV.Areas.Admin.Controllers
             });
         }
 
-        // POST: /Admin/Media/Upload  (FilePond: gửi 1 file/1 request)
+        // POST: /Admin/Media/Upload  (TinyMCE: cần trả { location: "<url>" })
         [HttpPost]
         [RequestSizeLimit(1024L * 1024 * 200)] // 200MB
-        public async Task<IActionResult> Upload(string? folder = "")
+        [IgnoreAntiforgeryToken] // nếu bạn bật AutoValidateAntiForgeryToken toàn cục, giữ dòng này để tránh 400
+        public async Task<IActionResult> Upload(string? folder = "posts")
         {
             var targetDir = SafePath(folder);
             Directory.CreateDirectory(targetDir);
@@ -97,6 +98,8 @@ namespace WEB_CV.Areas.Admin.Controllers
             var files = Request.Form.Files;
             if (files == null || files.Count == 0)
                 return BadRequest("No file uploaded");
+
+            string? lastFileUrl = null;
 
             foreach (var f in files)
             {
@@ -118,10 +121,15 @@ namespace WEB_CV.Areas.Admin.Controllers
 
                 await using var stream = System.IO.File.Create(dst);
                 await f.CopyToAsync(stream);
+
+                // URL public để trả về cho TinyMCE
+                lastFileUrl = Url.Content($"~/media/{folder}/{fileName}");
             }
 
-            // FilePond thích response text/plain
-            return Content("ok", "text/plain");
+            if (lastFileUrl == null) return BadRequest("Upload failed");
+
+            // TinyMCE expects JSON: { location: "<url>" }
+            return Json(new { location = lastFileUrl });
         }
 
         // POST: /Admin/Media/Delete

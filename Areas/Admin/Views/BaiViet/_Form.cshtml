@@ -37,7 +37,53 @@
     </div>
     <div class="card-body">
       <label asp-for="NoiDung" class="form-label">Nội dung</label>
-      <textarea asp-for="NoiDung" class="form-control autosize" rows="12" placeholder="Soạn thảo nội dung..."></textarea>
+      <!-- lưu ý: không dùng autosize cho textarea được thay thế bởi TinyMCE -->
+      <textarea asp-for="NoiDung" class="form-control" rows="12" placeholder="Soạn thảo nội dung..."></textarea>
+
+      <!-- TinyMCE: soạn thảo + upload ảnh -->
+      <script src="https://cdn.tiny.cloud/1/5y7eprut3aap74ydqqc1ffaqszfn9qi6lc1lzned67e6k039/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+      <script>
+        document.addEventListener('DOMContentLoaded', function () {
+          tinymce.init({
+            selector: 'textarea[name="NoiDung"]',
+            branding: false, promotion: false,
+            height: 520, menubar: false,
+            plugins: 'image link lists table code autoresize',
+            toolbar: 'undo redo | blocks | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | image link table | code',
+            content_style: 'body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;font-size:16px;line-height:1.6;} img{max-width:100%;height:auto;}',
+
+            /* Upload tự động khi dán/kéo thả */
+            automatic_uploads: true,
+            convert_urls: false,
+            images_upload_url: '@Url.Action("Upload","Media", new { area="Admin", folder = "posts" })',
+            images_reuse_filename: false,
+            paste_data_images: true,
+
+            /* Nút chọn file ảnh mở file picker và upload luôn */
+            file_picker_types: 'image',
+            file_picker_callback: (cb, value, meta) => {
+              if (meta.filetype !== 'image') return;
+              const input = document.createElement('input');
+              input.type = 'file'; input.accept = 'image/*';
+              input.onchange = function () {
+                const file = this.files[0];
+                const form = new FormData();
+                form.append('file', file, file.name);
+                fetch('@Url.Action("Upload","Media", new { area="Admin", folder = "posts" })', {
+                  method: 'POST',
+                  body: form,
+                  credentials: 'same-origin'
+                })
+                .then(r => r.json())
+                .then(json => cb(json.location))
+                .catch(err => alert('Upload lỗi: ' + err));
+              };
+              input.click();
+            }
+          });
+        });
+      </script>
+
       <span asp-validation-for="NoiDung" class="text-danger small"></span>
       <div class="form-text mt-2">Bạn có thể dán HTML/đoạn văn bản đã định dạng.</div>
     </div>
@@ -82,3 +128,8 @@
     </div>
   </div>
 </div>
+
+<style>
+  /* Tránh lớp khác đè lên editor (nếu có) */
+  .tox-tinymce{ position: relative; z-index: 1; }
+</style>

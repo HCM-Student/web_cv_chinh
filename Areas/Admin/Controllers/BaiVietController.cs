@@ -102,6 +102,7 @@ namespace WEB_CV.Areas.Admin.Controllers
         }
 
         // GET: /Admin/BaiViet/Edit/5
+        [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
             var bv = await _db.BaiViets.FindAsync(id);
@@ -118,6 +119,7 @@ namespace WEB_CV.Areas.Admin.Controllers
         {
             if (id != model.Id) return BadRequest();
 
+            // tránh validate navigation
             ModelState.Remove("ChuyenMuc");
             ModelState.Remove("TacGia");
 
@@ -135,12 +137,12 @@ namespace WEB_CV.Areas.Admin.Controllers
             var bv = await _db.BaiViets.FindAsync(id);
             if (bv == null) return NotFound();
 
-            bv.TieuDe = model.TieuDe;
-            bv.TomTat = model.TomTat;
-            bv.NoiDung = model.NoiDung;
+            bv.TieuDe      = model.TieuDe;
+            bv.TomTat      = model.TomTat;
+            bv.NoiDung     = model.NoiDung;
             bv.ChuyenMucId = model.ChuyenMucId;
-            bv.TacGiaId = model.TacGiaId;
-            bv.NgayDang = model.NgayDang;
+            bv.TacGiaId    = model.TacGiaId;
+            bv.NgayDang    = model.NgayDang;
 
             try
             {
