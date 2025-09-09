@@ -75,16 +75,31 @@
 
 
                 <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle @(currentController=="Services" ? "active" : "")" href="#" id="serviceDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Dịch vụ</a>
-                    <ul class="dropdown-menu" aria-labelledby="serviceDropdown">
-                        <li><a class="dropdown-item @(currentController=="Services" && currentAction=="SmartCity3D" ? "active" : "")" asp-controller="Services" asp-action="SmartCity3D">Giải pháp chuyển đổi số bản đồ nền 3D phục vụ thành phố thông minh</a></li>
+                    <li class="nav-item dropdown">
+  <a id="serviceDropdown"
+     class="nav-link dropdown-toggle @(currentController=="Services" ? "active" : "")"
+     href="#"
+     role="button"
+     data-bs-toggle="dropdown"
+     aria-expanded="false">
+    Dịch vụ
+    <!-- caret icon -->
+    <svg class="chev" width="14" height="14" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+    </a>
+
+        <ul class="dropdown-menu" aria-labelledby="serviceDropdown">
+    <li><a class="dropdown-item @(currentController=="Services" && currentAction=="SmartCity3D" ? "active" : "")" asp-controller="Services" asp-action="SmartCity3D">Giải pháp chuyển đổi số bản đồ nền 3D phục vụ thành phố thông minh</a></li>
                         <li><a class="dropdown-item @(currentController=="Services" && currentAction=="LidarAndModeling" ? "active" : "")" asp-controller="Services" asp-action="LidarAndModeling">Giải pháp công nghệ quét Lidar và mô hình hóa 3D</a></li>
                         <li><a class="dropdown-item @(currentController=="Services" && currentAction=="DigitalTourism" ? "active" : "")" asp-controller="Services" asp-action="DigitalTourism">Giải pháp công nghệ chuyển đổi số du lịch</a></li>
                         <li><a class="dropdown-item @(currentController=="Services" && currentAction=="SurveyServices" ? "active" : "")" asp-controller="Services" asp-action="SurveyServices">Giải pháp khảo sát công trình sử dụng công nghệ bay chụp ảnh và Lidar UAV</a></li>
                         <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item @(currentController=="Services" && currentAction=="OtherServices" ? "active" : "")" asp-controller="Services" asp-action="OtherServices">Dịch vụ khác</a></li>
-                    </ul>
-                </li>
+            </ul>
+        </li>
+                   
 
                 <li class="nav-item">
                     <a class="nav-link @(currentController=="Home" && currentAction=="ThietBi" ? "active" : "")"

@@ -306,6 +306,31 @@
   margin: 0 .85rem;
   display:inline-block;
 }
+/* === CONTACT: style siêu nhẹ giống ảnh === */
+.brandbar .contact-chip{
+  color:#6b7280 !important;                /* slate-500 */
+  font-weight:400 !important;              /* bỏ đậm ở <a> nếu có */
+}
+
+.brandbar .contact-chip .contact-text{
+  font-size:.975rem;                       /* nhỏ 1 xíu */
+  font-weight:400 !important;              /* nhẹ hẳn */
+  letter-spacing:.05px;                    /* gần như không dãn */
+  color:#6b7280 !important;                /* xám nhạt */
+  font-variation-settings: "wght" 400;     /* nếu dùng font variable (Inter) */
+}
+
+.brandbar .contact-chip .contact-icon{
+  width:20px; height:20px;                 /* icon nhỏ & tinh */
+  margin-top:-1px; opacity:.9;
+}
+
+.brandbar .contact-sep{
+  height:18px;
+  background:rgba(2,6,23,.06);             /* vạch ngăn mảnh & nhạt hơn */
+  margin:0 .9rem;
+}
+
 
 
 
