@@ -144,3 +144,168 @@
   border-radius: 0 !important;
   outline: none !important;
 }
+/* ==== Tinh chỉnh contact ở header (ghi đè CUỐI FILE) ==== */
+
+/* khoảng cách tổng giữa Phone | Email */
+.brandbar .contact-right{
+  gap: 1.25rem !important;
+}
+
+/* khoảng cách icon ↔ text */
+.brandbar .contact-item-header{
+  gap: .5rem !important;
+}
+
+/* kích thước icon + căn baseline */
+.brandbar .contact-item-header .contact-icon{
+  width: 22px !important;
+  height: 22px !important;
+  display: block;
+  object-fit: contain;
+  margin-top: -1px; /* trùng baseline với chữ */
+}
+
+/* chữ đậm vừa, màu chuẩn */
+.brandbar .contact-text{
+  font-size: 1rem !important;
+  font-weight: 600 !important;
+  color: #111827 !important; /* slate-900 */
+  letter-spacing: .2px;
+}
+
+/* gạch ngăn mảnh giữa 2 mục */
+.brandbar .contact-sep{
+  width: 1px;
+  height: 20px;
+  background: #e5e7eb;
+  margin: 0 .75rem;
+  display: inline-block;
+}
+
+/* hover nhẹ */
+.brandbar .contact-item-header:hover .contact-text{ color:#0f172a; }
+.brandbar .contact-item-header:hover .contact-icon{ filter: saturate(1.1); }
+
+/* Mobile */
+@media (max-width: 768px){
+  .brandbar .contact-right{ gap: .75rem !important; }
+  .brandbar .contact-item-header{ gap: .45rem !important; }
+  .brandbar .contact-item-header .contact-icon{
+    width: 20px !important; height: 20px !important; margin-top: 0 !important;
+  }
+}
+/* === Contact chip (icon + text trong 1 khung link) === */
+.brandbar .contact-chip{
+  display:inline-flex;
+  align-items:center;
+  gap:.45rem;                   /* icon sát chữ hơn */
+  padding:.15rem .55rem;        /* khung gọn */
+  border-radius:8px;
+  text-decoration:none;
+  color:#111827;                /* chữ */
+  line-height:1;
+}
+
+.brandbar .contact-chip .contact-icon{
+  width:22px; height:22px;      /* icon đồng bộ */
+  display:block; object-fit:contain;
+  margin-top:-1px;              /* căn baseline với chữ */
+  background:transparent!important;
+  border:none!important;
+  box-shadow:none!important;
+}
+
+.brandbar .contact-chip .contact-text{
+  font-size:1rem;               /* 16px */
+  font-weight:600;
+  letter-spacing:.2px;
+}
+
+.brandbar .contact-chip:hover{
+  background:#f9fafb;           /* hover nhẹ */
+  color:#0f172a;
+}
+
+/* Divider giữa Phone | Email */
+.brandbar .contact-sep{
+  width:1px; height:20px;
+  background:#e5e7eb;
+  margin:0 .75rem;
+  display:inline-block;
+}
+
+/* Khoảng cách tổng giữa 2 mục */
+.brandbar .contact-right{ gap:1.25rem; }
+
+/* Mobile */
+@media (max-width:768px){
+  .brandbar .contact-chip{ padding:.1rem .45rem; }
+  .brandbar .contact-chip .contact-icon{ width:20px;height:20px;margin-top:0; }
+  .brandbar .contact-right{ gap:.75rem; }
+}
+/* ============================
+   CONTACT (Header) — polish
+   ============================ */
+
+/* Tổng khoảng cách giữa Phone | Email */
+.brandbar .contact-right{
+  gap: 1.35rem !important;   /* nhẹ hơn 2rem */
+}
+
+/* Box liên hệ (nếu dùng .contact-chip) – không nền, chỉ hover rất nhẹ */
+.brandbar .contact-chip{
+  display:flex; align-items:center; gap:.5rem;
+  padding: 6px 10px; border-radius: 12px;
+  background: transparent; box-shadow: none;
+  text-decoration: none;
+}
+.brandbar .contact-chip:hover{
+  background: #f7f8fa;            /* rất nhẹ */
+}
+
+/* Icon: nhỏ gọn & căn baseline với chữ */
+.brandbar .contact-chip .i,
+.brandbar .contact-item-header .contact-icon{
+  width: 22px !important;
+  height: 22px !important;
+  display: block;
+  object-fit: contain;
+  margin-top: -1px;               /* căn baseline giống mẫu */
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  outline: none !important;
+}
+
+/* Khoảng cách icon ↔ chữ */
+.brandbar .contact-chip,
+.brandbar .contact-item-header{
+  gap: .5rem !important;          /* sát hơn */
+}
+
+/* Chữ: 16px, đậm vừa, màu #42515C như hình tham chiếu */
+.brandbar .contact-chip .label,
+.brandbar .contact-item-header .contact-text{
+  font-size: 1rem !important;     /* 16px */
+  font-weight: 600 !important;
+  color: #42515C !important;
+  letter-spacing: .1px;
+  -webkit-font-smoothing: antialiased;
+  text-decoration: none;
+}
+.brandbar .contact-chip:hover .label,
+.brandbar .contact-item-header:hover .contact-text{
+  color: #0f172a !important;      /* đậm hơn khi hover */
+}
+
+/* Gạch ngăn mảnh giữa 2 mục */
+.brandbar .contact-sep{
+  width:1px; height:22px;
+  background: rgba(2,6,23,.08);   /* mảnh & dịu */
+  margin: 0 .85rem;
+  display:inline-block;
+}
+
+
+
