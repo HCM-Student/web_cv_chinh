@@ -3677,3 +3677,115 @@ a {
   transform: translateY(1px) scale(0.99);
   box-shadow: 0 10px 28px rgba(13, 94, 168, .45);
 }
+/* === CTA XEM CHI TIẾT: style giống Hình 1 (đậm, không glossy, không blur) === */
+.btn-orange{
+  /* màu cam */
+  --orange: #ff7a00;        /* mặt nút */
+  --orange-dark: #b56a00;   /* viền đáy/“kệ” */
+  --orange-press: #e06000;  /* khi ấn */
+  --press-depth: 7px;
+
+  position: relative;
+  background: linear-gradient(180deg, var(--orange) 0%, var(--orange) 100%); /* phẳng, không bóng */
+  color:#fff !important;
+  border:0;
+  border-radius:999px;
+
+  /* chữ gọn như Hình 1 */
+  font-weight: 800;
+  font-size: .90rem;
+  letter-spacing: .1px;     /* gọn hơn */
+  font-stretch: 95%;
+  text-transform: uppercase;
+  text-shadow: none;        /* bỏ bóng chữ */
+
+  padding:.52rem 1.05rem;
+
+  /* chỉ giữ “viền đáy” đặc, KHÔNG blur */
+  box-shadow: 0 var(--press-depth) 0 var(--orange-dark);
+  transition: transform .12s ease, box-shadow .12s ease, filter .12s ease;
+  user-select:none; -webkit-tap-highlight-color:transparent;
+}
+
+/* tắt lớp bóng glossy cũ */
+.btn-orange::before{ display:none; }
+
+/* Hover = ấn xuống: viền đáy ngắn lại, không blur */
+.btn-orange:hover,
+.btn-orange:focus{
+  transform: translateY(var(--press-depth));
+  box-shadow: 0 2px 0 color-mix(in srgb, var(--orange-dark) 92%, #000 8%); /* viền đáy ngắn */
+  filter: none;
+  color:#fff !important;
+}
+
+/* Active = lún thêm 1px, màu mặt hơi trầm */
+.btn-orange:active{
+  background: linear-gradient(180deg, var(--orange-press) 0%, var(--orange-press) 100%);
+  transform: translateY(calc(var(--press-depth) + 1px));
+  box-shadow: 0 1px 0 color-mix(in srgb, var(--orange-dark) 95%, #000 5%);
+  color:#fff !important;
+}
+
+/* giữ pill */
+.btn-pill{ border-radius:999px; }
+
+
+/* ================== ABOUT SECTION (final) ================== */
+
+/* Căn đỉnh cột chữ ngang mép trên cụm hình (desktop) */
+@media (min-width: 992px){
+  #about{ padding-top: 0; }
+  #about .row{ align-items: flex-start; }
+  #about .row > [class*="col-"]:first-child{ margin-top: -8px; } /* chỉnh lên/ xuống nếu cần */
+}
+
+/* Badge GIỚI THIỆU rõ hơn */
+#about .eyebrow{
+  background:#fff;
+  color:#0f2f59;
+  font-weight:700;
+  border:1px solid rgba(15,47,89,.10);
+  box-shadow: 0 16px 40px rgba(15,47,89,.12);
+}
+
+/* Tiêu đề + gạch cam dài */
+#about .section-title{
+  color:#0f2f59;
+  font-weight: 800;
+  letter-spacing:-0.02em;
+  text-transform:none;
+  margin-bottom:.75rem;
+  position:relative;
+}
+#about .section-title::after{
+  content:"";
+  display:block;
+  width: clamp(220px, 28vw, 520px);               /* ← độ dài gạch (tăng/giảm tại đây) */
+  height:3.5px;
+  background:#ff7a00;
+  border-radius:999px;
+  margin-top: .45rem; 
+  box-shadow:0 4px 12px rgba(255,122,0,.22);
+}
+
+/* Bong bóng xanh cạnh tiêu đề – đậm hơn 1 chút */
+#about .section-title-wrap{ position:relative; }
+#about .section-title-wrap::after{
+  content:"";
+  position:absolute;
+  left:220px; top:20px;
+  width:16px; height:16px;
+  background:rgba(56,189,248,.55);
+  border-radius:999px;
+  filter:blur(.3px);
+}
+
+/* Đoạn mô tả */
+#about .section-subtitle{
+  color:#6b7280;
+  font-size:clamp(1rem,.95rem + .25vw,1.125rem);
+  line-height:1.8;
+  max-width:70ch;
+}
+
