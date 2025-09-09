@@ -33,6 +33,10 @@
       "PackagePath": "staticwebassets\\css\\devices-hero.css"
     },
     {
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\css\\header.css",
+      "PackagePath": "staticwebassets\\css\\header.css"
+    },
+    {
       "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\css\\hero-common.css",
       "PackagePath": "staticwebassets\\css\\hero-common.css"
     },
@@ -95,18 +99,6 @@
     {
       "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\img\\hero\\tech-ring.jpg",
       "PackagePath": "staticwebassets\\img\\hero\\tech-ring.jpg"
-    },
-    {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\img\\icon\\MAIL.webp",
-      "PackagePath": "staticwebassets\\img\\icon\\MAIL.webp"
-    },
-    {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\img\\icon\\MES.webp",
-      "PackagePath": "staticwebassets\\img\\icon\\MES.webp"
-    },
-    {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\img\\icon\\PHONE.webp",
-      "PackagePath": "staticwebassets\\img\\icon\\PHONE.webp"
     },
     {
       "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\img\\logo.png",
@@ -413,12 +405,24 @@
       "PackagePath": "staticwebassets\\media\\MAIL.png"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\media\\PHONE-1.png",
-      "PackagePath": "staticwebassets\\media\\PHONE-1.png"
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\media\\MES.png",
+      "PackagePath": "staticwebassets\\media\\MES.png"
     },
     {
       "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\media\\PHONE.png",
       "PackagePath": "staticwebassets\\media\\PHONE.png"
+    },
+    {
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\media\\WHATSAPP.png",
+      "PackagePath": "staticwebassets\\media\\WHATSAPP.png"
+    },
+    {
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\media\\mail-icon.png",
+      "PackagePath": "staticwebassets\\media\\mail-icon.png"
+    },
+    {
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\media\\phone-icon.png",
+      "PackagePath": "staticwebassets\\media\\phone-icon.png"
     },
     {
       "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.build.web_cv.props",

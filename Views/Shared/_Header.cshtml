@@ -3,6 +3,7 @@
     var currentController = (string?)ViewContext.RouteData.Values["controller"] ?? "";
     var currentAction = (string?)ViewContext.RouteData.Values["action"] ?? "";
 }
+<link rel="stylesheet" href="~/css/header.css" asp-append-version="true" />
 
 <!-- HÀNG TRÊN: LOGO + TÊN + LIÊN HỆ -->
 <div class="brandbar">
@@ -20,20 +21,24 @@
             </div>
         </a>
 
-   <!-- RIGHT: CONTACT INFO -->
+  <!-- RIGHT: CONTACT INFO -->
 <div class="d-none d-lg-flex align-items-center contact-right">
-  <div class="contact-item-header">
-    <i class="bi bi-telephone-fill contact-icon" aria-hidden="true"></i>
+  <!-- Phone -->
+  <a class="contact-item-header contact-link" href="tel:0378695597">
+    <img src="~/media/phone-icon.png" class="contact-icon" alt="Hotline">
     <span class="contact-text">0378 695 597</span>
-  </div>
+  </a>
 
-  <div class="contact-item-header">
-    <i class="bi bi-envelope-fill contact-icon" aria-hidden="true"></i>
-    <a href="mailto:luanha2003@gmail.com" class="contact-text contact-link">
-      luanha2003@gmail.com
-    </a>
-  </div>
+  <!-- separator (tuỳ thích) -->
+  <span class="contact-sep" aria-hidden="true"></span>
+
+  <!-- Email -->
+  <a class="contact-item-header contact-link" href="mailto:luanha2003@gmail.com">
+    <img src="~/media/mail-icon.png" class="contact-icon" alt="Email">
+    <span class="contact-text">luanha2003@gmail.com</span>
+  </a>
 </div>
+
 
 
 

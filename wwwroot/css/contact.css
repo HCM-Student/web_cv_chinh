@@ -238,53 +238,85 @@
 
 /* Contact Methods */
 .contact-method {
-    background: white;
-    padding: 2rem;
-    border-radius: 16px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
     transition: all 0.3s ease;
     height: 100%;
 }
 
 .contact-method:hover {
     transform: translateY(-8px);
-    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15);
 }
 
 .method-icon {
-    width: 80px;
-    height: 80px;
-    margin: 0 auto 1.5rem;
+    width: 72px;
+    height: 72px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     border-radius: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 2rem;
+    margin: 0 auto;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.method-image {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    transition: transform 0.3s ease;
+}
+
+.contact-method:hover .method-icon {
+    transform: translateY(-5px);
+}
+
+.contact-method {
+    text-align: center;
+    background-color: #fff;
+    padding: 1.5rem;
+    border-radius: 16px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.08);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 320px;
+}
+
+.contact-method h5 {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #2d3748;
+    margin: 1.5rem 0 1rem;
+}
+
+.contact-method p {
+    color: #718096;
+    margin-bottom: 2rem;
+    font-size: 0.95rem;
+    flex-grow: 1;
+}
+
+.contact-method .btn {
+    color: #0d6efd;
+    background-color: white;
+    border: 1px solid #0d6efd;
+    padding: 0.75rem 1.5rem;
+    border-radius: 9999px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    margin-top: auto;
+}
+
+.contact-method .btn:hover {
+    background-color: #0d6efd;
     color: white;
-    position: relative;
+    transform: translateY(-2px);
 }
-
-.phone-icon, .email-icon, .messenger-icon, .whatsapp-icon { 
-    background: linear-gradient(135deg, #1e3a8a, #3b82f6); 
-}
-
-.method-icon::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 24px;
-    height: 24px;
-    font-family: "Font Awesome 6 Free", "Font Awesome 6 Brands";
-    font-weight: 900;
-    font-size: 24px;
-}
-
-.phone-icon::before { content: "\f095"; }
-.email-icon::before { content: "\f0e0"; }
-.messenger-icon::before { content: "\f39f"; font-family: "Font Awesome 6 Brands"; }
-.whatsapp-icon::before { content: "\f232"; font-family: "Font Awesome 6 Brands"; }
 
 .contact-method h5 {
     color: var(--dark-color);

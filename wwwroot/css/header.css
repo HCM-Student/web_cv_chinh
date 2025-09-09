@@ -1,0 +1,146 @@
+/* ============================
+   HEADER / BRAND BAR
+   ============================ */
+
+:root{
+  --header-bg: #ffffff;
+  --header-border: #e5e7eb;
+  --header-text: #1f2937;   /* slate-800 */
+  --header-text-strong: #0f172a; /* slate-900 */
+}
+
+/* Thanh đầu trang */
+.brandbar{
+  background: var(--header-bg);
+  border-bottom: 1px solid var(--header-border);
+  position: relative;
+  z-index: 40;
+}
+
+.brandbar .inner{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: .6rem 0;
+}
+
+/* Logo */
+.brandbar .logo{
+  display: inline-flex;
+  align-items: center;
+  gap: .6rem;
+  text-decoration: none;
+}
+
+.brandbar .logo img{
+  height: 36px;
+  width: auto;
+  display: block;
+}
+
+/* Khu liên hệ bên phải */
+.brandbar .contact-right{
+  display: flex;
+  align-items: center;
+  gap: 2rem; /* khoảng cách giữa phone & email */
+}
+
+/* Mỗi item liên hệ (icon + text) */
+.brandbar .contact-item-header{
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  white-space: nowrap;
+}
+
+/* ====== ICON FIX ======
+   Không cho áp dụng style khung/bo góc/bóng từ nơi khác */
+.brandbar .contact-item-header .contact-icon{
+  width: 24px;
+  height: 24px;
+  display: inline-block;
+  object-fit: contain;
+
+  background: none !important;
+  border: 0 !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+/* Nếu có pseudo (::before) ở CSS khác, tắt luôn */
+.brandbar .contact-item-header .contact-icon::before{
+  content: none !important;
+}
+
+/* Text bên cạnh icon */
+.brandbar .contact-text{
+  color: var(--header-text);
+  font-weight: 600;
+  font-size: .95rem;
+}
+
+/* Link liên hệ (nếu dùng <a>) */
+.brandbar .contact-link{
+  color: var(--header-text);
+  text-decoration: none;
+}
+
+.brandbar .contact-link:hover{
+  color: var(--header-text-strong);
+  text-decoration: underline;
+}
+
+/* Vạch ngăn giữa các mục (tuỳ chọn) */
+.brandbar .divider{
+  width: 1px;
+  height: 20px;
+  background: var(--header-border);
+  display: inline-block;
+}
+
+/* ============================
+   RESPONSIVE
+   ============================ */
+
+@media (max-width: 992px){
+  .brandbar .contact-right{ gap: 1.25rem; }
+  .brandbar .contact-text{ font-size: .9rem; }
+}
+
+@media (max-width: 768px){
+  /* Mobile: chỉ hiển thị icon cho gọn */
+  .brandbar .contact-text{ display: none; }
+  .brandbar .contact-right{ gap: .75rem; }
+  .brandbar .contact-item-header .contact-icon{
+    width: 22px; height: 22px;
+  }
+}
+
+/* Gạch dọc mảnh giữa 2 item (giống ảnh tham chiếu) */
+.brandbar .contact-sep{
+  width:1px;
+  height:22px;
+  background: var(--header-border);
+  display:inline-block;
+  margin: 0 .25rem;
+}
+
+/* Hover nhẹ: chữ đậm hơn, icon tươi hơn (không đổi layout hiện tại) */
+.brandbar .contact-item-header:hover .contact-text{
+  color: var(--header-text-strong);
+}
+.brandbar .contact-item-header:hover .contact-icon{
+  filter: saturate(1.12);
+}
+
+/* Nếu icon còn bị ‘viền/nền’ do CSS nơi khác, ép tắt hoàn toàn ở header */
+.brandbar .contact-item-header .contact-icon{
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  outline: none !important;
+}
