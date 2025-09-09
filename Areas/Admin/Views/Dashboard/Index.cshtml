@@ -1,6 +1,7 @@
 ﻿@using WEB_CV.Data
 @using System.Text.Json
 @inject NewsDbContext Context
+@model WEB_CV.Areas.Admin.Controllers.DashboardController.MediaDashboardVm
 
 @{
     ViewData["Title"] = "Dashboard";
@@ -231,6 +232,57 @@
             </div>
         </div>
     </div>
+<!-- Media Library -->
+<div class="row g-4 mb-4">
+  <div class="col-lg-12">
+    <div class="content-card">
+      <div class="content-card-header d-flex justify-content-between align-items-center">
+        <h5 class="card-title mb-0">
+          <i class="fas fa-images me-2"></i>Thư viện media
+        </h5>
+        <a class="btn btn-sm btn-primary"
+           asp-area="Admin" asp-controller="Media" asp-action="Index">
+          Mở thư viện
+        </a>
+      </div>
+
+      <div class="content-card-body">
+        <div class="text-muted mb-3">
+          <span class="me-3">
+            <i class="fas fa-folder-open me-1"></i>@Model.TotalFolders thư mục
+          </span>
+          <span class="me-3">
+            <i class="fas fa-file-image me-1"></i>@Model.TotalFiles tệp
+          </span>
+          <span>
+            <i class="fas fa-hdd me-1"></i>
+            @WEB_CV.Areas.Admin.Controllers.DashboardController.HumanSize(Model.TotalBytes)
+          </span>
+        </div>
+
+        <div class="row g-2">
+          @if (Model?.Recent?.Any() == true)
+          {
+            foreach (var it in Model.Recent)
+            {
+              <div class="col-6 col-sm-4 col-md-3 col-lg-2">
+                <a asp-area="Admin" asp-controller="Media" asp-action="Index"
+                   class="d-block rounded-3 overflow-hidden border">
+                  <img src="@it.Url" alt="" class="w-100"
+                       style="aspect-ratio:1/1;object-fit:cover;" />
+                </a>
+              </div>
+            }
+          }
+          else
+          {
+            <div class="col-12 text-muted">Chưa có tệp nào trong thư viện.</div>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
     <!-- Content Grid -->
     <div class="row g-4">

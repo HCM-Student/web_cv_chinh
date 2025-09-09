@@ -409,6 +409,18 @@
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.slim.min.map"
     },
     {
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\media\\MAIL.png",
+      "PackagePath": "staticwebassets\\media\\MAIL.png"
+    },
+    {
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\media\\PHONE-1.png",
+      "PackagePath": "staticwebassets\\media\\PHONE-1.png"
+    },
+    {
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\media\\PHONE.png",
+      "PackagePath": "staticwebassets\\media\\PHONE.png"
+    },
+    {
       "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.build.web_cv.props",
       "PackagePath": "build\\web_cv.props"
     },

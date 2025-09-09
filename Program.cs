@@ -43,8 +43,15 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-app.UseStaticFiles();
 
+// Ensure media directory exists
+var mediaPath = Path.Combine(app.Environment.WebRootPath, "media");
+if (!Directory.Exists(mediaPath))
+{
+    Directory.CreateDirectory(mediaPath);
+}
+
+app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthentication();

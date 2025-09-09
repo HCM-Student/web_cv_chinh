@@ -1,0 +1,352 @@
+@{
+    ViewData["Title"] = "Thư viện Media";
+    Layout = "_AdminLayout";
+}
+<link rel="stylesheet" href="https://unpkg.com/filepond/dist/filepond.css" />
+<link rel="stylesheet" href="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.css" />
+<script src="https://unpkg.com/filepond-plugin-image-preview/dist/filepond-plugin-image-preview.js"></script>
+<script src="https://unpkg.com/filepond/dist/filepond.js"></script>
+
+<style>
+:root{
+  --brand: var(--bs-primary, #2563eb);
+  --ring: rgba(37,99,235,.2);
+  --card: #ffffff;
+  --border: #e5e7eb;
+  --muted: #6b7280;
+}
+
+/* Header */
+.media-head .btn{ border-radius: 999px; }
+.media-head .input-group .form-control{ border-radius: 999px; }
+.media-head .input-group-text{ border-radius: 999px; }
+
+/* Breadcrumb */
+.media-crumb{
+  background: #fff; border:1px solid var(--border);
+  border-radius: 999px; padding: .35rem .8rem;
+  box-shadow: 0 .25rem .75rem rgba(0,0,0,.04);
+}
+
+/* Grid */
+.media-grid{
+  display:grid; gap:14px;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+}
+
+.tile{
+  position:relative; background:var(--card);
+  border:1px solid var(--border); border-radius:16px;
+  overflow:hidden; transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+}
+.tile:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 12px 28px rgba(0,0,0,.06);
+  border-color: #d7dbe3;
+}
+.tile.selected{
+  outline: 3px solid var(--brand); outline-offset: 0;
+  box-shadow: 0 0 0 4px var(--ring);
+}
+
+/* Thumb */
+.tile-thumb{
+  position:relative; width:100%; aspect-ratio:1/1; background:#f3f4f6;
+  display:flex; align-items:center; justify-content:center;
+}
+.tile-thumb img{ width:100%; height:100%; object-fit:cover; }
+
+/* Overlay actions (hover) */
+.tile-actions{
+  position:absolute; left:.5rem; right:.5rem; bottom:.5rem;
+  display:flex; gap:.45rem; justify-content:center;
+  opacity:0; transform: translateY(4px);
+  transition: .15s ease;
+}
+.tile:hover .tile-actions{ opacity:1; transform:none; }
+.tile-actions .btn{
+  padding:.35rem .6rem; border-radius:999px;
+  backdrop-filter: blur(3px);
+}
+
+/* Info */
+.tile-info{ padding:.65rem .75rem; border-top:1px solid var(--border); background:#fff; }
+.tile-name{ font-weight:600; font-size:.95rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.tile-sub{ color:var(--muted); font-size:.8rem; }
+
+/* Ẩn input của FilePond (vì đã gắn vào label) */
+#uploader{ display:none; }
+
+/* Empty */
+.media-empty{
+  border:1px dashed var(--border); border-radius:16px; background:#fff;
+  padding:48px; text-align:center; color:var(--muted);
+}
+</style>
+
+<div class="container-fluid py-4">
+  <!-- Header -->
+  <div class="d-flex flex-wrap align-items-center justify-content-between mb-3 media-head">
+    <div class="pe-3">
+      <h4 class="fw-bold mb-1">Thư viện media</h4>
+      <div class="text-muted small">Quản lý ảnh & tệp trong <code>/wwwroot/media</code></div>
+    </div>
+
+    <div class="d-flex flex-wrap align-items-center gap-2">
+      <div class="input-group me-1" style="max-width:280px">
+        <span class="input-group-text bg-white border-end-0"><i class="fas fa-search"></i></span>
+        <input id="search" class="form-control border-start-0" placeholder="Tìm tên file hoặc thư mục...">
+      </div>
+
+      <button id="btnNewFolder" class="btn btn-outline-secondary">
+        <i class="fas fa-folder-plus me-1"></i> Thư mục mới
+      </button>
+      <button id="btnRename" class="btn btn-outline-secondary" disabled>
+        <i class="fas fa-i-cursor me-1"></i> Đổi tên
+      </button>
+      <button id="btnDelete" class="btn btn-outline-danger" disabled>
+        <i class="fas fa-trash me-1"></i> Xoá
+      </button>
+
+      <label class="btn btn-primary mb-0">
+        <i class="fas fa-upload me-1"></i> Tải lên
+        <input type="file" id="uploader" name="files" multiple />
+      </label>
+    </div>
+  </div>
+
+  <!-- Breadcrumb -->
+  <nav class="media-crumb mb-3" aria-label="breadcrumb">
+    <ol id="crumb" class="breadcrumb mb-0 small"><!-- render ở JS --></ol>
+  </nav>
+
+  <!-- Grid -->
+  <div id="grid" class="media-grid"></div>
+
+  <div id="emptyState" class="media-empty d-none">
+    <i class="fas fa-images fa-2x mb-2"></i>
+    <p class="mb-1">Thư mục trống</p>
+    <div class="text-muted small">Tải lên tệp hoặc tạo thư mục mới</div>
+  </div>
+</div>
+
+<script>
+/* ===== State & helpers ===== */
+let currentFolder = "";
+let selectedEl = null;
+const grid  = document.getElementById('grid');
+const crumb = document.getElementById('crumb');
+const empty = document.getElementById('emptyState');
+
+const api = (url, opt={}) => fetch(url, opt).then(r => r.ok ? r.json() : Promise.reject(r));
+const esc = s => (s||"").replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+
+/* Bootstrap tooltips */
+function initTooltips(){
+  if (window.bootstrap?.Tooltip){
+    document.querySelectorAll('[title]').forEach(el=>{
+      const prev = bootstrap.Tooltip.getInstance(el);
+      if (prev) prev.dispose();
+      new bootstrap.Tooltip(el, { boundary: document.body, placement: 'top' });
+    });
+  }
+}
+
+/* ===== FilePond (upload) ===== */
+FilePond.registerPlugin(FilePondPluginImagePreview);
+const pond = FilePond.create(document.getElementById('uploader'), {
+  name: 'files',
+  labelIdle: "Kéo & thả hoặc <span class='filepond--label-action'>chọn file</span>",
+  server: { process: { url: `/Admin/Media/Upload?folder=${encodeURIComponent(currentFolder)}`, onload: () => load() } }
+});
+function refreshPondServer(){
+  pond.setOptions({ server:{ process:{ url:`/Admin/Media/Upload?folder=${encodeURIComponent(currentFolder)}`, onload:()=>load() } }});
+}
+
+/* ===== Breadcrumb render ===== */
+function renderCrumb(folder){
+  const parts = (folder||"").split('/').filter(Boolean);
+  let html = `<li class="breadcrumb-item"><a href="#" data-folder="">media</a></li>`;
+  let path = "";
+  for(const p of parts){
+    path += (path?'/':'') + p;
+    html += `<li class="breadcrumb-item"><a href="#" data-folder="${path}">${esc(p)}</a></li>`;
+  }
+  crumb.innerHTML = html;
+  crumb.querySelectorAll('a[data-folder]').forEach(a=>{
+    a.onclick = e => { e.preventDefault(); openFolder(a.dataset.folder); };
+  });
+}
+
+/* ===== Grid render ===== */
+function renderGrid(items){
+  grid.innerHTML = "";
+  selectedEl = null;
+  document.getElementById('btnRename').disabled = true;
+  document.getElementById('btnDelete').disabled = true;
+
+  if(!items || items.length===0){
+    empty.classList.remove('d-none');
+    return;
+  }
+  empty.classList.add('d-none');
+
+  // folders first
+  items.sort((a,b)=> (a.type===b.type)? a.name.localeCompare(b.name) : (a.type==='folder'?-1:1));
+
+  for(const it of items){
+    const div = document.createElement('div');
+    div.className = 'tile';
+    div.dataset.path = it.path;
+    div.dataset.type = it.type;
+
+    if(it.type === 'folder'){
+      div.innerHTML = `
+        <div class="tile-thumb">
+          <img alt="folder"
+               src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Crect width='200' height='140' y='30' rx='16' fill='%23EAB308'/%3E%3C/svg%3E">
+        </div>
+        <div class="tile-info">
+          <div class="tile-name">📁 ${esc(it.name)}</div>
+          <div class="tile-sub">Thư mục</div>
+        </div>
+        <div class="tile-actions">
+          <button class="btn btn-light border btn-sm shadow-sm"
+                  title="Mở thư mục"
+                  onclick="openFolder('${it.path}')">
+            <i class="fas fa-folder-open"></i>
+          </button>
+          <button class="btn btn-light border btn-sm shadow-sm"
+                  title="Xoá"
+                  onclick="deletePath('${it.path}')">
+            <i class="fas fa-trash"></i>
+          </button>
+        </div>`;
+      div.ondblclick = () => openFolder(it.path);
+    }else{
+      const thumb = (it.contentType && it.contentType.startsWith('image/'))
+        ? it.url
+        : "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Crect width='200' height='200' rx='16' fill='%23e5e7eb'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' font-size='48' fill='%239ca3af'%3E%F0%9F%93%84%3C/text%3E%3C/svg%3E";
+      const size = formatSize(it.size);
+      div.innerHTML = `
+        <div class="tile-thumb">
+          <img src="${thumb}" alt="${esc(it.name)}"
+               onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 200 200%22%3E%3Crect width=%22200%22 height=%22200%22 rx=%2216%22 fill=%22%23e5e7eb%22/%3E%3C/svg%3E'">
+        </div>
+        <div class="tile-info">
+          <div class="tile-name">${esc(it.name)}</div>
+          <div class="tile-sub">${size}</div>
+        </div>
+        <div class="tile-actions">
+          <button class="btn btn-light border btn-sm shadow-sm"
+                  title="Copy link"
+                  onclick="copyUrl('${it.url}')">
+            <i class="fas fa-link"></i>
+          </button>
+          <a class="btn btn-light border btn-sm shadow-sm"
+             title="Xem"
+             href="${it.url}" target="_blank" rel="noopener">
+            <i class="fas fa-eye"></i>
+          </a>
+          <button class="btn btn-light border btn-sm shadow-sm"
+                  title="Xoá"
+                  onclick="deletePath('${it.path}')">
+            <i class="fas fa-trash"></i>
+          </button>
+        </div>`;
+    }
+
+    div.onclick = () => selectTile(div);
+    grid.appendChild(div);
+  }
+
+  // bật tooltip sau khi render
+  initTooltips();
+}
+
+function selectTile(el){
+  if(selectedEl) selectedEl.classList.remove('selected');
+  selectedEl = el;
+  el.classList.add('selected');
+  document.getElementById('btnRename').disabled = false;
+  document.getElementById('btnDelete').disabled = false;
+}
+
+/* ===== Actions ===== */
+async function load(q=""){
+  const data = await api(`/Admin/Media/List?folder=${encodeURIComponent(currentFolder)}&q=${encodeURIComponent(q)}`);
+  renderCrumb(currentFolder);
+  renderGrid(data.items || []);
+  refreshPondServer();
+}
+
+function openFolder(p){ currentFolder = p || ""; load(document.getElementById('search').value || ""); }
+
+function formatSize(bytes){
+  if(!bytes && bytes!==0) return '';
+  const k = 1024, i = Math.floor(Math.log(Math.max(bytes,1))/Math.log(k));
+  return `${(bytes/Math.pow(k,i)).toFixed(2)} ${['B','KB','MB','GB','TB'][i]}`;
+}
+
+function copyUrl(url){
+  navigator.clipboard.writeText(location.origin + url).then(()=> {
+    (window.toastr?.success && toastr.success('Đã copy link!')) || alert('Đã copy link!');
+  });
+}
+
+async function deletePath(path){
+  if(!confirm('Bạn chắc chắn muốn xoá?')) return;
+  await api('/Admin/Media/Delete', {
+    method:'POST',
+    headers:{'Content-Type':'application/x-www-form-urlencoded'},
+    body:`path=${encodeURIComponent(path)}`
+  });
+  load();
+}
+
+/* Toolbar buttons */
+document.getElementById('btnNewFolder').onclick = async ()=>{
+  const name = prompt('Tên thư mục mới:');
+  if(!name) return;
+  await api('/Admin/Media/CreateFolder',{
+    method:'POST',
+    headers:{'Content-Type':'application/x-www-form-urlencoded'},
+    body:`name=${encodeURIComponent(name)}&parent=${encodeURIComponent(currentFolder)}`
+  });
+  load();
+};
+
+document.getElementById('btnRename').onclick = async ()=>{
+  if(!selectedEl) return;
+  const currentName = selectedEl.querySelector('.tile-name')?.textContent?.trim() ?? '';
+  const newName = prompt('Đổi tên thành:', currentName.replace(/^📁\s*/, ''));
+  if(!newName) return;
+  await api('/Admin/Media/Rename',{
+    method:'POST',
+    headers:{'Content-Type':'application/x-www-form-urlencoded'},
+    body:`path=${encodeURIComponent(selectedEl.dataset.path)}&newName=${encodeURIComponent(newName)}`
+  });
+  load();
+};
+
+document.getElementById('btnDelete').onclick = async ()=>{
+  if(!selectedEl) return;
+  await deletePath(selectedEl.dataset.path);
+};
+
+/* Search (debounce) */
+let t;
+document.getElementById('search').addEventListener('input', e=>{
+  clearTimeout(t); t = setTimeout(()=> load(e.target.value), 250);
+});
+
+/* Keyboard shortcuts */
+document.addEventListener('keydown', (e)=>{
+  if(!selectedEl) return;
+  if(e.key === 'Delete') { e.preventDefault(); deletePath(selectedEl.dataset.path); }
+  if(e.key.toLowerCase() === 'r' && (e.ctrlKey || e.metaKey)) { e.preventDefault(); document.getElementById('btnRename').click(); }
+});
+
+/* init */
+load();
+</script>

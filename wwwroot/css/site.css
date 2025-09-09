@@ -3789,3 +3789,5 @@ a {
   max-width:70ch;
 }
 
+.content-card .border.rounded-3 img { transition: transform .2s ease; }
+.content-card .border.rounded-3:hover img { transform: scale(1.03); }
