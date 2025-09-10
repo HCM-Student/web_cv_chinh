@@ -1,121 +1,30 @@
 @model WEB_CV.Models.BaiViet
 @{
     ViewData["Title"] = "Sửa bài viết";
-    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";  // đổi nếu layout khác
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
-@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
 
 <div class="container py-4">
-    <h1 class="h4 mb-3">Sửa bài viết</h1>
+  <h1 class="h4 mb-3">Sửa bài viết</h1>
 
-    <form asp-area="Admin" asp-controller="BaiViet" asp-action="Edit" method="post">
-        @Html.AntiForgeryToken()
-        <input type="hidden" asp-for="Id" />
-        <div asp-validation-summary="All" class="text-danger mb-3"></div>
+  <form asp-area="Admin"
+        asp-controller="BaiViet"
+        asp-action="Edit"
+        asp-route-id="@Model.Id"
+        method="post"
+        enctype="multipart/form-data">
+    @Html.AntiForgeryToken()
+    <input type="hidden" asp-for="Id" />
 
-        <div class="mb-3">
-            <label asp-for="TieuDe" class="form-label"></label>
-            <input asp-for="TieuDe" class="form-control" />
-            <span asp-validation-for="TieuDe" class="text-danger"></span>
-        </div>
+    <partial name="_Form" model="Model" />
 
-        <div class="mb-3">
-            <label asp-for="TomTat" class="form-label"></label>
-            <textarea asp-for="TomTat" class="form-control" rows="2"></textarea>
-            <span asp-validation-for="TomTat" class="text-danger"></span>
-        </div>
-
-        <div class="mb-3">
-            <label asp-for="NoiDung" class="form-label"></label>
-            <!-- KHÔNG dùng autosize cho ô này vì TinyMCE sẽ thay thế -->
-            <textarea asp-for="NoiDung" class="form-control" rows="12" placeholder="Soạn thảo nội dung..."></textarea>
-            <span asp-validation-for="NoiDung" class="text-danger"></span>
-            <div class="form-text">Bạn có thể dán HTML/đoạn văn bản đã định dạng.</div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-6 mb-3">
-                <label asp-for="ChuyenMucId" class="form-label"></label>
-                <div class="d-flex gap-2">
-                    <select asp-for="ChuyenMucId" class="form-select" asp-items="ViewBag.ChuyenMucId">
-                        <option value="">-- chọn chuyên mục --</option>
-                    </select>
-                    <a class="btn btn-outline-secondary"
-                       asp-area="Admin" asp-controller="ChuyenMuc" asp-action="Create" target="_blank">+ Thêm</a>
-                </div>
-                <span asp-validation-for="ChuyenMucId" class="text-danger"></span>
-            </div>
-
-            <div class="col-md-6 mb-3">
-                <label asp-for="TacGiaId" class="form-label"></label>
-                <select asp-for="TacGiaId" class="form-select" asp-items="ViewBag.TacGiaId">
-                    <option value="">-- chọn tác giả --</option>
-                </select>
-                <span asp-validation-for="TacGiaId" class="text-danger"></span>
-            </div>
-        </div>
-
-        <div class="mb-3">
-            <label asp-for="NgayDang" class="form-label"></label>
-            <input asp-for="NgayDang" class="form-control" />
-            <span class="form-text">Có thể giữ nguyên nếu không muốn chỉnh.</span>
-            <span asp-validation-for="NgayDang" class="text-danger"></span>
-        </div>
-
-        <div class="mt-3 d-flex gap-2">
-            <button type="submit" class="btn btn-primary">Cập nhật</button>
-            <a asp-area="Admin" asp-controller="BaiViet" asp-action="Index" class="btn btn-secondary">Hủy</a>
-        </div>
-    </form>
+    <div class="mt-3 d-flex gap-2">
+      <button type="submit" class="btn btn-primary">
+        <i class="fas fa-save me-2"></i> Cập nhật
+      </button>
+      <a asp-area="Admin" asp-controller="BaiViet" asp-action="Index" class="btn btn-secondary">Hủy</a>
+    </div>
+  </form>
 </div>
-
-<!-- TinyMCE + cấu hình upload ảnh -->
-<script src="https://cdn.tiny.cloud/1/5y7eprut3aap74ydqqc1ffaqszfn9qi6lc1lzned67e6k039/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-  tinymce.init({
-    selector: 'textarea[name="NoiDung"]',
-    branding: false, promotion: false,
-    height: 520, menubar: false,
-    plugins: 'image link lists table code autoresize',
-    toolbar: 'undo redo | blocks | bold italic underline | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | image link table | code',
-    content_style: 'body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;font-size:16px;line-height:1.6;} img{max-width:100%;height:auto;}',
-
-    /* Upload tự động khi dán/kéo thả */
-    automatic_uploads: true,
-    convert_urls: false,
-    images_upload_url: '@Url.Action("Upload","Media", new { area="Admin", folder = "posts" })',
-    images_reuse_filename: false,
-    paste_data_images: true,
-
-    /* Nút chọn file ảnh mở file picker và upload luôn */
-    file_picker_types: 'image',
-    file_picker_callback: (cb, value, meta) => {
-      if (meta.filetype !== 'image') return;
-      const input = document.createElement('input');
-      input.type = 'file'; input.accept = 'image/*';
-      input.onchange = function () {
-        const file = this.files[0];
-        const form = new FormData();
-        form.append('file', file, file.name);
-        fetch('@Url.Action("Upload","Media", new { area="Admin", folder = "posts" })', {
-          method: 'POST',
-          body: form,
-          credentials: 'same-origin'
-        })
-        .then(r => r.json())
-        .then(json => cb(json.location))
-        .catch(err => alert('Upload lỗi: ' + err));
-      };
-      input.click();
-    }
-  });
-});
-</script>
-
-<style>
-/* tránh lớp khác đè lên editor trong vài theme */
-.tox-tinymce{ position: relative; z-index: 1; }
-</style>
 
 @section Scripts { <partial name="_ValidationScriptsPartial" /> }

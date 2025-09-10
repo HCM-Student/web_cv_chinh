@@ -29,6 +29,42 @@
     </div>
   </div>
 
+  <!-- Ảnh tiêu đề -->
+  <div class="form-section card shadow-sm mb-4">
+    <div class="card-header bg-white d-flex align-items-center gap-2">
+      <span class="section-chip"><i class="fas fa-image"></i></span>
+      <h5 class="mb-0">Ảnh tiêu đề</h5>
+    </div>
+    <div class="card-body">
+      @if (!string.IsNullOrEmpty(Model?.AnhTieuDe))
+      {
+        <div class="mb-3">
+          <img src="@Model.AnhTieuDe" alt="@Model.AnhTieuDeAlt" class="img-thumbnail" style="max-width:260px" />
+        </div>
+      }
+
+      <div class="mb-3">
+        <input type="file" name="AnhTieuDeFile" accept="image/*" class="form-control" />
+        <div class="form-text">Chọn ảnh .jpg .png .webp .gif .svg</div>
+      </div>
+
+      @* Hiện checkbox xoá chỉ khi đang sửa và có ảnh *@
+      @if (!string.IsNullOrEmpty(Model?.AnhTieuDe))
+      {
+        <div class="mb-3 form-check">
+          <input class="form-check-input" type="checkbox" name="removeThumb" id="removeThumb" />
+          <label class="form-check-label" for="removeThumb">Xoá ảnh hiện tại</label>
+        </div>
+      }
+
+      <div class="mb-3">
+        <label asp-for="AnhTieuDeAlt" class="form-label">Mô tả ảnh (alt)</label>
+        <input asp-for="AnhTieuDeAlt" class="form-control" placeholder="Mô tả ngắn nội dung ảnh (SEO & trợ năng)" />
+        <span asp-validation-for="AnhTieuDeAlt" class="text-danger"></span>
+      </div>
+    </div>
+  </div>
+
   <!-- Nội dung -->
   <div class="form-section card shadow-sm mb-4">
     <div class="card-header bg-white d-flex align-items-center gap-2">

@@ -38,5 +38,11 @@ namespace WEB_CV.Models
 
         [ValidateNever]
         public ICollection<BaiVietTag> BaiVietTags { get; set; } = new List<BaiVietTag>();
+
+        [StringLength(300)]
+        public string? AnhTieuDe { get; set; }   // lưu URL: "/media/posts/cover/xxx.jpg"
+
+        [StringLength(200)]
+        public string? AnhTieuDeAlt { get; set; } // mô tả ảnh (SEO/Accessibility)
     }
 }

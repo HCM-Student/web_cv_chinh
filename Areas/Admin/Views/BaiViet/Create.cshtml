@@ -3,12 +3,19 @@
     ViewData["Title"] = "Thêm bài viết";
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
-<form asp-action="Create" method="post">
+
+<form asp-area="Admin"
+      asp-controller="BaiViet"
+      asp-action="Create"
+      method="post"
+      enctype="multipart/form-data">
   @Html.AntiForgeryToken()
-  <partial name="_Form" />
+
+  <partial name="_Form" model="Model" />
+
   <div class="toolbar-sticky">
     <div class="container-fluid d-flex justify-content-end gap-2">
-      <a asp-action="Index" class="btn btn-light">Hủy</a>
+      <a asp-area="Admin" asp-controller="BaiViet" asp-action="Index" class="btn btn-light">Hủy</a>
       <button type="submit" class="btn btn-primary btn-save">
         <i class="fas fa-save me-2"></i> Lưu
       </button>
@@ -19,14 +26,16 @@
 @section Scripts{
   <partial name="_ValidationScriptsPartial" />
   <script>
-    // autosize textarea
+    // autosize cho các textarea gắn class "autosize" (vd: TomTat)
     document.querySelectorAll('textarea.autosize').forEach(t=>{
       const resize=()=>{ t.style.height='auto'; t.style.height=t.scrollHeight+'px'; };
       t.addEventListener('input', resize); resize();
     });
-    // button loading
+
+    // trạng thái loading khi ấn Lưu
     document.querySelector('.btn-save')?.addEventListener('click', function(){
-      this.classList.add('disabled'); this.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Đang lưu...';
+      this.classList.add('disabled');
+      this.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span>Đang lưu...';
     });
   </script>
 }
