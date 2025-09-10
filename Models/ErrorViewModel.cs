@@ -1,4 +1,4 @@
-namespace web_cv.Models;
+namespace WEB_CV.Models;
 
 public class ErrorViewModel
 {

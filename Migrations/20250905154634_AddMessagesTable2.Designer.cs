@@ -9,7 +9,7 @@ using WEB_CV.Data;
 
 #nullable disable
 
-namespace web_cv.Migrations
+namespace WEB_CV.Migrations
 {
     [DbContext(typeof(NewsDbContext))]
     [Migration("20250905154634_AddMessagesTable2")]

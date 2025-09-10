@@ -8,7 +8,7 @@ using WEB_CV.Data;
 
 #nullable disable
 
-namespace web_cv.Migrations
+namespace WEB_CV.Migrations
 {
     [DbContext(typeof(NewsDbContext))]
     partial class NewsDbContextModelSnapshot : ModelSnapshot
@@ -17,7 +17,7 @@ namespace web_cv.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "9.0.8")
+                .HasAnnotation("ProductVersion", "9.0.0-preview.3.24172.4")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -178,6 +178,45 @@ namespace web_cv.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ChuyenMucs");
+                });
+
+            modelBuilder.Entity("WEB_CV.Models.LienHe", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("HoTen")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<DateTime>("NgayGui")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("NoiDung")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SoDienThoai")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("nvarchar(20)");
+
+                    b.Property<string>("TieuDe")
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("LienHes");
                 });
 
             modelBuilder.Entity("WEB_CV.Models.NguoiDung", b =>

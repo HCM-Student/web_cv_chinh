@@ -1,12 +1,11 @@
 using System.Diagnostics;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using WEB_CV.Data;
 using WEB_CV.Models;
-using web_cv.Models;
 
-namespace web_cv.Controllers
+namespace WEB_CV.Controllers
 {
     public class HomeController : Controller
     {
@@ -19,58 +18,78 @@ namespace web_cv.Controllers
             _db = db;
         }
 
-        // ===== Trang chủ: trả 3 bài mới nhất làm model =====
-             
+        // ===== Trang chủ: trả 3 bài mới nhất =====
         [HttpGet]
         public async Task<IActionResult> Index()
-{
-    var latest3 = await _db.BaiViets
-        .Include(x => x.ChuyenMuc)
-        .OrderByDescending(x => x.NgayDang)
-        .Take(3)
-        .AsNoTracking()
-        .ToListAsync();
+        {
+            var latest3 = await _db.BaiViets
+                .Include(x => x.ChuyenMuc)
+                .OrderByDescending(x => x.NgayDang)
+                .Take(3)
+                .AsNoTracking()
+                .ToListAsync();
 
-    return View(latest3);   // QUAN TRỌNG: trả model
-}
-
+            return View(latest3);
+        }
 
         // ===== Trang Giới thiệu =====
-        [HttpGet]
-        [Route("Home/GioiThieu")]
-        [Route("gioi-thieu")]
+        [HttpGet, Route("Home/GioiThieu"), Route("gioi-thieu")]
         public IActionResult GioiThieu() => View("GioiThieu");
 
         public IActionResult Privacy() => View();
 
         // ===== Trang Thiết bị =====
-        [HttpGet]
-        [Route("Home/ThietBi")]
-        [Route("thiet-bi")]
+        [HttpGet, Route("Home/ThietBi"), Route("thiet-bi")]
         public IActionResult ThietBi() => View("ThietBi");
 
         // ===== Trang Tuyển dụng =====
-        [HttpGet]
-        [Route("Home/TuyenDung")]
-        [Route("tuyen-dung")]
+        [HttpGet, Route("Home/TuyenDung"), Route("tuyen-dung")]
         public IActionResult TuyenDung() => View("TuyenDung");
 
         // ===== Trang Báo giá =====
-        [HttpGet]
-        [Route("Home/BaoGia")]
-        [Route("bao-gia")]
+        [HttpGet, Route("Home/BaoGia"), Route("bao-gia")]
         public IActionResult BaoGia() => View("BaoGia");
 
-        // ===== Trang Liên hệ =====
-        [HttpGet]
-        [Route("Home/LienHe")]
-        [Route("lien-he")]
-        public IActionResult LienHe() => View("LienHe");
+                // ===== Liên hệ (GET) =====
+                [HttpGet, Route("Home/LienHe"), Route("lien-he")]
+                public IActionResult LienHe()
+                {
+                    return View("LienHe", new LienHe());
+                }
 
-        // ===== Trang Tin tức - Sự kiện (public) =====
-        [HttpGet]
-        [Route("Home/TinTuc")]
-        [Route("tin-tuc")]
+                // ===== Liên hệ (POST) =====
+        [HttpPost, Route("Home/LienHe"), Route("lien-he")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> LienHe([Bind("HoTen,Email,SoDienThoai,TieuDe,NoiDung")] LienHe model)
+        {
+            if (!ModelState.IsValid)
+            {
+                LogModelErrors();
+                TempData["ErrorMessage"] = "Đã có lỗi xảy ra. Vui lòng kiểm tra lại thông tin.";
+                return View("LienHe", model);
+            }
+
+            try
+            {
+                model.NgayGui = DateTime.Now;
+                _db.LienHes.Add(model);
+                await _db.SaveChangesAsync();
+
+                TempData["SuccessMessage"] = "Cảm ơn bạn! Chúng tôi đã nhận được tin nhắn và sẽ phản hồi sớm nhất.";
+                // 👉 QUAN TRỌNG: Redirect để TempData hiển thị ở GET
+                return RedirectToAction(nameof(LienHe));
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Lỗi lưu liên hệ");
+                TempData["ErrorMessage"] = "Không thể gửi tin nhắn lúc này. Vui lòng thử lại sau.";
+                return View("LienHe", model);
+            }
+        }
+
+
+        // ===== Tin tức =====
+        [HttpGet, Route("Home/TinTuc"), Route("tin-tuc")]
         public async Task<IActionResult> TinTuc()
         {
             var posts = await _db.BaiViets
@@ -80,14 +99,11 @@ namespace web_cv.Controllers
                 .OrderByDescending(b => b.NgayDang)
                 .ToListAsync();
 
-            // View công khai: Views/TinTuc/Index.cshtml
             return View("~/Views/TinTuc/Index.cshtml", posts);
         }
 
-        // ===== Chi tiết bài viết (public) =====
-        [HttpGet]
-        [Route("Home/ChiTietBaiViet/{id:int}")]
-        [Route("bai-viet/{id:int}")]
+        // ===== Chi tiết bài viết =====
+        [HttpGet, Route("Home/ChiTietBaiViet/{id:int}"), Route("bai-viet/{id:int}")]
         public async Task<IActionResult> ChiTietBaiViet(int id)
         {
             var post = await _db.BaiViets
@@ -97,13 +113,20 @@ namespace web_cv.Controllers
                 .FirstOrDefaultAsync(b => b.Id == id);
 
             if (post == null) return NotFound();
-
-            // View công khai: Views/TinTuc/Details.cshtml
             return View("~/Views/TinTuc/Details.cshtml", post);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
             => View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+
+        // ===== Helper: log lỗi model =====
+        private void LogModelErrors()
+        {
+            var errs = ModelState
+                .Where(kvp => kvp.Value?.Errors.Any() == true)
+                .Select(kvp => $"{kvp.Key}: {string.Join(" | ", kvp.Value!.Errors.Select(e => e.ErrorMessage))}");
+            _logger.LogWarning("LienHe model invalid: {Errors}", string.Join(" || ", errs));
+        }
     }
 }

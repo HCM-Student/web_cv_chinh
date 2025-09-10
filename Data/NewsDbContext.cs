@@ -14,7 +14,7 @@ namespace WEB_CV.Data
         public DbSet<Tag> Tags { get; set; }
         public DbSet<BaiVietTag> BaiVietTags { get; set; }
         public DbSet<CaiDat> CaiDats { get; set; }
-        // public DbSet<Message> Messages { get; set; }
+        public DbSet<LienHe> LienHes { get; set; }
 
         protected override void OnModelCreating(ModelBuilder mb)
         {
@@ -61,14 +61,13 @@ namespace WEB_CV.Data
               .HasForeignKey(x => x.TagId)
               .OnDelete(DeleteBehavior.Cascade);
 
-            // ===== Ràng buộc đơn giản cho ChuyenMuc =====
-           // ===== Ràng buộc ChuyenMuc =====
-        mb.Entity<ChuyenMuc>(e =>
-    {
-        e.Property(x => x.Ten).IsRequired().HasMaxLength(200);
-        e.Property(x => x.Slug).HasMaxLength(200);     // <— THÊM
-        e.Property(x => x.MoTa).HasMaxLength(1000);    // <— THÊM
-    });
+            // ===== Ràng buộc ChuyenMuc =====
+            mb.Entity<ChuyenMuc>(e =>
+            {
+                e.Property(x => x.Ten).IsRequired().HasMaxLength(200);
+                e.Property(x => x.Slug).HasMaxLength(200);
+                e.Property(x => x.MoTa).HasMaxLength(1000);
+            });
 
             // ===== Ràng buộc CaiDat =====
             mb.Entity<CaiDat>(e =>
@@ -80,8 +79,18 @@ namespace WEB_CV.Data
                 e.Property(x => x.NgayCapNhat).HasDefaultValueSql("GETDATE()");
             });
 
-            // Messaging removed
-
+            // ===== LienHe =====
+            mb.Entity<LienHe>(e =>
+            {
+                e.ToTable("LienHes"); // đồng bộ tên bảng với DbSet
+                e.Property(x => x.HoTen).IsRequired().HasMaxLength(100);
+                e.Property(x => x.Email).IsRequired().HasMaxLength(100);
+                e.Property(x => x.SoDienThoai).IsRequired().HasMaxLength(20);
+                e.Property(x => x.TieuDe).HasMaxLength(200);
+                e.Property(x => x.NoiDung).IsRequired();
+                e.Property(x => x.NgayGui).HasDefaultValueSql("GETDATE()");
+                e.HasIndex(x => x.NgayGui);
+            });
         }
     }
 }

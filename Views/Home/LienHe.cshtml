@@ -1,4 +1,5 @@
-﻿@{
+﻿@model WEB_CV.Models.LienHe
+@{
     ViewData["Title"] = "Liên hệ";
 }
 
@@ -157,73 +158,88 @@
 </section>
 
 <!-- ===================== FORM LIÊN HỆ ===================== -->
-<section id="contact-form" class="section bg-light fade-in-section">
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-lg-8">
-                <div class="contact-form-wrapper">
-                    <div class="text-center mb-5">
-                        <h2 class="section-title mb-3">Gửi tin nhắn cho chúng tôi</h2>
-                        <p class="text-muted">Chúng tôi sẽ phản hồi trong vòng 24 giờ</p>
-                    </div>
-                    
-                    <div class="contact-form">
-                        <form>
-                            <div class="row g-3">
-                                <div class="col-md-6">
-                                    <label for="fullName" class="form-label">Họ và tên *</label>
-                                    <input type="text" class="form-control" id="fullName" required>
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="email" class="form-label">Email *</label>
-                                    <input type="email" class="form-control" id="email" required>
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="phone" class="form-label">Số điện thoại</label>
-                                    <input type="tel" class="form-control" id="phone">
-                                </div>
-                                <div class="col-md-6">
-                                    <label for="company" class="form-label">Công ty/Tổ chức</label>
-                                    <input type="text" class="form-control" id="company">
-                                </div>
-                                <div class="col-12">
-                                    <label for="subject" class="form-label">Chủ đề *</label>
-                                    <select class="form-select" id="subject" required>
-                                        <option value="">Chọn chủ đề</option>
-                                        <option value="quote">Yêu cầu báo giá</option>
-                                        <option value="equipment">Thuê thiết bị</option>
-                                        <option value="service">Dịch vụ khảo sát</option>
-                                        <option value="job">Tuyển dụng</option>
-                                        <option value="support">Hỗ trợ kỹ thuật</option>
-                                        <option value="other">Khác</option>
-                                    </select>
-                                </div>
-                                <div class="col-12">
-                                    <label for="message" class="form-label">Nội dung tin nhắn *</label>
-                                    <textarea class="form-control" id="message" rows="5" required placeholder="Mô tả chi tiết yêu cầu của bạn..."></textarea>
-                                </div>
-                                <div class="col-12">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" id="agree" required>
-                                        <label class="form-check-label" for="agree">
-                                            Tôi đồng ý với <a href="#" class="text-primary">chính sách bảo mật</a> và cho phép công ty liên hệ lại
-                                        </label>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <button type="submit" class="btn btn-primary btn-lg w-100">
-                                        <i class="fas fa-paper-plane me-2"></i>Gửi tin nhắn
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
+<div id="contact-form" class="contact-form">
+    <form asp-action="LienHe" asp-controller="Home" method="post" novalidate>
+        @Html.AntiForgeryToken()
+
+        @* hiện thông báo nếu có *@
+        @if (TempData["SuccessMessage"] is string ok)
+        {
+            <div class="alert alert-success mb-3">@ok</div>
+        }
+        @if (TempData["ErrorMessage"] is string err)
+        {
+            <div class="alert alert-danger mb-3">@err</div>
+        }
+
+        <div asp-validation-summary="ModelOnly" class="text-danger mb-2"></div>
+
+        <div class="row g-3">
+            <div class="col-md-6">
+                <label asp-for="HoTen" class="form-label">Họ và tên *</label>
+                <input asp-for="HoTen" class="form-control" id="fullName" placeholder="Nguyễn Văn A" required />
+                <span asp-validation-for="HoTen" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-6">
+                <label asp-for="Email" class="form-label">Email *</label>
+                <input asp-for="Email" class="form-control" id="email" type="email" placeholder="name@example.com" required />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+            <div class="col-md-6">
+                <label asp-for="SoDienThoai" class="form-label">Số điện thoại *</label>
+                <input asp-for="SoDienThoai" class="form-control" id="phone" type="tel" placeholder="09xx xxx xxx" required />
+                <span asp-validation-for="SoDienThoai" class="text-danger"></span>
+            </div>
+
+            @* Trường thêm ngoài model: không bind, chỉ giữ name riêng để không ảnh hưởng model *@
+            <div class="col-md-6">
+                <label class="form-label">Công ty/Tổ chức</label>
+                <input class="form-control" id="company" name="Company" placeholder="(Không bắt buộc)" />
+            </div>
+
+            <div class="col-12">
+                <label asp-for="TieuDe" class="form-label">Chủ đề *</label>
+                <select asp-for="TieuDe" class="form-select" id="subject">
+                    <option value="">Chọn chủ đề</option>
+                    <option>Yêu cầu báo giá</option>
+                    <option>Thuê thiết bị</option>
+                    <option>Dịch vụ khảo sát</option>
+                    <option>Tuyển dụng</option>
+                    <option>Hỗ trợ kỹ thuật</option>
+                    <option>Khác</option>
+                </select>
+                <span asp-validation-for="TieuDe" class="text-danger"></span>
+            </div>
+
+            <div class="col-12">
+                <label asp-for="NoiDung" class="form-label">Nội dung tin nhắn *</label>
+                <textarea asp-for="NoiDung" class="form-control" id="message" rows="5" required placeholder="Mô tả chi tiết yêu cầu của bạn..."></textarea>
+                <span asp-validation-for="NoiDung" class="text-danger"></span>
+            </div>
+
+            <div class="col-12">
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="agree" name="agree" required />
+                    <label class="form-check-label" for="agree">
+                        Tôi đồng ý với <a href="#" class="text-primary">chính sách bảo mật</a> và cho phép công ty liên hệ lại
+                    </label>
                 </div>
             </div>
-        </div>
-    </div>
-</section>
 
+            <div class="col-12">
+                <button type="submit" class="btn btn-primary btn-lg w-100">
+                    <i class="fas fa-paper-plane me-2"></i>Gửi tin nhắn
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
 <!-- ===================== PHƯƠNG THỨC LIÊN HỆ ===================== -->
 <section class="section">
     <div class="container">

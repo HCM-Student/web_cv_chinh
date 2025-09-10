@@ -1,0 +1,34 @@
+@model WEB_CV.Models.LienHe
+@{
+    ViewData["Title"] = "Chi tiết Liên hệ";
+}
+
+<h1>Chi tiết Liên hệ</h1>
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">Họ Tên</dt>
+        <dd class="col-sm-10">@Model.HoTen</dd>
+
+        <dt class="col-sm-2">Email</dt>
+        <dd class="col-sm-10">@Model.Email</dd>
+
+        <dt class="col-sm-2">Số Điện Thoại</dt>
+        <dd class="col-sm-10">@Model.SoDienThoai</dd>
+        
+        <dt class="col-sm-2">Tiêu đề</dt>
+        <dd class="col-sm-10">@Model.TieuDe</dd>
+
+        <dt class="col-sm-2">Nội dung</dt>
+        <dd class="col-sm-10">
+            <textarea class="form-control" rows="8" readonly>@Model.NoiDung</textarea>
+        </dd>
+
+        <dt class="col-sm-2">Ngày Gửi</dt>
+        <dd class="col-sm-10">@Model.NgayGui.ToString("dd/MM/yyyy HH:mm:ss")</dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Index" class="btn btn-secondary">Quay lại danh sách</a>
+</div>

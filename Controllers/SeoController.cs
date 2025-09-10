@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WEB_CV.Data;
 
-namespace web_cv.Controllers
+namespace WEB_CV.Controllers
 {
     [ApiController]
     public class SeoController : Controller

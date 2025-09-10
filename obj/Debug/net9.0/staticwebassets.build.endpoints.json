@@ -24895,6 +24895,88 @@
       ]
     },
     {
+      "Route": "media/posts/cover/news-placeholder.jpg",
+      "AssetFile": "media/posts/cover/news-placeholder.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "125247"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"v9Pl/Rutoei6T5QbqdfBuOtBBLA1JUOerNsitXwXD74=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 10 Sep 2025 07:13:44 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-v9Pl/Rutoei6T5QbqdfBuOtBBLA1JUOerNsitXwXD74="
+        }
+      ]
+    },
+    {
+      "Route": "media/posts/cover/news-placeholder.xwenxwgp2g.jpg",
+      "AssetFile": "media/posts/cover/news-placeholder.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "125247"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"v9Pl/Rutoei6T5QbqdfBuOtBBLA1JUOerNsitXwXD74=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 10 Sep 2025 07:13:44 GMT"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "xwenxwgp2g"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-v9Pl/Rutoei6T5QbqdfBuOtBBLA1JUOerNsitXwXD74="
+        },
+        {
+          "Name": "label",
+          "Value": "media/posts/cover/news-placeholder.jpg"
+        }
+      ]
+    },
+    {
       "Route": "media/posts/cover/trang-chu-gioi-thieu-min-1.f9shr6gdws.png",
       "AssetFile": "media/posts/cover/trang-chu-gioi-thieu-min-1.png",
       "Selectors": [],
@@ -25017,7 +25099,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 08 Sep 2025 08:16:16 GMT"
+          "Value": "Wed, 10 Sep 2025 07:13:08 GMT"
         },
         {
           "Name": "Vary",
@@ -25066,7 +25148,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 08 Sep 2025 08:16:16 GMT"
+          "Value": "Wed, 10 Sep 2025 07:13:08 GMT"
         }
       ],
       "EndpointProperties": [
@@ -25115,7 +25197,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 08 Sep 2025 08:16:16 GMT"
+          "Value": "Wed, 10 Sep 2025 07:13:08 GMT"
         },
         {
           "Name": "Vary",
@@ -25178,7 +25260,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 08 Sep 2025 08:16:16 GMT"
+          "Value": "Wed, 10 Sep 2025 07:13:08 GMT"
         },
         {
           "Name": "Vary",
@@ -25219,7 +25301,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 08 Sep 2025 08:16:16 GMT"
+          "Value": "Wed, 10 Sep 2025 07:13:08 GMT"
         }
       ],
       "EndpointProperties": [
@@ -25260,7 +25342,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Mon, 08 Sep 2025 08:16:16 GMT"
+          "Value": "Wed, 10 Sep 2025 07:13:08 GMT"
         },
         {
           "Name": "Vary",

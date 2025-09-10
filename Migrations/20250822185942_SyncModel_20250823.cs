@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace web_cv.Migrations
+namespace WEB_CV.Migrations
 {
     /// <inheritdoc />
     public partial class SyncModel_20250823 : Migration
