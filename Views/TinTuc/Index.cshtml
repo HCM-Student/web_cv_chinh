@@ -1,54 +1,275 @@
-@model IEnumerable<WEB_CV.Models.BaiViet>
-@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model WEB_CV.Models.ViewModels.TinTucFilterVM
 @{
     ViewData["Title"] = "Tin tức & Sự kiện";
-    var placeholder = Url.Content("~/media/news-placeholder.jpg");
+    string q = Model.Q ?? "";
+    string dateFrom = Model.From?.ToString("yyyy-MM-dd") ?? "";
+    string dateTo   = Model.To?.ToString("yyyy-MM-dd") ?? "";
 }
 
-<div class="container py-4">
-  <div class="d-flex align-items-end justify-content-between mb-3">
-    <div>
-      <span class="eyebrow mb-2">Tin tức</span>
-      <h1 class="h3 mb-0">Tin tức &amp; Sự kiện</h1>
-    </div>
-    <a class="btn btn-outline-secondary" asp-controller="Home" asp-action="Index">Trang chủ</a>
-  </div>
-
-  <div class="row g-3">
-    @if (!(Model?.Any() ?? false))
+@functions {
+    // Chuẩn hoá URL ảnh -> luôn trả URL hợp lệ từ webroot
+    string ImgUrl(string? path)
     {
-      <div class="col-12">
-        <div class="alert alert-info">Chưa có bài viết.</div>
+        string placeholder = Url.Content("~/media/news-placeholder.jpg");
+        if (string.IsNullOrWhiteSpace(path)) return placeholder;
+
+        if (path.StartsWith("http", StringComparison.OrdinalIgnoreCase))
+            return path;
+
+        var clean = path.Replace("\\", "/").Trim();
+        if (clean.StartsWith("~/")) clean = clean[2..];
+        if (clean.StartsWith("/"))  clean = clean[1..];
+        if (!clean.Contains("/"))   clean = "media/" + clean;
+
+        return Url.Content("~/" + clean);
+    }
+
+    // Cắt HTML -> text thuần + rút gọn theo ký tự (fallback cho trình duyệt không hỗ trợ line-clamp)
+    string Excerpt(string? html, int maxChars = 240)
+    {
+        if (string.IsNullOrWhiteSpace(html)) return "";
+        var noTags = System.Text.RegularExpressions.Regex.Replace(html, "<.*?>", " ");
+        var text   = System.Net.WebUtility.HtmlDecode(noTags);
+        text = System.Text.RegularExpressions.Regex.Replace(text, @"\s+", " ").Trim();
+        if (text.Length <= maxChars) return text;
+        return text.Substring(0, maxChars).TrimEnd() + "…";
+    }
+}
+
+@section Styles {
+<style>
+/* ===== UI tổng thể ===== */
+.filter-bar{position:sticky;top:0;z-index:9;background:#fff;border-bottom:1px solid #eee;padding:.75rem 1rem;margin:-1rem -1rem 1rem -1rem}
+.card-article{border:1px solid #eee;border-radius:14px;overflow:hidden;transition:transform .18s ease,box-shadow .18s ease}
+.card-article:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(0,0,0,.08)}
+.card-article .thumb{aspect-ratio:16/9;object-fit:cover;width:100%}
+.card-article .category{font-size:.75rem;padding:.25rem .5rem;border-radius:999px;background:#f6f7fb}
+.card-article .meta{color:#6c757d;font-size:.9rem}
+.result-empty{border:1px dashed #cfd6e4;border-radius:14px;padding:2rem;background:#fafcff}
+.sidebar .widget{border:1px solid #eee;border-radius:14px;padding:1rem;background:#fff}
+.sidebar .widget + .widget{margin-top:1rem}
+.widget .item{display:flex;gap:.75rem}
+.widget .item + .item{margin-top:.75rem}
+.widget .item img{width:72px;height:48px;object-fit:cover;border-radius:8px;background:#f5f5f5}
+.sidebar-sticky{position:sticky;top:84px}
+.badge.filter-pill{background:#f1f5ff;color:#1e6fff;border:1px solid rgba(30,111,255,.2)}
+
+/* ===== Line clamp (giới hạn dòng) ===== */
+.line-clamp-1,.line-clamp-2,.line-clamp-3,.line-clamp-4{
+  display:-webkit-box; -webkit-box-orient:vertical; overflow:hidden;
+}
+.line-clamp-1{ -webkit-line-clamp:1 }
+.line-clamp-2{ -webkit-line-clamp:2 }
+.line-clamp-3{ -webkit-line-clamp:3 }
+.line-clamp-4{ -webkit-line-clamp:4 }
+
+.card-article h5 a{ text-decoration:none }
+.card-article h5 a:hover{ text-decoration:underline }
+.card-article .excerpt{ color:#6c757d; font-size:.975rem }
+
+.sidebar .widget .item-title{ font-weight:600; line-height:1.25 }
+</style>
+}
+
+<div class="d-flex align-items-center justify-content-between mb-3">
+  <div>
+    <span class="badge rounded-pill bg-light text-dark px-3 py-2">TIN TỨC</span>
+    <h2 class="mt-2 mb-0">Tin tức &amp; Sự kiện</h2>
+    <div class="text-muted">Tìm thấy <strong>@Model.Total</strong> bài viết</div>
+  </div>
+</div>
+
+<!-- FILTER BAR -->
+<div class="filter-bar rounded">
+  <form id="filterForm" method="get" class="container-xxl">
+    <div class="row g-2 align-items-end">
+      <div class="col-md-4">
+        <label class="form-label mb-1">Tìm kiếm</label>
+        <input name="q" value="@q" class="form-control" placeholder="Nhập từ khóa (tiêu đề, nội dung)..." />
+      </div>
+      <div class="col-md-3">
+        <label class="form-label mb-1">Chuyên mục</label>
+        <select class="form-select" name="chuyenMucId">
+          <option value="">Tất cả</option>
+          @foreach (var c in Model.ChuyenMucs)
+          {
+            <option value="@c.Id" selected="@(Model.ChuyenMucId == c.Id)">@c.Ten</option>
+          }
+        </select>
+      </div>
+      <div class="col-md-2">
+        <label class="form-label mb-1">Từ ngày</label>
+        <input type="date" class="form-control" name="from" value="@dateFrom" />
+      </div>
+      <div class="col-md-2">
+        <label class="form-label mb-1">Đến ngày</label>
+        <input type="date" class="form-control" name="to" value="@dateTo" />
+      </div>
+      <div class="col-md-1">
+        <label class="form-label mb-1">Hiển thị</label>
+        <select class="form-select" name="pageSize">
+          @foreach (var n in new[]{6,9,12,15,18})
+          { <option value="@n" selected="@(Model.PageSize==n)">@n</option> }
+        </select>
+      </div>
+    </div>
+
+    <div class="d-flex gap-2 mt-2 justify-content-end">
+      <div class="dropdown">
+        <button class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" type="button">Sắp xếp</button>
+        <ul class="dropdown-menu dropdown-menu-end">
+          <li><a class="dropdown-item @(Model.Sort=="newest"?"active":"")" href="@Url.Action("TinTuc", new { q=Model.Q, chuyenMucId=Model.ChuyenMucId, from = Model.From?.ToString("yyyy-MM-dd"), to = Model.To?.ToString("yyyy-MM-dd"), sort="newest", page=1, pageSize=Model.PageSize })">Mới nhất</a></li>
+          <li><a class="dropdown-item @(Model.Sort=="oldest"?"active":"")" href="@Url.Action("TinTuc", new { q=Model.Q, chuyenMucId=Model.ChuyenMucId, from = Model.From?.ToString("yyyy-MM-dd"), to = Model.To?.ToString("yyyy-MM-dd"), sort="oldest", page=1, pageSize=Model.PageSize })">Cũ nhất</a></li>
+          <li><a class="dropdown-item @(Model.Sort=="az"?"active":"")" href="@Url.Action("TinTuc", new { q=Model.Q, chuyenMucId=Model.ChuyenMucId, from = Model.From?.ToString("yyyy-MM-dd"), to = Model.To?.ToString("yyyy-MM-dd"), sort="az", page=1, pageSize=Model.PageSize })">A → Z</a></li>
+          <li><a class="dropdown-item @(Model.Sort=="comment"?"active":"")" href="@Url.Action("TinTuc", new { q=Model.Q, chuyenMucId=Model.ChuyenMucId, from = Model.From?.ToString("yyyy-MM-dd"), to = Model.To?.ToString("yyyy-MM-dd"), sort="comment", page=1, pageSize=Model.PageSize })">Nhiều bình luận</a></li>
+        </ul>
+      </div>
+      <button type="submit" class="btn btn-primary"><i class="fa-solid fa-filter me-1"></i> Lọc</button>
+      <a class="btn btn-outline-secondary" href="@Url.Action("TinTuc")">Xoá lọc</a>
+    </div>
+  </form>
+</div>
+
+<div class="row g-4">
+  <!-- MAIN LIST -->
+  <div class="col-lg-8">
+    @if (Model.Items.Count == 0)
+    {
+      <div class="result-empty text-center">
+        <h5>Không tìm thấy bài viết phù hợp</h5>
+        <div class="text-muted">Hãy thử từ khóa khác hoặc nới rộng bộ lọc.</div>
       </div>
     }
     else
     {
-      @foreach (var p in Model)
-      {
-        var cover = string.IsNullOrWhiteSpace(p.AnhTieuDe) ? placeholder : Url.Content(p.AnhTieuDe);
-        var alt   = string.IsNullOrWhiteSpace(p.AnhTieuDeAlt) ? p.TieuDe : p.AnhTieuDeAlt;
-        <div class="col-12 col-md-6 col-lg-4">
-          <article class="card h-100 border-0 shadow-sm">
-            <a asp-controller="Home" asp-action="ChiTietBaiViet" asp-route-id="@p.Id" class="ratio ratio-16x9 d-block">
-              <img src="@cover" alt="@alt" class="w-100 h-100 object-fit-cover" loading="lazy" />
-            </a>
-            <div class="card-body d-flex flex-column">
-              <h5 class="clamp-2 mb-2">
-                <a class="stretched-link text-decoration-none"
-                   asp-controller="Home" asp-action="ChiTietBaiViet" asp-route-id="@p.Id">
-                  @p.TieuDe
-                </a>
-              </h5>
-              @if (!string.IsNullOrWhiteSpace(p.TomTat))
-              { <p class="text-muted clamp-3 mb-3">@p.TomTat</p> }
-              <div class="small text-muted mt-auto">
-                <span class="chip">@p.NgayDang.ToString("dd/MM/yyyy")</span>
-                @if (!string.IsNullOrEmpty(p.ChuyenMuc?.Ten)) { <span class="chip">@p.ChuyenMuc.Ten</span> }
+      <div class="row g-4">
+        @foreach (var p in Model.Items)
+        {
+          <div class="col-12">
+            <article class="card-article d-flex flex-column flex-md-row">
+              <a asp-controller="Home" asp-action="ChiTietBaiViet" asp-route-id="@p.Id"
+                 class="ratio ratio-16x9 flex-shrink-0" style="max-width: 320px;">
+                <img class="thumb" src="@ImgUrl(p.AnhTieuDe)" alt="@p.TieuDe" />
+              </a>
+
+              <div class="p-3 d-flex flex-column gap-2 w-100">
+                <div class="d-flex align-items-center justify-content-between">
+                  <span class="category">@p.ChuyenMuc?.Ten</span>
+                  <span class="meta">@p.NgayDang.ToString("dd/MM/yyyy")</span>
+                </div>
+
+                <h5 class="mb-1">
+                  <a class="line-clamp-2"
+                     asp-controller="Home" asp-action="ChiTietBaiViet" asp-route-id="@p.Id">
+                    @p.TieuDe
+                  </a>
+                </h5>
+
+                @if (!string.IsNullOrWhiteSpace(p.TomTat) || !string.IsNullOrWhiteSpace(p.NoiDung))
+                {
+                  <p class="excerpt mb-2 line-clamp-3">
+                    @Excerpt(p.TomTat ?? p.NoiDung, 260)
+                  </p>
+                }
+
+                <div class="mt-auto d-flex justify-content-between align-items-center">
+                  <a class="btn btn-sm btn-outline-primary"
+                     asp-controller="Home" asp-action="ChiTietBaiViet" asp-route-id="@p.Id">
+                     Đọc tiếp
+                  </a>
+                  <small class="text-muted">
+                    <i class="fa-regular fa-comment-dots me-1"></i>@(p.BinhLuans?.Count ?? 0)
+                  </small>
+                </div>
               </div>
-            </div>
-          </article>
-        </div>
+            </article>
+          </div>
+        }
+      </div>
+
+      <!-- Pagination -->
+      @if (Model.TotalPages > 1)
+      {
+        <nav class="mt-4">
+          <ul class="pagination justify-content-center">
+            @{
+              int page = Model.Page;
+              int last = Model.TotalPages;
+              int start = Math.Max(1, page - 2);
+              int end   = Math.Min(last, page + 2);
+              string url(int p) => Url.Action("TinTuc", new {
+                  q = Model.Q, chuyenMucId = Model.ChuyenMucId,
+                  from = Model.From?.ToString("yyyy-MM-dd"),
+                  to = Model.To?.ToString("yyyy-MM-dd"),
+                  sort = Model.Sort, page = p, pageSize = Model.PageSize
+              })!;
+            }
+            <li class="page-item @(page==1?"disabled":"")"><a class="page-link" href="@url(page-1)">«</a></li>
+            @for (int i = start; i <= end; i++)
+            {
+              <li class="page-item @(i==page?"active":"")"><a class="page-link" href="@url(i)">@i</a></li>
+            }
+            <li class="page-item @(page==last?"disabled":"")"><a class="page-link" href="@url(page+1)">»</a></li>
+          </ul>
+        </nav>
       }
     }
   </div>
+
+  <!-- SIDEBAR -->
+  <div class="col-lg-4 sidebar">
+    <div class="sidebar-sticky">
+      <div class="widget">
+        <h6 class="mb-3">Bài viết mới nhất</h6>
+        @foreach (var p in Model.Latest5)
+        {
+          <div class="item">
+            <a asp-controller="Home" asp-action="ChiTietBaiViet" asp-route-id="@p.Id">
+              <img src="@ImgUrl(p.AnhTieuDe)" alt="@p.TieuDe" />
+            </a>
+            <div>
+              <a class="item-title line-clamp-2 text-decoration-none"
+                 asp-controller="Home" asp-action="ChiTietBaiViet" asp-route-id="@p.Id">
+                 @p.TieuDe
+              </a>
+              <div><small class="text-muted">@p.NgayDang.ToString("dd/MM/yyyy")</small></div>
+            </div>
+          </div>
+        }
+      </div>
+
+      @if (Model.Recruit5.Any())
+      {
+        <div class="widget">
+          <h6 class="mb-3">Tin tuyển dụng mới nhất</h6>
+          @foreach (var p in Model.Recruit5)
+          {
+            <div class="item">
+              <a asp-controller="Home" asp-action="ChiTietBaiViet" asp-route-id="@p.Id">
+                <img src="@ImgUrl(p.AnhTieuDe)" alt="@p.TieuDe" />
+              </a>
+              <div>
+                <a class="item-title line-clamp-2 text-decoration-none"
+                   asp-controller="Home" asp-action="ChiTietBaiViet" asp-route-id="@p.Id">
+                   @p.TieuDe
+                </a>
+                <div><small class="text-muted">@p.NgayDang.ToString("dd/MM/yyyy")</small></div>
+              </div>
+            </div>
+          }
+        </div>
+      }
+    </div>
+  </div>
 </div>
+
+@section Scripts {
+<script>
+  (function () {
+    const f = document.getElementById('filterForm');
+    f.querySelectorAll('select,input[type=date]').forEach(e => e.addEventListener('change', () => f.submit()));
+    const q = f.querySelector('input[name="q"]');
+    q && q.addEventListener('keydown', e => { if (e.key === 'Enter') f.submit(); });
+  })();
+</script>
+}

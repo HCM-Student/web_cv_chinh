@@ -1,10 +1,12 @@
+using System;
+using System.Linq;
 using System.Diagnostics;
-using System.Linq; // cần cho .Where/.Select
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using WEB_CV.Data;
 using WEB_CV.Models;
+using WEB_CV.Models.ViewModels; // nếu bạn đặt TinTucFilterVM trong Models/ViewModels
 
 namespace WEB_CV.Controllers
 {
@@ -19,7 +21,7 @@ namespace WEB_CV.Controllers
             _db = db;
         }
 
-        // ===== Trang chủ: trả 3 bài mới nhất =====
+        // ===== Trang chủ: 3 bài mới nhất =====
         [HttpGet]
         public async Task<IActionResult> Index()
         {
@@ -55,13 +57,6 @@ namespace WEB_CV.Controllers
         [HttpGet, Route("Home/LienHe"), Route("lien-he")]
         public IActionResult LienHe()
         {
-            // Dùng Peek để KHÔNG tiêu thụ TempData, đồng thời copy sang ViewData
-            if (TempData.ContainsKey("SuccessMessage"))
-                ViewData["SuccessMessage"] = TempData.Peek("SuccessMessage") as string;
-
-            if (TempData.ContainsKey("ErrorMessage"))
-                ViewData["ErrorMessage"] = TempData.Peek("ErrorMessage") as string;
-
             return View("LienHe", new LienHe());
         }
 
@@ -72,7 +67,7 @@ namespace WEB_CV.Controllers
         {
             if (!ModelState.IsValid)
             {
-                LogModelErrors();
+                LogModelErrors(); // <-- method ở cuối file
                 TempData["ErrorMessage"] = "Đã có lỗi xảy ra. Vui lòng kiểm tra lại thông tin.";
                 return View("LienHe", model);
             }
@@ -84,7 +79,7 @@ namespace WEB_CV.Controllers
                 await _db.SaveChangesAsync();
 
                 TempData["SuccessMessage"] = "Cảm ơn bạn! Chúng tôi đã nhận được tin nhắn và sẽ phản hồi sớm nhất.";
-                // PRG: chuyển sang GET để hiển thị thông báo và tránh resubmit
+                // Redirect để TempData hiển thị ở GET
                 return RedirectToAction(nameof(LienHe));
             }
             catch (Exception ex)
@@ -95,23 +90,80 @@ namespace WEB_CV.Controllers
             }
         }
 
-        // ===== Tin tức =====
+        // ===== Tin tức (lọc + sidebar) =====
         [HttpGet, Route("Home/TinTuc"), Route("tin-tuc")]
-        public async Task<IActionResult> TinTuc()
+        public async Task<IActionResult> TinTuc(
+            string? q, int? chuyenMucId, DateTime? from, DateTime? to,
+            string sort = "newest", int page = 1, int pageSize = 9)
         {
-            var posts = await _db.BaiViets
+            page = page <= 0 ? 1 : page;
+            pageSize = pageSize <= 0 ? 9 : pageSize;
+
+            var query = _db.BaiViets
                 .AsNoTracking()
                 .Include(b => b.ChuyenMuc)
                 .Include(b => b.TacGia)
-                .OrderByDescending(b => b.NgayDang)
-                .ToListAsync();
+                .Include(b => b.BinhLuans)
+                .AsQueryable();
 
-            return View("~/Views/TinTuc/Index.cshtml", posts);
+            if (!string.IsNullOrWhiteSpace(q))
+            {
+                var kw = q.Trim();
+                query = query.Where(b =>
+                    EF.Functions.Like(b.TieuDe, $"%{kw}%") ||
+                    (b.TomTat != null && EF.Functions.Like(b.TomTat, $"%{kw}%")) ||
+                    EF.Functions.Like(b.NoiDung, $"%{kw}%"));
+            }
+
+            if (chuyenMucId.HasValue) query = query.Where(b => b.ChuyenMucId == chuyenMucId.Value);
+            if (from.HasValue)        query = query.Where(b => b.NgayDang >= from.Value);
+            if (to.HasValue)          query = query.Where(b => b.NgayDang <= to.Value);
+
+            query = sort switch
+            {
+                "oldest"  => query.OrderBy(b => b.NgayDang),
+                "az"      => query.OrderBy(b => b.TieuDe),
+                "comment" => query.OrderByDescending(b => b.BinhLuans.Count),
+                _         => query.OrderByDescending(b => b.NgayDang)
+            };
+
+            var total = await query.CountAsync();
+            var items = await query.Skip((page - 1) * pageSize).Take(pageSize).ToListAsync();
+
+            var cms = await _db.ChuyenMucs.AsNoTracking().OrderBy(c => c.Ten).ToListAsync();
+
+            // Sidebar
+            var latest5 = await _db.BaiViets
+                .AsNoTracking()
+                .OrderByDescending(x => x.NgayDang)
+                .Take(5).ToListAsync();
+
+            int? recruitCatId = await _db.ChuyenMucs
+                .Where(c => EF.Functions.Like(c.Ten, "%tuyển%"))
+                .Select(c => (int?)c.Id).FirstOrDefaultAsync();
+
+            var recruit5 = await _db.BaiViets
+                .AsNoTracking()
+                .Where(b => recruitCatId != null && b.ChuyenMucId == recruitCatId.Value)
+                .OrderByDescending(b => b.NgayDang)
+                .Take(5).ToListAsync();
+
+            var vm = new TinTucFilterVM
+            {
+                Q = q, ChuyenMucId = chuyenMucId, From = from, To = to,
+                Sort = sort, Page = page, PageSize = pageSize,
+                Items = items, Total = total, ChuyenMucs = cms,
+                Latest5 = latest5, Recruit5 = recruit5
+            };
+
+            return View("~/Views/TinTuc/Index.cshtml", vm);
         }
 
-        // ===== Chi tiết bài viết =====
-        [HttpGet, Route("Home/ChiTietBaiViet/{id:int}"), Route("bai-viet/{id:int}")]
-        public async Task<IActionResult> ChiTietBaiViet(int id)
+        // ===== Chi tiết bài viết (hỗ trợ slug tùy chọn) =====
+        [HttpGet]
+        [Route("Home/ChiTietBaiViet/{id:int}")]
+        [Route("bai-viet/{id:int}/{slug?}")]
+        public async Task<IActionResult> ChiTietBaiViet(int id, string? slug = null)
         {
             var post = await _db.BaiViets
                 .AsNoTracking()
@@ -119,7 +171,21 @@ namespace WEB_CV.Controllers
                 .Include(b => b.TacGia)
                 .FirstOrDefaultAsync(b => b.Id == id);
 
-            if (post == null) return NotFound();
+            if (post == null)
+            {
+                _logger.LogWarning("ChiTietBaiViet: Không tìm thấy bài viết Id={Id}", id);
+                var hasAny = await _db.BaiViets.AsNoTracking().AnyAsync();
+                if (!hasAny) return NotFound("Chưa có bài viết nào trong CSDL.");
+                return NotFound($"Không tìm thấy bài viết (Id={id}).");
+            }
+
+            var expected = ToSlug(post.TieuDe ?? "");
+            if (!string.IsNullOrWhiteSpace(slug) &&
+                !string.Equals(slug, expected, StringComparison.OrdinalIgnoreCase))
+            {
+                return RedirectToActionPermanent(nameof(ChiTietBaiViet), new { id, slug = expected });
+            }
+
             return View("~/Views/TinTuc/Details.cshtml", post);
         }
 
@@ -127,13 +193,27 @@ namespace WEB_CV.Controllers
         public IActionResult Error()
             => View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
 
-        // ===== Helper: log lỗi model =====
+        // ===== Helpers =====
         private void LogModelErrors()
         {
             var errs = ModelState
                 .Where(kvp => kvp.Value?.Errors.Any() == true)
                 .Select(kvp => $"{kvp.Key}: {string.Join(" | ", kvp.Value!.Errors.Select(e => e.ErrorMessage))}");
             _logger.LogWarning("LienHe model invalid: {Errors}", string.Join(" || ", errs));
+        }
+
+        private static string ToSlug(string s)
+        {
+            if (string.IsNullOrWhiteSpace(s)) return "";
+            var norm = s.Normalize(System.Text.NormalizationForm.FormD);
+            var filtered = new string(norm.Where(ch =>
+                System.Globalization.CharUnicodeInfo.GetUnicodeCategory(ch) !=
+                System.Globalization.UnicodeCategory.NonSpacingMark).ToArray());
+            filtered = filtered.Normalize(System.Text.NormalizationForm.FormC);
+            filtered = new string(filtered.ToLowerInvariant().Select(c =>
+                char.IsLetterOrDigit(c) ? c : '-').ToArray());
+            while (filtered.Contains("--")) filtered = filtered.Replace("--", "-");
+            return filtered.Trim('-');
         }
     }
 }
