@@ -1224,6 +1224,18 @@
       <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-PEvzltImFPDD3oSwQn8tW1Wo1EDpkbDUf/io42dS8VM="}]]]></EndpointProperties>
       <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=3600, must-revalidate"},{"Name":"Content-Length","Value":"3400"},{"Name":"Content-Type","Value":"image/png"},{"Name":"ETag","Value":"\u0022PEvzltImFPDD3oSwQn8tW1Wo1EDpkbDUf/io42dS8VM=\u0022"},{"Name":"Last-Modified","Value":"Mon, 08 Sep 2025 09:03:05 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/web_cv/media/news-placeholder.jpg">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\media\news-placeholder.jpg'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-v9Pl/Rutoei6T5QbqdfBuOtBBLA1JUOerNsitXwXD74="}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=3600, must-revalidate"},{"Name":"Content-Length","Value":"125247"},{"Name":"Content-Type","Value":"image/jpeg"},{"Name":"ETag","Value":"\u0022v9Pl/Rutoei6T5QbqdfBuOtBBLA1JUOerNsitXwXD74=\u0022"},{"Name":"Last-Modified","Value":"Wed, 10 Sep 2025 03:26:23 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/web_cv/media/news-placeholder.xwenxwgp2g.jpg">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\media\news-placeholder.jpg'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"xwenxwgp2g"},{"Name":"integrity","Value":"sha256-v9Pl/Rutoei6T5QbqdfBuOtBBLA1JUOerNsitXwXD74="},{"Name":"label","Value":"_content/web_cv/media/news-placeholder.jpg"}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"125247"},{"Name":"Content-Type","Value":"image/jpeg"},{"Name":"ETag","Value":"\u0022v9Pl/Rutoei6T5QbqdfBuOtBBLA1JUOerNsitXwXD74=\u0022"},{"Name":"Last-Modified","Value":"Wed, 10 Sep 2025 03:26:23 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/web_cv/media/phone-icon.onbvrcjviw.png">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\media\phone-icon.png'))</AssetFile>
       <Selectors><![CDATA[[]]]></Selectors>
@@ -1247,6 +1259,18 @@
       <Selectors><![CDATA[[]]]></Selectors>
       <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-RbMW2CWjAfkfvlwm5svz\u002B5eOUkLiUnB4nAvYIFWLIQw="}]]]></EndpointProperties>
       <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=3600, must-revalidate"},{"Name":"Content-Length","Value":"851"},{"Name":"Content-Type","Value":"image/png"},{"Name":"ETag","Value":"\u0022RbMW2CWjAfkfvlwm5svz\u002B5eOUkLiUnB4nAvYIFWLIQw=\u0022"},{"Name":"Last-Modified","Value":"Tue, 09 Sep 2025 02:55:36 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/web_cv/media/posts/cover/trang-chu-gioi-thieu-min-1.f9shr6gdws.png">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\media\posts\cover\trang-chu-gioi-thieu-min-1.png'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"fingerprint","Value":"f9shr6gdws"},{"Name":"integrity","Value":"sha256-U7zKkYGPZiUef4x/6OOdYSmR7SUpAD3PEo3e3OaVhxs="},{"Name":"label","Value":"_content/web_cv/media/posts/cover/trang-chu-gioi-thieu-min-1.png"}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=31536000, immutable"},{"Name":"Content-Length","Value":"921658"},{"Name":"Content-Type","Value":"image/png"},{"Name":"ETag","Value":"\u0022U7zKkYGPZiUef4x/6OOdYSmR7SUpAD3PEo3e3OaVhxs=\u0022"},{"Name":"Last-Modified","Value":"Wed, 10 Sep 2025 02:32:58 GMT"}]]]></ResponseHeaders>
+    </StaticWebAssetEndpoint>
+    <StaticWebAssetEndpoint Include="_content/web_cv/media/posts/cover/trang-chu-gioi-thieu-min-1.png">
+      <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\media\posts\cover\trang-chu-gioi-thieu-min-1.png'))</AssetFile>
+      <Selectors><![CDATA[[]]]></Selectors>
+      <EndpointProperties><![CDATA[[{"Name":"integrity","Value":"sha256-U7zKkYGPZiUef4x/6OOdYSmR7SUpAD3PEo3e3OaVhxs="}]]]></EndpointProperties>
+      <ResponseHeaders><![CDATA[[{"Name":"Accept-Ranges","Value":"bytes"},{"Name":"Cache-Control","Value":"max-age=3600, must-revalidate"},{"Name":"Content-Length","Value":"921658"},{"Name":"Content-Type","Value":"image/png"},{"Name":"ETag","Value":"\u0022U7zKkYGPZiUef4x/6OOdYSmR7SUpAD3PEo3e3OaVhxs=\u0022"},{"Name":"Last-Modified","Value":"Wed, 10 Sep 2025 02:32:58 GMT"}]]]></ResponseHeaders>
     </StaticWebAssetEndpoint>
     <StaticWebAssetEndpoint Include="_content/web_cv/media/WHATSAPP.3jhtt28bep.png">
       <AssetFile>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\media\WHATSAPP.png'))</AssetFile>

@@ -1,4 +1,5 @@
 ﻿
+@model List<WEB_CV.Models.BaiViet>
 
 @{
     ViewData["Title"] = "Trang chủ";
@@ -517,6 +518,8 @@ document.addEventListener('DOMContentLoaded', function(){
   </div>
 </section>
 
+
+
 <!-- ===================== NEWS (3 bài) ===================== -->
 <section id="news" class="section bg-light">
   <div class="container">
@@ -525,58 +528,61 @@ document.addEventListener('DOMContentLoaded', function(){
         <span class="eyebrow mb-2">Tin tức</span>
         <h2 class="section-title mb-0">Tin tức & Sự kiện</h2>
       </div>
-        <a class="btn btn-outline-primary" href="#">Xem tất cả</a>
+      <a class="btn btn-outline-primary" asp-controller="Home" asp-action="TinTuc">Xem tất cả</a>
     </div>
 
-    <div class="row g-3">
-      <!-- Bài 1 -->
-      <div class="col-12 col-md-6 col-lg-4">
-        <article class="card news-card h-100 border-0 shadow-sm">
-          <img class="news-thumb" src="https://images.unsplash.com/photo-1581092921461-eab62e97a780?q=80&w=1400&auto=format&fit=crop" alt="Ứng dụng LiDAR">
-          <div class="card-body d-flex flex-column">
-            <h5 class="news-title clamp-2">Ứng dụng LiDAR trong quản lý đô thị thông minh</h5>
-            <p class="news-desc clamp-3">Chuẩn hóa, cập nhật hạ tầng 3D theo thời gian thực giúp tối ưu quản lý.</p>
-            <div class="news-meta small mt-auto">
-              <span class="chip">20/08/2025</span>
-              <span class="chip">LiDAR</span>
-              <span class="chip">Smart City</span>
-            </div>
-          </div>
-        </article>
-      </div>
+    @{
+      var list = Model ?? new List<WEB_CV.Models.BaiViet>();
+      var placeholder = Url.Content("~/media/news-placeholder.jpg"); // đúng path bạn đã tạo
+    }
 
-      <!-- Bài 2 -->
-      <div class="col-12 col-md-6 col-lg-4">
-        <article class="card news-card h-100 border-0 shadow-sm">
-          <img class="news-thumb" src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1400&auto=format&fit=crop" alt="Tour 3D">
-          <div class="card-body d-flex flex-column">
-            <h5 class="news-title clamp-2">Trải nghiệm Tour 3D – số hoá công trình thực</h5>
-            <p class="news-desc clamp-3">Tạo tour 360° cho bảo tàng, trường học, nhà máy… ngay trên trình duyệt.</p>
-            <div class="news-meta small mt-auto">
-              <span class="chip">12/08/2025</span>
-              <span class="chip">3D Tour</span>
-            </div>
-          </div>
-        </article>
-      </div>
+    @if (!list.Any())
+    {
+      <div class="alert alert-info">Chưa có bài viết.</div>
+    }
+    else
+    {
+      <div class="row g-3">
+        @foreach (var p in list)
+        {
+          var coverUrl = string.IsNullOrWhiteSpace(p.AnhTieuDe)
+              ? placeholder
+              : Url.Content(p.AnhTieuDe);
+          var alt = string.IsNullOrWhiteSpace(p.AnhTieuDeAlt) ? p.TieuDe : p.AnhTieuDeAlt;
 
-      <!-- Bài 3 -->
-      <div class="col-12 col-md-6 col-lg-4">
-        <article class="card news-card h-100 border-0 shadow-sm">
-          <img class="news-thumb" src="https://images.unsplash.com/photo-1518779578993-ec3579fee39f?q=80&w=1400&auto=format&fit=crop" alt="UAV thế hệ mới">
-          <div class="card-body d-flex flex-column">
-            <h5 class="news-title clamp-2">UAV chụp ảnh quang học thế hệ mới</h5>
-            <p class="news-desc clamp-3">Độ phân giải cao, bay tự động, tích hợp pipeline xử lý ảnh &amp; 3D.</p>
-            <div class="news-meta small mt-auto">
-              <span class="chip">02/08/2025</span>
-              <span class="chip">UAV/Drone</span>
-            </div>
+          <div class="col-12 col-md-6 col-lg-4">
+            <article class="card news-card h-100 border-0 shadow-sm">
+              <a asp-controller="Home" asp-action="ChiTietBaiViet" asp-route-id="@p.Id"
+                 class="ratio ratio-16x9 d-block">
+                <img class="news-thumb w-100 h-100 object-fit-cover"
+                     src="@coverUrl" alt="@alt" loading="lazy" />
+              </a>
+              <div class="card-body d-flex flex-column">
+                <h5 class="news-title clamp-2">
+                  <a class="stretched-link text-decoration-none"
+                     asp-controller="Home" asp-action="ChiTietBaiViet" asp-route-id="@p.Id">
+                    @p.TieuDe
+                  </a>
+                </h5>
+                @if (!string.IsNullOrWhiteSpace(p.TomTat))
+                {
+                  <p class="news-desc clamp-3">@p.TomTat</p>
+                }
+                <div class="news-meta small mt-auto">
+                  <span class="chip">@p.NgayDang.ToString("dd/MM/yyyy")</span>
+                  @if (!string.IsNullOrEmpty(p.ChuyenMuc?.Ten))
+                  { <span class="chip">@p.ChuyenMuc.Ten</span> }
+                </div>
+              </div>
+            </article>
           </div>
-        </article>
+        }
       </div>
-    </div>
+    }
   </div>
 </section>
+
+
 
 <!-- ===================== INTERACTIVE SERVICES ===================== -->
 <section id="interactive-services" class="section bg-white">

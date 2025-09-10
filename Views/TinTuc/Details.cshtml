@@ -1,0 +1,48 @@
+@model WEB_CV.Models.BaiViet
+@{
+    ViewData["Title"] = Model.TieuDe;
+    var cover = Url.Content(string.IsNullOrWhiteSpace(Model.AnhTieuDe)
+        ? "~/media/news-placeholder.jpg"
+        : Model.AnhTieuDe);
+    var alt  = string.IsNullOrWhiteSpace(Model.AnhTieuDeAlt) ? Model.TieuDe : Model.AnhTieuDeAlt;
+    var desc = string.IsNullOrWhiteSpace(Model.TomTat) ? Model.TieuDe : Model.TomTat;
+}
+
+@section Head {
+  <meta name="description" content="@desc" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="@Model.TieuDe" />
+  <meta property="og:description" content="@desc" />
+  <meta property="og:image" content="@cover" />
+  <meta property="og:image:alt" content="@alt" />
+  <meta property="og:url" content="@($"{Context.Request.Scheme}://{Context.Request.Host}{Context.Request.Path}")" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="@Model.TieuDe" />
+  <meta name="twitter:description" content="@desc" />
+}
+
+<article class="container py-4">
+  <h1 class="h3 mb-3">@Model.TieuDe</h1>
+
+  <figure class="mb-4">
+    <img src="@cover" alt="@alt" class="img-fluid w-100"
+         style="object-fit:cover;max-height:480px" loading="lazy" />
+    @if (!string.IsNullOrWhiteSpace(Model.AnhTieuDeAlt))
+    { <figcaption class="small text-muted mt-2">@Model.AnhTieuDeAlt</figcaption> }
+  </figure>
+
+  <div class="article-meta small text-muted mb-3">
+    @Model.NgayDang.ToString("dd/MM/yyyy HH:mm")
+    @if (!string.IsNullOrEmpty(Model.ChuyenMuc?.Ten)) { <span>• @Model.ChuyenMuc.Ten</span> }
+    @if (!string.IsNullOrEmpty(Model.TacGia?.HoTen))   { <span>• @Model.TacGia.HoTen</span> }
+  </div>
+
+  <div class="article-body">
+    @Html.Raw(Model.NoiDung)  @* Nội dung do admin nhập bằng TinyMCE *@
+  </div>
+</article>
+
+<style>
+  .article-body img{max-width:100%;height:auto}
+  .article-body table{display:block;max-width:100%;overflow:auto}
+</style>

@@ -421,8 +421,16 @@
       "PackagePath": "staticwebassets\\media\\mail-icon.png"
     },
     {
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\media\\news-placeholder.jpg",
+      "PackagePath": "staticwebassets\\media\\news-placeholder.jpg"
+    },
+    {
       "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\media\\phone-icon.png",
       "PackagePath": "staticwebassets\\media\\phone-icon.png"
+    },
+    {
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\media\\posts\\cover\\trang-chu-gioi-thieu-min-1.png",
+      "PackagePath": "staticwebassets\\media\\posts\\cover\\trang-chu-gioi-thieu-min-1.png"
     },
     {
       "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.build.web_cv.props",

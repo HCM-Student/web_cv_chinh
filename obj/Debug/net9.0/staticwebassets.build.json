@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "TELGZP00ApOQcYDN6sBY9BhyiZjE64+ukrQCw9fOUWk=",
+  "Hash": "hMWkCRnlcArRYPuPw/q8/CQPLUb7VpObEl1IubIg2XQ=",
   "Source": "web_cv",
   "BasePath": "_content/web_cv",
   "Mode": "Default",
@@ -3818,6 +3818,27 @@
       "OriginalItemSpec": "wwwroot\\media\\MES.png"
     },
     {
+      "Identity": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\media\\news-placeholder.jpg",
+      "SourceId": "web_cv",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\",
+      "BasePath": "_content/web_cv",
+      "RelativePath": "media/news-placeholder#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "xwenxwgp2g",
+      "Integrity": "v9Pl/Rutoei6T5QbqdfBuOtBBLA1JUOerNsitXwXD74=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\media\\news-placeholder.jpg"
+    },
+    {
       "Identity": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\media\\phone-icon.png",
       "SourceId": "web_cv",
       "SourceType": "Discovered",
@@ -3858,6 +3879,27 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\media\\PHONE.png"
+    },
+    {
+      "Identity": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\media\\posts\\cover\\trang-chu-gioi-thieu-min-1.png",
+      "SourceId": "web_cv",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\",
+      "BasePath": "_content/web_cv",
+      "RelativePath": "media/posts/cover/trang-chu-gioi-thieu-min-1#[.{fingerprint}]?.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "f9shr6gdws",
+      "Integrity": "U7zKkYGPZiUef4x/6OOdYSmR7SUpAD3PEo3e3OaVhxs=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\media\\posts\\cover\\trang-chu-gioi-thieu-min-1.png"
     },
     {
       "Identity": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\media\\WHATSAPP.png",
@@ -28447,6 +28489,88 @@
       ]
     },
     {
+      "Route": "media/news-placeholder.jpg",
+      "AssetFile": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\media\\news-placeholder.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "125247"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"v9Pl/Rutoei6T5QbqdfBuOtBBLA1JUOerNsitXwXD74=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 10 Sep 2025 03:26:23 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-v9Pl/Rutoei6T5QbqdfBuOtBBLA1JUOerNsitXwXD74="
+        }
+      ]
+    },
+    {
+      "Route": "media/news-placeholder.xwenxwgp2g.jpg",
+      "AssetFile": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\media\\news-placeholder.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "125247"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"v9Pl/Rutoei6T5QbqdfBuOtBBLA1JUOerNsitXwXD74=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 10 Sep 2025 03:26:23 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "xwenxwgp2g"
+        },
+        {
+          "Name": "label",
+          "Value": "media/news-placeholder.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-v9Pl/Rutoei6T5QbqdfBuOtBBLA1JUOerNsitXwXD74="
+        }
+      ]
+    },
+    {
       "Route": "media/phone-icon.onbvrcjviw.png",
       "AssetFile": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\media\\phone-icon.png",
       "Selectors": [],
@@ -28607,6 +28731,88 @@
         {
           "Name": "integrity",
           "Value": "sha256-RbMW2CWjAfkfvlwm5svz+5eOUkLiUnB4nAvYIFWLIQw="
+        }
+      ]
+    },
+    {
+      "Route": "media/posts/cover/trang-chu-gioi-thieu-min-1.f9shr6gdws.png",
+      "AssetFile": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\media\\posts\\cover\\trang-chu-gioi-thieu-min-1.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "921658"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"U7zKkYGPZiUef4x/6OOdYSmR7SUpAD3PEo3e3OaVhxs=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 10 Sep 2025 02:32:58 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "f9shr6gdws"
+        },
+        {
+          "Name": "label",
+          "Value": "media/posts/cover/trang-chu-gioi-thieu-min-1.png"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-U7zKkYGPZiUef4x/6OOdYSmR7SUpAD3PEo3e3OaVhxs="
+        }
+      ]
+    },
+    {
+      "Route": "media/posts/cover/trang-chu-gioi-thieu-min-1.png",
+      "AssetFile": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\media\\posts\\cover\\trang-chu-gioi-thieu-min-1.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "921658"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"U7zKkYGPZiUef4x/6OOdYSmR7SUpAD3PEo3e3OaVhxs=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Wed, 10 Sep 2025 02:32:58 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-U7zKkYGPZiUef4x/6OOdYSmR7SUpAD3PEo3e3OaVhxs="
         }
       ]
     },
