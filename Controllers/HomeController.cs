@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using System.Linq; // cần cho .Where/.Select
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -50,14 +51,21 @@ namespace WEB_CV.Controllers
         [HttpGet, Route("Home/BaoGia"), Route("bao-gia")]
         public IActionResult BaoGia() => View("BaoGia");
 
-                // ===== Liên hệ (GET) =====
-                [HttpGet, Route("Home/LienHe"), Route("lien-he")]
-                public IActionResult LienHe()
-                {
-                    return View("LienHe", new LienHe());
-                }
+        // ===== Liên hệ (GET) =====
+        [HttpGet, Route("Home/LienHe"), Route("lien-he")]
+        public IActionResult LienHe()
+        {
+            // Dùng Peek để KHÔNG tiêu thụ TempData, đồng thời copy sang ViewData
+            if (TempData.ContainsKey("SuccessMessage"))
+                ViewData["SuccessMessage"] = TempData.Peek("SuccessMessage") as string;
 
-                // ===== Liên hệ (POST) =====
+            if (TempData.ContainsKey("ErrorMessage"))
+                ViewData["ErrorMessage"] = TempData.Peek("ErrorMessage") as string;
+
+            return View("LienHe", new LienHe());
+        }
+
+        // ===== Liên hệ (POST) =====
         [HttpPost, Route("Home/LienHe"), Route("lien-he")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> LienHe([Bind("HoTen,Email,SoDienThoai,TieuDe,NoiDung")] LienHe model)
@@ -76,7 +84,7 @@ namespace WEB_CV.Controllers
                 await _db.SaveChangesAsync();
 
                 TempData["SuccessMessage"] = "Cảm ơn bạn! Chúng tôi đã nhận được tin nhắn và sẽ phản hồi sớm nhất.";
-                // 👉 QUAN TRỌNG: Redirect để TempData hiển thị ở GET
+                // PRG: chuyển sang GET để hiển thị thông báo và tránh resubmit
                 return RedirectToAction(nameof(LienHe));
             }
             catch (Exception ex)
@@ -86,7 +94,6 @@ namespace WEB_CV.Controllers
                 return View("LienHe", model);
             }
         }
-
 
         // ===== Tin tức =====
         [HttpGet, Route("Home/TinTuc"), Route("tin-tuc")]
