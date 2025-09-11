@@ -1,0 +1,498 @@
+@{
+    ViewData["Title"] = "Báo cáo thống kê";
+}
+
+<div class="admin-reports-page">
+    <!-- Header Section -->
+    <div class="page-header mb-4">
+        <div class="d-flex justify-content-between align-items-center">
+            <div>
+                <h1 class="page-title">
+                    <i class="fas fa-chart-bar text-primary me-2"></i>
+                    Báo cáo thống kê
+                </h1>
+                <p class="page-subtitle text-muted">Tổng quan và phân tích dữ liệu hệ thống</p>
+            </div>
+            <div class="btn-group">
+                <button class="btn btn-outline-primary btn-lg" onclick="exportReport()">
+                    <i class="fas fa-download me-2"></i>Xuất báo cáo
+                </button>
+                <button class="btn btn-success btn-lg" onclick="refreshData()">
+                    <i class="fas fa-sync-alt me-2"></i>Làm mới
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tổng quan thống kê -->
+    <div class="row g-4 mb-4">
+        <div class="col-lg-3 col-md-6">
+            <div class="stats-card modern-card">
+                <div class="stats-card-content">
+                    <div class="stats-info">
+                        <div class="stats-label">Tổng bài viết</div>
+                        <div class="stats-value">@ViewBag.TotalBaiViet</div>
+                    </div>
+                    <div class="stats-icon bg-primary">
+                        <i class="fas fa-newspaper"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+            <div class="stats-card modern-card">
+                <div class="stats-card-content">
+                    <div class="stats-info">
+                        <div class="stats-label">Tổng lượt xem</div>
+                        <div class="stats-value">@ViewBag.TotalLuotXem</div>
+                    </div>
+                    <div class="stats-icon bg-success">
+                        <i class="fas fa-eye"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+            <div class="stats-card modern-card">
+                <div class="stats-card-content">
+                    <div class="stats-info">
+                        <div class="stats-label">Chuyên mục</div>
+                        <div class="stats-value">@ViewBag.TotalChuyenMuc</div>
+                    </div>
+                    <div class="stats-icon bg-warning">
+                        <i class="fas fa-folder"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-md-6">
+            <div class="stats-card modern-card">
+                <div class="stats-card-content">
+                    <div class="stats-info">
+                        <div class="stats-label">Liên hệ</div>
+                        <div class="stats-value">@ViewBag.TotalLienHe</div>
+                    </div>
+                    <div class="stats-icon bg-info">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-4">
+        <!-- Biểu đồ thống kê theo tháng -->
+        <div class="col-lg-8">
+            <div class="content-card">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <i class="fas fa-chart-line me-2"></i>
+                        Thống kê bài viết theo tháng
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <canvas id="monthlyChart" height="100"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Thống kê liên hệ -->
+        <div class="col-lg-4">
+            <div class="content-card">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <i class="fas fa-envelope me-2"></i>
+                        Trạng thái liên hệ
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <canvas id="contactChart" height="200"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-4 mt-4">
+        <!-- Top bài viết được xem nhiều nhất -->
+        <div class="col-lg-8">
+            <div class="content-card">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <i class="fas fa-trophy me-2"></i>
+                        Top 10 bài viết được xem nhiều nhất
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Tiêu đề</th>
+                                    <th>Chuyên mục</th>
+                                    <th>Tác giả</th>
+                                    <th>Lượt xem</th>
+                                    <th>Ngày đăng</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{
+                                    int rank = 1;
+                                }
+                                @foreach (var item in ViewBag.TopBaiViet)
+                                {
+                                    <tr>
+                                        <td>
+                                            <span class="badge bg-primary">@rank</span>
+                                        </td>
+                                        <td>
+                                            <div class="text-truncate" style="max-width: 200px;" title="@item.TieuDe">
+                                                @item.TieuDe
+                                            </div>
+                                        </td>
+                                        <td>@item.ChuyenMuc</td>
+                                        <td>@item.TacGia</td>
+                                        <td>
+                                            <span class="badge bg-success">@item.LuotXem</span>
+                                        </td>
+                                        <td>@item.NgayDang.ToString("dd/MM/yyyy")</td>
+                                    </tr>
+                                    rank++;
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Thống kê theo chuyên mục -->
+        <div class="col-lg-4">
+            <div class="content-card">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        <i class="fas fa-folder me-2"></i>
+                        Thống kê theo chuyên mục
+                    </h3>
+                </div>
+                <div class="card-body">
+                    <canvas id="categoryChart" height="300"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.admin-reports-page {
+    padding: 2rem;
+    background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+    min-height: 100vh;
+    position: relative;
+}
+
+.admin-reports-page::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="rgba(0,0,0,0.05)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+    opacity: 0.3;
+    pointer-events: none;
+}
+
+.page-header {
+    margin-bottom: 2rem;
+    position: relative;
+    z-index: 2;
+}
+
+.page-title {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin: 0;
+    color: #1a202c;
+    display: flex;
+    align-items: center;
+}
+
+.page-subtitle {
+    font-size: 1.1rem;
+    margin: 0.5rem 0 0 0;
+    color: #6c757d;
+    font-weight: 400;
+}
+
+.stats-card {
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(20px);
+    border-radius: 24px;
+    padding: 2rem;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.08);
+    border: 1px solid rgba(255,255,255,0.3);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+    height: 180px;
+    display: flex;
+    flex-direction: column;
+}
+
+.modern-card {
+    background: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(255,255,255,0.7));
+    border: 1px solid rgba(255,255,255,0.2);
+    box-shadow: 
+        0 8px 32px rgba(0,0,0,0.1),
+        inset 0 1px 0 rgba(255,255,255,0.5);
+}
+
+.modern-card:hover {
+    transform: translateY(-12px) scale(1.02);
+    box-shadow: 
+        0 20px 60px rgba(0,0,0,0.15),
+        inset 0 1px 0 rgba(255,255,255,0.6);
+    background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(255,255,255,0.8));
+}
+
+.stats-card-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.stats-info {
+    flex: 1;
+}
+
+.stats-label {
+    font-size: 0.9rem;
+    color: #4a5568;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.stats-value {
+    font-size: 2.8rem;
+    font-weight: 800;
+    margin: 0.5rem 0;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.stats-icon {
+    width: 70px;
+    height: 70px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    color: white;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+    transition: all 0.3s ease;
+}
+
+.stats-icon:hover {
+    transform: scale(1.1) rotate(5deg);
+    box-shadow: 0 12px 35px rgba(102, 126, 234, 0.4);
+}
+
+.bg-primary { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important; }
+.bg-success { background: linear-gradient(135deg, #56ab2f 0%, #a8e6cf 100%) !important; }
+.bg-warning { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%) !important; }
+.bg-info { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%) !important; }
+
+.content-card {
+    background: linear-gradient(135deg, rgba(255,255,255,0.9), rgba(255,255,255,0.7));
+    backdrop-filter: blur(20px);
+    border-radius: 24px;
+    box-shadow: 
+        0 12px 40px rgba(0,0,0,0.15),
+        inset 0 1px 0 rgba(255,255,255,0.6);
+    border: 1px solid rgba(255,255,255,0.2);
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 2;
+}
+
+.card-header {
+    padding: 2rem 2rem 1rem 2rem;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+}
+
+.card-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #1a202c;
+    margin: 0;
+    display: flex;
+    align-items: center;
+}
+
+.card-body {
+    padding: 2rem;
+}
+
+.table th {
+    border-top: none;
+    font-weight: 600;
+    color: #4a5568;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.table td {
+    vertical-align: middle;
+    border-color: rgba(0,0,0,0.05);
+}
+
+.badge {
+    font-size: 0.8rem;
+    padding: 0.5rem 0.75rem;
+}
+</style>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+// Biểu đồ thống kê theo tháng
+const monthlyCtx = document.getElementById('monthlyChart').getContext('2d');
+const monthlyData = @Html.Raw(Json.Serialize(ViewBag.MonthlyStats));
+
+const monthlyLabels = monthlyData.map(item => `${item.thang}/${item.nam}`);
+const monthlyPosts = monthlyData.map(item => item.soBaiViet);
+const monthlyViews = monthlyData.map(item => item.tongLuotXem);
+
+new Chart(monthlyCtx, {
+    type: 'line',
+    data: {
+        labels: monthlyLabels,
+        datasets: [{
+            label: 'Số bài viết',
+            data: monthlyPosts,
+            borderColor: '#667eea',
+            backgroundColor: 'rgba(102, 126, 234, 0.1)',
+            tension: 0.4,
+            fill: true
+        }, {
+            label: 'Tổng lượt xem',
+            data: monthlyViews,
+            borderColor: '#56ab2f',
+            backgroundColor: 'rgba(86, 171, 47, 0.1)',
+            tension: 0.4,
+            fill: true,
+            yAxisID: 'y1'
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+            y: {
+                beginAtZero: true,
+                title: {
+                    display: true,
+                    text: 'Số bài viết'
+                }
+            },
+            y1: {
+                type: 'linear',
+                display: true,
+                position: 'right',
+                title: {
+                    display: true,
+                    text: 'Lượt xem'
+                },
+                grid: {
+                    drawOnChartArea: false,
+                },
+            }
+        },
+        plugins: {
+            legend: {
+                position: 'top',
+            }
+        }
+    }
+});
+
+// Biểu đồ trạng thái liên hệ
+const contactCtx = document.getElementById('contactChart').getContext('2d');
+new Chart(contactCtx, {
+    type: 'doughnut',
+    data: {
+        labels: ['Chưa xử lý', 'Đã xử lý'],
+        datasets: [{
+            data: [@ViewBag.LienHeChuaXuLy, @ViewBag.LienHeDaXuLy],
+            backgroundColor: ['#f5576c', '#56ab2f'],
+            borderWidth: 0
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+            legend: {
+                position: 'bottom'
+            }
+        }
+    }
+});
+
+// Biểu đồ theo chuyên mục
+const categoryCtx = document.getElementById('categoryChart').getContext('2d');
+const categoryData = @Html.Raw(Json.Serialize(ViewBag.StatsByChuyenMuc));
+
+const categoryLabels = categoryData.map(item => item.ten);
+const categoryPosts = categoryData.map(item => item.soBaiViet);
+
+new Chart(categoryCtx, {
+    type: 'bar',
+    data: {
+        labels: categoryLabels,
+        datasets: [{
+            label: 'Số bài viết',
+            data: categoryPosts,
+            backgroundColor: [
+                '#667eea',
+                '#56ab2f',
+                '#f093fb',
+                '#4facfe',
+                '#f5576c'
+            ],
+            borderRadius: 8
+        }]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        },
+        plugins: {
+            legend: {
+                display: false
+            }
+        }
+    }
+});
+
+function exportReport() {
+    // Tạo file Excel hoặc PDF
+    alert('Chức năng xuất báo cáo đang được phát triển!');
+}
+
+function refreshData() {
+    location.reload();
+}
+</script>

@@ -28,5 +28,7 @@ namespace WEB_CV.Models
         public string NoiDung { get; set; }
 
         public DateTime NgayGui { get; set; } = DateTime.Now;
+        
+        public bool DaXuLy { get; set; } = false;
     }
 }

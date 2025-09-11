@@ -4,6 +4,8 @@
     ViewData["Title"] = Model.BaiViet.TieuDe;
 }
 
+@Html.AntiForgeryToken()
+
 <!-- ===================== BREADCRUMB ===================== -->
 <section class="breadcrumb-section py-3 bg-light">
     <div class="container">
@@ -377,6 +379,80 @@
 </section>
 
 <script>
+// Chức năng đếm lượt xem khi người dùng đọc bài viết
+let viewCounted = false;
+let articleRead = false;
+
+// Hàm gửi request tăng lượt xem
+async function incrementViewCount() {
+    if (viewCounted) return;
+    
+    try {
+        const response = await fetch('@Url.Action("IncrementViewCount", "Home")', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]')?.value
+            },
+            body: JSON.stringify(@Model.BaiViet.Id)
+        });
+        
+        if (response.ok) {
+            viewCounted = true;
+            console.log('Đã tăng lượt xem');
+        }
+    } catch (error) {
+        console.error('Lỗi khi tăng lượt xem:', error);
+    }
+}
+
+// Intersection Observer để theo dõi khi người dùng đọc bài viết
+const observerOptions = {
+    root: null,
+    rootMargin: '0px',
+    threshold: 0.5 // Khi 50% nội dung hiển thị
+};
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting && !articleRead) {
+            articleRead = true;
+            // Tăng lượt xem sau 2 giây để đảm bảo người dùng thực sự đọc
+            setTimeout(() => {
+                incrementViewCount();
+            }, 2000);
+        }
+    });
+}, observerOptions);
+
+// Theo dõi nội dung bài viết
+document.addEventListener('DOMContentLoaded', function() {
+    const articleContent = document.querySelector('.article-body');
+    if (articleContent) {
+        observer.observe(articleContent);
+    }
+    
+    // Tăng lượt xem khi người dùng cuộn xuống 70% trang
+    let scrollCounted = false;
+    window.addEventListener('scroll', () => {
+        if (scrollCounted) return;
+        
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        const documentHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const scrollPercent = (scrollTop / documentHeight) * 100;
+        
+        if (scrollPercent > 70) {
+            scrollCounted = true;
+            incrementViewCount();
+        }
+    });
+    
+    // Tăng lượt xem khi người dùng ở lại trang hơn 30 giây
+    setTimeout(() => {
+        incrementViewCount();
+    }, 30000);
+});
+
 document.addEventListener('DOMContentLoaded', function() {
     const slider = document.getElementById('newsSlider');
     const prevBtn = document.getElementById('prevBtn');

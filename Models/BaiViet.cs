@@ -45,6 +45,8 @@ namespace WEB_CV.Models
         public NguoiDung? TacGia { get; set; }
 
         public DateTime NgayDang { get; set; } = DateTime.UtcNow;
+        
+        public int LuotXem { get; set; } = 0;
 
         // ===== Ảnh đại diện =====
         [StringLength(300)]

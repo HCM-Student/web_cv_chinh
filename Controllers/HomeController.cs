@@ -243,5 +243,25 @@ namespace WEB_CV.Controllers
             while (filtered.Contains("--")) filtered = filtered.Replace("--", "-");
             return filtered.Trim('-');
         }
+
+        [HttpPost]
+        public async Task<IActionResult> IncrementViewCount([FromBody] int baiVietId)
+        {
+            try
+            {
+                var baiViet = await _db.BaiViets.FindAsync(baiVietId);
+                if (baiViet != null)
+                {
+                    baiViet.LuotXem++;
+                    await _db.SaveChangesAsync();
+                    return Json(new { success = true, newCount = baiViet.LuotXem });
+                }
+                return Json(new { success = false, message = "Không tìm thấy bài viết" });
+            }
+            catch (Exception ex)
+            {
+                return Json(new { success = false, message = "Lỗi khi cập nhật lượt xem: " + ex.Message });
+            }
+        }
     }
 }

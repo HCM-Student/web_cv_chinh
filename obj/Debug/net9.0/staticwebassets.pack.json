@@ -429,6 +429,10 @@
       "PackagePath": "staticwebassets\\media\\phone-icon.png"
     },
     {
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\media\\posts\\cover\\8-13082025_1f9dbf2410.png",
+      "PackagePath": "staticwebassets\\media\\posts\\cover\\8-13082025_1f9dbf2410.png"
+    },
+    {
       "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\media\\posts\\cover\\a1(172).jpg",
       "PackagePath": "staticwebassets\\media\\posts\\cover\\a1(172).jpg"
     },
@@ -457,8 +461,28 @@
       "PackagePath": "staticwebassets\\media\\posts\\cover\\img_4303-131317_612.jpg"
     },
     {
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\media\\posts\\cover\\screenshot-2025-07-18-165356-093050_341-095724.jpg",
+      "PackagePath": "staticwebassets\\media\\posts\\cover\\screenshot-2025-07-18-165356-093050_341-095724.jpg"
+    },
+    {
       "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\media\\posts\\cover\\trang-chu-gioi-thieu-min-1.png",
       "PackagePath": "staticwebassets\\media\\posts\\cover\\trang-chu-gioi-thieu-min-1.png"
+    },
+    {
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\media\\posts\\cover\\vay-tay-16939989380041054058261.jpg",
+      "PackagePath": "staticwebassets\\media\\posts\\cover\\vay-tay-16939989380041054058261.jpg"
+    },
+    {
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\media\\posts\\cover\\z6906229649486_a9c0f80f16c6cd0e0156daee1c997c40_0db4190080.png",
+      "PackagePath": "staticwebassets\\media\\posts\\cover\\z6906229649486_a9c0f80f16c6cd0e0156daee1c997c40_0db4190080.png"
+    },
+    {
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\media\\posts\\cover\\z6995922012757_d96fae0150dda3d4a9913e2bd76562af-103906_677-160816.jpg",
+      "PackagePath": "staticwebassets\\media\\posts\\cover\\z6995922012757_d96fae0150dda3d4a9913e2bd76562af-103906_677-160816.jpg"
+    },
+    {
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\media\\posts\\cover\\ảnh 2 tlkl_67ae1a6dec.png",
+      "PackagePath": "staticwebassets\\media\\posts\\cover\\ảnh 2 tlkl_67ae1a6dec.png"
     },
     {
       "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.build.web_cv.props",

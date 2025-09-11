@@ -118,6 +118,9 @@ namespace WEB_CV.Areas.Admin.Controllers
                 .Take(Math.Max(1, take))
                 .ToListAsync();
 
+            // Debug logging
+            System.Diagnostics.Debug.WriteLine($"Found {posts.Count} posts");
+
             foreach (var p in posts)
             {
                 var who = p.TacGia?.HoTen ?? "Admin";
@@ -150,10 +153,24 @@ namespace WEB_CV.Areas.Admin.Controllers
                 .Take(Math.Max(1, take))
                 .ToList();
 
+            // Nếu không có dữ liệu, tạo dữ liệu mẫu
+            if (ordered.Count == 0)
+            {
+                ordered.Add(new ActivityVM
+                {
+                    Type = "post",
+                    Message = "Hệ thống đã khởi động",
+                    CreatedAt = DateTime.Now
+                });
+            }
+
             var bellCount = ordered.Count(x =>
                 (DateTime.UtcNow - x.CreatedAt.ToUniversalTime()).TotalHours < 24);
 
             var mailCount = 0; // chỗ trống để nối hệ thống tin nhắn sau
+
+            // Debug logging
+            System.Diagnostics.Debug.WriteLine($"Returning {ordered.Count} activities");
 
             return Json(new { bellCount, mailCount, activities = ordered });
         }
