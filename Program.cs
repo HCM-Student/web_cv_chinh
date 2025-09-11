@@ -1,8 +1,11 @@
 using System;
 using System.Linq;
+using System.Globalization;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using WEB_CV.Data;
 using WEB_CV.Models;
 using WEB_CV.Services;
@@ -10,11 +13,19 @@ using WEB_CV.Services;
 var builder = WebApplication.CreateBuilder(args);
 
 // ===================== Services =====================
+
+// DbContext
 builder.Services.AddDbContext<NewsDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-builder.Services.AddControllersWithViews();
+// Localization (VI/EN) – mặc định VI
+builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
+builder.Services
+    .AddControllersWithViews()
+    .AddViewLocalization()
+    .AddDataAnnotationsLocalization();
 
+// Cookie Auth
 builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(options =>
     {
@@ -29,9 +40,18 @@ builder.Services.AddAuthorization();
 // Hash mật khẩu cho NguoiDung (tự quản)
 builder.Services.AddSingleton<IPasswordHasher<NguoiDung>, PasswordHasher<NguoiDung>>();
 
-// Register Services
+// App services
 builder.Services.AddScoped<ICaiDatService, CaiDatService>();
-// Messaging service is not used anywhere; remove registration to avoid missing type error
+
+// RequestLocalization (ưu tiên cookie)
+var supportedCultures = new[] { new CultureInfo("vi-VN"), new CultureInfo("en-US") };
+builder.Services.Configure<RequestLocalizationOptions>(options =>
+{
+    options.DefaultRequestCulture = new RequestCulture("vi-VN");
+    options.SupportedCultures = supportedCultures;
+    options.SupportedUICultures = supportedCultures;
+    options.RequestCultureProviders.Insert(0, new CookieRequestCultureProvider());
+});
 
 var app = builder.Build();
 
@@ -52,6 +72,10 @@ if (!Directory.Exists(mediaPath))
 }
 
 app.UseStaticFiles();
+
+// Áp dụng localization TRƯỚC routing
+app.UseRequestLocalization(app.Services.GetRequiredService<IOptions<RequestLocalizationOptions>>().Value);
+
 app.UseRouting();
 
 app.UseAuthentication();

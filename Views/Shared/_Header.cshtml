@@ -2,165 +2,195 @@
 @{
     var currentController = (string?)ViewContext.RouteData.Values["controller"] ?? "";
     var currentAction = (string?)ViewContext.RouteData.Values["action"] ?? "";
+    var back = Context.Request.Path + Context.Request.QueryString;
 }
 <link rel="stylesheet" href="~/css/header.css" asp-append-version="true" />
 
 <!-- HÀNG TRÊN: LOGO + TÊN + LIÊN HỆ -->
 <div class="brandbar">
-    <div class="container d-flex align-items-center justify-content-between py-2">
-        <!-- LEFT: LOGO + TÊN -->
-        <a class="d-flex align-items-center gap-3 text-decoration-none brand-link"
-           asp-area=""
-           asp-controller="Home"
-           asp-action="Index">
-            <img src="~/img/logo.png" asp-append-version="true" alt="Logo" class="brand-logo" />
-            <div class="brand-text d-none d-md-block">
-                <div class="brand-title">TTDL PHÍA NAM</div>
-                <div class="brand-sub">CỤC CHUYỂN ĐỔI SỐ</div>
-                <div class="brand-slogan">SÁNG TẠO CHO CUỘC SỐNG TỐT ĐẸP</div>
-            </div>
-        </a>
+  <div class="container d-flex align-items-center justify-content-between py-2">
 
- <!-- RIGHT: CONTACT INFO -->
-<div class="d-none d-lg-flex align-items-center contact-right">
+    <!-- LEFT: LOGO + TÊN -->
+    <a class="d-flex align-items-center gap-3 text-decoration-none brand-link"
+       asp-area="" asp-controller="Home" asp-action="Index">
+      <img src="~/img/logo.png" asp-append-version="true" alt="Logo" class="brand-logo" />
+      <div class="brand-text d-none d-md-block">
+        <div class="brand-title">TTDL PHÍA NAM</div>
+        <div class="brand-sub">CỤC CHUYỂN ĐỔI SỐ</div>
+        <div class="brand-slogan">SÁNG TẠO CHO CUỘC SỐNG TỐT ĐẸP</div>
+      </div>
+    </a>
 
-  <!-- Phone -->
-  <a class="contact-chip" href="tel:0378695597" aria-label="Gọi 0378 695 597">
-    <img src="~/media/phone-icon.png" class="contact-icon" alt="Hotline">
-    <span class="contact-text">0378 695 597</span>
-  </a>
+    <!-- RIGHT: CONTACT INFO -->
+    <div class="d-none d-lg-flex align-items-center contact-right">
+      <!-- Phone -->
+      <a class="contact-chip" href="tel:0378695597" aria-label="Gọi 0378 695 597">
+        <img src="~/media/phone-icon.png" class="contact-icon" alt="Hotline">
+        <span class="contact-text">0378 695 597</span>
+      </a>
 
-  <span class="contact-sep" aria-hidden="true"></span>
+      <span class="contact-sep" aria-hidden="true"></span>
 
-  <!-- Email -->
-  <a class="contact-chip" href="mailto:luanha2003@gmail.com">
-    <img src="~/media/mail-icon.png" class="contact-icon" alt="Email">
-    <span class="contact-text">luanha2003@gmail.com</span>
-  </a>
-</div>
-
-
-
-
-
+      <!-- Email -->
+      <a class="contact-chip" href="mailto:luanha2003@gmail.com">
+        <img src="~/media/mail-icon.png" class="contact-icon" alt="Email">
+        <span class="contact-text">luanha2003@gmail.com</span>
+      </a>
     </div>
+
+  </div>
 </div>
 
 <!-- HÀNG DƯỚI: MENU (GIỮA) + AUTH (BÊN PHẢI) -->
 <nav class="navbar navbar-expand-lg navbar-light navstrip">
-    <div class="container">
-        <!-- Sticky row also shows a small brand logo -->
-        <a class="navbar-brand d-flex align-items-center gap-2" asp-area="" asp-controller="Home" asp-action="Index">
-            <img src="~/img/logo.png" asp-append-version="true" alt="Logo" class="brand-logo-sm" />
-        </a>
-        <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav"
-                aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
+  <div class="container">
 
-        <div class="collapse navbar-collapse w-100" id="mainNav">
-            <!-- MENU Ở GIỮA (GIÃN THƯA) -->
-            <ul class="navbar-nav mx-auto nav-center mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link @(currentController=="Home" && currentAction=="Index" ? "active" : "")"
-                       asp-area="" asp-controller="Home" asp-action="Index">Trang chủ</a>
-                </li>
-
-                <!-- CHUYỂN TRANG GIỚI THIỆU -->
-                <li class="nav-item">
-                    <a class="nav-link @(currentController=="Home" && currentAction=="GioiThieu" ? "active" : "")"
-                       asp-area="" asp-controller="Home" asp-action="GioiThieu">Giới thiệu</a>
-                </li>
-
-
-
-                <li class="nav-item dropdown">
-                    <li class="nav-item dropdown">
-  <a id="serviceDropdown"
-     class="nav-link dropdown-toggle @(currentController=="Services" ? "active" : "")"
-     href="#"
-     role="button"
-     data-bs-toggle="dropdown"
-     aria-expanded="false">
-    Dịch vụ
-    <!-- caret icon -->
-    <svg class="chev" width="14" height="14" viewBox="0 0 24 24" aria-hidden="true">
-      <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"
-            stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
+    <!-- Logo nhỏ khi sticky -->
+    <a class="navbar-brand d-flex align-items-center gap-2" asp-area="" asp-controller="Home" asp-action="Index">
+      <img src="~/img/logo.png" asp-append-version="true" alt="Logo" class="brand-logo-sm" />
     </a>
 
-        <ul class="dropdown-menu" aria-labelledby="serviceDropdown">
-    <li><a class="dropdown-item @(currentController=="Services" && currentAction=="SmartCity3D" ? "active" : "")" asp-controller="Services" asp-action="SmartCity3D">Giải pháp chuyển đổi số bản đồ nền 3D phục vụ thành phố thông minh</a></li>
-                        <li><a class="dropdown-item @(currentController=="Services" && currentAction=="LidarAndModeling" ? "active" : "")" asp-controller="Services" asp-action="LidarAndModeling">Giải pháp công nghệ quét Lidar và mô hình hóa 3D</a></li>
-                        <li><a class="dropdown-item @(currentController=="Services" && currentAction=="DigitalTourism" ? "active" : "")" asp-controller="Services" asp-action="DigitalTourism">Giải pháp công nghệ chuyển đổi số du lịch</a></li>
-                        <li><a class="dropdown-item @(currentController=="Services" && currentAction=="SurveyServices" ? "active" : "")" asp-controller="Services" asp-action="SurveyServices">Giải pháp khảo sát công trình sử dụng công nghệ bay chụp ảnh và Lidar UAV</a></li>
-                        <li><hr class="dropdown-divider"></li>
-                        <li><a class="dropdown-item @(currentController=="Services" && currentAction=="OtherServices" ? "active" : "")" asp-controller="Services" asp-action="OtherServices">Dịch vụ khác</a></li>
-                </ul>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link @(currentController=="Home" && currentAction=="ThietBi" ? "active" : "")"
-                       asp-area="" asp-controller="Home" asp-action="ThietBi">Thiết bị</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link @(currentController=="Home" && currentAction=="TinTuc" ? "active" : "")"
-                       asp-area="" asp-controller="Home" asp-action="TinTuc">Tin tức – Sự kiện</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link @(currentController=="Home" && currentAction=="TuyenDung" ? "active" : "")"
-                       asp-area="" asp-controller="Home" asp-action="TuyenDung">Tuyển dụng</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link @(currentController=="Home" && currentAction=="BaoGia" ? "active" : "")"
-                       asp-area="" asp-controller="Home" asp-action="BaoGia">Báo giá</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link @(currentController=="Home" && currentAction=="LienHe" ? "active" : "")"
-                       asp-area="" asp-controller="Home" asp-action="LienHe">Liên hệ</a>
-                </li>
-            </ul>
+    <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav"
+            aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-            <!-- AUTH BÊN PHẢI -->
-            <div class="ms-lg-auto d-flex align-items-center gap-2 header-auth">
-                @if (User?.Identity?.IsAuthenticated ?? false)
-                {
-                    <div class="dropdown">
-                        <a class="btn btn-light rounded-pill px-3 dropdown-toggle d-flex align-items-center gap-2 avatar-chip"
-                           href="#" id="userMenu" data-bs-toggle="dropdown" aria-expanded="false">
-                            <img src="~/img/avatar.jpg" asp-append-version="true" alt="avatar" class="avatar-img" />
-                            <span class="fw-semibold d-none d-sm-inline">@User.Identity!.Name</span>
-                        </a>
-                        <ul class="dropdown-menu dropdown-menu-end shadow-sm" aria-labelledby="userMenu">
-                            <li><a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Login">Tài khoản</a></li>
-                            
-                            @if (User.IsInRole("Admin"))
-                            {
-                                <li><hr class="dropdown-divider" /></li>
-                                <li class="px-3 pt-1 pb-1 text-muted small">Quản trị</li>
-                                <li><a class="dropdown-item" asp-area="Admin" asp-controller="Dashboard" asp-action="Index">Bảng điều khiển</a></li>
-                                <li><a class="dropdown-item" asp-area="Admin" asp-controller="BaiViet" asp-action="Index">Bài viết</a></li>
-                                <li><a class="dropdown-item" asp-area="Admin" asp-controller="NguoiDung" asp-action="Index">Người dùng</a></li>
-                            }
-                            <li><hr class="dropdown-divider" /></li>
-                            <li><a class="dropdown-item" href="javascript:void(0)" onclick="document.getElementById('logout-form').submit();">Đăng xuất</a></li>
-                        </ul>
-                    </div>
-                }
-                else
-                {
-                    <a class="btn btn-outline-primary btn-sm rounded-pill px-3 d-flex align-items-center gap-1" asp-area="" asp-controller="Account" asp-action="Login">
-                        <span>🔑</span>
-                        <span>Đăng nhập</span>
-                    </a>
-                    <a class="btn btn-primary btn-sm rounded-pill px-3 d-flex align-items-center gap-1" asp-area="" asp-controller="Account" asp-action="Register">
-                        <span>👤</span>
-                        <span>Đăng ký</span>
-                    </a>
-                }
-            </div>
+    <div class="collapse navbar-collapse w-100" id="mainNav">
+      <!-- MENU Ở GIỮA -->
+      <ul class="navbar-nav mx-auto nav-center mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link @(currentController=="Home" && currentAction=="Index" ? "active" : "")"
+             asp-area="" asp-controller="Home" asp-action="Index">Trang chủ</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link @(currentController=="Home" && currentAction=="GioiThieu" ? "active" : "")"
+             asp-area="" asp-controller="Home" asp-action="GioiThieu">Giới thiệu</a>
+        </li>
+
+        <!-- DỊCH VỤ (dropdown) -->
+        <li class="nav-item dropdown">
+          <a id="serviceDropdown"
+             class="nav-link dropdown-toggle @(currentController=="Services" ? "active" : "")"
+             href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Dịch vụ
+            <svg class="chev" width="14" height="14" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="serviceDropdown">
+            <li><a class="dropdown-item @(currentController=="Services" && currentAction=="SmartCity3D" ? "active" : "")"
+                   asp-controller="Services" asp-action="SmartCity3D">Giải pháp chuyển đổi số bản đồ nền 3D phục vụ thành phố thông minh</a></li>
+            <li><a class="dropdown-item @(currentController=="Services" && currentAction=="LidarAndModeling" ? "active" : "")"
+                   asp-controller="Services" asp-action="LidarAndModeling">Giải pháp công nghệ quét Lidar và mô hình hóa 3D</a></li>
+            <li><a class="dropdown-item @(currentController=="Services" && currentAction=="DigitalTourism" ? "active" : "")"
+                   asp-controller="Services" asp-action="DigitalTourism">Giải pháp công nghệ chuyển đổi số du lịch</a></li>
+            <li><a class="dropdown-item @(currentController=="Services" && currentAction=="SurveyServices" ? "active" : "")"
+                   asp-controller="Services" asp-action="SurveyServices">Giải pháp khảo sát công trình sử dụng công nghệ bay chụp ảnh và Lidar UAV</a></li>
+            <li><hr class="dropdown-divider" /></li>
+            <li><a class="dropdown-item @(currentController=="Services" && currentAction=="OtherServices" ? "active" : "")"
+                   asp-controller="Services" asp-action="OtherServices">Dịch vụ khác</a></li>
+          </ul>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link @(currentController=="Home" && currentAction=="ThietBi" ? "active" : "")"
+             asp-area="" asp-controller="Home" asp-action="ThietBi">Thiết bị</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link @(currentController=="Home" && currentAction=="TinTuc" ? "active" : "")"
+             asp-area="" asp-controller="Home" asp-action="TinTuc">Tin tức – Sự kiện</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link @(currentController=="Home" && currentAction=="TuyenDung" ? "active" : "")"
+             asp-area="" asp-controller="Home" asp-action="TuyenDung">Tuyển dụng</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link @(currentController=="Home" && currentAction=="BaoGia" ? "active" : "")"
+             asp-area="" asp-controller="Home" asp-action="BaoGia">Báo giá</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link @(currentController=="Home" && currentAction=="LienHe" ? "active" : "")"
+             asp-area="" asp-controller="Home" asp-action="LienHe">Liên hệ</a>
+        </li>
+
+        <!-- MOBILE: Language switcher trong menu (ẩn desktop) -->
+        <li class="nav-item d-lg-none">
+          <div class="dropdown w-100">
+            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+              <i class="fa-solid fa-globe me-1"></i>
+              @System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName.ToUpper()
+            </a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item"
+                     asp-controller="Language" asp-action="SetLanguage"
+                     asp-route-culture="vi-VN" asp-route-returnUrl="@back">Tiếng Việt</a></li>
+              <li><a class="dropdown-item"
+                     asp-controller="Language" asp-action="SetLanguage"
+                     asp-route-culture="en-US" asp-route-returnUrl="@back">English</a></li>
+            </ul>
+          </div>
+        </li>
+      </ul>
+
+      <!-- BÊN PHẢI: AUTH + LANGUAGE (desktop) -->
+      <div class="ms-lg-auto d-flex align-items-center gap-2 header-auth">
+
+        @if (User?.Identity?.IsAuthenticated ?? false)
+        {
+          <div class="dropdown">
+            <a class="btn btn-light rounded-pill px-3 dropdown-toggle d-flex align-items-center gap-2 avatar-chip"
+               href="#" id="userMenu" data-bs-toggle="dropdown" aria-expanded="false">
+              <img src="~/img/avatar.jpg" asp-append-version="true" alt="avatar" class="avatar-img" />
+              <span class="fw-semibold d-none d-sm-inline">@User.Identity!.Name</span>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end shadow-sm" aria-labelledby="userMenu">
+              <li><a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Login">Tài khoản</a></li>
+              @if (User.IsInRole("Admin"))
+              {
+                <li><hr class="dropdown-divider" /></li>
+                <li class="px-3 pt-1 pb-1 text-muted small">Quản trị</li>
+                <li><a class="dropdown-item" asp-area="Admin" asp-controller="Dashboard" asp-action="Index">Bảng điều khiển</a></li>
+                <li><a class="dropdown-item" asp-area="Admin" asp-controller="BaiViet" asp-action="Index">Bài viết</a></li>
+                <li><a class="dropdown-item" asp-area="Admin" asp-controller="NguoiDung" asp-action="Index">Người dùng</a></li>
+              }
+              <li><hr class="dropdown-divider" /></li>
+              <li><a class="dropdown-item" href="javascript:void(0)" onclick="document.getElementById('logout-form').submit();">Đăng xuất</a></li>
+            </ul>
+          </div>
+        }
+        else
+        {
+          <a class="btn btn-outline-primary btn-sm rounded-pill px-3 d-flex align-items-center gap-1"
+             asp-area="" asp-controller="Account" asp-action="Login">
+            <span>🔑</span><span>Đăng nhập</span>
+          </a>
+          <a class="btn btn-primary btn-sm rounded-pill px-3 d-flex align-items-center gap-1"
+             asp-area="" asp-controller="Account" asp-action="Register">
+            <span>👤</span><span>Đăng ký</span>
+          </a>
+        }
+
+        <!-- LANGUAGE cuối cùng (desktop) -->
+        <div class="dropdown d-none d-lg-block">
+          <button class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown">
+            <i class="fa-solid fa-globe me-1"></i>
+            @System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName.ToUpper()
+          </button>
+          <ul class="dropdown-menu dropdown-menu-end">
+            <li><a class="dropdown-item"
+                   asp-controller="Language" asp-action="SetLanguage"
+                   asp-route-culture="vi-VN" asp-route-returnUrl="@back">Tiếng Việt</a></li>
+            <li><a class="dropdown-item"
+                   asp-controller="Language" asp-action="SetLanguage"
+                   asp-route-culture="en-US" asp-route-returnUrl="@back">English</a></li>
+          </ul>
         </div>
+
+      </div>
     </div>
+  </div>
 </nav>
 
 <script>
@@ -173,11 +203,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
   const update = () => {
     threshold = (brandbar?.offsetHeight || 0);
-    if (window.scrollY > threshold) {
-      nav.classList.add('is-stuck');
-    } else {
-      nav.classList.remove('is-stuck');
-    }
+    if (window.scrollY > threshold) nav.classList.add('is-stuck');
+    else nav.classList.remove('is-stuck');
   };
   update();
   window.addEventListener('scroll', update, { passive: true });
@@ -187,5 +214,5 @@ document.addEventListener('DOMContentLoaded', function () {
 
 <!-- FORM ẨN LOGOUT -->
 <form id="logout-form" method="post" asp-area="" asp-controller="Account" asp-action="Logout" class="d-none">
-    @Html.AntiForgeryToken()
+  @Html.AntiForgeryToken()
 </form>

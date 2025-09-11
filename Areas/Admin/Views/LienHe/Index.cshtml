@@ -1,34 +1,337 @@
 @model IEnumerable<WEB_CV.Models.LienHe>
 @{
-    ViewData["Title"] = " Quản lý Liên hệ";
+    ViewData["Title"] = "Quản lý Liên hệ";
 }
 
-<h1>Danh sách Liên hệ</h1>
-<p>Dưới đây là danh sách các tin nhắn được gửi từ form liên hệ.</p>
+<div class="admin-contact-page">
+    @if (TempData["msg"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show">
+            @TempData["msg"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
 
-<table class="table table-bordered table-striped">
-    <thead>
-        <tr>
-            <th>Họ Tên</th>
-            <th>Email</th>
-            <th>Số Điện Thoại</th>
-            <th>Ngày Gửi</th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
+    <!-- Header Section -->
+    <div class="page-header mb-4">
+        <div class="d-flex justify-content-between align-items-center">
+            <div>
+                <h1 class="page-title">
+                    <i class="fas fa-envelope text-primary me-2"></i>
+                    Quản lý Liên hệ
+                </h1>
+                <p class="page-subtitle text-muted">Dưới đây là danh sách các tin nhắn được gửi từ form liên hệ</p>
+            </div>
+            <div class="contact-stats">
+                <div class="stat-badge">
+                    <i class="fas fa-message me-1"></i>
+                    <span>@Model.Count() tin nhắn</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Messages Grid -->
+    <div class="row g-4">
         @foreach (var item in Model)
         {
-            <tr>
-                <td>@Html.DisplayFor(modelItem => item.HoTen)</td>
-                <td>@Html.DisplayFor(modelItem => item.Email)</td>
-                <td>@Html.DisplayFor(modelItem => item.SoDienThoai)</td>
-                <td>@item.NgayGui.ToString("dd/MM/yyyy HH:mm")</td>
-                <td>
-                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-info btn-sm">Xem</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger btn-sm">Xóa</a>
-                </td>
-            </tr>
+            <div class="col-lg-4 col-md-6">
+                <div class="contact-card">
+                    <div class="contact-header">
+                        <div class="contact-avatar">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="contact-info">
+                            <h6 class="contact-name">@item.HoTen</h6>
+                            <div class="contact-meta">
+                                <span class="contact-date">
+                                    <i class="fas fa-clock me-1"></i>
+                                    @item.NgayGui.ToString("dd/MM/yyyy HH:mm")
+                                </span>
+                            </div>
+                        </div>
+                        <div class="contact-actions">
+                            <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-sm btn-outline-info" title="Xem chi tiết">
+                                <i class="fas fa-eye"></i>
+                            </a>
+                            <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-sm btn-outline-danger" title="Xóa">
+                                <i class="fas fa-trash"></i>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-content">
+                        @if (!string.IsNullOrEmpty(item.TieuDe))
+                        {
+                            <div class="contact-subject">
+                                <strong>@item.TieuDe</strong>
+                            </div>
+                        }
+                        
+                        @if (!string.IsNullOrEmpty(item.NoiDung))
+                        {
+                            <div class="contact-message">
+                                @(item.NoiDung.Length > 100 ? item.NoiDung.Substring(0, 100) + "..." : item.NoiDung)
+                            </div>
+                        }
+                    </div>
+                    
+                    <div class="contact-footer">
+                        <div class="contact-details">
+                            <div class="contact-email">
+                                <i class="fas fa-envelope me-1"></i>
+                                <a href="mailto:@item.Email">@item.Email</a>
+                            </div>
+                            <div class="contact-phone">
+                                <i class="fas fa-phone me-1"></i>
+                                <a href="tel:@item.SoDienThoai">@item.SoDienThoai</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         }
-    </tbody>
-</table>
+    </div>
+    
+    @if (!Model.Any())
+    {
+        <div class="empty-state">
+            <div class="empty-icon">
+                <i class="fas fa-inbox"></i>
+            </div>
+            <h4>Chưa có tin nhắn nào</h4>
+            <p>Chưa có tin nhắn liên hệ nào được gửi từ form liên hệ.</p>
+        </div>
+    }
+</div>
+
+<style>
+.admin-contact-page {
+    padding: 1.5rem;
+    background: #f8f9fa;
+    min-height: 100vh;
+}
+
+.page-header {
+    margin-bottom: 2rem;
+}
+
+.page-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0;
+    color: #2c3e50;
+}
+
+.page-subtitle {
+    font-size: 1.1rem;
+    margin: 0.5rem 0 0 0;
+}
+
+.contact-stats {
+    display: flex;
+    align-items: center;
+}
+
+.stat-badge {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 25px;
+    font-weight: 600;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+/* Contact Card Styles */
+.contact-card {
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    overflow: hidden;
+    transition: all 0.3s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.contact-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+}
+
+.contact-header {
+    padding: 1.5rem;
+    border-bottom: 1px solid #f1f3f4;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.contact-avatar {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+}
+
+.contact-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.contact-name {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #2c3e50;
+    margin: 0 0 0.25rem 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.contact-meta {
+    font-size: 0.85rem;
+    color: #6c757d;
+}
+
+.contact-date {
+    display: flex;
+    align-items: center;
+}
+
+.contact-actions {
+    display: flex;
+    gap: 0.5rem;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.contact-card:hover .contact-actions {
+    opacity: 1;
+}
+
+.contact-actions .btn {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    font-size: 0.8rem;
+}
+
+.contact-content {
+    padding: 1.5rem;
+    flex: 1;
+}
+
+.contact-subject {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 0.75rem;
+    line-height: 1.4;
+}
+
+.contact-message {
+    font-size: 0.9rem;
+    color: #6c757d;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+}
+
+.contact-footer {
+    padding: 1rem 1.5rem;
+    background: #f8f9fa;
+    border-top: 1px solid #f1f3f4;
+}
+
+.contact-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.contact-email,
+.contact-phone {
+    display: flex;
+    align-items: center;
+    font-size: 0.85rem;
+    color: #6c757d;
+}
+
+.contact-email a,
+.contact-phone a {
+    color: #007bff;
+    text-decoration: none;
+    margin-left: 0.5rem;
+}
+
+.contact-email a:hover,
+.contact-phone a:hover {
+    text-decoration: underline;
+}
+
+/* Empty State */
+.empty-state {
+    text-align: center;
+    padding: 4rem 2rem;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+
+.empty-icon {
+    font-size: 4rem;
+    color: #adb5bd;
+    margin-bottom: 1.5rem;
+}
+
+.empty-state h4 {
+    color: #6c757d;
+    margin-bottom: 1rem;
+}
+
+.empty-state p {
+    color: #adb5bd;
+    margin: 0;
+}
+
+/* Responsive */
+@@media (max-width: 768px) {
+    .contact-card {
+        margin-bottom: 1rem;
+    }
+    
+    .contact-header {
+        padding: 1rem;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.75rem;
+    }
+    
+    .contact-actions {
+        opacity: 1;
+        align-self: flex-end;
+    }
+    
+    .contact-content {
+        padding: 1rem;
+    }
+    
+    .contact-footer {
+        padding: 1rem;
+    }
+    
+    .contact-details {
+        flex-direction: column;
+    }
+}
+</style>

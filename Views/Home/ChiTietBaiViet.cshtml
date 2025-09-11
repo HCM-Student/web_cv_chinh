@@ -1,86 +1,62 @@
 @using WEB_CV.Models
-@model BaiViet
+@model ChiTietBaiVietVM
 @{
-    ViewData["Title"] = Model.TieuDe;
+    ViewData["Title"] = Model.BaiViet.TieuDe;
 }
 
-<!-- ===================== BÀI VIẾT HERO ===================== -->
-<section class="article-hero">
+<!-- ===================== BREADCRUMB ===================== -->
+<section class="breadcrumb-section py-3 bg-light">
     <div class="container">
-        <div class="row">
-            <div class="col-lg-8 mx-auto">
-                <nav aria-label="breadcrumb" class="mb-4">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home")">Trang chủ</a></li>
-                        <li class="breadcrumb-item"><a href="@Url.Action("TinTuc", "Home")">Tin tức</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">@Model.TieuDe</li>
-                    </ol>
-                </nav>
-                
-                <div class="article-header">
-                    <div class="article-meta mb-3">
-                        <span class="category badge bg-primary">@Model.ChuyenMuc?.Ten</span>
-                        <span class="date">
-                            <i class="fas fa-calendar me-1"></i>
-                            @Model.NgayDang.ToString("dd/MM/yyyy")
-                        </span>
-                        <span class="author">
-                            <i class="fas fa-user me-1"></i>
-                            @(Model.TacGia?.HoTen ?? "Admin")
-                        </span>
-                    </div>
-                    
-                    <h1 class="article-title">@Model.TieuDe</h1>
-                    
-                    @if (!string.IsNullOrEmpty(Model.TomTat))
-                    {
-                        <p class="article-lead">@Model.TomTat</p>
-                    }
-                    
-                    <div class="article-actions">
-                        <div class="social-share">
-                            <span class="share-label">Chia sẻ:</span>
-                            <a href="#" class="share-btn facebook" title="Chia sẻ lên Facebook">
-                                <i class="fab fa-facebook-f"></i>
-                            </a>
-                            <a href="#" class="share-btn twitter" title="Chia sẻ lên Twitter">
-                                <i class="fab fa-twitter"></i>
-                            </a>
-                            <a href="#" class="share-btn linkedin" title="Chia sẻ lên LinkedIn">
-                                <i class="fab fa-linkedin-in"></i>
-                            </a>
-                            <a href="#" class="share-btn copy" title="Sao chép link">
-                                <i class="fas fa-link"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb mb-0">
+                <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home")" class="text-decoration-none">Trang chủ</a></li>
+                <li class="breadcrumb-item"><a href="@Url.Action("TinTuc", "Home")" class="text-decoration-none">Tin tức</a></li>
+                <li class="breadcrumb-item active" aria-current="page">@Model.BaiViet.TieuDe</li>
+            </ol>
+        </nav>
     </div>
 </section>
 
 <!-- ===================== NỘI DUNG BÀI VIẾT ===================== -->
 <section class="article-content section">
     <div class="container">
-        <div class="row">
+        <div class="row g-4">
             <div class="col-lg-8">
                 <article class="main-article">
-                    <div class="article-image mb-4">
-                        <img src="~/img/hero/hero-1.jpg" alt="@Model.TieuDe" class="img-fluid rounded">
-                        <div class="image-caption text-muted small mt-2">@Model.TieuDe</div>
+                    <!-- Article Header -->
+                    <div class="article-header mb-4">
+                        <div class="article-meta mb-3">
+                            <span class="category badge bg-primary me-2">@Model.BaiViet.ChuyenMuc?.Ten</span>
+                            <span class="date text-muted me-3">
+                                <i class="fas fa-calendar me-1"></i>
+                                @Model.BaiViet.NgayDang.ToString("dd/MM/yyyy")
+                            </span>
+                            <span class="author text-muted">
+                                <i class="fas fa-user me-1"></i>
+                                @(Model.BaiViet.TacGia?.HoTen ?? "Admin")
+                            </span>
+                        </div>
+                        
+                        <h1 class="article-title mb-3">@Model.BaiViet.TieuDe</h1>
+                        
+                        @if (!string.IsNullOrEmpty(Model.BaiViet.TomTat))
+                        {
+                            <p class="article-lead text-muted mb-4">@Model.BaiViet.TomTat</p>
+                        }
+                        
                     </div>
-                    
+
+                    <!-- Article Body -->
                     <div class="article-body">
-                        @Html.Raw(Model.NoiDung)
+                        @Html.Raw(Model.BaiViet.NoiDung)
                     </div>
                     
-                    @if (Model.BaiVietTags?.Any() == true)
+                    @if (Model.BaiViet.BaiVietTags?.Any() == true)
                     {
                         <div class="article-tags mt-4">
                             <h6>Tags:</h6>
                             <div class="tags-list">
-                                @foreach (var baiVietTag in Model.BaiVietTags)
+                                @foreach (var baiVietTag in Model.BaiViet.BaiVietTags)
                                 {
                                     <span class="tag">#@baiVietTag.Tag?.Ten</span>
                                 }
@@ -93,7 +69,7 @@
                             <div class="col-md-6">
                                 <div class="article-info">
                                     <small class="text-muted">
-                                        Đăng lúc: @Model.NgayDang.ToString("HH:mm dd/MM/yyyy")
+                                        Đăng lúc: @Model.BaiViet.NgayDang.ToString("HH:mm dd/MM/yyyy")
                                     </small>
                                 </div>
                             </div>
@@ -111,41 +87,62 @@
             <div class="col-lg-4">
                 <aside class="article-sidebar">
                     <!-- Bài viết liên quan -->
-                    <div class="sidebar-widget">
-                        <h5 class="widget-title">Bài viết liên quan</h5>
-                        <div class="related-posts">
-                            <!-- Placeholder cho bài viết liên quan -->
-                            <div class="related-post">
-                                <div class="related-image">
-                                    <img src="~/img/hero/hero-2.jpg" alt="Bài viết liên quan" class="img-fluid">
-                                </div>
-                                <div class="related-content">
-                                    <h6><a href="#">Công nghệ LiDAR trong khảo sát địa hình</a></h6>
-                                    <small class="text-muted">15/08/2024</small>
-                                </div>
-                            </div>
-                            
-                            <div class="related-post">
-                                <div class="related-image">
-                                    <img src="~/img/hero/hero-3.jpg" alt="Bài viết liên quan" class="img-fluid">
-                                </div>
-                                <div class="related-content">
-                                    <h6><a href="#">Ứng dụng AI trong phân tích dữ liệu không gian</a></h6>
-                                    <small class="text-muted">12/08/2024</small>
-                                </div>
-                            </div>
-                            
-                            <div class="related-post">
-                                <div class="related-image">
-                                    <img src="~/img/about/smart-city.png" alt="Bài viết liên quan" class="img-fluid">
-                                </div>
-                                <div class="related-content">
-                                    <h6><a href="#">Tương lai của thành phố thông minh</a></h6>
-                                    <small class="text-muted">10/08/2024</small>
-                                </div>
+                    @if (Model.BaiVietLienQuan.Any())
+                    {
+                        <div class="sidebar-widget">
+                            <h5 class="widget-title">Bài viết liên quan</h5>
+                            <div class="related-posts">
+                                @foreach (var relatedPost in Model.BaiVietLienQuan)
+                                {
+                                    <div class="related-post">
+                                        <div class="related-image">
+                                            @if (!string.IsNullOrEmpty(relatedPost.AnhTieuDe))
+                                            {
+                                                <img src="@relatedPost.AnhTieuDe" alt="@relatedPost.TieuDe" class="img-fluid">
+                                            }
+                                            else
+                                            {
+                                                <img src="~/media/news-placeholder.jpg" alt="@relatedPost.TieuDe" class="img-fluid">
+                                            }
+                                        </div>
+                                        <div class="related-content">
+                                            <h6><a href="@Url.Action("ChiTietBaiViet", "Home", new { id = relatedPost.Id })">@relatedPost.TieuDe</a></h6>
+                                            <small class="text-muted">@relatedPost.NgayDang.ToString("dd/MM/yyyy")</small>
+                                        </div>
+                                    </div>
+                                }
                             </div>
                         </div>
-                    </div>
+                    }
+                    
+                    <!-- Bài viết mới nhất -->
+                    @if (Model.BaiVietMoiNhat.Any())
+                    {
+                        <div class="sidebar-widget">
+                            <h5 class="widget-title">Bài viết mới nhất</h5>
+                            <div class="related-posts">
+                                @foreach (var latestPost in Model.BaiVietMoiNhat)
+                                {
+                                    <div class="related-post">
+                                        <div class="related-image">
+                                            @if (!string.IsNullOrEmpty(latestPost.AnhTieuDe))
+                                            {
+                                                <img src="@latestPost.AnhTieuDe" alt="@latestPost.TieuDe" class="img-fluid">
+                                            }
+                                            else
+                                            {
+                                                <img src="~/media/news-placeholder.jpg" alt="@latestPost.TieuDe" class="img-fluid">
+                                            }
+                                        </div>
+                                        <div class="related-content">
+                                            <h6><a href="@Url.Action("ChiTietBaiViet", "Home", new { id = latestPost.Id })">@latestPost.TieuDe</a></h6>
+                                            <small class="text-muted">@latestPost.NgayDang.ToString("dd/MM/yyyy")</small>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    }
                     
                     <!-- Newsletter -->
                     <div class="sidebar-widget">
@@ -187,6 +184,63 @@
     </div>
 </section>
 
+<!-- ===================== ĐÁNH GIÁ BÀI VIẾT ===================== -->
+<section class="section bg-white">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="article-rating">
+                    <div class="rating-section">
+                        <div class="rating-header">
+                            <h5 class="rating-title">Đánh giá bài viết:</h5>
+                            <div class="rating-stars">
+                                <button class="star-btn" data-rating="1" title="1 sao">
+                                    <i class="far fa-star"></i>
+                                </button>
+                                <button class="star-btn" data-rating="2" title="2 sao">
+                                    <i class="far fa-star"></i>
+                                </button>
+                                <button class="star-btn" data-rating="3" title="3 sao">
+                                    <i class="far fa-star"></i>
+                                </button>
+                                <button class="star-btn" data-rating="4" title="4 sao">
+                                    <i class="far fa-star"></i>
+                                </button>
+                                <button class="star-btn" data-rating="5" title="5 sao">
+                                    <i class="far fa-star"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="rating-stats">
+                            <span class="rating-count">(lượt đánh giá: <span id="ratingCount">0</span>, trung bình: <span id="averageRating">0.0</span>)</span>
+                        </div>
+                    </div>
+                    
+                    <div class="divider"></div>
+                    
+                    <div class="social-share">
+                        <span class="share-label">Chia sẻ:</span>
+                        <div class="share-buttons">
+                            <a href="#" class="share-btn facebook" title="Chia sẻ lên Facebook">
+                                <i class="fab fa-facebook-f"></i>
+                            </a>
+                            <a href="#" class="share-btn twitter" title="Chia sẻ lên Twitter">
+                                <i class="fab fa-twitter"></i>
+                            </a>
+                            <a href="#" class="share-btn linkedin" title="Chia sẻ lên LinkedIn">
+                                <i class="fab fa-linkedin-in"></i>
+                            </a>
+                            <a href="#" class="share-btn copy" title="Sao chép link">
+                                <i class="fas fa-link"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 <!-- ===================== BÀI VIẾT KHÁC ===================== -->
 <section class="section bg-light">
     <div class="container">
@@ -195,70 +249,123 @@
             <p class="text-muted">Khám phá thêm những tin tức và sự kiện mới nhất</p>
         </div>
         
-        <div class="row g-4">
-            <!-- Placeholder cho bài viết khác -->
-            <div class="col-lg-4 col-md-6">
-                <div class="news-card">
-                    <div class="news-image">
-                        <img src="~/img/about/gis-network.png" alt="Bài viết khác" class="img-fluid">
-                        <div class="news-category">Công nghệ</div>
-                    </div>
-                    <div class="news-content">
-                        <div class="news-meta">
-                            <span class="news-date">
-                                <i class="fas fa-calendar me-1"></i>20/08/2024
-                            </span>
+        <!-- Slider Container -->
+        <div class="news-slider-container position-relative">
+            <!-- Slider Wrapper -->
+            <div class="news-slider-wrapper overflow-hidden">
+                <div class="news-slider d-flex" id="newsSlider">
+                    @if (Model.BaiVietMoiNhat.Any())
+                    {
+                        @foreach (var post in Model.BaiVietMoiNhat)
+                        {
+                            <div class="news-slide">
+                                <div class="news-card">
+                                    <div class="news-image">
+                                        @if (!string.IsNullOrEmpty(post.AnhTieuDe))
+                                        {
+                                            <img src="@post.AnhTieuDe" alt="@post.TieuDe" class="img-fluid">
+                                        }
+                                        else
+                                        {
+                                            <img src="~/media/news-placeholder.jpg" alt="@post.TieuDe" class="img-fluid">
+                                        }
+                                        <div class="news-category">@post.ChuyenMuc?.Ten</div>
+                                    </div>
+                                    <div class="news-content">
+                                        <div class="news-meta">
+                                            <span class="news-date">
+                                                <i class="fas fa-calendar me-1"></i>@post.NgayDang.ToString("dd/MM/yyyy")
+                                            </span>
+                                        </div>
+                                        <h5 class="news-title">
+                                            <a href="@Url.Action("ChiTietBaiViet", "Home", new { id = post.Id })">@post.TieuDe</a>
+                                        </h5>
+                                        <p class="news-excerpt">@(post.TomTat?.Length > 100 ? post.TomTat.Substring(0, 100) + "..." : post.TomTat)</p>
+                                        <a href="@Url.Action("ChiTietBaiViet", "Home", new { id = post.Id })" class="read-more">Đọc thêm <i class="fas fa-arrow-right"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <!-- Fallback content -->
+                        <div class="news-slide">
+                            <div class="news-card">
+                                <div class="news-image">
+                                    <img src="~/media/news-placeholder.jpg" alt="Bài viết khác" class="img-fluid">
+                                    <div class="news-category">Công nghệ</div>
+                                </div>
+                                <div class="news-content">
+                                    <div class="news-meta">
+                                        <span class="news-date">
+                                            <i class="fas fa-calendar me-1"></i>20/08/2024
+                                        </span>
+                                    </div>
+                                    <h5 class="news-title">
+                                        <a href="#">Xu hướng công nghệ GIS 2024</a>
+                                    </h5>
+                                    <p class="news-excerpt">Tìm hiểu những xu hướng mới nhất trong lĩnh vực công nghệ thông tin địa lý và ứng dụng thực tế trong quản lý tài nguyên thiên nhiên...</p>
+                                    <a href="#" class="read-more">Đọc thêm <i class="fas fa-arrow-right"></i></a>
+                                </div>
+                            </div>
                         </div>
-                        <h5 class="news-title">
-                            <a href="#">Xu hướng công nghệ GIS 2024</a>
-                        </h5>
-                        <p class="news-excerpt">Tìm hiểu những xu hướng mới nhất trong lĩnh vực công nghệ thông tin địa lý...</p>
-                        <a href="#" class="read-more">Đọc thêm <i class="fas fa-arrow-right"></i></a>
-                    </div>
+                        
+                        <div class="news-slide">
+                            <div class="news-card">
+                                <div class="news-image">
+                                    <img src="~/media/news-placeholder.jpg" alt="Bài viết khác" class="img-fluid">
+                                    <div class="news-category">Sự kiện</div>
+                                </div>
+                                <div class="news-content">
+                                    <div class="news-meta">
+                                        <span class="news-date">
+                                            <i class="fas fa-calendar me-1"></i>18/08/2024
+                                        </span>
+                                    </div>
+                                    <h5 class="news-title">
+                                        <a href="#">Hội thảo công nghệ không gian 2024</a>
+                                    </h5>
+                                    <p class="news-excerpt">Tham gia hội thảo lớn nhất năm về công nghệ không gian và ứng dụng thực tế trong việc phát triển các dự án vệ tinh...</p>
+                                    <a href="#" class="read-more">Đọc thêm <i class="fas fa-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="news-slide">
+                            <div class="news-card">
+                                <div class="news-image">
+                                    <img src="~/media/news-placeholder.jpg" alt="Bài viết khác" class="img-fluid">
+                                    <div class="news-category">Tin tức</div>
+                                </div>
+                                <div class="news-content">
+                                    <div class="news-meta">
+                                        <span class="news-date">
+                                            <i class="fas fa-calendar me-1"></i>15/08/2024
+                                        </span>
+                                    </div>
+                                    <h5 class="news-title">
+                                        <a href="#">Dự án thành phố thông minh tại Việt Nam</a>
+                                    </h5>
+                                    <p class="news-excerpt">Cập nhật tiến độ các dự án thành phố thông minh đang triển khai tại Việt Nam và những thách thức trong quá trình phát triển...</p>
+                                    <a href="#" class="read-more">Đọc thêm <i class="fas fa-arrow-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    }
                 </div>
             </div>
             
-            <div class="col-lg-4 col-md-6">
-                <div class="news-card">
-                    <div class="news-image">
-                        <img src="~/img/about/datacenter.png" alt="Bài viết khác" class="img-fluid">
-                        <div class="news-category">Sự kiện</div>
-                    </div>
-                    <div class="news-content">
-                        <div class="news-meta">
-                            <span class="news-date">
-                                <i class="fas fa-calendar me-1"></i>18/08/2024
-                            </span>
-                        </div>
-                        <h5 class="news-title">
-                            <a href="#">Hội thảo công nghệ không gian 2024</a>
-                        </h5>
-                        <p class="news-excerpt">Tham gia hội thảo lớn nhất năm về công nghệ không gian và ứng dụng thực tế...</p>
-                        <a href="#" class="read-more">Đọc thêm <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </div>
-            </div>
+            <!-- Navigation Buttons -->
+            <button class="slider-btn slider-btn-prev" id="prevBtn" aria-label="Bài viết trước">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="slider-btn slider-btn-next" id="nextBtn" aria-label="Bài viết tiếp">
+                <i class="fas fa-chevron-right"></i>
+            </button>
             
-            <div class="col-lg-4 col-md-6">
-                <div class="news-card">
-                    <div class="news-image">
-                        <img src="~/img/about/smart-city.png" alt="Bài viết khác" class="img-fluid">
-                        <div class="news-category">Tin tức</div>
-                    </div>
-                    <div class="news-content">
-                        <div class="news-meta">
-                            <span class="news-date">
-                                <i class="fas fa-calendar me-1"></i>15/08/2024
-                            </span>
-                        </div>
-                        <h5 class="news-title">
-                            <a href="#">Dự án thành phố thông minh tại Việt Nam</a>
-                        </h5>
-                        <p class="news-excerpt">Cập nhật tiến độ các dự án thành phố thông minh đang triển khai tại Việt Nam...</p>
-                        <a href="#" class="read-more">Đọc thêm <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </div>
-            </div>
+            <!-- Dots Indicator -->
+            <div class="slider-dots" id="sliderDots"></div>
         </div>
         
         <div class="text-center mt-5">
@@ -268,3 +375,317 @@
         </div>
     </div>
 </section>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const slider = document.getElementById('newsSlider');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const dotsContainer = document.getElementById('sliderDots');
+    
+    if (!slider) return;
+    
+    const slides = slider.querySelectorAll('.news-slide');
+    const totalSlides = slides.length;
+    let currentSlide = 0;
+    let slidesToShow = window.innerWidth < 768 ? 1 : 3;
+    let maxSlide = Math.max(0, totalSlides - slidesToShow);
+    
+    // Tạo dots indicator
+    function createDots() {
+        dotsContainer.innerHTML = '';
+        const totalPages = Math.ceil(totalSlides / slidesToShow);
+        
+        for (let i = 0; i < totalPages; i++) {
+            const dot = document.createElement('button');
+            dot.className = 'slider-dot';
+            if (i === 0) dot.classList.add('active');
+            dot.addEventListener('click', () => goToSlide(i * slidesToShow));
+            dotsContainer.appendChild(dot);
+        }
+    }
+    
+    // Cập nhật vị trí slider
+    function updateSlider() {
+        const slideWidth = 100 / slidesToShow;
+        const translateX = -currentSlide * slideWidth;
+        slider.style.transform = `translateX(${translateX}%)`;
+        
+        // Cập nhật dots
+        const activeDotIndex = Math.floor(currentSlide / slidesToShow);
+        dotsContainer.querySelectorAll('.slider-dot').forEach((dot, index) => {
+            dot.classList.toggle('active', index === activeDotIndex);
+        });
+        
+        // Ẩn/hiện nút điều hướng
+        prevBtn.style.display = currentSlide === 0 ? 'none' : 'flex';
+        nextBtn.style.display = currentSlide >= maxSlide ? 'none' : 'flex';
+    }
+    
+    // Chuyển đến slide cụ thể
+    function goToSlide(slideIndex) {
+        currentSlide = Math.max(0, Math.min(slideIndex, maxSlide));
+        updateSlider();
+    }
+    
+    // Slide tiếp theo
+    function nextSlide() {
+        if (currentSlide < maxSlide) {
+            currentSlide += slidesToShow;
+            updateSlider();
+        }
+    }
+    
+    // Slide trước đó
+    function prevSlide() {
+        if (currentSlide > 0) {
+            currentSlide -= slidesToShow;
+            updateSlider();
+        }
+    }
+    
+    // Event listeners
+    nextBtn.addEventListener('click', nextSlide);
+    prevBtn.addEventListener('click', prevSlide);
+    
+    // Mouse drag support
+    let startX = 0;
+    let isDragging = false;
+    let startTransform = 0;
+    
+    slider.addEventListener('mousedown', (e) => {
+        startX = e.clientX;
+        isDragging = true;
+        startTransform = currentSlide * (100 / slidesToShow);
+        slider.style.cursor = 'grabbing';
+        slider.style.transition = 'none';
+        e.preventDefault();
+    });
+    
+    document.addEventListener('mousemove', (e) => {
+        if (!isDragging) return;
+        
+        const currentX = e.clientX;
+        const diff = startX - currentX;
+        const slideWidth = 100 / slidesToShow;
+        const newTransform = startTransform + (diff / slider.offsetWidth) * 100;
+        
+        slider.style.transform = `translateX(${-newTransform}%)`;
+    });
+    
+    document.addEventListener('mouseup', (e) => {
+        if (!isDragging) return;
+        isDragging = false;
+        slider.style.cursor = 'grab';
+        slider.style.transition = 'transform 0.5s ease-in-out';
+        
+        const currentX = e.clientX;
+        const diff = startX - currentX;
+        const threshold = slider.offsetWidth * 0.1; // 10% threshold
+        
+        if (Math.abs(diff) > threshold) {
+            if (diff > 0) {
+                nextSlide();
+            } else {
+                prevSlide();
+            }
+        } else {
+            updateSlider(); // Snap back
+        }
+    });
+    
+    // Touch/swipe support
+    slider.addEventListener('touchstart', (e) => {
+        startX = e.touches[0].clientX;
+        isDragging = true;
+        startTransform = currentSlide * (100 / slidesToShow);
+        slider.style.transition = 'none';
+    });
+    
+    slider.addEventListener('touchmove', (e) => {
+        if (!isDragging) return;
+        e.preventDefault();
+        
+        const currentX = e.touches[0].clientX;
+        const diff = startX - currentX;
+        const slideWidth = 100 / slidesToShow;
+        const newTransform = startTransform + (diff / slider.offsetWidth) * 100;
+        
+        slider.style.transform = `translateX(${-newTransform}%)`;
+    });
+    
+    slider.addEventListener('touchend', (e) => {
+        if (!isDragging) return;
+        isDragging = false;
+        slider.style.transition = 'transform 0.5s ease-in-out';
+        
+        const currentX = e.changedTouches[0].clientX;
+        const diff = startX - currentX;
+        const threshold = slider.offsetWidth * 0.1; // 10% threshold
+        
+        if (Math.abs(diff) > threshold) {
+            if (diff > 0) {
+                nextSlide();
+            } else {
+                prevSlide();
+            }
+        } else {
+            updateSlider(); // Snap back
+        }
+    });
+    
+    // Auto-play (optional)
+    let autoPlayInterval;
+    
+    function startAutoPlay() {
+        autoPlayInterval = setInterval(() => {
+            if (currentSlide >= maxSlide) {
+                goToSlide(0);
+            } else {
+                nextSlide();
+            }
+        }, 5000); // 5 seconds
+    }
+    
+    function stopAutoPlay() {
+        clearInterval(autoPlayInterval);
+    }
+    
+    // Start auto-play
+    startAutoPlay();
+    
+    // Pause on hover
+    slider.addEventListener('mouseenter', stopAutoPlay);
+    slider.addEventListener('mouseleave', startAutoPlay);
+    
+    // Initialize
+    createDots();
+    updateSlider();
+    
+    // Responsive handling
+    function handleResize() {
+        const isMobile = window.innerWidth < 768;
+        const newSlidesToShow = isMobile ? 1 : 3;
+        
+        if (newSlidesToShow !== slidesToShow) {
+            slidesToShow = newSlidesToShow;
+            maxSlide = Math.max(0, totalSlides - slidesToShow);
+            currentSlide = Math.min(currentSlide, maxSlide);
+            createDots();
+            updateSlider();
+        }
+    }
+    
+    window.addEventListener('resize', handleResize);
+});
+
+// Rating functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const starButtons = document.querySelectorAll('.star-btn');
+    const ratingCount = document.getElementById('ratingCount');
+    const averageRating = document.getElementById('averageRating');
+    
+    let currentRating = 0;
+    let totalRatings = 0;
+    let averageScore = 0;
+    
+    // Load saved rating from localStorage
+    const articleId = @Model.BaiViet.Id;
+    const savedRating = localStorage.getItem(`rating_${articleId}`);
+    if (savedRating) {
+        currentRating = parseInt(savedRating);
+        updateStars(currentRating);
+    }
+    
+    // Load rating stats (in real app, this would come from server)
+    const ratingStats = JSON.parse(localStorage.getItem(`rating_stats_${articleId}`) || '{"count": 0, "average": 0}');
+    totalRatings = ratingStats.count;
+    averageScore = ratingStats.average;
+    updateRatingInfo();
+    
+    starButtons.forEach((button, index) => {
+        button.addEventListener('click', () => {
+            const rating = index + 1;
+            currentRating = rating;
+            updateStars(rating);
+            saveRating(rating);
+        });
+        
+        button.addEventListener('mouseenter', () => {
+            highlightStars(index + 1);
+        });
+    });
+    
+    document.querySelector('.rating-stars').addEventListener('mouseleave', () => {
+        updateStars(currentRating);
+    });
+    
+    function updateStars(rating) {
+        starButtons.forEach((button, index) => {
+            const icon = button.querySelector('i');
+            if (index < rating) {
+                icon.className = 'fas fa-star';
+                button.classList.add('active');
+            } else {
+                icon.className = 'far fa-star';
+                button.classList.remove('active');
+            }
+        });
+    }
+    
+    function highlightStars(rating) {
+        starButtons.forEach((button, index) => {
+            const icon = button.querySelector('i');
+            if (index < rating) {
+                icon.className = 'fas fa-star';
+            } else {
+                icon.className = 'far fa-star';
+            }
+        });
+    }
+    
+    function saveRating(rating) {
+        // Save to localStorage (in real app, this would be sent to server)
+        localStorage.setItem(`rating_${articleId}`, rating.toString());
+        
+        // Update stats
+        totalRatings = Math.max(totalRatings, 1);
+        averageScore = ((averageScore * (totalRatings - 1)) + rating) / totalRatings;
+        
+        const stats = {
+            count: totalRatings,
+            average: averageScore
+        };
+        localStorage.setItem(`rating_stats_${articleId}`, JSON.stringify(stats));
+        
+        updateRatingInfo();
+        
+        // Show thank you message
+        showThankYouMessage();
+    }
+    
+    function updateRatingInfo() {
+        ratingCount.textContent = totalRatings;
+        averageRating.textContent = averageScore.toFixed(1);
+    }
+    
+    function showThankYouMessage() {
+        const message = document.createElement('div');
+        message.className = 'alert alert-success alert-dismissible fade show mt-3';
+        message.innerHTML = `
+            <i class="fas fa-check-circle me-2"></i>
+            Cảm ơn bạn đã đánh giá bài viết!
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        `;
+        
+        document.querySelector('.article-rating').appendChild(message);
+        
+        // Auto remove after 3 seconds
+        setTimeout(() => {
+            if (message.parentNode) {
+                message.remove();
+            }
+        }, 3000);
+    }
+});
+</script>

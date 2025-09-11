@@ -169,6 +169,8 @@ namespace WEB_CV.Controllers
                 .AsNoTracking()
                 .Include(b => b.ChuyenMuc)
                 .Include(b => b.TacGia)
+                .Include(b => b.BaiVietTags)
+                    .ThenInclude(bt => bt.Tag)
                 .FirstOrDefaultAsync(b => b.Id == id);
 
             if (post == null)
@@ -186,7 +188,33 @@ namespace WEB_CV.Controllers
                 return RedirectToActionPermanent(nameof(ChiTietBaiViet), new { id, slug = expected });
             }
 
-            return View("~/Views/TinTuc/Details.cshtml", post);
+            // Lấy bài viết liên quan (cùng chuyên mục, khác bài viết hiện tại)
+            var relatedPosts = await _db.BaiViets
+                .AsNoTracking()
+                .Include(b => b.ChuyenMuc)
+                .Where(b => b.ChuyenMucId == post.ChuyenMucId && b.Id != post.Id)
+                .OrderByDescending(b => b.NgayDang)
+                .Take(5)
+                .ToListAsync();
+
+            // Lấy bài viết mới nhất (khác bài viết hiện tại)
+            var latestPosts = await _db.BaiViets
+                .AsNoTracking()
+                .Include(b => b.ChuyenMuc)
+                .Where(b => b.Id != post.Id)
+                .OrderByDescending(b => b.NgayDang)
+                .Take(5)
+                .ToListAsync();
+
+            // Tạo ViewModel để truyền dữ liệu
+            var viewModel = new ChiTietBaiVietVM
+            {
+                BaiViet = post,
+                BaiVietLienQuan = relatedPosts,
+                BaiVietMoiNhat = latestPosts
+            };
+
+            return View("ChiTietBaiViet", viewModel);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

@@ -1,0 +1,21 @@
+@{
+    var back = Context.Request.Path + Context.Request.QueryString;
+}
+<div class="dropdown">
+  <button class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown">
+    <i class="fa-solid fa-globe me-1"></i>
+    @System.Globalization.CultureInfo.CurrentUICulture.TwoLetterISOLanguageName.ToUpper()
+  </button>
+  <ul class="dropdown-menu dropdown-menu-end">
+    <li>
+      <a class="dropdown-item"
+         asp-controller="Language" asp-action="SetLanguage"
+         asp-route-culture="vi-VN" asp-route-returnUrl="@back">Tiếng Việt</a>
+    </li>
+    <li>
+      <a class="dropdown-item"
+         asp-controller="Language" asp-action="SetLanguage"
+         asp-route-culture="en-US" asp-route-returnUrl="@back">English</a>
+    </li>
+  </ul>
+</div>

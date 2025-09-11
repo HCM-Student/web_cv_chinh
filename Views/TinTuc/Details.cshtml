@@ -1,44 +1,79 @@
 @model WEB_CV.Models.BaiViet
+@using System.Globalization
+
 @{
-    ViewData["Title"] = Model.TieuDe;
-    var cover = Url.Content(string.IsNullOrWhiteSpace(Model.AnhTieuDe)
-        ? "~/media/news-placeholder.jpg"
-        : Model.AnhTieuDe);
-    var alt  = string.IsNullOrWhiteSpace(Model.AnhTieuDeAlt) ? Model.TieuDe : Model.AnhTieuDeAlt;
-    var desc = string.IsNullOrWhiteSpace(Model.TomTat) ? Model.TieuDe : Model.TomTat;
+    // Ưu tiên VI; nếu người dùng chọn EN thì hiển thị bản EN (nếu có)
+    bool isEn = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName == "en";
+
+    string title    = isEn && !string.IsNullOrWhiteSpace(Model.TieuDeEn) ? Model.TieuDeEn! : Model.TieuDe;
+    string? summary = isEn && !string.IsNullOrWhiteSpace(Model.TomTatEn) ? Model.TomTatEn : Model.TomTat;
+    string content  = isEn && !string.IsNullOrWhiteSpace(Model.NoiDungEn) ? Model.NoiDungEn! : Model.NoiDung;
+
+    // Chỉ dùng tên chuyên mục tiếng Việt (model chưa có TenEn)
+    string categoryName = Model.ChuyenMuc?.Ten ?? "";
+
+    ViewData["Title"] = title;
+
+    // Ảnh cover + alt + description (SEO)
+    string coverSrc = string.IsNullOrWhiteSpace(Model.AnhTieuDe) ? "/media/news-placeholder.jpg" : Model.AnhTieuDe!;
+    if (!coverSrc.StartsWith("http", StringComparison.OrdinalIgnoreCase))
+        coverSrc = "~/" + coverSrc.TrimStart('~','/').Replace("\\","/");
+    var cover = Url.Content(coverSrc);
+    var alt   = string.IsNullOrWhiteSpace(Model.AnhTieuDeAlt) ? title : Model.AnhTieuDeAlt!;
+    var desc  = string.IsNullOrWhiteSpace(summary) ? title : summary!;
 }
 
 @section Head {
   <meta name="description" content="@desc" />
   <meta property="og:type" content="article" />
-  <meta property="og:title" content="@Model.TieuDe" />
+  <meta property="og:title" content="@title" />
   <meta property="og:description" content="@desc" />
   <meta property="og:image" content="@cover" />
   <meta property="og:image:alt" content="@alt" />
   <meta property="og:url" content="@($"{Context.Request.Scheme}://{Context.Request.Host}{Context.Request.Path}")" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="@Model.TieuDe" />
+  <meta name="twitter:title" content="@title" />
   <meta name="twitter:description" content="@desc" />
 }
 
 <article class="container py-4">
-  <h1 class="h3 mb-3">@Model.TieuDe</h1>
+  <div class="d-flex align-items-center justify-content-between mb-3">
+    <h1 class="h3 mb-0">@title</h1>
+
+    @* Nút đổi ngôn ngữ *@
+    @{
+        var returnUrl = Context.Request.Path + Context.Request.QueryString;
+    }
+    <div class="dropdown ms-3">
+      <button class="btn btn-sm btn-outline-secondary rounded-pill px-3 dropdown-toggle" data-bs-toggle="dropdown" type="button">
+        <i class="fa-solid fa-globe me-1"></i>@(isEn ? "English" : "Tiếng Việt")
+      </button>
+      <ul class="dropdown-menu dropdown-menu-end">
+        <li><a class="dropdown-item @(isEn?"":"active")" href="@Url.Action("SetLanguage","Language", new { culture="vi-VN", returnUrl })">Tiếng Việt</a></li>
+        <li><a class="dropdown-item @(isEn?"active":"")" href="@Url.Action("SetLanguage","Language", new { culture="en-US", returnUrl })">English</a></li>
+      </ul>
+    </div>
+  </div>
 
   <figure class="mb-4">
-    <img src="@cover" alt="@alt" class="img-fluid w-100"
-         style="object-fit:cover;max-height:480px" loading="lazy" />
+    <img src="@cover" alt="@alt" class="img-fluid w-100" style="object-fit:cover;max-height:480px" loading="lazy" />
     @if (!string.IsNullOrWhiteSpace(Model.AnhTieuDeAlt))
     { <figcaption class="small text-muted mt-2">@Model.AnhTieuDeAlt</figcaption> }
   </figure>
 
   <div class="article-meta small text-muted mb-3">
     @Model.NgayDang.ToString("dd/MM/yyyy HH:mm")
-    @if (!string.IsNullOrEmpty(Model.ChuyenMuc?.Ten)) { <span>• @Model.ChuyenMuc.Ten</span> }
-    @if (!string.IsNullOrEmpty(Model.TacGia?.HoTen))   { <span>• @Model.TacGia.HoTen</span> }
+    @if (!string.IsNullOrEmpty(categoryName)) { <span>• @categoryName</span> }
+    @if (!string.IsNullOrEmpty(Model.TacGia?.HoTen)) { <span>• @Model.TacGia.HoTen</span> }
   </div>
 
+  @if (!string.IsNullOrWhiteSpace(summary))
+  {
+    <p class="lead">@Html.Raw(summary)</p>
+  }
+
   <div class="article-body">
-    @Html.Raw(Model.NoiDung)  @* Nội dung do admin nhập bằng TinyMCE *@
+    @Html.Raw(content)
   </div>
 </article>
 
