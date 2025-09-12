@@ -4315,6 +4315,7 @@ a {
         0 0 0 1px rgba(255, 255, 255, 0.1),
         inset 0 1px 0 rgba(255, 255, 255, 0.2);
     transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 5; /* Đảm bảo wrapper ở trên thanh nối */
 }
 
 .service-image-wrapper:hover {
@@ -4332,7 +4333,7 @@ a {
     border-radius: 50%;
     transition: all 0.6s ease;
     position: relative;
-    z-index: 1;
+    z-index: 10; /* Tăng z-index để hình ảnh luôn ở trên thanh nối */
 }
 
 
@@ -4368,6 +4369,12 @@ a {
 
 .service-item:hover {
     transform: translateX(6px);
+}
+
+/* Tắt hiệu ứng hover cho thanh nối */
+.service-item:hover .service-dot::after {
+    opacity: 1;
+    transform: translateY(-50%) rotate(var(--line-rot, 0deg));
 }
 
 .service-item.active {
@@ -4416,9 +4423,10 @@ a {
         rgba(102,126,234,0.7) 100%);
     transform-origin: right center;
     transform: translateY(-50%) rotate(var(--line-rot, 0deg));
-    z-index: 5;
+    z-index: 1; /* Giảm z-index để không chọc vào hình */
     pointer-events: none;
     opacity: 1;
+    transition: none; /* Tắt transition để thanh nối không bị ảnh hưởng */
 }
 
 /* Fallback angles/lengths (will be overridden by JS for perfect alignment) */
@@ -4441,6 +4449,7 @@ a {
         transparent 0%,
         rgba(249, 115, 22, 0.3) 30%, 
         rgba(249, 115, 22, 0.8) 100%) !important;
+    transition: none !important; /* Tắt transition cho thanh nối cam */
 }
 
 .service-item.active .service-dot {
@@ -4454,14 +4463,24 @@ a {
     opacity: 1;
 }
 
+/* Đảm bảo thanh nối luôn ổn định */
+.service-item:hover .service-dot::after,
 .service-item.active .service-dot::after {
-    opacity: 1;
+    opacity: 1 !important;
+    transform: translateY(-50%) rotate(var(--line-rot, 0deg)) !important;
+    transition: none !important;
+}
+
+.service-item.active .service-dot::after {
+    opacity: 1 !important;
     background: linear-gradient(270deg, 
         transparent 0%,
         rgba(102, 126, 234, 0.5) 30%, 
         rgba(102, 126, 234, 1) 100%);
     height: 2px;
     box-shadow: 0 0 6px rgba(102, 126, 234, 0.4);
+    transform: translateY(-50%) rotate(var(--line-rot, 0deg)) !important;
+    transition: none !important;
 }
 
 .service-item.active .dot-orange {
@@ -4477,6 +4496,8 @@ a {
         rgba(249, 115, 22, 1) 100%) !important;
     height: 2px;
     box-shadow: 0 0 6px rgba(249, 115, 22, 0.4);
+    transform: translateY(-50%) rotate(var(--line-rot, 0deg)) !important;
+    transition: none !important;
 }
 
 /* Clean connection lines - no complex animations */
@@ -4640,44 +4661,93 @@ a {
 
 /* ===== Override: make CTA more visible on busy background ===== */
 /* ===== Consolidated CTA for Slide 4 (scoped & clean) ===== */
-/* === CTA: gray glass background, rõ trên nền ảnh === */
+/* === CTA: Modern gradient button với hiệu ứng đẹp === */
 #mainHero .carousel-item.slide-4 .btn-cta{
-  --cta-blue: #1da1f2;          /* xanh nước biển */
-  --cta-blue-active: #0f8bd6;   /* xanh đậm khi nhấn */
-  background: rgba(240,243,248,.92);             /* xám sáng hơi đục */
-  color: var(--cta-blue);
-  border: 1px solid rgba(29,161,242,.35);        /* viền xanh nhạt */
+  --cta-blue: #667eea;          /* xanh tím gradient */
+  --cta-blue-dark: #764ba2;     /* tím gradient */
+  --cta-blue-active: #5a67d8;   /* xanh đậm khi nhấn */
+  background: linear-gradient(135deg, var(--cta-blue), var(--cta-blue-dark));
+  color: #fff;
+  border: none;
   font-weight: 700;
-  font-size: clamp(.95rem, .8vw + .5rem, 1.125rem);
-  padding: .9rem 1.8rem;
-  border-radius: 999px;
-  box-shadow: 0 10px 28px rgba(0,0,0,.35);       /* đổ bóng để nổi khỏi nền */
-  -webkit-backdrop-filter: blur(6px) saturate(120%);
-  backdrop-filter: blur(6px) saturate(120%);     /* hiệu ứng glass */
-  mix-blend-mode: normal;                        /* tránh bị ảnh hưởng bởi overlay multiply */
-  z-index: 2;                                    /* luôn nằm trên ảnh */
+  font-size: clamp(1rem, 1vw + 0.5rem, 1.25rem);
+  padding: 1rem 2.5rem;
+  border-radius: 50px;
+  box-shadow: 
+    0 8px 32px rgba(102, 126, 234, 0.4),
+    0 4px 16px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  -webkit-backdrop-filter: blur(10px) saturate(150%);
+  backdrop-filter: blur(10px) saturate(150%);
+  mix-blend-mode: normal;
+  z-index: 10;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
-/* Nếu trước đó bạn có halo ::after làm rìa tối, tắt đi: */
-#mainHero .carousel-item.slide-4 .btn-cta::after{ display:none; }
+/* Hiệu ứng ripple và glow */
+#mainHero .carousel-item.slide-4 .btn-cta::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: all 0.6s ease;
+  z-index: 1;
+}
 
-/* Hover/focus: xanh nước biển – chữ trắng */
+#mainHero .carousel-item.slide-4 .btn-cta:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+#mainHero .carousel-item.slide-4 .btn-cta::after {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(135deg, var(--cta-blue), var(--cta-blue-dark));
+  border-radius: 50px;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+#mainHero .carousel-item.slide-4 .btn-cta:hover::after {
+  opacity: 0.7;
+}
+
+/* Hover/focus: Gradient đảo ngược + hiệu ứng nổi */
 #mainHero .carousel-item.slide-4 .btn-cta:hover,
 #mainHero .carousel-item.slide-4 .btn-cta:focus,
 #mainHero .carousel-item.slide-4 .btn-cta:focus-visible{
-  background: var(--cta-blue);
-  border-color: var(--cta-blue);
-  color:#fff;
-  box-shadow: 0 16px 42px rgba(29,161,242,.45);
+  background: linear-gradient(135deg, var(--cta-blue-dark), var(--cta-blue));
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 
+    0 20px 40px rgba(102, 126, 234, 0.6),
+    0 8px 24px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  color: #fff;
 }
 
-/* Active: xanh đậm + “ấn” nhẹ */
+/* Active: Hiệu ứng ấn xuống */
 #mainHero .carousel-item.slide-4 .btn-cta:active{
-  background: var(--cta-blue-active);
-  border-color: var(--cta-blue-active);
-  color:#fff;
-  transform: translateY(1px) scale(0.99);
-  box-shadow: 0 10px 28px rgba(13, 94, 168, .45);
+  background: linear-gradient(135deg, var(--cta-blue-active), var(--cta-blue));
+  transform: translateY(1px) scale(0.98);
+  box-shadow: 
+    0 4px 16px rgba(102, 126, 234, 0.5),
+    0 2px 8px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  color: #fff;
 }
 /* === CTA XEM CHI TIẾT: style giống Hình 1 (đậm, không glossy, không blur) === */
 .btn-orange{

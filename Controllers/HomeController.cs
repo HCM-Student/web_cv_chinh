@@ -27,6 +27,7 @@ namespace WEB_CV.Controllers
         {
             var latest3 = await _db.BaiViets
                 .Include(x => x.ChuyenMuc)
+                .Where(x => x.TrangThai == 1) // Chỉ lấy bài viết đã đăng
                 .OrderByDescending(x => x.NgayDang)
                 .Take(3)
                 .AsNoTracking()
@@ -65,9 +66,13 @@ namespace WEB_CV.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> LienHe([Bind("HoTen,Email,SoDienThoai,TieuDe,NoiDung")] LienHe model)
         {
+            _logger.LogInformation("LienHe POST: Model received - HoTen: {HoTen}, Email: {Email}, TieuDe: {TieuDe}", 
+                model.HoTen, model.Email, model.TieuDe);
+
             if (!ModelState.IsValid)
             {
                 LogModelErrors(); // <-- method ở cuối file
+                _logger.LogWarning("Model validation failed for LienHe");
                 TempData["ErrorMessage"] = "Đã có lỗi xảy ra. Vui lòng kiểm tra lại thông tin.";
                 return View("LienHe", model);
             }
@@ -75,16 +80,21 @@ namespace WEB_CV.Controllers
             try
             {
                 model.NgayGui = DateTime.Now;
+                model.TrangThai = "Chưa đọc";
+                model.DaXuLy = false;
+                
+                _logger.LogInformation("Saving LienHe to database: {Model}", model);
                 _db.LienHes.Add(model);
                 await _db.SaveChangesAsync();
 
+                _logger.LogInformation("LienHe saved successfully with ID: {Id}", model.Id);
                 TempData["SuccessMessage"] = "Cảm ơn bạn! Chúng tôi đã nhận được tin nhắn và sẽ phản hồi sớm nhất.";
                 // Redirect để TempData hiển thị ở GET
                 return RedirectToAction(nameof(LienHe));
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Lỗi lưu liên hệ");
+                _logger.LogError(ex, "Lỗi lưu liên hệ: {Message}", ex.Message);
                 TempData["ErrorMessage"] = "Không thể gửi tin nhắn lúc này. Vui lòng thử lại sau.";
                 return View("LienHe", model);
             }
@@ -104,6 +114,7 @@ namespace WEB_CV.Controllers
                 .Include(b => b.ChuyenMuc)
                 .Include(b => b.TacGia)
                 .Include(b => b.BinhLuans)
+                .Where(b => b.TrangThai == 1) // Chỉ lấy bài viết đã đăng
                 .AsQueryable();
 
             if (!string.IsNullOrWhiteSpace(q))
@@ -135,6 +146,7 @@ namespace WEB_CV.Controllers
             // Sidebar
             var latest5 = await _db.BaiViets
                 .AsNoTracking()
+                .Where(x => x.TrangThai == 1) // Chỉ lấy bài viết đã đăng
                 .OrderByDescending(x => x.NgayDang)
                 .Take(5).ToListAsync();
 
@@ -144,7 +156,7 @@ namespace WEB_CV.Controllers
 
             var recruit5 = await _db.BaiViets
                 .AsNoTracking()
-                .Where(b => recruitCatId != null && b.ChuyenMucId == recruitCatId.Value)
+                .Where(b => recruitCatId != null && b.ChuyenMucId == recruitCatId.Value && b.TrangThai == 1)
                 .OrderByDescending(b => b.NgayDang)
                 .Take(5).ToListAsync();
 
@@ -170,7 +182,7 @@ namespace WEB_CV.Controllers
                 .Include(b => b.TacGia)
                 .Include(b => b.BaiVietTags)
                     .ThenInclude(bt => bt.Tag)
-                .FirstOrDefaultAsync(b => b.Id == id);
+                .FirstOrDefaultAsync(b => b.Id == id && b.TrangThai == 1); // Chỉ lấy bài viết đã đăng
 
             if (post == null)
             {
@@ -195,7 +207,7 @@ namespace WEB_CV.Controllers
             var relatedPosts = await _db.BaiViets
                 .AsNoTracking()
                 .Include(b => b.ChuyenMuc)
-                .Where(b => b.ChuyenMucId == post.ChuyenMucId && b.Id != post.Id)
+                .Where(b => b.ChuyenMucId == post.ChuyenMucId && b.Id != post.Id && b.TrangThai == 1)
                 .OrderByDescending(b => b.NgayDang)
                 .Take(5)
                 .ToListAsync();
@@ -204,7 +216,7 @@ namespace WEB_CV.Controllers
             var latestPosts = await _db.BaiViets
                 .AsNoTracking()
                 .Include(b => b.ChuyenMuc)
-                .Where(b => b.Id != post.Id)
+                .Where(b => b.Id != post.Id && b.TrangThai == 1)
                 .OrderByDescending(b => b.NgayDang)
                 .Take(12)
                 .ToListAsync();

@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using WEB_CV.Data;
 using WEB_CV.Models;
+using System.Globalization;
 
 namespace WEB_CV.Services
 {
@@ -19,7 +20,9 @@ namespace WEB_CV.Services
         {
             try
             {
-                var now = DateTime.UtcNow;
+                // Sử dụng timezone Việt Nam
+                var vietnamTimeZone = TimeZoneInfo.FindSystemTimeZoneById("SE Asia Standard Time");
+                var now = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, vietnamTimeZone);
                 
                 // Lấy các bài viết đã đến thời gian đăng
                 var scheduledPosts = await _context.BaiViets
@@ -68,7 +71,9 @@ namespace WEB_CV.Services
                 }
 
                 // Kiểm tra thời gian lên lịch phải trong tương lai
-                if (scheduledTime <= DateTime.UtcNow)
+                var vietnamTimeZone = TimeZoneInfo.FindSystemTimeZoneById("SE Asia Standard Time");
+                var now = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, vietnamTimeZone);
+                if (scheduledTime <= now)
                 {
                     _logger.LogWarning("Thời gian lên lịch phải trong tương lai. Bài viết ID: {Id}", baiVietId);
                     return false;

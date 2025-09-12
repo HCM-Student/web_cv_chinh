@@ -196,19 +196,19 @@
             @* Trường thêm ngoài model: không bind, chỉ giữ name riêng để không ảnh hưởng model *@
             <div class="col-md-6">
                 <label class="form-label">Công ty/Tổ chức</label>
-                <input class="form-control" id="company" name="Company" placeholder="(Không bắt buộc)" />
+                <input class="form-control" id="company" placeholder="(Không bắt buộc)" />
             </div>
 
             <div class="col-12">
                 <label asp-for="TieuDe" class="form-label">Chủ đề *</label>
-                <select asp-for="TieuDe" class="form-select" id="subject">
+                <select asp-for="TieuDe" class="form-select" id="subject" required>
                     <option value="">Chọn chủ đề</option>
-                    <option>Yêu cầu báo giá</option>
-                    <option>Thuê thiết bị</option>
-                    <option>Dịch vụ khảo sát</option>
-                    <option>Tuyển dụng</option>
-                    <option>Hỗ trợ kỹ thuật</option>
-                    <option>Khác</option>
+                    <option value="Yêu cầu báo giá">Yêu cầu báo giá</option>
+                    <option value="Thuê thiết bị">Thuê thiết bị</option>
+                    <option value="Dịch vụ khảo sát">Dịch vụ khảo sát</option>
+                    <option value="Tuyển dụng">Tuyển dụng</option>
+                    <option value="Hỗ trợ kỹ thuật">Hỗ trợ kỹ thuật</option>
+                    <option value="Khác">Khác</option>
                 </select>
                 <span asp-validation-for="TieuDe" class="text-danger"></span>
             </div>

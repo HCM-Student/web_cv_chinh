@@ -63,6 +63,16 @@ builder.Services.Configure<RequestLocalizationOptions>(options =>
     options.RequestCultureProviders.Insert(0, new CookieRequestCultureProvider());
 });
 
+// Cấu hình timezone cho Việt Nam
+builder.Services.Configure<RequestLocalizationOptions>(options =>
+{
+    var viCulture = new CultureInfo("vi-VN");
+    viCulture.DateTimeFormat.Calendar = new System.Globalization.GregorianCalendar();
+    options.DefaultRequestCulture = new RequestCulture(viCulture);
+    options.SupportedCultures = new[] { viCulture, new CultureInfo("en-US") };
+    options.SupportedUICultures = new[] { viCulture, new CultureInfo("en-US") };
+});
+
 var app = builder.Build();
 
 // ===================== Middleware =====================

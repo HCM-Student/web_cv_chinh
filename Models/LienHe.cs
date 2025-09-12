@@ -21,8 +21,9 @@ namespace WEB_CV.Models
         [StringLength(20)]
         public string SoDienThoai { get; set; } = string.Empty;
 
+        [Required(ErrorMessage = "Vui lòng chọn chủ đề")]
         [StringLength(200)]
-        public string? TieuDe { get; set; }
+        public string TieuDe { get; set; } = string.Empty;
 
         [Required(ErrorMessage = "Vui lòng nhập nội dung")]
         public string NoiDung { get; set; } = string.Empty;
