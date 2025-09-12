@@ -65,6 +65,88 @@
     </div>
   </div>
 
+  <!-- Video -->
+  <div class="form-section card shadow-sm mb-4">
+    <div class="card-header bg-white d-flex align-items-center gap-2">
+      <span class="section-chip"><i class="fas fa-video"></i></span>
+      <h5 class="mb-0">Video</h5>
+    </div>
+    <div class="card-body">
+      <!-- Video hiện tại -->
+      @if (!string.IsNullOrEmpty(Model?.VideoFile) || !string.IsNullOrEmpty(Model?.VideoUrl))
+      {
+        <div class="mb-3">
+          @if (!string.IsNullOrEmpty(Model.VideoFile))
+          {
+            <video controls class="img-thumbnail" style="max-width: 400px; max-height: 300px;">
+              <source src="@Model.VideoFile" type="video/mp4">
+              Trình duyệt không hỗ trợ video.
+            </video>
+          }
+          else if (!string.IsNullOrEmpty(Model.VideoUrl))
+          {
+            <div class="embed-responsive embed-responsive-16by9" style="max-width: 400px;">
+              @if (Model.VideoType == "youtube")
+              {
+                <iframe class="embed-responsive-item" src="@Model.VideoUrl" allowfullscreen></iframe>
+              }
+              else if (Model.VideoType == "vimeo")
+              {
+                <iframe class="embed-responsive-item" src="@Model.VideoUrl" allowfullscreen></iframe>
+              }
+            </div>
+          }
+        </div>
+      }
+
+      <!-- Upload video file -->
+      <div class="mb-3">
+        <label class="form-label">Upload video file</label>
+        <input type="file" name="VideoFile" accept="video/*" class="form-control" />
+        <div class="form-text">Chọn video .mp4 .avi .mov .wmv .flv .webm (tối đa 100MB)</div>
+        @if (ViewData.ModelState["VideoFile"]?.Errors?.Count > 0)
+        {
+          <div class="text-danger small">@ViewData.ModelState["VideoFile"].Errors[0].ErrorMessage</div>
+        }
+      </div>
+
+      <!-- Hoặc nhập URL video -->
+      <div class="mb-3">
+        <label asp-for="VideoUrl" class="form-label">Hoặc nhập URL video (YouTube, Vimeo, etc.)</label>
+        <input asp-for="VideoUrl" class="form-control" placeholder="https://www.youtube.com/watch?v=..." />
+        <div class="form-text">Dán link YouTube, Vimeo hoặc video khác</div>
+      </div>
+
+      <!-- Loại video -->
+      <div class="mb-3">
+        <label asp-for="VideoType" class="form-label">Loại video</label>
+        <select asp-for="VideoType" class="form-select">
+          <option value="">Chọn loại video</option>
+          <option value="file">File video</option>
+          <option value="youtube">YouTube</option>
+          <option value="vimeo">Vimeo</option>
+          <option value="other">Khác</option>
+        </select>
+      </div>
+
+      <!-- Mô tả video -->
+      <div class="mb-3">
+        <label asp-for="VideoAlt" class="form-label">Mô tả video (Alt text)</label>
+        <input asp-for="VideoAlt" class="form-control" placeholder="Mô tả ngắn gọn về video..." />
+        <div class="form-text">Giúp người dùng khiếm thị hiểu nội dung video</div>
+      </div>
+
+      @* Hiện checkbox xoá chỉ khi đang sửa và có video *@
+      @if (!string.IsNullOrEmpty(Model?.VideoFile) || !string.IsNullOrEmpty(Model?.VideoUrl))
+      {
+        <div class="mb-3 form-check">
+          <input class="form-check-input" type="checkbox" name="removeVideo" id="removeVideo" />
+          <label class="form-check-label" for="removeVideo">Xoá video hiện tại</label>
+        </div>
+      }
+    </div>
+  </div>
+
   <!-- Gemini AI Assistant -->
   <partial name="_GeminiAssistant" />
 

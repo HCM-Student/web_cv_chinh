@@ -66,6 +66,19 @@ namespace WEB_CV.Models
         [StringLength(200)]
         public string? AnhTieuDeAlt { get; set; } // mô tả ảnh (SEO/Accessibility)
 
+        // ===== Video =====
+        [StringLength(300)]
+        public string? VideoFile { get; set; }   // đường dẫn file video (ví dụ: "media/posts/videos/xxx.mp4")
+
+        [StringLength(200)]
+        public string? VideoAlt { get; set; }    // mô tả video (SEO/Accessibility)
+
+        [StringLength(500)]
+        public string? VideoUrl { get; set; }    // URL video từ YouTube, Vimeo, etc.
+
+        [StringLength(100)]
+        public string? VideoType { get; set; }   // "file", "youtube", "vimeo", etc.
+
         // ===== Điều hướng/ liên kết =====
         [ValidateNever]
         public ICollection<BinhLuan> BinhLuans { get; set; } = new List<BinhLuan>();

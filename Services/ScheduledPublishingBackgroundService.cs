@@ -32,10 +32,19 @@ namespace WEB_CV.Services
                 }
                 catch (Exception ex)
                 {
-                    _logger.LogError(ex, "Lỗi trong Scheduled Publishing Background Service");
+                    _logger.LogError(ex, "Lỗi trong Scheduled Publishing Background Service: {Message}", ex.Message);
+                    // Tiếp tục chạy thay vì dừng service
                 }
 
-                await Task.Delay(_period, stoppingToken);
+                try
+                {
+                    await Task.Delay(_period, stoppingToken);
+                }
+                catch (OperationCanceledException)
+                {
+                    // Service đang được dừng, thoát khỏi vòng lặp
+                    break;
+                }
             }
 
             _logger.LogInformation("Scheduled Publishing Background Service đã dừng");

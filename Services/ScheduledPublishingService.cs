@@ -24,6 +24,8 @@ namespace WEB_CV.Services
                 var vietnamTimeZone = TimeZoneInfo.FindSystemTimeZoneById("SE Asia Standard Time");
                 var now = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, vietnamTimeZone);
                 
+                _logger.LogInformation("Đang kiểm tra bài viết được lên lịch lúc {Time}", now);
+                
                 // Lấy các bài viết đã đến thời gian đăng
                 var scheduledPosts = await _context.BaiViets
                     .Where(b => b.TrangThai == 2 && // Scheduled
@@ -41,12 +43,19 @@ namespace WEB_CV.Services
 
                 foreach (var post in scheduledPosts)
                 {
-                    // Cập nhật trạng thái thành Published
-                    post.TrangThai = 1; // Published
-                    post.NgayDang = now; // Cập nhật thời gian đăng thực tế
-                    post.NgayDangDuKien = null; // Xóa thời gian lên lịch
+                    try
+                    {
+                        // Cập nhật trạng thái thành Published
+                        post.TrangThai = 1; // Published
+                        post.NgayDang = now; // Cập nhật thời gian đăng thực tế
+                        post.NgayDangDuKien = null; // Xóa thời gian lên lịch
 
-                    _logger.LogInformation("Đã đăng bài viết: {Title} (ID: {Id})", post.TieuDe, post.Id);
+                        _logger.LogInformation("Đã đăng bài viết: {Title} (ID: {Id})", post.TieuDe, post.Id);
+                    }
+                    catch (Exception ex)
+                    {
+                        _logger.LogError(ex, "Lỗi khi cập nhật bài viết ID: {Id}", post.Id);
+                    }
                 }
 
                 await _context.SaveChangesAsync();
@@ -54,8 +63,8 @@ namespace WEB_CV.Services
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, "Lỗi khi xử lý bài viết được lên lịch");
-                throw;
+                _logger.LogError(ex, "Lỗi khi xử lý bài viết được lên lịch: {Message}", ex.Message);
+                // Không throw exception để tránh crash background service
             }
         }
 

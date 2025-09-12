@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using Microsoft.AspNetCore.Http.Features;
+using Microsoft.AspNetCore.Server.IIS;
 using WEB_CV.Data;
 using WEB_CV.Models;
 using WEB_CV.Services;
@@ -13,6 +15,20 @@ using WEB_CV.Services;
 var builder = WebApplication.CreateBuilder(args);
 
 // ===================== Services =====================
+
+// Cấu hình upload file lớn
+builder.Services.Configure<IISServerOptions>(options =>
+{
+    options.MaxRequestBodySize = 100 * 1024 * 1024; // 100MB
+});
+
+builder.Services.Configure<FormOptions>(options =>
+{
+    options.MultipartBodyLengthLimit = 100 * 1024 * 1024; // 100MB
+    options.ValueLengthLimit = int.MaxValue;
+    options.ValueCountLimit = int.MaxValue;
+    options.KeyLengthLimit = int.MaxValue;
+});
 
 // DbContext
 builder.Services.AddDbContext<NewsDbContext>(options =>

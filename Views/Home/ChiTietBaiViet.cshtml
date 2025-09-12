@@ -48,6 +48,49 @@
                         
                     </div>
 
+                    <!-- Video -->
+                    @if (!string.IsNullOrEmpty(Model.BaiViet.VideoFile) || !string.IsNullOrEmpty(Model.BaiViet.VideoUrl))
+                    {
+                        <div class="article-video mb-4">
+                            @if (!string.IsNullOrEmpty(Model.BaiViet.VideoFile))
+                            {
+                                <div class="video-container">
+                                    <video controls class="img-fluid rounded shadow-sm" style="width: 100%; max-height: 500px;">
+                                        <source src="@Model.BaiViet.VideoFile" type="video/mp4">
+                                        Trình duyệt không hỗ trợ video.
+                                    </video>
+                                    @if (!string.IsNullOrEmpty(Model.BaiViet.VideoAlt))
+                                    {
+                                        <p class="video-caption text-muted mt-2 small">@Model.BaiViet.VideoAlt</p>
+                                    }
+                                </div>
+                            }
+                            else if (!string.IsNullOrEmpty(Model.BaiViet.VideoUrl))
+                            {
+                                <div class="video-container">
+                                    <div class="embed-responsive embed-responsive-16by9">
+                                        @if (Model.BaiViet.VideoType == "youtube")
+                                        {
+                                            <iframe class="embed-responsive-item" src="@Model.BaiViet.VideoUrl" allowfullscreen></iframe>
+                                        }
+                                        else if (Model.BaiViet.VideoType == "vimeo")
+                                        {
+                                            <iframe class="embed-responsive-item" src="@Model.BaiViet.VideoUrl" allowfullscreen></iframe>
+                                        }
+                                        else
+                                        {
+                                            <iframe class="embed-responsive-item" src="@Model.BaiViet.VideoUrl" allowfullscreen></iframe>
+                                        }
+                                    </div>
+                                    @if (!string.IsNullOrEmpty(Model.BaiViet.VideoAlt))
+                                    {
+                                        <p class="video-caption text-muted mt-2 small">@Model.BaiViet.VideoAlt</p>
+                                    }
+                                </div>
+                            }
+                        </div>
+                    }
+
                     <!-- Article Body -->
                     <div class="article-body">
                         @Html.Raw(Model.BaiViet.NoiDung)

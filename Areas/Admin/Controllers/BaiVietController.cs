@@ -10,6 +10,8 @@ using Microsoft.EntityFrameworkCore;
 using WEB_CV.Data;
 using WEB_CV.Models;
 using WEB_CV.Services;
+using System.Web;
+using Microsoft.AspNetCore.Http.Features;
 
 namespace WEB_CV.Areas.Admin.Controllers
 {
@@ -33,6 +35,10 @@ namespace WEB_CV.Areas.Admin.Controllers
         // ==== Cấu hình thư mục lưu ảnh tiêu đề ====
         private string ThumbRoot => Path.Combine(_env.WebRootPath, "media", "posts", "cover");
         private static readonly string[] allowedImg = new[] { ".png", ".jpg", ".jpeg", ".webp", ".gif", ".svg" };
+
+        // ==== Cấu hình thư mục lưu video ====
+        private string VideoRoot => Path.Combine(_env.WebRootPath, "media", "posts", "videos");
+        private static readonly string[] allowedVideo = new[] { ".mp4", ".avi", ".mov", ".wmv", ".flv", ".webm" };
 
         private async Task<string> SaveThumbAsync(IFormFile f)
         {
@@ -63,6 +69,35 @@ namespace WEB_CV.Areas.Admin.Controllers
             return $"/media/posts/cover/{fileName}";
         }
 
+        private async Task<string> SaveVideoAsync(IFormFile f)
+        {
+            Directory.CreateDirectory(VideoRoot);
+
+            var ext = Path.GetExtension(f.FileName).ToLowerInvariant();
+            if (!allowedVideo.Contains(ext)) throw new Exception("Định dạng video không hỗ trợ.");
+
+            var baseName = Path.GetFileNameWithoutExtension(f.FileName).Trim();
+            // làm sạch tên file
+            var safe = string.Concat(baseName.Select(ch => Path.GetInvalidFileNameChars().Contains(ch) ? '-' : ch)).ToLower();
+            if (string.IsNullOrWhiteSpace(safe)) safe = "video";
+
+            var fileName = $"{safe}{ext}";
+            var dst = Path.Combine(VideoRoot, fileName);
+
+            int i = 1;
+            while (System.IO.File.Exists(dst))
+            {
+                fileName = $"{safe}-{i++}{ext}";
+                dst = Path.Combine(VideoRoot, fileName);
+            }
+
+            await using var s = System.IO.File.Create(dst);
+            await f.CopyToAsync(s);
+
+            // trả về URL public
+            return $"/media/posts/videos/{fileName}";
+        }
+
         private void TryDeletePhysical(string? publicUrl)
         {
             if (string.IsNullOrWhiteSpace(publicUrl)) return;
@@ -71,6 +106,109 @@ namespace WEB_CV.Areas.Admin.Controllers
             if (System.IO.File.Exists(full))
             {
                 try { System.IO.File.Delete(full); } catch { /* ignore */ }
+            }
+        }
+
+        private string ConvertToEmbedUrl(string videoUrl, string videoType)
+        {
+            if (string.IsNullOrEmpty(videoUrl)) return videoUrl;
+
+            switch (videoType?.ToLower())
+            {
+                case "youtube":
+                    // Chuyển đổi từ https://www.youtube.com/watch?v=... thành https://www.youtube.com/embed/...
+                    if (videoUrl.Contains("youtube.com/watch?v="))
+                    {
+                        var videoId = ExtractYouTubeVideoId(videoUrl);
+                        if (!string.IsNullOrEmpty(videoId))
+                        {
+                            return $"https://www.youtube.com/embed/{videoId}";
+                        }
+                    }
+                    // Chuyển đổi từ https://youtu.be/... thành https://www.youtube.com/embed/...
+                    else if (videoUrl.Contains("youtu.be/"))
+                    {
+                        var videoId = ExtractYouTubeShortVideoId(videoUrl);
+                        if (!string.IsNullOrEmpty(videoId))
+                        {
+                            return $"https://www.youtube.com/embed/{videoId}";
+                        }
+                    }
+                    // Nếu đã là embed URL thì giữ nguyên
+                    else if (videoUrl.Contains("youtube.com/embed/"))
+                    {
+                        return videoUrl;
+                    }
+                    break;
+
+                case "vimeo":
+                    // Chuyển đổi từ https://vimeo.com/... thành https://player.vimeo.com/video/...
+                    if (videoUrl.Contains("vimeo.com/"))
+                    {
+                        var videoId = ExtractVimeoVideoId(videoUrl);
+                        if (!string.IsNullOrEmpty(videoId))
+                        {
+                            return $"https://player.vimeo.com/video/{videoId}";
+                        }
+                    }
+                    // Nếu đã là player URL thì giữ nguyên
+                    else if (videoUrl.Contains("player.vimeo.com/video/"))
+                    {
+                        return videoUrl;
+                    }
+                    break;
+            }
+
+            return videoUrl;
+        }
+
+        private string ExtractYouTubeVideoId(string url)
+        {
+            try
+            {
+                var uri = new Uri(url);
+                var query = System.Web.HttpUtility.ParseQueryString(uri.Query);
+                return query["v"] ?? string.Empty;
+            }
+            catch
+            {
+                return string.Empty;
+            }
+        }
+
+        private string ExtractYouTubeShortVideoId(string url)
+        {
+            try
+            {
+                var uri = new Uri(url);
+                var segments = uri.AbsolutePath.Split('/');
+                var videoId = segments.LastOrDefault(s => !string.IsNullOrEmpty(s));
+                
+                // Loại bỏ query parameters nếu có
+                if (!string.IsNullOrEmpty(videoId) && videoId.Contains('?'))
+                {
+                    videoId = videoId.Split('?')[0];
+                }
+                
+                return videoId ?? string.Empty;
+            }
+            catch
+            {
+                return string.Empty;
+            }
+        }
+
+        private string ExtractVimeoVideoId(string url)
+        {
+            try
+            {
+                var uri = new Uri(url);
+                var segments = uri.AbsolutePath.Split('/');
+                return segments.LastOrDefault(s => !string.IsNullOrEmpty(s)) ?? string.Empty;
+            }
+            catch
+            {
+                return string.Empty;
             }
         }
 
@@ -121,9 +259,10 @@ namespace WEB_CV.Areas.Admin.Controllers
         // POST: /Admin/BaiViet/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [RequestSizeLimit(100 * 1024 * 1024)] // 100MB
         public async Task<IActionResult> Create(
-            [Bind("TieuDe,TomTat,NoiDung,ChuyenMucId,TacGiaId,NgayDang,AnhTieuDeAlt,TrangThai,NgayDangDuKien")] BaiViet model,
-            IFormFile? AnhTieuDeFile)
+            [Bind("TieuDe,TomTat,NoiDung,ChuyenMucId,TacGiaId,NgayDang,AnhTieuDeAlt,TrangThai,NgayDangDuKien,VideoFile,VideoAlt,VideoUrl,VideoType")] BaiViet model,
+            IFormFile? AnhTieuDeFile, IFormFile? VideoFile)
         {
             // bỏ validate navigation
             ModelState.Remove("ChuyenMuc");
@@ -137,7 +276,11 @@ namespace WEB_CV.Areas.Admin.Controllers
             // Xử lý scheduled publishing
             if (model.TrangThai == 2 && model.NgayDangDuKien.HasValue) // Scheduled
             {
-                if (model.NgayDangDuKien.Value <= DateTime.UtcNow)
+                // Sử dụng timezone Việt Nam để so sánh
+                var vietnamTimeZone = TimeZoneInfo.FindSystemTimeZoneById("SE Asia Standard Time");
+                var nowVietnam = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, vietnamTimeZone);
+                
+                if (model.NgayDangDuKien.Value <= nowVietnam)
                 {
                     ModelState.AddModelError(nameof(model.NgayDangDuKien), "Thời gian lên lịch phải trong tương lai.");
                 }
@@ -170,6 +313,27 @@ namespace WEB_CV.Areas.Admin.Controllers
                     await LoadDropdowns();
                     return View(model);
                 }
+            }
+
+            // Lưu video (nếu có file)
+            if (VideoFile?.Length > 0)
+            {
+                try 
+                { 
+                    model.VideoFile = await SaveVideoAsync(VideoFile);
+                    model.VideoType = "file";
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError(string.Empty, $"Upload video lỗi: {ex.Message}");
+                    await LoadDropdowns();
+                    return View(model);
+                }
+            }
+            else if (!string.IsNullOrEmpty(model.VideoUrl) && !string.IsNullOrEmpty(model.VideoType))
+            {
+                // Chuyển đổi URL thành embed URL
+                model.VideoUrl = ConvertToEmbedUrl(model.VideoUrl, model.VideoType);
             }
 
             try
@@ -210,10 +374,11 @@ namespace WEB_CV.Areas.Admin.Controllers
         // POST: /Admin/BaiViet/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [RequestSizeLimit(100 * 1024 * 1024)] // 100MB
         public async Task<IActionResult> Edit(
             int id,
-            [Bind("Id,TieuDe,TomTat,NoiDung,ChuyenMucId,TacGiaId,NgayDang,AnhTieuDeAlt")] BaiViet model,
-            IFormFile? AnhTieuDeFile, bool? removeThumb)
+            [Bind("Id,TieuDe,TomTat,NoiDung,ChuyenMucId,TacGiaId,NgayDang,AnhTieuDeAlt,TrangThai,NgayDangDuKien,VideoFile,VideoAlt,VideoUrl,VideoType")] BaiViet model,
+            IFormFile? AnhTieuDeFile, IFormFile? VideoFile, bool? removeThumb, bool? removeVideo)
         {
             if (id != model.Id) return BadRequest();
 
@@ -224,6 +389,19 @@ namespace WEB_CV.Areas.Admin.Controllers
                 ModelState.AddModelError(nameof(model.ChuyenMucId), "Vui lòng chọn chuyên mục.");
             if (model.TacGiaId <= 0)
                 ModelState.AddModelError(nameof(model.TacGiaId), "Vui lòng chọn tác giả.");
+
+            // Xử lý scheduled publishing
+            if (model.TrangThai == 2 && model.NgayDangDuKien.HasValue) // Scheduled
+            {
+                // Sử dụng timezone Việt Nam để so sánh
+                var vietnamTimeZone = TimeZoneInfo.FindSystemTimeZoneById("SE Asia Standard Time");
+                var nowVietnam = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, vietnamTimeZone);
+                
+                if (model.NgayDangDuKien.Value <= nowVietnam)
+                {
+                    ModelState.AddModelError(nameof(model.NgayDangDuKien), "Thời gian lên lịch phải trong tương lai.");
+                }
+            }
 
             if (!ModelState.IsValid)
             {
@@ -241,6 +419,8 @@ namespace WEB_CV.Areas.Admin.Controllers
             bv.TacGiaId     = model.TacGiaId;
             bv.NgayDang     = model.NgayDang;
             bv.AnhTieuDeAlt = model.AnhTieuDeAlt;
+            bv.TrangThai    = model.TrangThai;
+            bv.NgayDangDuKien = model.NgayDangDuKien;
 
             // xử lý ảnh: xoá / thay / giữ nguyên
             if (removeThumb == true && !string.IsNullOrEmpty(bv.AnhTieuDe))
@@ -260,6 +440,49 @@ namespace WEB_CV.Areas.Admin.Controllers
                     ModelState.AddModelError(string.Empty, $"Upload ảnh lỗi: {ex.Message}");
                     await LoadDropdowns();
                     return View(model);
+                }
+            }
+
+            // xử lý video: xoá / thay / giữ nguyên
+            if (removeVideo == true && !string.IsNullOrEmpty(bv.VideoFile))
+            {
+                TryDeletePhysical(bv.VideoFile);
+                bv.VideoFile = null;
+                bv.VideoType = null;
+            }
+            else if (VideoFile?.Length > 0)
+            {
+                // thay video mới -> xoá file cũ (nếu có), rồi lưu mới
+                if (!string.IsNullOrEmpty(bv.VideoFile))
+                    TryDeletePhysical(bv.VideoFile);
+
+                try 
+                { 
+                    bv.VideoFile = await SaveVideoAsync(VideoFile);
+                    bv.VideoType = "file";
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError(string.Empty, $"Upload video lỗi: {ex.Message}");
+                    await LoadDropdowns();
+                    return View(model);
+                }
+            }
+            else
+            {
+                // Cập nhật thông tin video từ form (có thể là URL YouTube/Vimeo)
+                bv.VideoFile = model.VideoFile;
+                bv.VideoAlt = model.VideoAlt;
+                bv.VideoType = model.VideoType;
+                
+                // Chuyển đổi URL thành embed URL nếu cần
+                if (!string.IsNullOrEmpty(model.VideoUrl) && !string.IsNullOrEmpty(model.VideoType))
+                {
+                    bv.VideoUrl = ConvertToEmbedUrl(model.VideoUrl, model.VideoType);
+                }
+                else
+                {
+                    bv.VideoUrl = model.VideoUrl;
                 }
             }
 
