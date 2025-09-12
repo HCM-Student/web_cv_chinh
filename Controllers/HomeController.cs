@@ -206,7 +206,7 @@ namespace WEB_CV.Controllers
                 .Include(b => b.ChuyenMuc)
                 .Where(b => b.Id != post.Id)
                 .OrderByDescending(b => b.NgayDang)
-                .Take(5)
+                .Take(12)
                 .ToListAsync();
 
             // Tạo ViewModel để truyền dữ liệu

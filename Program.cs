@@ -45,6 +45,11 @@ builder.Services.AddScoped<ICaiDatService, CaiDatService>();
 builder.Services.AddScoped<ISEOAnalysisService, SEOAnalysisService>();
 builder.Services.AddScoped<IScheduledPublishingService, ScheduledPublishingService>();
 
+// AI Services
+builder.Services.AddHttpClient<IAIWritingService, AIWritingService>();
+builder.Services.AddScoped<IAIWritingService, AIWritingService>();
+builder.Services.AddHttpContextAccessor();
+
 // Background services
 builder.Services.AddHostedService<ScheduledPublishingBackgroundService>();
 

@@ -1,0 +1,392 @@
+<!-- Gemini AI Assistant Panel -->
+<div class="form-section card shadow-sm mb-4" id="geminiAssistantPanel">
+    <div class="card-header bg-gradient text-white d-flex align-items-center gap-2" style="background: linear-gradient(135deg, #4285f4 0%, #34a853 100%);">
+        <span class="section-chip"><i class="fab fa-google"></i></span>
+        <h5 class="mb-0">Gemini AI Assistant</h5>
+        <span class="badge bg-light text-dark ms-2" id="geminiStatusBadge">
+            <i class="fas fa-circle text-success me-1"></i>Gemini Active
+        </span>
+        <div class="ms-auto">
+            <button type="button" class="btn btn-sm btn-outline-light" id="toggleGeminiPanel">
+                <i class="fas fa-chevron-up"></i>
+            </button>
+        </div>
+    </div>
+    
+    <div class="card-body" id="geminiAssistantContent">
+        <div class="row">
+            <!-- Tạo nội dung với Gemini -->
+            <div class="col-md-6">
+                <div class="gemini-section">
+                    <h6 class="text-primary mb-3">
+                        <i class="fas fa-magic me-2"></i>Tạo nội dung với Gemini
+                    </h6>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Chủ đề bài viết *</label>
+                        <input type="text" class="form-control" id="geminiTopic" placeholder="Nhập chủ đề để Gemini tạo nội dung">
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label class="form-label">Từ khóa chính</label>
+                        <input type="text" class="form-control" id="geminiKeywords" placeholder="Từ khóa 1, từ khóa 2, từ khóa 3">
+                    </div>
+                    
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label class="form-label">Phong cách</label>
+                            <select class="form-select" id="geminiStyle">
+                                <option value="professional">Chuyên nghiệp</option>
+                                <option value="casual">Thân thiện</option>
+                                <option value="academic">Học thuật</option>
+                                <option value="creative">Sáng tạo</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Số từ</label>
+                            <select class="form-select" id="geminiWordCount">
+                                <option value="300">300 từ (Ngắn)</option>
+                                <option value="500" selected>500 từ (Trung bình)</option>
+                                <option value="800">800 từ (Dài)</option>
+                                <option value="1000">1000+ từ (Rất dài)</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <button type="button" class="btn btn-primary w-100" id="generateWithGemini">
+                        <i class="fab fa-google me-2"></i>Tạo nội dung với Gemini
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Phân tích SEO với Gemini -->
+            <div class="col-md-6">
+                <div class="gemini-section">
+                    <h6 class="text-success mb-3">
+                        <i class="fas fa-chart-line me-2"></i>Phân tích SEO với Gemini
+                    </h6>
+                    
+                    <div class="seo-preview mb-3">
+                        <div class="d-flex align-items-center mb-2">
+                            <span class="badge bg-secondary me-2">SEO Score</span>
+                            <span class="h4 mb-0 text-primary" id="seoScore">--</span>
+                            <span class="text-muted ms-2">/100</span>
+                        </div>
+                        
+                        <div class="seo-metrics">
+                            <div class="metric-item d-flex justify-content-between">
+                                <span>Tiêu đề:</span>
+                                <span id="titleLength">0 ký tự</span>
+                            </div>
+                            <div class="metric-item d-flex justify-content-between">
+                                <span>Nội dung:</span>
+                                <span id="contentLength">0 từ</span>
+                            </div>
+                            <div class="metric-item d-flex justify-content-between">
+                                <span>Từ khóa:</span>
+                                <span id="keywordDensity">0%</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button type="button" class="btn btn-success w-100" id="analyzeWithGemini">
+                        <i class="fas fa-search me-2"></i>Phân tích SEO với Gemini
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Kết quả từ Gemini -->
+        <div class="gemini-results mt-4" id="geminiResults" style="display: none;">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center">
+                    <h6 class="mb-0">Kết quả từ Gemini AI</h6>
+                    <div>
+                        <button type="button" class="btn btn-sm btn-outline-primary me-2" id="copyGeminiContent">
+                            <i class="fas fa-copy me-1"></i>Sao chép
+                        </button>
+                        <button type="button" class="btn btn-sm btn-outline-success" id="useGeminiContent">
+                            <i class="fas fa-check me-1"></i>Sử dụng nội dung
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div id="geminiContentDisplay"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.gemini-section {
+    background: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    border: 1px solid #e9ecef;
+}
+
+.seo-preview {
+    background: white;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid #dee2e6;
+}
+
+.metric-item {
+    padding: 0.25rem 0;
+    border-bottom: 1px solid #f1f3f4;
+}
+
+.metric-item:last-child {
+    border-bottom: none;
+}
+
+.gemini-results {
+    animation: fadeIn 0.3s ease-in;
+}
+
+@@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+#geminiStatusBadge {
+    animation: pulse 2s infinite;
+}
+
+@@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.7; }
+    100% { opacity: 1; }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const toggleBtn = document.getElementById('toggleGeminiPanel');
+    const geminiContent = document.getElementById('geminiAssistantContent');
+    const generateBtn = document.getElementById('generateWithGemini');
+    const analyzeBtn = document.getElementById('analyzeWithGemini');
+    const useContentBtn = document.getElementById('useGeminiContent');
+    const copyBtn = document.getElementById('copyGeminiContent');
+    
+    // Toggle panel
+    toggleBtn.addEventListener('click', function() {
+        const isVisible = geminiContent.style.display !== 'none';
+        geminiContent.style.display = isVisible ? 'none' : 'block';
+        toggleBtn.querySelector('i').className = isVisible ? 'fas fa-chevron-down' : 'fas fa-chevron-up';
+    });
+    
+    // Generate content with Gemini
+    generateBtn.addEventListener('click', async function() {
+        const topic = document.getElementById('geminiTopic').value.trim();
+        const keywords = document.getElementById('geminiKeywords').value.trim();
+        const style = document.getElementById('geminiStyle').value;
+        const wordCount = parseInt(document.getElementById('geminiWordCount').value);
+        
+        if (!topic) {
+            alert('Vui lòng nhập chủ đề bài viết');
+            return;
+        }
+        
+        generateBtn.disabled = true;
+        generateBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Đang tạo với Gemini...';
+        
+        try {
+            const response = await fetch('/api/ai/generate-content', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    topic: topic,
+                    keywords: keywords ? keywords.split(',').map(k => k.trim()) : [],
+                    style: style,
+                    wordCount: wordCount,
+                    language: 'vi',
+                    tone: 'professional'
+                })
+            });
+            
+            const result = await response.json();
+            
+            if (result.success) {
+                displayGeminiContent(result.data);
+                updateStats('generated', 1);
+            } else {
+                alert('Lỗi: ' + result.message);
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            alert('Có lỗi xảy ra khi tạo nội dung với Gemini');
+        } finally {
+            generateBtn.disabled = false;
+            generateBtn.innerHTML = '<i class="fab fa-google me-2"></i>Tạo nội dung với Gemini';
+        }
+    });
+    
+    // Analyze SEO with Gemini
+    analyzeBtn.addEventListener('click', async function() {
+        const title = document.querySelector('input[name="TieuDe"]')?.value || '';
+        const content = tinymce.get('NoiDung')?.getContent() || '';
+        
+        if (!title && !content) {
+            alert('Vui lòng nhập tiêu đề hoặc nội dung để phân tích');
+            return;
+        }
+        
+        analyzeBtn.disabled = true;
+        analyzeBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Đang phân tích với Gemini...';
+        
+        try {
+            const response = await fetch('/api/ai/analyze-seo', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    title: title,
+                    content: content,
+                    keywords: [],
+                    targetKeyword: ''
+                })
+            });
+            
+            const result = await response.json();
+            
+            if (result.success) {
+                updateSEOAnalysis(result.data);
+                updateStats('analyzed', 1);
+            } else {
+                alert('Lỗi: ' + result.message);
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            alert('Có lỗi xảy ra khi phân tích SEO với Gemini');
+        } finally {
+            analyzeBtn.disabled = false;
+            analyzeBtn.innerHTML = '<i class="fas fa-search me-2"></i>Phân tích SEO với Gemini';
+        }
+    });
+    
+    // Use Gemini content
+    useContentBtn.addEventListener('click', function() {
+        const data = window.geminiContentData;
+        if (data) {
+            // Fill form fields
+            if (data.title) {
+                const titleField = document.querySelector('input[name="TieuDe"]');
+                if (titleField) titleField.value = data.title;
+            }
+            
+            if (data.content) {
+                const contentEditor = tinymce.get('NoiDung');
+                if (contentEditor) contentEditor.setContent(data.content);
+            }
+            
+            if (data.summary) {
+                const summaryField = document.querySelector('textarea[name="TomTat"]');
+                if (summaryField) summaryField.value = data.summary;
+            }
+            
+            // Show success message
+            showToast('Đã áp dụng nội dung từ Gemini AI', 'success');
+            
+            // Hide results
+            document.getElementById('geminiResults').style.display = 'none';
+        }
+    });
+    
+    // Copy Gemini content
+    copyBtn.addEventListener('click', function() {
+        const data = window.geminiContentData;
+        if (data) {
+            const content = `Tiêu đề: ${data.title}\n\nTóm tắt: ${data.summary}\n\nNội dung:\n${data.content}`;
+            navigator.clipboard.writeText(content).then(() => {
+                showToast('Đã sao chép nội dung', 'success');
+            });
+        }
+    });
+    
+    function displayGeminiContent(data) {
+        window.geminiContentData = data;
+        
+        const display = document.getElementById('geminiContentDisplay');
+        display.innerHTML = `
+            <div class="mb-3">
+                <h6 class="text-primary">Tiêu đề:</h6>
+                <p class="mb-0">${data.title}</p>
+            </div>
+            <div class="mb-3">
+                <h6 class="text-primary">Tóm tắt:</h6>
+                <p class="mb-0">${data.summary}</p>
+            </div>
+            <div class="mb-3">
+                <h6 class="text-primary">Từ khóa:</h6>
+                <div class="d-flex flex-wrap gap-1">
+                    ${data.keywords.map(k => `<span class="badge bg-secondary">${k}</span>`).join('')}
+                </div>
+            </div>
+            <div>
+                <h6 class="text-primary">Nội dung:</h6>
+                <div class="border p-3 rounded" style="max-height: 300px; overflow-y: auto;">
+                    ${data.content.replace(/\n/g, '<br>')}
+                </div>
+            </div>
+        `;
+        
+        document.getElementById('geminiResults').style.display = 'block';
+    }
+    
+    function updateSEOAnalysis(data) {
+        document.getElementById('seoScore').textContent = data.score || 0;
+        document.getElementById('titleLength').textContent = `${data.analysis?.titleLength || 0} ký tự`;
+        document.getElementById('contentLength').textContent = `${data.analysis?.contentLength || 0} từ`;
+        document.getElementById('keywordDensity').textContent = `${data.analysis?.keywordDensity || 0}%`;
+    }
+    
+    function updateStats(type, value) {
+        // Update stats if needed
+        console.log(`Updated stats: ${type} = ${value}`);
+    }
+    
+    function showToast(message, type = 'info') {
+        const toast = document.createElement('div');
+        toast.className = `alert alert-${type} alert-dismissible fade show position-fixed`;
+        toast.style.cssText = 'top: 20px; right: 20px; z-index: 9999; min-width: 300px;';
+        toast.innerHTML = `
+            ${message}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        `;
+        document.body.appendChild(toast);
+        
+        setTimeout(() => {
+            toast.remove();
+        }, 5000);
+    }
+    
+    // Check Gemini status
+    checkGeminiStatus();
+});
+
+async function checkGeminiStatus() {
+    try {
+        const response = await fetch('/api/ai/status');
+        const data = await response.json();
+        
+        const badge = document.getElementById('geminiStatusBadge');
+        if (badge) {
+            if (data.provider === 'gemini' && data.hasApiKey) {
+                badge.innerHTML = '<i class="fas fa-circle text-success me-1"></i>Gemini Active';
+                badge.className = 'badge bg-success text-white ms-2';
+            } else {
+                badge.innerHTML = '<i class="fas fa-circle text-warning me-1"></i>API Key Required';
+                badge.className = 'badge bg-warning text-dark ms-2';
+            }
+        }
+    } catch (error) {
+        console.log('Could not check Gemini status:', error);
+    }
+}
+</script>
