@@ -331,6 +331,117 @@
   margin:0 .9rem;
 }
 
+/* ============================
+   ADMIN BUTTON FIX
+   ============================ */
+
+/* Fix icon trong nút admin bị lỗi */
+.admin-button {
+  position: relative;
+  overflow: hidden;
+}
+
+.admin-button::before {
+  content: none !important;
+}
+
+.admin-button::after {
+  content: none !important;
+}
+
+/* Đảm bảo icon Font Awesome hiển thị đúng */
+.admin-button i,
+.admin-button .fas,
+.admin-button .fa-solid {
+  display: inline-block !important;
+  font-style: normal !important;
+  font-variant: normal !important;
+  text-rendering: auto !important;
+  -webkit-font-smoothing: antialiased !important;
+  -moz-osx-font-smoothing: grayscale !important;
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+/* Fix cho dropdown items */
+.dropdown-item i,
+.dropdown-item .fas,
+.dropdown-item .fa-solid {
+  display: inline-block !important;
+  font-style: normal !important;
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+  width: auto !important;
+  height: auto !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Fix cho language button */
+.btn-light i,
+.btn-light .fas,
+.btn-light .fa-solid {
+  display: inline-block !important;
+  font-style: normal !important;
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+/* Fix cho avatar image */
+.avatar-img {
+  width: 32px !important;
+  height: 32px !important;
+  border-radius: 50% !important;
+  object-fit: cover !important;
+  display: block !important;
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Fix cho admin button container */
+.avatar-chip {
+  position: relative;
+  overflow: visible !important;
+}
+
+.avatar-chip::before,
+.avatar-chip::after {
+  content: none !important;
+}
+
+/* Đảm bảo không có pseudo-element nào can thiệp */
+.admin-button *::before,
+.admin-button *::after {
+  content: none !important;
+}
+
+/* Fix cho tất cả icon trong header */
+.navbar i,
+.navbar .fas,
+.navbar .fa-solid,
+.navbar .fa-brands {
+  display: inline-block !important;
+  font-style: normal !important;
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+  width: auto !important;
+  height: auto !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
 
 
 

@@ -39,13 +39,16 @@
     right: 0;
     bottom: 0;
     overflow: hidden;
-    z-index: 2;
+    z-index: 5;
+    pointer-events: none;
 }
 
 .floating-icon {
     position: absolute;
-    color: rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.15);
     animation: float 6s ease-in-out infinite;
+    display: block;
+    opacity: 1;
 }
 
 .floating-elements .floating-icon:nth-child(1) { top: 10%; left: 10%; animation-delay: 0s; }
@@ -182,13 +185,13 @@
     width: 50px;
     height: 50px;
     background: linear-gradient(135deg, #1e3a8a, #3b82f6);
-    border-radius: 12px;
+   
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
-    font-size: 1.2rem;
-    margin-right: 1rem;
+    
+    
+   
     flex-shrink: 0;
 }
 
@@ -244,18 +247,21 @@
 
 .contact-method:hover {
     transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(102, 126, 234, 0.4);
 }
 
 .method-icon {
     width: 72px;
     height: 72px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: rgba(255, 255, 255, 0.2);
     border-radius: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
     margin: 0 auto;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.3);
 }
 
 .method-image {
@@ -271,35 +277,56 @@
 
 .contact-method {
     text-align: center;
-    background-color: #fff;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     padding: 1.5rem;
     border-radius: 16px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
     height: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     min-height: 320px;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Different gradients for each contact method */
+.contact-method:nth-child(1) {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.contact-method:nth-child(2) {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+.contact-method:nth-child(3) {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+}
+
+.contact-method:nth-child(4) {
+    background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
 }
 
 .contact-method h5 {
     font-size: 1.25rem;
     font-weight: 600;
-    color: #2d3748;
+    color: white;
     margin: 1.5rem 0 1rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .contact-method p {
-    color: #718096;
+    color: rgba(255, 255, 255, 0.9);
     margin-bottom: 2rem;
     font-size: 0.95rem;
     flex-grow: 1;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 
 .contact-method .btn {
-    color: #0d6efd;
-    background-color: white;
-    border: 1px solid #0d6efd;
+    color: white;
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.3);
     padding: 0.75rem 1.5rem;
     border-radius: 9999px;
     font-size: 0.95rem;
@@ -307,15 +334,18 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.2s ease;
+    transition: all 0.3s ease;
     text-decoration: none;
     margin-top: auto;
+    backdrop-filter: blur(10px);
 }
 
 .contact-method .btn:hover {
-    background-color: #0d6efd;
+    background: rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 255, 255, 0.5);
     color: white;
     transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
 }
 
 .contact-method h5 {
@@ -377,7 +407,12 @@
     }
     
     .floating-elements {
-        display: none;
+        display: block;
+    }
+    
+    .floating-icon {
+        font-size: 1.5rem !important;
+        opacity: 0.8;
     }
 }
 

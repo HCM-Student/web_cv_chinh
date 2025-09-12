@@ -76,7 +76,10 @@
                                     <i class="fas fa-clock me-1"></i>
                                     @item.NgayGui.ToString("dd/MM/yyyy HH:mm")
                                 </span>
-                                <span class="contact-id">#@item.Id</span>
+                                <div class="contact-status">
+                                    <span class="status-badge status-@(item.TrangThai.Replace(" ", "-").ToLower())">@item.TrangThai</span>
+                                    <span class="contact-id">#@item.Id</span>
+                                </div>
                             </div>
                         </div>
                         <div class="contact-actions">
@@ -440,6 +443,42 @@
     display: flex;
     align-items: center;
     font-weight: 500;
+}
+
+.contact-status {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.5rem;
+}
+
+.status-badge {
+    padding: 0.3rem 0.8rem;
+    border-radius: 15px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.status-chưa-đọc {
+    background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+    color: white;
+}
+
+.status-đang-xử-lý {
+    background: linear-gradient(135deg, #f39c12, #e67e22);
+    color: white;
+}
+
+.status-đã-xử-lý {
+    background: linear-gradient(135deg, #27ae60, #2ecc71);
+    color: white;
+}
+
+.status-hoàn-thành {
+    background: linear-gradient(135deg, #4f46e5, #06b6d4);
+    color: white;
 }
 
 .contact-id {

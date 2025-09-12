@@ -25,6 +25,8 @@ namespace WEB_CV.Models
 
         public DateTime NgayTao { get; set; } = DateTime.UtcNow;
 
+        public string? Avatar { get; set; }
+
         // ===== THÊM MỚI: danh sách bài viết do user này làm tác giả =====
         public virtual ICollection<BaiViet> BaiViets { get; set; } = new HashSet<BaiViet>();
     }

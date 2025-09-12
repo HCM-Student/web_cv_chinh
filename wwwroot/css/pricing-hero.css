@@ -36,13 +36,16 @@
     right: 0;
     bottom: 0;
     overflow: hidden;
-    z-index: 2;
+    z-index: 5;
+    pointer-events: none;
 }
 
 .floating-icon {
     position: absolute;
-    color: rgba(255, 255, 255, 0.1);
+    color: rgba(255, 255, 255, 0.15);
     animation: float 6s ease-in-out infinite;
+    display: block;
+    opacity: 1;
 }
 
 .floating-elements .floating-icon:nth-child(1) { top: 10%; left: 10%; animation-delay: 0s; }
@@ -156,6 +159,11 @@
     }
     
     .floating-elements {
-        display: none;
+        display: block;
+    }
+    
+    .floating-icon {
+        font-size: 1.5rem !important;
+        opacity: 0.8;
     }
 }

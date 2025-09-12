@@ -1,0 +1,270 @@
+@model WEB_CV.Areas.Admin.Controllers.ProfileEditViewModel
+@{
+    ViewData["Title"] = "Chỉnh sửa thông tin";
+}
+
+<div class="admin-profile-edit-page">
+    @if (TempData["msg"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show">
+            @TempData["msg"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    <!-- Header Section -->
+    <div class="page-header mb-4">
+        <div class="d-flex justify-content-between align-items-center">
+            <div>
+                <h1 class="page-title">
+                    <i class="fas fa-edit text-primary me-2"></i>
+                    Chỉnh sửa thông tin
+                </h1>
+                <p class="page-subtitle text-muted">Cập nhật thông tin cá nhân của bạn</p>
+            </div>
+            <div class="btn-group">
+                <a class="btn btn-outline-secondary btn-lg" asp-action="Index">
+                    <i class="fas fa-arrow-left me-2"></i>Quay lại
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="edit-form-card">
+                <form asp-action="Edit" method="post">
+                    <div class="form-header">
+                        <h4 class="form-title">
+                            <i class="fas fa-user-edit me-2"></i>Thông tin cá nhân
+                        </h4>
+                    </div>
+                    
+                    <div class="form-body">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="HoTen" class="form-label">Họ và tên *</label>
+                                    <input asp-for="HoTen" class="form-control" placeholder="Nhập họ và tên" required>
+                                    <span asp-validation-for="HoTen" class="text-danger"></span>
+                                </div>
+                            </div>
+                            
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="Email" class="form-label">Email *</label>
+                                    <input asp-for="Email" type="email" class="form-control" placeholder="Nhập email" required>
+                                    <span asp-validation-for="Email" class="text-danger"></span>
+                                </div>
+                            </div>
+                            
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label class="form-label">Vai trò</label>
+                                    <input type="text" class="form-control" value="@(string.IsNullOrEmpty(Model.VaiTro) ? "Người dùng" : Model.VaiTro)" readonly>
+                                    <small class="form-text text-muted">Vai trò không thể thay đổi</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-footer">
+                        <button type="submit" class="btn btn-primary btn-lg">
+                            <i class="fas fa-save me-2"></i>Lưu thay đổi
+                        </button>
+                        <a asp-action="Index" class="btn btn-outline-secondary btn-lg">
+                            <i class="fas fa-times me-2"></i>Hủy
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.admin-profile-edit-page {
+    padding: 2rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    position: relative;
+}
+
+.admin-profile-edit-page::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+    opacity: 0.3;
+    pointer-events: none;
+}
+
+.page-header {
+    margin-bottom: 3rem;
+    position: relative;
+    z-index: 2;
+}
+
+.page-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin: 0;
+    color: white;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.page-subtitle {
+    font-size: 1.2rem;
+    margin: 0.5rem 0 0 0;
+    color: rgba(255,255,255,0.9);
+}
+
+.edit-form-card {
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(20px);
+    border-radius: 24px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    position: relative;
+    z-index: 2;
+    overflow: hidden;
+}
+
+.form-header {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    padding: 2rem;
+    text-align: center;
+}
+
+.form-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.form-body {
+    padding: 2rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-label {
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.form-control {
+    border: 2px solid #e9ecef;
+    border-radius: 12px;
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background: white;
+}
+
+.form-control:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+    background: white;
+}
+
+.form-control[readonly] {
+    background-color: #f8f9fa;
+    border-color: #e9ecef;
+}
+
+.form-text {
+    font-size: 0.85rem;
+    margin-top: 0.25rem;
+}
+
+.form-footer {
+    padding: 2rem;
+    background: #f8f9fa;
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.btn {
+    border-radius: 12px;
+    font-weight: 600;
+    padding: 0.75rem 2rem;
+    transition: all 0.3s ease;
+    border: none;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+    background: linear-gradient(135deg, #5a6fd8, #6a4190);
+}
+
+.btn-outline-secondary {
+    border: 2px solid #6c757d;
+    color: #6c757d;
+}
+
+.btn-outline-secondary:hover {
+    background: #6c757d;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(108, 117, 125, 0.3);
+}
+
+.text-danger {
+    font-size: 0.85rem;
+    margin-top: 0.25rem;
+    display: block;
+}
+
+/* Responsive */
+@@media (max-width: 768px) {
+    .admin-profile-edit-page {
+        padding: 1rem;
+    }
+    
+    .edit-form-card {
+        margin: 0;
+    }
+    
+    .form-header,
+    .form-body,
+    .form-footer {
+        padding: 1.5rem;
+    }
+    
+    .form-footer {
+        flex-direction: column;
+    }
+    
+    .btn {
+        width: 100%;
+    }
+    
+    .page-title {
+        font-size: 2rem;
+    }
+}
+</style>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

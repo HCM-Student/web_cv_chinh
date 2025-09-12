@@ -4,6 +4,35 @@
     ViewData["Title"] = "Quản lý Người dùng";
 }
 
+<script>
+// EMERGENCY FIX - Run immediately to remove black screen
+(function() {
+    // Remove all modal backdrops immediately
+    const backdrops = document.querySelectorAll('.modal-backdrop');
+    backdrops.forEach(backdrop => {
+        backdrop.remove();
+        backdrop.style.display = 'none';
+        backdrop.style.visibility = 'hidden';
+    });
+    
+    // Remove modal-open class from body
+    document.body.classList.remove('modal-open');
+    
+    // Reset body styles
+    document.body.style.paddingRight = '';
+    document.body.style.overflow = 'auto';
+    document.body.style.position = 'static';
+    
+    // Force remove any blocking elements
+    const blockingElements = document.querySelectorAll('[style*="position: fixed"][style*="z-index"]');
+    blockingElements.forEach(el => {
+        if (el.style.zIndex > 1000) {
+            el.remove();
+        }
+    });
+})();
+</script>
+
 <div class="admin-page">
     @if (TempData["SuccessMessage"] != null)
     {
@@ -24,10 +53,13 @@
                 </h1>
                 <p class="page-subtitle text-muted">Quản lý tài khoản và quyền hạn người dùng</p>
             </div>
-            <div>
+            <div class="btn-group">
                 <a class="btn btn-primary btn-lg" asp-action="Create">
                     <i class="fas fa-plus me-2"></i>Thêm người dùng
                 </a>
+                <button class="btn btn-warning btn-lg" onclick="cleanupUsers()">
+                    <i class="fas fa-broom me-2"></i>Dọn dẹp tài khoản
+                </button>
             </div>
         </div>
     </div>
@@ -156,7 +188,14 @@
                                 <td>
                                     <div class="d-flex align-items-center">
                                         <div class="avatar me-2">
-                                            <i class="fas fa-user-circle text-muted"></i>
+                                            @if (!string.IsNullOrEmpty(item.Avatar))
+                                            {
+                                                <img src="@item.Avatar" alt="Avatar" class="avatar-img">
+                                            }
+                                            else
+                                            {
+                                                <i class="fas fa-user-circle text-muted"></i>
+                                            }
                                         </div>
                                         <div>
                                             <strong>@item.HoTen</strong>
@@ -199,15 +238,24 @@
                                 </td>
                                 <td class="text-center">
                                     <div class="btn-group" role="group">
-                                        <a class="btn btn-sm btn-outline-info" asp-action="Details" asp-route-id="@item.Id" title="Xem chi tiết">
-                                            <i class="fas fa-eye"></i>
+                                        <a class="btn btn-sm btn-outline-info" asp-action="ViewProfile" asp-route-id="@item.Id" title="Xem Profile">
+                                            <i class="fas fa-user-circle"></i>
                                         </a>
                                         <a class="btn btn-sm btn-outline-primary" asp-action="Edit" asp-route-id="@item.Id" title="Chỉnh sửa">
                                             <i class="fas fa-edit"></i>
                                         </a>
-                                        <a class="btn btn-sm btn-outline-danger" asp-action="Delete" asp-route-id="@item.Id" title="Xóa">
-                                            <i class="fas fa-trash"></i>
-                                        </a>
+                                        @if (item.VaiTro != "Admin")
+                                        {
+                                            <button class="btn btn-sm btn-outline-danger" onclick="confirmDelete(@item.Id, '@item.HoTen')" title="Xóa tài khoản">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
+                                        }
+                                        else
+                                        {
+                                            <button class="btn btn-sm btn-outline-secondary" disabled title="Không thể xóa Admin">
+                                                <i class="fas fa-shield-alt"></i>
+                                            </button>
+                                        }
                                     </div>
                                 </td>
                             </tr>
@@ -219,12 +267,83 @@
     </div>
 </div>
 
+<!-- Delete Confirmation Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <i class="fas fa-exclamation-triangle text-warning me-2"></i>Xác nhận xóa
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <p>Bạn có chắc chắn muốn xóa tài khoản <strong id="userNameToDelete"></strong>?</p>
+                <p class="text-danger small">Hành động này không thể hoàn tác!</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                <button type="button" class="btn btn-danger" id="confirmDeleteBtn">Xóa tài khoản</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <style>
 .admin-page {
     padding: 1.5rem;
     background: #f8f9fa;
     min-height: 100vh;
     max-width: 100%;
+}
+
+/* Modal styling */
+.modal {
+    z-index: 1050;
+}
+
+.modal-backdrop {
+    z-index: 1040;
+}
+
+/* FORCE REMOVE ALL STUCK BACKDROPS */
+body:not(.modal-open) .modal-backdrop {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+}
+
+/* Ensure no backdrop is stuck */
+.modal-backdrop.show {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+}
+
+.modal-backdrop.fade {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+}
+
+/* Force remove any overlay that might be blocking */
+.modal-backdrop {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+}
+
+/* Ensure body is not blocked */
+body {
+    overflow: auto !important;
+    position: static !important;
+}
+
+/* Remove any fixed overlays */
+[class*="backdrop"], [class*="overlay"] {
+    display: none !important;
+    visibility: hidden !important;
 }
 
 .container-fluid {
@@ -314,6 +433,19 @@
 
 .avatar {
     font-size: 1.5rem;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.avatar-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #e9ecef;
 }
 
 .btn-group .btn {
@@ -327,6 +459,8 @@
 </style>
 
 <script>
+let userIdToDelete = null;
+
 // Search and filter functionality
 document.getElementById('searchInput').addEventListener('keyup', filterTable);
 document.getElementById('roleFilter').addEventListener('change', filterTable);
@@ -366,4 +500,224 @@ function clearFilters() {
     document.getElementById('statusFilter').value = '';
     filterTable();
 }
+
+// Delete functionality
+function confirmDelete(id, name) {
+    userIdToDelete = id;
+    document.getElementById('userNameToDelete').textContent = name;
+    const modal = new bootstrap.Modal(document.getElementById('deleteModal'));
+    modal.show();
+}
+
+document.getElementById('confirmDeleteBtn').addEventListener('click', function() {
+    if (userIdToDelete) {
+        deleteUser(userIdToDelete);
+    }
+});
+
+function deleteUser(id) {
+    const formData = new FormData();
+    formData.append('id', id);
+    
+    // Get CSRF token
+    const token = document.querySelector('input[name="__RequestVerificationToken"]');
+    if (token) {
+        formData.append('__RequestVerificationToken', token.value);
+    }
+    
+    fetch('/Admin/NguoiDung/DeleteUser', {
+        method: 'POST',
+        body: formData,
+        headers: {
+            'X-Requested-With': 'XMLHttpRequest'
+        }
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+    })
+    .then(data => {
+        if (data.success) {
+            showAlert('success', data.message);
+            // Close modal properly
+            const modalElement = document.getElementById('deleteModal');
+            const modal = bootstrap.Modal.getInstance(modalElement);
+            if (modal) {
+                modal.hide();
+            } else {
+                // If no instance, create new one and hide
+                const newModal = new bootstrap.Modal(modalElement);
+                newModal.hide();
+            }
+            // Reload page after 2 seconds
+            setTimeout(() => {
+                location.reload();
+            }, 2000);
+        } else {
+            showAlert('error', data.message || 'Có lỗi xảy ra khi xóa người dùng');
+        }
+    })
+    .catch(error => {
+        console.error('Delete error:', error);
+        showAlert('error', 'Lỗi khi xóa người dùng: ' + error.message);
+    });
+}
+
+function showAlert(type, message) {
+    const alertClass = type === 'success' ? 'alert-success' : 'alert-danger';
+    const alertHtml = `
+        <div class="alert ${alertClass} alert-dismissible fade show" role="alert">
+            ${message}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    `;
+    
+    // Remove existing alerts
+    const existingAlerts = document.querySelectorAll('.alert');
+    existingAlerts.forEach(alert => alert.remove());
+    
+    // Add new alert
+    const container = document.querySelector('.admin-page');
+    container.insertAdjacentHTML('afterbegin', alertHtml);
+    
+    // Auto remove after 5 seconds
+    setTimeout(() => {
+        const alert = document.querySelector('.alert');
+        if (alert) {
+            alert.remove();
+        }
+    }, 5000);
+}
+
+// Cleanup users function
+function cleanupUsers() {
+    if (confirm('Bạn có chắc chắn muốn dọn dẹp tài khoản test? Tất cả tài khoản không phải Admin sẽ bị xóa!')) {
+        const formData = new FormData();
+        
+        // Get CSRF token
+        const token = document.querySelector('input[name="__RequestVerificationToken"]');
+        if (token) {
+            formData.append('__RequestVerificationToken', token.value);
+        }
+        
+        fetch('/Admin/NguoiDung/CleanupUsers', {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest'
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                showAlert('success', data.message);
+                // Reload page after 2 seconds
+                setTimeout(() => {
+                    location.reload();
+                }, 2000);
+            } else {
+                showAlert('error', data.message);
+            }
+        })
+        .catch(error => {
+            showAlert('error', 'Lỗi khi dọn dẹp: ' + error.message);
+        });
+    }
+}
+
+
+// Force remove any stuck modal backdrops immediately
+function removeStuckBackdrops() {
+    // Remove all modal backdrops
+    const backdrops = document.querySelectorAll('.modal-backdrop');
+    backdrops.forEach(backdrop => backdrop.remove());
+    
+    // Remove modal-open class from body
+    document.body.classList.remove('modal-open');
+    
+    // Reset body padding and overflow
+    document.body.style.paddingRight = '';
+    document.body.style.overflow = '';
+}
+
+// Modal event handlers
+document.addEventListener('DOMContentLoaded', function() {
+    // Remove any stuck backdrops immediately
+    removeStuckBackdrops();
+    
+    // Handle delete modal events
+    const deleteModal = document.getElementById('deleteModal');
+    if (deleteModal) {
+        deleteModal.addEventListener('hidden.bs.modal', function() {
+            // Reset any modal state if needed
+            userIdToDelete = null;
+            // Remove any stuck backdrops
+            removeStuckBackdrops();
+        });
+    }
+});
+
+// Also run on page load
+window.addEventListener('load', removeStuckBackdrops);
+</script>
+
+@Html.AntiForgeryToken()
+
+<script>
+// AGGRESSIVE FIX for stuck backdrop - run immediately and repeatedly
+(function() {
+    function forceRemoveBackdrop() {
+        // Remove all modal backdrops
+        const backdrops = document.querySelectorAll('.modal-backdrop');
+        backdrops.forEach(backdrop => {
+            backdrop.remove();
+            backdrop.style.display = 'none';
+        });
+        
+        // Remove modal-open class from body
+        document.body.classList.remove('modal-open');
+        
+        // Reset body padding and overflow
+        document.body.style.paddingRight = '';
+        document.body.style.overflow = '';
+        document.body.style.position = '';
+        
+        // Remove any overlay elements
+        const overlays = document.querySelectorAll('[class*="overlay"], [class*="backdrop"], [class*="modal"]');
+        overlays.forEach(overlay => {
+            if (overlay.classList.contains('modal-backdrop') || overlay.classList.contains('show')) {
+                overlay.remove();
+            }
+        });
+        
+        // Force remove any fixed positioned elements that might be blocking
+        const fixedElements = document.querySelectorAll('[style*="position: fixed"]');
+        fixedElements.forEach(el => {
+            if (el.classList.contains('modal-backdrop') || el.style.zIndex > 1000) {
+                el.remove();
+            }
+        });
+    }
+    
+    // Run immediately
+    forceRemoveBackdrop();
+    
+    // Run every 100ms for first 2 seconds
+    let attempts = 0;
+    const interval = setInterval(() => {
+        forceRemoveBackdrop();
+        attempts++;
+        if (attempts > 20) {
+            clearInterval(interval);
+        }
+    }, 100);
+    
+    // Also run on any click
+    document.addEventListener('click', forceRemoveBackdrop);
+    
+    // Run on any key press
+    document.addEventListener('keydown', forceRemoveBackdrop);
+})();
 </script>

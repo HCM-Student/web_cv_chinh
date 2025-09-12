@@ -166,7 +166,6 @@ namespace WEB_CV.Controllers
         public async Task<IActionResult> ChiTietBaiViet(int id, string? slug = null)
         {
             var post = await _db.BaiViets
-                .AsNoTracking()
                 .Include(b => b.ChuyenMuc)
                 .Include(b => b.TacGia)
                 .Include(b => b.BaiVietTags)
@@ -187,6 +186,10 @@ namespace WEB_CV.Controllers
             {
                 return RedirectToActionPermanent(nameof(ChiTietBaiViet), new { id, slug = expected });
             }
+
+            // Tăng lượt xem
+            post.LuotXem++;
+            await _db.SaveChangesAsync();
 
             // Lấy bài viết liên quan (cùng chuyên mục, khác bài viết hiện tại)
             var relatedPosts = await _db.BaiViets

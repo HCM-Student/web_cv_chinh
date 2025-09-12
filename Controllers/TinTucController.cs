@@ -35,6 +35,21 @@ public class TinTucController : Controller
             .FirstOrDefaultAsync(x => x.Id == id);
 
         if (bv == null) return NotFound();
+        
+        // Tăng lượt xem
+        bv.LuotXem++;
+        await _db.SaveChangesAsync();
+        
+        // Lấy bài viết liên quan
+        var relatedPosts = await _db.BaiViets
+            .Include(x => x.ChuyenMuc)
+            .Where(x => x.Id != id && x.ChuyenMucId == bv.ChuyenMucId)
+            .OrderByDescending(x => x.NgayDang)
+            .Take(4)
+            .ToListAsync();
+        
+        ViewBag.RelatedPosts = relatedPosts;
+        
         return View(bv);
     }
 }

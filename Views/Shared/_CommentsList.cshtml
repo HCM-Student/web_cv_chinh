@@ -1,0 +1,206 @@
+@model IEnumerable<WEB_CV.Models.BinhLuan>
+
+@if (Model.Any())
+{
+    <div class="comments-section">
+        <h5 class="comments-title">
+            <i class="fas fa-comments me-2"></i>
+            Bình luận (@Model.Count())
+        </h5>
+        
+        <div class="comments-list">
+            @foreach (var comment in Model)
+            {
+                <div class="comment-item">
+                    <div class="comment-avatar">
+                        @if (comment.NguoiDung != null && !string.IsNullOrEmpty(comment.NguoiDung.Avatar))
+                        {
+                            <img src="@comment.NguoiDung.Avatar" alt="Avatar" class="avatar-img">
+                        }
+                        else
+                        {
+                            <div class="avatar-placeholder">
+                                <i class="fas fa-user"></i>
+                            </div>
+                        }
+                    </div>
+                    
+                    <div class="comment-content">
+                        <div class="comment-header">
+                            <h6 class="comment-author">
+                                @if (comment.NguoiDung != null)
+                                {
+                                    @comment.NguoiDung.HoTen
+                                }
+                                else
+                                {
+                                    @comment.HoTen
+                                }
+                            </h6>
+                            <span class="comment-date">
+                                <i class="fas fa-clock me-1"></i>
+                                @comment.Ngay.ToString("dd/MM/yyyy HH:mm")
+                            </span>
+                        </div>
+                        
+                        <div class="comment-text">
+                            @comment.NoiDung
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+}
+else
+{
+    <div class="no-comments">
+        <div class="no-comments-icon">
+            <i class="fas fa-comment-slash"></i>
+        </div>
+        <p>Chưa có bình luận nào. Hãy là người đầu tiên bình luận!</p>
+    </div>
+}
+
+<style>
+.comments-section {
+    margin-top: 2rem;
+    padding: 2rem;
+    background: #f8f9fa;
+    border-radius: 15px;
+    border: 1px solid #e9ecef;
+}
+
+.comments-title {
+    color: #2c3e50;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #4f46e5;
+    display: flex;
+    align-items: center;
+}
+
+.comments-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.comment-item {
+    display: flex;
+    gap: 1rem;
+    padding: 1.5rem;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+    border-left: 4px solid #4f46e5;
+}
+
+.comment-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.comment-avatar {
+    flex-shrink: 0;
+    width: 50px;
+    height: 50px;
+    position: relative;
+}
+
+.avatar-img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #e9ecef;
+    max-width: 50px;
+    max-height: 50px;
+}
+
+.avatar-placeholder {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, #4f46e5, #06b6d4);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.2rem;
+}
+
+.comment-content {
+    flex: 1;
+    min-width: 0;
+}
+
+.comment-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+}
+
+.comment-author {
+    color: #2c3e50;
+    font-weight: 600;
+    margin: 0;
+    font-size: 1rem;
+}
+
+.comment-date {
+    color: #6c757d;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+}
+
+.comment-text {
+    color: #495057;
+    line-height: 1.6;
+    font-size: 0.95rem;
+    white-space: pre-wrap;
+}
+
+.no-comments {
+    text-align: center;
+    padding: 3rem 2rem;
+    color: #6c757d;
+}
+
+.no-comments-icon {
+    font-size: 3rem;
+    color: #adb5bd;
+    margin-bottom: 1rem;
+}
+
+.no-comments p {
+    margin: 0;
+    font-size: 1.1rem;
+}
+
+/* Responsive */
+@@media (max-width: 768px) {
+    .comments-section {
+        padding: 1.5rem;
+    }
+    
+    .comment-item {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+    
+    .comment-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+    
+    .comment-avatar {
+        align-self: flex-start;
+    }
+}
+</style>

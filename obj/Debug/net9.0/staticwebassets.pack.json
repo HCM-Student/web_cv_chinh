@@ -81,8 +81,20 @@
       "PackagePath": "staticwebassets\\img\\avatar.jpg"
     },
     {
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\img\\avatars\\avatar_1_20250911155225.png",
+      "PackagePath": "staticwebassets\\img\\avatars\\avatar_1_20250911155225.png"
+    },
+    {
       "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\img\\contact-hero.webp",
       "PackagePath": "staticwebassets\\img\\contact-hero.webp"
+    },
+    {
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\img\\default-avatar.png",
+      "PackagePath": "staticwebassets\\img\\default-avatar.png"
+    },
+    {
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\img\\default-avatar.svg",
+      "PackagePath": "staticwebassets\\img\\default-avatar.svg"
     },
     {
       "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\img\\hero\\hero-1.jpg",
@@ -483,6 +495,10 @@
     {
       "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\media\\posts\\cover\\ảnh 2 tlkl_67ae1a6dec.png",
       "PackagePath": "staticwebassets\\media\\posts\\cover\\ảnh 2 tlkl_67ae1a6dec.png"
+    },
+    {
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\uploads\\avatars\\2_a7f91986-4350-462e-a868-d52c393ace9f.png",
+      "PackagePath": "staticwebassets\\uploads\\avatars\\2_a7f91986-4350-462e-a868-d52c393ace9f.png"
     },
     {
       "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.build.web_cv.props",

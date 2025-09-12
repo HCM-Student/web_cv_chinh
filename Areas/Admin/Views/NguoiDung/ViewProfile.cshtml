@@ -1,0 +1,556 @@
+@model WEB_CV.Areas.Admin.Controllers.UserProfileViewModel
+@{
+    ViewData["Title"] = "Thông tin người dùng";
+}
+
+<div class="user-profile-page">
+    <!-- Header Section -->
+    <div class="page-header mb-4">
+        <div class="d-flex justify-content-between align-items-center">
+            <div>
+                <h1 class="page-title">
+                    <i class="fas fa-user-circle text-primary me-2"></i>
+                    Thông tin người dùng
+                </h1>
+                <p class="page-subtitle text-muted">Xem chi tiết thông tin người dùng</p>
+            </div>
+            <div class="btn-group">
+                <a class="btn btn-outline-secondary btn-lg" asp-action="Index">
+                    <i class="fas fa-arrow-left me-2"></i>Quay lại
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-4">
+        <!-- Profile Card -->
+        <div class="col-lg-4">
+            <div class="profile-card">
+                <div class="profile-header">
+                    <div class="avatar-container">
+                        <div class="avatar-wrapper">
+                            @if (!string.IsNullOrEmpty(Model.Avatar))
+                            {
+                                <img src="@Model.Avatar" alt="Avatar" class="avatar-img">
+                            }
+                            else
+                            {
+                                <div class="avatar-placeholder">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    <h3 class="profile-name">@Model.HoTen</h3>
+                    <p class="profile-role">
+                        <span class="badge @(Model.VaiTro == "Admin" ? "bg-danger" : "bg-primary")">
+                            @(string.IsNullOrEmpty(Model.VaiTro) ? "Người dùng" : Model.VaiTro)
+                        </span>
+                    </p>
+                    <p class="profile-status">
+                        <span class="badge @(Model.KichHoat ? "bg-success" : "bg-secondary")">
+                            @(Model.KichHoat ? "Đã kích hoạt" : "Chưa kích hoạt")
+                        </span>
+                    </p>
+                </div>
+
+                <div class="profile-stats">
+                    <div class="stat-item">
+                        <div class="stat-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="stat-content">
+                            <span class="stat-label">Email</span>
+                            <span class="stat-value">@Model.Email</span>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-icon">
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                        <div class="stat-content">
+                            <span class="stat-label">Ngày tham gia</span>
+                            <span class="stat-value">@Model.NgayTao.ToString("dd/MM/yyyy")</span>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-icon">
+                            <i class="fas fa-file-alt"></i>
+                        </div>
+                        <div class="stat-content">
+                            <span class="stat-label">Số bài viết</span>
+                            <span class="stat-value">@Model.SoBaiViet</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Profile Details -->
+        <div class="col-lg-8">
+            <div class="profile-details">
+                <!-- Personal Information -->
+                <div class="detail-section">
+                    <div class="section-header">
+                        <h4 class="section-title">
+                            <i class="fas fa-user me-2"></i>Thông tin cá nhân
+                        </h4>
+                    </div>
+                    <div class="section-content">
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <label class="info-label">Họ và tên</label>
+                                <span class="info-value">@Model.HoTen</span>
+                            </div>
+                            <div class="info-item">
+                                <label class="info-label">Email</label>
+                                <span class="info-value">@Model.Email</span>
+                            </div>
+                            <div class="info-item">
+                                <label class="info-label">Vai trò</label>
+                                <span class="info-value">
+                                    <span class="badge @(Model.VaiTro == "Admin" ? "bg-danger" : "bg-primary")">
+                                        @(string.IsNullOrEmpty(Model.VaiTro) ? "Người dùng" : Model.VaiTro)
+                                    </span>
+                                </span>
+                            </div>
+                            <div class="info-item">
+                                <label class="info-label">Trạng thái</label>
+                                <span class="info-value">
+                                    <span class="badge @(Model.KichHoat ? "bg-success" : "bg-secondary")">
+                                        @(Model.KichHoat ? "Đã kích hoạt" : "Chưa kích hoạt")
+                                    </span>
+                                </span>
+                            </div>
+                            <div class="info-item">
+                                <label class="info-label">Ngày tạo tài khoản</label>
+                                <span class="info-value">@Model.NgayTao.ToString("dd/MM/yyyy HH:mm")</span>
+                            </div>
+                            <div class="info-item">
+                                <label class="info-label">Số bài viết đã viết</label>
+                                <span class="info-value">@Model.SoBaiViet bài viết</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Actions -->
+                <div class="detail-section">
+                    <div class="section-header">
+                        <h4 class="section-title">
+                            <i class="fas fa-cogs me-2"></i>Thao tác
+                        </h4>
+                    </div>
+                    <div class="section-content">
+                        <div class="action-buttons">
+                            <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">
+                                <i class="fas fa-edit me-2"></i>Chỉnh sửa
+                            </a>
+                            @if (Model.VaiTro != "Admin")
+                            {
+                                <button class="btn btn-danger" onclick="confirmDelete(@Model.Id, '@Model.HoTen')">
+                                    <i class="fas fa-trash me-2"></i>Xóa tài khoản
+                                </button>
+                            }
+                            <a asp-action="Index" class="btn btn-outline-secondary">
+                                <i class="fas fa-list me-2"></i>Danh sách người dùng
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Delete Confirmation Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <i class="fas fa-exclamation-triangle text-warning me-2"></i>Xác nhận xóa
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <p>Bạn có chắc chắn muốn xóa tài khoản <strong id="userNameToDelete"></strong>?</p>
+                <p class="text-danger small">Hành động này không thể hoàn tác!</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                <button type="button" class="btn btn-danger" id="confirmDeleteBtn">Xóa tài khoản</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.user-profile-page {
+    padding: 2rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    position: relative;
+}
+
+.user-profile-page::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+    opacity: 0.3;
+    pointer-events: none;
+}
+
+.page-header {
+    margin-bottom: 3rem;
+    position: relative;
+    z-index: 2;
+}
+
+.page-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin: 0;
+    color: white;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.page-subtitle {
+    font-size: 1.2rem;
+    margin: 0.5rem 0 0 0;
+    color: rgba(255,255,255,0.9);
+}
+
+/* Profile Card */
+.profile-card {
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(20px);
+    border-radius: 24px;
+    padding: 2rem;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    position: relative;
+    z-index: 2;
+    text-align: center;
+}
+
+.profile-header {
+    margin-bottom: 2rem;
+}
+
+.avatar-container {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 1.5rem;
+}
+
+.avatar-wrapper {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    margin: 0 auto;
+}
+
+.avatar-img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid white;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+}
+
+.avatar-placeholder {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 3rem;
+    border: 4px solid white;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+}
+
+.profile-name {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #2c3e50;
+    margin: 0 0 0.5rem 0;
+}
+
+.profile-role, .profile-status {
+    margin: 0.5rem 0;
+}
+
+.profile-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.stat-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: #f8f9fa;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+}
+
+.stat-item:hover {
+    background: #e9ecef;
+    transform: translateX(5px);
+}
+
+.stat-icon {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.2rem;
+}
+
+.stat-content {
+    flex: 1;
+}
+
+.stat-label {
+    display: block;
+    font-size: 0.85rem;
+    color: #6c757d;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+}
+
+.stat-value {
+    display: block;
+    font-size: 1rem;
+    color: #2c3e50;
+    font-weight: 600;
+}
+
+/* Profile Details */
+.profile-details {
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(20px);
+    border-radius: 24px;
+    padding: 2rem;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    position: relative;
+    z-index: 2;
+}
+
+.detail-section {
+    margin-bottom: 2rem;
+}
+
+.detail-section:last-child {
+    margin-bottom: 0;
+}
+
+.section-header {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid rgba(102, 126, 234, 0.1);
+}
+
+.section-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #2c3e50;
+    margin: 0;
+    display: flex;
+    align-items: center;
+}
+
+.section-content {
+    padding: 0;
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.info-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.info-label {
+    font-size: 0.9rem;
+    color: #6c757d;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.info-value {
+    font-size: 1.1rem;
+    color: #2c3e50;
+    font-weight: 600;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.btn {
+    border-radius: 12px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+/* Modal Styles */
+.modal-content {
+    border-radius: 20px;
+    border: none;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+}
+
+.modal-header {
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    padding: 1.5rem 2rem;
+}
+
+.modal-title {
+    font-weight: 700;
+    color: #2c3e50;
+}
+
+.modal-body {
+    padding: 2rem;
+}
+
+.modal-footer {
+    border-top: 1px solid rgba(0,0,0,0.1);
+    padding: 1.5rem 2rem;
+}
+
+/* Responsive */
+@@media (max-width: 768px) {
+    .user-profile-page {
+        padding: 1rem;
+    }
+    
+    .profile-card {
+        padding: 1.5rem;
+    }
+    
+    .profile-details {
+        padding: 1.5rem;
+    }
+    
+    .info-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .action-buttons {
+        flex-direction: column;
+    }
+    
+    .page-title {
+        font-size: 2rem;
+    }
+}
+</style>
+
+<script>
+let userIdToDelete = null;
+
+function confirmDelete(id, name) {
+    userIdToDelete = id;
+    document.getElementById('userNameToDelete').textContent = name;
+    const modal = new bootstrap.Modal(document.getElementById('deleteModal'));
+    modal.show();
+}
+
+document.getElementById('confirmDeleteBtn').addEventListener('click', function() {
+    if (userIdToDelete) {
+        deleteUser(userIdToDelete);
+    }
+});
+
+function deleteUser(id) {
+    const formData = new FormData();
+    formData.append('id', id);
+    
+    fetch('/Admin/NguoiDung/DeleteUser', {
+        method: 'POST',
+        body: formData,
+        headers: {
+            'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]').value
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            showAlert('success', data.message);
+            // Close modal
+            const modal = bootstrap.Modal.getInstance(document.getElementById('deleteModal'));
+            modal.hide();
+            // Redirect to index after 2 seconds
+            setTimeout(() => {
+                window.location.href = '/Admin/NguoiDung';
+            }, 2000);
+        } else {
+            showAlert('error', data.message);
+        }
+    })
+    .catch(error => {
+        showAlert('error', 'Lỗi khi xóa người dùng: ' + error.message);
+    });
+}
+
+function showAlert(type, message) {
+    const alertClass = type === 'success' ? 'alert-success' : 'alert-danger';
+    const alertHtml = `
+        <div class="alert ${alertClass} alert-dismissible fade show" role="alert">
+            ${message}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    `;
+    
+    // Remove existing alerts
+    const existingAlerts = document.querySelectorAll('.alert');
+    existingAlerts.forEach(alert => alert.remove());
+    
+    // Add new alert
+    const container = document.querySelector('.user-profile-page');
+    container.insertAdjacentHTML('afterbegin', alertHtml);
+    
+    // Auto remove after 5 seconds
+    setTimeout(() => {
+        const alert = document.querySelector('.alert');
+        if (alert) {
+            alert.remove();
+        }
+    }, 5000);
+}
+</script>
+
+@Html.AntiForgeryToken()
+
+

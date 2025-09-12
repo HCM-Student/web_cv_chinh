@@ -63,5 +63,41 @@ namespace WEB_CV.Areas.Admin.Controllers
             }
             return RedirectToAction(nameof(Index));
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> UpdateStatus(int id, string trangThai, string? ghiChu = null)
+        {
+            var lienHe = await _context.LienHes.FindAsync(id);
+            if (lienHe == null) return NotFound();
+
+            lienHe.TrangThai = trangThai;
+            if (!string.IsNullOrEmpty(ghiChu))
+            {
+                lienHe.GhiChu = ghiChu;
+            }
+            
+            // Tự động cập nhật DaXuLy dựa trên trạng thái
+            lienHe.DaXuLy = trangThai == "Đã xử lý" || trangThai == "Hoàn thành";
+
+            await _context.SaveChangesAsync();
+            TempData["msg"] = "Cập nhật trạng thái thành công!";
+            return RedirectToAction(nameof(Details), new { id });
+        }
+
+        [HttpGet]
+        public IActionResult Reply(int id)
+        {
+            var lienHe = _context.LienHes.Find(id);
+            if (lienHe == null) return NotFound();
+
+            // Tạo mailto link với thông tin đã điền sẵn
+            var subject = $"Re: {lienHe.TieuDe}";
+            var body = $"\n\n--- Tin nhắn gốc ---\nTừ: {lienHe.HoTen} ({lienHe.Email})\nNgày: {lienHe.NgayGui:dd/MM/yyyy HH:mm}\nNội dung:\n{lienHe.NoiDung}";
+            
+            var mailtoUrl = $"mailto:{lienHe.Email}?subject={Uri.EscapeDataString(subject)}&body={Uri.EscapeDataString(body)}";
+            
+            return Redirect(mailtoUrl);
+        }
     }
 }

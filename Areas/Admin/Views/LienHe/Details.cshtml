@@ -3,32 +3,536 @@
     ViewData["Title"] = "Chi tiết Liên hệ";
 }
 
-<h1>Chi tiết Liên hệ</h1>
+<div class="admin-contact-detail-page">
+    @if (TempData["msg"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show">
+            @TempData["msg"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
 
-<div>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">Họ Tên</dt>
-        <dd class="col-sm-10">@Model.HoTen</dd>
+    <!-- Header Section -->
+    <div class="page-header mb-4">
+        <div class="d-flex justify-content-between align-items-center">
+            <div>
+                <h1 class="page-title">
+                    <div class="title-icon">
+                        <i class="fas fa-envelope-open"></i>
+                    </div>
+                    <div class="title-content">
+                        <span class="title-text">Chi tiết Liên hệ</span>
+                        <span class="contact-id">#@Model.Id</span>
+                    </div>
+                </h1>
+                <p class="page-subtitle text-muted">Thông tin chi tiết tin nhắn từ @Model.HoTen</p>
+            </div>
+            <div class="header-actions">
+                <a asp-action="Reply" asp-route-id="@Model.Id" class="btn btn-primary btn-lg">
+                    <i class="fas fa-reply me-2"></i>Trả lời Email
+                </a>
+                <a asp-action="Index" class="btn btn-outline-secondary btn-lg">
+                    <i class="fas fa-arrow-left me-2"></i>Quay lại
+                </a>
+            </div>
+        </div>
+    </div>
 
-        <dt class="col-sm-2">Email</dt>
-        <dd class="col-sm-10">@Model.Email</dd>
+    <div class="row g-4">
+        <!-- Contact Info Card -->
+        <div class="col-lg-4">
+            <div class="contact-info-card">
+                <div class="card-header">
+                    <h5 class="card-title">
+                        <i class="fas fa-user me-2"></i>Thông tin người gửi
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="contact-avatar-section">
+                        <div class="avatar-circle">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="avatar-info">
+                            <h6 class="contact-name">@Model.HoTen</h6>
+                            <span class="contact-email">@Model.Email</span>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-details">
+                        <div class="detail-item">
+                            <div class="detail-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <div class="detail-content">
+                                <span class="detail-label">Số điện thoại</span>
+                                <a href="tel:@Model.SoDienThoai" class="detail-value">@Model.SoDienThoai</a>
+                            </div>
+                        </div>
+                        
+                        <div class="detail-item">
+                            <div class="detail-icon">
+                                <i class="fas fa-calendar"></i>
+                            </div>
+                            <div class="detail-content">
+                                <span class="detail-label">Ngày gửi</span>
+                                <span class="detail-value">@Model.NgayGui.ToString("dd/MM/yyyy HH:mm")</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-        <dt class="col-sm-2">Số Điện Thoại</dt>
-        <dd class="col-sm-10">@Model.SoDienThoai</dd>
-        
-        <dt class="col-sm-2">Tiêu đề</dt>
-        <dd class="col-sm-10">@Model.TieuDe</dd>
+            <!-- Status Management Card -->
+            <div class="status-management-card">
+                <div class="card-header">
+                    <h5 class="card-title">
+                        <i class="fas fa-cog me-2"></i>Quản lý trạng thái
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <form asp-action="UpdateStatus" method="post">
+                        <input type="hidden" name="id" value="@Model.Id" />
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Trạng thái hiện tại</label>
+                            <div class="current-status">
+                                <span class="status-badge status-@(Model.TrangThai.Replace(" ", "-").ToLower())">@Model.TrangThai</span>
+                            </div>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Cập nhật trạng thái</label>
+                            <select name="trangThai" class="form-select">
+                                <option value="Chưa đọc" selected="@(Model.TrangThai == "Chưa đọc")">Chưa đọc</option>
+                                <option value="Đang xử lý" selected="@(Model.TrangThai == "Đang xử lý")">Đang xử lý</option>
+                                <option value="Đã xử lý" selected="@(Model.TrangThai == "Đã xử lý")">Đã xử lý</option>
+                                <option value="Hoàn thành" selected="@(Model.TrangThai == "Hoàn thành")">Hoàn thành</option>
+                            </select>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">Ghi chú</label>
+                            <textarea name="ghiChu" class="form-control" rows="3" placeholder="Thêm ghi chú...">@Model.GhiChu</textarea>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-primary w-100">
+                            <i class="fas fa-save me-2"></i>Cập nhật trạng thái
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
 
-        <dt class="col-sm-2">Nội dung</dt>
-        <dd class="col-sm-10">
-            <textarea class="form-control" rows="8" readonly>@Model.NoiDung</textarea>
-        </dd>
-
-        <dt class="col-sm-2">Ngày Gửi</dt>
-        <dd class="col-sm-10">@Model.NgayGui.ToString("dd/MM/yyyy HH:mm:ss")</dd>
-    </dl>
+        <!-- Message Content Card -->
+        <div class="col-lg-8">
+            <div class="message-content-card">
+                <div class="card-header">
+                    <h5 class="card-title">
+                        <i class="fas fa-comment-alt me-2"></i>Nội dung tin nhắn
+                    </h5>
+                </div>
+                <div class="card-body">
+                    @if (!string.IsNullOrEmpty(Model.TieuDe))
+                    {
+                        <div class="message-subject">
+                            <h6 class="subject-label">Chủ đề:</h6>
+                            <span class="subject-text">@Model.TieuDe</span>
+                        </div>
+                    }
+                    
+                    <div class="message-content">
+                        <div class="content-label">Nội dung:</div>
+                        <div class="content-text">@Model.NoiDung</div>
+                    </div>
+                    
+                    @if (!string.IsNullOrEmpty(Model.GhiChu))
+                    {
+                        <div class="message-notes">
+                            <h6 class="notes-label">Ghi chú:</h6>
+                            <div class="notes-text">@Model.GhiChu</div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
-<div>
-    <a asp-action="Index" class="btn btn-secondary">Quay lại danh sách</a>
-</div>
+
+<style>
+.admin-contact-detail-page {
+    padding: 2rem;
+    background: linear-gradient(135deg, #4f46e5 0%, #06b6d4 100%);
+    min-height: 100vh;
+    position: relative;
+}
+
+.admin-contact-detail-page::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+    opacity: 0.3;
+    pointer-events: none;
+}
+
+.page-header {
+    margin-bottom: 3rem;
+    position: relative;
+    z-index: 2;
+}
+
+.page-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin: 0;
+    color: white;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.title-icon {
+    width: 60px;
+    height: 60px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    font-size: 1.5rem;
+}
+
+.title-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.title-text {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: white;
+    line-height: 1.2;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.contact-id {
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: 0.4rem 0.8rem;
+    border-radius: 15px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    align-self: flex-start;
+}
+
+.page-subtitle {
+    font-size: 1.2rem;
+    margin: 0.5rem 0 0 0;
+    color: rgba(255,255,255,0.9);
+}
+
+.header-actions {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.contact-info-card,
+.status-management-card,
+.message-content-card {
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(20px);
+    border-radius: 20px;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    margin-bottom: 2rem;
+    position: relative;
+    z-index: 2;
+}
+
+.card-header {
+    padding: 1.5rem 2rem;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    background: linear-gradient(135deg, rgba(79, 70, 229, 0.05), rgba(6, 182, 212, 0.05));
+    border-radius: 20px 20px 0 0;
+}
+
+.card-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #2c3e50;
+    margin: 0;
+    display: flex;
+    align-items: center;
+}
+
+.card-body {
+    padding: 2rem;
+}
+
+.contact-avatar-section {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, rgba(79, 70, 229, 0.1), rgba(6, 182, 212, 0.1));
+    border-radius: 15px;
+}
+
+.avatar-circle {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #4f46e5 0%, #06b6d4 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.5rem;
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+}
+
+.contact-name {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #2c3e50;
+    margin: 0 0 0.5rem 0;
+}
+
+.contact-email {
+    color: #6c757d;
+    font-size: 0.95rem;
+}
+
+.contact-details {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.detail-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+}
+
+.detail-item:hover {
+    transform: translateX(5px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.detail-icon {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, #4f46e5, #06b6d4);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1rem;
+    flex-shrink: 0;
+}
+
+.detail-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.detail-label {
+    font-size: 0.85rem;
+    color: #6c757d;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.detail-value {
+    color: #2c3e50;
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 0.95rem;
+}
+
+.detail-value:hover {
+    color: #4f46e5;
+    text-decoration: none;
+}
+
+.status-badge {
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: inline-block;
+}
+
+.status-chưa-đọc {
+    background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+    color: white;
+}
+
+.status-đang-xử-lý {
+    background: linear-gradient(135deg, #f39c12, #e67e22);
+    color: white;
+}
+
+.status-đã-xử-lý {
+    background: linear-gradient(135deg, #27ae60, #2ecc71);
+    color: white;
+}
+
+.status-hoàn-thành {
+    background: linear-gradient(135deg, #4f46e5, #06b6d4);
+    color: white;
+}
+
+.current-status {
+    margin-bottom: 1rem;
+}
+
+.form-label {
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+}
+
+.form-select,
+.form-control {
+    border: 2px solid #e5e7eb;
+    border-radius: 10px;
+    padding: 0.75rem 1rem;
+    transition: all 0.3s ease;
+}
+
+.form-select:focus,
+.form-control:focus {
+    border-color: #4f46e5;
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+}
+
+.message-subject {
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background: linear-gradient(135deg, rgba(79, 70, 229, 0.1), rgba(6, 182, 212, 0.1));
+    border-radius: 15px;
+    border-left: 4px solid #4f46e5;
+}
+
+.subject-label {
+    font-size: 0.9rem;
+    color: #6c757d;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.5rem;
+}
+
+.subject-text {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #2c3e50;
+}
+
+.message-content {
+    margin-bottom: 2rem;
+}
+
+.content-label {
+    font-size: 0.9rem;
+    color: #6c757d;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 1rem;
+}
+
+.content-text {
+    font-size: 1rem;
+    color: #2c3e50;
+    line-height: 1.6;
+    padding: 1.5rem;
+    background: #f8f9fa;
+    border-radius: 12px;
+    border-left: 4px solid #e9ecef;
+    white-space: pre-wrap;
+}
+
+.message-notes {
+    padding: 1.5rem;
+    background: linear-gradient(135deg, rgba(255, 193, 7, 0.1), rgba(255, 152, 0, 0.1));
+    border-radius: 15px;
+    border-left: 4px solid #ffc107;
+}
+
+.notes-label {
+    font-size: 0.9rem;
+    color: #6c757d;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.5rem;
+}
+
+.notes-text {
+    font-size: 0.95rem;
+    color: #2c3e50;
+    line-height: 1.6;
+    white-space: pre-wrap;
+}
+
+/* Responsive */
+@@media (max-width: 768px) {
+    .admin-contact-detail-page {
+        padding: 1rem;
+    }
+    
+    .page-title {
+        font-size: 2rem;
+        gap: 1rem;
+    }
+    
+    .title-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 1.2rem;
+    }
+    
+    .title-text {
+        font-size: 2rem;
+    }
+    
+    .header-actions {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .card-body {
+        padding: 1.5rem;
+    }
+    
+    .contact-avatar-section {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+</style>

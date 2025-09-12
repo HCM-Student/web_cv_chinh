@@ -1,0 +1,699 @@
+@model WEB_CV.Areas.Admin.Controllers.ProfileViewModel
+@{
+    ViewData["Title"] = "Thông tin cá nhân";
+}
+
+<div class="admin-profile-page">
+    @if (TempData["msg"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show">
+            @TempData["msg"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    <!-- Header Section -->
+    <div class="page-header mb-4">
+        <div class="d-flex justify-content-between align-items-center">
+            <div>
+                <h1 class="page-title">
+                    <i class="fas fa-user-circle text-primary me-2"></i>
+                    Thông tin cá nhân
+                </h1>
+                <p class="page-subtitle text-muted">Quản lý thông tin tài khoản và cài đặt cá nhân</p>
+            </div>
+            <div class="btn-group">
+                <a class="btn btn-outline-primary btn-lg" asp-action="Edit">
+                    <i class="fas fa-edit me-2"></i>Chỉnh sửa
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-4">
+        <!-- Profile Card -->
+        <div class="col-lg-4">
+            <div class="profile-card">
+                <div class="profile-header">
+                    <div class="avatar-container">
+                        <div class="avatar-wrapper" id="avatarWrapper">
+                            @if (!string.IsNullOrEmpty(Model.Avatar))
+                            {
+                                <img src="@Model.Avatar" alt="Avatar" class="avatar-img" id="avatarImg">
+                            }
+                            else
+                            {
+                                <div class="avatar-placeholder">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                            }
+                            <div class="avatar-overlay">
+                                <label for="avatarInput" class="avatar-upload-btn">
+                                    <i class="fas fa-camera"></i>
+                                </label>
+                                <input type="file" id="avatarInput" accept="image/*" style="display: none;">
+                            </div>
+                        </div>
+                    </div>
+                    <h3 class="profile-name">@Model.HoTen</h3>
+                    <p class="profile-role">@(string.IsNullOrEmpty(Model.VaiTro) ? "Người dùng" : Model.VaiTro)</p>
+                </div>
+
+                <div class="profile-stats">
+                    <div class="stat-item">
+                        <div class="stat-icon">
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                        <div class="stat-content">
+                            <span class="stat-label">Ngày tham gia</span>
+                            <span class="stat-value">@Model.NgayTao.ToString("dd/MM/yyyy")</span>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="stat-content">
+                            <span class="stat-label">Email</span>
+                            <span class="stat-value">@Model.Email</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Profile Details -->
+        <div class="col-lg-8">
+            <div class="profile-details">
+                <!-- Personal Information -->
+                <div class="detail-section">
+                    <div class="section-header">
+                        <h4 class="section-title">
+                            <i class="fas fa-user me-2"></i>Thông tin cá nhân
+                        </h4>
+                    </div>
+                    <div class="section-content">
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <label class="info-label">Họ và tên</label>
+                                <span class="info-value">@Model.HoTen</span>
+                            </div>
+                            <div class="info-item">
+                                <label class="info-label">Email</label>
+                                <span class="info-value">@Model.Email</span>
+                            </div>
+                            <div class="info-item">
+                                <label class="info-label">Vai trò</label>
+                                <span class="info-value">
+                                    <span class="badge bg-primary">@(string.IsNullOrEmpty(Model.VaiTro) ? "Người dùng" : Model.VaiTro)</span>
+                                </span>
+                            </div>
+                            <div class="info-item">
+                                <label class="info-label">Ngày tạo tài khoản</label>
+                                <span class="info-value">@Model.NgayTao.ToString("dd/MM/yyyy HH:mm")</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Security Settings -->
+                <div class="detail-section">
+                    <div class="section-header">
+                        <h4 class="section-title">
+                            <i class="fas fa-shield-alt me-2"></i>Bảo mật
+                        </h4>
+                    </div>
+                    <div class="section-content">
+                        <div class="security-actions">
+                            <button class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#changePasswordModal">
+                                <i class="fas fa-key me-2"></i>Đổi mật khẩu
+                            </button>
+                            <button class="btn btn-outline-info" onclick="refreshProfile()">
+                                <i class="fas fa-sync-alt me-2"></i>Làm mới
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Change Password Modal -->
+<div class="modal fade" id="changePasswordModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">
+                    <i class="fas fa-key me-2"></i>Đổi mật khẩu
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <form id="changePasswordForm">
+                    <div class="mb-3">
+                        <label for="currentPassword" class="form-label">Mật khẩu hiện tại</label>
+                        <input type="password" class="form-control" id="currentPassword" name="CurrentPassword" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="newPassword" class="form-label">Mật khẩu mới</label>
+                        <input type="password" class="form-control" id="newPassword" name="NewPassword" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="confirmPassword" class="form-label">Xác nhận mật khẩu mới</label>
+                        <input type="password" class="form-control" id="confirmPassword" name="ConfirmPassword" required>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+                <button type="button" class="btn btn-primary" onclick="changePassword()">Đổi mật khẩu</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.admin-profile-page {
+    padding: 2rem;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    position: relative;
+}
+
+/* Fix modal backdrop issues */
+.modal-backdrop {
+    z-index: 1040 !important;
+}
+
+.modal {
+    z-index: 1050 !important;
+}
+
+/* Ensure body doesn't get stuck with modal-open class */
+body.modal-open {
+    overflow: hidden;
+}
+
+/* Clean up any lingering backdrops */
+.modal-backdrop.show {
+    opacity: 0.5;
+}
+
+.admin-profile-page::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="rgba(255,255,255,0.1)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+    opacity: 0.3;
+    pointer-events: none;
+}
+
+.page-header {
+    margin-bottom: 3rem;
+    position: relative;
+    z-index: 2;
+}
+
+.page-title {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin: 0;
+    color: white;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.page-subtitle {
+    font-size: 1.2rem;
+    margin: 0.5rem 0 0 0;
+    color: rgba(255,255,255,0.9);
+}
+
+/* Profile Card */
+.profile-card {
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(20px);
+    border-radius: 24px;
+    padding: 2rem;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    position: relative;
+    z-index: 2;
+    text-align: center;
+}
+
+.profile-header {
+    margin-bottom: 2rem;
+}
+
+.avatar-container {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 1.5rem;
+}
+
+.avatar-wrapper {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    margin: 0 auto;
+}
+
+.avatar-img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid white;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+}
+
+.avatar-placeholder {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 3rem;
+    border: 4px solid white;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.1);
+}
+
+.avatar-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0,0,0,0.5);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.avatar-wrapper:hover .avatar-overlay {
+    opacity: 1;
+}
+
+.avatar-upload-btn {
+    color: white;
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.avatar-upload-btn:hover {
+    transform: scale(1.1);
+}
+
+.profile-name {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #2c3e50;
+    margin: 0 0 0.5rem 0;
+}
+
+.profile-role {
+    font-size: 1rem;
+    color: #6c757d;
+    margin: 0;
+}
+
+.profile-stats {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.stat-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    background: #f8f9fa;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+}
+
+.stat-item:hover {
+    background: #e9ecef;
+    transform: translateX(5px);
+}
+
+.stat-icon {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.2rem;
+}
+
+.stat-content {
+    flex: 1;
+}
+
+.stat-label {
+    display: block;
+    font-size: 0.85rem;
+    color: #6c757d;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+}
+
+.stat-value {
+    display: block;
+    font-size: 1rem;
+    color: #2c3e50;
+    font-weight: 600;
+}
+
+/* Profile Details */
+.profile-details {
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(20px);
+    border-radius: 24px;
+    padding: 2rem;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+    border: 1px solid rgba(255,255,255,0.2);
+    position: relative;
+    z-index: 2;
+}
+
+.detail-section {
+    margin-bottom: 2rem;
+}
+
+.detail-section:last-child {
+    margin-bottom: 0;
+}
+
+.section-header {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid rgba(102, 126, 234, 0.1);
+}
+
+.section-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #2c3e50;
+    margin: 0;
+    display: flex;
+    align-items: center;
+}
+
+.section-content {
+    padding: 0;
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+}
+
+.info-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.info-label {
+    font-size: 0.9rem;
+    color: #6c757d;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.info-value {
+    font-size: 1.1rem;
+    color: #2c3e50;
+    font-weight: 600;
+}
+
+.security-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.btn {
+    border-radius: 12px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+/* Modal Styles */
+.modal-content {
+    border-radius: 20px;
+    border: none;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+}
+
+.modal-header {
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    padding: 1.5rem 2rem;
+}
+
+.modal-title {
+    font-weight: 700;
+    color: #2c3e50;
+}
+
+.modal-body {
+    padding: 2rem;
+}
+
+.modal-footer {
+    border-top: 1px solid rgba(0,0,0,0.1);
+    padding: 1.5rem 2rem;
+}
+
+/* Responsive */
+@@media (max-width: 768px) {
+    .admin-profile-page {
+        padding: 1rem;
+    }
+    
+    .profile-card {
+        padding: 1.5rem;
+    }
+    
+    .profile-details {
+        padding: 1.5rem;
+    }
+    
+    .info-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .security-actions {
+        flex-direction: column;
+    }
+    
+    .page-title {
+        font-size: 2rem;
+    }
+}
+</style>
+
+<script>
+// Upload Avatar
+document.getElementById('avatarInput').addEventListener('change', function(e) {
+    const file = e.target.files[0];
+    if (file) {
+        const formData = new FormData();
+        formData.append('avatar', file);
+        
+        // Show loading
+        const avatarImg = document.getElementById('avatarImg');
+        const avatarPlaceholder = document.querySelector('.avatar-placeholder');
+        
+        fetch('/Admin/Profile/ChangeAvatar', {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]').value
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                // Update avatar image
+                if (avatarImg) {
+                    avatarImg.src = data.avatar;
+                } else {
+                    // Create new img element if placeholder exists
+                    const newImg = document.createElement('img');
+                    newImg.src = data.avatar;
+                    newImg.alt = 'Avatar';
+                    newImg.className = 'avatar-img';
+                    newImg.id = 'avatarImg';
+                    
+                    if (avatarPlaceholder) {
+                        avatarPlaceholder.parentNode.replaceChild(newImg, avatarPlaceholder);
+                    }
+                }
+                
+                showAlert('success', data.message);
+            } else {
+                showAlert('error', data.message);
+            }
+        })
+        .catch(error => {
+            showAlert('error', 'Lỗi khi upload avatar: ' + error.message);
+        });
+    }
+});
+
+// Change Password
+function changePassword() {
+    const form = document.getElementById('changePasswordForm');
+    const formData = new FormData(form);
+    
+    fetch('/Admin/Profile/ChangePassword', {
+        method: 'POST',
+        body: formData,
+        headers: {
+            'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]').value
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            showAlert('success', data.message);
+            // Close modal properly
+            const modalElement = document.getElementById('changePasswordModal');
+            const modal = bootstrap.Modal.getInstance(modalElement);
+            if (modal) {
+                modal.hide();
+            } else {
+                // If no instance, create new one and hide
+                const newModal = new bootstrap.Modal(modalElement);
+                newModal.hide();
+            }
+            // Clear form
+            form.reset();
+        } else {
+            showAlert('error', data.message);
+        }
+    })
+    .catch(error => {
+        showAlert('error', 'Lỗi khi đổi mật khẩu: ' + error.message);
+    });
+}
+
+// Refresh Profile
+function refreshProfile() {
+    location.reload();
+}
+
+// Force remove modal backdrop
+function forceRemoveBackdrop() {
+    // Remove all modal backdrops
+    const backdrops = document.querySelectorAll('.modal-backdrop');
+    backdrops.forEach(backdrop => backdrop.remove());
+    
+    // Remove modal-open class from body
+    document.body.classList.remove('modal-open');
+    
+    // Reset body padding and overflow
+    document.body.style.paddingRight = '';
+    document.body.style.overflow = '';
+    
+    // Remove any modal instances
+    const modals = document.querySelectorAll('.modal');
+    modals.forEach(modal => {
+        const modalInstance = bootstrap.Modal.getInstance(modal);
+        if (modalInstance) {
+            modalInstance.dispose();
+        }
+    });
+}
+
+// Modal event handlers
+document.addEventListener('DOMContentLoaded', function() {
+    // Handle modal hidden event to cleanup backdrop
+    const changePasswordModal = document.getElementById('changePasswordModal');
+    if (changePasswordModal) {
+        changePasswordModal.addEventListener('hidden.bs.modal', function() {
+            forceRemoveBackdrop();
+        });
+        
+        // Handle modal show event
+        changePasswordModal.addEventListener('show.bs.modal', function() {
+            forceRemoveBackdrop();
+        });
+        
+        // Handle modal hide event
+        changePasswordModal.addEventListener('hide.bs.modal', function() {
+            forceRemoveBackdrop();
+        });
+    }
+    
+    // Add click handler to cancel button
+    const cancelBtn = document.querySelector('[data-bs-dismiss="modal"]');
+    if (cancelBtn) {
+        cancelBtn.addEventListener('click', function() {
+            setTimeout(forceRemoveBackdrop, 100);
+        });
+    }
+    
+    // Add click handler to close button (X)
+    const closeBtn = document.querySelector('.btn-close');
+    if (closeBtn) {
+        closeBtn.addEventListener('click', function() {
+            setTimeout(forceRemoveBackdrop, 100);
+        });
+    }
+});
+
+// Show Alert
+function showAlert(type, message) {
+    const alertClass = type === 'success' ? 'alert-success' : 'alert-danger';
+    const alertHtml = `
+        <div class="alert ${alertClass} alert-dismissible fade show" role="alert">
+            ${message}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    `;
+    
+    // Remove existing alerts
+    const existingAlerts = document.querySelectorAll('.alert');
+    existingAlerts.forEach(alert => alert.remove());
+    
+    // Add new alert
+    const container = document.querySelector('.admin-profile-page');
+    container.insertAdjacentHTML('afterbegin', alertHtml);
+    
+    // Auto remove after 5 seconds
+    setTimeout(() => {
+        const alert = document.querySelector('.alert');
+        if (alert) {
+            alert.remove();
+        }
+    }, 5000);
+}
+</script>
+
+@Html.AntiForgeryToken()

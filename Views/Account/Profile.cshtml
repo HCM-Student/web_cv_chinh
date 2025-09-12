@@ -1,0 +1,626 @@
+@model WEB_CV.Models.NguoiDung
+@{
+    ViewData["Title"] = "Hồ sơ cá nhân";
+}
+
+<div class="profile-page">
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="hero-background"></div>
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1 class="hero-title">
+                        <i class="fas fa-user-circle me-3"></i>
+                        Hồ sơ cá nhân
+                    </h1>
+                    <p class="hero-subtitle">Quản lý thông tin tài khoản của bạn một cách dễ dàng</p>
+                </div>
+                <div class="hero-actions">
+                    <a href="@Url.Action("Edit", "Account")" class="btn btn-hero">
+                        <i class="fas fa-edit me-2"></i>Chỉnh sửa hồ sơ
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <!-- Profile Card -->
+            <div class="col-lg-4">
+                <div class="profile-card">
+                    <div class="profile-avatar-container">
+                        <div class="avatar-ring">
+                            <img src="@(string.IsNullOrEmpty(Model.Avatar) ? "/img/default-avatar.svg" : Model.Avatar)" alt="Avatar" class="profile-avatar">
+                        </div>
+                        <div class="avatar-status @(Model.KichHoat ? "online" : "offline")"></div>
+                    </div>
+                    <div class="profile-info">
+                        <h3 class="profile-name">@Model.HoTen</h3>
+                        <p class="profile-email">@Model.Email</p>
+                        <div class="profile-badges">
+                            <span class="badge @(Model.VaiTro == "Admin" ? "badge-admin" : "badge-user")">
+                                <i class="fas @(Model.VaiTro == "Admin" ? "fa-crown" : "fa-user") me-1"></i>
+                                @(Model.VaiTro == "Admin" ? "Quản trị viên" : "Người dùng")
+                            </span>
+                            <span class="badge @(Model.KichHoat ? "badge-success" : "badge-secondary")">
+                                <i class="fas @(Model.KichHoat ? "fa-check-circle" : "fa-times-circle") me-1"></i>
+                                @(Model.KichHoat ? "Đã kích hoạt" : "Chưa kích hoạt")
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Stats -->
+                <div class="stats-card">
+                    <div class="stats-header">
+                        <h5 class="stats-title">
+                            <i class="fas fa-chart-line me-2"></i>Thống kê
+                        </h5>
+                    </div>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-calendar-plus"></i>
+                            </div>
+                            <div class="stat-content">
+                                <span class="stat-value">@Model.NgayTao.ToString("dd/MM/yyyy")</span>
+                                <span class="stat-label">Tham gia</span>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="stat-content">
+                                <span class="stat-value">@((DateTime.Now - Model.NgayTao).Days)</span>
+                                <span class="stat-label">Ngày hoạt động</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Profile Details -->
+            <div class="col-lg-8">
+                <div class="profile-details">
+                    <!-- Personal Information -->
+                    <div class="detail-section">
+                        <div class="section-header">
+                            <h4 class="section-title">
+                                <i class="fas fa-user me-2"></i>Thông tin cá nhân
+                            </h4>
+                            <div class="section-line"></div>
+                        </div>
+                        <div class="info-grid">
+                            <div class="info-card">
+                                <div class="info-icon">
+                                    <i class="fas fa-user"></i>
+                                </div>
+                                <div class="info-content">
+                                    <label class="info-label">Họ và tên</label>
+                                    <span class="info-value">@Model.HoTen</span>
+                                </div>
+                            </div>
+                            <div class="info-card">
+                                <div class="info-icon">
+                                    <i class="fas fa-envelope"></i>
+                                </div>
+                                <div class="info-content">
+                                    <label class="info-label">Email</label>
+                                    <span class="info-value">@Model.Email</span>
+                                </div>
+                            </div>
+                            <div class="info-card">
+                                <div class="info-icon">
+                                    <i class="fas fa-user-tag"></i>
+                                </div>
+                                <div class="info-content">
+                                    <label class="info-label">Vai trò</label>
+                                    <span class="info-value">
+                                        <span class="badge @(Model.VaiTro == "Admin" ? "badge-admin" : "badge-user")">
+                                            @(Model.VaiTro == "Admin" ? "Quản trị viên" : "Người dùng")
+                                        </span>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="info-card">
+                                <div class="info-icon">
+                                    <i class="fas fa-shield-alt"></i>
+                                </div>
+                                <div class="info-content">
+                                    <label class="info-label">Trạng thái</label>
+                                    <span class="info-value">
+                                        <span class="badge @(Model.KichHoat ? "badge-success" : "badge-secondary")">
+                                            @(Model.KichHoat ? "Đã kích hoạt" : "Chưa kích hoạt")
+                                        </span>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="info-card">
+                                <div class="info-icon">
+                                    <i class="fas fa-calendar-alt"></i>
+                                </div>
+                                <div class="info-content">
+                                    <label class="info-label">Ngày tạo</label>
+                                    <span class="info-value">@Model.NgayTao.ToString("dd/MM/yyyy HH:mm")</span>
+                                </div>
+                            </div>
+                            <div class="info-card">
+                                <div class="info-icon">
+                                    <i class="fas fa-history"></i>
+                                </div>
+                                <div class="info-content">
+                                    <label class="info-label">Thời gian hoạt động</label>
+                                    <span class="info-value">@((DateTime.Now - Model.NgayTao).Days) ngày</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+/* ============================
+   MODERN PROFILE PAGE STYLES
+   ============================ */
+
+.profile-page {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    position: relative;
+}
+
+/* Hero Section */
+.hero-section {
+    position: relative;
+    padding: 4rem 0 6rem 0;
+    overflow: hidden;
+}
+
+.hero-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    opacity: 0.95;
+}
+
+.hero-background::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><defs><radialGradient id="a" cx="50%" cy="50%" r="50%"><stop offset="0%" stop-color="%23ffffff" stop-opacity="0.1"/><stop offset="100%" stop-color="%23ffffff" stop-opacity="0"/></radialGradient></defs><circle cx="200" cy="200" r="100" fill="url(%23a)"/><circle cx="800" cy="300" r="150" fill="url(%23a)"/><circle cx="400" cy="700" r="120" fill="url(%23a)"/></svg>') no-repeat center center;
+    background-size: cover;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: white;
+}
+
+.hero-title {
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin: 0;
+    text-shadow: 0 4px 8px rgba(0,0,0,0.3);
+    background: linear-gradient(45deg, #ffffff, #f0f0f0);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.hero-subtitle {
+    font-size: 1.3rem;
+    margin: 1rem 0 0 0;
+    opacity: 0.9;
+    font-weight: 300;
+}
+
+.btn-hero {
+    background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+    border: none;
+    color: white;
+    padding: 1rem 2rem;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    box-shadow: 0 8px 25px rgba(255, 107, 107, 0.3);
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+}
+
+.btn-hero:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 35px rgba(255, 107, 107, 0.4);
+    color: white;
+}
+
+/* Profile Card */
+.profile-card {
+    background: white;
+    border-radius: 25px;
+    padding: 2.5rem;
+    text-align: center;
+    box-shadow: 0 25px 80px rgba(0,0,0,0.15);
+    margin-bottom: 2rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.profile-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #667eea, #764ba2);
+}
+
+.profile-avatar-container {
+    position: relative;
+    margin-bottom: 2rem;
+    display: inline-block;
+}
+
+.avatar-ring {
+    position: relative;
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    padding: 4px;
+    margin: 0 auto;
+}
+
+.profile-avatar {
+    width: 132px;
+    height: 132px;
+    border-radius: 50%;
+    object-fit: cover;
+    display: block;
+    border: 3px solid white;
+}
+
+.avatar-status {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 3px solid white;
+}
+
+.avatar-status.online {
+    background: #28a745;
+}
+
+.avatar-status.offline {
+    background: #6c757d;
+}
+
+.profile-name {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #2c3e50;
+    margin: 0 0 0.5rem 0;
+}
+
+.profile-email {
+    color: #6c757d;
+    margin-bottom: 1.5rem;
+    font-size: 1.1rem;
+}
+
+.profile-badges {
+    display: flex;
+    gap: 0.75rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.badge {
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    display: inline-flex;
+    align-items: center;
+}
+
+.badge-admin {
+    background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+    color: white;
+}
+
+.badge-user {
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    color: white;
+}
+
+.badge-success {
+    background: linear-gradient(45deg, #28a745, #20c997);
+    color: white;
+}
+
+.badge-secondary {
+    background: linear-gradient(45deg, #6c757d, #495057);
+    color: white;
+}
+
+/* Stats Card */
+.stats-card {
+    background: white;
+    border-radius: 25px;
+    padding: 2rem;
+    box-shadow: 0 25px 80px rgba(0,0,0,0.15);
+    margin-bottom: 2rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.stats-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #28a745, #20c997);
+}
+
+.stats-header {
+    margin-bottom: 1.5rem;
+}
+
+.stats-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #2c3e50;
+    margin: 0;
+    display: flex;
+    align-items: center;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.stat-card {
+    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+    border-radius: 15px;
+    padding: 1.5rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(102, 126, 234, 0.1);
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    background: linear-gradient(135deg, #e9ecef, #dee2e6);
+}
+
+.stat-icon {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.3rem;
+    margin: 0 auto 1rem auto;
+}
+
+.stat-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.stat-value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #2c3e50;
+}
+
+.stat-label {
+    font-size: 0.85rem;
+    color: #6c757d;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+
+/* Profile Details */
+.profile-details {
+    background: white;
+    border-radius: 25px;
+    padding: 2.5rem;
+    box-shadow: 0 25px 80px rgba(0,0,0,0.15);
+    position: relative;
+    overflow: hidden;
+}
+
+.profile-details::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #667eea, #764ba2);
+}
+
+.detail-section {
+    margin-bottom: 2.5rem;
+}
+
+.detail-section:last-child {
+    margin-bottom: 0;
+}
+
+.section-header {
+    margin-bottom: 2rem;
+    position: relative;
+}
+
+.section-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #2c3e50;
+    margin: 0;
+    display: flex;
+    align-items: center;
+}
+
+.section-line {
+    height: 3px;
+    background: linear-gradient(90deg, #667eea, #764ba2);
+    border-radius: 2px;
+    margin-top: 0.5rem;
+    width: 60px;
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.info-card {
+    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+    border-radius: 20px;
+    padding: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(102, 126, 234, 0.1);
+}
+
+.info-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    background: linear-gradient(135deg, #e9ecef, #dee2e6);
+}
+
+.info-icon {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+}
+
+.info-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.info-label {
+    font-size: 0.85rem;
+    color: #6c757d;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.info-value {
+    font-size: 1.1rem;
+    color: #2c3e50;
+    font-weight: 600;
+}
+
+/* Responsive Design */
+@@media (max-width: 768px) {
+    .hero-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 2rem;
+    }
+    
+    .hero-title {
+        font-size: 2.5rem;
+    }
+    
+    .hero-subtitle {
+        font-size: 1.1rem;
+    }
+    
+    .profile-card, .profile-details, .stats-card {
+        padding: 1.5rem;
+    }
+    
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .info-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .info-card {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .action-item {
+        justify-content: center;
+    }
+}
+
+@@media (max-width: 576px) {
+    .hero-section {
+        padding: 2rem 0 4rem 0;
+    }
+    
+    .hero-title {
+        font-size: 2rem;
+    }
+    
+    .profile-avatar {
+        width: 100px;
+        height: 100px;
+    }
+    
+    .avatar-ring {
+        width: 108px;
+        height: 108px;
+    }
+    
+    .profile-name {
+        font-size: 1.5rem;
+    }
+}
+</style>

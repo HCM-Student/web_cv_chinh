@@ -81,7 +81,6 @@
     <!-- Admin Sidebar -->
     <div class="admin-sidebar" id="adminSidebar">
         <div class="sidebar-header">
-            
             <button class="sidebar-close d-lg-none" onclick="toggleSidebar()">
                 <i class="fas fa-times"></i>
             </button>
@@ -148,15 +147,16 @@
                             <span class="nav-text">Người dùng</span>
                         </a>
                     </li>
-                    
+                    <li class="nav-item">
+                        <a class="nav-link" asp-area="Admin" asp-controller="LienHe" asp-action="Index">
+                            <span class="nav-icon">
+                                <i class="fas fa-envelope"></i>
+                            </span>
+                            <span class="nav-text">Liên hệ</span>
+                        </a>
+                    </li>
                 </ul>
             </div>
-            <li class="nav-item">
-            <a class="nav-link" asp-area="Admin" asp-controller="LienHe" asp-action="Index">
-                <i class="fas fa-fw fa-envelope"></i>
-                <span>Quản lý Liên hệ</span>
-            </a>
-        </li>
 
             <div class="nav-section">
                 <div class="nav-section-title">SYSTEM</div>
@@ -228,12 +228,11 @@
                             @User.Identity?.Name
                         </button>
                         <ul class="dropdown-menu dropdown-menu-end">
-                            <li><a class="dropdown-item" href="#"><i class="fas fa-user me-2"></i>Profile</a></li>
-                            <li><a class="dropdown-item" href="#"><i class="fas fa-cog me-2"></i>Settings</a></li>
+                            <li><a class="dropdown-item" asp-area="Admin" asp-controller="Profile" asp-action="Index"><i class="fas fa-user me-2"></i>Hồ sơ</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li>
                                 <a class="dropdown-item" href="javascript:void(0)" onclick="document.getElementById('logout-form').submit();">
-                                    <i class="fas fa-sign-out-alt me-2"></i>Logout
+                                    <i class="fas fa-sign-out-alt me-2"></i>Đăng xuất
                                 </a>
                             </li>
                         </ul>

@@ -30,5 +30,10 @@ namespace WEB_CV.Models
         public DateTime NgayGui { get; set; } = DateTime.Now;
         
         public bool DaXuLy { get; set; } = false;
+        
+        [StringLength(50)]
+        public string TrangThai { get; set; } = "Chưa đọc";
+        
+        public string? GhiChu { get; set; }
     }
 }

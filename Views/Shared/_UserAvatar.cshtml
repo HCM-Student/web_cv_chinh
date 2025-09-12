@@ -1,0 +1,27 @@
+@using Microsoft.AspNetCore.Http
+@using Microsoft.EntityFrameworkCore
+@using WEB_CV.Data
+@inject NewsDbContext _context
+
+@{
+    var userEmail = User.FindFirst(System.Security.Claims.ClaimTypes.Email)?.Value;
+    string? avatarUrl = null;
+    
+    if (!string.IsNullOrEmpty(userEmail))
+    {
+        var user = await _context.NguoiDungs
+            .FirstOrDefaultAsync(u => u.Email == userEmail);
+        avatarUrl = user?.Avatar;
+    }
+}
+
+@if (!string.IsNullOrEmpty(avatarUrl))
+{
+    <img src="@avatarUrl" alt="avatar" class="avatar-img" />
+}
+else
+{
+    <img src="~/img/default-avatar.svg" alt="avatar" class="avatar-img" />
+}
+
+

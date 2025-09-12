@@ -1,0 +1,202 @@
+@model WEB_CV.Models.BaiViet
+
+<div class="social-share-section">
+    <h6 class="share-title">
+        <i class="fas fa-share-alt me-2"></i>
+        Chia sẻ bài viết
+    </h6>
+    
+    <div class="share-buttons">
+        <a href="https://www.facebook.com/sharer/sharer.php?u=@Url.Action("ChiTietBaiViet", "Home", new { id = Model.Id }, Context.Request.Scheme)" 
+           target="_blank" 
+           class="share-btn facebook-btn"
+           title="Chia sẻ lên Facebook">
+            <i class="fab fa-facebook-f"></i>
+            <span>Facebook</span>
+        </a>
+        
+        <a href="https://twitter.com/intent/tweet?url=@Url.Action("ChiTietBaiViet", "Home", new { id = Model.Id }, Context.Request.Scheme)&text=@Uri.EscapeDataString(Model.TieuDe)" 
+           target="_blank" 
+           class="share-btn twitter-btn"
+           title="Chia sẻ lên Twitter">
+            <i class="fab fa-twitter"></i>
+            <span>Twitter</span>
+        </a>
+        
+        <a href="https://zalo.me/share?url=@Url.Action("ChiTietBaiViet", "Home", new { id = Model.Id }, Context.Request.Scheme)&title=@Uri.EscapeDataString(Model.TieuDe)" 
+           target="_blank" 
+           class="share-btn zalo-btn"
+           title="Chia sẻ lên Zalo">
+            <i class="fas fa-comment-dots"></i>
+            <span>Zalo</span>
+        </a>
+        
+        <a href="https://www.linkedin.com/sharing/share-offsite/?url=@Url.Action("ChiTietBaiViet", "Home", new { id = Model.Id }, Context.Request.Scheme)" 
+           target="_blank" 
+           class="share-btn linkedin-btn"
+           title="Chia sẻ lên LinkedIn">
+            <i class="fab fa-linkedin-in"></i>
+            <span>LinkedIn</span>
+        </a>
+        
+        <button onclick="copyToClipboard()" 
+                class="share-btn copy-btn"
+                title="Sao chép liên kết">
+            <i class="fas fa-copy"></i>
+            <span>Sao chép</span>
+        </button>
+    </div>
+</div>
+
+<script>
+function copyToClipboard() {
+    const url = window.location.href;
+    navigator.clipboard.writeText(url).then(function() {
+        // Hiển thị thông báo
+        const btn = event.target.closest('.copy-btn');
+        const originalText = btn.querySelector('span').textContent;
+        btn.querySelector('span').textContent = 'Đã sao chép!';
+        btn.style.background = 'linear-gradient(135deg, #28a745, #20c997)';
+        
+        setTimeout(() => {
+            btn.querySelector('span').textContent = originalText;
+            btn.style.background = '';
+        }, 2000);
+    }).catch(function(err) {
+        console.error('Không thể sao chép: ', err);
+        alert('Không thể sao chép liên kết. Vui lòng thử lại.');
+    });
+}
+</script>
+
+<style>
+.social-share-section {
+    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+    padding: 1.5rem;
+    border-radius: 15px;
+    border: 1px solid #dee2e6;
+    margin: 2rem 0;
+}
+
+.share-title {
+    color: #2c3e50;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    font-size: 1rem;
+}
+
+.share-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+.share-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    border-radius: 10px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    min-width: 120px;
+    justify-content: center;
+}
+
+.share-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    text-decoration: none;
+}
+
+.share-btn i {
+    font-size: 1.1rem;
+}
+
+.facebook-btn {
+    background: linear-gradient(135deg, #1877f2, #42a5f5);
+    color: white;
+}
+
+.facebook-btn:hover {
+    background: linear-gradient(135deg, #1565c0, #1976d2);
+    color: white;
+}
+
+.twitter-btn {
+    background: linear-gradient(135deg, #1da1f2, #42a5f5);
+    color: white;
+}
+
+.twitter-btn:hover {
+    background: linear-gradient(135deg, #0d8bd9, #1976d2);
+    color: white;
+}
+
+.zalo-btn {
+    background: linear-gradient(135deg, #0068ff, #42a5f5);
+    color: white;
+}
+
+.zalo-btn:hover {
+    background: linear-gradient(135deg, #0056cc, #1976d2);
+    color: white;
+}
+
+.linkedin-btn {
+    background: linear-gradient(135deg, #0077b5, #42a5f5);
+    color: white;
+}
+
+.linkedin-btn:hover {
+    background: linear-gradient(135deg, #005885, #1976d2);
+    color: white;
+}
+
+.copy-btn {
+    background: linear-gradient(135deg, #6c757d, #adb5bd);
+    color: white;
+}
+
+.copy-btn:hover {
+    background: linear-gradient(135deg, #5a6268, #6c757d);
+    color: white;
+}
+
+/* Responsive */
+@@media (max-width: 768px) {
+    .social-share-section {
+        padding: 1rem;
+        margin: 1.5rem 0;
+    }
+    
+    .share-buttons {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .share-btn {
+        width: 100%;
+        min-width: auto;
+    }
+}
+
+@@media (max-width: 480px) {
+    .share-btn {
+        padding: 0.6rem 0.8rem;
+        font-size: 0.85rem;
+    }
+    
+    .share-btn i {
+        font-size: 1rem;
+    }
+}
+</style>
+
+

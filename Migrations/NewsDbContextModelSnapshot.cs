@@ -109,16 +109,33 @@ namespace WEB_CV.Migrations
                     b.Property<int>("BaiVietId")
                         .HasColumnType("int");
 
+                    b.Property<bool>("DaDuyet")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("HoTen")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
                     b.Property<DateTime>("Ngay")
                         .HasColumnType("datetime2");
 
+                    b.Property<int?>("NguoiDungId")
+                        .HasColumnType("int");
+
                     b.Property<string>("NoiDung")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(1000)
+                        .HasColumnType("nvarchar(1000)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("BaiVietId");
+
+                    b.HasIndex("NguoiDungId");
 
                     b.ToTable("BinhLuans");
                 });
@@ -210,6 +227,9 @@ namespace WEB_CV.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
+                    b.Property<string>("GhiChu")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("HoTen")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -233,6 +253,11 @@ namespace WEB_CV.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
+                    b.Property<string>("TrangThai")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("NgayGui");
@@ -247,6 +272,9 @@ namespace WEB_CV.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Avatar")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -344,7 +372,13 @@ namespace WEB_CV.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("WEB_CV.Models.NguoiDung", "NguoiDung")
+                        .WithMany()
+                        .HasForeignKey("NguoiDungId");
+
                     b.Navigation("BaiViet");
+
+                    b.Navigation("NguoiDung");
                 });
 
             modelBuilder.Entity("WEB_CV.Models.BaiViet", b =>

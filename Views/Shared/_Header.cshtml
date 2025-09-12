@@ -140,23 +140,39 @@
         @if (User?.Identity?.IsAuthenticated ?? false)
         {
           <div class="dropdown">
-            <a class="btn btn-light rounded-pill px-3 dropdown-toggle d-flex align-items-center gap-2 avatar-chip"
+            <a class="btn btn-light rounded-pill px-3 dropdown-toggle d-flex align-items-center gap-2 avatar-chip admin-button"
                href="#" id="userMenu" data-bs-toggle="dropdown" aria-expanded="false">
-              <img src="~/img/avatar.jpg" asp-append-version="true" alt="avatar" class="avatar-img" />
+              @await Html.PartialAsync("_UserAvatar")
               <span class="fw-semibold d-none d-sm-inline">@User.Identity!.Name</span>
             </a>
             <ul class="dropdown-menu dropdown-menu-end shadow-sm" aria-labelledby="userMenu">
-              <li><a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Login">Tài khoản</a></li>
+              <li><a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Profile">
+                <i class="fas fa-user me-2"></i>Hồ sơ cá nhân
+              </a></li>
+              <li><a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Edit">
+                <i class="fas fa-edit me-2"></i>Chỉnh sửa hồ sơ
+              </a></li>
+              <li><a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="ChangePassword">
+                <i class="fas fa-key me-2"></i>Đổi mật khẩu
+              </a></li>
               @if (User.IsInRole("Admin"))
               {
                 <li><hr class="dropdown-divider" /></li>
                 <li class="px-3 pt-1 pb-1 text-muted small">Quản trị</li>
-                <li><a class="dropdown-item" asp-area="Admin" asp-controller="Dashboard" asp-action="Index">Bảng điều khiển</a></li>
-                <li><a class="dropdown-item" asp-area="Admin" asp-controller="BaiViet" asp-action="Index">Bài viết</a></li>
-                <li><a class="dropdown-item" asp-area="Admin" asp-controller="NguoiDung" asp-action="Index">Người dùng</a></li>
+                <li><a class="dropdown-item" asp-area="Admin" asp-controller="Dashboard" asp-action="Index">
+                  <i class="fas fa-tachometer-alt me-2"></i>Bảng điều khiển
+                </a></li>
+                <li><a class="dropdown-item" asp-area="Admin" asp-controller="BaiViet" asp-action="Index">
+                  <i class="fas fa-newspaper me-2"></i>Bài viết
+                </a></li>
+                <li><a class="dropdown-item" asp-area="Admin" asp-controller="NguoiDung" asp-action="Index">
+                  <i class="fas fa-users me-2"></i>Người dùng
+                </a></li>
               }
               <li><hr class="dropdown-divider" /></li>
-              <li><a class="dropdown-item" href="javascript:void(0)" onclick="document.getElementById('logout-form').submit();">Đăng xuất</a></li>
+              <li><a class="dropdown-item" href="javascript:void(0)" onclick="document.getElementById('logout-form').submit();">
+                <i class="fas fa-sign-out-alt me-2"></i>Đăng xuất
+              </a></li>
             </ul>
           </div>
         }

@@ -62,9 +62,16 @@
   </figure>
 
   <div class="article-meta small text-muted mb-3">
-    @Model.NgayDang.ToString("dd/MM/yyyy HH:mm")
-    @if (!string.IsNullOrEmpty(categoryName)) { <span>• @categoryName</span> }
-    @if (!string.IsNullOrEmpty(Model.TacGia?.HoTen)) { <span>• @Model.TacGia.HoTen</span> }
+    <div class="d-flex flex-wrap align-items-center gap-3">
+      <span><i class="fas fa-calendar me-1"></i>@Model.NgayDang.ToString("dd/MM/yyyy HH:mm")</span>
+      @if (!string.IsNullOrEmpty(categoryName)) { 
+        <span><i class="fas fa-folder me-1"></i>@categoryName</span> 
+      }
+      @if (!string.IsNullOrEmpty(Model.TacGia?.HoTen)) { 
+        <span><i class="fas fa-user me-1"></i>@Model.TacGia.HoTen</span> 
+      }
+      <span><i class="fas fa-eye me-1"></i>@Model.LuotXem lượt xem</span>
+    </div>
   </div>
 
   @if (!string.IsNullOrWhiteSpace(summary))
@@ -75,9 +82,73 @@
   <div class="article-body">
     @Html.Raw(content)
   </div>
+  
+  <!-- Chia sẻ mạng xã hội -->
+  <partial name="_SocialShare" model="Model" />
+  
+  <!-- Form bình luận -->
+  <partial name="_CommentForm" model="new WEB_CV.Models.BinhLuan { BaiVietId = Model.Id }" />
+  
+  <!-- Danh sách bình luận -->
+  <div id="comments-container">
+    <partial name="_CommentsList" model="new List<WEB_CV.Models.BinhLuan>()" />
+  </div>
+  
+  <!-- Bài viết liên quan -->
+  @if (ViewBag.RelatedPosts != null)
+  {
+    <partial name="_RelatedPosts" model="ViewBag.RelatedPosts" />
+  }
 </article>
 
 <style>
   .article-body img{max-width:100%;height:auto}
   .article-body table{display:block;max-width:100%;overflow:auto}
+  
+  .article-meta {
+    background: #f8f9fa;
+    padding: 1rem;
+    border-radius: 10px;
+    border-left: 4px solid #4f46e5;
+  }
+  
+  .article-meta span {
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+  }
+  
+  .article-meta i {
+    color: #4f46e5;
+    width: 16px;
+  }
 </style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Load comments when page loads
+    loadComments();
+});
+
+function loadComments() {
+    fetch('@Url.Action("GetComments", "BinhLuan", new { baiVietId = Model.Id })')
+        .then(response => response.text())
+        .then(html => {
+            document.getElementById('comments-container').innerHTML = html;
+        })
+        .catch(error => {
+            console.error('Error loading comments:', error);
+        });
+}
+
+// Reload comments after form submission
+document.addEventListener('DOMContentLoaded', function() {
+    const commentForm = document.querySelector('.comment-form');
+    if (commentForm) {
+        commentForm.addEventListener('submit', function(e) {
+            // Let the form submit normally, then reload comments
+            setTimeout(loadComments, 1000);
+        });
+    }
+});
+</script>
