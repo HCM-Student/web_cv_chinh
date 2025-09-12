@@ -112,6 +112,18 @@ html, body { max-width: 100%; overflow-x: clip; }
 .avatar-chip{
   background:#ffffff;border:1px solid #e2e8f0;
   box-shadow:0 2px 8px rgba(2,6,23,.06);
+  transition: none !important;
+  transform: none !important;
+  scale: 1 !important;
+}
+
+.avatar-chip:hover,
+.avatar-chip:active,
+.avatar-chip:focus,
+.avatar-chip.show {
+  transform: none !important;
+  scale: 1 !important;
+  box-shadow:0 2px 8px rgba(2,6,23,.06) !important;
 }
 .avatar-img{
   width:28px;height:28px;border-radius:50%;
@@ -3907,22 +3919,22 @@ body.loaded {
     transition: all 0.3s ease;
 }
 
-.btn::before {
-    content: '';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 0;
-    height: 0;
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 50%;
-    transition: all 0.6s ease;
-    transform: translate(-50%, -50%);
+/* chỉ áp cho nút CTA thay vì toàn bộ .btn */
+.btn-cta::before,
+.btn-orange::before {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 0; height: 0;
+  background: rgba(255,255,255,.2);
+  border-radius: 50%;
+  transition: all .6s ease;
+  transform: translate(-50%, -50%);
 }
-
-.btn:hover::before {
-    width: 300px;
-    height: 300px;
+.btn-cta:hover::before,
+.btn-orange:hover::before {
+  width: 300px;
+  height: 300px;
 }
 
 /* Enhanced card hover animations */
@@ -4856,6 +4868,21 @@ a {
   overflow: visible !important;
 }
 
+/* Ngăn chặn mọi hiệu ứng thụt ra thụt vào cho admin button */
+.admin-button:hover,
+.admin-button:active,
+.admin-button:focus,
+.admin-button.show,
+.admin-button:not(:disabled):not(.disabled):active,
+.admin-button:not(:disabled):not(.disabled).active {
+  transform: none !important;
+  scale: 1 !important;
+  box-shadow: 0 2px 8px rgba(2,6,23,.06) !important;
+  outline: none !important;
+  border: 1px solid #e2e8f0 !important;
+  padding: .35rem .9rem !important;
+}
+
 .admin-button * {
   position: relative !important;
   z-index: 1 !important;
@@ -4905,4 +4932,116 @@ a {
   padding: 0 !important;
   position: relative !important;
   z-index: 2 !important;
+}
+
+/* Khóa hoàn toàn hiệu ứng khi dropdown avatar mở/active/focus */
+.header-auth .btn.dropdown-toggle,
+.header-auth .btn.dropdown-toggle.show,
+.header-auth .btn.dropdown-toggle:active,
+.header-auth .btn.dropdown-toggle:focus,
+.header-auth .btn.dropdown-toggle:hover {
+  /* GIỮ CỐ ĐỊNH kích thước – dùng đúng padding bạn đang xài ở header */
+  padding: .35rem .9rem !important;
+  border-width: 0 !important;
+  transform: none !important;
+  scale: 1 !important;
+  box-shadow: none !important;
+  outline: none !important;
+  overflow: hidden !important; /* chặn pseudo-element tràn */
+  width: auto !important;
+  height: auto !important;
+  min-width: auto !important;
+  min-height: auto !important;
+  max-width: none !important;
+  max-height: none !important;
+}
+
+/* Nếu còn ripple (::before/::after) ở nơi khác, triệt hẳn tại đây */
+.header-auth .btn.dropdown-toggle::before,
+.header-auth .btn.dropdown-toggle.show::before,
+.header-auth .btn.dropdown-toggle:active::before,
+.header-auth .btn.dropdown-toggle:focus::before,
+.header-auth .btn.dropdown-toggle::after,
+.header-auth .btn.dropdown-toggle.show::after,
+.header-auth .btn.dropdown-toggle:active::after,
+.header-auth .btn.dropdown-toggle:focus::after,
+.header-auth .btn.rounded-pill::before,
+.header-auth .btn.rounded-pill::after,
+.header-auth .btn.rounded-pill:hover::before,
+.header-auth .btn.rounded-pill:hover::after,
+.header-auth .btn.rounded-pill:active::before,
+.header-auth .btn.rounded-pill:active::after,
+.header-auth .btn.rounded-pill:focus::before,
+.header-auth .btn.rounded-pill:focus::after {
+  content: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  display: none !important;
+}
+
+/* Đảm bảo avatar chip không bị ảnh hưởng bởi bất kỳ hiệu ứng nào */
+.avatar-chip,
+.avatar-chip *,
+.avatar-chip .btn,
+.avatar-chip .dropdown-toggle {
+  transition: none !important;
+  animation: none !important;
+  transform: none !important;
+  scale: 1 !important;
+  width: auto !important;
+  height: auto !important;
+}
+
+/* Đặc biệt fix cho admin button với tất cả các trạng thái */
+.admin-button.btn,
+.admin-button.btn-light,
+.admin-button.btn.rounded-pill {
+  transition: none !important;
+  animation: none !important;
+  transform: none !important;
+  scale: 1 !important;
+}
+
+.admin-button.btn:hover,
+.admin-button.btn:active,
+.admin-button.btn:focus,
+.admin-button.btn.show,
+.admin-button.btn:not(:disabled):not(.disabled):active,
+.admin-button.btn:not(:disabled):not(.disabled).active {
+  transition: none !important;
+  animation: none !important;
+  transform: none !important;
+  scale: 1 !important;
+  box-shadow: 0 2px 8px rgba(2,6,23,.06) !important;
+  outline: none !important;
+  border: 1px solid #e2e8f0 !important;
+}
+
+/* Override tất cả các hiệu ứng Bootstrap có thể gây phóng to */
+.header-auth .btn:not(:disabled):not(.disabled):active,
+.header-auth .btn:not(:disabled):not(.disabled).active,
+.header-auth .btn:not(:disabled):not(.disabled):focus,
+.header-auth .btn:not(:disabled):not(.disabled).focus {
+  transform: none !important;
+  scale: 1 !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+/* Đặc biệt fix cho nút rounded-pill trong header */
+.header-auth .btn.rounded-pill {
+  transition: none !important;
+  transform: none !important;
+  scale: 1 !important;
+}
+
+.header-auth .btn.rounded-pill:hover,
+.header-auth .btn.rounded-pill:active,
+.header-auth .btn.rounded-pill:focus,
+.header-auth .btn.rounded-pill.show {
+  transform: none !important;
+  scale: 1 !important;
+  box-shadow: 0 2px 8px rgba(2,6,23,.06) !important;
+  outline: none !important;
+  border: 1px solid #e2e8f0 !important;
 }

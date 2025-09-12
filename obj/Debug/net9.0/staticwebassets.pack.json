@@ -1,503 +1,503 @@
 {
   "Files": [
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\obj\\Debug\\net9.0\\scopedcss\\projectbundle\\web_cv.bundle.scp.css",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\obj\\Debug\\net9.0\\scopedcss\\projectbundle\\web_cv.bundle.scp.css",
       "PackagePath": "staticwebassets\\web_cv.dn1lzfaoul.bundle.scp.css"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\css\\about-hero.css",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\css\\about-hero.css",
       "PackagePath": "staticwebassets\\css\\about-hero.css"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\css\\about.css",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\css\\about.css",
       "PackagePath": "staticwebassets\\css\\about.css"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\css\\admin.css",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\css\\admin.css",
       "PackagePath": "staticwebassets\\css\\admin.css"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\css\\auth.css",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\css\\auth.css",
       "PackagePath": "staticwebassets\\css\\auth.css"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\css\\careers-hero.css",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\css\\careers-hero.css",
       "PackagePath": "staticwebassets\\css\\careers-hero.css"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\css\\contact.css",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\css\\contact.css",
       "PackagePath": "staticwebassets\\css\\contact.css"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\css\\devices-hero.css",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\css\\devices-hero.css",
       "PackagePath": "staticwebassets\\css\\devices-hero.css"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\css\\header.css",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\css\\header.css",
       "PackagePath": "staticwebassets\\css\\header.css"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\css\\hero-common.css",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\css\\hero-common.css",
       "PackagePath": "staticwebassets\\css\\hero-common.css"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\css\\news-hero.css",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\css\\news-hero.css",
       "PackagePath": "staticwebassets\\css\\news-hero.css"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\css\\pricing-hero.css",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\css\\pricing-hero.css",
       "PackagePath": "staticwebassets\\css\\pricing-hero.css"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\css\\services.css",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\css\\services.css",
       "PackagePath": "staticwebassets\\css\\services.css"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\css\\site-backup.css",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\css\\site-backup.css",
       "PackagePath": "staticwebassets\\css\\site-backup.css"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\css\\site.css",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\favicon.ico",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\favicon.ico",
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\img\\about\\datacenter.png",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\img\\about\\datacenter.png",
       "PackagePath": "staticwebassets\\img\\about\\datacenter.png"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\img\\about\\gis-network.png",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\img\\about\\gis-network.png",
       "PackagePath": "staticwebassets\\img\\about\\gis-network.png"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\img\\about\\smart-city.png",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\img\\about\\smart-city.png",
       "PackagePath": "staticwebassets\\img\\about\\smart-city.png"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\img\\avatar.jpg",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\img\\avatar.jpg",
       "PackagePath": "staticwebassets\\img\\avatar.jpg"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\img\\avatars\\avatar_1_20250911155225.png",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\img\\avatars\\avatar_1_20250911155225.png",
       "PackagePath": "staticwebassets\\img\\avatars\\avatar_1_20250911155225.png"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\img\\contact-hero.webp",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\img\\contact-hero.webp",
       "PackagePath": "staticwebassets\\img\\contact-hero.webp"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\img\\default-avatar.png",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\img\\default-avatar.png",
       "PackagePath": "staticwebassets\\img\\default-avatar.png"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\img\\default-avatar.svg",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\img\\default-avatar.svg",
       "PackagePath": "staticwebassets\\img\\default-avatar.svg"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\img\\hero\\hero-1.jpg",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\img\\hero\\hero-1.jpg",
       "PackagePath": "staticwebassets\\img\\hero\\hero-1.jpg"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\img\\hero\\hero-2.jpg",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\img\\hero\\hero-2.jpg",
       "PackagePath": "staticwebassets\\img\\hero\\hero-2.jpg"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\img\\hero\\hero-3.jpg",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\img\\hero\\hero-3.jpg",
       "PackagePath": "staticwebassets\\img\\hero\\hero-3.jpg"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\img\\hero\\tech-ring.jpg",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\img\\hero\\tech-ring.jpg",
       "PackagePath": "staticwebassets\\img\\hero\\tech-ring.jpg"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\img\\logo.png",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\img\\logo.png",
       "PackagePath": "staticwebassets\\img\\logo.png"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\img\\thuonghieu\\logo-1.jpg",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\img\\thuonghieu\\logo-1.jpg",
       "PackagePath": "staticwebassets\\img\\thuonghieu\\logo-1.jpg"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\img\\thuonghieu\\logo-10.jpg",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\img\\thuonghieu\\logo-10.jpg",
       "PackagePath": "staticwebassets\\img\\thuonghieu\\logo-10.jpg"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\img\\thuonghieu\\logo-11.png",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\img\\thuonghieu\\logo-11.png",
       "PackagePath": "staticwebassets\\img\\thuonghieu\\logo-11.png"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\img\\thuonghieu\\logo-12.png",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\img\\thuonghieu\\logo-12.png",
       "PackagePath": "staticwebassets\\img\\thuonghieu\\logo-12.png"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\img\\thuonghieu\\logo-2.jpg",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\img\\thuonghieu\\logo-2.jpg",
       "PackagePath": "staticwebassets\\img\\thuonghieu\\logo-2.jpg"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\img\\thuonghieu\\logo-3.jpg",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\img\\thuonghieu\\logo-3.jpg",
       "PackagePath": "staticwebassets\\img\\thuonghieu\\logo-3.jpg"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\img\\thuonghieu\\logo-4.jpg",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\img\\thuonghieu\\logo-4.jpg",
       "PackagePath": "staticwebassets\\img\\thuonghieu\\logo-4.jpg"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\img\\thuonghieu\\logo-5.jpg",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\img\\thuonghieu\\logo-5.jpg",
       "PackagePath": "staticwebassets\\img\\thuonghieu\\logo-5.jpg"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\img\\thuonghieu\\logo-6.jpg",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\img\\thuonghieu\\logo-6.jpg",
       "PackagePath": "staticwebassets\\img\\thuonghieu\\logo-6.jpg"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\img\\thuonghieu\\logo-7.jpg",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\img\\thuonghieu\\logo-7.jpg",
       "PackagePath": "staticwebassets\\img\\thuonghieu\\logo-7.jpg"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\img\\thuonghieu\\logo-8.jpg",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\img\\thuonghieu\\logo-8.jpg",
       "PackagePath": "staticwebassets\\img\\thuonghieu\\logo-8.jpg"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\img\\thuonghieu\\logo-9.jpg",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\img\\thuonghieu\\logo-9.jpg",
       "PackagePath": "staticwebassets\\img\\thuonghieu\\logo-9.jpg"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\img\\trang-chu-gioi-thieu-min-1.png",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\img\\trang-chu-gioi-thieu-min-1.png",
       "PackagePath": "staticwebassets\\img\\trang-chu-gioi-thieu-min-1.png"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\js\\site.js",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\lib\\bootstrap\\LICENSE",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\lib\\bootstrap\\LICENSE",
       "PackagePath": "staticwebassets\\lib\\bootstrap"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.css.map"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.min.css.map"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.css.map"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-grid.rtl.min.css.map"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.css.map"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.min.css.map"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.css.map"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-reboot.rtl.min.css.map"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.css.map"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.min.css.map"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.css.map"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap-utilities.rtl.min.css.map"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.css"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css.map",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.css.map"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.min.css"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.min.css.map"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.css.map"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\css\\bootstrap.rtl.min.css.map"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.js.map"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.bundle.min.js.map"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.js.map"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.esm.min.js.map"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.js"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js.map",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.js.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.js.map"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map",
       "PackagePath": "staticwebassets\\lib\\bootstrap\\dist\\js\\bootstrap.min.js.map"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\lib\\jquery-validation-unobtrusive\\LICENSE.txt",
       "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\LICENSE.txt"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\lib\\jquery-validation-unobtrusive\\dist\\jquery.validate.unobtrusive.js",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\lib\\jquery-validation-unobtrusive\\dist\\jquery.validate.unobtrusive.js",
       "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\dist\\jquery.validate.unobtrusive.js"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\lib\\jquery-validation-unobtrusive\\dist\\jquery.validate.unobtrusive.min.js",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\lib\\jquery-validation-unobtrusive\\dist\\jquery.validate.unobtrusive.min.js",
       "PackagePath": "staticwebassets\\lib\\jquery-validation-unobtrusive\\dist\\jquery.validate.unobtrusive.min.js"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\lib\\jquery-validation\\LICENSE.md",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\lib\\jquery-validation\\LICENSE.md",
       "PackagePath": "staticwebassets\\lib\\jquery-validation\\LICENSE.md"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.js",
       "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\additional-methods.js"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\lib\\jquery-validation\\dist\\additional-methods.min.js",
       "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\additional-methods.min.js"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.js",
       "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\jquery.validate.js"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\lib\\jquery-validation\\dist\\jquery.validate.min.js",
       "PackagePath": "staticwebassets\\lib\\jquery-validation\\dist\\jquery.validate.min.js"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\lib\\jquery\\LICENSE.txt",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\lib\\jquery\\LICENSE.txt",
       "PackagePath": "staticwebassets\\lib\\jquery\\LICENSE.txt"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\lib\\jquery\\dist\\jquery.js",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\lib\\jquery\\dist\\jquery.js",
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.js"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\lib\\jquery\\dist\\jquery.min.js",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\lib\\jquery\\dist\\jquery.min.js",
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.js"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\lib\\jquery\\dist\\jquery.min.map",
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\lib\\jquery\\dist\\jquery.slim.js",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\lib\\jquery\\dist\\jquery.slim.js",
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.slim.js"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\lib\\jquery\\dist\\jquery.slim.min.js",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\lib\\jquery\\dist\\jquery.slim.min.js",
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.slim.min.js"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\lib\\jquery\\dist\\jquery.slim.min.map",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\lib\\jquery\\dist\\jquery.slim.min.map",
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.slim.min.map"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\media\\MAIL.png",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\media\\MAIL.png",
       "PackagePath": "staticwebassets\\media\\MAIL.png"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\media\\MES.png",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\media\\MES.png",
       "PackagePath": "staticwebassets\\media\\MES.png"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\media\\PHONE.png",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\media\\PHONE.png",
       "PackagePath": "staticwebassets\\media\\PHONE.png"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\media\\WHATSAPP.png",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\media\\WHATSAPP.png",
       "PackagePath": "staticwebassets\\media\\WHATSAPP.png"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\media\\mail-icon.png",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\media\\mail-icon.png",
       "PackagePath": "staticwebassets\\media\\mail-icon.png"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\media\\news-placeholder.jpg",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\media\\news-placeholder.jpg",
       "PackagePath": "staticwebassets\\media\\news-placeholder.jpg"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\media\\phone-icon.png",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\media\\phone-icon.png",
       "PackagePath": "staticwebassets\\media\\phone-icon.png"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\media\\posts\\cover\\8-13082025_1f9dbf2410.png",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\media\\posts\\cover\\8-13082025_1f9dbf2410.png",
       "PackagePath": "staticwebassets\\media\\posts\\cover\\8-13082025_1f9dbf2410.png"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\media\\posts\\cover\\a1(172).jpg",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\media\\posts\\cover\\a1(172).jpg",
       "PackagePath": "staticwebassets\\media\\posts\\cover\\a1(172).jpg"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\media\\posts\\cover\\anh-chup-man-hinh-2025-01-14-luc-16.53.55(1).png",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\media\\posts\\cover\\anh-chup-man-hinh-2025-01-14-luc-16.53.55(1).png",
       "PackagePath": "staticwebassets\\media\\posts\\cover\\anh-chup-man-hinh-2025-01-14-luc-16.53.55(1).png"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\media\\posts\\cover\\baonnmt_20250521_pttg-hop-ve-chi-thi_3-182315_149-184836.jpg",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\media\\posts\\cover\\baonnmt_20250521_pttg-hop-ve-chi-thi_3-182315_149-184836.jpg",
       "PackagePath": "staticwebassets\\media\\posts\\cover\\baonnmt_20250521_pttg-hop-ve-chi-thi_3-182315_149-184836.jpg"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\media\\posts\\cover\\big city_5fe877b5c0.png",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\media\\posts\\cover\\big city_5fe877b5c0.png",
       "PackagePath": "staticwebassets\\media\\posts\\cover\\big city_5fe877b5c0.png"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\media\\posts\\cover\\dat-dai-1-17575038033621692300901-192351_920.jpg",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\media\\posts\\cover\\dat-dai-1-17575038033621692300901-192351_920.jpg",
       "PackagePath": "staticwebassets\\media\\posts\\cover\\dat-dai-1-17575038033621692300901-192351_920.jpg"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\media\\posts\\cover\\dsc02546-102914_747-120205.jpg",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\media\\posts\\cover\\dsc02546-102914_747-120205.jpg",
       "PackagePath": "staticwebassets\\media\\posts\\cover\\dsc02546-102914_747-120205.jpg"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\media\\posts\\cover\\img_4303-131317_612.jpg",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\media\\posts\\cover\\img_4303-131317_612.jpg",
       "PackagePath": "staticwebassets\\media\\posts\\cover\\img_4303-131317_612.jpg"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\media\\posts\\cover\\screenshot-2025-07-18-165356-093050_341-095724.jpg",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\media\\posts\\cover\\screenshot-2025-07-18-165356-093050_341-095724.jpg",
       "PackagePath": "staticwebassets\\media\\posts\\cover\\screenshot-2025-07-18-165356-093050_341-095724.jpg"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\media\\posts\\cover\\trang-chu-gioi-thieu-min-1.png",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\media\\posts\\cover\\trang-chu-gioi-thieu-min-1.png",
       "PackagePath": "staticwebassets\\media\\posts\\cover\\trang-chu-gioi-thieu-min-1.png"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\media\\posts\\cover\\vay-tay-16939989380041054058261.jpg",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\media\\posts\\cover\\vay-tay-16939989380041054058261.jpg",
       "PackagePath": "staticwebassets\\media\\posts\\cover\\vay-tay-16939989380041054058261.jpg"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\media\\posts\\cover\\z6906229649486_a9c0f80f16c6cd0e0156daee1c997c40_0db4190080.png",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\media\\posts\\cover\\z6906229649486_a9c0f80f16c6cd0e0156daee1c997c40_0db4190080.png",
       "PackagePath": "staticwebassets\\media\\posts\\cover\\z6906229649486_a9c0f80f16c6cd0e0156daee1c997c40_0db4190080.png"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\media\\posts\\cover\\z6995922012757_d96fae0150dda3d4a9913e2bd76562af-103906_677-160816.jpg",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\media\\posts\\cover\\z6995922012757_d96fae0150dda3d4a9913e2bd76562af-103906_677-160816.jpg",
       "PackagePath": "staticwebassets\\media\\posts\\cover\\z6995922012757_d96fae0150dda3d4a9913e2bd76562af-103906_677-160816.jpg"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\media\\posts\\cover\\ảnh 2 tlkl_67ae1a6dec.png",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\media\\posts\\cover\\ảnh 2 tlkl_67ae1a6dec.png",
       "PackagePath": "staticwebassets\\media\\posts\\cover\\ảnh 2 tlkl_67ae1a6dec.png"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv\\wwwroot\\uploads\\avatars\\2_a7f91986-4350-462e-a868-d52c393ace9f.png",
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\uploads\\avatars\\2_a7f91986-4350-462e-a868-d52c393ace9f.png",
       "PackagePath": "staticwebassets\\uploads\\avatars\\2_a7f91986-4350-462e-a868-d52c393ace9f.png"
     },
     {

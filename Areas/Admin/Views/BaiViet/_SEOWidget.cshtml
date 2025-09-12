@@ -98,6 +98,36 @@
         margin-right: 0.5rem;
         margin-top: 0.125rem;
     }
+    
+    .seo-score-circle {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        background: conic-gradient(#e9ecef 0deg, #e9ecef 360deg);
+        transition: background 0.3s ease;
+        flex-shrink: 0;
+        max-width: 80px;
+        max-height: 80px;
+        min-width: 80px;
+        min-height: 80px;
+    }
+    
+    .score-number {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #333;
+    }
+    
+    .score-label {
+        font-size: 0.8rem;
+        color: #666;
+        margin-top: -5px;
+    }
 </style>
 
 <script>
@@ -153,12 +183,15 @@
     function displaySEOResults(analysis) {
         const resultsDiv = document.getElementById('seo-results');
         
+        const scoreColor = getScoreColor(analysis.tongDiem);
+        const scorePercent = analysis.tongDiem * 3.6;
+        
         const html = `
             <div class="row mb-3">
                 <div class="col-12 text-center">
-                    <div class="seo-score-circle mx-auto mb-2" style="width: 80px; height: 80px; border-radius: 50%; background: conic-gradient(${getScoreColor(analysis.tongDiem)} 0deg, ${getScoreColor(analysis.tongDiem)} ${analysis.tongDiem * 3.6}deg, #e9ecef ${analysis.tongDiem * 3.6}deg, #e9ecef 360deg); display: flex; flex-direction: column; justify-content: center; align-items: center;">
-                        <div style="font-size: 1.5rem; font-weight: bold; color: #333;">${analysis.tongDiem}</div>
-                        <div style="font-size: 0.8rem; color: #666;">Điểm SEO</div>
+                    <div class="seo-score-circle mx-auto mb-2" style="background: conic-gradient(${scoreColor} 0deg, ${scoreColor} ${scorePercent}deg, #e9ecef ${scorePercent}deg, #e9ecef 360deg);">
+                        <div class="score-number">${analysis.tongDiem}</div>
+                        <div class="score-label">Điểm SEO</div>
                     </div>
                     <h6 class="text-${analysis.mauSac}">${analysis.trangThai}</h6>
                 </div>
