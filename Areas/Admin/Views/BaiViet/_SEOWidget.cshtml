@@ -1,0 +1,269 @@
+@model WEB_CV.Models.BaiViet
+
+<div class="card mb-4" id="seo-widget">
+    <div class="card-header d-flex justify-content-between align-items-center">
+        <h5 class="mb-0">
+            <i class="fas fa-search me-2"></i>Phân tích SEO
+        </h5>
+        <button type="button" class="btn btn-sm btn-outline-primary" onclick="analyzeSEO()">
+            <i class="fas fa-sync-alt me-1"></i>Phân tích
+        </button>
+    </div>
+    <div class="card-body">
+        <div id="seo-loading" class="text-center py-4" style="display: none;">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Đang phân tích...</span>
+            </div>
+            <p class="mt-2">Đang phân tích SEO...</p>
+        </div>
+        
+        <div id="seo-results" style="display: none;">
+            <!-- Kết quả phân tích sẽ được load ở đây -->
+        </div>
+        
+        <div id="seo-placeholder" class="text-center py-4 text-muted">
+            <i class="fas fa-chart-line fa-3x mb-3"></i>
+            <p>Nhấn "Phân tích" để kiểm tra điểm SEO của bài viết</p>
+        </div>
+    </div>
+</div>
+
+<style>
+    .seo-score-badge {
+        display: inline-block;
+        padding: 0.25rem 0.5rem;
+        border-radius: 0.375rem;
+        font-size: 0.875rem;
+        font-weight: 500;
+    }
+    
+    .seo-score-badge.red {
+        background-color: #f8d7da;
+        color: #721c24;
+    }
+    
+    .seo-score-badge.orange {
+        background-color: #fff3cd;
+        color: #856404;
+    }
+    
+    .seo-score-badge.yellow {
+        background-color: #fff3cd;
+        color: #856404;
+    }
+    
+    .seo-score-badge.green {
+        background-color: #d1edff;
+        color: #0c5460;
+    }
+    
+    .seo-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.5rem 0;
+        border-bottom: 1px solid #e9ecef;
+    }
+    
+    .seo-item:last-child {
+        border-bottom: none;
+    }
+    
+    .seo-progress {
+        height: 6px;
+        background-color: #e9ecef;
+        border-radius: 3px;
+        overflow: hidden;
+    }
+    
+    .seo-progress-bar {
+        height: 100%;
+        transition: width 0.3s ease;
+    }
+    
+    .seo-suggestions {
+        margin-top: 1rem;
+        padding-top: 1rem;
+        border-top: 1px solid #e9ecef;
+    }
+    
+    .seo-suggestion {
+        display: flex;
+        align-items: flex-start;
+        margin-bottom: 0.5rem;
+        font-size: 0.875rem;
+    }
+    
+    .seo-suggestion i {
+        margin-right: 0.5rem;
+        margin-top: 0.125rem;
+    }
+</style>
+
+<script>
+    function analyzeSEO() {
+        const loading = document.getElementById('seo-loading');
+        const results = document.getElementById('seo-results');
+        const placeholder = document.getElementById('seo-placeholder');
+        
+        // Hiển thị loading
+        loading.style.display = 'block';
+        results.style.display = 'none';
+        placeholder.style.display = 'none';
+        
+        // Lấy dữ liệu từ form
+        const tieuDe = document.querySelector('input[name="TieuDe"]')?.value || '';
+        const tomTat = document.querySelector('textarea[name="TomTat"]')?.value || '';
+        const noiDung = document.querySelector('textarea[name="NoiDung"]')?.value || '';
+        const anhTieuDeAlt = document.querySelector('input[name="AnhTieuDeAlt"]')?.value || '';
+        
+        // Gọi API phân tích
+        fetch('/Admin/SEO/AnalyzeContent', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'RequestVerificationToken': document.querySelector('input[name="__RequestVerificationToken"]').value
+            },
+            body: JSON.stringify({
+                tieuDe: tieuDe,
+                tomTat: tomTat,
+                noiDung: noiDung,
+                anhTieuDeAlt: anhTieuDeAlt
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            loading.style.display = 'none';
+            
+            if (data.success) {
+                displaySEOResults(data.data);
+                results.style.display = 'block';
+            } else {
+                alert('Lỗi phân tích SEO: ' + data.message);
+                placeholder.style.display = 'block';
+            }
+        })
+        .catch(error => {
+            loading.style.display = 'none';
+            alert('Lỗi kết nối: ' + error.message);
+            placeholder.style.display = 'block';
+        });
+    }
+    
+    function displaySEOResults(analysis) {
+        const resultsDiv = document.getElementById('seo-results');
+        
+        const html = `
+            <div class="row mb-3">
+                <div class="col-12 text-center">
+                    <div class="seo-score-circle mx-auto mb-2" style="width: 80px; height: 80px; border-radius: 50%; background: conic-gradient(${getScoreColor(analysis.tongDiem)} 0deg, ${getScoreColor(analysis.tongDiem)} ${analysis.tongDiem * 3.6}deg, #e9ecef ${analysis.tongDiem * 3.6}deg, #e9ecef 360deg); display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                        <div style="font-size: 1.5rem; font-weight: bold; color: #333;">${analysis.tongDiem}</div>
+                        <div style="font-size: 0.8rem; color: #666;">Điểm SEO</div>
+                    </div>
+                    <h6 class="text-${analysis.mauSac}">${analysis.trangThai}</h6>
+                </div>
+            </div>
+            
+            <div class="seo-item">
+                <span><i class="fas fa-heading me-2"></i>Tiêu đề</span>
+                <div class="d-flex align-items-center">
+                    <div class="seo-progress me-2" style="width: 100px;">
+                        <div class="seo-progress-bar bg-${analysis.tieuDeChiTiet.mauSac}" style="width: ${analysis.tieuDeChiTiet.diem}%"></div>
+                    </div>
+                    <span class="seo-score-badge ${analysis.tieuDeChiTiet.mauSac}">${analysis.tieuDeChiTiet.diem}/100</span>
+                </div>
+            </div>
+            
+            <div class="seo-item">
+                <span><i class="fas fa-align-left me-2"></i>Tóm tắt</span>
+                <div class="d-flex align-items-center">
+                    <div class="seo-progress me-2" style="width: 100px;">
+                        <div class="seo-progress-bar bg-${analysis.tomTatChiTiet.mauSac}" style="width: ${analysis.tomTatChiTiet.diem}%"></div>
+                    </div>
+                    <span class="seo-score-badge ${analysis.tomTatChiTiet.mauSac}">${analysis.tomTatChiTiet.diem}/100</span>
+                </div>
+            </div>
+            
+            <div class="seo-item">
+                <span><i class="fas fa-file-alt me-2"></i>Nội dung</span>
+                <div class="d-flex align-items-center">
+                    <div class="seo-progress me-2" style="width: 100px;">
+                        <div class="seo-progress-bar bg-${analysis.noiDungChiTiet.mauSac}" style="width: ${analysis.noiDungChiTiet.diem}%"></div>
+                    </div>
+                    <span class="seo-score-badge ${analysis.noiDungChiTiet.mauSac}">${analysis.noiDungChiTiet.diem}/100</span>
+                </div>
+            </div>
+            
+            <div class="seo-item">
+                <span><i class="fas fa-key me-2"></i>Từ khóa</span>
+                <div class="d-flex align-items-center">
+                    <div class="seo-progress me-2" style="width: 100px;">
+                        <div class="seo-progress-bar bg-${analysis.tuKhoaChiTiet.mauSac}" style="width: ${analysis.tuKhoaChiTiet.diem}%"></div>
+                    </div>
+                    <span class="seo-score-badge ${analysis.tuKhoaChiTiet.mauSac}">${analysis.tuKhoaChiTiet.diem}/100</span>
+                </div>
+            </div>
+            
+            <div class="seo-item">
+                <span><i class="fas fa-sitemap me-2"></i>Cấu trúc</span>
+                <div class="d-flex align-items-center">
+                    <div class="seo-progress me-2" style="width: 100px;">
+                        <div class="seo-progress-bar bg-${analysis.cauTrucChiTiet.mauSac}" style="width: ${analysis.cauTrucChiTiet.diem}%"></div>
+                    </div>
+                    <span class="seo-score-badge ${analysis.cauTrucChiTiet.mauSac}">${analysis.cauTrucChiTiet.diem}/100</span>
+                </div>
+            </div>
+            
+            <div class="seo-item">
+                <span><i class="fas fa-image me-2"></i>Hình ảnh</span>
+                <div class="d-flex align-items-center">
+                    <div class="seo-progress me-2" style="width: 100px;">
+                        <div class="seo-progress-bar bg-${analysis.hinhAnhChiTiet.mauSac}" style="width: ${analysis.hinhAnhChiTiet.diem}%"></div>
+                    </div>
+                    <span class="seo-score-badge ${analysis.hinhAnhChiTiet.mauSac}">${analysis.hinhAnhChiTiet.diem}/100</span>
+                </div>
+            </div>
+            
+            <div class="seo-item">
+                <span><i class="fas fa-link me-2"></i>Liên kết</span>
+                <div class="d-flex align-items-center">
+                    <div class="seo-progress me-2" style="width: 100px;">
+                        <div class="seo-progress-bar bg-${analysis.lienKetChiTiet.mauSac}" style="width: ${analysis.lienKetChiTiet.diem}%"></div>
+                    </div>
+                    <span class="seo-score-badge ${analysis.lienKetChiTiet.mauSac}">${analysis.lienKetChiTiet.diem}/100</span>
+                </div>
+            </div>
+            
+            <div class="seo-item">
+                <span><i class="fas fa-ruler me-2"></i>Độ dài</span>
+                <div class="d-flex align-items-center">
+                    <div class="seo-progress me-2" style="width: 100px;">
+                        <div class="seo-progress-bar bg-${analysis.doDaiChiTiet.mauSac}" style="width: ${analysis.doDaiChiTiet.diem}%"></div>
+                    </div>
+                    <span class="seo-score-badge ${analysis.doDaiChiTiet.mauSac}">${analysis.doDaiChiTiet.diem}/100</span>
+                </div>
+            </div>
+            
+            ${analysis.goiY && analysis.goiY.length > 0 ? `
+                <div class="seo-suggestions">
+                    <h6><i class="fas fa-lightbulb me-2"></i>Gợi ý cải thiện</h6>
+                    ${analysis.goiY.map(goiY => `
+                        <div class="seo-suggestion">
+                            <i class="fas fa-arrow-right text-primary"></i>
+                            <span>${goiY}</span>
+                        </div>
+                    `).join('')}
+                </div>
+            ` : ''}
+        `;
+        
+        resultsDiv.innerHTML = html;
+    }
+    
+    function getScoreColor(score) {
+        if (score >= 80) return '#28a745';
+        if (score >= 60) return '#ffc107';
+        if (score >= 40) return '#fd7e14';
+        return '#dc3545';
+    }
+</script>

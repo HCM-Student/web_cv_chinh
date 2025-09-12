@@ -138,8 +138,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>9c248kdvv6</Fingerprint>
-      <Integrity>2Uw5wkKYEwgSEMw52haE2PA1FxwmGWhbkhH1XMJQ518=</Integrity>
+      <Fingerprint>bzyd1xvqw0</Fingerprint>
+      <Integrity>qdjXOraqZj7fBLc6oBlxBlWqcgAuR4x5wJlXz/nWhwI=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\header.css'))</OriginalItemSpec>
@@ -192,8 +192,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>9wudkum6id</Fingerprint>
-      <Integrity>qYnAe555iHQMIqIYo+7ZwoqeW2WmB5bHpgDadPtoe2E=</Integrity>
+      <Fingerprint>06bqptmgfv</Fingerprint>
+      <Integrity>CGjymVufXktJZWSgwzwNxohWjOAv9i4MhIgA6UY4qQg=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\pricing-hero.css'))</OriginalItemSpec>
@@ -228,8 +228,8 @@
       <RelatedAsset></RelatedAsset>
       <AssetTraitName></AssetTraitName>
       <AssetTraitValue></AssetTraitValue>
-      <Fingerprint>kdzda6rpnc</Fingerprint>
-      <Integrity>WAY8xBT7QjxZXd/TKNkWiNRWOw4hRW39qAqo1zZ5GDQ=</Integrity>
+      <Fingerprint>6a3i3oxij0</Fingerprint>
+      <Integrity>4kvyFSObHDXD3j9Li1aI0N/ywSiNZuQbyaReiS3eQkc=</Integrity>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
       <OriginalItemSpec>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\staticwebassets\css\site.css'))</OriginalItemSpec>

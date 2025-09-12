@@ -15,6 +15,7 @@ namespace WEB_CV.Data
         public DbSet<BaiVietTag> BaiVietTags { get; set; }
         public DbSet<CaiDat> CaiDats { get; set; }
         public DbSet<LienHe> LienHes { get; set; }
+        public DbSet<SEOAnalysis> SEOAnalyses { get; set; }
 
         protected override void OnModelCreating(ModelBuilder mb)
         {
@@ -90,6 +91,31 @@ namespace WEB_CV.Data
                 e.Property(x => x.NoiDung).IsRequired();
                 e.Property(x => x.NgayGui).HasDefaultValueSql("GETDATE()");
                 e.HasIndex(x => x.NgayGui);
+            });
+
+            // ===== SEOAnalysis =====
+            mb.Entity<SEOAnalysis>(e =>
+            {
+                e.Property(x => x.TongDiem).HasDefaultValue(0);
+                e.Property(x => x.DiemTieuDe).HasDefaultValue(0);
+                e.Property(x => x.DiemTomTat).HasDefaultValue(0);
+                e.Property(x => x.DiemNoiDung).HasDefaultValue(0);
+                e.Property(x => x.DiemTuKhoa).HasDefaultValue(0);
+                e.Property(x => x.DiemCauTruc).HasDefaultValue(0);
+                e.Property(x => x.DiemHinhAnh).HasDefaultValue(0);
+                e.Property(x => x.DiemLienKet).HasDefaultValue(0);
+                e.Property(x => x.DiemDoDai).HasDefaultValue(0);
+                e.Property(x => x.NgayPhanTich).HasDefaultValueSql("GETDATE()");
+                e.Property(x => x.DaXuLy).HasDefaultValue(false);
+                
+                // Foreign key relationship
+                e.HasOne(x => x.BaiViet)
+                 .WithMany()
+                 .HasForeignKey(x => x.BaiVietId)
+                 .OnDelete(DeleteBehavior.Cascade);
+                 
+                e.HasIndex(x => x.BaiVietId);
+                e.HasIndex(x => x.NgayPhanTich);
             });
         }
     }

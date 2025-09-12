@@ -1,0 +1,915 @@
+@model WEB_CV.Models.SEOAnalysisVM
+@{
+    ViewData["Title"] = "Phân tích SEO";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container py-4">
+    <div class="row">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h1 class="h4 mb-0">Phân tích SEO</h1>
+                <button type="button" class="btn btn-outline-primary" onclick="refreshAnalysis()">
+                    <i class="fas fa-sync-alt me-2"></i>Làm mới
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tổng quan điểm SEO -->
+    <div class="row mb-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body text-center">
+                    <div class="seo-score-circle mx-auto mb-3" data-score="@Model.TongDiem">
+                        <div class="score-number">@Model.TongDiem</div>
+                        <div class="score-label">Điểm SEO</div>
+                    </div>
+                    <h3 class="text-@Model.MauSac">@Model.TrangThai</h3>
+                    <p class="text-muted">@Model.TieuDe</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chi tiết các điểm -->
+    <div class="row">
+        <div class="col-md-6 mb-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-heading me-2"></i>Tiêu đề
+                        <span class="badge bg-@Model.TieuDeChiTiet.MauSac float-end">@Model.TieuDeChiTiet.Diem/100</span>
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="progress mb-3" style="height: 8px;">
+                        <div class="progress-bar bg-@Model.TieuDeChiTiet.MauSac" style="width: @Model.TieuDeChiTiet.Diem%"></div>
+                    </div>
+                    <ul class="list-unstyled mb-0">
+                        @foreach (var ghiChu in Model.TieuDeChiTiet.GhiChu)
+                        {
+                            <li class="mb-1">
+                                @if (ghiChu.StartsWith("✓"))
+                                {
+                                    <i class="fas fa-check text-success me-2"></i>
+                                    <span class="text-success">@ghiChu.Substring(1)</span>
+                                }
+                                else if (ghiChu.StartsWith("⚠"))
+                                {
+                                    <i class="fas fa-exclamation-triangle text-warning me-2"></i>
+                                    <span class="text-warning">@ghiChu.Substring(1)</span>
+                                }
+                                else
+                                {
+                                    <i class="fas fa-info-circle text-info me-2"></i>
+                                    <span>@ghiChu</span>
+                                }
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 mb-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-align-left me-2"></i>Tóm tắt
+                        <span class="badge bg-@Model.TomTatChiTiet.MauSac float-end">@Model.TomTatChiTiet.Diem/100</span>
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="progress mb-3" style="height: 8px;">
+                        <div class="progress-bar bg-@Model.TomTatChiTiet.MauSac" style="width: @Model.TomTatChiTiet.Diem%"></div>
+                    </div>
+                    <ul class="list-unstyled mb-0">
+                        @foreach (var ghiChu in Model.TomTatChiTiet.GhiChu)
+                        {
+                            <li class="mb-1">
+                                @if (ghiChu.StartsWith("✓"))
+                                {
+                                    <i class="fas fa-check text-success me-2"></i>
+                                    <span class="text-success">@ghiChu.Substring(1)</span>
+                                }
+                                else if (ghiChu.StartsWith("⚠"))
+                                {
+                                    <i class="fas fa-exclamation-triangle text-warning me-2"></i>
+                                    <span class="text-warning">@ghiChu.Substring(1)</span>
+                                }
+                                else
+                                {
+                                    <i class="fas fa-info-circle text-info me-2"></i>
+                                    <span>@ghiChu</span>
+                                }
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 mb-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-file-alt me-2"></i>Nội dung
+                        <span class="badge bg-@Model.NoiDungChiTiet.MauSac float-end">@Model.NoiDungChiTiet.Diem/100</span>
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="progress mb-3" style="height: 8px;">
+                        <div class="progress-bar bg-@Model.NoiDungChiTiet.MauSac" style="width: @Model.NoiDungChiTiet.Diem%"></div>
+                    </div>
+                    <ul class="list-unstyled mb-0">
+                        @foreach (var ghiChu in Model.NoiDungChiTiet.GhiChu)
+                        {
+                            <li class="mb-1">
+                                @if (ghiChu.StartsWith("✓"))
+                                {
+                                    <i class="fas fa-check text-success me-2"></i>
+                                    <span class="text-success">@ghiChu.Substring(1)</span>
+                                }
+                                else if (ghiChu.StartsWith("⚠"))
+                                {
+                                    <i class="fas fa-exclamation-triangle text-warning me-2"></i>
+                                    <span class="text-warning">@ghiChu.Substring(1)</span>
+                                }
+                                else
+                                {
+                                    <i class="fas fa-info-circle text-info me-2"></i>
+                                    <span>@ghiChu</span>
+                                }
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 mb-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-key me-2"></i>Từ khóa
+                        <span class="badge bg-@Model.TuKhoaChiTiet.MauSac float-end">@Model.TuKhoaChiTiet.Diem/100</span>
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="progress mb-3" style="height: 8px;">
+                        <div class="progress-bar bg-@Model.TuKhoaChiTiet.MauSac" style="width: @Model.TuKhoaChiTiet.Diem%"></div>
+                    </div>
+                    <ul class="list-unstyled mb-0">
+                        @foreach (var ghiChu in Model.TuKhoaChiTiet.GhiChu)
+                        {
+                            <li class="mb-1">
+                                @if (ghiChu.StartsWith("✓"))
+                                {
+                                    <i class="fas fa-check text-success me-2"></i>
+                                    <span class="text-success">@ghiChu.Substring(1)</span>
+                                }
+                                else if (ghiChu.StartsWith("⚠"))
+                                {
+                                    <i class="fas fa-exclamation-triangle text-warning me-2"></i>
+                                    <span class="text-warning">@ghiChu.Substring(1)</span>
+                                }
+                                else
+                                {
+                                    <i class="fas fa-info-circle text-info me-2"></i>
+                                    <span>@ghiChu</span>
+                                }
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 mb-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-sitemap me-2"></i>Cấu trúc
+                        <span class="badge bg-@Model.CauTrucChiTiet.MauSac float-end">@Model.CauTrucChiTiet.Diem/100</span>
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="progress mb-3" style="height: 8px;">
+                        <div class="progress-bar bg-@Model.CauTrucChiTiet.MauSac" style="width: @Model.CauTrucChiTiet.Diem%"></div>
+                    </div>
+                    <ul class="list-unstyled mb-0">
+                        @foreach (var ghiChu in Model.CauTrucChiTiet.GhiChu)
+                        {
+                            <li class="mb-1">
+                                @if (ghiChu.StartsWith("✓"))
+                                {
+                                    <i class="fas fa-check text-success me-2"></i>
+                                    <span class="text-success">@ghiChu.Substring(1)</span>
+                                }
+                                else if (ghiChu.StartsWith("⚠"))
+                                {
+                                    <i class="fas fa-exclamation-triangle text-warning me-2"></i>
+                                    <span class="text-warning">@ghiChu.Substring(1)</span>
+                                }
+                                else
+                                {
+                                    <i class="fas fa-info-circle text-info me-2"></i>
+                                    <span>@ghiChu</span>
+                                }
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 mb-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-image me-2"></i>Hình ảnh
+                        <span class="badge bg-@Model.HinhAnhChiTiet.MauSac float-end">@Model.HinhAnhChiTiet.Diem/100</span>
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="progress mb-3" style="height: 8px;">
+                        <div class="progress-bar bg-@Model.HinhAnhChiTiet.MauSac" style="width: @Model.HinhAnhChiTiet.Diem%"></div>
+                    </div>
+                    <ul class="list-unstyled mb-0">
+                        @foreach (var ghiChu in Model.HinhAnhChiTiet.GhiChu)
+                        {
+                            <li class="mb-1">
+                                @if (ghiChu.StartsWith("✓"))
+                                {
+                                    <i class="fas fa-check text-success me-2"></i>
+                                    <span class="text-success">@ghiChu.Substring(1)</span>
+                                }
+                                else if (ghiChu.StartsWith("⚠"))
+                                {
+                                    <i class="fas fa-exclamation-triangle text-warning me-2"></i>
+                                    <span class="text-warning">@ghiChu.Substring(1)</span>
+                                }
+                                else
+                                {
+                                    <i class="fas fa-info-circle text-info me-2"></i>
+                                    <span>@ghiChu</span>
+                                }
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 mb-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-link me-2"></i>Liên kết
+                        <span class="badge bg-@Model.LienKetChiTiet.MauSac float-end">@Model.LienKetChiTiet.Diem/100</span>
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="progress mb-3" style="height: 8px;">
+                        <div class="progress-bar bg-@Model.LienKetChiTiet.MauSac" style="width: @Model.LienKetChiTiet.Diem%"></div>
+                    </div>
+                    <ul class="list-unstyled mb-0">
+                        @foreach (var ghiChu in Model.LienKetChiTiet.GhiChu)
+                        {
+                            <li class="mb-1">
+                                @if (ghiChu.StartsWith("✓"))
+                                {
+                                    <i class="fas fa-check text-success me-2"></i>
+                                    <span class="text-success">@ghiChu.Substring(1)</span>
+                                }
+                                else if (ghiChu.StartsWith("⚠"))
+                                {
+                                    <i class="fas fa-exclamation-triangle text-warning me-2"></i>
+                                    <span class="text-warning">@ghiChu.Substring(1)</span>
+                                }
+                                else
+                                {
+                                    <i class="fas fa-info-circle text-info me-2"></i>
+                                    <span>@ghiChu</span>
+                                }
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 mb-4">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-ruler me-2"></i>Độ dài
+                        <span class="badge bg-@Model.DoDaiChiTiet.MauSac float-end">@Model.DoDaiChiTiet.Diem/100</span>
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <div class="progress mb-3" style="height: 8px;">
+                        <div class="progress-bar bg-@Model.DoDaiChiTiet.MauSac" style="width: @Model.DoDaiChiTiet.Diem%"></div>
+                    </div>
+                    <ul class="list-unstyled mb-0">
+                        @foreach (var ghiChu in Model.DoDaiChiTiet.GhiChu)
+                        {
+                            <li class="mb-1">
+                                @if (ghiChu.StartsWith("✓"))
+                                {
+                                    <i class="fas fa-check text-success me-2"></i>
+                                    <span class="text-success">@ghiChu.Substring(1)</span>
+                                }
+                                else if (ghiChu.StartsWith("⚠"))
+                                {
+                                    <i class="fas fa-exclamation-triangle text-warning me-2"></i>
+                                    <span class="text-warning">@ghiChu.Substring(1)</span>
+                                }
+                                else
+                                {
+                                    <i class="fas fa-info-circle text-info me-2"></i>
+                                    <span>@ghiChu</span>
+                                }
+                            </li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Gợi ý cải thiện -->
+    @if (Model.GoiY.Any())
+    {
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0">
+                            <i class="fas fa-lightbulb me-2"></i>Gợi ý cải thiện
+                        </h5>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-group list-group-flush">
+                            @foreach (var goiY in Model.GoiY)
+                            {
+                                <li class="list-group-item d-flex align-items-center">
+                                    <i class="fas fa-arrow-right text-primary me-3"></i>
+                                    <span>@goiY</span>
+                                </li>
+                            }
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+<style>
+    .seo-score-circle {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        background: conic-gradient(#e9ecef 0deg, #e9ecef 360deg);
+        transition: all 0.3s ease;
+    }
+
+    .seo-score-circle[data-score] {
+        background: conic-gradient(
+            var(--score-color) 0deg,
+            var(--score-color) calc(var(--score-percent) * 3.6deg),
+            #e9ecef calc(var(--score-percent) * 3.6deg),
+            #e9ecef 360deg
+        );
+    }
+
+    .seo-score-circle[data-score="0"] {
+        --score-color: #dc3545;
+        --score-percent: 0;
+    }
+
+    .seo-score-circle[data-score="1"] {
+        --score-color: #dc3545;
+        --score-percent: 1;
+    }
+
+    .seo-score-circle[data-score="2"] {
+        --score-color: #dc3545;
+        --score-percent: 2;
+    }
+
+    .seo-score-circle[data-score="3"] {
+        --score-color: #dc3545;
+        --score-percent: 3;
+    }
+
+    .seo-score-circle[data-score="4"] {
+        --score-color: #dc3545;
+        --score-percent: 4;
+    }
+
+    .seo-score-circle[data-score="5"] {
+        --score-color: #dc3545;
+        --score-percent: 5;
+    }
+
+    .seo-score-circle[data-score="6"] {
+        --score-color: #dc3545;
+        --score-percent: 6;
+    }
+
+    .seo-score-circle[data-score="7"] {
+        --score-color: #dc3545;
+        --score-percent: 7;
+    }
+
+    .seo-score-circle[data-score="8"] {
+        --score-color: #dc3545;
+        --score-percent: 8;
+    }
+
+    .seo-score-circle[data-score="9"] {
+        --score-color: #dc3545;
+        --score-percent: 9;
+    }
+
+    .seo-score-circle[data-score="10"] {
+        --score-color: #dc3545;
+        --score-percent: 10;
+    }
+
+    .seo-score-circle[data-score="11"] {
+        --score-color: #dc3545;
+        --score-percent: 11;
+    }
+
+    .seo-score-circle[data-score="12"] {
+        --score-color: #dc3545;
+        --score-percent: 12;
+    }
+
+    .seo-score-circle[data-score="13"] {
+        --score-color: #dc3545;
+        --score-percent: 13;
+    }
+
+    .seo-score-circle[data-score="14"] {
+        --score-color: #dc3545;
+        --score-percent: 14;
+    }
+
+    .seo-score-circle[data-score="15"] {
+        --score-color: #dc3545;
+        --score-percent: 15;
+    }
+
+    .seo-score-circle[data-score="16"] {
+        --score-color: #dc3545;
+        --score-percent: 16;
+    }
+
+    .seo-score-circle[data-score="17"] {
+        --score-color: #dc3545;
+        --score-percent: 17;
+    }
+
+    .seo-score-circle[data-score="18"] {
+        --score-color: #dc3545;
+        --score-percent: 18;
+    }
+
+    .seo-score-circle[data-score="19"] {
+        --score-color: #dc3545;
+        --score-percent: 19;
+    }
+
+    .seo-score-circle[data-score="20"] {
+        --score-color: #dc3545;
+        --score-percent: 20;
+    }
+
+    .seo-score-circle[data-score="21"] {
+        --score-color: #dc3545;
+        --score-percent: 21;
+    }
+
+    .seo-score-circle[data-score="22"] {
+        --score-color: #dc3545;
+        --score-percent: 22;
+    }
+
+    .seo-score-circle[data-score="23"] {
+        --score-color: #dc3545;
+        --score-percent: 23;
+    }
+
+    .seo-score-circle[data-score="24"] {
+        --score-color: #dc3545;
+        --score-percent: 24;
+    }
+
+    .seo-score-circle[data-score="25"] {
+        --score-color: #dc3545;
+        --score-percent: 25;
+    }
+
+    .seo-score-circle[data-score="26"] {
+        --score-color: #dc3545;
+        --score-percent: 26;
+    }
+
+    .seo-score-circle[data-score="27"] {
+        --score-color: #dc3545;
+        --score-percent: 27;
+    }
+
+    .seo-score-circle[data-score="28"] {
+        --score-color: #dc3545;
+        --score-percent: 28;
+    }
+
+    .seo-score-circle[data-score="29"] {
+        --score-color: #dc3545;
+        --score-percent: 29;
+    }
+
+    .seo-score-circle[data-score="30"] {
+        --score-color: #dc3545;
+        --score-percent: 30;
+    }
+
+    .seo-score-circle[data-score="31"] {
+        --score-color: #dc3545;
+        --score-percent: 31;
+    }
+
+    .seo-score-circle[data-score="32"] {
+        --score-color: #dc3545;
+        --score-percent: 32;
+    }
+
+    .seo-score-circle[data-score="33"] {
+        --score-color: #dc3545;
+        --score-percent: 33;
+    }
+
+    .seo-score-circle[data-score="34"] {
+        --score-color: #dc3545;
+        --score-percent: 34;
+    }
+
+    .seo-score-circle[data-score="35"] {
+        --score-color: #dc3545;
+        --score-percent: 35;
+    }
+
+    .seo-score-circle[data-score="36"] {
+        --score-color: #dc3545;
+        --score-percent: 36;
+    }
+
+    .seo-score-circle[data-score="37"] {
+        --score-color: #dc3545;
+        --score-percent: 37;
+    }
+
+    .seo-score-circle[data-score="38"] {
+        --score-color: #dc3545;
+        --score-percent: 38;
+    }
+
+    .seo-score-circle[data-score="39"] {
+        --score-color: #dc3545;
+        --score-percent: 39;
+    }
+
+    .seo-score-circle[data-score="40"] {
+        --score-color: #dc3545;
+        --score-percent: 40;
+    }
+
+    .seo-score-circle[data-score="41"] {
+        --score-color: #dc3545;
+        --score-percent: 41;
+    }
+
+    .seo-score-circle[data-score="42"] {
+        --score-color: #dc3545;
+        --score-percent: 42;
+    }
+
+    .seo-score-circle[data-score="43"] {
+        --score-color: #dc3545;
+        --score-percent: 43;
+    }
+
+    .seo-score-circle[data-score="44"] {
+        --score-color: #dc3545;
+        --score-percent: 44;
+    }
+
+    .seo-score-circle[data-score="45"] {
+        --score-color: #dc3545;
+        --score-percent: 45;
+    }
+
+    .seo-score-circle[data-score="46"] {
+        --score-color: #dc3545;
+        --score-percent: 46;
+    }
+
+    .seo-score-circle[data-score="47"] {
+        --score-color: #dc3545;
+        --score-percent: 47;
+    }
+
+    .seo-score-circle[data-score="48"] {
+        --score-color: #dc3545;
+        --score-percent: 48;
+    }
+
+    .seo-score-circle[data-score="49"] {
+        --score-color: #dc3545;
+        --score-percent: 49;
+    }
+
+    .seo-score-circle[data-score="50"] {
+        --score-color: #dc3545;
+        --score-percent: 50;
+    }
+
+    .seo-score-circle[data-score="51"] {
+        --score-color: #dc3545;
+        --score-percent: 51;
+    }
+
+    .seo-score-circle[data-score="52"] {
+        --score-color: #dc3545;
+        --score-percent: 52;
+    }
+
+    .seo-score-circle[data-score="53"] {
+        --score-color: #dc3545;
+        --score-percent: 53;
+    }
+
+    .seo-score-circle[data-score="54"] {
+        --score-color: #dc3545;
+        --score-percent: 54;
+    }
+
+    .seo-score-circle[data-score="55"] {
+        --score-color: #dc3545;
+        --score-percent: 55;
+    }
+
+    .seo-score-circle[data-score="56"] {
+        --score-color: #dc3545;
+        --score-percent: 56;
+    }
+
+    .seo-score-circle[data-score="57"] {
+        --score-color: #dc3545;
+        --score-percent: 57;
+    }
+
+    .seo-score-circle[data-score="58"] {
+        --score-color: #dc3545;
+        --score-percent: 58;
+    }
+
+    .seo-score-circle[data-score="59"] {
+        --score-color: #dc3545;
+        --score-percent: 59;
+    }
+
+    .seo-score-circle[data-score="60"] {
+        --score-color: #dc3545;
+        --score-percent: 60;
+    }
+
+    .seo-score-circle[data-score="61"] {
+        --score-color: #dc3545;
+        --score-percent: 61;
+    }
+
+    .seo-score-circle[data-score="62"] {
+        --score-color: #dc3545;
+        --score-percent: 62;
+    }
+
+    .seo-score-circle[data-score="63"] {
+        --score-color: #dc3545;
+        --score-percent: 63;
+    }
+
+    .seo-score-circle[data-score="64"] {
+        --score-color: #dc3545;
+        --score-percent: 64;
+    }
+
+    .seo-score-circle[data-score="65"] {
+        --score-color: #dc3545;
+        --score-percent: 65;
+    }
+
+    .seo-score-circle[data-score="66"] {
+        --score-color: #dc3545;
+        --score-percent: 66;
+    }
+
+    .seo-score-circle[data-score="67"] {
+        --score-color: #dc3545;
+        --score-percent: 67;
+    }
+
+    .seo-score-circle[data-score="68"] {
+        --score-color: #dc3545;
+        --score-percent: 68;
+    }
+
+    .seo-score-circle[data-score="69"] {
+        --score-color: #dc3545;
+        --score-percent: 69;
+    }
+
+    .seo-score-circle[data-score="70"] {
+        --score-color: #dc3545;
+        --score-percent: 70;
+    }
+
+    .seo-score-circle[data-score="71"] {
+        --score-color: #dc3545;
+        --score-percent: 71;
+    }
+
+    .seo-score-circle[data-score="72"] {
+        --score-color: #dc3545;
+        --score-percent: 72;
+    }
+
+    .seo-score-circle[data-score="73"] {
+        --score-color: #dc3545;
+        --score-percent: 73;
+    }
+
+    .seo-score-circle[data-score="74"] {
+        --score-color: #dc3545;
+        --score-percent: 74;
+    }
+
+    .seo-score-circle[data-score="75"] {
+        --score-color: #dc3545;
+        --score-percent: 75;
+    }
+
+    .seo-score-circle[data-score="76"] {
+        --score-color: #dc3545;
+        --score-percent: 76;
+    }
+
+    .seo-score-circle[data-score="77"] {
+        --score-color: #dc3545;
+        --score-percent: 77;
+    }
+
+    .seo-score-circle[data-score="78"] {
+        --score-color: #dc3545;
+        --score-percent: 78;
+    }
+
+    .seo-score-circle[data-score="79"] {
+        --score-color: #dc3545;
+        --score-percent: 79;
+    }
+
+    .seo-score-circle[data-score="80"] {
+        --score-color: #28a745;
+        --score-percent: 80;
+    }
+
+    .seo-score-circle[data-score="81"] {
+        --score-color: #28a745;
+        --score-percent: 81;
+    }
+
+    .seo-score-circle[data-score="82"] {
+        --score-color: #28a745;
+        --score-percent: 82;
+    }
+
+    .seo-score-circle[data-score="83"] {
+        --score-color: #28a745;
+        --score-percent: 83;
+    }
+
+    .seo-score-circle[data-score="84"] {
+        --score-color: #28a745;
+        --score-percent: 84;
+    }
+
+    .seo-score-circle[data-score="85"] {
+        --score-color: #28a745;
+        --score-percent: 85;
+    }
+
+    .seo-score-circle[data-score="86"] {
+        --score-color: #28a745;
+        --score-percent: 86;
+    }
+
+    .seo-score-circle[data-score="87"] {
+        --score-color: #28a745;
+        --score-percent: 87;
+    }
+
+    .seo-score-circle[data-score="88"] {
+        --score-color: #28a745;
+        --score-percent: 88;
+    }
+
+    .seo-score-circle[data-score="89"] {
+        --score-color: #28a745;
+        --score-percent: 89;
+    }
+
+    .seo-score-circle[data-score="90"] {
+        --score-color: #28a745;
+        --score-percent: 90;
+    }
+
+    .seo-score-circle[data-score="91"] {
+        --score-color: #28a745;
+        --score-percent: 91;
+    }
+
+    .seo-score-circle[data-score="92"] {
+        --score-color: #28a745;
+        --score-percent: 92;
+    }
+
+    .seo-score-circle[data-score="93"] {
+        --score-color: #28a745;
+        --score-percent: 93;
+    }
+
+    .seo-score-circle[data-score="94"] {
+        --score-color: #28a745;
+        --score-percent: 94;
+    }
+
+    .seo-score-circle[data-score="95"] {
+        --score-color: #28a745;
+        --score-percent: 95;
+    }
+
+    .seo-score-circle[data-score="96"] {
+        --score-color: #28a745;
+        --score-percent: 96;
+    }
+
+    .seo-score-circle[data-score="97"] {
+        --score-color: #28a745;
+        --score-percent: 97;
+    }
+
+    .seo-score-circle[data-score="98"] {
+        --score-color: #28a745;
+        --score-percent: 98;
+    }
+
+    .seo-score-circle[data-score="99"] {
+        --score-color: #28a745;
+        --score-percent: 99;
+    }
+
+    .seo-score-circle[data-score="100"] {
+        --score-color: #28a745;
+        --score-percent: 100;
+    }
+
+    .score-number {
+        font-size: 2rem;
+        font-weight: bold;
+        color: #333;
+    }
+
+    .score-label {
+        font-size: 0.9rem;
+        color: #666;
+        margin-top: -5px;
+    }
+</style>
+
+<script>
+    function refreshAnalysis() {
+        location.reload();
+    }
+</script>

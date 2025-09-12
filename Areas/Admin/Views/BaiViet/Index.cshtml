@@ -182,6 +182,9 @@
                                 <a asp-area="Admin" asp-controller="BaiViet" asp-action="Edit" asp-route-id="@item.Id" class="action-btn edit-btn" title="Chỉnh sửa">
                                     <i class="fas fa-edit"></i>
                                 </a>
+                                <a asp-area="Admin" asp-controller="BaiViet" asp-action="SEOAnalysis" asp-route-id="@item.Id" class="action-btn seo-btn" title="Phân tích SEO">
+                                    <i class="fas fa-search"></i>
+                                </a>
                                 <a asp-area="Admin" asp-controller="BaiViet" asp-action="Delete" asp-route-id="@item.Id" class="action-btn delete-btn" title="Xóa">
                                     <i class="fas fa-trash"></i>
                                 </a>
@@ -296,6 +299,9 @@
                                         </a>
                                         <a class="btn btn-sm btn-outline-primary" asp-area="Admin" asp-controller="BaiViet" asp-action="Edit" asp-route-id="@item.Id" title="Chỉnh sửa">
                                             <i class="fas fa-edit"></i>
+                                        </a>
+                                        <a class="btn btn-sm btn-outline-warning" asp-area="Admin" asp-controller="BaiViet" asp-action="SEOAnalysis" asp-route-id="@item.Id" title="Phân tích SEO">
+                                            <i class="fas fa-search"></i>
                                         </a>
                                         <a class="btn btn-sm btn-outline-danger" asp-area="Admin" asp-controller="BaiViet" asp-action="Delete" asp-route-id="@item.Id" title="Xóa">
                                             <i class="fas fa-trash"></i>
@@ -604,6 +610,11 @@
 
 .edit-btn {
     background: rgba(46, 204, 113, 0.9);
+    color: white;
+}
+
+.seo-btn {
+    background: rgba(255, 193, 7, 0.9);
     color: white;
 }
 

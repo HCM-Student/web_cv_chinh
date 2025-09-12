@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using WEB_CV.Data;
 using WEB_CV.Models;
+using WEB_CV.Services;
 
 namespace WEB_CV.Areas.Admin.Controllers
 {
@@ -18,11 +19,13 @@ namespace WEB_CV.Areas.Admin.Controllers
     {
         private readonly NewsDbContext _db;
         private readonly IWebHostEnvironment _env;
+        private readonly ISEOAnalysisService _seoService;
 
-        public BaiVietController(NewsDbContext db, IWebHostEnvironment env)
+        public BaiVietController(NewsDbContext db, IWebHostEnvironment env, ISEOAnalysisService seoService)
         {
             _db = db;
             _env = env;
+            _seoService = seoService;
         }
 
         // ==== Cấu hình thư mục lưu ảnh tiêu đề ====
@@ -292,6 +295,24 @@ namespace WEB_CV.Areas.Admin.Controllers
             catch (DbUpdateException ex)
             {
                 TempData["msg"] = $"Không thể xoá: {ex.InnerException?.Message ?? ex.Message}";
+                return RedirectToAction(nameof(Index));
+            }
+        }
+
+        // GET: /Admin/BaiViet/SEOAnalysis/5
+        public async Task<IActionResult> SEOAnalysis(int id)
+        {
+            var baiViet = await _db.BaiViets.FindAsync(id);
+            if (baiViet == null) return NotFound();
+
+            try
+            {
+                var analysis = await _seoService.AnalyzeBaiVietAsync(id);
+                return View(analysis);
+            }
+            catch (Exception ex)
+            {
+                TempData["error"] = $"Lỗi phân tích SEO: {ex.Message}";
                 return RedirectToAction(nameof(Index));
             }
         }

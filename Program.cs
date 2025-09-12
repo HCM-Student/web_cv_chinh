@@ -42,6 +42,7 @@ builder.Services.AddSingleton<IPasswordHasher<NguoiDung>, PasswordHasher<NguoiDu
 
 // App services
 builder.Services.AddScoped<ICaiDatService, CaiDatService>();
+builder.Services.AddScoped<ISEOAnalysisService, SEOAnalysisService>();
 
 // RequestLocalization (ưu tiên cookie)
 var supportedCultures = new[] { new CultureInfo("vi-VN"), new CultureInfo("en-US") };
