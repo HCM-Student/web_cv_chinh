@@ -220,7 +220,7 @@ namespace WEB_CV.Areas.Admin.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetSystemInfo()
+        public Task<IActionResult> GetSystemInfo()
         {
             try
             {
@@ -245,11 +245,11 @@ namespace WEB_CV.Areas.Admin.Controllers
                     timezone = TimeZoneInfo.Local.DisplayName
                 };
 
-                return Json(new { success = true, data = info });
+                return Task.FromResult<IActionResult>(Json(new { success = true, data = info }));
             }
             catch (Exception ex)
             {
-                return Json(new { success = false, message = $"Có lỗi xảy ra: {ex.Message}" });
+                return Task.FromResult<IActionResult>(Json(new { success = false, message = $"Có lỗi xảy ra: {ex.Message}" }));
             }
         }
 

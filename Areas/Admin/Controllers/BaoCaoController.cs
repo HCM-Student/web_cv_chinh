@@ -50,8 +50,8 @@ namespace WEB_CV.Areas.Admin.Controllers
                     b.TieuDe,
                     b.LuotXem,
                     b.NgayDang,
-                    ChuyenMuc = b.ChuyenMuc.Ten,
-                    TacGia = b.TacGia.HoTen
+                    ChuyenMuc = b.ChuyenMuc!.Ten,
+                    TacGia = b.TacGia!.HoTen
                 })
                 .ToListAsync();
 

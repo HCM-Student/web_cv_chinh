@@ -23,7 +23,12 @@ namespace WEB_CV.Services
             return await AnalyzeBaiVietContentAsync(baiViet.TieuDe, baiViet.TomTat, baiViet.NoiDung, baiViet.AnhTieuDeAlt);
         }
 
-        public async Task<SEOAnalysisVM> AnalyzeBaiVietContentAsync(string tieuDe, string? tomTat, string noiDung, string? anhTieuDeAlt)
+        public Task<SEOAnalysisVM> AnalyzeBaiVietContentAsync(string tieuDe, string? tomTat, string noiDung, string? anhTieuDeAlt)
+        {
+            return Task.FromResult(CreateAnalysis(tieuDe, tomTat, noiDung, anhTieuDeAlt));
+        }
+
+        private SEOAnalysisVM CreateAnalysis(string tieuDe, string? tomTat, string noiDung, string? anhTieuDeAlt)
         {
             var analysis = new SEOAnalysisVM
             {

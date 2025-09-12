@@ -34,7 +34,7 @@ namespace WEB_CV.Services
         }
 
         // Get typed setting
-        public async Task<T> GetSettingAsync<T>(string key, T defaultValue = default)
+        public async Task<T> GetSettingAsync<T>(string key, T defaultValue = default!)
         {
             try
             {
@@ -130,12 +130,12 @@ namespace WEB_CV.Services
             }
             else if (value is int || value is long)
             {
-                stringValue = value.ToString();
+                stringValue = value.ToString() ?? "";
                 type = "int";
             }
             else if (value is bool)
             {
-                stringValue = value.ToString();
+                stringValue = value.ToString() ?? "";
                 type = "bool";
             }
             else

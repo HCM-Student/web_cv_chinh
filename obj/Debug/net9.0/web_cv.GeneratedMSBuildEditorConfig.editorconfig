@@ -64,6 +64,14 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQmFvQ2FvXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/acer/Downloads/web_cv_chinh/Areas/Admin/Views/BinhLuan/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQmluaEx1YW5cRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/acer/Downloads/web_cv_chinh/Areas/Admin/Views/BinhLuan/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQmluaEx1YW5cSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/acer/Downloads/web_cv_chinh/Areas/Admin/Views/CaiDat/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = QXJlYXNcQWRtaW5cVmlld3NcQ2FpRGF0XEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -186,6 +194,14 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/acer/Downloads/web_cv_chinh/Views/Account/Register.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjb3VudFxSZWdpc3Rlci5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/acer/Downloads/web_cv_chinh/Views/BinhLuan/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQmluaEx1YW5cRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/acer/Downloads/web_cv_chinh/Views/BinhLuan/MyComments.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQmluaEx1YW5cTXlDb21tZW50cy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/acer/Downloads/web_cv_chinh/Views/Home/BaoGia.cshtml]

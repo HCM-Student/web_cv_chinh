@@ -19,12 +19,17 @@ namespace WEB_CV.Models
         [StringLength(100)]
         public string? Email { get; set; }
         
-        public bool DaDuyet { get; set; } = false;
+        public int TrangThai { get; set; } = 0; // 0: Chờ duyệt, 1: Đã duyệt, 2: Từ chối
         
         public int? NguoiDungId { get; set; }
         public NguoiDung? NguoiDung { get; set; }
 
         public int BaiVietId { get; set; }
         public BaiViet BaiViet { get; set; } = null!;
+        
+        // Reply functionality
+        public int? ParentId { get; set; }
+        public BinhLuan? Parent { get; set; }
+        public ICollection<BinhLuan> Replies { get; set; } = new List<BinhLuan>();
     }
 }

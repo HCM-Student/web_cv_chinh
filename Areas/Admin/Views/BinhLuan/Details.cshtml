@@ -1,0 +1,211 @@
+@model WEB_CV.Models.BinhLuan
+
+@{
+    ViewData["Title"] = "Chi tiết bình luận";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2><i class="fas fa-comment"></i> Chi tiết bình luận</h2>
+                <a href="@Url.Action("Index")" class="btn btn-outline-secondary">
+                    <i class="fas fa-arrow-left"></i> Quay lại
+                </a>
+            </div>
+
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Nội dung bình luận</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Nội dung:</label>
+                                <div class="border rounded p-3 bg-light">
+                                    @Model.NoiDung
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card mt-4">
+                        <div class="card-header">
+                            <h5>Thông tin người gửi</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label class="form-label fw-bold">Họ tên:</label>
+                                    <p class="form-control-plaintext">
+                                        @if (Model.NguoiDung != null)
+                                        {
+                                            @Model.NguoiDung.HoTen
+                                        }
+                                        else
+                                        {
+                                            @Model.HoTen
+                                        }
+                                    </p>
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label fw-bold">Email:</label>
+                                    <p class="form-control-plaintext">
+                                        @if (Model.NguoiDung != null)
+                                        {
+                                            @Model.NguoiDung.Email
+                                        }
+                                        else
+                                        {
+                                            @Model.Email
+                                        }
+                                    </p>
+                                </div>
+                            </div>
+                            @if (Model.NguoiDung != null)
+                            {
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label class="form-label fw-bold">Loại tài khoản:</label>
+                                        <p class="form-control-plaintext">
+                                            <span class="badge bg-primary">Thành viên đã đăng ký</span>
+                                        </p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label fw-bold">Ngày đăng ký:</label>
+                                        <p class="form-control-plaintext">
+                                            @Model.NguoiDung.NgayTao.ToString("dd/MM/yyyy HH:mm")
+                                        </p>
+                                    </div>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label class="form-label fw-bold">Loại tài khoản:</label>
+                                        <p class="form-control-plaintext">
+                                            <span class="badge bg-secondary">Khách</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card">
+                        <div class="card-header">
+                            <h5>Thông tin bình luận</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Trạng thái:</label>
+                                <div>
+                                    @switch (Model.TrangThai)
+                                    {
+                                        case 0:
+                                            <span class="badge bg-warning fs-6">
+                                                <i class="fas fa-clock"></i> Chờ duyệt
+                                            </span>
+                                            break;
+                                        case 1:
+                                            <span class="badge bg-success fs-6">
+                                                <i class="fas fa-check"></i> Đã duyệt
+                                            </span>
+                                            break;
+                                        case 2:
+                                            <span class="badge bg-danger fs-6">
+                                                <i class="fas fa-times"></i> Từ chối
+                                            </span>
+                                            break;
+                                    }
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Ngày gửi:</label>
+                                <p class="form-control-plaintext">@Model.Ngay.ToString("dd/MM/yyyy HH:mm")</p>
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label fw-bold">Bài viết:</label>
+                                <p class="form-control-plaintext">
+                                    <a href="@Url.Action("ChiTietBaiViet", "Home", new { id = Model.BaiVietId })" 
+                                       class="text-decoration-none" target="_blank">
+                                        @Model.BaiViet.TieuDe
+                                    </a>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card mt-4">
+                        <div class="card-header">
+                            <h5>Thao tác</h5>
+                        </div>
+                        <div class="card-body">
+                            @if (Model.TrangThai == 0)
+                            {
+                                <div class="d-grid gap-2">
+                                    <form method="post" action="@Url.Action("Approve", new { id = Model.Id })" 
+                                          onsubmit="return confirm('Duyệt bình luận này?')">
+                                        @Html.AntiForgeryToken()
+                                        <button type="submit" class="btn btn-success">
+                                            <i class="fas fa-check"></i> Duyệt bình luận
+                                        </button>
+                                    </form>
+                                    <form method="post" action="@Url.Action("Reject", new { id = Model.Id })" 
+                                          onsubmit="return confirm('Từ chối bình luận này?')">
+                                        @Html.AntiForgeryToken()
+                                        <button type="submit" class="btn btn-warning">
+                                            <i class="fas fa-times"></i> Từ chối bình luận
+                                        </button>
+                                    </form>
+                                </div>
+                            }
+                            else if (Model.TrangThai == 1)
+                            {
+                                <div class="d-grid gap-2">
+                                    <form method="post" action="@Url.Action("Reject", new { id = Model.Id })" 
+                                          onsubmit="return confirm('Từ chối bình luận này?')">
+                                        @Html.AntiForgeryToken()
+                                        <button type="submit" class="btn btn-warning">
+                                            <i class="fas fa-times"></i> Từ chối bình luận
+                                        </button>
+                                    </form>
+                                </div>
+                            }
+                            else if (Model.TrangThai == 2)
+                            {
+                                <div class="d-grid gap-2">
+                                    <form method="post" action="@Url.Action("Approve", new { id = Model.Id })" 
+                                          onsubmit="return confirm('Duyệt bình luận này?')">
+                                        @Html.AntiForgeryToken()
+                                        <button type="submit" class="btn btn-success">
+                                            <i class="fas fa-check"></i> Duyệt bình luận
+                                        </button>
+                                    </form>
+                                </div>
+                            }
+
+                            <hr>
+                            <div class="d-grid">
+                                <form method="post" action="@Url.Action("Delete", new { id = Model.Id })" 
+                                      onsubmit="return confirm('Xóa bình luận này? Hành động này không thể hoàn tác!')">
+                                    @Html.AntiForgeryToken()
+                                    <button type="submit" class="btn btn-outline-danger">
+                                        <i class="fas fa-trash"></i> Xóa bình luận
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -6,7 +6,7 @@ namespace WEB_CV.Services
     {
         // Get settings
         Task<string> GetSettingAsync(string key, string defaultValue = "");
-        Task<T> GetSettingAsync<T>(string key, T defaultValue = default);
+        Task<T> GetSettingAsync<T>(string key, T defaultValue = default!);
         Task<Dictionary<string, string>> GetAllSettingsAsync();
 
         // Set settings

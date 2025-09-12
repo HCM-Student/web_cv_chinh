@@ -155,6 +155,9 @@
               <li><a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="ChangePassword">
                 <i class="fas fa-key me-2"></i>Đổi mật khẩu
               </a></li>
+              <li><a class="dropdown-item" asp-area="" asp-controller="BinhLuan" asp-action="MyComments">
+                <i class="fas fa-comments me-2"></i>Bình luận của tôi
+              </a></li>
               @if (User.IsInRole("Admin"))
               {
                 <li><hr class="dropdown-divider" /></li>
@@ -167,6 +170,9 @@
                 </a></li>
                 <li><a class="dropdown-item" asp-area="Admin" asp-controller="NguoiDung" asp-action="Index">
                   <i class="fas fa-users me-2"></i>Người dùng
+                </a></li>
+                <li><a class="dropdown-item" asp-area="Admin" asp-controller="BinhLuan" asp-action="Index">
+                  <i class="fas fa-comments me-2"></i>Quản lý bình luận
                 </a></li>
               }
               <li><hr class="dropdown-divider" /></li>

@@ -22,9 +22,10 @@
         </div>
     }
 
-    <form asp-action="Create" asp-controller="BinhLuan" method="post" class="comment-form">
+    <form asp-action="Create" asp-controller="BinhLuan" method="post" class="comment-form" id="commentForm">
         @Html.AntiForgeryToken()
         <input type="hidden" asp-for="BaiVietId" />
+        <input type="hidden" id="ParentId" name="ParentId" value="" />
         
         @if (User.Identity?.IsAuthenticated == true)
         {
@@ -35,6 +36,10 @@
         }
         else
         {
+            <div class="alert alert-info mb-3">
+                <i class="fas fa-info-circle me-2"></i>
+                <strong>Lưu ý:</strong> Bình luận của bạn sẽ được kiểm duyệt trước khi hiển thị công khai.
+            </div>
             <div class="row">
                 <div class="col-md-6 mb-3">
                     <label asp-for="HoTen" class="form-label">Họ tên *</label>
@@ -200,3 +205,48 @@
     }
 }
 </style>
+
+<script>
+// Handle reply functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const commentForm = document.getElementById('commentForm');
+    const parentIdField = document.getElementById('ParentId');
+    const textarea = commentForm.querySelector('textarea');
+    const formTitle = document.querySelector('.form-title');
+    
+    // Listen for reply events
+    document.addEventListener('replyToComment', function(event) {
+        const { commentId, authorName } = event.detail;
+        
+        // Set parent ID
+        parentIdField.value = commentId;
+        
+        // Update form title
+        formTitle.innerHTML = '<i class="fas fa-reply me-2"></i>Trả lời @@' + authorName;
+        
+        // Focus on textarea
+        textarea.focus();
+        textarea.value = '@@' + authorName + ' ';
+        
+        // Scroll to form
+        commentForm.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+    
+    // Reset form when submitting new comment (not reply)
+    commentForm.addEventListener('submit', function() {
+        if (!parentIdField.value) {
+            // This is a new comment, not a reply
+            formTitle.innerHTML = '<i class="fas fa-edit me-2"></i>Viết bình luận';
+        }
+    });
+    
+    // Reset form when clicking reset button
+    const resetBtn = commentForm.querySelector('button[type="reset"]');
+    if (resetBtn) {
+        resetBtn.addEventListener('click', function() {
+            parentIdField.value = '';
+            formTitle.innerHTML = '<i class="fas fa-edit me-2"></i>Viết bình luận';
+        });
+    }
+});
+</script>

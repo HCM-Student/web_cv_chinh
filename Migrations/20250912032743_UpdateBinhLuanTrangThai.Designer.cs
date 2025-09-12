@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WEB_CV.Data;
 
@@ -11,9 +12,11 @@ using WEB_CV.Data;
 namespace WEB_CV.Migrations
 {
     [DbContext(typeof(NewsDbContext))]
-    partial class NewsDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250912032743_UpdateBinhLuanTrangThai")]
+    partial class UpdateBinhLuanTrangThai
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -128,9 +131,6 @@ namespace WEB_CV.Migrations
                         .HasMaxLength(1000)
                         .HasColumnType("nvarchar(1000)");
 
-                    b.Property<int?>("ParentId")
-                        .HasColumnType("int");
-
                     b.Property<int>("TrangThai")
                         .HasColumnType("int");
 
@@ -139,8 +139,6 @@ namespace WEB_CV.Migrations
                     b.HasIndex("BaiVietId");
 
                     b.HasIndex("NguoiDungId");
-
-                    b.HasIndex("ParentId");
 
                     b.ToTable("BinhLuans");
                 });
@@ -483,15 +481,9 @@ namespace WEB_CV.Migrations
                         .WithMany()
                         .HasForeignKey("NguoiDungId");
 
-                    b.HasOne("WEB_CV.Models.BinhLuan", "Parent")
-                        .WithMany("Replies")
-                        .HasForeignKey("ParentId");
-
                     b.Navigation("BaiViet");
 
                     b.Navigation("NguoiDung");
-
-                    b.Navigation("Parent");
                 });
 
             modelBuilder.Entity("WEB_CV.Models.SEOAnalysis", b =>
@@ -510,11 +502,6 @@ namespace WEB_CV.Migrations
                     b.Navigation("BaiVietTags");
 
                     b.Navigation("BinhLuans");
-                });
-
-            modelBuilder.Entity("WEB_CV.Models.BinhLuan", b =>
-                {
-                    b.Navigation("Replies");
                 });
 
             modelBuilder.Entity("WEB_CV.Models.ChuyenMuc", b =>
