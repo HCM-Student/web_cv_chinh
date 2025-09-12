@@ -320,7 +320,7 @@ html, body { max-width: 100%; overflow-x: clip; }
   position:absolute;
   left:50%;
   transform:translateX(-50%);
-  bottom:-26px;                 /* Ä‘áº©y ra ngoÃ i, náº±m dÆ°á»›i vÃ²m */
+                   /* Ä‘áº©y ra ngoÃ i, náº±m dÆ°á»›i vÃ²m */
   gap:.35rem;
   margin:0;
   z-index:5;                    /* ná»•i trÃªn vÃ²m */
@@ -2074,8 +2074,8 @@ html, body { max-width: 100%; overflow-x: clip; }
     top: 0;
     left: 0;
     right: 0;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(0,0,0,0.1), transparent);
+    height: 0;
+    background: transparent;
 }
 
 /* Card enhancements */
@@ -3798,6 +3798,18 @@ html, body { max-width: 100%; overflow-x: clip; }
     justify-content: center;
     gap: 0.5rem;
     margin-top: 2rem;
+    position: relative;
+    z-index: 20;
+}
+
+/* Đảm bảo dots giữ nguyên vị trí cao */
+.about-hero .slider-dots {
+    position: absolute;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin-top: 0;
+    z-index: 25;
 }
 
 .slider-dot {

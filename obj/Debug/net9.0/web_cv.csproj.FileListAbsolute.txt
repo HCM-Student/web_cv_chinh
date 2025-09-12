@@ -577,8 +577,6 @@ C:\Users\acer\Downloads\web_cv_chinh\obj\Debug\net9.0\web_cv.sourcelink.json
 C:\Users\acer\Downloads\web_cv_chinh\obj\Debug\net9.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
 C:\Users\acer\Downloads\web_cv_chinh\obj\Debug\net9.0\scopedcss\bundle\web_cv.styles.css
 C:\Users\acer\Downloads\web_cv_chinh\obj\Debug\net9.0\scopedcss\projectbundle\web_cv.bundle.scp.css
-C:\Users\acer\Downloads\web_cv_chinh\obj\Debug\net9.0\compressed\5c39lythn3-y0fh4fstr7.gz
-C:\Users\acer\Downloads\web_cv_chinh\obj\Debug\net9.0\compressed\tqxi9wgfru-m5f61sxiyu.gz
 C:\Users\acer\Downloads\web_cv_chinh\obj\Debug\net9.0\compressed\sz760lp45r-3fjxvfvj44.gz
 C:\Users\acer\Downloads\web_cv_chinh\obj\Debug\net9.0\compressed\vetgwtkxeu-f0pn282mje.gz
 C:\Users\acer\Downloads\web_cv_chinh\obj\Debug\net9.0\compressed\1woyse1sag-0a46zsvx1b.gz
@@ -669,4 +667,6 @@ C:\Users\acer\Downloads\web_cv_chinh\obj\Debug\net9.0\refint\web_cv.dll
 C:\Users\acer\Downloads\web_cv_chinh\obj\Debug\net9.0\web_cv.pdb
 C:\Users\acer\Downloads\web_cv_chinh\obj\Debug\net9.0\web_cv.genruntimeconfig.cache
 C:\Users\acer\Downloads\web_cv_chinh\obj\Debug\net9.0\ref\web_cv.dll
-C:\Users\acer\Downloads\web_cv_chinh\obj\Debug\net9.0\compressed\6h9kldcc6f-kreegdlqej.gz
+C:\Users\acer\Downloads\web_cv_chinh\obj\Debug\net9.0\compressed\5c39lythn3-6qhmk9v5lh.gz
+C:\Users\acer\Downloads\web_cv_chinh\obj\Debug\net9.0\compressed\tqxi9wgfru-ns15bgpeex.gz
+C:\Users\acer\Downloads\web_cv_chinh\obj\Debug\net9.0\compressed\6h9kldcc6f-68v476wu60.gz

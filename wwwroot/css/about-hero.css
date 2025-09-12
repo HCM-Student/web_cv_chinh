@@ -26,7 +26,7 @@
 .hero-buttons .btn{ padding:.95rem 1.65rem; font-weight:600; border-radius:999px; transition:all .3s ease; }
 .hero-buttons .btn:hover{ transform:translateY(-2px); box-shadow:0 8px 25px rgba(0,0,0,.15); }
 
-.about-stats-section{ margin-top:3rem; padding-top:2rem; border-top:1px solid rgba(255,255,255,.2); }
+.about-stats-section{ margin-top:3rem; padding-top:2rem; }
 .stat-item{ text-align:center; color:white; }
 .stat-number{ display:block; font-size:2rem; font-weight:800; margin-bottom:.5rem; }
 .stat-label{ font-size:.9rem; opacity:.9; }
