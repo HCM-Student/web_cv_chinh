@@ -32,6 +32,65 @@
       t.addEventListener('input', resize); resize();
     });
 
+    // Xử lý scheduled publishing
+    document.addEventListener('DOMContentLoaded', function() {
+      const scheduleDateTime = document.getElementById('scheduleDateTime');
+      const schedulePublish = document.getElementById('schedulePublish');
+      const ngayDangDuKien = document.querySelector('input[name="NgayDangDuKien"]');
+      
+      // Hiển thị/ẩn datetime picker
+      document.querySelectorAll('input[name="PublishingType"]').forEach(radio => {
+        radio.addEventListener('change', function() {
+          if (this.value === 'schedule') {
+            scheduleDateTime.style.display = 'block';
+            // Set minimum date to now
+            const now = new Date();
+            now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+            ngayDangDuKien.min = now.toISOString().slice(0, 16);
+          } else {
+            scheduleDateTime.style.display = 'none';
+            ngayDangDuKien.value = '';
+          }
+        });
+      });
+
+      // Xử lý form submit
+      document.querySelector('form').addEventListener('submit', function(e) {
+        const selectedType = document.querySelector('input[name="PublishingType"]:checked').value;
+        const ngayDangDuKienInput = document.querySelector('input[name="NgayDangDuKien"]');
+        
+        // Set hidden fields based on selection
+        if (selectedType === 'now') {
+          document.querySelector('input[name="TrangThai"]')?.remove();
+          const input = document.createElement('input');
+          input.type = 'hidden';
+          input.name = 'TrangThai';
+          input.value = '1';
+          this.appendChild(input);
+        } else if (selectedType === 'draft') {
+          document.querySelector('input[name="TrangThai"]')?.remove();
+          const input = document.createElement('input');
+          input.type = 'hidden';
+          input.name = 'TrangThai';
+          input.value = '0';
+          this.appendChild(input);
+        } else if (selectedType === 'schedule') {
+          if (!ngayDangDuKienInput.value) {
+            e.preventDefault();
+            alert('Vui lòng chọn thời gian đăng bài');
+            return;
+          }
+          
+          document.querySelector('input[name="TrangThai"]')?.remove();
+          const input = document.createElement('input');
+          input.type = 'hidden';
+          input.name = 'TrangThai';
+          input.value = '2';
+          this.appendChild(input);
+        }
+      });
+    });
+
     // trạng thái loading khi ấn Lưu
     document.querySelector('.btn-save')?.addEventListener('click', function(){
       this.classList.add('disabled');

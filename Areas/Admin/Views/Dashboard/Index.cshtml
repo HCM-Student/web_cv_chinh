@@ -242,6 +242,7 @@
                     <div class="popular-posts-list">
                         @if (baiVietXemNhieu.Any())
                         {
+                            int popularIndex = 1;
                             @foreach (var post in baiVietXemNhieu)
                             {
                                 <div class="popular-post-item">
@@ -269,9 +270,10 @@
         </div>
                                     </div>
                                     <div class="post-rank">
-                                        <span class="rank-number">@(baiVietXemNhieu.IndexOf(post) + 1)</span>
+                                        <span class="rank-number">@popularIndex</span>
                                     </div>
               </div>
+              popularIndex++;
             }
           }
           else

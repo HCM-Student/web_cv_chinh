@@ -48,6 +48,17 @@ namespace WEB_CV.Models
         
         public int LuotXem { get; set; } = 0;
 
+        // ===== Scheduled Publishing =====
+        /// <summary>
+        /// Thời gian đăng bài đã lên lịch (nếu có)
+        /// </summary>
+        public DateTime? NgayDangDuKien { get; set; }
+
+        /// <summary>
+        /// Trạng thái bài viết: 0=Draft, 1=Published, 2=Scheduled
+        /// </summary>
+        public int TrangThai { get; set; } = 1; // 0: Draft, 1: Published, 2: Scheduled
+
         // ===== Ảnh đại diện =====
         [StringLength(300)]
         public string? AnhTieuDe { get; set; }   // ví dụ: "media/posts/cover/xxx.jpg" hoặc URL tuyệt đối

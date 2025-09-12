@@ -73,10 +73,11 @@
                         </tr>
                     </thead>
                     <tbody>
+                    @{ int suKienIndex = Model.Count(); }
                     @foreach (var item in Model)
                     {
                         <tr>
-                            <td>#@item.Id</td>
+                            <td>#@suKienIndex</td>
                             <td>@item.TieuDe</td>
                             <td>@(item.TacGia?.HoTen ?? "-")</td>
                             <td>@item.NgayDang.ToString("dd/MM/yyyy HH:mm")</td>
@@ -87,6 +88,7 @@
                                 </div>
                             </td>
                         </tr>
+                        suKienIndex--;
                     }
                     </tbody>
                 </table>

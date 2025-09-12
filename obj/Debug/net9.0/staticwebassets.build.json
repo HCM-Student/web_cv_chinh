@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "h/8PHxY2D9U9TEdpDY6WS7fkPD7xKT+An0d9xjIgmzE=",
+  "Hash": "nlqlwrP1GfRSIuSD5YFOsos/OjW9FOeTqI92iYv4POI=",
   "Source": "web_cv",
   "BasePath": "_content/web_cv",
   "Mode": "Default",
@@ -4110,6 +4110,27 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\media\\posts\\cover\\dat-dai-1-17575038033621692300901-192351_920.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\media\\posts\\cover\\dat20825_0c8beda7f8.png",
+      "SourceId": "web_cv",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\",
+      "BasePath": "_content/web_cv",
+      "RelativePath": "media/posts/cover/dat20825_0c8beda7f8#[.{fingerprint}]?.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "jlo84udevj",
+      "Integrity": "ecWdTsPWBenPFNMRKbQl6h/x6MkY3osxTAzlPe6XmnI=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\media\\posts\\cover\\dat20825_0c8beda7f8.png"
     },
     {
       "Identity": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\media\\posts\\cover\\dsc02546-102914_747-120205.jpg",
@@ -30145,6 +30166,88 @@
         {
           "Name": "integrity",
           "Value": "sha256-akkDQdXY5pPt5/GzeXjs9Y8yD6JmvVdojoN0zimRY7k="
+        }
+      ]
+    },
+    {
+      "Route": "media/posts/cover/dat20825_0c8beda7f8.jlo84udevj.png",
+      "AssetFile": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\media\\posts\\cover\\dat20825_0c8beda7f8.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "91890"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"ecWdTsPWBenPFNMRKbQl6h/x6MkY3osxTAzlPe6XmnI=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 12 Sep 2025 04:15:53 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "jlo84udevj"
+        },
+        {
+          "Name": "label",
+          "Value": "media/posts/cover/dat20825_0c8beda7f8.png"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-ecWdTsPWBenPFNMRKbQl6h/x6MkY3osxTAzlPe6XmnI="
+        }
+      ]
+    },
+    {
+      "Route": "media/posts/cover/dat20825_0c8beda7f8.png",
+      "AssetFile": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\media\\posts\\cover\\dat20825_0c8beda7f8.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "91890"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"ecWdTsPWBenPFNMRKbQl6h/x6MkY3osxTAzlPe6XmnI=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 12 Sep 2025 04:15:53 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-ecWdTsPWBenPFNMRKbQl6h/x6MkY3osxTAzlPe6XmnI="
         }
       ]
     },

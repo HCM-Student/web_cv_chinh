@@ -164,6 +164,57 @@
     </div>
   </div>
 
+  <!-- Scheduled Publishing -->
+  <div class="form-section card shadow-sm mb-4">
+    <div class="card-header bg-white d-flex align-items-center gap-2">
+      <span class="section-chip"><i class="fas fa-clock"></i></span>
+      <h5 class="mb-0">Lên lịch đăng bài</h5>
+    </div>
+    <div class="card-body">
+      <div class="row g-3">
+        <div class="col-12">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="PublishingType" id="publishNow" value="now" checked>
+            <label class="form-check-label" for="publishNow">
+              <strong>Đăng ngay</strong>
+              <small class="text-muted d-block">Bài viết sẽ được đăng ngay lập tức</small>
+            </label>
+          </div>
+        </div>
+
+        <div class="col-12">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="PublishingType" id="saveDraft" value="draft">
+            <label class="form-check-label" for="saveDraft">
+              <strong>Lưu bản nháp</strong>
+              <small class="text-muted d-block">Lưu bài viết để chỉnh sửa sau</small>
+            </label>
+          </div>
+        </div>
+
+        <div class="col-12">
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="PublishingType" id="schedulePublish" value="schedule">
+            <label class="form-check-label" for="schedulePublish">
+              <strong>Lên lịch đăng</strong>
+              <small class="text-muted d-block">Chọn thời gian đăng bài trong tương lai</small>
+            </label>
+          </div>
+        </div>
+
+        <div class="col-12" id="scheduleDateTime" style="display: none;">
+          <label asp-for="NgayDangDuKien" class="form-label">Thời gian đăng bài</label>
+          <div class="input-group">
+            <span class="input-group-text"><i class="fas fa-calendar-alt"></i></span>
+            <input asp-for="NgayDangDuKien" type="datetime-local" class="form-control" />
+          </div>
+          <span asp-validation-for="NgayDangDuKien" class="text-danger small"></span>
+          <div class="form-text">Chọn ngày và giờ để đăng bài viết</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Widget SEO -->
   <partial name="_SEOWidget" model="Model" />
 </div>

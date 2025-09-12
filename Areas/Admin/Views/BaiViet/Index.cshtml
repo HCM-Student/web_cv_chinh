@@ -160,6 +160,7 @@
         
         <!-- Grid View -->
         <div class="posts-grid" id="gridView">
+            @{ int index = Model.Count(); }
             @foreach (var item in Model)
             {
                 <div class="post-item">
@@ -204,8 +205,17 @@
                     
                     <div class="post-content">
                         <div class="post-header">
-                            <span class="post-id">#@item.Id</span>
+                            <span class="post-id">#@index</span>
                             <span class="post-date">@item.NgayDang.ToString("dd/MM/yyyy")</span>
+                            <span class="post-status status-@item.TrangThai">
+                                @(item.TrangThai switch
+                                {
+                                    0 => "Bản nháp",
+                                    1 => "Đã đăng",
+                                    2 => "Lên lịch",
+                                    _ => "Không xác định"
+                                })
+                            </span>
                         </div>
                         
                         <h4 class="post-title">@item.TieuDe</h4>
@@ -225,6 +235,7 @@
                         </div>
                     </div>
                 </div>
+                index--;
             }
         </div>
 
@@ -244,11 +255,12 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @{ int tableIndex = Model.Count(); }
                         @foreach (var item in Model)
                         {
                             <tr>
                                 <td>
-                                    <span class="badge bg-primary">#@item.Id</span>
+                                    <span class="badge bg-primary">#@tableIndex</span>
                                 </td>
                                 <td>
                                     <div class="table-image">
@@ -309,6 +321,7 @@
                                     </div>
                                 </td>
                             </tr>
+                            tableIndex--;
                         }
                     </tbody>
                 </table>
@@ -962,6 +975,34 @@
 .btn-group .btn:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+/* Post Status Styles */
+.post-status {
+    padding: 0.25rem 0.5rem;
+    border-radius: 12px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.status-0 {
+    background: #f8f9fa;
+    color: #6c757d;
+    border: 1px solid #dee2e6;
+}
+
+.status-1 {
+    background: #d1edff;
+    color: #0c63e4;
+    border: 1px solid #b3d7ff;
+}
+
+.status-2 {
+    background: #fff3cd;
+    color: #856404;
+    border: 1px solid #ffeaa7;
 }
 </style>
 

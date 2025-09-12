@@ -20,12 +20,14 @@ namespace WEB_CV.Areas.Admin.Controllers
         private readonly NewsDbContext _db;
         private readonly IWebHostEnvironment _env;
         private readonly ISEOAnalysisService _seoService;
+        private readonly IScheduledPublishingService _scheduledPublishingService;
 
-        public BaiVietController(NewsDbContext db, IWebHostEnvironment env, ISEOAnalysisService seoService)
+        public BaiVietController(NewsDbContext db, IWebHostEnvironment env, ISEOAnalysisService seoService, IScheduledPublishingService scheduledPublishingService)
         {
             _db = db;
             _env = env;
             _seoService = seoService;
+            _scheduledPublishingService = scheduledPublishingService;
         }
 
         // ==== Cấu hình thư mục lưu ảnh tiêu đề ====
@@ -120,7 +122,7 @@ namespace WEB_CV.Areas.Admin.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(
-            [Bind("TieuDe,TomTat,NoiDung,ChuyenMucId,TacGiaId,NgayDang,AnhTieuDeAlt")] BaiViet model,
+            [Bind("TieuDe,TomTat,NoiDung,ChuyenMucId,TacGiaId,NgayDang,AnhTieuDeAlt,TrangThai,NgayDangDuKien")] BaiViet model,
             IFormFile? AnhTieuDeFile)
         {
             // bỏ validate navigation
@@ -132,8 +134,25 @@ namespace WEB_CV.Areas.Admin.Controllers
             if (model.TacGiaId <= 0)
                 ModelState.AddModelError(nameof(model.TacGiaId), "Vui lòng chọn tác giả.");
 
-            if (model.NgayDang == default)
-                model.NgayDang = DateTime.UtcNow;
+            // Xử lý scheduled publishing
+            if (model.TrangThai == 2 && model.NgayDangDuKien.HasValue) // Scheduled
+            {
+                if (model.NgayDangDuKien.Value <= DateTime.UtcNow)
+                {
+                    ModelState.AddModelError(nameof(model.NgayDangDuKien), "Thời gian lên lịch phải trong tương lai.");
+                }
+                model.NgayDang = DateTime.UtcNow; // Thời gian tạo
+            }
+            else if (model.TrangThai == 1) // Published
+            {
+                if (model.NgayDang == default)
+                    model.NgayDang = DateTime.UtcNow;
+            }
+            else // Draft
+            {
+                model.TrangThai = 0; // Draft
+                model.NgayDang = DateTime.UtcNow; // Thời gian tạo
+            }
 
             if (!ModelState.IsValid)
             {
@@ -157,7 +176,16 @@ namespace WEB_CV.Areas.Admin.Controllers
             {
                 _db.BaiViets.Add(model);
                 await _db.SaveChangesAsync();
-                TempData["msg"] = "Đã thêm bài viết.";
+                
+                string message = model.TrangThai switch
+                {
+                    0 => "Đã lưu bài viết dưới dạng bản nháp.",
+                    1 => "Đã đăng bài viết thành công.",
+                    2 => $"Đã lên lịch đăng bài viết vào lúc {model.NgayDangDuKien?.ToString("dd/MM/yyyy HH:mm")}.",
+                    _ => "Đã thêm bài viết."
+                };
+                
+                TempData["msg"] = message;
                 return RedirectToAction(nameof(Index));
             }
             catch (DbUpdateException ex)
@@ -315,6 +343,47 @@ namespace WEB_CV.Areas.Admin.Controllers
                 TempData["error"] = $"Lỗi phân tích SEO: {ex.Message}";
                 return RedirectToAction(nameof(Index));
             }
+        }
+
+        // GET: /Admin/BaiViet/Scheduled
+        public async Task<IActionResult> Scheduled()
+        {
+            var scheduledPosts = await _scheduledPublishingService.GetScheduledPostsAsync();
+            return View(scheduledPosts);
+        }
+
+        // POST: /Admin/BaiViet/Schedule/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Schedule(int id, DateTime scheduledTime)
+        {
+            var success = await _scheduledPublishingService.SchedulePostAsync(id, scheduledTime);
+            if (success)
+            {
+                TempData["msg"] = "Đã lên lịch đăng bài viết thành công.";
+            }
+            else
+            {
+                TempData["msg"] = "Không thể lên lịch đăng bài viết.";
+            }
+            return RedirectToAction(nameof(Index));
+        }
+
+        // POST: /Admin/BaiViet/Unschedule/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Unschedule(int id)
+        {
+            var success = await _scheduledPublishingService.UnschedulePostAsync(id);
+            if (success)
+            {
+                TempData["msg"] = "Đã hủy lịch đăng bài viết.";
+            }
+            else
+            {
+                TempData["msg"] = "Không thể hủy lịch đăng bài viết.";
+            }
+            return RedirectToAction(nameof(Index));
         }
 
         private async Task LoadDropdowns()

@@ -58,6 +58,7 @@
 
     <!-- Contact Messages Grid View -->
     <div class="contacts-grid" id="gridView">
+        @{ int contactIndex = Model.Count(); }
         @foreach (var item in Model)
         {
             <div class="contact-item">
@@ -78,7 +79,7 @@
                                 </span>
                                 <div class="contact-status">
                                     <span class="status-badge status-@(item.TrangThai.Replace(" ", "-").ToLower())">@item.TrangThai</span>
-                                    <span class="contact-id">#@item.Id</span>
+                                    <span class="contact-id">#@contactIndex</span>
                                 </div>
                             </div>
                         </div>
@@ -128,12 +129,14 @@
                     </div>
                 </div>
             </div>
+            contactIndex--;
         }
     </div>
 
     <!-- Contact Messages List View -->
     <div class="contacts-list" id="listView" style="display: none;">
         <div class="list-container">
+            @{ int listIndex = Model.Count(); }
             @foreach (var item in Model)
             {
                 <div class="list-item">
@@ -146,7 +149,7 @@
                     <div class="list-content">
                         <div class="list-header">
                             <h6 class="list-name">@item.HoTen</h6>
-                            <span class="list-id">#@item.Id</span>
+                            <span class="list-id">#@listIndex</span>
                         </div>
                         @if (!string.IsNullOrEmpty(item.TieuDe))
                         {
@@ -185,6 +188,7 @@
                         </a>
                     </div>
                 </div>
+                listIndex--;
             }
         </div>
     </div>
