@@ -53,12 +53,22 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
 
 builder.Services.AddAuthorization();
 
+// Session
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
+
 // Hash mật khẩu cho NguoiDung (tự quản)
 builder.Services.AddSingleton<IPasswordHasher<NguoiDung>, PasswordHasher<NguoiDung>>();
 
 // App services
 builder.Services.AddScoped<ICaiDatService, CaiDatService>();
 builder.Services.AddScoped<ISEOAnalysisService, SEOAnalysisService>();
+builder.Services.AddScoped<IOnlineUserService, OnlineUserService>();
 builder.Services.AddScoped<IScheduledPublishingService, ScheduledPublishingService>();
 
 // AI Services
@@ -68,6 +78,7 @@ builder.Services.AddHttpContextAccessor();
 
 // Background services
 builder.Services.AddHostedService<ScheduledPublishingBackgroundService>();
+builder.Services.AddHostedService<OnlineUserCleanupService>();
 
 // RequestLocalization (ưu tiên cookie)
 var supportedCultures = new[] { new CultureInfo("vi-VN"), new CultureInfo("en-US") };
@@ -113,6 +124,11 @@ app.UseStaticFiles();
 app.UseRequestLocalization(app.Services.GetRequiredService<IOptions<RequestLocalizationOptions>>().Value);
 
 app.UseRouting();
+
+app.UseSession();
+
+// Online user tracking middleware
+app.UseMiddleware<WEB_CV.Middleware.OnlineUserTrackingMiddleware>();
 
 app.UseAuthentication();
 app.UseAuthorization();

@@ -16,6 +16,7 @@ namespace WEB_CV.Data
         public DbSet<CaiDat> CaiDats { get; set; }
         public DbSet<LienHe> LienHes { get; set; }
         public DbSet<SEOAnalysis> SEOAnalyses { get; set; }
+        public DbSet<OnlineUser> OnlineUsers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder mb)
         {
@@ -116,6 +117,22 @@ namespace WEB_CV.Data
                  
                 e.HasIndex(x => x.BaiVietId);
                 e.HasIndex(x => x.NgayPhanTich);
+            });
+
+            // ===== OnlineUser =====
+            mb.Entity<OnlineUser>(e =>
+            {
+                e.Property(x => x.SessionId).IsRequired().HasMaxLength(100);
+                e.Property(x => x.Email).HasMaxLength(150);
+                e.Property(x => x.HoTen).HasMaxLength(100);
+                e.Property(x => x.IpAddress).HasMaxLength(50);
+                e.Property(x => x.UserAgent).HasMaxLength(200);
+                e.Property(x => x.LastSeen).HasDefaultValueSql("GETDATE()");
+                e.Property(x => x.IsActive).HasDefaultValue(true);
+                
+                e.HasIndex(x => x.SessionId);
+                e.HasIndex(x => x.LastSeen);
+                e.HasIndex(x => x.IsActive);
             });
         }
     }
