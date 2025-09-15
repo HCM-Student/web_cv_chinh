@@ -1,0 +1,25 @@
+@model WEB_CV.Models.ViewModels.SiteStatsVm
+@{
+    var nfi = System.Globalization.CultureInfo.GetCultureInfo("vi-VN").NumberFormat;
+}
+<div class="card stats-card shadow-sm rounded-3">
+  <div class="card-body">
+    <div class="d-flex align-items-center gap-2 mb-2">
+      <i class="fas fa-users fs-4 text-primary"></i>
+      <h5 class="mb-0 fw-semibold">Người dùng online</h5>
+    </div>
+
+    <div class="display-5 fw-bold text-primary text-center">@Model.Online</div>
+    <p class="text-center text-muted mb-3">người đang online <span class="opacity-75">(trong 10 phút qua)</span></p>
+
+    <hr class="my-3" />
+
+    <div class="d-flex justify-content-between align-items-center">
+      <div class="d-flex align-items-center gap-2">
+        <i class="fas fa-chart-line"></i>
+        <span class="fw-semibold">Lượt truy cập</span>
+      </div>
+      <span class="fw-bold">@Model.TotalVisits.ToString("N0", nfi)</span>
+    </div>
+  </div>
+</div>

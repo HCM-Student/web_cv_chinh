@@ -3028,8 +3028,23 @@ html, body { max-width: 100%; overflow-x: clip; }
 /* Sidebar Styles */
 .article-sidebar {
     position: sticky;
-    top: 2rem;
+    top: 0;              /* ← bỏ offset để không bị tụt xuống so với cột trái */
     z-index: 100;
+}
+
+/* Khi đặt "Bài viết liên quan" trong sidebar thì bỏ margin trên để thẳng hàng */
+.article-sidebar .related-posts-section {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+}
+
+/* Stats Card Styles */
+.stats-card .display-5 { 
+    line-height: 1; 
+}
+
+.stats-card hr { 
+    opacity: .15; 
 }
 
 /* Ensure proper spacing between columns */

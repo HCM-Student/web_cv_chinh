@@ -286,5 +286,6 @@ namespace WEB_CV.Controllers
             ViewData["Title"] = "Dấu trang của tôi";
             return View();
         }
+
     }
 }

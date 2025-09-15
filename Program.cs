@@ -70,6 +70,7 @@ builder.Services.AddScoped<ICaiDatService, CaiDatService>();
 builder.Services.AddScoped<ISEOAnalysisService, SEOAnalysisService>();
 builder.Services.AddScoped<IOnlineUserService, OnlineUserService>();
 builder.Services.AddScoped<IScheduledPublishingService, ScheduledPublishingService>();
+builder.Services.AddScoped<ISiteCounter, SiteCounter>();
 
 // AI Services
 builder.Services.AddHttpClient<IAIWritingService, AIWritingService>();
@@ -126,6 +127,9 @@ app.UseRequestLocalization(app.Services.GetRequiredService<IOptions<RequestLocal
 app.UseRouting();
 
 app.UseSession();
+
+// Site tracking middleware (track visits and online users)
+app.UseMiddleware<WEB_CV.Middleware.SiteTrackingMiddleware>();
 
 // Online user tracking middleware
 app.UseMiddleware<WEB_CV.Middleware.OnlineUserTrackingMiddleware>();

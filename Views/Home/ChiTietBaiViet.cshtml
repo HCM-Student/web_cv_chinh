@@ -23,7 +23,7 @@
 <!-- ===================== NỘI DUNG BÀI VIẾT ===================== -->
 <section class="article-content section">
     <div class="container">
-        <div class="row g-4">
+        <div class="row g-4 align-items-start">
             <div class="col-lg-8">
                 <article class="main-article">
                     <!-- Article Header -->
@@ -110,7 +110,7 @@
                                     <span class="font-size-label">Chọn cỡ chữ</span>
                                     <div class="font-size-buttons">
                                         <button class="font-size-btn" id="decreaseFont" title="Giảm cỡ chữ">
-                                            A
+                                            a
                                         </button>
                                         <button class="font-size-btn" id="increaseFont" title="Tăng cỡ chữ">
                                             A
@@ -264,21 +264,9 @@
                         </div>
                     </div>
                     
-                    <!-- Online Users Counter -->
+                    <!-- Site Stats Counter -->
                     <div class="sidebar-widget">
-                        <div class="online-users-counter">
-                            <div class="online-users-header">
-                                <i class="fas fa-users text-primary me-2"></i>
-                                <span class="counter-title">Người dùng online</span>
-                            </div>
-                            <div class="online-users-count" id="onlineUsersCount">
-                                <span class="count-number">0</span>
-                                <span class="count-text">người đang online</span>
-                            </div>
-                            <div class="online-users-time">
-                                <small class="text-muted">(trong 10 phút qua)</small>
-                            </div>
-                        </div>
+                        @await Component.InvokeAsync("SiteStats")
                     </div>
                 </aside>
             </div>
@@ -872,29 +860,8 @@ document.addEventListener('DOMContentLoaded', function() {
 // Load comments when page loads
 document.addEventListener('DOMContentLoaded', function() {
     loadComments();
-    loadOnlineUsersCount();
     trackCurrentUser();
 });
-
-// Load online users count
-function loadOnlineUsersCount() {
-    fetch('/api/OnlineUser/count?minutes=10')
-        .then(response => response.json())
-        .then(data => {
-            if (data.count !== undefined) {
-                const countNumber = document.querySelector('#onlineUsersCount .count-number');
-                if (countNumber) {
-                    countNumber.textContent = data.count;
-                }
-            }
-        })
-        .catch(error => {
-            console.error('Error loading online users count:', error);
-        });
-}
-
-// Refresh online users count every 2 minutes (120000ms)
-setInterval(loadOnlineUsersCount, 120000);
 
 // Track current user
 function trackCurrentUser() {
@@ -951,129 +918,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-// CSS cho Online Users Counter
-const onlineUsersStyle = document.createElement('style');
-onlineUsersStyle.textContent = `
-  /* Online Users Counter Styles */
-  .online-users-counter {
-    background: linear-gradient(135deg, #ffffff, #f8f9fa);
-    border: 1px solid #e3e6f0;
-    border-radius: 16px;
-    padding: 24px 20px;
-    text-align: center;
-    transition: all 0.3s ease;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-    position: relative;
-    overflow: hidden;
-  }
-
-  .online-users-counter::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 3px;
-    background: linear-gradient(90deg, #007bff, #0056b3, #007bff);
-    background-size: 200% 100%;
-    animation: shimmer 3s ease-in-out infinite;
-  }
-
-  .online-users-counter:hover {
-    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
-    transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(0, 123, 255, 0.15);
-    border-color: #007bff;
-  }
-
-  .online-users-header {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 16px;
-  }
-
-  .online-users-header i {
-    font-size: 20px;
-    margin-right: 8px;
-    color: #007bff;
-    text-shadow: 0 1px 2px rgba(0, 123, 255, 0.3);
-  }
-
-  .counter-title {
-    font-size: 16px;
-    font-weight: 600;
-    color: #2c3e50;
-    letter-spacing: 0.3px;
-  }
-
-  .online-users-count {
-    margin-bottom: 12px;
-  }
-
-  .count-number {
-    font-size: 36px;
-    font-weight: 800;
-    color: #007bff;
-    display: block;
-    line-height: 1;
-    text-shadow: 0 2px 4px rgba(0, 123, 255, 0.2);
-    margin-bottom: 4px;
-    background: linear-gradient(135deg, #007bff, #0056b3);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  .count-text {
-    font-size: 14px;
-    color: #6c757d;
-    font-weight: 500;
-    letter-spacing: 0.2px;
-  }
-
-  .online-users-time {
-    margin-top: 12px;
-    padding-top: 8px;
-    border-top: 1px solid #f1f3f4;
-  }
-
-  .online-users-time small {
-    color: #95a5a6;
-    font-size: 12px;
-    font-weight: 400;
-  }
-`;
-document.head.appendChild(onlineUsersStyle);
-
-// Thêm keyframes animation riêng biệt
-const keyframesStyle = document.createElement('style');
-keyframesStyle.textContent = `
-  @@keyframes shimmer {
-    0%, 100% { background-position: 200% 0; }
-    50% { background-position: -200% 0; }
-  }
-`;
-document.head.appendChild(keyframesStyle);
-
-// Thêm responsive CSS riêng biệt
-const responsiveStyle = document.createElement('style');
-responsiveStyle.textContent = `
-  @@media (max-width: 768px) {
-    .online-users-counter {
-      padding: 20px 16px;
-    }
-    
-    .count-number {
-      font-size: 28px;
-    }
-    
-    .counter-title {
-      font-size: 14px;
-    }
-  }
-`;
-document.head.appendChild(responsiveStyle);
 
 // Thêm CSS cho NEW tag
 const newTagStyle = document.createElement('style');

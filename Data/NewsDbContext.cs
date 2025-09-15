@@ -17,6 +17,7 @@ namespace WEB_CV.Data
         public DbSet<LienHe> LienHes { get; set; }
         public DbSet<SEOAnalysis> SEOAnalyses { get; set; }
         public DbSet<OnlineUser> OnlineUsers { get; set; }
+        public DbSet<SiteStats> SiteStats => Set<SiteStats>();
 
         protected override void OnModelCreating(ModelBuilder mb)
         {
