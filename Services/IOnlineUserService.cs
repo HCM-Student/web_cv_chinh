@@ -11,3 +11,4 @@ namespace WEB_CV.Services
         Task<List<OnlineUser>> GetOnlineUsersAsync(int minutes = 10);
     }
 }
+

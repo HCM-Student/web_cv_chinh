@@ -27,3 +27,4 @@ namespace WEB_CV.Models
         public bool IsActive { get; set; } = true;
     }
 }
+
