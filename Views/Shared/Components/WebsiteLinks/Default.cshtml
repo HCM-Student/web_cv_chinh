@@ -1,0 +1,16 @@
+@model List<WEB_CV.Models.Options.WebsiteLinkItem>
+
+<div class="widget widget-website-links">
+  <div class="widget-header">
+    <span>LIÊN KẾT WEBSITE</span>
+  </div>
+
+  <div class="stack">
+    @foreach (var it in Model)
+    {
+      <a class="link-card" href="@it.Url" target="_blank" rel="noopener noreferrer nofollow" title="@it.Title">
+        <img src="@it.Image" alt="@it.Title" />
+      </a>
+    }
+  </div>
+</div>

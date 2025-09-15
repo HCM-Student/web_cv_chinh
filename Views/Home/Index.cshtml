@@ -189,7 +189,7 @@
           class="headline text-white fw-bold mb-4 typing-title"
           data-typing="CUNG CẤP GIẢI PHÁP BẢN ĐỒ, CSDL,\nMÔ HÌNH 3D VÀ PHẦN MỀM ĐỊA KHÔNG GIAN">
         </h1>
-        <a href="#services" class="btn btn-cta btn-lg">CHI TIẾT</a>
+        <a href="@Url.Action("GioiThieu", "Home")" class="btn btn-cta btn-lg">CHI TIẾT</a>
       </div>
     </div>
   </div>
@@ -303,7 +303,7 @@ lỗi tt
           Phụ trách triển khai hạ tầng dữ liệu số, tích hợp – chia sẻ dữ liệu quốc gia,
           nền tảng đô thị thông minh (Smart City), IoT và phân tích AI/Big Data.
         </p>
-        <a class="btn btn-orange btn-pill btn-sm" href="#services">XEM CHI TIẾT</a>
+        <a class="btn btn-orange btn-pill btn-sm" href="@Url.Action("GioiThieu", "Home")">XEM CHI TIẾT</a>
       </div>
       <!-- Image -->
       <div class="col-lg-6">
@@ -504,9 +504,16 @@ document.addEventListener('DOMContentLoaded', function(){
           <div class="col-12 col-md-6 col-lg-4">
             <article class="card news-card h-100 border-0 shadow-sm">
               <a asp-controller="Home" asp-action="ChiTietBaiViet" asp-route-id="@p.Id"
-                 class="ratio ratio-16x9 d-block">
+                 class="ratio ratio-16x9 d-block position-relative">
                 <img class="news-thumb w-100 h-100 object-fit-cover"
                      src="@coverUrl" alt="@alt" loading="lazy" />
+                @{
+                  var isNew = (DateTime.Now - p.NgayDang).TotalDays <= 7; // Bài viết mới trong 7 ngày
+                }
+                @if (isNew)
+                {
+                  <span class="new-tag">NEW</span>
+                }
               </a>
               <div class="card-body d-flex flex-column">
                 <h5 class="news-title clamp-2">

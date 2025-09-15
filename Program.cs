@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Server.IIS;
 using WEB_CV.Data;
 using WEB_CV.Models;
+using WEB_CV.Models.Options;
 using WEB_CV.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -71,6 +72,10 @@ builder.Services.AddScoped<ISEOAnalysisService, SEOAnalysisService>();
 builder.Services.AddScoped<IOnlineUserService, OnlineUserService>();
 builder.Services.AddScoped<IScheduledPublishingService, ScheduledPublishingService>();
 builder.Services.AddScoped<ISiteCounter, SiteCounter>();
+
+// Configuration options
+builder.Services.Configure<WebsiteLinksOptions>(
+    builder.Configuration.GetSection("WebsiteLinks"));
 
 // AI Services
 builder.Services.AddHttpClient<IAIWritingService, AIWritingService>();

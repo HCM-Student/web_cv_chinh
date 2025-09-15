@@ -113,6 +113,18 @@
       "PackagePath": "staticwebassets\\img\\hero\\tech-ring.jpg"
     },
     {
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\img\\links\\bo_nganh_dia_phuong.png",
+      "PackagePath": "staticwebassets\\img\\links\\bo_nganh_dia_phuong.png"
+    },
+    {
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\img\\links\\lien_ket_khac.png",
+      "PackagePath": "staticwebassets\\img\\links\\lien_ket_khac.png"
+    },
+    {
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\img\\links\\to_chuc_thuoc_bo.png",
+      "PackagePath": "staticwebassets\\img\\links\\to_chuc_thuoc_bo.png"
+    },
+    {
       "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\img\\logo.png",
       "PackagePath": "staticwebassets\\img\\logo.png"
     },
