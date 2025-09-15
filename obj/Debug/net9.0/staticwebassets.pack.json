@@ -81,8 +81,8 @@
       "PackagePath": "staticwebassets\\img\\avatar.jpg"
     },
     {
-      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\img\\avatars\\avatar_1_20250911155225.png",
-      "PackagePath": "staticwebassets\\img\\avatars\\avatar_1_20250911155225.png"
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\img\\avatars\\avatar_1_20250915160257.png",
+      "PackagePath": "staticwebassets\\img\\avatars\\avatar_1_20250915160257.png"
     },
     {
       "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\img\\contact-hero.webp",
@@ -531,6 +531,10 @@
     {
       "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\media\\posts\\videos\\videoplayback.mp4",
       "PackagePath": "staticwebassets\\media\\posts\\videos\\videoplayback.mp4"
+    },
+    {
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\uploads\\avatars\\1_4c3589ef-5fc7-48e2-ac06-16032abf715d.webp",
+      "PackagePath": "staticwebassets\\uploads\\avatars\\1_4c3589ef-5fc7-48e2-ac06-16032abf715d.webp"
     },
     {
       "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\uploads\\avatars\\2_a7f91986-4350-462e-a868-d52c393ace9f.png",

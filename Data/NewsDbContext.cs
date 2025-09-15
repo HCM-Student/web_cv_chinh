@@ -18,6 +18,7 @@ namespace WEB_CV.Data
         public DbSet<SEOAnalysis> SEOAnalyses { get; set; }
         public DbSet<OnlineUser> OnlineUsers { get; set; }
         public DbSet<SiteStats> SiteStats => Set<SiteStats>();
+        public DbSet<WorkScheduleEvent> WorkScheduleEvents => Set<WorkScheduleEvent>();
 
         protected override void OnModelCreating(ModelBuilder mb)
         {

@@ -158,9 +158,12 @@
               <li><a class="dropdown-item" asp-area="" asp-controller="BinhLuan" asp-action="MyComments">
                 <i class="fas fa-comments me-2"></i>Bình luận của tôi
               </a></li>
-              <li><a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Bookmarks">
-                <i class="fas fa-bookmark me-2"></i>Dấu trang của tôi
-              </a></li>
+              @if (!User.IsInRole("Admin"))
+              {
+                <li><a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Bookmarks">
+                  <i class="fas fa-bookmark me-2"></i>Dấu trang của tôi
+                </a></li>
+              }
               @if (User.IsInRole("Admin"))
               {
                 <li><hr class="dropdown-divider" /></li>
@@ -177,6 +180,9 @@
                 <li><a class="dropdown-item" asp-area="Admin" asp-controller="BinhLuan" asp-action="Index">
                   <i class="fas fa-comments me-2"></i>Quản lý bình luận
                 </a></li>
+                <li><a class="dropdown-item" href="@Url.Action("Index","LichCongTac")">
+                  <i class="bi bi-calendar3-week me-2"></i>Lịch công tác
+                </a></li>
               }
               <li><hr class="dropdown-divider" /></li>
               <li><a class="dropdown-item" href="javascript:void(0)" onclick="document.getElementById('logout-form').submit();">
@@ -185,17 +191,14 @@
             </ul>
           </div>
         }
-        else
-        {
-          <a class="btn btn-outline-primary btn-sm rounded-pill px-3 d-flex align-items-center gap-1"
-             asp-area="" asp-controller="Account" asp-action="Login">
-            <span>🔑</span><span>Đăng nhập</span>
-          </a>
-          <a class="btn btn-primary btn-sm rounded-pill px-3 d-flex align-items-center gap-1"
-             asp-area="" asp-controller="Account" asp-action="Register">
-            <span>👤</span><span>Đăng ký</span>
-          </a>
-        }
+         else
+         {
+           <!-- AUTH BUTTONS (MINIMAL) -->
+           <div class="auth-compact">
+             <a class="auth-btn login" asp-area="" asp-controller="Account" asp-action="Login">Đăng nhập</a>
+             <a class="auth-btn register" asp-area="" asp-controller="Account" asp-action="Register">Đăng ký</a>
+           </div>
+         }
 
 
         <!-- LANGUAGE cuối cùng (desktop) -->

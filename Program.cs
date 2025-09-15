@@ -181,6 +181,53 @@ using (var scope = app.Services.CreateScope())
 
     // Initialize default settings
     await caiDatService.InitializeDefaultSettingsAsync();
+
+    // Seed dữ liệu mẫu cho Lịch công tác
+    if (!db.WorkScheduleEvents.Any())
+    {
+        var mon = DateTime.Today.AddDays(-(7 + (int)DateTime.Today.DayOfWeek - 1) % 7); // về thứ 2 tuần hiện tại
+        db.WorkScheduleEvents.AddRange(
+            new WorkScheduleEvent { 
+                Date = mon, 
+                StartTime = new TimeSpan(8,0,0), 
+                EndTime = new TimeSpan(9,30,0),
+                Title = "Họp giao ban đầu tuần", 
+                Location="Phòng A101", 
+                Organization="Văn phòng Cục",
+                Participants="Ban Lãnh đạo, Trưởng/Phó phòng", 
+                Preparation="Văn phòng", 
+                Contact="Nguyễn An", 
+                Phone="0903xxx", 
+                Email="an@example.gov.vn" 
+            },
+            new WorkScheduleEvent { 
+                Date = mon.AddDays(2), 
+                StartTime = new TimeSpan(14,0,0),
+                Title = "Làm việc với Sở TN&MT tỉnh X", 
+                Location="Trực tuyến", 
+                Organization="Cục Chuyển đổi số",
+                Participants="Tổ công tác chuyển đổi số", 
+                Preparation="CNTT", 
+                Contact="Trần Bình",
+                Phone="0987xxx",
+                Email="binh@example.gov.vn"
+            },
+            new WorkScheduleEvent { 
+                Date = mon.AddDays(4), 
+                StartTime = new TimeSpan(9,0,0), 
+                EndTime = new TimeSpan(11,0,0),
+                Title = "Hội thảo chuyển đổi số", 
+                Location="Hội trường lớn", 
+                Organization="Bộ TT&TT",
+                Participants="Các đơn vị trực thuộc", 
+                Preparation="Ban tổ chức", 
+                Contact="Lê Minh",
+                Phone="0912xxx",
+                Email="minh@example.gov.vn"
+            }
+        );
+        db.SaveChanges();
+    }
 }
 
 // ===================== Routes =====================

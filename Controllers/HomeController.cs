@@ -279,10 +279,23 @@ namespace WEB_CV.Controllers
             }
         }
 
-        // ===== Trang dấu trang =====
+        // ===== Trang dấu trang (chỉ dành cho người dùng thường) =====
         [HttpGet]
         public IActionResult Bookmarks()
         {
+            // Kiểm tra xem user có phải admin không
+            if (User.IsInRole("Admin"))
+            {
+                TempData["ErrorMessage"] = "Admin không có chức năng dấu trang. Vui lòng sử dụng quản trị để quản lý bài viết.";
+                return RedirectToAction("Index", "Dashboard", new { area = "Admin" });
+            }
+
+            // Kiểm tra đăng nhập
+            if (!User.Identity?.IsAuthenticated == true)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
             ViewData["Title"] = "Dấu trang của tôi";
             return View();
         }

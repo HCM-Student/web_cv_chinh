@@ -122,9 +122,12 @@
                                         <button class="btn btn-sm btn-outline-primary" id="printArticle" title="In bài viết">
                                             <i class="fas fa-print"></i>
                                         </button>
-                                        <button class="btn btn-sm btn-outline-danger bookmark-btn" id="bookmarkArticle" title="Lưu dấu trang">
-                                            <i class="fas fa-bookmark"></i>
-                                        </button>
+                                        @if (!User.IsInRole("Admin"))
+                                        {
+                                            <button class="btn btn-sm btn-outline-danger bookmark-btn" id="bookmarkArticle" title="Lưu dấu trang">
+                                                <i class="fas fa-bookmark"></i>
+                                            </button>
+                                        }
                                     </div>
                                 </div>
                             </div>
@@ -968,7 +971,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const brightnessSlider = document.getElementById('brightnessSlider');
     const body = document.body;
     
-    // Bookmark control
+    // Bookmark control (chỉ hiển thị cho user thường, không cho admin)
     const bookmarkBtn = document.getElementById('bookmarkArticle');
     const articleId = @Model.BaiViet.Id;
     const articleTitle = '@Html.Raw(Model.BaiViet.TieuDe.Replace("'", "\\'"))';
@@ -1126,7 +1129,7 @@ document.addEventListener('DOMContentLoaded', function() {
         updateBrightness();
     }
     
-    // Check bookmark status
-    checkBookmarkStatus();
+    // Check bookmark status (chỉ cho user thường, không cho admin)
+    if (bookmarkBtn) checkBookmarkStatus();
 });
 </script>

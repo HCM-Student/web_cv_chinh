@@ -669,4 +669,4 @@ C:\Users\acer\Downloads\web_cv_chinh\obj\Debug\net9.0\refint\web_cv.dll
 C:\Users\acer\Downloads\web_cv_chinh\obj\Debug\net9.0\web_cv.pdb
 C:\Users\acer\Downloads\web_cv_chinh\obj\Debug\net9.0\web_cv.genruntimeconfig.cache
 C:\Users\acer\Downloads\web_cv_chinh\obj\Debug\net9.0\ref\web_cv.dll
-C:\Users\acer\Downloads\web_cv_chinh\obj\Debug\net9.0\compressed\6h9kldcc6f-y5c5c98dko.gz
+C:\Users\acer\Downloads\web_cv_chinh\obj\Debug\net9.0\compressed\6h9kldcc6f-zv4nqwahkd.gz

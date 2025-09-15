@@ -1,0 +1,147 @@
+@model WEB_CV.Models.ViewModels.WorkScheduleVm
+@using System.Globalization
+@{
+    ViewData["Title"] = "Lịch công tác";
+    var vi = CultureInfo.GetCultureInfo("vi-VN");
+    string fmtTime(TimeSpan? t) => t.HasValue ? DateTime.Today.Add(t.Value).ToString("HH:mm") : "";
+    bool IsToday(DateTime d) => d.Date == DateTime.Today;
+}
+
+<div class="container-xxl py-3">
+  <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 mb-3">
+    <div class="d-flex align-items-center gap-2">
+      <a class="btn btn-outline-primary" href="@Url.Action("Index", new { start = Model.WeekStart.AddDays(-7).ToString("yyyy-MM-dd") })">
+        <i class="bi bi-arrow-left"></i> Tuần trước
+      </a>
+      <div class="fw-semibold">
+        Tuần thứ @CultureInfo.CurrentCulture.Calendar.GetWeekOfYear(Model.WeekStart, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday)
+        năm @Model.WeekStart.Year
+        <div class="text-muted small">(Từ ngày: @Model.WeekStart.ToString("dd/MM/yyyy") – Đến ngày: @Model.WeekEnd.ToString("dd/MM/yyyy"))</div>
+      </div>
+      <a class="btn btn-outline-primary" href="@Url.Action("Index", new { start = Model.WeekStart.AddDays(7).ToString("yyyy-MM-dd") })">
+        Tuần kế tiếp <i class="bi bi-arrow-right"></i>
+      </a>
+    </div>
+
+    <div class="d-flex align-items-center gap-2">
+      <a class="btn btn-light" href="@Url.Action("Index")"><i class="bi bi-calendar-event"></i> Tuần hiện tại</a>
+      <button type="button" class="btn btn-light" data-action="fullscreen"><i class="bi bi-arrows-fullscreen"></i> Full Screen</button>
+    </div>
+  </div>
+
+  <form class="card card-body shadow-sm border-0 mb-3" method="get" action="@Url.Action("Index")">
+    <input type="hidden" name="start" value="@Model.WeekStart.ToString("yyyy-MM-dd")" />
+    <div class="row g-3">
+      <div class="col-sm-6 col-lg-3">
+        <label class="form-label">Từ khóa</label>
+        <input class="form-control" name="keyword" value="@Model.Keyword" placeholder="Nhập từ khóa">
+      </div>
+      <div class="col-sm-6 col-lg-3">
+        <label class="form-label">Tên tổ chức</label>
+        <input class="form-control" name="org" value="@Model.Org" placeholder="Nhập tên tổ chức">
+      </div>
+      <div class="col-sm-6 col-lg-3">
+        <label class="form-label">Email</label>
+        <input class="form-control" name="email" value="@Model.Email" placeholder="Nhập email">
+      </div>
+      <div class="col-sm-6 col-lg-3">
+        <label class="form-label">Số điện thoại</label>
+        <input class="form-control" name="phone" value="@Model.Phone" placeholder="Nhập số điện thoại">
+      </div>
+      <div class="col-sm-6 col-lg-3">
+        <label class="form-label">Người liên hệ</label>
+        <input class="form-control" name="contact" value="@Model.Contact" placeholder="Nhập người liên hệ">
+      </div>
+      <div class="col-auto align-self-end">
+        <button class="btn btn-primary"><i class="bi bi-search"></i> Tìm kiếm</button>
+      </div>
+    </div>
+  </form>
+
+  <div class="table-responsive schedule-wrapper shadow-sm rounded-3">
+    <table class="table table-hover align-middle schedule-table mb-0">
+      <thead class="table-light sticky-top top-0">
+        <tr>
+          <th style="width:120px">Thứ/Ngày</th>
+          <th style="width:130px">Thời gian</th>
+          <th>Nội dung</th>
+          <th style="width:180px">Địa điểm</th>
+          <th style="width:180px">Tên tổ chức</th>
+          <th style="width:200px">Thành phần tham gia</th>
+          <th style="width:200px">Thành phần chuẩn bị</th>
+          <th style="width:150px">Liên hệ</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (int i = 0; i < 7; i++)
+        {
+            var d = Model.WeekStart.AddDays(i).Date;
+            var items = Model.EventsByDay[d];
+            <tr class="day-row @(IsToday(d) ? "is-today" : "")">
+              <td class="fw-semibold">
+                @("Thứ " + ((int)d.DayOfWeek == 0 ? "Chủ nhật" : ((int)d.DayOfWeek+1).ToString()))
+                <div class="text-muted small">@d.ToString("dd/MM/yyyy")</div>
+              </td>
+
+              <td>
+                @if (items.Count == 0) { <span class="text-muted">—</span> }
+                else
+                {
+                    foreach (var e in items)
+                    {
+                        <div class="time-chip">@fmtTime(e.StartTime)@((e.EndTime != null ? "–" + fmtTime(e.EndTime) : ""))</div>
+                    }
+                }
+              </td>
+
+              <td>
+                @if (items.Count == 0) { <span class="text-muted">Không có lịch</span> }
+                else
+                {
+                    foreach (var e in items)
+                    {
+                        <div class="mb-2">
+                          <div class="fw-semibold">@e.Title</div>
+                          @if(!string.IsNullOrWhiteSpace(e.Email) || !string.IsNullOrWhiteSpace(e.Phone))
+                          {
+                            <div class="small text-muted">
+                               @if(!string.IsNullOrWhiteSpace(e.Email)){<span class="me-2"><i class="bi bi-envelope"></i> @e.Email</span>}
+                               @if(!string.IsNullOrWhiteSpace(e.Phone)){<span><i class="bi bi-telephone"></i> @e.Phone</span>}
+                            </div>
+                          }
+                        </div>
+                    }
+                }
+              </td>
+
+              <td>
+                @foreach (var e in items) { <div class="mb-2"><i class="bi bi-geo"></i> @e.Location</div> }
+              </td>
+              <td>
+                @foreach (var e in items) { <div class="mb-2">@e.Organization</div> }
+              </td>
+              <td>
+                @foreach (var e in items) { <div class="mb-2">@e.Participants</div> }
+              </td>
+              <td>
+                @foreach (var e in items) { <div class="mb-2">@e.Preparation</div> }
+              </td>
+              <td>
+                @foreach (var e in items) { <div class="mb-2">@e.Contact</div> }
+              </td>
+            </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>
+
+@section Scripts {
+<script>
+  document.querySelector('[data-action="fullscreen"]')?.addEventListener('click', () => {
+    const box = document.querySelector('.schedule-wrapper');
+    if (!document.fullscreenElement) box.requestFullscreen();
+    else document.exitFullscreen();
+  });
+</script>
+}

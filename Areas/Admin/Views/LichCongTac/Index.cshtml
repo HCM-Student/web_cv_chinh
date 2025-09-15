@@ -1,0 +1,115 @@
+@model IEnumerable<WEB_CV.Models.WorkScheduleEvent>
+
+@{
+    ViewData["Title"] = "Quản lý Lịch công tác";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2><i class="fas fa-calendar-alt"></i> Quản lý Lịch công tác</h2>
+    <a asp-action="Create" class="btn btn-primary">
+        <i class="fas fa-plus"></i> Thêm sự kiện mới
+    </a>
+</div>
+
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        @TempData["SuccessMessage"]
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+}
+
+<div class="card">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead class="table-light">
+                    <tr>
+                        <th>Ngày</th>
+                        <th>Thời gian</th>
+                        <th>Nội dung</th>
+                        <th>Địa điểm</th>
+                        <th>Tổ chức</th>
+                        <th>Liên hệ</th>
+                        <th width="150">Thao tác</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                <strong>@item.Date.ToString("dd/MM/yyyy")</strong><br>
+                                <small class="text-muted">@GetDayOfWeek(item.Date.DayOfWeek)</small>
+                            </td>
+                            <td>
+                                @if (item.StartTime.HasValue)
+                                {
+                                    <span class="badge bg-primary">@item.StartTime.Value.ToString(@"hh\:mm")</span>
+                                    @if (item.EndTime.HasValue)
+                                    {
+                                        <span class="text-muted">-</span>
+                                        <span class="badge bg-secondary">@item.EndTime.Value.ToString(@"hh\:mm")</span>
+                                    }
+                                }
+                            </td>
+                            <td>
+                                <strong>@item.Title</strong>
+                                @if (!string.IsNullOrEmpty(item.Participants))
+                                {
+                                    <br><small class="text-muted">Tham gia: @item.Participants</small>
+                                }
+                            </td>
+                            <td>@item.Location</td>
+                            <td>@item.Organization</td>
+                            <td>
+                                @if (!string.IsNullOrEmpty(item.Contact))
+                                {
+                                    <div>@item.Contact</div>
+                                }
+                                @if (!string.IsNullOrEmpty(item.Phone))
+                                {
+                                    <small class="text-muted"><i class="fas fa-phone"></i> @item.Phone</small>
+                                }
+                                @if (!string.IsNullOrEmpty(item.Email))
+                                {
+                                    <br><small class="text-muted"><i class="fas fa-envelope"></i> @item.Email</small>
+                                }
+                            </td>
+                            <td>
+                                <div class="btn-group btn-group-sm" role="group">
+                                    <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-outline-info" title="Xem chi tiết">
+                                        <i class="fas fa-eye"></i>
+                                    </a>
+                                    <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-outline-warning" title="Chỉnh sửa">
+                                        <i class="fas fa-edit"></i>
+                                    </a>
+                                    <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-outline-danger" title="Xóa">
+                                        <i class="fas fa-trash"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@functions {
+    string GetDayOfWeek(DayOfWeek dayOfWeek)
+    {
+        return dayOfWeek switch
+        {
+            DayOfWeek.Monday => "Thứ 2",
+            DayOfWeek.Tuesday => "Thứ 3",
+            DayOfWeek.Wednesday => "Thứ 4",
+            DayOfWeek.Thursday => "Thứ 5",
+            DayOfWeek.Friday => "Thứ 6",
+            DayOfWeek.Saturday => "Thứ 7",
+            DayOfWeek.Sunday => "Chủ nhật",
+            _ => ""
+        };
+    }
+}
