@@ -278,5 +278,13 @@ namespace WEB_CV.Controllers
                 return Json(new { success = false, message = "Lỗi khi cập nhật lượt xem: " + ex.Message });
             }
         }
+
+        // ===== Trang dấu trang =====
+        [HttpGet]
+        public IActionResult Bookmarks()
+        {
+            ViewData["Title"] = "Dấu trang của tôi";
+            return View();
+        }
     }
 }

@@ -19,6 +19,7 @@
     </div>
 </section>
 
+
 <!-- ===================== NỘI DUNG BÀI VIẾT ===================== -->
 <section class="article-content section">
     <div class="container">
@@ -90,6 +91,45 @@
                             }
                         </div>
                     }
+
+                    <!-- ===================== ACCESSIBILITY CONTROLS ===================== -->
+                    <div class="accessibility-controls bg-light rounded p-3 mb-4 border">
+                        <div class="row align-items-center">
+                            <div class="col-md-6">
+                                <!-- Brightness Control -->
+                                <div class="d-flex align-items-center">
+                                    <i class="fas fa-moon me-2 text-muted"></i>
+                                    <input type="range" class="form-range brightness-slider" id="brightnessSlider" 
+                                           min="0.5" max="1.5" step="0.1" value="1" style="width: 120px;">
+                                    <i class="fas fa-sun ms-2 text-muted"></i>
+                                </div>
+                            </div>
+                            <div class="col-md-6 text-end">
+                                <!-- Font Size Control -->
+                                <div class="font-size-control-modern">
+                                    <span class="font-size-label">Chọn cỡ chữ</span>
+                                    <div class="font-size-buttons">
+                                        <button class="font-size-btn" id="decreaseFont" title="Giảm cỡ chữ">
+                                            A
+                                        </button>
+                                        <button class="font-size-btn" id="increaseFont" title="Tăng cỡ chữ">
+                                            A
+                                        </button>
+                                    </div>
+                                    
+                                    <!-- Action Buttons -->
+                                    <div class="ms-3 d-flex gap-1">
+                                        <button class="btn btn-sm btn-outline-primary" id="printArticle" title="In bài viết">
+                                            <i class="fas fa-print"></i>
+                                        </button>
+                                        <button class="btn btn-sm btn-outline-danger bookmark-btn" id="bookmarkArticle" title="Lưu dấu trang">
+                                            <i class="fas fa-bookmark"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
                     <!-- Article Body -->
                     <div class="article-body">
@@ -188,34 +228,6 @@
                         </div>
                     }
                     
-                    <!-- Bài viết mới nhất -->
-                    @if (Model.BaiVietMoiNhat.Any())
-                    {
-                        <div class="sidebar-widget">
-                            <h5 class="widget-title">Bài viết mới nhất</h5>
-                            <div class="related-posts">
-                                @foreach (var latestPost in Model.BaiVietMoiNhat)
-                                {
-                                    <div class="related-post">
-                                        <div class="related-image">
-                                            @if (!string.IsNullOrEmpty(latestPost.AnhTieuDe))
-                                            {
-                                                <img src="@latestPost.AnhTieuDe" alt="@latestPost.TieuDe" class="img-fluid">
-                                            }
-                                            else
-                                            {
-                                                <img src="~/media/news-placeholder.jpg" alt="@latestPost.TieuDe" class="img-fluid">
-                                            }
-                                        </div>
-                                        <div class="related-content">
-                                            <h6><a href="@Url.Action("ChiTietBaiViet", "Home", new { id = latestPost.Id })">@latestPost.TieuDe</a></h6>
-                                            <small class="text-muted">@latestPost.NgayDang.ToString("dd/MM/yyyy")</small>
-                                        </div>
-                                    </div>
-                                }
-                            </div>
-                        </div>
-                    }
                     
                     <!-- Newsletter -->
                     <div class="sidebar-widget">
@@ -1062,4 +1074,210 @@ responsiveStyle.textContent = `
   }
 `;
 document.head.appendChild(responsiveStyle);
+
+// Thêm CSS cho NEW tag
+const newTagStyle = document.createElement('style');
+newTagStyle.textContent = `
+  .new-tag {
+    position: absolute !important;
+    top: 4px !important;
+    right: 4px !important;
+    background: #dc3545 !important;
+    color: white !important;
+    padding: 2px 6px !important;
+    border-radius: 3px !important;
+    font-size: 8px !important;
+    font-weight: bold !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.3px !important;
+    z-index: 999 !important;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.3) !important;
+    display: block !important;
+    line-height: 1.2 !important;
+  }
+  
+  .related-image {
+    position: relative !important;
+  }
+  
+  .news-image {
+    position: relative !important;
+  }
+`;
+document.head.appendChild(newTagStyle);
+
+// ===================== ACCESSIBILITY FEATURES =====================
+document.addEventListener('DOMContentLoaded', function() {
+    // Font size control
+    let currentFontSize = 100;
+    // const fontDisplay = document.getElementById('fontSizeDisplay'); // Không cần nữa
+    const decreaseBtn = document.getElementById('decreaseFont');
+    const increaseBtn = document.getElementById('increaseFont');
+    const articleBody = document.querySelector('.article-body');
+    
+    // Brightness control
+    const brightnessSlider = document.getElementById('brightnessSlider');
+    const body = document.body;
+    
+    // Bookmark control
+    const bookmarkBtn = document.getElementById('bookmarkArticle');
+    const articleId = @Model.BaiViet.Id;
+    const articleTitle = '@Html.Raw(Model.BaiViet.TieuDe.Replace("'", "\\'"))';
+    const articleUrl = window.location.href;
+    
+    // Print control
+    const printBtn = document.getElementById('printArticle');
+    
+    // Font size functions
+    function updateFontSize() {
+        const fontSize = currentFontSize / 100;
+        // Chỉ điều chỉnh nội dung bài viết, không phải tiêu đề
+        if (articleBody) {
+            articleBody.style.fontSize = fontSize + 'rem';
+        }
+        // Không cần hiển thị phần trăm nữa
+        
+        // Save to localStorage
+        localStorage.setItem('articleFontSize', currentFontSize);
+    }
+    
+    function decreaseFontSize() {
+        if (currentFontSize > 75) {
+            currentFontSize -= 25;
+            updateFontSize();
+        }
+    }
+    
+    function increaseFontSize() {
+        if (currentFontSize < 200) {
+            currentFontSize += 25;
+            updateFontSize();
+        }
+    }
+    
+    // Brightness functions
+    function updateBrightness() {
+        const brightness = brightnessSlider.value;
+        // Chỉ áp dụng độ sáng cho nội dung bài viết, không phải toàn bộ trang
+        const articleContent = document.querySelector('.main-article');
+        if (articleContent) {
+            articleContent.style.filter = `brightness(${brightness})`;
+        }
+        
+        // Save to localStorage
+        localStorage.setItem('articleBrightness', brightness);
+    }
+    
+    // Bookmark functions
+    function toggleBookmark() {
+        let bookmarks = JSON.parse(localStorage.getItem('articleBookmarks') || '[]');
+        const bookmarkIndex = bookmarks.findIndex(b => b.id === articleId);
+        
+        if (bookmarkIndex > -1) {
+            // Remove bookmark
+            bookmarks.splice(bookmarkIndex, 1);
+            bookmarkBtn.innerHTML = '<i class="fas fa-bookmark"></i>';
+            bookmarkBtn.classList.remove('btn-danger');
+            bookmarkBtn.classList.add('btn-outline-danger');
+            showNotification('Đã xóa khỏi dấu trang', 'success');
+        } else {
+            // Add bookmark
+            bookmarks.push({
+                id: articleId,
+                title: articleTitle,
+                url: articleUrl,
+                date: new Date().toISOString()
+            });
+            bookmarkBtn.innerHTML = '<i class="fas fa-bookmark"></i>';
+            bookmarkBtn.classList.remove('btn-outline-danger');
+            bookmarkBtn.classList.add('btn-danger');
+            showNotification('Đã lưu vào dấu trang', 'success');
+        }
+        
+        localStorage.setItem('articleBookmarks', JSON.stringify(bookmarks));
+    }
+    
+    function checkBookmarkStatus() {
+        let bookmarks = JSON.parse(localStorage.getItem('articleBookmarks') || '[]');
+        const isBookmarked = bookmarks.some(b => b.id === articleId);
+        
+        if (isBookmarked) {
+            bookmarkBtn.innerHTML = '<i class="fas fa-bookmark"></i>';
+            bookmarkBtn.classList.remove('btn-outline-danger');
+            bookmarkBtn.classList.add('btn-danger');
+        }
+    }
+    
+    // Print function
+    function printArticle() {
+        // Tạo cửa sổ in với chỉ nội dung bài viết
+        const printWindow = window.open('', '_blank');
+        const articleContent = document.querySelector('.main-article').innerHTML;
+        const articleTitle = document.querySelector('.article-title').textContent;
+        
+        printWindow.document.write(`
+            <!DOCTYPE html>
+            <html>
+            <head>
+                <title>${articleTitle}</title>
+                <style>
+                    body { font-family: Arial, sans-serif; margin: 20px; }
+                    .article-title { font-size: 24px; font-weight: bold; margin-bottom: 20px; }
+                    .article-body { font-size: 14px; line-height: 1.6; }
+                    .article-body img { max-width: 100%; height: auto; }
+                    @@media print { body { margin: 0; } }
+                </style>
+            </head>
+            <body>
+                ${articleContent}
+            </body>
+            </html>
+        `);
+        printWindow.document.close();
+        printWindow.print();
+    }
+    
+    // Notification function
+    function showNotification(message, type = 'info') {
+        const notification = document.createElement('div');
+        notification.className = `alert alert-${type} alert-dismissible fade show position-fixed`;
+        notification.style.cssText = 'top: 20px; right: 20px; z-index: 9999; min-width: 300px;';
+        notification.innerHTML = `
+            <i class="fas fa-check-circle me-2"></i>
+            ${message}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        `;
+        document.body.appendChild(notification);
+        
+        // Auto remove after 3 seconds
+        setTimeout(() => {
+            if (notification.parentNode) {
+                notification.remove();
+            }
+        }, 3000);
+    }
+    
+    // Event listeners
+    decreaseBtn.addEventListener('click', decreaseFontSize);
+    increaseBtn.addEventListener('click', increaseFontSize);
+    brightnessSlider.addEventListener('input', updateBrightness);
+    bookmarkBtn.addEventListener('click', toggleBookmark);
+    printBtn.addEventListener('click', printArticle);
+    
+    // Load saved settings
+    const savedFontSize = localStorage.getItem('articleFontSize');
+    if (savedFontSize) {
+        currentFontSize = parseInt(savedFontSize);
+        updateFontSize();
+    }
+    
+    const savedBrightness = localStorage.getItem('articleBrightness');
+    if (savedBrightness) {
+        brightnessSlider.value = savedBrightness;
+        updateBrightness();
+    }
+    
+    // Check bookmark status
+    checkBookmarkStatus();
+});
 </script>

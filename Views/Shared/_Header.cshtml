@@ -158,6 +158,9 @@
               <li><a class="dropdown-item" asp-area="" asp-controller="BinhLuan" asp-action="MyComments">
                 <i class="fas fa-comments me-2"></i>Bình luận của tôi
               </a></li>
+              <li><a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Bookmarks">
+                <i class="fas fa-bookmark me-2"></i>Dấu trang của tôi
+              </a></li>
               @if (User.IsInRole("Admin"))
               {
                 <li><hr class="dropdown-divider" /></li>

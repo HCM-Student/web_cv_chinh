@@ -1,0 +1,208 @@
+@{
+    ViewData["Title"] = "Dấu trang của tôi";
+}
+
+<!-- ===================== BREADCRUMB ===================== -->
+<section class="breadcrumb-section py-3 bg-light">
+    <div class="container">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb mb-0">
+                <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home")" class="text-decoration-none">Trang chủ</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Dấu trang của tôi</li>
+            </ol>
+        </nav>
+    </div>
+</section>
+
+<!-- ===================== NỘI DUNG DẤU TRANG ===================== -->
+<section class="bookmarks-content section">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="bookmarks-header mb-4">
+                    <h1 class="h2 mb-3">
+                        <i class="fas fa-bookmark text-primary me-2"></i>
+                        Dấu trang của tôi
+                    </h1>
+                    <p class="text-muted">Danh sách các bài viết bạn đã lưu dấu trang</p>
+                </div>
+
+                <!-- Bookmarks List -->
+                <div id="bookmarksList" class="bookmarks-list">
+                    <div class="text-center py-5" id="emptyState">
+                        <i class="fas fa-bookmark fa-3x text-muted mb-3"></i>
+                        <h4 class="text-muted">Chưa có dấu trang nào</h4>
+                        <p class="text-muted">Hãy lưu dấu trang các bài viết bạn quan tâm để xem lại sau</p>
+                        <a href="@Url.Action("TinTuc", "Home")" class="btn btn-primary">
+                            <i class="fas fa-newspaper me-2"></i>
+                            Xem tin tức
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+.bookmarks-list {
+    min-height: 400px;
+}
+
+.bookmark-item {
+    background: #fff;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.bookmark-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    border-color: #007bff;
+}
+
+.bookmark-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+    line-height: 1.4;
+}
+
+.bookmark-title a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.bookmark-title a:hover {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.bookmark-meta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    color: #6c757d;
+}
+
+.bookmark-actions {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.bookmark-date {
+    font-size: 0.8rem;
+    color: #6c757d;
+}
+
+.btn-bookmark-remove {
+    background: #dc3545;
+    border-color: #dc3545;
+    color: white;
+}
+
+.btn-bookmark-remove:hover {
+    background: #c82333;
+    border-color: #bd2130;
+    color: white;
+}
+
+@@media (max-width: 768px) {
+    .bookmark-meta {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+    
+    .bookmark-actions {
+        flex-wrap: wrap;
+    }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const bookmarksList = document.getElementById('bookmarksList');
+    const emptyState = document.getElementById('emptyState');
+    
+    function loadBookmarks() {
+        const bookmarks = JSON.parse(localStorage.getItem('articleBookmarks') || '[]');
+        
+        if (bookmarks.length === 0) {
+            emptyState.style.display = 'block';
+            return;
+        }
+        
+        emptyState.style.display = 'none';
+        
+        // Sort by date (newest first)
+        bookmarks.sort((a, b) => new Date(b.date) - new Date(a.date));
+        
+        const bookmarksHtml = bookmarks.map(bookmark => {
+            const date = new Date(bookmark.date).toLocaleDateString('vi-VN');
+            return `
+                <div class="bookmark-item">
+                    <h3 class="bookmark-title">
+                        <a href="${bookmark.url}" target="_blank">${bookmark.title}</a>
+                    </h3>
+                    <div class="bookmark-meta">
+                        <span><i class="fas fa-calendar me-1"></i> Lưu ngày: ${date}</span>
+                        <span><i class="fas fa-external-link-alt me-1"></i> ID: ${bookmark.id}</span>
+                    </div>
+                    <div class="bookmark-actions">
+                        <a href="${bookmark.url}" class="btn btn-primary btn-sm" target="_blank">
+                            <i class="fas fa-eye me-1"></i> Xem bài viết
+                        </a>
+                        <button class="btn btn-bookmark-remove btn-sm" onclick="removeBookmark(${bookmark.id})">
+                            <i class="fas fa-trash me-1"></i> Xóa dấu trang
+                        </button>
+                    </div>
+                </div>
+            `;
+        }).join('');
+        
+        bookmarksList.innerHTML = bookmarksHtml;
+    }
+    
+    function removeBookmark(articleId) {
+        if (confirm('Bạn có chắc muốn xóa dấu trang này?')) {
+            let bookmarks = JSON.parse(localStorage.getItem('articleBookmarks') || '[]');
+            bookmarks = bookmarks.filter(b => b.id !== articleId);
+            localStorage.setItem('articleBookmarks', JSON.stringify(bookmarks));
+            loadBookmarks();
+            showNotification('Đã xóa dấu trang', 'success');
+        }
+    }
+    
+    function showNotification(message, type = 'info') {
+        const notification = document.createElement('div');
+        notification.className = `alert alert-${type} alert-dismissible fade show position-fixed`;
+        notification.style.cssText = 'top: 20px; right: 20px; z-index: 9999; min-width: 300px;';
+        notification.innerHTML = `
+            ${message}
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        `;
+        document.body.appendChild(notification);
+        
+        setTimeout(() => {
+            if (notification.parentNode) {
+                notification.remove();
+            }
+        }, 3000);
+    }
+    
+    // Make removeBookmark global
+    window.removeBookmark = removeBookmark;
+    
+    // Load bookmarks on page load
+    loadBookmarks();
+});
+</script>

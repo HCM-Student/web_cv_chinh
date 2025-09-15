@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "ZKhumP7zKKbE6BjzRUIn+QdAk4HPFQJJsa4qBVXLn2Y=",
+  "Hash": "NFEP5OB/Sc+hOU7nGjDyN1Q/Ls2m3URe/D4e85TzLrw=",
   "Source": "web_cv",
   "BasePath": "_content/web_cv",
   "Mode": "Default",
@@ -332,12 +332,12 @@
       "OriginalItemSpec": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\lib\\jquery\\dist\\jquery.min.map"
     },
     {
-      "Identity": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\obj\\Debug\\net9.0\\compressed\\6h9kldcc6f-qaow57bhgz.gz",
+      "Identity": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\obj\\Debug\\net9.0\\compressed\\6h9kldcc6f-xxfh83nv4s.gz",
       "SourceId": "web_cv",
       "SourceType": "Discovered",
       "ContentRoot": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\obj\\Debug\\net9.0\\compressed\\",
       "BasePath": "_content/web_cv",
-      "RelativePath": "css/site#[.{fingerprint=qaow57bhgz}]?.css.gz",
+      "RelativePath": "css/site#[.{fingerprint=xxfh83nv4s}]?.css.gz",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Alternative",
@@ -346,8 +346,8 @@
       "RelatedAsset": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\css\\site.css",
       "AssetTraitName": "Content-Encoding",
       "AssetTraitValue": "gzip",
-      "Fingerprint": "pskyo8686p",
-      "Integrity": "yTUblAjH6fwsjxSFR5Uv4uq88jl0B7d0r7Q6rnIpomo=",
+      "Fingerprint": "u7b9073qr6",
+      "Integrity": "9jKsdvuWZISlQdXMbz2Z2kwsDvjetC9hD87bLJ81VjE=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\css\\site.css"
@@ -1984,8 +1984,8 @@
       "RelatedAsset": "",
       "AssetTraitName": "",
       "AssetTraitValue": "",
-      "Fingerprint": "qaow57bhgz",
-      "Integrity": "AtQl55uEw2sIPQ3xCur1t+LCgeBZ0/DdmijVehg2w78=",
+      "Fingerprint": "xxfh83nv4s",
+      "Integrity": "9Y4Rki/CcO8ry4xcyb6szx0TPkjfGTrBWS7qDYH5H0U=",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\css\\site.css"
@@ -4091,6 +4091,27 @@
       "OriginalItemSpec": "wwwroot\\media\\posts\\cover\\big city_5fe877b5c0.png"
     },
     {
+      "Identity": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\media\\posts\\cover\\can-dot-pha-cong-nghe-de-nang-cao-chat-luong-giam-that-thoat-sau-thu-hoach-100449_793-105420.jpg",
+      "SourceId": "web_cv",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\",
+      "BasePath": "_content/web_cv",
+      "RelativePath": "media/posts/cover/can-dot-pha-cong-nghe-de-nang-cao-chat-luong-giam-that-thoat-sau-thu-hoach-100449_793-105420#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "m5qn9buxcf",
+      "Integrity": "Krluq4yb/HotvJblHofRl/pzMnWIyorQsF0xBtBZZPc=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\media\\posts\\cover\\can-dot-pha-cong-nghe-de-nang-cao-chat-luong-giam-that-thoat-sau-thu-hoach-100449_793-105420.jpg"
+    },
+    {
       "Identity": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\media\\posts\\cover\\dat-dai-1-17575038033621692300901-192351_920.jpg",
       "SourceId": "web_cv",
       "SourceType": "Discovered",
@@ -4175,6 +4196,27 @@
       "OriginalItemSpec": "wwwroot\\media\\posts\\cover\\dsc02546-102914_747-120205.jpg"
     },
     {
+      "Identity": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\media\\posts\\cover\\image.jpg",
+      "SourceId": "web_cv",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\",
+      "BasePath": "_content/web_cv",
+      "RelativePath": "media/posts/cover/image#[.{fingerprint}]?.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "by71p0snom",
+      "Integrity": "gxePKk9/ICZ0r39foPp9ekqaKTd1QVfgZFWaz4bjAbk=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\media\\posts\\cover\\image.jpg"
+    },
+    {
       "Identity": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\media\\posts\\cover\\img_4303-131317_612.jpg",
       "SourceId": "web_cv",
       "SourceType": "Discovered",
@@ -4236,27 +4278,6 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\media\\posts\\cover\\screenshot-2025-07-18-165356-093050_341-095724.jpg"
-    },
-    {
-      "Identity": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\media\\posts\\cover\\trang-chu-gioi-thieu-min-1.png",
-      "SourceId": "web_cv",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\",
-      "BasePath": "_content/web_cv",
-      "RelativePath": "media/posts/cover/trang-chu-gioi-thieu-min-1#[.{fingerprint}]?.png",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "AssetMergeBehavior": "",
-      "AssetMergeSource": "",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "Fingerprint": "f9shr6gdws",
-      "Integrity": "U7zKkYGPZiUef4x/6OOdYSmR7SUpAD3PEo3e3OaVhxs=",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\media\\posts\\cover\\trang-chu-gioi-thieu-min-1.png"
     },
     {
       "Identity": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\media\\posts\\cover\\vay-tay-16939989380041054058261.jpg",
@@ -8283,12 +8304,12 @@
     },
     {
       "Route": "css/site.css",
-      "AssetFile": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\obj\\Debug\\net9.0\\compressed\\6h9kldcc6f-qaow57bhgz.gz",
+      "AssetFile": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\obj\\Debug\\net9.0\\compressed\\6h9kldcc6f-xxfh83nv4s.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000035433350"
+          "Quality": "0.000033210455"
         }
       ],
       "ResponseHeaders": [
@@ -8298,15 +8319,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "28221"
+          "Value": "30110"
         },
         {
           "Name": "ETag",
-          "Value": "\"yTUblAjH6fwsjxSFR5Uv4uq88jl0B7d0r7Q6rnIpomo=\""
+          "Value": "\"9jKsdvuWZISlQdXMbz2Z2kwsDvjetC9hD87bLJ81VjE=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 12 Sep 2025 16:16:56 GMT"
+          "Value": "Mon, 15 Sep 2025 03:51:52 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -8326,13 +8347,13 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"AtQl55uEw2sIPQ3xCur1t+LCgeBZ0/DdmijVehg2w78=\""
+          "Value": "W/\"9Y4Rki/CcO8ry4xcyb6szx0TPkjfGTrBWS7qDYH5H0U=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-AtQl55uEw2sIPQ3xCur1t+LCgeBZ0/DdmijVehg2w78="
+          "Value": "sha256-9Y4Rki/CcO8ry4xcyb6szx0TPkjfGTrBWS7qDYH5H0U="
         }
       ]
     },
@@ -8347,7 +8368,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "138863"
+          "Value": "147292"
         },
         {
           "Name": "Content-Type",
@@ -8355,11 +8376,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"AtQl55uEw2sIPQ3xCur1t+LCgeBZ0/DdmijVehg2w78=\""
+          "Value": "\"9Y4Rki/CcO8ry4xcyb6szx0TPkjfGTrBWS7qDYH5H0U=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 12 Sep 2025 16:16:56 GMT"
+          "Value": "Mon, 15 Sep 2025 03:51:52 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -8369,13 +8390,13 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-AtQl55uEw2sIPQ3xCur1t+LCgeBZ0/DdmijVehg2w78="
+          "Value": "sha256-9Y4Rki/CcO8ry4xcyb6szx0TPkjfGTrBWS7qDYH5H0U="
         }
       ]
     },
     {
       "Route": "css/site.css.gz",
-      "AssetFile": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\obj\\Debug\\net9.0\\compressed\\6h9kldcc6f-qaow57bhgz.gz",
+      "AssetFile": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\obj\\Debug\\net9.0\\compressed\\6h9kldcc6f-xxfh83nv4s.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -8384,7 +8405,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "28221"
+          "Value": "30110"
         },
         {
           "Name": "Content-Type",
@@ -8392,11 +8413,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"yTUblAjH6fwsjxSFR5Uv4uq88jl0B7d0r7Q6rnIpomo=\""
+          "Value": "\"9jKsdvuWZISlQdXMbz2Z2kwsDvjetC9hD87bLJ81VjE=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 12 Sep 2025 16:16:56 GMT"
+          "Value": "Mon, 15 Sep 2025 03:51:52 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -8414,18 +8435,18 @@
       "EndpointProperties": [
         {
           "Name": "integrity",
-          "Value": "sha256-yTUblAjH6fwsjxSFR5Uv4uq88jl0B7d0r7Q6rnIpomo="
+          "Value": "sha256-9jKsdvuWZISlQdXMbz2Z2kwsDvjetC9hD87bLJ81VjE="
         }
       ]
     },
     {
-      "Route": "css/site.qaow57bhgz.css",
-      "AssetFile": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\obj\\Debug\\net9.0\\compressed\\6h9kldcc6f-qaow57bhgz.gz",
+      "Route": "css/site.xxfh83nv4s.css",
+      "AssetFile": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\obj\\Debug\\net9.0\\compressed\\6h9kldcc6f-xxfh83nv4s.gz",
       "Selectors": [
         {
           "Name": "Content-Encoding",
           "Value": "gzip",
-          "Quality": "0.000035433350"
+          "Quality": "0.000033210455"
         }
       ],
       "ResponseHeaders": [
@@ -8435,15 +8456,15 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "28221"
+          "Value": "30110"
         },
         {
           "Name": "ETag",
-          "Value": "\"yTUblAjH6fwsjxSFR5Uv4uq88jl0B7d0r7Q6rnIpomo=\""
+          "Value": "\"9jKsdvuWZISlQdXMbz2Z2kwsDvjetC9hD87bLJ81VjE=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 12 Sep 2025 16:16:56 GMT"
+          "Value": "Mon, 15 Sep 2025 03:51:52 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -8463,13 +8484,13 @@
         },
         {
           "Name": "ETag",
-          "Value": "W/\"AtQl55uEw2sIPQ3xCur1t+LCgeBZ0/DdmijVehg2w78=\""
+          "Value": "W/\"9Y4Rki/CcO8ry4xcyb6szx0TPkjfGTrBWS7qDYH5H0U=\""
         }
       ],
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "qaow57bhgz"
+          "Value": "xxfh83nv4s"
         },
         {
           "Name": "label",
@@ -8477,12 +8498,12 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-AtQl55uEw2sIPQ3xCur1t+LCgeBZ0/DdmijVehg2w78="
+          "Value": "sha256-9Y4Rki/CcO8ry4xcyb6szx0TPkjfGTrBWS7qDYH5H0U="
         }
       ]
     },
     {
-      "Route": "css/site.qaow57bhgz.css",
+      "Route": "css/site.xxfh83nv4s.css",
       "AssetFile": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\css\\site.css",
       "Selectors": [],
       "ResponseHeaders": [
@@ -8492,7 +8513,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "138863"
+          "Value": "147292"
         },
         {
           "Name": "Content-Type",
@@ -8500,11 +8521,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"AtQl55uEw2sIPQ3xCur1t+LCgeBZ0/DdmijVehg2w78=\""
+          "Value": "\"9Y4Rki/CcO8ry4xcyb6szx0TPkjfGTrBWS7qDYH5H0U=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 12 Sep 2025 16:16:56 GMT"
+          "Value": "Mon, 15 Sep 2025 03:51:52 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -8514,7 +8535,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "qaow57bhgz"
+          "Value": "xxfh83nv4s"
         },
         {
           "Name": "label",
@@ -8522,13 +8543,13 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-AtQl55uEw2sIPQ3xCur1t+LCgeBZ0/DdmijVehg2w78="
+          "Value": "sha256-9Y4Rki/CcO8ry4xcyb6szx0TPkjfGTrBWS7qDYH5H0U="
         }
       ]
     },
     {
-      "Route": "css/site.qaow57bhgz.css.gz",
-      "AssetFile": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\obj\\Debug\\net9.0\\compressed\\6h9kldcc6f-qaow57bhgz.gz",
+      "Route": "css/site.xxfh83nv4s.css.gz",
+      "AssetFile": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\obj\\Debug\\net9.0\\compressed\\6h9kldcc6f-xxfh83nv4s.gz",
       "Selectors": [],
       "ResponseHeaders": [
         {
@@ -8537,7 +8558,7 @@
         },
         {
           "Name": "Content-Length",
-          "Value": "28221"
+          "Value": "30110"
         },
         {
           "Name": "Content-Type",
@@ -8545,11 +8566,11 @@
         },
         {
           "Name": "ETag",
-          "Value": "\"yTUblAjH6fwsjxSFR5Uv4uq88jl0B7d0r7Q6rnIpomo=\""
+          "Value": "\"9jKsdvuWZISlQdXMbz2Z2kwsDvjetC9hD87bLJ81VjE=\""
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 12 Sep 2025 16:16:56 GMT"
+          "Value": "Mon, 15 Sep 2025 03:51:52 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -8567,7 +8588,7 @@
       "EndpointProperties": [
         {
           "Name": "fingerprint",
-          "Value": "qaow57bhgz"
+          "Value": "xxfh83nv4s"
         },
         {
           "Name": "label",
@@ -8575,7 +8596,7 @@
         },
         {
           "Name": "integrity",
-          "Value": "sha256-yTUblAjH6fwsjxSFR5Uv4uq88jl0B7d0r7Q6rnIpomo="
+          "Value": "sha256-9jKsdvuWZISlQdXMbz2Z2kwsDvjetC9hD87bLJ81VjE="
         }
       ]
     },
@@ -30172,6 +30193,88 @@
       ]
     },
     {
+      "Route": "media/posts/cover/can-dot-pha-cong-nghe-de-nang-cao-chat-luong-giam-that-thoat-sau-thu-hoach-100449_793-105420.jpg",
+      "AssetFile": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\media\\posts\\cover\\can-dot-pha-cong-nghe-de-nang-cao-chat-luong-giam-that-thoat-sau-thu-hoach-100449_793-105420.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "126589"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"Krluq4yb/HotvJblHofRl/pzMnWIyorQsF0xBtBZZPc=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 15 Sep 2025 01:19:52 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-Krluq4yb/HotvJblHofRl/pzMnWIyorQsF0xBtBZZPc="
+        }
+      ]
+    },
+    {
+      "Route": "media/posts/cover/can-dot-pha-cong-nghe-de-nang-cao-chat-luong-giam-that-thoat-sau-thu-hoach-100449_793-105420.m5qn9buxcf.jpg",
+      "AssetFile": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\media\\posts\\cover\\can-dot-pha-cong-nghe-de-nang-cao-chat-luong-giam-that-thoat-sau-thu-hoach-100449_793-105420.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "126589"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"Krluq4yb/HotvJblHofRl/pzMnWIyorQsF0xBtBZZPc=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 15 Sep 2025 01:19:52 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "m5qn9buxcf"
+        },
+        {
+          "Name": "label",
+          "Value": "media/posts/cover/can-dot-pha-cong-nghe-de-nang-cao-chat-luong-giam-that-thoat-sau-thu-hoach-100449_793-105420.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-Krluq4yb/HotvJblHofRl/pzMnWIyorQsF0xBtBZZPc="
+        }
+      ]
+    },
+    {
       "Route": "media/posts/cover/dat-dai-1-17575038033621692300901-192351_920.jpg",
       "AssetFile": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\media\\posts\\cover\\dat-dai-1-17575038033621692300901-192351_920.jpg",
       "Selectors": [],
@@ -30500,6 +30603,88 @@
       ]
     },
     {
+      "Route": "media/posts/cover/image.by71p0snom.jpg",
+      "AssetFile": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\media\\posts\\cover\\image.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "118482"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"gxePKk9/ICZ0r39foPp9ekqaKTd1QVfgZFWaz4bjAbk=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 15 Sep 2025 01:29:01 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "by71p0snom"
+        },
+        {
+          "Name": "label",
+          "Value": "media/posts/cover/image.jpg"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-gxePKk9/ICZ0r39foPp9ekqaKTd1QVfgZFWaz4bjAbk="
+        }
+      ]
+    },
+    {
+      "Route": "media/posts/cover/image.jpg",
+      "AssetFile": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\media\\posts\\cover\\image.jpg",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "118482"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/jpeg"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"gxePKk9/ICZ0r39foPp9ekqaKTd1QVfgZFWaz4bjAbk=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Mon, 15 Sep 2025 01:29:01 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-gxePKk9/ICZ0r39foPp9ekqaKTd1QVfgZFWaz4bjAbk="
+        }
+      ]
+    },
+    {
       "Route": "media/posts/cover/img_4303-131317_612.jpg",
       "AssetFile": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\media\\posts\\cover\\img_4303-131317_612.jpg",
       "Selectors": [],
@@ -30742,88 +30927,6 @@
         {
           "Name": "integrity",
           "Value": "sha256-nTATCt6I8aOOlRDDKgQnp5feSpY3VKK6cn4GSBbbyjA="
-        }
-      ]
-    },
-    {
-      "Route": "media/posts/cover/trang-chu-gioi-thieu-min-1.f9shr6gdws.png",
-      "AssetFile": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\media\\posts\\cover\\trang-chu-gioi-thieu-min-1.png",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "921658"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "image/png"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"U7zKkYGPZiUef4x/6OOdYSmR7SUpAD3PEo3e3OaVhxs=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Fri, 12 Sep 2025 10:00:37 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=31536000, immutable"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "fingerprint",
-          "Value": "f9shr6gdws"
-        },
-        {
-          "Name": "label",
-          "Value": "media/posts/cover/trang-chu-gioi-thieu-min-1.png"
-        },
-        {
-          "Name": "integrity",
-          "Value": "sha256-U7zKkYGPZiUef4x/6OOdYSmR7SUpAD3PEo3e3OaVhxs="
-        }
-      ]
-    },
-    {
-      "Route": "media/posts/cover/trang-chu-gioi-thieu-min-1.png",
-      "AssetFile": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\media\\posts\\cover\\trang-chu-gioi-thieu-min-1.png",
-      "Selectors": [],
-      "ResponseHeaders": [
-        {
-          "Name": "Accept-Ranges",
-          "Value": "bytes"
-        },
-        {
-          "Name": "Content-Length",
-          "Value": "921658"
-        },
-        {
-          "Name": "Content-Type",
-          "Value": "image/png"
-        },
-        {
-          "Name": "ETag",
-          "Value": "\"U7zKkYGPZiUef4x/6OOdYSmR7SUpAD3PEo3e3OaVhxs=\""
-        },
-        {
-          "Name": "Last-Modified",
-          "Value": "Fri, 12 Sep 2025 10:00:37 GMT"
-        },
-        {
-          "Name": "Cache-Control",
-          "Value": "max-age=3600, must-revalidate"
-        }
-      ],
-      "EndpointProperties": [
-        {
-          "Name": "integrity",
-          "Value": "sha256-U7zKkYGPZiUef4x/6OOdYSmR7SUpAD3PEo3e3OaVhxs="
         }
       ]
     },
@@ -31426,7 +31529,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 12 Sep 2025 10:00:37 GMT"
+          "Value": "Mon, 15 Sep 2025 02:22:33 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -31479,7 +31582,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 12 Sep 2025 10:00:37 GMT"
+          "Value": "Mon, 15 Sep 2025 02:22:33 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -31516,7 +31619,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 12 Sep 2025 10:00:37 GMT"
+          "Value": "Mon, 15 Sep 2025 02:22:33 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -31563,7 +31666,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 12 Sep 2025 10:00:37 GMT"
+          "Value": "Mon, 15 Sep 2025 02:22:33 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -31624,7 +31727,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 12 Sep 2025 10:00:37 GMT"
+          "Value": "Mon, 15 Sep 2025 02:22:33 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -31669,7 +31772,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 12 Sep 2025 10:00:37 GMT"
+          "Value": "Mon, 15 Sep 2025 02:22:33 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -31724,7 +31827,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 12 Sep 2025 10:00:37 GMT"
+          "Value": "Mon, 15 Sep 2025 02:22:33 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -31785,7 +31888,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 12 Sep 2025 10:00:37 GMT"
+          "Value": "Mon, 15 Sep 2025 02:22:33 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -31830,7 +31933,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 12 Sep 2025 10:00:37 GMT"
+          "Value": "Mon, 15 Sep 2025 02:22:33 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -31885,7 +31988,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 12 Sep 2025 10:00:37 GMT"
+          "Value": "Mon, 15 Sep 2025 02:22:33 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -31938,7 +32041,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 12 Sep 2025 10:00:37 GMT"
+          "Value": "Mon, 15 Sep 2025 02:22:33 GMT"
         },
         {
           "Name": "Cache-Control",
@@ -31975,7 +32078,7 @@
         },
         {
           "Name": "Last-Modified",
-          "Value": "Fri, 12 Sep 2025 10:00:37 GMT"
+          "Value": "Mon, 15 Sep 2025 02:22:33 GMT"
         },
         {
           "Name": "Cache-Control",
