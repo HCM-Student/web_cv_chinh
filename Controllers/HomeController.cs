@@ -40,6 +40,10 @@ namespace WEB_CV.Controllers
         [HttpGet, Route("Home/GioiThieu"), Route("gioi-thieu")]
         public IActionResult GioiThieu() => View("GioiThieu");
 
+        // ===== Trang Giới thiệu chung =====
+        [HttpGet, Route("Home/GioiThieuChung"), Route("gioi-thieu-chung")]
+        public IActionResult GioiThieuChung() => View("GioiThieuChung");
+
         // ===== Trang Lãnh đạo bộ =====
         [HttpGet, Route("Home/LanhDaoBo"), Route("lanh-dao-bo")]
         public IActionResult LanhDaoBo() => View("LanhDaoBo");

@@ -27,8 +27,20 @@
             if (u.Id == meId) { continue; }
             <a class="list-group-item list-group-item-action dm-open @(room == "dm:" + (string.CompareOrdinal(meId, u.Id) < 0 ? meId + ":" + u.Id : u.Id + ":" + meId) ? "active" : "")" 
                data-id="@u.Id" data-name="@u.UserName" href="javascript:void(0)">
-              <i class="bi bi-person-circle me-2"></i>@u.UserName
-              <span class="badge bg-primary ms-auto" id="unread-@u.Id" style="display:none;">0</span>
+              <div class="d-flex align-items-center">
+                <div class="user-avatar me-2">
+                  @if (!string.IsNullOrEmpty(u.Avatar))
+                  {
+                    <img src="@u.Avatar" alt="@u.UserName" class="avatar-img">
+                  }
+                  else
+                  {
+                    <i class="bi bi-person-circle"></i>
+                  }
+                </div>
+                <span>@u.UserName</span>
+                <span class="badge bg-primary ms-auto" id="unread-@u.Id" style="display:none;">0</span>
+              </div>
             </a>
           }
         </div>
@@ -61,7 +73,18 @@
                 @if (m.SenderId != meId)
                 {
                   <div class="msg-avatar">
-                    <i class="bi bi-person-circle"></i>
+                    @{
+                      var userAvatars = ViewBag.UserAvatars as Dictionary<string, string>;
+                      var senderAvatar = userAvatars?.GetValueOrDefault(m.SenderId);
+                    }
+                    @if (!string.IsNullOrEmpty(senderAvatar))
+                    {
+                      <img src="@senderAvatar" alt="@m.SenderName" class="avatar-img">
+                    }
+                    else
+                    {
+                      <i class="bi bi-person-circle"></i>
+                    }
                   </div>
                 }
                 <div class="msg-content">
@@ -196,6 +219,31 @@
 /* Typing indicator */
 .typing-indicator{color:#007bff;font-style:italic;animation:pulse 1.5s infinite}
 @@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.5}}
+
+/* Avatar styles */
+.user-avatar, .msg-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f8f9fa;
+  flex-shrink: 0;
+}
+
+.avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.user-avatar i, .msg-avatar i {
+  font-size: 1.5rem;
+  color: #6c757d;
+}
 
 /* Scrollbar */
 .chat-body::-webkit-scrollbar{width:6px}
@@ -525,13 +573,13 @@ async function uploadAndSendImage(file, text = "") {
   }
 }
 function append(m) {
-  // m: {id, room, senderId, senderName, content, imageUrl, createdAt, status?}
+  // m: {id, room, senderId, senderName, senderAvatar, content, imageUrl, createdAt, status?}
   const mine = m.senderId === meId;
   const item = document.createElement("div");
   item.className = "msg" + (mine ? " me" : " other");
   item.dataset.id = m.id;
 
-  const avatar = `<div class="msg-avatar"><i class="bi bi-person-circle"></i></div>`;
+  const avatar = `<div class="msg-avatar">${m.senderAvatar ? `<img src="${m.senderAvatar}" alt="${m.senderName}" class="avatar-img">` : `<i class="bi bi-person-circle"></i>`}</div>`;
   const name = !mine ? `<div class="msg-name">${m.senderName}</div>` : "";
   const textHtml = m.content ? `<div class="msg-text"></div>` : "";
   const imgHtml = m.imageUrl ? `<img class="msg-image" src="${m.imageUrl}" alt="image"/>` : "";

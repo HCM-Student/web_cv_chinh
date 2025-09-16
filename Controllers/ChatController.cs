@@ -29,17 +29,25 @@ public class ChatController : Controller
         var users = await _db.NguoiDungs
             .Where(u => u.VaiTro == "Admin" || u.VaiTro == "Staff")
             .OrderBy(u => u.HoTen)
-            .Select(u => new { Id = u.Id.ToString(), UserName = u.HoTen })
+            .Select(u => new { Id = u.Id.ToString(), UserName = u.HoTen, Avatar = u.Avatar })
             .ToListAsync();
         ViewBag.Users = users;
 
-        // Lấy 100 tin gần nhất của room
+        // Lấy 100 tin gần nhất của room với thông tin avatar
         var msgs = await _db.ChatMessages
             .Where(m => m.Room == room)
             .OrderByDescending(m => m.Id)
             .Take(100)
             .OrderBy(m => m.Id)
             .ToListAsync();
+
+        // Tạo dictionary để lưu avatar của từng user
+        var userIds = msgs.Select(m => m.SenderId).Distinct().ToList();
+        var userAvatars = await _db.NguoiDungs
+            .Where(u => userIds.Contains(u.Id.ToString()))
+            .ToDictionaryAsync(u => u.Id.ToString(), u => u.Avatar);
+        
+        ViewBag.UserAvatars = userAvatars;
 
         return View(msgs);
     }

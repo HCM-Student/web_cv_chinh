@@ -79,6 +79,12 @@ public class ChatHub : Hub
         var userId = Context.User?.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? "unknown";
         var name = Context.User?.FindFirst(ClaimTypes.Name)?.Value ?? "User";
 
+        // Lấy avatar của người gửi
+        var senderAvatar = await _db.NguoiDungs
+            .Where(u => u.Id.ToString() == userId)
+            .Select(u => u.Avatar)
+            .FirstOrDefaultAsync();
+
         var msg = new ChatMessage
         {
             Room = room,
@@ -96,6 +102,7 @@ public class ChatHub : Hub
             room,
             senderId = userId,
             senderName = name,
+            senderAvatar = senderAvatar,
             content = msg.Content,
             imageUrl = msg.ImageUrl,
             createdAt = msg.CreatedAt,
@@ -108,6 +115,12 @@ public class ChatHub : Hub
     {
         var userId = Context.User?.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? "unknown";
         var name = Context.User?.FindFirst(ClaimTypes.Name)?.Value ?? "User";
+
+        // Lấy avatar của người gửi
+        var senderAvatar = await _db.NguoiDungs
+            .Where(u => u.Id.ToString() == userId)
+            .Select(u => u.Avatar)
+            .FirstOrDefaultAsync();
 
         var key = GetDmKey(userId, toUserId);
         var room = $"dm:{key}";
@@ -133,6 +146,7 @@ public class ChatHub : Hub
             room,
             senderId = userId,
             senderName = name,
+            senderAvatar = senderAvatar,
             toUserId,
             content = msg.Content,
             imageUrl = msg.ImageUrl,
