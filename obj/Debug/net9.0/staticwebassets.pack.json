@@ -541,6 +541,22 @@
       "PackagePath": "staticwebassets\\uploads\\avatars\\2_a7f91986-4350-462e-a868-d52c393ace9f.png"
     },
     {
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\uploads\\chat\\2025\\09\\2205931f9fd241fea3e2fc57aa148887.png",
+      "PackagePath": "staticwebassets\\uploads\\chat\\2025\\09\\2205931f9fd241fea3e2fc57aa148887.png"
+    },
+    {
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\uploads\\chat\\2025\\09\\71587e3e78884c7495b5fe851e87c1cb.png",
+      "PackagePath": "staticwebassets\\uploads\\chat\\2025\\09\\71587e3e78884c7495b5fe851e87c1cb.png"
+    },
+    {
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\uploads\\chat\\2025\\09\\a452a948961044698bbe2d4d905f4564.png",
+      "PackagePath": "staticwebassets\\uploads\\chat\\2025\\09\\a452a948961044698bbe2d4d905f4564.png"
+    },
+    {
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\uploads\\chat\\2025\\09\\cc1e178b009c463fb5129b8e4daabd96.png",
+      "PackagePath": "staticwebassets\\uploads\\chat\\2025\\09\\cc1e178b009c463fb5129b8e4daabd96.png"
+    },
+    {
       "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.build.web_cv.props",
       "PackagePath": "build\\web_cv.props"
     },

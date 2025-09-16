@@ -70,14 +70,31 @@
                     <div class="msg-name">@m.SenderName</div>
                   }
                   <div class="msg-bubble">
-                    <div class="msg-text">@m.Content</div>
+                    @if (!string.IsNullOrWhiteSpace(m.Content))
+                    {
+                      <div class="msg-text">@m.Content</div>
+                    }
+                    @if (!string.IsNullOrWhiteSpace(m.ImageUrl))
+                    {
+                      <img class="msg-image" src="@m.ImageUrl" alt="image"/>
+                    }
                     <div class="msg-time">
                       <span class="time">@m.CreatedAt.ToLocalTime().ToString("HH:mm")</span>
-                      @if (m.SenderId == meId)
+                      @if (m.SenderId == meId && room.StartsWith("dm:"))
                       {
                         <span class="status">
-                          <i class="bi bi-check2-all text-primary"></i>
-                          <span class="status-text">Đã xem</span>
+                          @switch (m.Status)
+                          {
+                            case WEB_CV.Models.MessageStatus.Sent:
+                              @:<i class="bi bi-check2"></i><span class="status-text">Đã gửi</span>
+                              break;
+                            case WEB_CV.Models.MessageStatus.Delivered:
+                              @:<i class="bi bi-check2-all"></i><span class="status-text">Đã nhận</span>
+                              break;
+                            case WEB_CV.Models.MessageStatus.Seen:
+                              @:<i class="bi bi-check2-all text-primary"></i><span class="status-text">Đã xem</span>
+                              break;
+                          }
                         </span>
                       }
                     </div>
@@ -93,12 +110,37 @@
             }
           </div>
         <div class="chat-input">
+          <form id="uploadForm" enctype="multipart/form-data" class="d-none">
+            @Html.AntiForgeryToken()
+            <input id="fileInput" name="file" type="file" accept="image/*"/>
+          </form>
+
+          <button id="btnImage" class="btn btn-outline-secondary" type="button" title="Chọn ảnh">
+            <i class="bi bi-image"></i>
+          </button>
+
           <input id="msg" class="form-control" placeholder="Nhập tin nhắn..." />
           <button id="send" class="btn btn-primary"><i class="bi bi-send"></i></button>
+        </div>
+
+        <!-- Image Preview Area -->
+        <div id="imagePreview" class="image-preview" style="display: none;">
+          <div class="preview-container">
+            <img id="previewImg" src="" alt="Preview" />
+            <button id="removeImage" class="btn btn-sm btn-danger" type="button">
+              <i class="bi bi-x"></i>
+            </button>
+          </div>
         </div>
       </div>
     </section>
   </div>
+</div>
+
+<!-- Upload Progress Indicator -->
+<div id="uploadProgress" class="upload-progress">
+  <i class="bi bi-cloud-upload me-2"></i>
+  <span>Đang upload ảnh...</span>
 </div>
 
 @section Styles{
@@ -131,6 +173,9 @@
 /* Message text */
 .msg-text{word-wrap:break-word;line-height:1.4}
 
+/* Message image */
+.msg-image{max-width:320px;border-radius:10px;display:block;margin-top:8px;border:1px solid #e9ecef}
+
 /* Message time and status */
 .msg-time{display:flex;justify-content:space-between;align-items:center;margin-top:0.5rem;font-size:0.7rem;opacity:0.8}
 .msg.me .msg-time{color:rgba(255,255,255,0.8)}
@@ -161,6 +206,76 @@
 /* Animation for new messages */
 .msg{animation:slideIn 0.3s ease-out}
 @@keyframes slideIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+/* Drag & Drop styles */
+.chat-body.drag-over, .chat-input.drag-over {
+  background-color: #e3f2fd !important;
+  border: 2px dashed #2196f3 !important;
+  transition: all 0.2s ease;
+}
+
+/* Upload progress indicator */
+.upload-progress {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: #007bff;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 5px;
+  z-index: 1000;
+  display: none;
+}
+
+/* Image Preview Styles */
+.image-preview {
+  background: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  padding: 12px;
+  margin-top: 8px;
+  animation: slideDown 0.3s ease-out;
+}
+
+.preview-container {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 8px;
+}
+
+.preview-container img {
+  max-width: 200px;
+  max-height: 150px;
+  border-radius: 6px;
+  border: 1px solid #ddd;
+  object-fit: cover;
+}
+
+.preview-container .btn {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+}
+
+
+@@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 </style>
 }
 @section Scripts{
@@ -170,34 +285,155 @@ const meId = "@meId", room = "@room";
 const hub = new signalR.HubConnectionBuilder().withUrl("/hubs/chat").build();
 const list = document.getElementById("messages");
 const input = document.getElementById("msg");
+const btnSend = document.getElementById("send");
+const fileInput = document.getElementById("fileInput");
+const btnImage = document.getElementById("btnImage");
+const uploadProgress = document.getElementById("uploadProgress");
+const imagePreview = document.getElementById("imagePreview");
+const previewImg = document.getElementById("previewImg");
+const removeImage = document.getElementById("removeImage");
 
-hub.on("message", m => append(m.senderName, m.content, m.senderId === meId, m.createdAt));
+// Biến lưu file ảnh đang preview
+let currentImageFile = null;
+
+// Event handlers
+removeImage.onclick = () => hideImagePreview();
+
+hub.on("message", m => append(m));
 hub.on("dm", m => {
-  if (m.toUserId === meId || m.senderId === meId) {
-    // Kiểm tra xem có phải room DM hiện tại không
-    const currentDmRoom = room.startsWith("dm:") ? room : null;
-    const messageDmRoom = "dm:" + (m.senderId < m.toUserId ? m.senderId + ":" + m.toUserId : m.toUserId + ":" + m.senderId);
-    
-    if (currentDmRoom === messageDmRoom) {
-      append(m.senderName, m.content, m.senderId === meId, m.createdAt);
-    }
+  // chỉ render nếu là DM hiện tại
+  if (!room.startsWith("dm:")) return;
+  const msgRoom = m.room;
+  if (msgRoom === room) append(m);
+});
+hub.on("statusChanged", s => {
+  const el = document.querySelector(`.msg[data-id="${s.id}"] .status`);
+  if (!el) return;
+  const wrap = el;
+  if (s.status === "Delivered") {
+    wrap.innerHTML = `<i class="bi bi-check2-all"></i><span class="status-text">Đã nhận</span>`;
+  } else if (s.status === "Seen") {
+    wrap.innerHTML = `<i class="bi bi-check2-all text-primary"></i><span class="status-text">Đã xem</span>`;
   }
 });
-hub.start().then(() => hub.invoke("JoinRoom", room));
 
-document.getElementById("send").onclick = send;
-input.addEventListener("keydown", e => { 
-  if (e.key === "Enter") send(); 
-  else {
-    // Show typing indicator
-    const typing = document.querySelector('.typing-indicator');
-    if (typing) typing.style.display = 'inline';
+hub.start().then(() => {
+  hub.invoke("JoinRoom", room);
+  // Nếu đang ở DM -> mark seen ngay
+  if (room.startsWith("dm:")) {
+    const ids = room.replace("dm:", "").split(":");
+    const other = ids[0] === meId ? ids[1] : ids[0];
+    hub.invoke("MarkSeen", other);
+  }
+});
+
+// Khi quay lại tab -> đánh dấu đã xem
+document.addEventListener("visibilitychange", () => {
+  if (document.visibilityState === "visible" && room.startsWith("dm:")) {
+    const ids = room.replace("dm:", "").split(":");
+    const other = ids[0] === meId ? ids[1] : ids[0];
+    hub.invoke("MarkSeen", other);
+  }
+});
+
+// Xử lý drag & drop ảnh
+const chatBody = document.getElementById("messages");
+const chatInput = document.querySelector(".chat-input");
+
+// Thêm visual feedback khi drag over
+[chatBody, chatInput].forEach(element => {
+  element.addEventListener("dragover", (e) => {
+    e.preventDefault();
+    element.style.backgroundColor = "#e3f2fd";
+    element.style.border = "2px dashed #2196f3";
+  });
+
+  element.addEventListener("dragleave", (e) => {
+    e.preventDefault();
+    element.style.backgroundColor = "";
+    element.style.border = "";
+  });
+
+  element.addEventListener("drop", (e) => {
+    e.preventDefault();
+    element.style.backgroundColor = "";
+    element.style.border = "";
+
+    const files = e.dataTransfer.files;
+    if (files.length > 0) {
+      const file = files[0];
+      if (file.type.startsWith("image/")) {
+        showImagePreview(file);
+      } else {
+        alert("Chỉ cho phép kéo thả file ảnh");
+      }
+    }
+  });
+});
+
+btnImage.onclick = () => fileInput.click();
+
+fileInput.addEventListener("change", (e) => {
+  if (!fileInput.files || fileInput.files.length === 0) return;
+  const file = fileInput.files[0];
+  showImagePreview(file);
+  fileInput.value = "";
+});
+
+btnSend.onclick = async () => {
+  const text = input.value.trim();
+  const imageFile = currentImageFile;
+  
+  if (!text && !imageFile) return;
+  
+  if (imageFile) {
+    // Có ảnh preview, upload và gửi kèm text
+    await uploadAndSendImage(imageFile, text);
+    hideImagePreview();
+  } else {
+    // Chỉ có text
+    await sendMessage(text, null);
+  }
+  
+  input.value = "";
+};
+
+input.addEventListener("keydown", async (e) => {
+  if (e.key === "Enter" && !e.shiftKey) {
+    e.preventDefault();
+    const text = input.value.trim();
+    const imageFile = currentImageFile;
     
-    // Hide typing indicator after 2 seconds
-    clearTimeout(window.typingTimeout);
-    window.typingTimeout = setTimeout(() => {
-      if (typing) typing.style.display = 'none';
-    }, 2000);
+    if (!text && !imageFile) return;
+    
+    if (imageFile) {
+      // Có ảnh preview, upload và gửi kèm text
+      await uploadAndSendImage(imageFile, text);
+      hideImagePreview();
+    } else {
+      // Chỉ có text
+      await sendMessage(text, null);
+    }
+    
+    input.value = "";
+  }
+});
+
+// Xử lý paste hình ảnh
+input.addEventListener("paste", (e) => {
+  const items = e.clipboardData?.items;
+  if (!items) return;
+  
+  for (let i = 0; i < items.length; i++) {
+    const item = items[i];
+    if (item.type.startsWith("image/")) {
+      e.preventDefault();
+      const file = item.getAsFile();
+      if (file) {
+        showImagePreview(file);
+      }
+      break;
+    }
   }
 });
 
@@ -212,72 +448,143 @@ document.querySelectorAll(".dm-open").forEach(a=>{
   });
 });
 
-function send(){
-  const text = input.value.trim();
-  if (!text) return;
-  
-  // Hide typing indicator
-  const typing = document.querySelector('.typing-indicator');
-  if (typing) typing.style.display = 'none';
-  
-  // Gửi tin nhắn đến room hiện tại
+async function sendMessage(text, imageUrl) {
+  if (!text && !imageUrl) return;
   if (room.startsWith("dm:")) {
-    // Chat riêng tư - tìm user ID từ room
-    const parts = room.replace("dm:", "").split(":");
-    const otherUserId = parts[0] === meId ? parts[1] : parts[0];
-    hub.invoke("SendDirect", otherUserId, text);
+    const ids = room.replace("dm:", "").split(":");
+    const other = ids[0] === meId ? ids[1] : ids[0];
+    await hub.invoke("SendDirect", other, text || null, imageUrl || null);
   } else {
-    // Chat chung
-    hub.invoke("SendToRoom", room, text);
+    await hub.invoke("SendToRoom", room, text || null, imageUrl || null);
   }
-  
-  input.value = "";
 }
-function append(name, content, mine, createdAt){
+
+// Hiển thị preview ảnh
+function showImagePreview(file) {
+  // Kiểm tra loại file
+  const okTypes = ["image/png", "image/jpeg", "image/gif", "image/webp"];
+  if (!okTypes.includes(file.type)) {
+    alert("Chỉ cho phép upload ảnh (PNG, JPEG, GIF, WEBP)");
+    return;
+  }
+
+  // Kiểm tra kích thước file (tối đa 5MB)
+  const maxSize = 5 * 1024 * 1024; // 5MB
+  if (file.size > maxSize) {
+    alert("Kích thước file quá lớn. Tối đa 5MB");
+    return;
+  }
+
+  // Lưu file và hiển thị preview
+  currentImageFile = file;
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    previewImg.src = e.target.result;
+    imagePreview.style.display = "block";
+    input.focus();
+  };
+  reader.readAsDataURL(file);
+}
+
+// Ẩn preview ảnh
+function hideImagePreview() {
+  currentImageFile = null;
+  imagePreview.style.display = "none";
+  previewImg.src = "";
+}
+
+// Upload và gửi ảnh
+async function uploadAndSendImage(file, text = "") {
+  const formData = new FormData();
+  formData.append("file", file);
+  formData.append("__RequestVerificationToken", document.querySelector('input[name="__RequestVerificationToken"]').value);
+
+  btnImage.disabled = btnSend.disabled = true;
+  uploadProgress.style.display = "block";
+  
+  try {
+    const resp = await fetch("@Url.Action("UploadAttachment", "Chat")", {
+      method: "POST",
+      body: formData,
+      headers: { "X-Requested-With": "XMLHttpRequest" }
+    });
+    
+    if (!resp.ok) {
+      const errorText = await resp.text();
+      throw new Error(errorText || "Upload lỗi");
+    }
+    
+    const data = await resp.json();
+    // Gửi tin với imageUrl và text
+    await sendMessage(text, data.url);
+  } catch (err) {
+    alert(err.message || "Lỗi upload ảnh");
+  } finally {
+    btnImage.disabled = btnSend.disabled = false;
+    uploadProgress.style.display = "none";
+  }
+}
+function append(m) {
+  // m: {id, room, senderId, senderName, content, imageUrl, createdAt, status?}
+  const mine = m.senderId === meId;
   const item = document.createElement("div");
   item.className = "msg" + (mine ? " me" : " other");
-  
+  item.dataset.id = m.id;
+
+  const avatar = `<div class="msg-avatar"><i class="bi bi-person-circle"></i></div>`;
+  const name = !mine ? `<div class="msg-name">${m.senderName}</div>` : "";
+  const textHtml = m.content ? `<div class="msg-text"></div>` : "";
+  const imgHtml = m.imageUrl ? `<img class="msg-image" src="${m.imageUrl}" alt="image"/>` : "";
+  const statusHtml = (mine && room.startsWith("dm:"))
+    ? `<span class="status">${renderStatus(m.status)}</span>` : "";
+
   if (mine) {
     item.innerHTML = `
       <div class="msg-content">
+        ${name}
         <div class="msg-bubble">
-          <div class="msg-text"></div>
+          ${textHtml}
+          ${imgHtml}
           <div class="msg-time">
-            <span class="time">${formatTime(createdAt)}</span>
-            <span class="status">
-              <i class="bi bi-check2-all text-primary"></i>
-              <span class="status-text">Đã xem</span>
-            </span>
+            <span class="time">${formatTime(m.createdAt)}</span>
+            ${statusHtml}
           </div>
         </div>
       </div>
-      <div class="msg-avatar">
-        <i class="bi bi-person-circle"></i>
-      </div>
+      ${avatar}
     `;
   } else {
     item.innerHTML = `
-      <div class="msg-avatar">
-        <i class="bi bi-person-circle"></i>
-      </div>
+      ${avatar}
       <div class="msg-content">
-        <div class="msg-name">${name}</div>
+        ${name}
         <div class="msg-bubble">
-          <div class="msg-text"></div>
+          ${textHtml}
+          ${imgHtml}
           <div class="msg-time">
-            <span class="time">${formatTime(createdAt)}</span>
+            <span class="time">${formatTime(m.createdAt)}</span>
           </div>
         </div>
       </div>
     `;
   }
-  
-  item.querySelector(".msg-text").textContent = content;
+
+  if (m.content) item.querySelector(".msg-text").textContent = m.content;
   list.appendChild(item);
   list.scrollTop = list.scrollHeight;
+}
+
+function renderStatus(status) {
+  switch ((status || "Sent")) {
+    case "Delivered": return `<i class="bi bi-check2-all"></i><span class="status-text">Đã nhận</span>`;
+    case "Seen": return `<i class="bi bi-check2-all text-primary"></i><span class="status-text">Đã xem</span>`;
+    default: return `<i class="bi bi-check2"></i><span class="status-text">Đã gửi</span>`;
+  }
 }
 function formatTime(iso){
   try{ return new Date(iso).toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'}); }catch{ return ""; }
 }
 </script>
 }
+
+

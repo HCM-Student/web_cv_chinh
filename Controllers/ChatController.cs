@@ -7,50 +7,69 @@ using WEB_CV.Models;
 
 namespace WEB_CV.Controllers;
 
-[Authorize(Roles = "Admin,Staff")]   // chỉ Admin/Staff truy cập Chat
+[Authorize(Roles = "Admin,Staff")]
 public class ChatController : Controller
 {
     private readonly NewsDbContext _db;
-    public ChatController(NewsDbContext db){ _db=db; }
+    private readonly IWebHostEnvironment _env;
+    public ChatController(NewsDbContext db, IWebHostEnvironment env)
+    {
+        _db = db;
+        _env = env;
+    }
 
+    // room = "general" hoặc "dm:{a:b}"
     public async Task<IActionResult> Index(string room = "general")
     {
-        var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-        var userName = User.FindFirst(ClaimTypes.Name)?.Value ?? "User";
-        
-        ViewBag.MeId = userId;
-        ViewBag.MeName = userName;
+        var meId = User.FindFirstValue(ClaimTypes.NameIdentifier) ?? "";
+        ViewBag.MeId = meId;
         ViewBag.Room = room;
 
-        // Xử lý room DM
-        string roomDisplayName = room;
-        if (room.StartsWith("dm:"))
-        {
-            var parts = room.Replace("dm:", "").Split(":");
-            var otherUserId = parts[0] == userId ? parts[1] : parts[0];
-            var otherUser = await _db.NguoiDungs
-                .Where(u => u.Id.ToString() == otherUserId)
-                .Select(u => u.HoTen)
-                .FirstOrDefaultAsync();
-            roomDisplayName = otherUser ?? "Chat riêng tư";
-        }
-
-        ViewBag.RoomDisplayName = roomDisplayName;
-
-        var msgs = await _db.ChatMessages
-            .Where(x => x.Room == room)
-            .OrderByDescending(x => x.CreatedAt)
-            .Take(100)
-            .OrderBy(x => x.CreatedAt)
-            .ToListAsync();
-
+        // Danh sách user để mở DM
         var users = await _db.NguoiDungs
             .Where(u => u.VaiTro == "Admin" || u.VaiTro == "Staff")
             .OrderBy(u => u.HoTen)
             .Select(u => new { Id = u.Id.ToString(), UserName = u.HoTen })
             .ToListAsync();
-
         ViewBag.Users = users;
+
+        // Lấy 100 tin gần nhất của room
+        var msgs = await _db.ChatMessages
+            .Where(m => m.Room == room)
+            .OrderByDescending(m => m.Id)
+            .Take(100)
+            .OrderBy(m => m.Id)
+            .ToListAsync();
+
         return View(msgs);
+    }
+
+    // Upload ảnh đính kèm (chỉ Admin/Staff)
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> UploadAttachment(IFormFile file)
+    {
+        if (file == null || file.Length == 0)
+            return BadRequest("No file");
+
+        // Chỉ cho ảnh
+        var okTypes = new[] { "image/png", "image/jpeg", "image/gif", "image/webp" };
+        if (!okTypes.Contains(file.ContentType))
+            return BadRequest("Chỉ cho phép upload ảnh");
+
+        var ext = Path.GetExtension(file.FileName).ToLowerInvariant();
+        var now = DateTime.UtcNow;
+        var folder = Path.Combine(_env.WebRootPath, "uploads", "chat", now.ToString("yyyy"), now.ToString("MM"));
+        Directory.CreateDirectory(folder);
+
+        var fname = $"{Guid.NewGuid():N}{ext}";
+        var full = Path.Combine(folder, fname);
+        using (var fs = System.IO.File.Create(full))
+        {
+            await file.CopyToAsync(fs);
+        }
+
+        var url = $"/uploads/chat/{now:yyyy}/{now:MM}/{fname}";
+        return Json(new { url });
     }
 }
