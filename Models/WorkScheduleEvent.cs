@@ -19,6 +19,9 @@ namespace WEB_CV.Models
         [Required, MaxLength(300)]
         public string Title { get; set; } = "";     // Nội dung
 
+        [MaxLength(100)]
+        public string Leader { get; set; } = "";    // Lãnh đạo
+
         [MaxLength(200)]
         public string Location { get; set; } = "";  // Địa điểm
 
@@ -37,7 +40,9 @@ namespace WEB_CV.Models
         [MaxLength(50)]
         public string Phone { get; set; } = "";
 
-        [MaxLength(120), EmailAddress]
+        [MaxLength(120)]
         public string Email { get; set; } = "";
+
+        public ScheduleScope Scope { get; set; } = ScheduleScope.DonVi; // Phạm vi: đơn vị hoặc bộ
     }
 }

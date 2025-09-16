@@ -1,117 +1,78 @@
 @model WEB_CV.Models.WorkScheduleEvent
-
-@{
-    ViewData["Title"] = "Thêm sự kiện lịch công tác";
-}
-
-<div class="d-flex justify-content-between align-items-center mb-4">
-    <h2><i class="fas fa-plus"></i> Thêm sự kiện lịch công tác</h2>
-    <a asp-action="Index" class="btn btn-secondary">
-        <i class="fas fa-arrow-left"></i> Quay lại
-    </a>
-</div>
-
-<div class="card">
-    <div class="card-body">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="mb-3">
-                        <label asp-for="Date" class="form-label">Ngày diễn ra *</label>
-                        <input asp-for="Date" class="form-control" type="date" />
-                        <span asp-validation-for="Date" class="text-danger"></span>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="mb-3">
-                        <label asp-for="StartTime" class="form-label">Giờ bắt đầu</label>
-                        <input asp-for="StartTime" class="form-control" type="time" />
-                        <span asp-validation-for="StartTime" class="text-danger"></span>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="mb-3">
-                        <label asp-for="EndTime" class="form-label">Giờ kết thúc</label>
-                        <input asp-for="EndTime" class="form-control" type="time" />
-                        <span asp-validation-for="EndTime" class="text-danger"></span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="mb-3">
-                <label asp-for="Title" class="form-label">Nội dung *</label>
-                <input asp-for="Title" class="form-control" placeholder="Nhập nội dung sự kiện" />
-                <span asp-validation-for="Title" class="text-danger"></span>
-            </div>
-
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="mb-3">
-                        <label asp-for="Location" class="form-label">Địa điểm</label>
-                        <input asp-for="Location" class="form-control" placeholder="Nhập địa điểm" />
-                        <span asp-validation-for="Location" class="text-danger"></span>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="mb-3">
-                        <label asp-for="Organization" class="form-label">Tên tổ chức</label>
-                        <input asp-for="Organization" class="form-control" placeholder="Nhập tên tổ chức" />
-                        <span asp-validation-for="Organization" class="text-danger"></span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="mb-3">
-                        <label asp-for="Participants" class="form-label">Thành phần tham gia</label>
-                        <textarea asp-for="Participants" class="form-control" rows="3" placeholder="Nhập thành phần tham gia"></textarea>
-                        <span asp-validation-for="Participants" class="text-danger"></span>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="mb-3">
-                        <label asp-for="Preparation" class="form-label">Thành phần chuẩn bị</label>
-                        <textarea asp-for="Preparation" class="form-control" rows="3" placeholder="Nhập thành phần chuẩn bị"></textarea>
-                        <span asp-validation-for="Preparation" class="text-danger"></span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="mb-3">
-                        <label asp-for="Contact" class="form-label">Người liên hệ</label>
-                        <input asp-for="Contact" class="form-control" placeholder="Nhập tên người liên hệ" />
-                        <span asp-validation-for="Contact" class="text-danger"></span>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="mb-3">
-                        <label asp-for="Phone" class="form-label">Số điện thoại</label>
-                        <input asp-for="Phone" class="form-control" placeholder="Nhập số điện thoại" />
-                        <span asp-validation-for="Phone" class="text-danger"></span>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="mb-3">
-                        <label asp-for="Email" class="form-label">Email</label>
-                        <input asp-for="Email" class="form-control" type="email" placeholder="Nhập email" />
-                        <span asp-validation-for="Email" class="text-danger"></span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="d-flex justify-content-end gap-2">
-                <a asp-action="Index" class="btn btn-secondary">Hủy</a>
-                <button type="submit" class="btn btn-primary">
-                    <i class="fas fa-save"></i> Lưu
-                </button>
-            </div>
-        </form>
+<div class="container-xxl py-3">
+  <h4 class="mb-3">Thêm lịch (đơn vị)</h4>
+  
+  @if (!ViewData.ModelState.IsValid)
+  {
+      <div class="alert alert-danger">
+          <ul class="mb-0">
+              @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+              {
+                  <li>@error.ErrorMessage</li>
+              }
+          </ul>
+      </div>
+  }
+  
+  <form asp-action="Create" method="post" class="card card-body shadow-sm border-0">
+    <input type="hidden" asp-for="Scope" value="DonVi" />
+    <div class="row g-3">
+      <div class="col-sm-4">
+        <label class="form-label">Ngày *</label>
+        <input type="date" class="form-control" asp-for="Date" />
+        <span asp-validation-for="Date" class="text-danger"></span>
+      </div>
+      <div class="col-sm-2">
+        <label class="form-label">Bắt đầu</label>
+        <input type="time" class="form-control" asp-for="StartTime" />
+      </div>
+      <div class="col-sm-2">
+        <label class="form-label">Kết thúc</label>
+        <input type="time" class="form-control" asp-for="EndTime" />
+      </div>
+      <div class="col-sm-4">
+        <label class="form-label">Lãnh đạo</label>
+        <input class="form-control" asp-for="Leader" placeholder="Tên lãnh đạo" />
+      </div>
+      <div class="col-sm-12">
+        <label class="form-label">Nội dung công việc *</label>
+        <input class="form-control" asp-for="Title" placeholder="Nhập nội dung công việc" />
+        <span asp-validation-for="Title" class="text-danger"></span>
+      </div>
+      <div class="col-sm-4">
+        <label class="form-label">Thành phần</label>
+        <input class="form-control" asp-for="Participants" placeholder="Thành phần tham gia" />
+      </div>
+      <div class="col-sm-4">
+        <label class="form-label">Chuẩn bị</label>
+        <input class="form-control" asp-for="Preparation" placeholder="Thành phần chuẩn bị" />
+      </div>
+      <div class="col-sm-4">
+        <label class="form-label">Đơn vị/Tổ chức</label>
+        <input class="form-control" asp-for="Organization" placeholder="Tên đơn vị/tổ chức" />
+      </div>
+      <div class="col-sm-6">
+        <label class="form-label">Địa điểm</label>
+        <input class="form-control" asp-for="Location" placeholder="Địa điểm tổ chức" />
+      </div>
+      <div class="col-sm-6">
+        <label class="form-label">Liên hệ</label>
+        <input class="form-control" asp-for="Contact" placeholder="Người liên hệ" />
+      </div>
+      <div class="col-sm-6">
+        <label class="form-label">Số điện thoại</label>
+        <input class="form-control" asp-for="Phone" placeholder="Số điện thoại" />
+      </div>
+      <div class="col-sm-6">
+        <label class="form-label">Email</label>
+        <input class="form-control" type="email" asp-for="Email" placeholder="Email liên hệ" />
+      </div>
+      <div class="col-12 d-flex gap-2">
+        <button type="submit" class="btn btn-primary">Lưu</button>
+        <a class="btn btn-light" href="@Url.Action("Index")">Hủy</a>
+      </div>
     </div>
+  </form>
 </div>
 
 @section Scripts {

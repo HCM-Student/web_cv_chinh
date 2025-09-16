@@ -1,147 +1,358 @@
 @model WEB_CV.Models.ViewModels.WorkScheduleVm
-@using System.Globalization
+@using WEB_CV.Models
 @{
-    ViewData["Title"] = "Lịch công tác";
-    var vi = CultureInfo.GetCultureInfo("vi-VN");
-    string fmtTime(TimeSpan? t) => t.HasValue ? DateTime.Today.Add(t.Value).ToString("HH:mm") : "";
-    bool IsToday(DateTime d) => d.Date == DateTime.Today;
+    ViewData["Title"] = "Lịch công tác (đơn vị)";
+    string PathWith(DateTime start, string? leader, string? q)
+        => Url.Action("Index", new { start = start.ToString("yyyy-MM-dd"), leader, q })!;
+    string ftime(TimeSpan? t) => t.HasValue ? DateTime.Today.Add(t.Value).ToString("HH:mm") : "";
 }
 
 <div class="container-xxl py-3">
-  <div class="d-flex flex-wrap align-items-center justify-content-between gap-2 mb-3">
-    <div class="d-flex align-items-center gap-2">
-      <a class="btn btn-outline-primary" href="@Url.Action("Index", new { start = Model.WeekStart.AddDays(-7).ToString("yyyy-MM-dd") })">
-        <i class="bi bi-arrow-left"></i> Tuần trước
-      </a>
-      <div class="fw-semibold">
-        Tuần thứ @CultureInfo.CurrentCulture.Calendar.GetWeekOfYear(Model.WeekStart, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday)
-        năm @Model.WeekStart.Year
-        <div class="text-muted small">(Từ ngày: @Model.WeekStart.ToString("dd/MM/yyyy") – Đến ngày: @Model.WeekEnd.ToString("dd/MM/yyyy"))</div>
-      </div>
-      <a class="btn btn-outline-primary" href="@Url.Action("Index", new { start = Model.WeekStart.AddDays(7).ToString("yyyy-MM-dd") })">
-        Tuần kế tiếp <i class="bi bi-arrow-right"></i>
-      </a>
-    </div>
 
-    <div class="d-flex align-items-center gap-2">
-      <a class="btn btn-light" href="@Url.Action("Index")"><i class="bi bi-calendar-event"></i> Tuần hiện tại</a>
-      <button type="button" class="btn btn-light" data-action="fullscreen"><i class="bi bi-arrows-fullscreen"></i> Full Screen</button>
+  <!-- Header -->
+  <div class="d-flex flex-wrap justify-content-between align-items-center mb-4">
+    <div>
+      <h2 class="h4 mb-1">Lịch công tác (đơn vị)</h2>
+      <p class="text-muted mb-0">Tuần @Model.WeekNo / @Model.WeekStart.Year — (@Model.WeekStart.ToString("dd/MM/yyyy") – @Model.WeekEnd.ToString("dd/MM/yyyy"))</p>
+    </div>
+    
+    <div class="d-flex gap-2">
+      <a class="btn btn-outline-primary" href="@PathWith(Model.WeekStart.AddDays(-7), Model.Leader, Model.Keyword)">
+        <i class="bi bi-chevron-left"></i> Tuần trước
+      </a>
+      <a class="btn btn-outline-primary" href="@PathWith(Model.WeekStart.AddDays(7), Model.Leader, Model.Keyword)">
+        Tuần kế tiếp <i class="bi bi-chevron-right"></i>
+      </a>
     </div>
   </div>
 
-  <form class="card card-body shadow-sm border-0 mb-3" method="get" action="@Url.Action("Index")">
-    <input type="hidden" name="start" value="@Model.WeekStart.ToString("yyyy-MM-dd")" />
-    <div class="row g-3">
-      <div class="col-sm-6 col-lg-3">
-        <label class="form-label">Từ khóa</label>
-        <input class="form-control" name="keyword" value="@Model.Keyword" placeholder="Nhập từ khóa">
+  <!-- Filter Form -->
+  <div class="card shadow-sm mb-4">
+    <div class="card-header bg-light">
+      <h6 class="mb-0"><i class="bi bi-funnel"></i> Bộ lọc và tìm kiếm</h6>
+    </div>
+    <div class="card-body">
+      <form method="get" action="@Url.Action("Index")" class="row g-3">
+        <input type="hidden" name="start" value="@Model.WeekStart.ToString("yyyy-MM-dd")" />
+        
+        <div class="col-md-3">
+          <label class="form-label">Lãnh đạo</label>
+          <select class="form-select" name="leader">
+            <option value="">-- Tất cả lãnh đạo --</option>
+            @foreach (var l in Model.LeaderOptions)
+            {
+                <option value="@l" selected="@(l==Model.Leader)">@l</option>
+            }
+          </select>
+        </div>
+        
+        <div class="col-md-6">
+          <label class="form-label">Tìm kiếm</label>
+          <input class="form-control" name="q" value="@Model.Keyword" placeholder="Nhập từ khóa (nội dung, địa điểm, đơn vị...)">
+        </div>
+        
+        <div class="col-md-3 d-flex align-items-end gap-2">
+          <button type="submit" class="btn btn-primary">
+            <i class="bi bi-search"></i> Tìm kiếm
+          </button>
+          <a class="btn btn-outline-secondary" href="@Url.Action("Index")">
+            <i class="bi bi-x-circle"></i> Xóa bộ lọc
+          </a>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Thanh 7 ngày -->
+  <div class="weekday-bar mb-3">
+    @for (int i=0;i<7;i++){
+      var d = Model.WeekStart.AddDays(i);
+      var isToday = d.Date == DateTime.Today;
+      <div class="day-card @(isToday?"today":"")">
+        <div class="dow">@d.ToString("ddd", System.Globalization.CultureInfo.GetCultureInfo("vi-VN")).ToUpper()</div>
+        <div class="date">@d.ToString("dd/MM")</div>
+        @if(isToday){<span class="today-badge">Hôm nay</span>}
       </div>
-      <div class="col-sm-6 col-lg-3">
-        <label class="form-label">Tên tổ chức</label>
-        <input class="form-control" name="org" value="@Model.Org" placeholder="Nhập tên tổ chức">
-      </div>
-      <div class="col-sm-6 col-lg-3">
-        <label class="form-label">Email</label>
-        <input class="form-control" name="email" value="@Model.Email" placeholder="Nhập email">
-      </div>
-      <div class="col-sm-6 col-lg-3">
-        <label class="form-label">Số điện thoại</label>
-        <input class="form-control" name="phone" value="@Model.Phone" placeholder="Nhập số điện thoại">
-      </div>
-      <div class="col-sm-6 col-lg-3">
-        <label class="form-label">Người liên hệ</label>
-        <input class="form-control" name="contact" value="@Model.Contact" placeholder="Nhập người liên hệ">
-      </div>
-      <div class="col-auto align-self-end">
-        <button class="btn btn-primary"><i class="bi bi-search"></i> Tìm kiếm</button>
+    }
+  </div>
+
+  <!-- Bảng lịch -->
+  <div class="card shadow-sm">
+    <div class="card-body p-0">
+      <div class="table-responsive">
+        <table class="table table-hover mb-0 schedule-table">
+          <thead class="table-dark">
+            <tr>
+              <th style="width:180px"><i class="bi bi-person-badge"></i> Lãnh đạo</th>
+              <th style="width:120px"><i class="bi bi-clock"></i> Thời gian</th>
+              <th><i class="bi bi-calendar-event"></i> Nội dung công việc</th>
+              <th style="width:200px"><i class="bi bi-people"></i> Thành phần</th>
+              <th style="width:200px"><i class="bi bi-geo-alt"></i> Địa điểm</th>
+            </tr>
+          </thead>
+          <tbody>
+          @for (int i = 0; i < 7; i++)
+          {
+              var d = Model.WeekStart.AddDays(i).Date;
+              var items = Model.EventsByDay[d];
+
+              <tr class="table-secondary">
+                <td colspan="5" class="py-3">
+                  <div class="d-flex align-items-center gap-3">
+                    <div class="fw-bold text-primary">@d.ToString("dddd", System.Globalization.CultureInfo.GetCultureInfo("vi-VN"))</div>
+                    <div class="text-muted">@d.ToString("dd/MM/yyyy")</div>
+                    @if(d == DateTime.Today){
+                      <span class="badge bg-success"><i class="bi bi-calendar-check"></i> Hôm nay</span>
+                    }
+                  </div>
+                </td>
+              </tr>
+
+              if (items.Count == 0)
+              {
+                  <tr>
+                    <td colspan="5" class="text-center text-muted py-4">
+                      <i class="bi bi-calendar-x fs-4"></i><br>
+                      Không có lịch công tác
+                    </td>
+                  </tr>
+              }
+              else
+              {
+                  foreach (var e in items)
+                  {
+                      <tr class="@(d == DateTime.Today ? "today-event" : "")">
+                        <td class="fw-semibold text-primary">@e.Leader</td>
+                        <td>
+                          <span class="badge bg-info text-dark">
+                            @if(e.StartTime!=null){@ftime(e.StartTime)}
+                            @if(e.EndTime!=null){<text> - </text>@ftime(e.EndTime)}
+                          </span>
+                        </td>
+                        <td>
+                          <div class="fw-bold">@e.Title</div>
+                          @if(!string.IsNullOrWhiteSpace(e.Organization)){
+                            <small class="text-muted"><i class="bi bi-building"></i> @e.Organization</small>
+                          }
+                          @if(!string.IsNullOrWhiteSpace(e.Contact)){
+                            <br><small class="text-muted"><i class="bi bi-person-lines-fill"></i> @e.Contact</small>
+                          }
+                        </td>
+                        <td>
+                          @e.Participants
+                          @if(!string.IsNullOrWhiteSpace(e.Preparation)){
+                            <br><small class="text-warning"><i class="bi bi-tools"></i> Chuẩn bị: @e.Preparation</small>
+                          }
+                        </td>
+                        <td>
+                          <i class="bi bi-geo-alt text-success"></i> @e.Location
+                        </td>
+                      </tr>
+                  }
+              }
+          }
+          </tbody>
+        </table>
       </div>
     </div>
-  </form>
-
-  <div class="table-responsive schedule-wrapper shadow-sm rounded-3">
-    <table class="table table-hover align-middle schedule-table mb-0">
-      <thead class="table-light sticky-top top-0">
-        <tr>
-          <th style="width:120px">Thứ/Ngày</th>
-          <th style="width:130px">Thời gian</th>
-          <th>Nội dung</th>
-          <th style="width:180px">Địa điểm</th>
-          <th style="width:180px">Tên tổ chức</th>
-          <th style="width:200px">Thành phần tham gia</th>
-          <th style="width:200px">Thành phần chuẩn bị</th>
-          <th style="width:150px">Liên hệ</th>
-        </tr>
-      </thead>
-      <tbody>
-        @for (int i = 0; i < 7; i++)
-        {
-            var d = Model.WeekStart.AddDays(i).Date;
-            var items = Model.EventsByDay[d];
-            <tr class="day-row @(IsToday(d) ? "is-today" : "")">
-              <td class="fw-semibold">
-                @("Thứ " + ((int)d.DayOfWeek == 0 ? "Chủ nhật" : ((int)d.DayOfWeek+1).ToString()))
-                <div class="text-muted small">@d.ToString("dd/MM/yyyy")</div>
-              </td>
-
-              <td>
-                @if (items.Count == 0) { <span class="text-muted">—</span> }
-                else
-                {
-                    foreach (var e in items)
-                    {
-                        <div class="time-chip">@fmtTime(e.StartTime)@((e.EndTime != null ? "–" + fmtTime(e.EndTime) : ""))</div>
-                    }
-                }
-              </td>
-
-              <td>
-                @if (items.Count == 0) { <span class="text-muted">Không có lịch</span> }
-                else
-                {
-                    foreach (var e in items)
-                    {
-                        <div class="mb-2">
-                          <div class="fw-semibold">@e.Title</div>
-                          @if(!string.IsNullOrWhiteSpace(e.Email) || !string.IsNullOrWhiteSpace(e.Phone))
-                          {
-                            <div class="small text-muted">
-                               @if(!string.IsNullOrWhiteSpace(e.Email)){<span class="me-2"><i class="bi bi-envelope"></i> @e.Email</span>}
-                               @if(!string.IsNullOrWhiteSpace(e.Phone)){<span><i class="bi bi-telephone"></i> @e.Phone</span>}
-                            </div>
-                          }
-                        </div>
-                    }
-                }
-              </td>
-
-              <td>
-                @foreach (var e in items) { <div class="mb-2"><i class="bi bi-geo"></i> @e.Location</div> }
-              </td>
-              <td>
-                @foreach (var e in items) { <div class="mb-2">@e.Organization</div> }
-              </td>
-              <td>
-                @foreach (var e in items) { <div class="mb-2">@e.Participants</div> }
-              </td>
-              <td>
-                @foreach (var e in items) { <div class="mb-2">@e.Preparation</div> }
-              </td>
-              <td>
-                @foreach (var e in items) { <div class="mb-2">@e.Contact</div> }
-              </td>
-            </tr>
-        }
-      </tbody>
-    </table>
   </div>
 </div>
 
-@section Scripts {
-<script>
-  document.querySelector('[data-action="fullscreen"]')?.addEventListener('click', () => {
-    const box = document.querySelector('.schedule-wrapper');
-    if (!document.fullscreenElement) box.requestFullscreen();
-    else document.exitFullscreen();
-  });
-</script>
+@section Styles{
+<style>
+/* Thanh 7 ngày */
+.weekday-bar {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 1rem;
+}
+
+.day-card {
+  position: relative;
+  padding: 1rem;
+  border-radius: 0.75rem;
+  background: #f8f9fa;
+  border: 2px solid #e9ecef;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.day-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.day-card.today {
+  background: linear-gradient(135deg, #ffeb3b, #ffc107);
+  border-color: #ff9800;
+  box-shadow: 0 4px 12px rgba(255, 193, 7, 0.4);
+  animation: glow 2s ease-in-out infinite alternate;
+}
+
+@@keyframes glow {
+  from { box-shadow: 0 4px 12px rgba(255, 193, 7, 0.4); }
+  to { box-shadow: 0 6px 16px rgba(255, 193, 7, 0.6); }
+}
+
+.day-card .dow {
+  font-weight: 700;
+  font-size: 0.875rem;
+  letter-spacing: 0.5px;
+  color: #495057;
+  text-transform: uppercase;
+}
+
+.day-card .date {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #212529;
+  margin-top: 0.25rem;
+}
+
+.day-card.today .dow,
+.day-card.today .date {
+  color: #e65100;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.1);
+}
+
+.today-badge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background: linear-gradient(135deg, #ff5722, #d84315);
+  color: white;
+  font-size: 0.75rem;
+  padding: 0.3rem 0.6rem;
+  border-radius: 1rem;
+  font-weight: 700;
+  box-shadow: 0 2px 6px rgba(255, 87, 34, 0.4);
+  animation: bounce 1s infinite;
+}
+
+@@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+  40% { transform: translateY(-3px); }
+  60% { transform: translateY(-2px); }
+}
+
+/* Bảng lịch */
+.schedule-table {
+  font-size: 0.9rem;
+}
+
+.schedule-table thead th {
+  background: #343a40 !important;
+  color: white !important;
+  font-weight: 600;
+  border: none;
+  padding: 1rem 0.75rem;
+  border-right: 2px solid #6c757d;
+}
+
+.schedule-table thead th:last-child {
+  border-right: none;
+}
+
+.schedule-table tbody tr {
+  transition: background-color 0.2s ease;
+}
+
+.schedule-table tbody tr:hover {
+  background-color: #f8f9fa;
+}
+
+.schedule-table .table-secondary {
+  background-color: #e9ecef !important;
+  border-color: #dee2e6;
+}
+
+.schedule-table .table-secondary td {
+  border-color: #dee2e6;
+}
+
+/* Gạch phân chia giữa các cột */
+.schedule-table td {
+  border-right: 2px solid #dee2e6;
+  vertical-align: top;
+}
+
+.schedule-table td:last-child {
+  border-right: none;
+}
+
+/* Tô màu nổi bật khi sự kiện diễn ra vào ngày hôm nay */
+.schedule-table tbody tr.today-event {
+  background: linear-gradient(135deg, #fff3e0, #ffe0b2) !important;
+  border-left: 5px solid #ff9800;
+  box-shadow: 0 2px 8px rgba(255, 152, 0, 0.2);
+}
+
+
+.schedule-table tbody tr.today-event:hover {
+  background: linear-gradient(135deg, #ffe0b2, #ffcc80) !important;
+  box-shadow: 0 4px 12px rgba(255, 152, 0, 0.3);
+}
+
+.schedule-table tbody tr.today-event td {
+  border-color: #ffcc80;
+  font-weight: 500;
+}
+
+.schedule-table tbody tr.today-event td:first-child {
+  color: #e65100 !important;
+  font-weight: 700;
+}
+
+/* Badge thời gian cho sự kiện hôm nay */
+.schedule-table tbody tr.today-event .badge.bg-info {
+  background: linear-gradient(135deg, #ff5722, #d84315) !important;
+  color: white !important;
+  font-weight: 700;
+  padding: 0.6rem 1rem;
+  border-radius: 0.6rem;
+  box-shadow: 0 3px 6px rgba(255, 87, 34, 0.4);
+  animation: pulse 2s infinite;
+}
+
+@@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
+
+/* Badge thời gian đẹp hơn */
+.schedule-table .badge.bg-info {
+  background: linear-gradient(135deg, #007bff, #0056b3) !important;
+  color: white !important;
+  font-weight: 600;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 4px rgba(0, 123, 255, 0.3);
+  border: none;
+  font-size: 0.85rem;
+  letter-spacing: 0.5px;
+}
+
+/* Responsive */
+@@media (max-width: 768px) {
+  .weekday-bar {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.5rem;
+  }
+  
+  .day-card {
+    padding: 0.75rem 0.5rem;
+  }
+  
+  .day-card .date {
+    font-size: 1rem;
+  }
+}
+
+@@media (max-width: 576px) {
+  .weekday-bar {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+</style>
 }

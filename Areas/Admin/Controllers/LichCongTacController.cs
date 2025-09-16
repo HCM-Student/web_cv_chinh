@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WEB_CV.Data;
@@ -6,6 +7,7 @@ using WEB_CV.Models;
 namespace WEB_CV.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles="Admin")]
     public class LichCongTacController : Controller
     {
         private readonly NewsDbContext _db;
@@ -14,11 +16,11 @@ namespace WEB_CV.Areas.Admin.Controllers
         // GET: Admin/LichCongTac
         public async Task<IActionResult> Index()
         {
-            var events = await _db.WorkScheduleEvents
-                .OrderByDescending(e => e.Date)
-                .ThenBy(e => e.StartTime)
-                .ToListAsync();
-            return View(events);
+            var list = await _db.WorkScheduleEvents
+                .Where(x=>x.Scope==ScheduleScope.DonVi)
+                .OrderByDescending(x=>x.Date).ThenBy(x=>x.StartTime)
+                .Take(200).ToListAsync();
+            return View(list);
         }
 
         // GET: Admin/LichCongTac/Details/5
@@ -36,14 +38,15 @@ namespace WEB_CV.Areas.Admin.Controllers
         // GET: Admin/LichCongTac/Create
         public IActionResult Create()
         {
-            return View();
+            return View(new WorkScheduleEvent{ Date=DateTime.Today, Scope=ScheduleScope.DonVi });
         }
 
         // POST: Admin/LichCongTac/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Date,StartTime,EndTime,Title,Location,Organization,Participants,Preparation,Contact,Phone,Email")] WorkScheduleEvent workScheduleEvent)
+        public async Task<IActionResult> Create([Bind("Id,Date,StartTime,EndTime,Title,Leader,Location,Organization,Participants,Preparation,Contact,Phone,Email,Scope")] WorkScheduleEvent workScheduleEvent)
         {
+            workScheduleEvent.Scope = ScheduleScope.DonVi; // luôn là đơn vị
             if (ModelState.IsValid)
             {
                 _db.Add(workScheduleEvent);
@@ -67,10 +70,11 @@ namespace WEB_CV.Areas.Admin.Controllers
         // POST: Admin/LichCongTac/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Date,StartTime,EndTime,Title,Location,Organization,Participants,Preparation,Contact,Phone,Email")] WorkScheduleEvent workScheduleEvent)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Date,StartTime,EndTime,Title,Leader,Location,Organization,Participants,Preparation,Contact,Phone,Email,Scope")] WorkScheduleEvent workScheduleEvent)
         {
             if (id != workScheduleEvent.Id) return NotFound();
 
+            workScheduleEvent.Scope = ScheduleScope.DonVi; // giữ đúng phạm vi
             if (ModelState.IsValid)
             {
                 try
@@ -91,22 +95,10 @@ namespace WEB_CV.Areas.Admin.Controllers
             return View(workScheduleEvent);
         }
 
-        // GET: Admin/LichCongTac/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null) return NotFound();
-
-            var workScheduleEvent = await _db.WorkScheduleEvents
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (workScheduleEvent == null) return NotFound();
-
-            return View(workScheduleEvent);
-        }
-
         // POST: Admin/LichCongTac/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> Delete(int id)
         {
             var workScheduleEvent = await _db.WorkScheduleEvents.FindAsync(id);
             if (workScheduleEvent != null)
@@ -115,6 +107,71 @@ namespace WEB_CV.Areas.Admin.Controllers
                 await _db.SaveChangesAsync();
                 TempData["SuccessMessage"] = "Đã xóa sự kiện lịch công tác thành công!";
             }
+            return RedirectToAction(nameof(Index));
+        }
+
+        // GET: Admin/LichCongTac/CreateTestData
+        public async Task<IActionResult> CreateTestData()
+        {
+            var testData = new List<WorkScheduleEvent>
+            {
+                new WorkScheduleEvent
+                {
+                    Date = DateTime.Today.AddDays(1),
+                    StartTime = new TimeSpan(8, 0, 0),
+                    EndTime = new TimeSpan(10, 0, 0),
+                    Title = "Họp giao ban tuần",
+                    Leader = "Nguyễn Văn A",
+                    Location = "Phòng họp A1",
+                    Organization = "Cục Chuyển đổi số",
+                    Participants = "Lãnh đạo các phòng ban",
+                    Preparation = "Chuẩn bị báo cáo tuần",
+                    Contact = "Nguyễn Thị B",
+                    Phone = "0123456789",
+                    Email = "nguyenvana@example.com",
+                    Scope = ScheduleScope.DonVi
+                },
+                new WorkScheduleEvent
+                {
+                    Date = DateTime.Today.AddDays(2),
+                    StartTime = new TimeSpan(14, 0, 0),
+                    EndTime = new TimeSpan(16, 0, 0),
+                    Title = "Kiểm tra dự án số hóa",
+                    Leader = "Trần Văn C",
+                    Location = "Phòng IT",
+                    Organization = "Cục Chuyển đổi số",
+                    Participants = "Đội dự án, Kỹ thuật viên",
+                    Preparation = "Chuẩn bị demo sản phẩm",
+                    Contact = "Lê Văn D",
+                    Phone = "0987654321",
+                    Email = "tranvanc@example.com",
+                    Scope = ScheduleScope.DonVi
+                },
+                new WorkScheduleEvent
+                {
+                    Date = DateTime.Today.AddDays(3),
+                    StartTime = new TimeSpan(9, 0, 0),
+                    EndTime = new TimeSpan(11, 30, 0),
+                    Title = "Tập huấn công nghệ mới",
+                    Leader = "Phạm Thị E",
+                    Location = "Hội trường lớn",
+                    Organization = "Cục Chuyển đổi số",
+                    Participants = "Toàn thể cán bộ",
+                    Preparation = "Chuẩn bị tài liệu, máy chiếu",
+                    Contact = "Hoàng Văn F",
+                    Phone = "0369258147",
+                    Email = "phamthie@example.com",
+                    Scope = ScheduleScope.DonVi
+                }
+            };
+
+            foreach (var item in testData)
+            {
+                _db.WorkScheduleEvents.Add(item);
+            }
+
+            await _db.SaveChangesAsync();
+            TempData["SuccessMessage"] = "Đã tạo dữ liệu test thành công!";
             return RedirectToAction(nameof(Index));
         }
 

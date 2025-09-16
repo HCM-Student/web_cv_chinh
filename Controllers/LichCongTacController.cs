@@ -12,43 +12,46 @@ namespace WEB_CV.Controllers
         private readonly NewsDbContext _db;
         public LichCongTacController(NewsDbContext db) => _db = db;
 
-        // /lich-cong-tac?start=2025-09-15
+        // /lich-cong-tac?start=2025-09-15&leader=...&q=...
         [HttpGet("/lich-cong-tac")]
-        public async Task<IActionResult> Index(DateTime? start, string? keyword, string? org, string? email, string? phone, string? contact)
+        public async Task<IActionResult> Index(DateTime? start, string? leader, string? q)
         {
-            var today = DateTime.Today;
-            var startOfWeek = GetMonday(start ?? today);
-            var endOfWeek = startOfWeek.AddDays(6);
+            var monday = GetMonday(start ?? DateTime.Today);
+            var sunday = monday.AddDays(6);
 
-            var q = _db.WorkScheduleEvents
-                .Where(e => e.Date >= startOfWeek && e.Date <= endOfWeek);
+            var baseQuery = _db.WorkScheduleEvents
+                .Where(e => e.Scope == ScheduleScope.DonVi && e.Date >= monday && e.Date <= sunday);
 
-            if (!string.IsNullOrWhiteSpace(keyword))
-                q = q.Where(e => EF.Functions.Like(e.Title, $"%{keyword}%"));
-            if (!string.IsNullOrWhiteSpace(org))
-                q = q.Where(e => EF.Functions.Like(e.Organization, $"%{org}%"));
-            if (!string.IsNullOrWhiteSpace(email))
-                q = q.Where(e => e.Email.Contains(email));
-            if (!string.IsNullOrWhiteSpace(phone))
-                q = q.Where(e => e.Phone.Contains(phone));
-            if (!string.IsNullOrWhiteSpace(contact))
-                q = q.Where(e => EF.Functions.Like(e.Contact, $"%{contact}%"));
+            if (!string.IsNullOrWhiteSpace(leader))
+                baseQuery = baseQuery.Where(e => e.Leader == leader);
 
-            var list = await q.AsNoTracking()
-                              .OrderBy(e => e.Date)
-                              .ThenBy(e => e.StartTime)
-                              .ToListAsync();
+            if (!string.IsNullOrWhiteSpace(q))
+                baseQuery = baseQuery.Where(e =>
+                    EF.Functions.Like(e.Title, $"%{q}%") ||
+                    EF.Functions.Like(e.Organization, $"%{q}%") ||
+                    EF.Functions.Like(e.Location, $"%{q}%"));
 
-            var vm = new WorkScheduleVm {
-                WeekStart = startOfWeek,
-                WeekEnd = endOfWeek,
-                Keyword = keyword, Org = org, Email = email, Phone = phone, Contact = contact
+            var list = await baseQuery
+                .AsNoTracking()
+                .OrderBy(e => e.Date).ThenBy(e => e.StartTime)
+                .ToListAsync();
+
+            var vm = new WorkScheduleVm
+            {
+                WeekStart = monday,
+                WeekEnd = sunday,
+                WeekNo = ISOWeek.GetWeekOfYear(monday),
+                Leader = leader,
+                Keyword = q,
+                LeaderOptions = await _db.WorkScheduleEvents
+                                         .Where(e => e.Scope == ScheduleScope.DonVi)
+                                         .Select(e => e.Leader)
+                                         .Distinct().OrderBy(x => x).ToListAsync()
             };
 
-            // tạo đủ 7 ngày
             for (int i = 0; i < 7; i++)
             {
-                var d = startOfWeek.AddDays(i).Date;
+                var d = monday.AddDays(i).Date;
                 vm.EventsByDay[d] = list.Where(x => x.Date.Date == d).ToList();
             }
 
@@ -57,8 +60,8 @@ namespace WEB_CV.Controllers
 
         private static DateTime GetMonday(DateTime d)
         {
-            int diff = (7 + (d.DayOfWeek - DayOfWeek.Monday)) % 7;
-            return d.AddDays(-1 * diff).Date;
+            int diff = (7 + (int)d.DayOfWeek - (int)DayOfWeek.Monday) % 7;
+            return d.AddDays(-diff).Date;
         }
     }
 }
