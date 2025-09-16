@@ -134,7 +134,7 @@ document.addEventListener('DOMContentLoaded', function() {
         el.classList.add('reveal-on-scroll', 'tilt-ready', 'glow-hover');
     });
     
-    // Initialize counters on BaoGia hero
+    // Initialize counters on hero sections
     initHeroCounters();
     
     // Initialize tilt interactions

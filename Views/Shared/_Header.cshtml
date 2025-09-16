@@ -56,16 +56,39 @@
     </button>
 
     <div class="collapse navbar-collapse w-100" id="mainNav">
-      <!-- MENU Ở GIỮA -->
-      <ul class="navbar-nav mx-auto nav-center mb-2 mb-lg-0">
+      <div class="d-flex w-100 align-items-center">
+        <!-- MENU Ở BÊN TRÁI -->
+        <ul class="navbar-nav nav-left mb-2 mb-lg-0">
         <li class="nav-item">
           <a class="nav-link @(currentController=="Home" && currentAction=="Index" ? "active" : "")"
              asp-area="" asp-controller="Home" asp-action="Index">Trang chủ</a>
         </li>
 
-        <li class="nav-item">
-          <a class="nav-link @(currentController=="Home" && currentAction=="GioiThieu" ? "active" : "")"
-             asp-area="" asp-controller="Home" asp-action="GioiThieu">Giới thiệu</a>
+        <!-- GIỚI THIỆU (dropdown) -->
+        <li class="nav-item dropdown">
+          <a id="introDropdown"
+             class="nav-link dropdown-toggle @(currentController=="Home" && (currentAction=="GioiThieu" || currentAction=="LanhDaoBo" || currentAction=="ChucNangNhiemVu" || currentAction=="CoCauToChuc" || currentAction=="QuaTrinhPhatTrien" || currentAction=="DanhBaDonVi") ? "active" : "")"
+             href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Giới thiệu
+            <svg class="chev" width="14" height="14" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="introDropdown">
+            <li><a class="dropdown-item @(currentController=="Home" && currentAction=="GioiThieu" ? "active" : "")"
+                   asp-controller="Home" asp-action="GioiThieu">Tổng quan</a></li>
+            <li><a class="dropdown-item @(currentController=="Home" && currentAction=="LanhDaoBo" ? "active" : "")"
+                   asp-controller="Home" asp-action="LanhDaoBo">Lãnh đạo bộ</a></li>
+            <li><a class="dropdown-item @(currentController=="Home" && currentAction=="ChucNangNhiemVu" ? "active" : "")"
+                   asp-controller="Home" asp-action="ChucNangNhiemVu">Chức năng nhiệm vụ</a></li>
+            <li><a class="dropdown-item @(currentController=="Home" && currentAction=="CoCauToChuc" ? "active" : "")"
+                   asp-controller="Home" asp-action="CoCauToChuc">Cơ cấu tổ chức</a></li>
+            <li><a class="dropdown-item @(currentController=="Home" && currentAction=="QuaTrinhPhatTrien" ? "active" : "")"
+                   asp-controller="Home" asp-action="QuaTrinhPhatTrien">Quá trình phát triển</a></li>
+            <li><a class="dropdown-item @(currentController=="Home" && currentAction=="DanhBaDonVi" ? "active" : "")"
+                   asp-controller="Home" asp-action="DanhBaDonVi">Danh bạ các đơn vị</a></li>
+          </ul>
         </li>
 
         <!-- DỊCH VỤ (dropdown) -->
@@ -95,20 +118,12 @@
         </li>
 
         <li class="nav-item">
-          <a class="nav-link @(currentController=="Home" && currentAction=="ThietBi" ? "active" : "")"
-             asp-area="" asp-controller="Home" asp-action="ThietBi">Thiết bị</a>
-        </li>
-        <li class="nav-item">
           <a class="nav-link @(currentController=="Home" && currentAction=="TinTuc" ? "active" : "")"
              asp-area="" asp-controller="Home" asp-action="TinTuc">Tin tức – Sự kiện</a>
         </li>
         <li class="nav-item">
           <a class="nav-link @(currentController=="Home" && currentAction=="TuyenDung" ? "active" : "")"
              asp-area="" asp-controller="Home" asp-action="TuyenDung">Tuyển dụng</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link @(currentController=="Home" && currentAction=="BaoGia" ? "active" : "")"
-             asp-area="" asp-controller="Home" asp-action="BaoGia">Báo giá</a>
         </li>
         <li class="nav-item">
           <a class="nav-link @(currentController=="Home" && currentAction=="LienHe" ? "active" : "")"
@@ -230,6 +245,7 @@
         </div>
 
 
+      </div>
       </div>
     </div>
   </div>

@@ -154,7 +154,7 @@
 }
 
 .official-badge::before {
-    content: 'ðŸ›ï¸';
+    content: none;
     margin-right: 0.5rem;
 }
 

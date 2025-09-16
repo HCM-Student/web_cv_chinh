@@ -40,19 +40,31 @@ namespace WEB_CV.Controllers
         [HttpGet, Route("Home/GioiThieu"), Route("gioi-thieu")]
         public IActionResult GioiThieu() => View("GioiThieu");
 
-        public IActionResult Privacy() => View();
+        // ===== Trang Lãnh đạo bộ =====
+        [HttpGet, Route("Home/LanhDaoBo"), Route("lanh-dao-bo")]
+        public IActionResult LanhDaoBo() => View("LanhDaoBo");
 
-        // ===== Trang Thiết bị =====
-        [HttpGet, Route("Home/ThietBi"), Route("thiet-bi")]
-        public IActionResult ThietBi() => View("ThietBi");
+        // ===== Trang Chức năng nhiệm vụ =====
+        [HttpGet, Route("Home/ChucNangNhiemVu"), Route("chuc-nang-nhiem-vu")]
+        public IActionResult ChucNangNhiemVu() => View("ChucNangNhiemVu");
+
+        // ===== Trang Cơ cấu tổ chức =====
+        [HttpGet, Route("Home/CoCauToChuc"), Route("co-cau-to-chuc")]
+        public IActionResult CoCauToChuc() => View("CoCauToChuc");
+
+        // ===== Trang Quá trình phát triển =====
+        [HttpGet, Route("Home/QuaTrinhPhatTrien"), Route("qua-trinh-phat-trien")]
+        public IActionResult QuaTrinhPhatTrien() => View("QuaTrinhPhatTrien");
+
+        // ===== Trang Danh bạ các đơn vị =====
+        [HttpGet, Route("Home/DanhBaDonVi"), Route("danh-ba-don-vi")]
+        public IActionResult DanhBaDonVi() => View("DanhBaDonVi");
+
+        public IActionResult Privacy() => View();
 
         // ===== Trang Tuyển dụng =====
         [HttpGet, Route("Home/TuyenDung"), Route("tuyen-dung")]
         public IActionResult TuyenDung() => View("TuyenDung");
-
-        // ===== Trang Báo giá =====
-        [HttpGet, Route("Home/BaoGia"), Route("bao-gia")]
-        public IActionResult BaoGia() => View("BaoGia");
 
         // ===== Liên hệ (GET) =====
         [HttpGet, Route("Home/LienHe"), Route("lien-he")]

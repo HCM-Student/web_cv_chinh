@@ -1,0 +1,625 @@
+@{
+    ViewData["Title"] = "Cơ cấu tổ chức";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<!-- Hero Section -->
+<section class="org-hero bg-gradient-primary text-white py-5 position-relative overflow-hidden">
+    <div class="hero-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+    </div>
+    <div class="container position-relative">
+        <div class="row align-items-center min-vh-50">
+            <div class="col-lg-8">
+                <div class="hero-content text-center">
+                    <h1 class="display-3 fw-bold mb-3 animate-fade-in">Cơ cấu tổ chức</h1>
+                    <p class="lead fs-4 mb-4 animate-fade-in-delay">Sơ đồ tổ chức của Cục Chuyển đổi số</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Organization Chart Section -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="text-center mb-5">
+                    <div class="section-badge mb-3">
+                        <span class="badge bg-primary-subtle text-primary px-3 py-2 rounded-pill">
+                            <i class="fas fa-sitemap me-2"></i>Sơ đồ tổ chức
+                        </span>
+                    </div>
+                    <h2 class="display-5 fw-bold text-dark mb-3">Cơ cấu tổ chức</h2>
+                    <p class="lead text-muted mx-auto" style="max-width: 600px;">
+                        Cơ cấu tổ chức hiện đại, chuyên nghiệp với các phòng ban chức năng rõ ràng
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Organization Chart -->
+        <div class="row justify-content-center">
+            <div class="col-lg-12">
+                <div class="org-chart-container">
+                    <!-- Top Level - Director -->
+                    <div class="org-level-1 text-center mb-5">
+                        <div class="org-box director">
+                            <div class="org-icon">
+                                <i class="fas fa-crown"></i>
+                            </div>
+                            <h4 class="org-title mb-2">Cục trưởng</h4>
+                            <p class="org-subtitle mb-0">Trần Đức Thắng</p>
+                        </div>
+                    </div>
+
+                    <!-- Second Level - Deputy Directors -->
+                    <div class="org-level-2 mb-5">
+                        <div class="row g-4 justify-content-center">
+                            <div class="col-lg-3 col-md-6">
+                                <div class="org-box deputy">
+                                    <div class="org-icon">
+                                        <i class="fas fa-user-tie"></i>
+                                    </div>
+                                    <h5 class="org-title mb-1">Phó Cục trưởng</h5>
+                                    <p class="org-subtitle mb-0">Nguyễn Hoàng Hiệp</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-6">
+                                <div class="org-box deputy">
+                                    <div class="org-icon">
+                                        <i class="fas fa-user-tie"></i>
+                                    </div>
+                                    <h5 class="org-title mb-1">Phó Cục trưởng</h5>
+                                    <p class="org-subtitle mb-0">Nguyễn Thị Phương Hoa</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-6">
+                                <div class="org-box deputy">
+                                    <div class="org-icon">
+                                        <i class="fas fa-user-tie"></i>
+                                    </div>
+                                    <h5 class="org-title mb-1">Phó Cục trưởng</h5>
+                                    <p class="org-subtitle mb-0">Trần Thanh Nam</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Third Level - Departments -->
+                    <div class="org-level-3">
+                        <div class="row g-4">
+                            <div class="col-lg-3 col-md-6">
+                                <div class="org-box department">
+                                    <div class="org-icon">
+                                        <i class="fas fa-chart-line"></i>
+                                    </div>
+                                    <h6 class="org-title mb-1">Phòng Kế hoạch</h6>
+                                    <p class="org-subtitle mb-0">Tổng hợp</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-6">
+                                <div class="org-box department">
+                                    <div class="org-icon">
+                                        <i class="fas fa-laptop-code"></i>
+                                    </div>
+                                    <h6 class="org-title mb-1">Phòng Công nghệ</h6>
+                                    <p class="org-subtitle mb-0">Thông tin</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-6">
+                                <div class="org-box department">
+                                    <div class="org-icon">
+                                        <i class="fas fa-graduation-cap"></i>
+                                    </div>
+                                    <h6 class="org-title mb-1">Phòng Đào tạo</h6>
+                                    <p class="org-subtitle mb-0">Nhân lực</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-6">
+                                <div class="org-box department">
+                                    <div class="org-icon">
+                                        <i class="fas fa-handshake"></i>
+                                    </div>
+                                    <h6 class="org-title mb-1">Phòng Hợp tác</h6>
+                                    <p class="org-subtitle mb-0">Quốc tế</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-6">
+                                <div class="org-box department">
+                                    <div class="org-icon">
+                                        <i class="fas fa-coins"></i>
+                                    </div>
+                                    <h6 class="org-title mb-1">Phòng Tài chính</h6>
+                                    <p class="org-subtitle mb-0">Kế toán</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-6">
+                                <div class="org-box department">
+                                    <div class="org-icon">
+                                        <i class="fas fa-clipboard-list"></i>
+                                    </div>
+                                    <h6 class="org-title mb-1">Phòng Hành chính</h6>
+                                    <p class="org-subtitle mb-0">Tổng hợp</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-6">
+                                <div class="org-box department">
+                                    <div class="org-icon">
+                                        <i class="fas fa-gavel"></i>
+                                    </div>
+                                    <h6 class="org-title mb-1">Phòng Pháp chế</h6>
+                                    <p class="org-subtitle mb-0">Thanh tra</p>
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-md-6">
+                                <div class="org-box department">
+                                    <div class="org-icon">
+                                        <i class="fas fa-project-diagram"></i>
+                                    </div>
+                                    <h6 class="org-title mb-1">Phòng Dự án</h6>
+                                    <p class="org-subtitle mb-0">Đầu tư</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Department Details -->
+        <div class="row mt-5">
+            <div class="col-12">
+                <div class="text-center mb-5">
+                    <div class="section-badge mb-3">
+                        <span class="badge bg-success-subtle text-success px-3 py-2 rounded-pill">
+                            <i class="fas fa-info-circle me-2"></i>Chi tiết phòng ban
+                        </span>
+                    </div>
+                    <h3 class="display-6 fw-bold text-dark mb-3">Thông tin chi tiết các phòng ban</h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="row g-4">
+            <div class="col-lg-6">
+                <div class="department-card">
+                    <div class="department-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="department-content">
+                        <h5 class="department-title">Phòng Kế hoạch Tổng hợp</h5>
+                        <p class="department-description">
+                            Chịu trách nhiệm xây dựng kế hoạch chiến lược, tổng hợp báo cáo và điều phối hoạt động của toàn Cục.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="department-card">
+                    <div class="department-icon">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <div class="department-content">
+                        <h5 class="department-title">Phòng Công nghệ Thông tin</h5>
+                        <p class="department-description">
+                            Quản lý hệ thống công nghệ thông tin, phát triển ứng dụng và đảm bảo an ninh mạng.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="department-card">
+                    <div class="department-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div class="department-content">
+                        <h5 class="department-title">Phòng Đào tạo Nhân lực</h5>
+                        <p class="department-description">
+                            Tổ chức đào tạo, bồi dưỡng nâng cao trình độ chuyên môn cho cán bộ, công chức.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="department-card">
+                    <div class="department-icon">
+                        <i class="fas fa-handshake"></i>
+                    </div>
+                    <div class="department-content">
+                        <h5 class="department-title">Phòng Hợp tác Quốc tế</h5>
+                        <p class="department-description">
+                            Thúc đẩy hợp tác quốc tế, trao đổi kinh nghiệm và học hỏi các mô hình tiên tiến.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+/* ============================
+   ORGANIZATION CHART STYLES
+   ============================ */
+
+/* Hero Section */
+.org-hero {
+    background: linear-gradient(135deg, #ff8a50 0%, #ff6b35 50%, #4ecdc4 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-shapes {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+}
+
+.shape {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    animation: float 6s ease-in-out infinite;
+}
+
+.shape-1 {
+    width: 200px;
+    height: 200px;
+    top: 10%;
+    right: 10%;
+    animation-delay: 0s;
+}
+
+.shape-2 {
+    width: 150px;
+    height: 150px;
+    bottom: 20%;
+    left: 5%;
+    animation-delay: 2s;
+}
+
+.shape-3 {
+    width: 100px;
+    height: 100px;
+    top: 50%;
+    right: 20%;
+    animation-delay: 4s;
+}
+
+@@keyframes float {
+    0%, 100% { transform: translateY(0px) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(180deg); }
+}
+
+.animate-fade-in {
+    animation: fadeInUp 1s ease-out;
+}
+
+.animate-fade-in-delay {
+    animation: fadeInUp 1s ease-out 0.3s both;
+}
+
+@@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Section Badge */
+.section-badge .badge {
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+/* Organization Chart Container */
+.org-chart-container {
+    position: relative;
+    padding: 2rem 0;
+}
+
+/* Organization Boxes */
+.org-box {
+    background: #fff;
+    border-radius: 15px;
+    padding: 1.5rem 1rem;
+    text-align: center;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    position: relative;
+    border: none;
+    overflow: hidden;
+}
+
+.org-box::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(135deg, #ff6b35, #4ecdc4);
+}
+
+.org-box:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* Director Box */
+.org-box.director {
+    background: linear-gradient(135deg, #ff8a50 0%, #ff6b35 100%);
+    color: white;
+    box-shadow: 0 20px 40px rgba(255, 138, 80, 0.4);
+    border: 3px solid rgba(255, 255, 255, 0.2);
+}
+
+.org-box.director::before {
+    background: rgba(255, 255, 255, 0.4);
+    height: 6px;
+}
+
+.org-box.director .org-title,
+.org-box.director .org-subtitle {
+    color: white;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Deputy Boxes */
+.org-box.deputy {
+    background: linear-gradient(135deg, #4ecdc4 0%, #26a69a 100%);
+    color: white;
+    box-shadow: 0 15px 30px rgba(78, 205, 196, 0.4);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.org-box.deputy::before {
+    background: rgba(255, 255, 255, 0.4);
+    height: 5px;
+}
+
+.org-box.deputy .org-title,
+.org-box.deputy .org-subtitle {
+    color: white;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Department Boxes */
+.org-box.department {
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    border: 2px solid #e9ecef;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.org-box.department::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(255, 138, 80, 0.05), rgba(78, 205, 196, 0.05));
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.org-box.department:hover {
+    border-color: #ff8a50;
+    box-shadow: 0 15px 35px rgba(255, 138, 80, 0.2);
+    transform: translateY(-8px);
+}
+
+.org-box.department:hover::after {
+    opacity: 1;
+}
+
+/* Organization Icons */
+.org-icon {
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, #ff8a50, #4ecdc4);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 0.8rem;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+    position: relative;
+    z-index: 2;
+}
+
+.org-box.director .org-icon {
+    background: rgba(255, 255, 255, 0.25);
+    width: 70px;
+    height: 70px;
+    font-size: 1.8rem;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.org-box.deputy .org-icon {
+    background: rgba(255, 255, 255, 0.25);
+    width: 60px;
+    height: 60px;
+    font-size: 1.5rem;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.18);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.org-box.department .org-icon {
+    background: linear-gradient(135deg, #ff8a50, #4ecdc4);
+    width: 45px;
+    height: 45px;
+    font-size: 1.1rem;
+    box-shadow: 0 5px 12px rgba(0, 0, 0, 0.12);
+}
+
+.org-box:hover .org-icon {
+    transform: scale(1.15) rotate(5deg);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25);
+}
+
+/* Organization Text */
+.org-title {
+    font-weight: 700;
+    margin-bottom: 0.3rem;
+    color: #2d3748;
+    font-size: 0.95rem;
+}
+
+.org-subtitle {
+    color: #6b7280;
+    font-size: 0.8rem;
+    margin-bottom: 0;
+}
+
+/* Connection Lines */
+.org-level-1::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 100%;
+    width: 2px;
+    height: 30px;
+    background: linear-gradient(135deg, #ff6b35, #4ecdc4);
+    transform: translateX(-50%);
+    border-radius: 2px;
+}
+
+.org-level-2::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: -30px;
+    width: 2px;
+    height: 30px;
+    background: linear-gradient(135deg, #ff6b35, #4ecdc4);
+    transform: translateX(-50%);
+    border-radius: 2px;
+}
+
+.org-level-2::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 100%;
+    width: 2px;
+    height: 30px;
+    background: linear-gradient(135deg, #ff6b35, #4ecdc4);
+    transform: translateX(-50%);
+    border-radius: 2px;
+}
+
+/* Department Details Cards */
+.department-card {
+    background: #fff;
+    border-radius: 20px;
+    padding: 2rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    border: none;
+    position: relative;
+    overflow: hidden;
+}
+
+.department-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(135deg, #ff6b35, #4ecdc4);
+}
+
+.department-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.department-icon {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #ff6b35, #4ecdc4);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.department-card:hover .department-icon {
+    transform: scale(1.1);
+}
+
+.department-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #2d3748;
+    margin-bottom: 1rem;
+}
+
+.department-description {
+    color: #6b7280;
+    line-height: 1.6;
+    margin-bottom: 0;
+}
+
+/* Responsive Design */
+@@media (max-width: 768px) {
+    .org-box {
+        padding: 1.5rem 1rem;
+    }
+    
+    .org-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 1.2rem;
+    }
+    
+    .org-box.director .org-icon {
+        width: 60px;
+        height: 60px;
+        font-size: 1.5rem;
+    }
+    
+    .org-box.deputy .org-icon {
+        width: 55px;
+        height: 55px;
+        font-size: 1.3rem;
+    }
+    
+    .department-card {
+        padding: 1.5rem;
+    }
+    
+    .department-icon {
+        width: 50px;
+        height: 50px;
+        font-size: 1.2rem;
+    }
+}
+</style>

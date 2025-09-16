@@ -8,7 +8,6 @@
     
     <div class="share-buttons">
         <a href="https://www.facebook.com/sharer/sharer.php?u=@Url.Action("ChiTietBaiViet", "Home", new { id = Model.Id }, Context.Request.Scheme)" 
-           target="_blank" 
            class="share-btn facebook-btn"
            title="Chia sẻ lên Facebook">
             <i class="fab fa-facebook-f"></i>
@@ -16,7 +15,6 @@
         </a>
         
         <a href="https://twitter.com/intent/tweet?url=@Url.Action("ChiTietBaiViet", "Home", new { id = Model.Id }, Context.Request.Scheme)&text=@Uri.EscapeDataString(Model.TieuDe)" 
-           target="_blank" 
            class="share-btn twitter-btn"
            title="Chia sẻ lên Twitter">
             <i class="fab fa-twitter"></i>
@@ -24,7 +22,6 @@
         </a>
         
         <a href="https://zalo.me/share?url=@Url.Action("ChiTietBaiViet", "Home", new { id = Model.Id }, Context.Request.Scheme)&title=@Uri.EscapeDataString(Model.TieuDe)" 
-           target="_blank" 
            class="share-btn zalo-btn"
            title="Chia sẻ lên Zalo">
             <i class="fas fa-comment-dots"></i>
@@ -32,7 +29,6 @@
         </a>
         
         <a href="https://www.linkedin.com/sharing/share-offsite/?url=@Url.Action("ChiTietBaiViet", "Home", new { id = Model.Id }, Context.Request.Scheme)" 
-           target="_blank" 
            class="share-btn linkedin-btn"
            title="Chia sẻ lên LinkedIn">
             <i class="fab fa-linkedin-in"></i>

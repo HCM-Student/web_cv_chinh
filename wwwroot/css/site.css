@@ -1,4 +1,4 @@
-﻿/* ==========================================================================
+/* ==========================================================================
    Base & Resets
    ========================================================================== */
 html{font-size:14px;position:relative;min-height:100%}
@@ -25,7 +25,7 @@ html, body { max-width: 100%; overflow-x: clip; }
 .form-floating>.form-control-plaintext:focus::placeholder,
 .form-floating>.form-control:focus::placeholder{text-align:start}
 
-/* khoáº£ng há»Ÿ giá»¯a vÃ²m & dáº£i tháº» ngay sau hero */
+/* khoảng hở giữa vòm & dải thẻ ngay sau hero */
 :root{
   --hero-curve-gap: clamp(18px, 2.8vw, 40px);
   --primary-color: #f97316; /* brand primary (orange) */
@@ -37,13 +37,13 @@ html, body { max-width: 100%; overflow-x: clip; }
   --dark-color: #1e293b;
   --text-muted: #64748b;
   --nav-gap: clamp(.75rem, 3vw, 2.25rem);
- /* giÃ£n thÆ°a menu */
+ /* giãn thưa menu */
 }
 
 /* ==========================================================================
    HEADER (BRANDBAR + NAVSTRIP)
    ========================================================================== */
-/* HÃ ng trÃªn: logo + tÃªn + liÃªn há»‡ */
+/* Hàng trên: logo + tên + liên hệ */
 .brandbar{background:#fff;border-bottom:1px solid #eef2f7}
 .brand-link{color:inherit}
 .brand-logo{height:48px;width:auto;max-width:48px;border-radius:10px;object-fit:contain;display:block}
@@ -51,9 +51,9 @@ html, body { max-width: 100%; overflow-x: clip; }
 
 /* Compact logo inside sticky navbar */
 .brand-logo-sm{height:32px;width:auto;max-width:32px;border-radius:8px;object-fit:contain;display:block}
-/* Ẩn logo nhỏ theo mặc định; chỉ hiện khi nav đã dính */
+/* ?n logo nh? theo m?c d?nh; ch? hi?n khi nav d� d�nh */
 .navstrip .navbar-brand{padding-top:.35rem;padding-bottom:.35rem;margin-right:.75rem; display:none !important;}
-/* Chỉ hiện logo nhỏ khi thanh nav đã dính (đang cuộn) */
+/* Ch? hi?n logo nh? khi thanh nav d� d�nh (dang cu?n) */
 .navstrip.is-stuck .navbar-brand{ display:flex !important; }
 
 .brand-title{font-weight:800;letter-spacing:.02em;color:#1f2937;line-height:1}
@@ -75,16 +75,16 @@ html, body { max-width: 100%; overflow-x: clip; }
   color: #fff;
   box-shadow: 0 6px 18px rgba(37,99,235,.35);
   margin-right: .5rem;
-  font-size: 1rem; /* kÃ­ch thÆ°á»›c biá»ƒu tÆ°á»£ng */
+  font-size: 1rem; /* kích thước biểu tượng */
 }
 
-/* CÃ¡ch xa nhau giá»¯a phone & email */
+/* Cách xa nhau giữa phone & email */
 .brandbar .contact-right{ gap: 1.25rem; }
 
-/* Text Ä‘áº­m & mÃ u tá»‘i trong brandbar */
+/* Text đậm & màu tối trong brandbar */
 .brandbar .contact-text{ color:#1f2937; font-weight:700; }
 
-/* HÃ ng dÆ°á»›i: thanh menu */
+/* Hàng dưới: thanh menu */
 .navstrip{background:#f8fafc;border-bottom:1px solid #eef2f7}
 /* Keep the menu bar visible while scrolling */
 .navstrip{ position: sticky; top: 0; z-index: 1040; }
@@ -92,15 +92,15 @@ html, body { max-width: 100%; overflow-x: clip; }
 .navstrip{ box-shadow: 0 2px 12px rgba(2,6,23,.06); }
 .navstrip .navbar-nav .nav-link{
   white-space:nowrap;font-weight:500;
-  padding:.9rem 0.75rem;        /* tÄƒng chiá»u cao Ä‘á»ƒ â€œbáº±ngâ€ logo (cáº£m giÃ¡c) */
+  padding:.9rem 0.75rem;        /* tăng chiều cao để “bằng” logo (cảm giác) */
 }
 .navstrip .navbar-nav .nav-link.active{color:#f97316;font-weight:700}
 
-/* menu á»Ÿ giá»¯a + giÃ£n thÆ°a */
-.nav-center{gap:var(--nav-gap)}
+/* menu ở giữa + giãn thưa */
+.nav-left{gap:var(--nav-gap)}
 .navbar .navbar-collapse{align-items:center}
 
-/* ===== Auth / Avatar á»Ÿ HÃ€NG DÆ¯á»šI (bÃªn pháº£i) ===== */
+/* ===== Auth / Avatar ở HÀNG DƯỚI (bên phải) ===== */
 .header-auth .btn{ padding:.35rem .9rem }
 .header-auth .btn span:first-child {
     font-size: 0.9rem;
@@ -138,9 +138,9 @@ html, body { max-width: 100%; overflow-x: clip; }
 }
 
 /* ===================== ENHANCED DROPDOWN MENUS (MINIMAL) ===================== */
-/* Giá»¯ nguyÃªn giao diá»‡n Bootstrap cÆ¡ báº£n, chá»‰ thÃªm hiá»‡u á»©ng nháº¹ */
+/* Giữ nguyên giao diện Bootstrap cơ bản, chỉ thêm hiệu ứng nhẹ */
 
-/* Dropdown menu container - chá»‰ thÃªm shadow nháº¹ */
+/* Dropdown menu container - chỉ thêm shadow nhẹ */
 .nav-item.dropdown .dropdown-menu {
     border-radius: 8px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
@@ -159,14 +159,14 @@ html, body { max-width: 100%; overflow-x: clip; }
     }
 }
 
-/* Dropdown items - giá»¯ nguyÃªn padding Bootstrap, chá»‰ thÃªm hover effect */
+/* Dropdown items - giữ nguyên padding Bootstrap, chỉ thêm hover effect */
 .nav-item.dropdown .dropdown-item {
     transition: all 0.2s ease;
     border-radius: 4px;
     margin: 2px 4px;
 }
 
-/* Hover effect nháº¹ nhÃ ng */
+/* Hover effect nhẹ nhàng */
 .nav-item.dropdown .dropdown-item:hover {
     background: #f8f9fa;
     color: #667eea;
@@ -179,7 +179,7 @@ html, body { max-width: 100%; overflow-x: clip; }
     color: white;
 }
 
-/* Dropdown toggle - chá»‰ thÃªm hover effect nháº¹ */
+/* Dropdown toggle - chỉ thêm hover effect nhẹ */
 .nav-item.dropdown .dropdown-toggle {
     transition: color 0.2s ease;
 }
@@ -198,7 +198,7 @@ html, body { max-width: 100%; overflow-x: clip; }
 }
 
 /* ==========================================================================
-   Sections â€“ helpers
+   Sections – helpers
    ========================================================================== */
 .section{padding:3rem 0; position:relative; z-index:3;}
 .section-title{font-weight:700;letter-spacing:-.02em}
@@ -218,7 +218,7 @@ html, body { max-width: 100%; overflow-x: clip; }
 .project-card img{transition:.25s}
 .project-card:hover img{transform:scale(1.03)}
 
-/* Logo Ä‘á»‘i tÃ¡c â€“ Máº¶C Äá»ŠNH cÃ³ mÃ u */
+/* Logo đối tác – MẶC ĐỊNH có màu */
 .partner-logo{
   max-height:60px;
   transition:transform .2s ease;
@@ -278,10 +278,10 @@ html, body { max-width: 100%; overflow-x: clip; }
 @keyframes ringFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
 #mainHero .carousel-indicators [data-bs-target]{width:10px;height:10px;border-radius:50%;background:#cfe3ff;opacity:.8}
 #mainHero .carousel-indicators .active{background:#0d6efd;opacity:1}
-/* bÃ³ng nháº¹ cho icon (giá»¯ láº¡i) */
+/* bóng nhẹ cho icon (giữ lại) */
 #mainHero .carousel-control-prev-icon,#mainHero .carousel-control-next-icon{filter:drop-shadow(0 2px 6px rgba(0,0,0,.4))}
 
-/* ===== FIX: mÅ©i tÃªn chuyá»ƒn slide luÃ´n hiá»‡n + náº±m trÃªn má»i overlay ===== */
+/* ===== FIX: mũi tên chuyển slide luôn hiện + nằm trên mọi overlay ===== */
 #mainHero .carousel-control-prev,
 #mainHero .carousel-control-next{
   width: clamp(48px, 6vw, 72px);
@@ -300,14 +300,14 @@ html, body { max-width: 100%; overflow-x: clip; }
   border-radius:999px;
   filter:drop-shadow(0 2px 8px rgba(0,0,0,.35));
 }
-/* SVG riÃªng Ä‘á»ƒ khÃ´ng phá»¥ thuá»™c background-image máº·c Ä‘á»‹nh cá»§a Bootstrap */
+/* SVG riêng để không phụ thuộc background-image mặc định của Bootstrap */
 #mainHero .carousel-control-prev-icon{
   background-image:url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none'%3e%3cpath d='M10.5 2L4 8l6.5 6' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3e%3c/svg%3e");
 }
 #mainHero .carousel-control-next-icon{
   background-image:url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='none'%3e%3cpath d='M5.5 2L12 8l-6.5 6' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3e%3c/svg%3e");
 }
-/* Ä‘áº£m báº£o táº¥t cáº£ lá»›p â€œtrang trÃ­â€ khÃ´ng cháº·n click */
+/* đảm bảo tất cả lớp “trang trí” không chặn click */
 .hero-wrap .slide-overlay,
 .hero-wrap .city-lights,
 .hero-wrap .tech-ring,
@@ -315,40 +315,40 @@ html, body { max-width: 100%; overflow-x: clip; }
   pointer-events:none;
 }
 
-/* ===== Dots dÆ°á»›i vÃ²m tráº¯ng (giá»‘ng áº£nh) ===== */
+/* ===== Dots dưới vòm trắng (giống ảnh) ===== */
 #mainHero .carousel-indicators{
   position:absolute;
   left:50%;
   transform:translateX(-50%);
-                   /* Ä‘áº©y ra ngoÃ i, náº±m dÆ°á»›i vÃ²m */
+                   /* đẩy ra ngoài, nằm dưới vòm */
   gap:.35rem;
   margin:0;
-  z-index:5;                    /* ná»•i trÃªn vÃ²m */
+  z-index:5;                    /* nổi trên vòm */
 }
 #mainHero .carousel-indicators [data-bs-target]{
   width:8px;
   height:8px;
   border-radius:50%;
   border:0;
-  background:#555;             /* cháº¥m xÃ¡m */
+  background:#555;             /* chấm xám */
   opacity:.9;
   box-shadow:0 1px 2px rgba(0,0,0,.15);
 }
 #mainHero .carousel-indicators .active{
-  background:#1e6fff;          /* cháº¥m active xanh */
+  background:#1e6fff;          /* chấm active xanh */
   opacity:1;
-  box-shadow:0 0 0 3px #fff, 0 1px 3px rgba(0,0,0,.2); /* viá»n tráº¯ng ná»•i báº­t */
+  box-shadow:0 0 0 3px #fff, 0 1px 3px rgba(0,0,0,.2); /* viền trắng nổi bật */
 }
 @media (max-width:575.98px){
   #mainHero .carousel-indicators{ bottom:-20px; }
 }
 
-/* VÃ²m cong phÃ­a dÆ°á»›i hero */
+/* Vòm cong phía dưới hero */
 .hero-curve{position:absolute;left:0;right:0;bottom:-1px;height:var(--arc-height);background:transparent;overflow:hidden;pointer-events:none;z-index:2}
 .hero-curve svg{display:block;width:100%;height:100%;animation:curveBob 6s ease-in-out infinite;filter:drop-shadow(0 -8px 14px rgba(0,0,0,.18))}
 @keyframes curveBob{0%,100%{transform:translateY(0)}50%{transform:translateY(2px)}}
 
-/* Waves (náº¿u dÃ¹ng) */
+/* Waves (nếu dùng) */
 .waves-anim{position:relative;height:var(--arc-height);margin-top:-1px;overflow:hidden;z-index:1;pointer-events:none}
 .waves-anim .wave{position:absolute;left:50%;bottom:-1px;transform:translateX(-50%);width:200%;height:100%;display:block}
 .waves-anim .w1{animation:waveX 22s linear infinite, waveBob 6s ease-in-out infinite}
@@ -357,7 +357,7 @@ html, body { max-width: 100%; overflow-x: clip; }
 @keyframes waveX{from{transform:translate(-50%,0)}to{transform:translate(-60%,0)}}
 @keyframes waveBob{0%,100%{bottom:-1px}50%{bottom:2px}}
 
-/* === Hiá»‡u á»©ng Ä‘á»™ng trÃªn ÄÆ¯á»œNG CONG hero (shine + dash + sparkles) === */
+/* === Hiệu ứng động trên ĐƯỜNG CONG hero (shine + dash + sparkles) === */
 .heroCurveSvg{ display:block; width:100%; height:100%; }
 .curve-dash{
   stroke:rgba(255,255,255,.9);
@@ -368,13 +368,13 @@ html, body { max-width: 100%; overflow-x: clip; }
   filter:drop-shadow(0 0 8px rgba(255,255,255,.7));
 }
 @keyframes curveDash{ to{ stroke-dashoffset:-480; } }
-/* TÃ´n trá»ng reduce-motion */
+/* Tôn trọng reduce-motion */
 @media (prefers-reduced-motion:reduce){
   .curve-dash{ animation:none }
 }
 
 /* ==========================================================================
-   FOOTER (má»›i)
+   FOOTER (mới)
    ========================================================================== */
 .site-footer .footer-top{
   position:relative;
@@ -394,7 +394,7 @@ html, body { max-width: 100%; overflow-x: clip; }
 .site-footer .brand-sub{font-weight:800;letter-spacing:.02em;line-height:1;color:#fff}
 .site-footer .brand-slogan{font-size:.78rem;color:rgba(255,255,255,.75);margin-top:.2rem}
 
-/* Info list (Ä‘á»‹a chá»‰/Ä‘iá»‡n thoáº¡i/email) */
+/* Info list (địa chỉ/điện thoại/email) */
 .footer-info .fi{
   width:24px;
   min-width:24px;
@@ -477,7 +477,7 @@ html, body { max-width: 100%; overflow-x: clip; }
   color:#fff;
 }
 
-/* Heading cÃ³ gáº¡ch mÃ u cam */
+/* Heading có gạch màu cam */
 .footer-heading{
   position:relative;padding-top:.25rem;margin-bottom:.75rem;font-weight:800;
 }
@@ -486,7 +486,7 @@ html, body { max-width: 100%; overflow-x: clip; }
   background:#f97316;border-radius:2px;
 }
 
-/* Link list cá»™t dá»‹ch vá»¥ */
+/* Link list cột dịch vụ */
 .footer-list{list-style:none;margin:0;padding:0}
 .footer-list li{padding:.55rem 0;border-bottom:1px dashed rgba(255,255,255,.15)}
 .footer-list li:last-child{border-bottom:none}
@@ -630,7 +630,7 @@ html, body { max-width: 100%; overflow-x: clip; }
   50% { box-shadow: 0 8px 25px rgba(255, 0, 0, 0.6); }
 }
 
-/* Links & text á»Ÿ mini bar */
+/* Links & text ở mini bar */
 .site-footer .footer-link{color:rgba(255,255,255,.85);text-decoration:none}
 .site-footer .footer-link:hover{color:#fff;text-decoration:underline}
 
@@ -695,7 +695,7 @@ html, body { max-width: 100%; overflow-x: clip; }
 }
 .hotline-float:hover{ filter:brightness(.98) }
 
-/* icon trÃ²n + hiá»‡u á»©ng ripple */
+/* icon tròn + hiệu ứng ripple */
 .hl-icon{
   position:relative; width:38px; height:38px; border-radius:50%;
   display:grid; place-items:center; background:linear-gradient(180deg,#ff4d5e,#e11d2e);
@@ -703,7 +703,7 @@ html, body { max-width: 100%; overflow-x: clip; }
 }
 .hl-icon svg{ color:#fff; animation:hl-wiggle 1.2s ease-in-out infinite; transform-origin:50% 50% }
 
-/* 2 vÃ²ng ripple */
+/* 2 vòng ripple */
 .hl-icon::before, .hl-icon::after{
   content:""; position:absolute; inset:-6px; border-radius:50%;
   border:2px solid rgba(255,255,255,.55); opacity:.8;
@@ -716,13 +716,13 @@ html, body { max-width: 100%; overflow-x: clip; }
 .hl-label{ font-weight:700; font-size:.9rem; opacity:.95 }
 .hl-number{ font-weight:800; font-size:1.05rem; letter-spacing:.02em }
 
-/* mobile: chá»‰ hiá»‡n icon Ä‘á»ƒ gá»n */
+/* mobile: chỉ hiện icon để gọn */
 @media (max-width:575.98px){
   .hotline-float{ padding:.45rem; }
   .hl-text{ display:none; }
 }
 
-/* tÃ´n trá»ng ngÆ°á»i dÃ¹ng giáº£m chuyá»ƒn Ä‘á»™ng */
+/* tôn trọng người dùng giảm chuyển động */
 @media (prefers-reduced-motion:reduce){
   .hl-icon::before,.hl-icon::after,.hl-icon svg{ animation:none }
 }
@@ -743,8 +743,8 @@ html, body { max-width: 100%; overflow-x: clip; }
 
 /* ===== Partners grid (final) ===== */
 #partners{
-  padding-top:4.5rem;            /* khoáº£ng cÃ¡ch trÃªn */
-  padding-bottom:4.5rem;         /* khoáº£ng cÃ¡ch dÆ°á»›i */
+  padding-top:4.5rem;            /* khoảng cách trên */
+  padding-bottom:4.5rem;         /* khoảng cách dưới */
 }
 #partners .section-title{
   font-size:clamp(2.6rem, 6vw, 3.8rem);
@@ -773,7 +773,7 @@ html, body { max-width: 100%; overflow-x: clip; }
   #partners .partner-logo{ max-height:96px; }
 }
 
-/* ===== News: Ä‘áº¹p & Ä‘á»“ng nháº¥t áº£nh ===== */
+/* ===== News: đẹp & đồng nhất ảnh ===== */
 :root{
   --news-thumb-sm: 190px;
   --news-thumb-md: 210px;
@@ -812,7 +812,7 @@ html, body { max-width: 100%; overflow-x: clip; }
   padding:.15rem .5rem; border-radius:999px;
 }
 
-/* Fix curve dash fill = none Ä‘á»ƒ khÃ´ng bá»‹ máº£ng Ä‘en */
+/* Fix curve dash fill = none để không bị mảng đen */
 .hero-curve .curve-dash{
   fill: none !important;
   stroke: rgba(255,255,255,.9);
@@ -822,7 +822,7 @@ html, body { max-width: 100%; overflow-x: clip; }
   animation: curveDash 7s linear infinite;
   filter: drop-shadow(0 0 6px rgba(255,255,255,.55));
 }
-/* Äáº£m báº£o pháº§n ná»n cong váº«n tráº¯ng */
+/* Đảm bảo phần nền cong vẫn trắng */
 .hero-curve .curve-fill{ fill:#fff !important; }
 
 /* ===== About page ===== */
@@ -882,11 +882,11 @@ html, body { max-width: 100%; overflow-x: clip; }
   margin: 4px 0 6px 0;
 }
 
-/* ===== ABOUT: mosaic 2 trÃ¡i + 1 dá»c pháº£i ===== */
+/* ===== ABOUT: mosaic 2 trái + 1 dọc phải ===== */
 .mosaic-3{
   --gap: 14px;
-  --left-ratio: 16/10;   /* hai áº£nh ngang bÃªn trÃ¡i */
-  --right-ratio: 9/16;   /* áº£nh dá»c bÃªn pháº£i */
+  --left-ratio: 16/10;   /* hai ảnh ngang bên trái */
+  --right-ratio: 9/16;   /* ảnh dọc bên phải */
   display: grid;
   gap: var(--gap);
 }
@@ -895,13 +895,13 @@ html, body { max-width: 100%; overflow-x: clip; }
   display: block;
   border-radius: 16px;
   box-shadow: 0 10px 28px rgba(0,0,0,.12);
-  background: #f3f6f9; /* trÃ¡nh nhÃ¡y tráº¯ng */
+  background: #f3f6f9; /* tránh nháy trắng */
   object-fit: cover;
 }
 .mosaic-3 .h{ aspect-ratio: var(--left-ratio); }
 .mosaic-3 .v{ aspect-ratio: var(--right-ratio); }
 
-/* Desktop: chia 2 cá»™t (7/5), áº£nh pháº£i cao báº±ng 2 áº£nh trÃ¡i */
+/* Desktop: chia 2 cột (7/5), ảnh phải cao bằng 2 ảnh trái */
 @media (min-width: 992px){
   .mosaic-3{
     grid-template-columns: 7fr 5fr;
@@ -913,7 +913,7 @@ html, body { max-width: 100%; overflow-x: clip; }
   .mosaic-3 .v       { grid-column: 2; grid-row: 1 / span 2; height: 100%; }
 }
 
-/* ============== Layout giá»¯ nguyÃªn ============== */
+/* ============== Layout giữ nguyên ============== */
 .carousel .carousel-item{ position:relative; overflow:hidden; }
 .wheel-split{
   position:absolute; inset:0;
@@ -930,7 +930,7 @@ html, body { max-width: 100%; overflow-x: clip; }
   animation: wheelFloat 8s ease-in-out infinite, wheelGlow 6s ease-in-out infinite alternate;
 }
 
-/* ThÃªm hiá»‡u á»©ng bÃªn ngoÃ i wheel */
+/* Thêm hiệu ứng bên ngoài wheel */
 .wu-core::before,
 .wu-core::after{
   content: "";
@@ -994,7 +994,7 @@ html, body { max-width: 100%; overflow-x: clip; }
   }
 }
 
-/* ============== Ná»n & aurora (ráº¥t nháº¹, khÃ´ng che chá»¯) ============== */
+/* ============== Nền & aurora (rất nhẹ, không che chữ) ============== */
 .slide-overlay::after{
   content:""; position:absolute; inset:-8%; pointer-events:none;
   background:
@@ -1037,7 +1037,7 @@ html, body { max-width: 100%; overflow-x: clip; }
   50% { opacity: 1.2; }
 }
 
-/* ============== VÃ²ng sÃ¡ng ============== */
+/* ============== Vòng sáng ============== */
 .wheel-ultra{ width:100%; height:100% }
 .ring-title{
   font: 900 12px/1 Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial;
@@ -1057,7 +1057,7 @@ html, body { max-width: 100%; overflow-x: clip; }
   50% { stroke-width: 28; opacity: 1; }
 }
 
-/* ============== Logo & pulse (má»m) ============== */
+/* ============== Logo & pulse (mềm) ============== */
 .wu-logo{
   position:absolute; left:50%; top:50%; transform:translate(-50%,-50%);
   width: calc(var(--size)*.24); height: calc(var(--size)*.24); border-radius:50%;
@@ -1120,7 +1120,7 @@ html, body { max-width: 100%; overflow-x: clip; }
   100%{opacity:0; transform:scale(1.3)}
 }
 
-/* ============== Twinkles (ráº¥t nháº¹) ============== */
+/* ============== Twinkles (rất nhẹ) ============== */
 .wu-twinkles{ position:absolute; inset:0; pointer-events:none }
 .wu-twinkles i{
   position:absolute; width:4px; height:4px; border-radius:50%;
@@ -1155,7 +1155,7 @@ html, body { max-width: 100%; overflow-x: clip; }
   50% { opacity: 0.6; transform: scale(1.2); }
 }
 
-/* ============== CHIP â€“ Æ¯U TIÃŠN Äá»ŒC RÃ• ============== */
+/* ============== CHIP – ƯU TIÊN ĐỌC RÕ ============== */
 .ring-chips{ position:absolute; inset:0; list-style:none; margin:0; padding:0; pointer-events:none; }
 .ring-chips li{ position:absolute; left:50%; top:50%; translate:-50% -50%; }
 .ring-chips .chip{
@@ -1177,7 +1177,7 @@ html, body { max-width: 100%; overflow-x: clip; }
   cursor: pointer;
   animation: chip-float 6s ease-in-out infinite;
 }
-/* halo cá»±c má»ng phÃ­a sau Ä‘á»ƒ ná»•i card trÃªn ná»n sÃ¡ng */
+/* halo cực mỏng phía sau để nổi card trên nền sáng */
 .ring-chips .chip::after{
   content:""; position:absolute; inset:-8px; border-radius:inherit; z-index:-1;
   box-shadow: 0 14px 24px rgba(15,23,42,.20);
@@ -1188,7 +1188,7 @@ html, body { max-width: 100%; overflow-x: clip; }
   0%, 100% { transform: translateY(0px); }
   50% { transform: translateY(-2px); }
 }
-/* sheen nhá» trÃªn máº·t chip khi hover (nhÆ°ng khÃ´ng chÃ³i) */
+/* sheen nhỏ trên mặt chip khi hover (nhưng không chói) */
 .ring-chips .chip::before{
   content:""; position:absolute; inset:-25%;
   background: linear-gradient(120deg, transparent 40%, rgba(255,255,255,.6) 50%, transparent 60%);
@@ -1208,7 +1208,7 @@ html, body { max-width: 100%; overflow-x: clip; }
 }
 .ring-chips .chip:hover::after{ opacity:.22 }
 
-/* Äáº·t quanh vÃ²ng â€“ chá»¯ luÃ´n Ä‘á»©ng tháº³ng vÃ  khÃ´ng bá»‹ chá»“ng */
+/* Đặt quanh vòng – chữ luôn đứng thẳng và không bị chồng */
 .ring-chips li{
   transform:
     rotate(calc(var(--start,0deg) + (var(--k) * 360deg / var(--N))))
@@ -1216,7 +1216,7 @@ html, body { max-width: 100%; overflow-x: clip; }
     rotate(calc(-1 * (var(--start,0deg) + (var(--k) * 360deg / var(--N)))));
 }
 
-/* KÃ­ch thÆ°á»›c theo nhÃ³m ná»™i dung - tá»‘i Æ°u Ä‘á»ƒ khÃ´ng bá»‹ chá»“ng */
+/* Kích thước theo nhóm nội dung - tối ưu để không bị chồng */
 .wheel-left  .ring-chips.short .chip{ 
   --chip-width: 100px; 
   font-size: .65rem;
@@ -1230,7 +1230,7 @@ html, body { max-width: 100%; overflow-x: clip; }
   line-height: 1.15;
 }
 
-/* Tá»‘i Æ°u khoáº£ng cÃ¡ch cho tá»«ng wheel - xen káº½ Ä‘á»ƒ trÃ¡nh chá»“ng */
+/* Tối ưu khoảng cách cho từng wheel - xen kẽ để tránh chồng */
 .wheel-left .ring-chips.short li:nth-child(odd) {
   transform:
     rotate(calc(var(--start,0deg) + (var(--k) * 360deg / var(--N))))
@@ -1259,7 +1259,7 @@ html, body { max-width: 100%; overflow-x: clip; }
     rotate(calc(-1 * (var(--start,0deg) + (var(--k) * 360deg / var(--N)))));
 }
 
-/* ThÃªm hiá»‡u á»©ng hover Ä‘áº¹p hÆ¡n */
+/* Thêm hiệu ứng hover đẹp hơn */
 .ring-chips .chip{
   position: relative;
   overflow: hidden;
@@ -1288,19 +1288,19 @@ html, body { max-width: 100%; overflow-x: clip; }
   filter: brightness(1.1);
 }
 
-/* Hiá»‡u á»©ng ripple khi click */
+/* Hiệu ứng ripple khi click */
 .ring-chips .chip:active{
   transform: translateY(-2px) scale(1.02);
   transition: all .1s ease;
 }
 
-/* TÃ´n trá»ng ngÆ°á»i dÃ¹ng muá»‘n giáº£m chuyá»ƒn Ä‘á»™ng */
+/* Tôn trọng người dùng muốn giảm chuyển động */
 @media (prefers-reduced-motion: reduce) {
   .ring-sheen, .wu-aurora, .wu-pulse, .wu-twinkles i,
   .ring-chips .chip::before, .wu-logo, .wu-core, .ring-chips .chip { animation: none !important }
 }
 
-/* ThÃªm hiá»‡u á»©ng particle floating */
+/* Thêm hiệu ứng particle floating */
 .wheel-split::before{
   content: "";
   position: absolute;
@@ -1320,12 +1320,12 @@ html, body { max-width: 100%; overflow-x: clip; }
   100% { background-position: 100% 100%, -100% -100%, 50% -50%, -50% 50%; }
 }
 
-/* áº¨n hai bÃ¡nh á»Ÿ mÃ n nhá» (tuá»³ báº¡n giá»¯/áº©n) */
+/* Ẩn hai bánh ở màn nhỏ (tuỳ bạn giữ/ẩn) */
 @media (max-width: 991.98px){
   .wheel-split{ display:none; }
 }
 
-/* Responsive cho mÃ n hÃ¬nh trung bÃ¬nh */
+/* Responsive cho màn hình trung bình */
 @media (max-width: 1200px) {
   .wu-core {
     --size: clamp(340px, 32vw, 440px);
@@ -1338,7 +1338,7 @@ html, body { max-width: 100%; overflow-x: clip; }
   .wheel-right .ring-chips.long .chip { --chip-width: 130px; }
 }
 
-/* Responsive cho mÃ n hÃ¬nh nhá» */
+/* Responsive cho màn hình nhỏ */
 @media (max-width: 1400px) {
   .wheel-split {
     gap: clamp(20px, 3vw, 35px);
@@ -1348,7 +1348,7 @@ html, body { max-width: 100%; overflow-x: clip; }
   }
 }
 
-/* Responsive cho mÃ n hÃ¬nh ráº¥t nhá» */
+/* Responsive cho màn hình rất nhỏ */
 @media (max-width: 1600px) {
   .wheel-split {
     gap: clamp(18px, 2.5vw, 30px);
@@ -2186,7 +2186,7 @@ html, body { max-width: 100%; overflow-x: clip; }
 }
 
 .official-badge::before {
-    content: 'ðŸ›ï¸';
+    content: '🏛️';
     margin-right: 0.5rem;
 }
 
@@ -2514,7 +2514,7 @@ html, body { max-width: 100%; overflow-x: clip; }
 }
 
 .method-icon.whatsapp-icon::before {
-    content: 'ðŸ"±';
+    content: '??';
     position: absolute;
     top: 50%;
     left: 50%;
@@ -2736,7 +2736,7 @@ html, body { max-width: 100%; overflow-x: clip; }
 }
 
 .news-image::before {
-    content: "📰";
+    content: "??";
     font-size: 3rem;
     color: white;
     position: absolute;
@@ -3028,11 +3028,11 @@ html, body { max-width: 100%; overflow-x: clip; }
 /* Sidebar Styles */
 .article-sidebar {
     position: sticky;
-    top: 0;              /* ← bỏ offset để không bị tụt xuống so với cột trái */
+    top: 0;              /* ? b? offset d? kh�ng b? t?t xu?ng so v?i c?t tr�i */
     z-index: 100;
 }
 
-/* Khi đặt "Bài viết liên quan" trong sidebar thì bỏ margin trên để thẳng hàng */
+/* Khi d?t "B�i vi?t li�n quan" trong sidebar th� b? margin tr�n d? th?ng h�ng */
 .article-sidebar .related-posts-section {
     margin-top: 0 !important;
     padding-top: 0 !important;
@@ -3123,7 +3123,7 @@ html, body { max-width: 100%; overflow-x: clip; }
   50% { background-position: -200% 0; }
 }
 
-/* ========== Lịch công tác ========== */
+/* ========== L?ch c�ng t�c ========== */
 .schedule-wrapper { 
   background: #fff; 
   border: 1px solid #e3e6f0;
@@ -3212,24 +3212,24 @@ html, body { max-width: 100%; overflow-x: clip; }
 .auth-compact{
   display: inline-flex;
   align-items: center;
-  gap: 6px;                 /* khoảng cách giữa 2 nút */
+  gap: 6px;                 /* kho?ng c�ch gi?a 2 n�t */
 }
 
 .auth-btn{
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  white-space: nowrap;      /* luôn 1 dòng */
+  white-space: nowrap;      /* lu�n 1 d�ng */
   text-decoration: none;
-  padding: .15rem .3rem;    /* KÍCH THƯỚC CỰC NHỎ */
+  padding: .15rem .3rem;    /* K�CH THU?C C?C NH? */
   border-radius: 999px;     /* pill */
-  font-size: .7rem;         /* chữ cực nhỏ */
-  font-weight: 400;         /* font weight rất nhẹ */
+  font-size: .7rem;         /* ch? c?c nh? */
+  font-weight: 400;         /* font weight r?t nh? */
   line-height: 1;
   transition: .18s ease;
 }
 
-/* Đăng nhập: viền xanh, nền trắng */
+/* �ang nh?p: vi?n xanh, n?n tr?ng */
 .auth-btn.login{
   border: 1.5px solid #2f6feb;
   color: #2f6feb;
@@ -3239,7 +3239,7 @@ html, body { max-width: 100%; overflow-x: clip; }
   background: #eef4ff;
 }
 
-/* Đăng ký: nền cam phẳng, không gradient */
+/* �ang k�: n?n cam ph?ng, kh�ng gradient */
 .auth-btn.register{
   border: 0;
   color: #fff;
@@ -3249,7 +3249,7 @@ html, body { max-width: 100%; overflow-x: clip; }
   filter: brightness(.97);
 }
 
-/* Thu gọn thêm chút ở màn hình hẹp */
+/* Thu g?n th�m ch�t ? m�n h�nh h?p */
 @media (max-width: 1200px){
   .auth-btn{ padding: .1rem .25rem; font-size: .65rem; }
 }
@@ -3314,7 +3314,7 @@ html, body { max-width: 100%; overflow-x: clip; }
 }
 
 .breadcrumb-item + .breadcrumb-item::before {
-    content: "›";
+    content: "�";
     color: #6c757d;
 }
 
@@ -3491,7 +3491,7 @@ html, body { max-width: 100%; overflow-x: clip; }
 }
 
 .related-image::before {
-    content: "📰";
+    content: "??";
     font-size: 24px;
     color: white;
 }
@@ -3940,15 +3940,15 @@ html, body { max-width: 100%; overflow-x: clip; }
 .news-slider-container {
     position: relative;
     margin: 2rem 0;
-    overflow: hidden; /* Ngăn slide lòi ra ngoài */
+    overflow: hidden; /* Ngan slide l�i ra ngo�i */
 }
 
 .news-slider-wrapper {
     position: relative;
     overflow: hidden;
     border-radius: 12px;
-    margin: 0 -15px; /* Bù trừ padding của container */
-    padding: 0 15px; /* Tạo khoảng cách an toàn */
+    margin: 0 -15px; /* B� tr? padding c?a container */
+    padding: 0 15px; /* T?o kho?ng c�ch an to�n */
 }
 
 .news-slider {
@@ -3958,7 +3958,7 @@ html, body { max-width: 100%; overflow-x: clip; }
     width: 100%;
     cursor: grab;
     user-select: none;
-    padding: 0 0.5rem; /* Padding bên trong để tránh cắt */
+    padding: 0 0.5rem; /* Padding b�n trong d? tr�nh c?t */
 }
 
 .news-slider:active {
@@ -3969,7 +3969,7 @@ html, body { max-width: 100%; overflow-x: clip; }
     flex: 0 0 calc(33.333% - 1rem);
     min-width: 0;
     padding: 0 0.5rem;
-    box-sizing: border-box; /* Đảm bảo padding được tính trong width */
+    box-sizing: border-box; /* �?m b?o padding du?c t�nh trong width */
 }
 
 .news-slide .news-card {
@@ -4023,7 +4023,7 @@ html, body { max-width: 100%; overflow-x: clip; }
     z-index: 20;
 }
 
-/* Đảm bảo dots giữ nguyên vị trí cao */
+/* �?m b?o dots gi? nguy�n v? tr� cao */
 .about-hero .slider-dots {
     position: absolute;
     top: 30%;
@@ -4068,11 +4068,11 @@ html, body { max-width: 100%; overflow-x: clip; }
     
     .news-slider {
         gap: 1rem;
-        padding: 0 0.25rem; /* Giảm padding trên mobile */
+        padding: 0 0.25rem; /* Gi?m padding tr�n mobile */
     }
     
     .news-slider-wrapper {
-        margin: 0 -10px; /* Giảm margin trên mobile */
+        margin: 0 -10px; /* Gi?m margin tr�n mobile */
         padding: 0 10px;
     }
     
@@ -4097,12 +4097,12 @@ html, body { max-width: 100%; overflow-x: clip; }
     }
     
     .news-slider-wrapper {
-        margin: 0 -5px; /* Giảm margin trên mobile nhỏ */
+        margin: 0 -5px; /* Gi?m margin tr�n mobile nh? */
         padding: 0 5px;
     }
     
     .news-slider {
-        padding: 0 0.125rem; /* Giảm padding trên mobile nhỏ */
+        padding: 0 0.125rem; /* Gi?m padding tr�n mobile nh? */
     }
     
     .slider-btn-prev {
@@ -4171,7 +4171,7 @@ body.loaded {
     transition: all 0.3s ease;
 }
 
-/* chỉ áp cho nút CTA thay vì toàn bộ .btn */
+/* ch? �p cho n�t CTA thay v� to�n b? .btn */
 .btn-cta::before,
 .btn-orange::before {
   content: '';
@@ -4567,7 +4567,7 @@ a {
         0 0 0 1px rgba(255, 255, 255, 0.1),
         inset 0 1px 0 rgba(255, 255, 255, 0.2);
     transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-    z-index: 5; /* Đảm bảo wrapper ở trên thanh nối */
+    z-index: 5; /* �?m b?o wrapper ? tr�n thanh n?i */
 }
 
 .service-image-wrapper:hover {
@@ -4585,7 +4585,7 @@ a {
     border-radius: 50%;
     transition: all 0.6s ease;
     position: relative;
-    z-index: 10; /* Tăng z-index để hình ảnh luôn ở trên thanh nối */
+    z-index: 10; /* Tang z-index d? h�nh ?nh lu�n ? tr�n thanh n?i */
 }
 
 
@@ -4601,18 +4601,18 @@ a {
     padding: 1.15rem 1.15rem;
     margin-bottom: .9rem;
     min-height: 0;
-    background: rgba(255, 255, 255, 0.78); /* khung sáng vừa phải*/
+    background: rgba(255, 255, 255, 0.78); /* khung s�ng v?a ph?i*/
     backdrop-filter: blur(4px);
     border-radius: 16px;
-    border: 1px solid rgba(2, 6, 23, 0.06); /* viền mảnh */
+    border: 1px solid rgba(2, 6, 23, 0.06); /* vi?n m?nh */
     cursor: pointer;
     transition: all 0.25s ease;
     position: relative;
     overflow: visible;
-    box-shadow: 0 6px 18px rgba(2, 6, 23, 0.06); /* bóng nhẹ */
+    box-shadow: 0 6px 18px rgba(2, 6, 23, 0.06); /* b�ng nh? */
 }
 
-/* bỏ hiệu ứng lóe trắng để khung gọn hơn */
+/* b? hi?u ?ng l�e tr?ng d? khung g?n hon */
 .service-item::before { display: none; }
 
 .service-item:hover::before {
@@ -4623,7 +4623,7 @@ a {
     transform: translateX(6px);
 }
 
-/* Tắt hiệu ứng hover cho thanh nối */
+/* T?t hi?u ?ng hover cho thanh n?i */
 .service-item:hover .service-dot::after {
     opacity: 1;
     transform: translateY(-50%) rotate(var(--line-rot, 0deg));
@@ -4675,10 +4675,10 @@ a {
         rgba(102,126,234,0.7) 100%);
     transform-origin: right center;
     transform: translateY(-50%) rotate(var(--line-rot, 0deg));
-    z-index: 1; /* Giảm z-index để không chọc vào hình */
+    z-index: 1; /* Gi?m z-index d? kh�ng ch?c v�o h�nh */
     pointer-events: none;
     opacity: 1;
-    transition: none; /* Tắt transition để thanh nối không bị ảnh hưởng */
+    transition: none; /* T?t transition d? thanh n?i kh�ng b? ?nh hu?ng */
 }
 
 /* Fallback angles/lengths (will be overridden by JS for perfect alignment) */
@@ -4701,7 +4701,7 @@ a {
         transparent 0%,
         rgba(249, 115, 22, 0.3) 30%, 
         rgba(249, 115, 22, 0.8) 100%) !important;
-    transition: none !important; /* Tắt transition cho thanh nối cam */
+    transition: none !important; /* T?t transition cho thanh n?i cam */
 }
 
 .service-item.active .service-dot {
@@ -4715,7 +4715,7 @@ a {
     opacity: 1;
 }
 
-/* Đảm bảo thanh nối luôn ổn định */
+/* �?m b?o thanh n?i lu�n ?n d?nh */
 .service-item:hover .service-dot::after,
 .service-item.active .service-dot::after {
     opacity: 1 !important;
@@ -4913,11 +4913,11 @@ a {
 
 /* ===== Override: make CTA more visible on busy background ===== */
 /* ===== Consolidated CTA for Slide 4 (scoped & clean) ===== */
-/* === CTA: Modern gradient button với hiệu ứng đẹp === */
+/* === CTA: Modern gradient button v?i hi?u ?ng d?p === */
 #mainHero .carousel-item.slide-4 .btn-cta{
-  --cta-blue: #667eea;          /* xanh tím gradient */
-  --cta-blue-dark: #764ba2;     /* tím gradient */
-  --cta-blue-active: #5a67d8;   /* xanh đậm khi nhấn */
+  --cta-blue: #667eea;          /* xanh t�m gradient */
+  --cta-blue-dark: #764ba2;     /* t�m gradient */
+  --cta-blue-active: #5a67d8;   /* xanh d?m khi nh?n */
   background: linear-gradient(135deg, var(--cta-blue), var(--cta-blue-dark));
   color: #fff;
   border: none;
@@ -4940,7 +4940,7 @@ a {
   letter-spacing: 1px;
 }
 
-/* Hiệu ứng ripple và glow */
+/* Hi?u ?ng ripple v� glow */
 #mainHero .carousel-item.slide-4 .btn-cta::before {
   content: '';
   position: absolute;
@@ -4978,7 +4978,7 @@ a {
   opacity: 0.7;
 }
 
-/* Hover/focus: Gradient đảo ngược + hiệu ứng nổi */
+/* Hover/focus: Gradient d?o ngu?c + hi?u ?ng n?i */
 #mainHero .carousel-item.slide-4 .btn-cta:hover,
 #mainHero .carousel-item.slide-4 .btn-cta:focus,
 #mainHero .carousel-item.slide-4 .btn-cta:focus-visible{
@@ -4991,7 +4991,7 @@ a {
   color: #fff;
 }
 
-/* Active: Hiệu ứng ấn xuống */
+/* Active: Hi?u ?ng ?n xu?ng */
 #mainHero .carousel-item.slide-4 .btn-cta:active{
   background: linear-gradient(135deg, var(--cta-blue-active), var(--cta-blue));
   transform: translateY(1px) scale(0.98);
@@ -5001,49 +5001,49 @@ a {
     inset 0 1px 0 rgba(255, 255, 255, 0.1);
   color: #fff;
 }
-/* === CTA XEM CHI TIẾT: style giống Hình 1 (đậm, không glossy, không blur) === */
+/* === CTA XEM CHI TI?T: style gi?ng H�nh 1 (d?m, kh�ng glossy, kh�ng blur) === */
 .btn-orange{
-  /* màu cam */
-  --orange: #ff7a00;        /* mặt nút */
-  --orange-dark: #b56a00;   /* viền đáy/“kệ” */
-  --orange-press: #e06000;  /* khi ấn */
+  /* m�u cam */
+  --orange: #ff7a00;        /* m?t n�t */
+  --orange-dark: #b56a00;   /* vi?n d�y/�k?� */
+  --orange-press: #e06000;  /* khi ?n */
   --press-depth: 7px;
 
   position: relative;
-  background: linear-gradient(180deg, var(--orange) 0%, var(--orange) 100%); /* phẳng, không bóng */
+  background: linear-gradient(180deg, var(--orange) 0%, var(--orange) 100%); /* ph?ng, kh�ng b�ng */
   color:#fff !important;
   border:0;
   border-radius:999px;
 
-  /* chữ gọn như Hình 1 */
+  /* ch? g?n nhu H�nh 1 */
   font-weight: 800;
   font-size: .90rem;
-  letter-spacing: .1px;     /* gọn hơn */
+  letter-spacing: .1px;     /* g?n hon */
   font-stretch: 95%;
   text-transform: uppercase;
-  text-shadow: none;        /* bỏ bóng chữ */
+  text-shadow: none;        /* b? b�ng ch? */
 
   padding:.52rem 1.05rem;
 
-  /* chỉ giữ “viền đáy” đặc, KHÔNG blur */
+  /* ch? gi? �vi?n d�y� d?c, KH�NG blur */
   box-shadow: 0 var(--press-depth) 0 var(--orange-dark);
   transition: transform .12s ease, box-shadow .12s ease, filter .12s ease;
   user-select:none; -webkit-tap-highlight-color:transparent;
 }
 
-/* tắt lớp bóng glossy cũ */
+/* t?t l?p b�ng glossy cu */
 .btn-orange::before{ display:none; }
 
-/* Hover = ấn xuống: viền đáy ngắn lại, không blur */
+/* Hover = ?n xu?ng: vi?n d�y ng?n l?i, kh�ng blur */
 .btn-orange:hover,
 .btn-orange:focus{
   transform: translateY(var(--press-depth));
-  box-shadow: 0 2px 0 color-mix(in srgb, var(--orange-dark) 92%, #000 8%); /* viền đáy ngắn */
+  box-shadow: 0 2px 0 color-mix(in srgb, var(--orange-dark) 92%, #000 8%); /* vi?n d�y ng?n */
   filter: none;
   color:#fff !important;
 }
 
-/* Active = lún thêm 1px, màu mặt hơi trầm */
+/* Active = l�n th�m 1px, m�u m?t hoi tr?m */
 .btn-orange:active{
   background: linear-gradient(180deg, var(--orange-press) 0%, var(--orange-press) 100%);
   transform: translateY(calc(var(--press-depth) + 1px));
@@ -5051,20 +5051,20 @@ a {
   color:#fff !important;
 }
 
-/* giữ pill */
+/* gi? pill */
 .btn-pill{ border-radius:999px; }
 
 
 /* ================== ABOUT SECTION (final) ================== */
 
-/* Căn đỉnh cột chữ ngang mép trên cụm hình (desktop) */
+/* Can d?nh c?t ch? ngang m�p tr�n c?m h�nh (desktop) */
 @media (min-width: 992px){
   #about{ padding-top: 0; }
   #about .row{ align-items: flex-start; }
-  #about .row > [class*="col-"]:first-child{ margin-top: -8px; } /* chỉnh lên/ xuống nếu cần */
+  #about .row > [class*="col-"]:first-child{ margin-top: -8px; } /* ch?nh l�n/ xu?ng n?u c?n */
 }
 
-/* Badge GIỚI THIỆU rõ hơn */
+/* Badge GI?I THI?U r� hon */
 #about .eyebrow{
   background:#fff;
   color:#0f2f59;
@@ -5073,7 +5073,7 @@ a {
   box-shadow: 0 16px 40px rgba(15,47,89,.12);
 }
 
-/* Tiêu đề + gạch cam dài */
+/* Ti�u d? + g?ch cam d�i */
 #about .section-title{
   color:#0f2f59;
   font-weight: 800;
@@ -5085,7 +5085,7 @@ a {
 #about .section-title::after{
   content:"";
   display:block;
-  width: clamp(220px, 28vw, 520px);               /* ← độ dài gạch (tăng/giảm tại đây) */
+  width: clamp(220px, 28vw, 520px);               /* ? d? d�i g?ch (tang/gi?m t?i d�y) */
   height:3.5px;
   background:#ff7a00;
   border-radius:999px;
@@ -5093,7 +5093,7 @@ a {
   box-shadow:0 4px 12px rgba(255,122,0,.22);
 }
 
-/* Bong bóng xanh cạnh tiêu đề – đậm hơn 1 chút */
+/* Bong b�ng xanh c?nh ti�u d? � d?m hon 1 ch�t */
 #about .section-title-wrap{ position:relative; }
 #about .section-title-wrap::after{
   content:"";
@@ -5105,7 +5105,7 @@ a {
   filter:blur(.3px);
 }
 
-/* Đoạn mô tả */
+/* �o?n m� t? */
 #about .section-subtitle{
   color:#6b7280;
   font-size:clamp(1rem,.95rem + .25vw,1.125rem);
@@ -5119,29 +5119,29 @@ a {
 /* ===== HOTFIX: Restore bottom separator & stable active underline ===== */
 .navstrip{
   background: var(--secondary-color, #f8fafc);
-  border-bottom: 1px solid #e5e7eb;   /* khôi phục đường kẻ dưới navbar */
-  box-shadow: none;                    /* bỏ shadow gây ẩn line trong 1 số case */
+  border-bottom: 1px solid #e5e7eb;   /* kh�i ph?c du?ng k? du?i navbar */
+  box-shadow: none;                    /* b? shadow g�y ?n line trong 1 s? case */
 }
 
 .navstrip .navbar-nav .nav-link{
-  color:#6b7280;                       /* xám nhẹ như ảnh mẫu */
+  color:#6b7280;                       /* x�m nh? nhu ?nh m?u */
   font-weight:500;
   letter-spacing:.1px;
 }
 .navstrip .navbar-nav .nav-link:hover{ color:#111827; }
 
-/* Active: dùng inset box-shadow làm gạch cam (ổn định, không sợ overflow) */
+/* Active: d�ng inset box-shadow l�m g?ch cam (?n d?nh, kh�ng s? overflow) */
 .navstrip .navbar-nav .nav-link.active{
   color:#f97316;
   font-weight:700;
   box-shadow: inset 0 -3px 0 0 #f97316;
-  padding-bottom: calc(.9rem - 3px);   /* giữ chiều cao tổng như cũ */
+  padding-bottom: calc(.9rem - 3px);   /* gi? chi?u cao t?ng nhu cu */
 }
 
-/* Tắt bất kỳ ::after underline cũ nào (nếu còn) */
+/* T?t b?t k? ::after underline cu n�o (n?u c�n) */
 .navstrip .navbar-nav .nav-link.active::after{ content: none !important; }
 
-/* ===== NAV: Dropdown UX (hover để mở trên desktop) ===== */
+/* ===== NAV: Dropdown UX (hover d? m? tr�n desktop) ===== */
 @media (min-width: 992px){
   .navstrip .dropdown:hover > .dropdown-menu,
   .navstrip .dropdown:focus-within > .dropdown-menu{
@@ -5149,10 +5149,10 @@ a {
   }
 }
 
-/* Ẩn caret mặc định của Bootstrap để khỏi trùng với SVG */
+/* ?n caret m?c d?nh c?a Bootstrap d? kh?i tr�ng v?i SVG */
 .navstrip .dropdown-toggle::after{ display:none; }
 
-/* Hộp dropdown */
+/* H?p dropdown */
 .navstrip .dropdown-menu{
   border-radius: 12px;
   border:1px solid #e5e7eb;
@@ -5160,22 +5160,22 @@ a {
   box-shadow: 0 12px 24px rgba(2,6,23,.12);
 }
 
-/* Caret SVG cạnh chữ “Dịch vụ” */
+/* Caret SVG c?nh ch? �D?ch v?� */
 .navstrip .nav-link .chev{
   margin-left:.25rem;
   vertical-align:-1px;
   transition: transform .2s ease, color .2s ease;
-  color: currentColor;     /* tự nhận màu như chữ */
+  color: currentColor;     /* t? nh?n m�u nhu ch? */
   opacity:.85;
 }
-/* Xoay caret khi mở (Bootstrap thêm .show vào .dropdown) */
+/* Xoay caret khi m? (Bootstrap th�m .show v�o .dropdown) */
 .navstrip .dropdown.show .chev{ transform: rotate(180deg); }
-/* Xoay khi hover trên desktop */
+/* Xoay khi hover tr�n desktop */
 @media (min-width: 992px){
   .navstrip .dropdown:hover .chev{ transform: rotate(180deg); }
 }
 
-/* Màu: xám thường, cam khi hover (giống tab active) */
+/* M�u: x�m thu?ng, cam khi hover (gi?ng tab active) */
 .navstrip .dropdown .nav-link{ color:#6b7280; }
 .navstrip .dropdown:hover > .nav-link,
 .navstrip .dropdown .nav-link:focus{ color:#f97316; }
@@ -5190,7 +5190,7 @@ a {
   overflow: visible !important;
 }
 
-/* Ngăn chặn mọi hiệu ứng thụt ra thụt vào cho admin button */
+/* Ngan ch?n m?i hi?u ?ng th?t ra th?t v�o cho admin button */
 .admin-button:hover,
 .admin-button:active,
 .admin-button:focus,
@@ -5216,7 +5216,7 @@ a {
   display: none !important;
 }
 
-/* Đảm bảo icon trong admin button không bị ảnh hưởng */
+/* �?m b?o icon trong admin button kh�ng b? ?nh hu?ng */
 .admin-button i,
 .admin-button .fas,
 .admin-button .fa-solid,
@@ -5256,20 +5256,20 @@ a {
   z-index: 2 !important;
 }
 
-/* Khóa hoàn toàn hiệu ứng khi dropdown avatar mở/active/focus */
+/* Kh�a ho�n to�n hi?u ?ng khi dropdown avatar m?/active/focus */
 .header-auth .btn.dropdown-toggle,
 .header-auth .btn.dropdown-toggle.show,
 .header-auth .btn.dropdown-toggle:active,
 .header-auth .btn.dropdown-toggle:focus,
 .header-auth .btn.dropdown-toggle:hover {
-  /* GIỮ CỐ ĐỊNH kích thước – dùng đúng padding bạn đang xài ở header */
+  /* GI? C? �?NH k�ch thu?c � d�ng d�ng padding b?n dang x�i ? header */
   padding: .35rem .9rem !important;
   border-width: 0 !important;
   transform: none !important;
   scale: 1 !important;
   box-shadow: none !important;
   outline: none !important;
-  overflow: hidden !important; /* chặn pseudo-element tràn */
+  overflow: hidden !important; /* ch?n pseudo-element tr�n */
   width: auto !important;
   height: auto !important;
   min-width: auto !important;
@@ -5278,7 +5278,7 @@ a {
   max-height: none !important;
 }
 
-/* Nếu còn ripple (::before/::after) ở nơi khác, triệt hẳn tại đây */
+/* N?u c�n ripple (::before/::after) ? noi kh�c, tri?t h?n t?i d�y */
 .header-auth .btn.dropdown-toggle::before,
 .header-auth .btn.dropdown-toggle.show::before,
 .header-auth .btn.dropdown-toggle:active::before,
@@ -5301,7 +5301,7 @@ a {
   display: none !important;
 }
 
-/* Đảm bảo avatar chip không bị ảnh hưởng bởi bất kỳ hiệu ứng nào */
+/* �?m b?o avatar chip kh�ng b? ?nh hu?ng b?i b?t k? hi?u ?ng n�o */
 .avatar-chip,
 .avatar-chip *,
 .avatar-chip .btn,
@@ -5314,7 +5314,7 @@ a {
   height: auto !important;
 }
 
-/* Đặc biệt fix cho admin button với tất cả các trạng thái */
+/* �?c bi?t fix cho admin button v?i t?t c? c�c tr?ng th�i */
 .admin-button.btn,
 .admin-button.btn-light,
 .admin-button.btn.rounded-pill {
@@ -5339,7 +5339,7 @@ a {
   border: 1px solid #e2e8f0 !important;
 }
 
-/* Override tất cả các hiệu ứng Bootstrap có thể gây phóng to */
+/* Override t?t c? c�c hi?u ?ng Bootstrap c� th? g�y ph�ng to */
 .header-auth .btn:not(:disabled):not(.disabled):active,
 .header-auth .btn:not(:disabled):not(.disabled).active,
 .header-auth .btn:not(:disabled):not(.disabled):focus,
@@ -5350,7 +5350,7 @@ a {
   outline: none !important;
 }
 
-/* Đặc biệt fix cho nút rounded-pill trong header */
+/* �?c bi?t fix cho n�t rounded-pill trong header */
 .header-auth .btn.rounded-pill {
   transition: none !important;
   transform: none !important;
@@ -5531,7 +5531,7 @@ a {
     margin-bottom: 0.75rem;
 }
 
-/* ===== REPLY STYLES - Giống Reddit với cấu trúc rõ ràng ===== */
+/* ===== REPLY STYLES - Gi?ng Reddit v?i c?u tr�c r� r�ng ===== */
 .replies-section {
     margin-top: 0.5rem;
     margin-left: 1.5rem;
@@ -5744,7 +5744,7 @@ a {
     user-select: none !important;
 }
 
-/* Nếu muốn chắc chắn override chiều cao khi nằm trong .ratio */
+/* N?u mu?n ch?c ch?n override chi?u cao khi n?m trong .ratio */
 .ratio > .new-tag {
     height: auto !important;
     width: auto !important;
@@ -5887,7 +5887,7 @@ a {
     position: relative;
 }
 
-/* ===================== ĐIỀU KHIỂN BÀI VIẾT ===================== */
+/* ===================== �I?U KHI?N B�I VI?T ===================== */
 
 /* Font Size Control Modern Style */
 .font-size-control-modern {
@@ -5900,6 +5900,8 @@ a {
     border: 1px solid #e0e0e0;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
     transition: all 0.3s ease;
+    height: 48px;
+    flex-wrap: nowrap;
 }
 
 .font-size-control-modern:hover {
@@ -5918,14 +5920,15 @@ a {
     display: flex;
     align-items: center;
     gap: 4px;
+    height: 32px;
 }
 
 .font-size-btn {
-    width: 28px;
-    height: 28px;
+    width: 32px;
+    height: 32px;
     border: 1px solid #ddd;
     background: white;
-    border-radius: 4px;
+    border-radius: 6px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -5935,6 +5938,8 @@ a {
     cursor: pointer;
     transition: all 0.2s ease;
     outline: none;
+    min-width: 32px;
+    flex-shrink: 0;
 }
 
 .font-size-btn:hover {
@@ -5954,6 +5959,37 @@ a {
 
 .font-size-btn:last-child {
     font-size: 16px;
+}
+
+/* Action buttons - đảm bảo kích thước bằng nhau */
+.font-size-control-modern .btn {
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+    min-width: 32px;
+    flex-shrink: 0;
+    margin: 0;
+    vertical-align: middle;
+}
+
+.font-size-control-modern .btn i {
+    font-size: 14px;
+}
+
+/* Đảm bảo tất cả elements căn chỉnh đều */
+.font-size-control-modern > * {
+    display: flex;
+    align-items: center;
+    height: 32px;
+}
+
+.font-size-control-modern .d-flex {
+    height: 32px;
+    align-items: center;
 }
 
 /* Accessibility Controls Container */
@@ -6093,13 +6129,38 @@ a {
     }
     
     .font-size-control-modern {
-        flex-direction: column;
-        align-items: flex-start;
+        flex-direction: row;
+        align-items: center;
         gap: 8px;
+        flex-wrap: wrap;
+        justify-content: center;
+        height: 44px;
     }
     
     .font-size-buttons {
-        align-self: center;
+        display: flex;
+        gap: 4px;
+        height: 30px;
+    }
+    
+    .font-size-control-modern .btn {
+        width: 30px;
+        height: 30px;
+        min-width: 30px;
+    }
+    
+    .font-size-btn {
+        width: 30px;
+        height: 30px;
+        min-width: 30px;
+    }
+    
+    .font-size-control-modern > * {
+        height: 30px;
+    }
+    
+    .font-size-control-modern .d-flex {
+        height: 30px;
     }
 }
 
@@ -6269,7 +6330,7 @@ a {
     color: white;
 }
 
-/* Responsive cho điều khiển bài viết */
+/* Responsive cho di?u khi?n b�i vi?t */
 @media (max-width: 768px) {
     .article-controls {
         padding: 15px;
@@ -6327,4 +6388,152 @@ a {
 /* Override Bootstrap ratio height for media elements only */
 .ratio > img, .ratio > video, .ratio > iframe, .ratio > picture {
     height: 100% !important;
+}
+
+/* ============================
+   NAVIGATION LEFT ALIGNMENT
+   ============================ */
+
+/* Can ch?nh menu v?i logo */
+.nav-left {
+  margin-left: 0;
+  padding-left: 0;
+}
+
+/* �?m b?o menu b?t d?u t? b�n tr�i */
+.navbar-collapse .d-flex {
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Kho?ng c�ch gi?a menu v� auth section */
+.navbar-collapse .nav-left {
+  margin-right: auto;
+}
+
+/* ====== GOV CONTACT — tone trang trọng, trắng trên nền dịu ====== */
+:root{
+  --gov-surface: #f6f8fb;
+  --gov-border: #e6e9f2;
+  --gov-shadow: 0 10px 28px rgba(25, 51, 102, .08);
+  --gov-primary: #184a99;     /* xanh hải quân */
+  --gov-primary-2: #0f3677;   /* xanh sâu */
+  --gov-accent: #f2c94c;      /* vàng dịu để nhấn */
+  --gov-text: #1f2937;        /* xám than */
+  --gov-muted: #667085;
+
+  /* màu thương hiệu cho vòng icon */
+  --brand-hotline:   #1fb981;
+  --brand-email:     #8a5cff;
+  --brand-messenger: #1877f2;
+  --brand-zalo:      #0068ff;
+}
+
+/* nền section */
+.section-gov {
+  background: var(--gov-surface);
+  position: relative;
+}
+.section-gov::after{ /* họa tiết nhẹ */
+  content:"";
+  position:absolute; inset:0;
+  background:
+    radial-gradient(800px 300px at 120% -10%, rgba(24,74,153,.06), transparent 40%),
+    radial-gradient(700px 280px at -10% 120%, rgba(15,54,119,.05), transparent 42%);
+  pointer-events:none;
+}
+
+/* —— Card chung —— */
+.gov-card{
+  position:relative;
+  display:flex; flex-direction:column;
+  background:#fff;
+  border-radius:18px;
+  padding:24px 22px;
+  border:1px solid var(--gov-border);
+  box-shadow: var(--gov-shadow);
+  height:100%;
+  transition: transform .18s ease, box-shadow .18s ease;
+  color: var(--gov-text);
+}
+.gov-card:hover{
+  transform: translateY(-2px);
+  box-shadow: 0 16px 40px rgba(10,40,90,.12);
+}
+
+/* Border gradient tinh tế */
+.gov-card::before{
+  content:"";
+  position:absolute; inset:0; border-radius:18px; padding:1px;
+  background: linear-gradient(135deg, rgba(24,74,153,.35), rgba(15,54,119,.15));
+  -webkit-mask: 
+    linear-gradient(#000 0 0) content-box, 
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor; mask-composite: exclude;
+  pointer-events:none;
+}
+
+/* icon hộp kính mờ + vòng thương hiệu */
+.gov-icon{
+  width:68px; height:68px; border-radius:16px;
+  display:flex; align-items:center; justify-content:center;
+  background: rgba(24,74,153,.06);
+  border: 1px solid var(--gov-border);
+  backdrop-filter: blur(4px);
+  box-shadow: inset 0 -8px 18px rgba(24,74,153,.06);
+  margin-bottom:14px; position:relative;
+}
+.gov-icon i{ font-size:28px; color: var(--gov-primary); }
+.gov-icon .ring{
+  position:absolute; inset:-5px; border-radius:18px; pointer-events:none;
+}
+.ring-hotline   { box-shadow: 0 0 0 2px var(--brand-hotline) inset; }
+.ring-email     { box-shadow: 0 0 0 2px var(--brand-email) inset; }
+.ring-messenger { box-shadow: 0 0 0 2px var(--brand-messenger) inset; }
+.ring-zalo      { box-shadow: 0 0 0 2px var(--brand-zalo) inset; }
+
+/* typographic */
+.gov-ttl{ font-size:1.25rem; font-weight:700; letter-spacing:.2px; margin:4px 0 6px; }
+.gov-desc{ color: var(--gov-muted); margin-bottom:18px; }
+
+/* nút pill hành động */
+.pill-btn{
+  display:inline-flex; align-items:center; gap:8px;
+  border:1.5px solid #cfd6e6; color:#1f2a44;
+  border-radius:999px; padding:10px 16px; font-weight:600;
+  background: #fff;
+  transition: background .18s, border-color .18s, color .18s, transform .18s;
+}
+.pill-btn:hover{ background:#f1f5ff; border-color:#b8c5e6; color:#0f2f6b; transform: translateY(-1px); }
+
+/* badge góc phải trên (24/7) */
+.soft-badge{
+  position:absolute; top:12px; right:12px; font-size:.75rem;
+  padding:6px 10px; border-radius:999px;
+  background:#fff; color:#5b4b00; 
+  border:1px solid #f2de8a; box-shadow: var(--gov-shadow);
+}
+
+/* —— List thông tin đơn vị —— */
+.info-panel{ padding:22px; }
+.info-ttl{ font-weight:800; color:var(--gov-primary); font-size:1.1rem; margin-bottom:12px; }
+.info-item{
+  display:flex; align-items:flex-start; gap:12px;
+  background:#fff; border:1px solid var(--gov-border);
+  border-radius:14px; padding:14px;
+  box-shadow: var(--gov-shadow); margin-bottom:12px;
+}
+.info-item .ic{
+  width:40px; height:40px; border-radius:10px;
+  background: linear-gradient(135deg, #eaf1ff, #f4f7ff);
+  display:flex; align-items:center; justify-content:center;
+  color: var(--gov-primary-2); border:1px solid var(--gov-border);
+}
+.info-item .k{ font-size:.75rem; text-transform:uppercase; color:#6b7385; font-weight:700; letter-spacing:.4px; }
+.info-item .v{ font-weight:600; color:#1f2a44; }
+
+/* responsive */
+@media (max-width: 575.98px){
+  .gov-card{ padding:20px 18px; }
+  .gov-icon{ width:60px; height:60px; border-radius:14px; }
 }

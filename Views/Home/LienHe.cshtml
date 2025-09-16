@@ -97,58 +97,47 @@
             </div>
             
             <div class="col-lg-4">
-                <div class="contact-info">
-                    <div class="contact-card">
-                        <h4 class="contact-title mb-4">Cục Chuyển đổi số Thông tin miền Nam</h4>
-                        
-                        <div class="contact-item">
-                            <div class="contact-icon">
-                                <i class="fas fa-location-dot"></i>
-                            </div>
-                            <div class="contact-details">
-                                <h6>Địa chỉ</h6>
-                                <p>Số 115 Trần Hưng Đạo, Quận 1, TP. Hồ Chí Minh</p>
-                            </div>
+                <!-- Bảng thông tin đơn vị - Style trang trọng -->
+                <div class="gov-card info-panel">
+                    <div class="info-ttl">Cục Chuyển đổi số Thông tin miền Nam</div>
+
+                    <div class="info-item">
+                        <div class="ic"><i class="bi bi-geo-alt"></i></div>
+                        <div>
+                            <div class="k">Địa chỉ</div>
+                            <div class="v">Số 115 Trần Hưng Đạo, Quận 1, TP. Hồ Chí Minh</div>
                         </div>
-                        
-                        <div class="contact-item">
-                            <div class="contact-icon">
-                                <i class="fas fa-id-card"></i>
-                            </div>
-                            <div class="contact-details">
-                                <h6>Mã đơn vị</h6>
-                                <p>CDS-001</p>
-                            </div>
+                    </div>
+
+                    <div class="info-item">
+                        <div class="ic"><i class="bi bi-hash"></i></div>
+                        <div>
+                            <div class="k">Mã đơn vị</div>
+                            <div class="v">CDS-001</div>
                         </div>
-                        
-                        <div class="contact-item">
-                            <div class="contact-icon">
-                                <i class="fas fa-phone"></i>
-                            </div>
-                            <div class="contact-details">
-                                <h6>Hotline</h6>
-                                <p>0378695597</p>
-                            </div>
+                    </div>
+
+                    <div class="info-item">
+                        <div class="ic"><i class="bi bi-telephone"></i></div>
+                        <div>
+                            <div class="k">Hotline</div>
+                            <div class="v">0378695597</div>
                         </div>
-                        
-                        <div class="contact-item">
-                            <div class="contact-icon">
-                                <i class="fas fa-envelope"></i>
-                            </div>
-                            <div class="contact-details">
-                                <h6>Email</h6>
-                                <p>luanha2003@gmail.com</p>
-                            </div>
+                    </div>
+
+                    <div class="info-item">
+                        <div class="ic"><i class="bi bi-envelope"></i></div>
+                        <div>
+                            <div class="k">Email</div>
+                            <div class="v">luanha2003@gmail.com</div>
                         </div>
-                        
-                        <div class="contact-item">
-                            <div class="contact-icon">
-                                <i class="fas fa-clock"></i>
-                            </div>
-                            <div class="contact-details">
-                                <h6>Giờ làm việc</h6>
-                                <p>8h30 – 17h30 từ Thứ 2 – Thứ 6, Từ 8h30 – 12h Thứ 7, Chủ Nhật nghỉ</p>
-                            </div>
+                    </div>
+
+                    <div class="info-item">
+                        <div class="ic"><i class="bi bi-clock-history"></i></div>
+                        <div>
+                            <div class="k">Giờ làm việc</div>
+                            <div class="v">8h30–17h30 (Thứ 2–6); 8h30–12h (Thứ 7); CN nghỉ</div>
                         </div>
                     </div>
                 </div>
@@ -248,63 +237,70 @@
             <p class="text-muted">Chọn phương thức thuận tiện nhất cho bạn</p>
         </div>
         
-        <div class="row g-4">
-            <div class="col-lg-3">
-                <div class="contact-method">
-                    <div class="method-icon">
-                        <img src="/media/PHONE.png" alt="Hotline" class="method-image" />
-                    </div>
-                    <h5>Hotline</h5>
-                    <p>Gọi trực tiếp để được tư vấn ngay</p>
-                    <a href="tel:0378695597" class="btn">
-                        <i class="fas fa-phone me-2"></i>
-                        0378695597
-                    </a>
-                </div>
-            </div>
-            
-            <div class="col-lg-3">
-                <div class="contact-method">
-                    <div class="method-icon">
-                        <img src="/media/MAIL.png" alt="Email" class="method-image" />
-                    </div>
-                    <h5>Email</h5>
-                    <p>Gửi email chi tiết về dự án</p>
-                    <a href="mailto:luanha2003@gmail.com" class="btn">
-                        <i class="fas fa-envelope me-2"></i>
-                        Gửi Email
-                    </a>
-                </div>
-            </div>
-            
-            <div class="col-lg-3">
-                <div class="contact-method">
-                    <div class="method-icon">
-                        <img src="/media/MES.png" alt="Messenger" class="method-image" />
-                    </div>
-                    <h5>Messenger</h5>
-                    <p>Chat trực tiếp qua Facebook</p>
-                    <a href="#" class="btn">
-                        <i class="fab fa-facebook-messenger me-2"></i>
-                        Chat ngay
-                    </a>
-                </div>
-            </div>
+        <!-- Khối 4 kênh liên hệ - Style trang trọng -->
+        <section class="section-gov py-5">
+            <div class="container-xxl">
+                <div class="row g-4">
 
-            <div class="col-lg-3">
-                <div class="contact-method">
-                    <div class="method-icon">
-                        <img src="/media/WHATSAPP.png" alt="WhatsApp" class="method-image" />
+                    <!-- 1) Hotline -->
+                    <div class="col-12 col-md-6 col-lg-3">
+                        <a href="tel:0378695597" class="gov-card text-decoration-none" aria-label="Gọi đường dây nóng">
+                            <span class="soft-badge">Trực 24/7</span>
+                            <div class="gov-icon">
+                                <span class="ring ring-hotline"></span>
+                                <i class="bi bi-telephone-outbound"></i>
+                            </div>
+                            <div class="gov-ttl">Đường dây nóng</div>
+                            <div class="gov-desc">Gọi trực tiếp để được hỗ trợ</div>
+                            <span class="pill-btn"><i class="bi bi-telephone"></i> 0378 695 597</span>
+                        </a>
                     </div>
-                    <h5>WhatsApp</h5>
-                    <p>Nhắn tin qua WhatsApp</p>
-                    <a href="https://wa.me/84378695597" class="btn">
-                        <i class="fab fa-whatsapp me-2"></i>
-                        WhatsApp
-                    </a>
+
+                    <!-- 2) Email -->
+                    <div class="col-12 col-md-6 col-lg-3">
+                        <a href="mailto:luanha2003@gmail.com" class="gov-card text-decoration-none" aria-label="Gửi thư điện tử">
+                            <div class="gov-icon">
+                                <span class="ring ring-email"></span>
+                                <i class="bi bi-envelope-paper"></i>
+                            </div>
+                            <div class="gov-ttl">Hòm thư điện tử</div>
+                            <div class="gov-desc">Gửi email chi tiết về nội dung</div>
+                            <span class="pill-btn"><i class="bi bi-envelope"></i> Gửi Email</span>
+                            <small class="d-block mt-2 text-secondary">Tiếp nhận giờ hành chính</small>
+                        </a>
+                    </div>
+
+                    <!-- 3) Messenger -->
+                    <div class="col-12 col-md-6 col-lg-3">
+                        <a href="https://m.me/tenfanpage" target="_blank" rel="noopener" class="gov-card text-decoration-none" aria-label="Chat qua Facebook Messenger">
+                            <div class="gov-icon">
+                                <span class="ring ring-messenger"></span>
+                                <i class="bi bi-messenger"></i>
+                            </div>
+                            <div class="gov-ttl">Hộp thư Facebook</div>
+                            <div class="gov-desc">Trao đổi nhanh trên Messenger</div>
+                            <span class="pill-btn"><i class="bi bi-chat-dots"></i> Chat ngay</span>
+                            <small class="d-block mt-2 text-secondary">Kênh bổ trợ không chính thức</small>
+                        </a>
+                    </div>
+
+                    <!-- 4) Zalo -->
+                    <div class="col-12 col-md-6 col-lg-3">
+                        <a href="https://zalo.me/oa-id" target="_blank" rel="noopener" class="gov-card text-decoration-none" aria-label="Nhắn tin qua Zalo">
+                            <div class="gov-icon">
+                                <span class="ring ring-zalo"></span>
+                                <i class="bi bi-chat-right-dots"></i>
+                            </div>
+                            <div class="gov-ttl">Zalo</div>
+                            <div class="gov-desc">Nhắn tin và gửi tệp nhanh</div>
+                            <span class="pill-btn"><i class="bi bi-send"></i> Mở Zalo</span>
+                            <small class="d-block mt-2 text-secondary">Hỗ trợ ngoài giờ</small>
+                        </a>
+                    </div>
+
                 </div>
             </div>
-            </div>
+        </section>
         </div>
     </div>
 </section>
