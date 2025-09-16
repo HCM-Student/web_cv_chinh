@@ -110,6 +110,17 @@
                 </div>
             </div>
         </div>
+        <div class="col-md-3">
+            <div class="stat-card">
+                <div class="stat-icon bg-success">
+                    <i class="fas fa-user-tie"></i>
+                </div>
+                <div class="stat-content">
+                    <h3 class="stat-number">@Model.Count(u => u.VaiTro == "Staff")</h3>
+                    <p class="stat-label">Cán bộ nhân viên</p>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- Search and Filter -->
@@ -211,6 +222,12 @@
                                     {
                                         <span class="badge bg-warning">
                                             <i class="fas fa-crown me-1"></i>Quản trị viên
+                                        </span>
+                                    }
+                                    else if (item.VaiTro == "Staff")
+                                    {
+                                        <span class="badge bg-success">
+                                            <i class="fas fa-user-tie me-1"></i>Cán bộ nhân viên
                                         </span>
                                     }
                                     else

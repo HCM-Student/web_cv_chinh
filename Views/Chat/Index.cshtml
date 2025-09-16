@@ -1,0 +1,283 @@
+@model IEnumerable<WEB_CV.Models.ChatMessage>
+@{
+  Layout = "_Layout";
+  var meId = (string)ViewBag.MeId;
+  var meName = (string)ViewBag.MeName;
+  var room = (string)ViewBag.Room;
+  var users = (IEnumerable<dynamic>)ViewBag.Users;
+}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+
+<div class="container-xxl py-3">
+  <div class="row g-3">
+    <aside class="col-lg-3">
+      <div class="card shadow-sm">
+        <div class="card-header fw-bold">Kênh</div>
+        <div class="list-group list-group-flush">
+          <a class="list-group-item list-group-item-action @(room=="general"?"active":"")"
+             href="@Url.Action("Index", new{room="general"})"># general</a>
+        </div>
+      </div>
+
+      <div class="card shadow-sm mt-3">
+        <div class="card-header fw-bold">Nhắn riêng</div>
+        <div class="list-group list-group-flush small">
+          @foreach (var u in users)
+          {
+            if (u.Id == meId) { continue; }
+            <a class="list-group-item list-group-item-action dm-open @(room == "dm:" + (string.CompareOrdinal(meId, u.Id) < 0 ? meId + ":" + u.Id : u.Id + ":" + meId) ? "active" : "")" 
+               data-id="@u.Id" data-name="@u.UserName" href="javascript:void(0)">
+              <i class="bi bi-person-circle me-2"></i>@u.UserName
+              <span class="badge bg-primary ms-auto" id="unread-@u.Id" style="display:none;">0</span>
+            </a>
+          }
+        </div>
+      </div>
+    </aside>
+
+    <section class="col-lg-9">
+      <div class="card shadow-sm chat-card">
+        <div class="card-header d-flex justify-content-between align-items-center">
+          <div class="fw-bold">
+            @if (room.StartsWith("dm:"))
+            {
+              <i class="bi bi-person-circle me-2"></i>@ViewBag.RoomDisplayName
+            }
+            else
+            {
+              <text># @ViewBag.RoomDisplayName</text>
+            }
+          </div>
+          <div class="small text-muted" id="typing">
+            <span class="typing-indicator" style="display:none;">
+              <i class="bi bi-three-dots"></i> Đang nhập...
+            </span>
+          </div>
+        </div>
+          <div class="chat-body" id="messages">
+            @foreach (var m in Model)
+            {
+              <div class="msg @(m.SenderId==meId?"me":"other")">
+                @if (m.SenderId != meId)
+                {
+                  <div class="msg-avatar">
+                    <i class="bi bi-person-circle"></i>
+                  </div>
+                }
+                <div class="msg-content">
+                  @if (m.SenderId != meId)
+                  {
+                    <div class="msg-name">@m.SenderName</div>
+                  }
+                  <div class="msg-bubble">
+                    <div class="msg-text">@m.Content</div>
+                    <div class="msg-time">
+                      <span class="time">@m.CreatedAt.ToLocalTime().ToString("HH:mm")</span>
+                      @if (m.SenderId == meId)
+                      {
+                        <span class="status">
+                          <i class="bi bi-check2-all text-primary"></i>
+                          <span class="status-text">Đã xem</span>
+                        </span>
+                      }
+                    </div>
+                  </div>
+                </div>
+                @if (m.SenderId == meId)
+                {
+                  <div class="msg-avatar">
+                    <i class="bi bi-person-circle"></i>
+                  </div>
+                }
+              </div>
+            }
+          </div>
+        <div class="chat-input">
+          <input id="msg" class="form-control" placeholder="Nhập tin nhắn..." />
+          <button id="send" class="btn btn-primary"><i class="bi bi-send"></i></button>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+
+@section Styles{
+<style>
+.chat-card{height:72vh;display:flex;flex-direction:column}
+.chat-body{flex:1;overflow:auto;padding:1rem;background:#f8fafc}
+
+/* Message container */
+.msg{display:flex;margin-bottom:1rem;align-items:flex-end;gap:0.5rem}
+.msg.me{flex-direction:row-reverse;justify-content:flex-start}
+.msg.other{flex-direction:row;justify-content:flex-start}
+
+/* Avatar */
+.msg-avatar{width:32px;height:32px;border-radius:50%;background:#e9ecef;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.msg-avatar i{font-size:1.2rem;color:#6c757d}
+
+/* Message content */
+.msg-content{max-width:70%;min-width:120px}
+.msg-name{font-size:0.75rem;color:#6c757d;margin-bottom:0.25rem;font-weight:500}
+
+/* Message bubble */
+.msg-bubble{background:#fff;border:1px solid #e5e7eb;border-radius:1rem;padding:0.75rem 1rem;position:relative;box-shadow:0 1px 3px rgba(0,0,0,0.1);transition:all 0.2s ease}
+.msg.me .msg-bubble{background:linear-gradient(135deg, #007bff, #0056b3);color:#fff;border-color:#007bff;margin-left:auto;box-shadow:0 2px 8px rgba(0,123,255,0.3)}
+.msg.other .msg-bubble{background:#fff;color:#333;border-color:#e5e7eb;box-shadow:0 1px 3px rgba(0,0,0,0.1)}
+
+/* Hover effects */
+.msg-bubble:hover{transform:translateY(-1px);box-shadow:0 2px 8px rgba(0,0,0,0.15)}
+.msg.me .msg-bubble:hover{box-shadow:0 4px 12px rgba(0,123,255,0.4)}
+
+/* Message text */
+.msg-text{word-wrap:break-word;line-height:1.4}
+
+/* Message time and status */
+.msg-time{display:flex;justify-content:space-between;align-items:center;margin-top:0.5rem;font-size:0.7rem;opacity:0.8}
+.msg.me .msg-time{color:rgba(255,255,255,0.8)}
+.msg.other .msg-time{color:#6c757d}
+
+.status{display:flex;align-items:center;gap:0.25rem}
+.status i{font-size:0.8rem}
+.status-text{font-size:0.65rem}
+
+/* Chat input */
+.chat-input{display:flex;gap:.5rem;padding:.75rem;border-top:1px solid #eee;background:#fff;align-items:center;box-shadow:0 -2px 10px rgba(0,0,0,0.1)}
+.chat-input input{flex:1;border-radius:1.5rem;border:1px solid #ddd;padding:0.75rem 1rem;outline:none;transition:all 0.2s ease;font-size:0.9rem}
+.chat-input input:focus{border-color:#007bff;box-shadow:0 0 0 3px rgba(0,123,255,0.1)}
+.chat-input button{border-radius:50%;width:40px;height:40px;display:flex;align-items:center;justify-content:center;background:#007bff;border:none;color:white;transition:all 0.2s ease}
+.chat-input button:hover{background:#0056b3;transform:scale(1.05)}
+.chat-input button:active{transform:scale(0.95)}
+
+/* Typing indicator */
+.typing-indicator{color:#007bff;font-style:italic;animation:pulse 1.5s infinite}
+@@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.5}}
+
+/* Scrollbar */
+.chat-body::-webkit-scrollbar{width:6px}
+.chat-body::-webkit-scrollbar-track{background:#f1f1f1;border-radius:3px}
+.chat-body::-webkit-scrollbar-thumb{background:#c1c1c1;border-radius:3px}
+.chat-body::-webkit-scrollbar-thumb:hover{background:#a8a8a8}
+
+/* Animation for new messages */
+.msg{animation:slideIn 0.3s ease-out}
+@@keyframes slideIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+</style>
+}
+@section Scripts{
+<script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/8.0.0/signalr.min.js"></script>
+<script>
+const meId = "@meId", room = "@room";
+const hub = new signalR.HubConnectionBuilder().withUrl("/hubs/chat").build();
+const list = document.getElementById("messages");
+const input = document.getElementById("msg");
+
+hub.on("message", m => append(m.senderName, m.content, m.senderId === meId, m.createdAt));
+hub.on("dm", m => {
+  if (m.toUserId === meId || m.senderId === meId) {
+    // Kiểm tra xem có phải room DM hiện tại không
+    const currentDmRoom = room.startsWith("dm:") ? room : null;
+    const messageDmRoom = "dm:" + (m.senderId < m.toUserId ? m.senderId + ":" + m.toUserId : m.toUserId + ":" + m.senderId);
+    
+    if (currentDmRoom === messageDmRoom) {
+      append(m.senderName, m.content, m.senderId === meId, m.createdAt);
+    }
+  }
+});
+hub.start().then(() => hub.invoke("JoinRoom", room));
+
+document.getElementById("send").onclick = send;
+input.addEventListener("keydown", e => { 
+  if (e.key === "Enter") send(); 
+  else {
+    // Show typing indicator
+    const typing = document.querySelector('.typing-indicator');
+    if (typing) typing.style.display = 'inline';
+    
+    // Hide typing indicator after 2 seconds
+    clearTimeout(window.typingTimeout);
+    window.typingTimeout = setTimeout(() => {
+      if (typing) typing.style.display = 'none';
+    }, 2000);
+  }
+});
+
+document.querySelectorAll(".dm-open").forEach(a=>{
+  a.addEventListener("click", ()=> {
+    const to = a.dataset.id;
+    const name = a.dataset.name;
+    const dmRoom = "dm:" + (meId < to ? meId + ":" + to : to + ":" + meId);
+    
+    // Chuyển đến room chat riêng tư
+    window.location.href = "@Url.Action("Index")" + "?room=" + encodeURIComponent(dmRoom);
+  });
+});
+
+function send(){
+  const text = input.value.trim();
+  if (!text) return;
+  
+  // Hide typing indicator
+  const typing = document.querySelector('.typing-indicator');
+  if (typing) typing.style.display = 'none';
+  
+  // Gửi tin nhắn đến room hiện tại
+  if (room.startsWith("dm:")) {
+    // Chat riêng tư - tìm user ID từ room
+    const parts = room.replace("dm:", "").split(":");
+    const otherUserId = parts[0] === meId ? parts[1] : parts[0];
+    hub.invoke("SendDirect", otherUserId, text);
+  } else {
+    // Chat chung
+    hub.invoke("SendToRoom", room, text);
+  }
+  
+  input.value = "";
+}
+function append(name, content, mine, createdAt){
+  const item = document.createElement("div");
+  item.className = "msg" + (mine ? " me" : " other");
+  
+  if (mine) {
+    item.innerHTML = `
+      <div class="msg-content">
+        <div class="msg-bubble">
+          <div class="msg-text"></div>
+          <div class="msg-time">
+            <span class="time">${formatTime(createdAt)}</span>
+            <span class="status">
+              <i class="bi bi-check2-all text-primary"></i>
+              <span class="status-text">Đã xem</span>
+            </span>
+          </div>
+        </div>
+      </div>
+      <div class="msg-avatar">
+        <i class="bi bi-person-circle"></i>
+      </div>
+    `;
+  } else {
+    item.innerHTML = `
+      <div class="msg-avatar">
+        <i class="bi bi-person-circle"></i>
+      </div>
+      <div class="msg-content">
+        <div class="msg-name">${name}</div>
+        <div class="msg-bubble">
+          <div class="msg-text"></div>
+          <div class="msg-time">
+            <span class="time">${formatTime(createdAt)}</span>
+          </div>
+        </div>
+      </div>
+    `;
+  }
+  
+  item.querySelector(".msg-text").textContent = content;
+  list.appendChild(item);
+  list.scrollTop = list.scrollHeight;
+}
+function formatTime(iso){
+  try{ return new Date(iso).toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'}); }catch{ return ""; }
+}
+</script>
+}

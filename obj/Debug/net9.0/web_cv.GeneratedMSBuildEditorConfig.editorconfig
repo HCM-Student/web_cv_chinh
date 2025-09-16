@@ -228,6 +228,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQmluaEx1YW5cTXlDb21tZW50cy5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/acer/Downloads/web_cv_chinh/Views/Chat/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQ2hhdFxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/acer/Downloads/web_cv_chinh/Views/Home/BaoGia.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxCYW9HaWEuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
@@ -256,10 +260,6 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/acer/Downloads/web_cv_chinh/Views/Home/Services.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxTZXJ2aWNlcy5jc2h0bWw=
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/Users/acer/Downloads/web_cv_chinh/Views/Home/ThietBi.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxUaGlldEJpLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -270,10 +270,6 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/acer/Downloads/web_cv_chinh/Views/Home/TuyenDung.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxUdXllbkR1bmcuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/acer/Downloads/web_cv_chinh/Views/Home/Welcome.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxXZWxjb21lLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/acer/Downloads/web_cv_chinh/Views/LichCongTac/Index.cshtml]

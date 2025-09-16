@@ -66,6 +66,9 @@ builder.Services.AddSession(options =>
 // Hash mật khẩu cho NguoiDung (tự quản)
 builder.Services.AddSingleton<IPasswordHasher<NguoiDung>, PasswordHasher<NguoiDung>>();
 
+// SignalR
+builder.Services.AddSignalR();
+
 // App services
 builder.Services.AddScoped<ICaiDatService, CaiDatService>();
 builder.Services.AddScoped<ISEOAnalysisService, SEOAnalysisService>();
@@ -142,28 +145,62 @@ app.UseMiddleware<WEB_CV.Middleware.OnlineUserTrackingMiddleware>();
 app.UseAuthentication();
 app.UseAuthorization();
 
+// Bảo vệ khu admin: tất cả controller trong /Admin yêu cầu Admin role
+app.Use(async (ctx, next) =>
+{
+    if (ctx.Request.Path.StartsWithSegments("/admin") && !ctx.User.IsInRole("Admin"))
+    {
+        ctx.Response.StatusCode = 403; // Forbidden
+        return;
+    }
+    await next();
+});
+
 // ===================== Seed dữ liệu =====================
 using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<NewsDbContext>();
     var hasher = scope.ServiceProvider.GetRequiredService<IPasswordHasher<NguoiDung>>();
     var caiDatService = scope.ServiceProvider.GetRequiredService<ICaiDatService>();
+    
 
     // Tự động chạy migration nếu chưa có
     db.Database.Migrate();
 
-    // Seed Admin mặc định (đổi mật khẩu sau khi đăng nhập)
+    // Seed Admin mặc định (đổi mật khẩu sau khi đăng nhập) - hệ thống cũ
     if (!db.NguoiDungs.Any(x => x.VaiTro == "Admin"))
     {
-        var admin = new NguoiDung
+        var adminOld = new NguoiDung
         {
             HoTen = "Quản trị hệ thống",
             Email = "admin@local",
             VaiTro = "Admin",
             KichHoat = true
         };
-        admin.MatKhauHash = hasher.HashPassword(admin, "123456");
-        db.NguoiDungs.Add(admin);
+        adminOld.MatKhauHash = hasher.HashPassword(adminOld, "123456");
+        db.NguoiDungs.Add(adminOld);
+        db.SaveChanges();
+    }
+
+    // Seed Staff mẫu - hệ thống cũ
+    var existingStaff = db.NguoiDungs.FirstOrDefault(x => x.Email == "canbo@example.gov.vn");
+    if (existingStaff != null)
+    {
+        // Cập nhật vai trò nếu đã tồn tại
+        existingStaff.VaiTro = "Staff";
+        db.SaveChanges();
+    }
+    else if (!db.NguoiDungs.Any(x => x.VaiTro == "Staff"))
+    {
+        var staffOld = new NguoiDung
+        {
+            HoTen = "Cán bộ nhân viên",
+            Email = "canbo@example.gov.vn",
+            VaiTro = "Staff",
+            KichHoat = true
+        };
+        staffOld.MatKhauHash = hasher.HashPassword(staffOld, "CanBo@123!");
+        db.NguoiDungs.Add(staffOld);
         db.SaveChanges();
     }
 
@@ -238,5 +275,8 @@ app.MapControllerRoute(
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+// SignalR Hubs
+app.MapHub<WEB_CV.Hubs.ChatHub>("/hubs/chat");
 
 app.Run();

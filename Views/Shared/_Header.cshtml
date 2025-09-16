@@ -164,6 +164,18 @@
                   <i class="fas fa-bookmark me-2"></i>Dấu trang của tôi
                 </a></li>
               }
+              @if (User.IsInRole("Admin") || User.IsInRole("Staff"))
+              {
+                <li><hr class="dropdown-divider" /></li>
+                <li class="px-3 pt-1 pb-1 text-muted small">Nội bộ</li>
+                <li><a class="dropdown-item" asp-controller="Chat" asp-action="Index">
+                  <i class="bi bi-chat-dots me-2"></i>Chat nội bộ
+                </a></li>
+                <li><a class="dropdown-item" asp-controller="LichCongTac" asp-action="Index">
+                  <i class="bi bi-calendar3-week me-2"></i>Lịch công tác
+                </a></li>
+              }
+              
               @if (User.IsInRole("Admin"))
               {
                 <li><hr class="dropdown-divider" /></li>
@@ -180,8 +192,8 @@
                 <li><a class="dropdown-item" asp-area="Admin" asp-controller="BinhLuan" asp-action="Index">
                   <i class="fas fa-comments me-2"></i>Quản lý bình luận
                 </a></li>
-                <li><a class="dropdown-item" href="@Url.Action("Index","LichCongTac")">
-                  <i class="bi bi-calendar3-week me-2"></i>Lịch công tác
+                <li><a class="dropdown-item" asp-area="Admin" asp-controller="LichCongTac" asp-action="Index">
+                  <i class="bi bi-calendar3-week me-2"></i>Quản lý lịch công tác
                 </a></li>
               }
               <li><hr class="dropdown-divider" /></li>

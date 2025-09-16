@@ -43,8 +43,8 @@
                     </div>
                     <h3 class="profile-name">@Model.HoTen</h3>
                     <p class="profile-role">
-                        <span class="badge @(Model.VaiTro == "Admin" ? "bg-danger" : "bg-primary")">
-                            @(string.IsNullOrEmpty(Model.VaiTro) ? "Người dùng" : Model.VaiTro)
+                        <span class="badge @(Model.VaiTro == "Admin" ? "bg-danger" : Model.VaiTro == "Staff" ? "bg-warning" : "bg-primary")">
+                            @(string.IsNullOrEmpty(Model.VaiTro) ? "Người dùng" : Model.VaiTro == "Staff" ? "Cán bộ nhân viên" : Model.VaiTro)
                         </span>
                     </p>
                     <p class="profile-status">
@@ -109,8 +109,8 @@
                             <div class="info-item">
                                 <label class="info-label">Vai trò</label>
                                 <span class="info-value">
-                                    <span class="badge @(Model.VaiTro == "Admin" ? "bg-danger" : "bg-primary")">
-                                        @(string.IsNullOrEmpty(Model.VaiTro) ? "Người dùng" : Model.VaiTro)
+                                    <span class="badge @(Model.VaiTro == "Admin" ? "bg-danger" : Model.VaiTro == "Staff" ? "bg-warning" : "bg-primary")">
+                                        @(string.IsNullOrEmpty(Model.VaiTro) ? "Người dùng" : Model.VaiTro == "Staff" ? "Cán bộ nhân viên" : Model.VaiTro)
                                     </span>
                                 </span>
                             </div>

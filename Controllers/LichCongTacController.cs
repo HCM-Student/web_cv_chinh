@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Globalization;
@@ -7,6 +8,7 @@ using WEB_CV.Models.ViewModels;
 
 namespace WEB_CV.Controllers
 {
+    [Authorize(Roles = "Admin,Staff")]
     public class LichCongTacController : Controller
     {
         private readonly NewsDbContext _db;

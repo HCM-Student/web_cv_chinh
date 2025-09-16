@@ -6,3 +6,4 @@ namespace WEB_CV.Models
         Bo = 2
     }
 }
+

@@ -40,8 +40,10 @@
         <div class="col-md-4">
           <label asp-for="VaiTro" class="form-label">Vai trò</label>
           <select asp-for="VaiTro" class="form-select">
-            <option value="User">User</option>
-            <option value="Admin">Admin</option>
+            <option value="User">Người dùng</option>
+            <option value="Staff">Cán bộ nhân viên</option>
+            <option value="Editor">Biên tập viên</option>
+            <option value="Admin">Quản trị viên</option>
           </select>
           <span asp-validation-for="VaiTro" class="text-danger small"></span>
         </div>

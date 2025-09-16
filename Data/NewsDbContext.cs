@@ -19,6 +19,7 @@ namespace WEB_CV.Data
         public DbSet<OnlineUser> OnlineUsers { get; set; }
         public DbSet<SiteStats> SiteStats => Set<SiteStats>();
         public DbSet<WorkScheduleEvent> WorkScheduleEvents => Set<WorkScheduleEvent>();
+        public DbSet<ChatMessage> ChatMessages => Set<ChatMessage>();
 
         protected override void OnModelCreating(ModelBuilder mb)
         {
