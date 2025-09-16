@@ -565,16 +565,91 @@ function exportToExcel() {
 }
 
 function printTable() {
-  // Ẩn các nút không cần thiết khi in
-  const buttons = document.querySelectorAll('.btn');
-  buttons.forEach(btn => btn.style.display = 'none');
+  // Tạo nội dung chỉ chứa bảng lịch công tác
+  const table = document.querySelector('.table');
+  const tableTitle = document.querySelector('h2');
   
-  window.print();
+  if (!table) {
+    alert('Không tìm thấy bảng dữ liệu!');
+    return;
+  }
   
-  // Hiện lại các nút sau khi in
-  setTimeout(() => {
-    buttons.forEach(btn => btn.style.display = '');
-  }, 1000);
+  // Tạo cửa sổ in mới
+  const printWindow = window.open('', '_blank');
+  
+  // Nội dung HTML cho in
+  const printContent = `
+    <!DOCTYPE html>
+    <html>
+    <head>
+      <title>Lịch Công Tác - ${new Date().toLocaleDateString('vi-VN')}</title>
+      <style>
+        body { 
+          font-family: Arial, sans-serif; 
+          margin: 20px; 
+          font-size: 12px;
+        }
+        h2 { 
+          color: #0d6efd; 
+          margin-bottom: 20px; 
+          text-align: center;
+          border-bottom: 2px solid #0d6efd;
+          padding-bottom: 10px;
+        }
+        table { 
+          width: 100%; 
+          border-collapse: collapse; 
+          margin-top: 10px;
+        }
+        th, td { 
+          border: 1px solid #dee2e6; 
+          padding: 8px; 
+          text-align: left;
+          vertical-align: top;
+        }
+        th { 
+          background-color: #f8f9fa; 
+          font-weight: bold;
+          color: #495057;
+        }
+        tr:nth-child(even) { 
+          background-color: #f8f9fa; 
+        }
+        .text-muted { color: #6c757d !important; }
+        .text-info { color: #0dcaf0 !important; }
+        .text-warning { color: #ffc107 !important; }
+        .text-success { color: #198754 !important; }
+        .fw-bold { font-weight: bold !important; }
+        .mb-1 { margin-bottom: 0.25rem !important; }
+        .d-block { display: block !important; }
+        .me-1 { margin-right: 0.25rem !important; }
+        @@media print {
+          body { margin: 0; }
+          table { font-size: 10px; }
+          th, td { padding: 4px; }
+        }
+      </style>
+    </head>
+    <body>
+      <h2>📅 ${tableTitle ? tableTitle.textContent : 'Lịch Công Tác'}</h2>
+      <p style="text-align: center; color: #6c757d; margin-bottom: 20px;">
+        In ngày: ${new Date().toLocaleDateString('vi-VN')} lúc ${new Date().toLocaleTimeString('vi-VN')}
+      </p>
+      ${table.outerHTML}
+    </body>
+    </html>
+  `;
+  
+  // Ghi nội dung vào cửa sổ mới
+  printWindow.document.write(printContent);
+  printWindow.document.close();
+  
+  // Chờ nội dung load xong rồi in
+  printWindow.onload = function() {
+    printWindow.focus();
+    printWindow.print();
+    printWindow.close();
+  };
 }
 
 // Thêm hiệu ứng loading khi submit form
