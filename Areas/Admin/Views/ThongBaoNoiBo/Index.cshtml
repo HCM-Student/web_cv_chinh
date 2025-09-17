@@ -1,0 +1,169 @@
+@using WEB_CV.Areas.Admin.ViewModels
+@model InternalNoticeFilterVm
+@{
+    ViewData["Title"] = "Thông báo nội bộ";
+}
+
+@section Styles{
+<style>
+  :root{
+    --navy:#0d56b3; --navy2:#0a4a98; --text:#0f1e3a; --muted:#6b7280; --border:#e5e7eb;
+    --ok:#16a34a; --warn:#b45309; --danger:#b91c1c;
+  }
+  .notice-wrap{ background:#fff; border:1px solid var(--border); border-radius:16px; box-shadow:0 10px 28px rgba(10,27,60,.08); }
+  .notice-row{ padding:14px 16px; display:flex; align-items:center; gap:14px; border-top:1px solid #f1f5f9; }
+  .notice-row:first-child{ border-top:none; }
+  .notice-title{ font-weight:800; color:#0f1e3a; }
+  .notice-meta{ color:var(--muted); font-size:.9rem; }
+  .badge-soft{ display:inline-flex; align-items:center; gap:6px; border-radius:999px; padding:6px 10px; font-weight:700; }
+  .b-active{ background:#ecfdf5; color:#065f46; border:1px solid #a7f3d0; }
+  .b-inactive{ background:#fdf2f2; color:#7f1d1d; border:1px solid #fecaca; }
+  .b-pin{ background:#fff7ed; color:#9a3412; border:1px solid #fed7aa; }
+  .b-expire{ background:#eef2ff; color:#3730a3; border:1px solid #c7d2fe; }
+  .actions .btn{ padding:.3rem .6rem; }
+
+  /* search card */
+  .search-card{ background:linear-gradient(180deg,#f7fbff,#ffffff); border:1px solid var(--border); border-radius:14px; padding:14px; }
+  .search-card label{ font-weight:700; color:#334155; }
+  .btn-navy{ background:linear-gradient(180deg,var(--navy),var(--navy2)); color:#fff; border:none; }
+  .btn-navy:hover{ filter:brightness(.96); color:#fff; }
+
+  .pagination .page-link{ border-radius:10px; }
+</style>
+}
+
+<div class="container-xxl py-4">
+  <nav class="mb-3">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="@Url.Content("~/")">Trang chủ</a></li>
+      <li class="breadcrumb-item active">Thông báo nội bộ</li>
+    </ol>
+  </nav>
+
+  <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+    <h2 class="m-0 fw-bold text-uppercase">Thông báo nội bộ</h2>
+    <a class="btn btn-navy" href="@Url.Action("Create")"><i class="bi bi-plus-circle me-1"></i> Thêm thông báo</a>
+  </div>
+
+  <!-- search -->
+  <form method="get" class="search-card mb-4">
+    <div class="row g-3 align-items-end">
+      <div class="col-md-4">
+        <label class="form-label">Từ khóa</label>
+        <input type="text" name="q" value="@Model.q" class="form-control" placeholder="Nhập từ khóa…">
+      </div>
+      <div class="col-md-3">
+        <label class="form-label">Từ ngày</label>
+        <input type="date" name="from" value="@(Model.from?.ToString("yyyy-MM-dd"))" class="form-control">
+      </div>
+      <div class="col-md-3">
+        <label class="form-label">Đến ngày</label>
+        <input type="date" name="to" value="@(Model.to?.ToString("yyyy-MM-dd"))" class="form-control">
+      </div>
+      <div class="col-md-2">
+        <label class="form-label">Bản ghi</label>
+        <input type="number" min="5" max="100" step="5" name="ps" value="@Model.ps" class="form-control">
+      </div>
+      <div class="col-12 d-flex align-items-center gap-3">
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" name="onlyActive" value="true" @(Model.onlyActive==true?"checked":"") id="onlyActive">
+          <label class="form-check-label" for="onlyActive">Chỉ hiển thị đang hoạt động</label>
+        </div>
+        <button class="btn btn-navy ms-auto" type="submit"><i class="bi bi-search me-1"></i> Tìm kiếm</button>
+      </div>
+    </div>
+  </form>
+
+  <!-- list -->
+  <div class="notice-wrap">
+    @if (Model.Items.Count == 0)
+    {
+      <div class="p-4 text-center text-muted">Không có thông báo nào.</div>
+    }
+    else
+    {
+      @foreach (var n in Model.Items)
+      {
+        var isExpired = n.ExpireAt.HasValue && n.ExpireAt.Value < DateTime.UtcNow;
+        <div class="notice-row">
+          <div class="flex-grow-1">
+            <div class="notice-title">@n.Title</div>
+            <div class="notice-meta">
+              <i class="bi bi-calendar3 me-1"></i>@n.PublishAt.ToLocalTime().ToString("dd/MM/yyyy HH:mm")
+              @if (n.ExpireAt.HasValue) 
+              { 
+                <text>· Hết hạn: @n.ExpireAt.Value.ToLocalTime().ToString("dd/MM/yyyy")</text>
+              }
+              @if (!string.IsNullOrWhiteSpace(n.Summary)) 
+              { 
+                <text>· @n.Summary</text>
+              }
+            </div>
+            <div class="mt-2 d-flex flex-wrap gap-2">
+              <span class="badge-soft @(n.IsActive ? "b-active" : "b-inactive")">
+                <i class="bi @(n.IsActive ? "bi-eye" : "bi-eye-slash")"></i> @(n.IsActive ? "Đang hiển thị" : "Đang ẩn")
+              </span>
+              @if (n.IsPinned)
+              {
+                <span class="badge-soft b-pin"><i class="bi bi-pin-angle"></i> Đang ghim</span>
+              }
+              @if (isExpired)
+              {
+                <span class="badge-soft b-expire"><i class="bi bi-clock-history"></i> Hết hạn</span>
+              }
+            </div>
+          </div>
+
+          <div class="actions d-flex align-items-center gap-2">
+            <a class="btn btn-outline-primary btn-sm" href="@Url.Action("Edit", new { id = n.Id })">
+              <i class="bi bi-pencil"></i>
+            </a>
+            <form method="post" action="@Url.Action("ToggleActive", new { id = n.Id })" class="d-inline">
+              @Html.AntiForgeryToken()
+              <button class="btn btn-outline-secondary btn-sm" title="Ẩn/Hiện" type="submit">
+                <i class="bi @(n.IsActive ? "bi-eye-slash" : "bi-eye")"></i>
+              </button>
+            </form>
+            <form method="post" action="@Url.Action("TogglePin", new { id = n.Id })" class="d-inline">
+              @Html.AntiForgeryToken()
+              <button class="btn btn-outline-warning btn-sm" title="Ghim/Bỏ ghim" type="submit">
+                <i class="bi bi-pin-angle"></i>
+              </button>
+            </form>
+            <form method="post" action="@Url.Action("Delete", new { id = n.Id })" onsubmit="return confirm('Xóa thông báo này?')" class="d-inline">
+              @Html.AntiForgeryToken()
+              <button class="btn btn-outline-danger btn-sm" title="Xóa" type="submit">
+                <i class="bi bi-trash"></i>
+              </button>
+            </form>
+          </div>
+        </div>
+      }
+    }
+  </div>
+
+  <!-- pagination -->
+  @if (Model.Pages > 1)
+  {
+    <nav class="mt-3">
+      <ul class="pagination">
+        @{
+          var cur = Model.page;
+          string Link(int p) => Url.Action("Index", new {
+              q = Model.q, from = Model.from?.ToString("yyyy-MM-dd"),
+              to = Model.to?.ToString("yyyy-MM-dd"), ps = Model.ps,
+              onlyActive = Model.onlyActive, page = p
+          })!;
+        }
+        <li class="page-item @(cur==1?"disabled":"")"><a class="page-link" href="@Link(1)">Đầu</a></li>
+        <li class="page-item @(cur==1?"disabled":"")"><a class="page-link" href="@Link(Math.Max(1,cur-1))">‹</a></li>
+        @for (int p = Math.Max(1, cur-2); p <= Math.Min(Model.Pages, cur+2); p++)
+        {
+            <li class="page-item @(p==cur?"active":"")"><a class="page-link" href="@Link(p)">@p</a></li>
+        }
+        <li class="page-item @(cur==Model.Pages?"disabled":"")"><a class="page-link" href="@Link(Math.Min(Model.Pages,cur+1))">›</a></li>
+        <li class="page-item @(cur==Model.Pages?"disabled":"")"><a class="page-link" href="@Link(Model.Pages)">Cuối</a></li>
+      </ul>
+    </nav>
+  }
+</div>

@@ -1,0 +1,77 @@
+@model WEB_CV.Models.InternalNotice
+@{
+    ViewData["Title"] = Model.Id == 0 ? "Thêm thông báo" : "Sửa thông báo";
+}
+@section Styles{
+<style>
+  .form-card{ background:#fff; border:1px solid #e5e7eb; border-radius:16px; padding:18px; box-shadow:0 10px 26px rgba(10,27,60,.08); }
+  .btn-navy{ background:linear-gradient(180deg,#0d56b3,#0a4a98); color:#fff; border:none; }
+  .btn-navy:hover{ filter:brightness(.96); color:#fff; }
+</style>
+}
+<div class="container-xxl py-4">
+  <nav class="mb-3">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="@Url.Action("Index")">Thông báo nội bộ</a></li>
+      <li class="breadcrumb-item active">@ViewData["Title"]</li>
+    </ol>
+  </nav>
+
+  <div class="form-card">
+    <form asp-action="@(Model.Id==0?"Create":"Edit")" method="post">
+      @Html.AntiForgeryToken()
+      @if(Model.Id!=0){ <input type="hidden" asp-for="Id" /> }
+
+      <div class="mb-3">
+        <label class="form-label fw-bold">Tiêu đề</label>
+        <input asp-for="Title" class="form-control" />
+        <span asp-validation-for="Title" class="text-danger"></span>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label fw-bold">Tóm tắt</label>
+        <input asp-for="Summary" class="form-control" />
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label fw-bold">Nội dung</label>
+        <textarea asp-for="Body" class="form-control" rows="10"></textarea>
+        <span asp-validation-for="Body" class="text-danger"></span>
+      </div>
+
+      <div class="row g-3">
+        <div class="col-md-3">
+          <label class="form-label fw-bold">Hiển thị từ</label>
+          <input asp-for="PublishAt" type="datetime-local" class="form-control"
+                 value="@Model.PublishAt.ToLocalTime().ToString("yyyy-MM-ddTHH:mm")" />
+        </div>
+        <div class="col-md-3">
+          <label class="form-label fw-bold">Hết hạn</label>
+          <input asp-for="ExpireAt" type="date" class="form-control"
+                 value="@(Model.ExpireAt?.ToLocalTime().ToString("yyyy-MM-dd"))" />
+        </div>
+        <div class="col-md-3 d-flex align-items-end">
+          <div class="form-check">
+            <input asp-for="IsActive" class="form-check-input" />
+            <label class="form-check-label fw-bold" for="IsActive">Đang hiển thị</label>
+          </div>
+        </div>
+        <div class="col-md-3 d-flex align-items-end">
+          <div class="form-check">
+            <input asp-for="IsPinned" class="form-check-input" />
+            <label class="form-check-label fw-bold" for="IsPinned">Ghim</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-4 d-flex gap-2">
+        <button class="btn btn-navy" type="submit"><i class="bi bi-check2-circle me-1"></i> Lưu</button>
+        <a href="@Url.Action("Index")" class="btn btn-outline-secondary">Hủy</a>
+      </div>
+    </form>
+  </div>
+</div>
+
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}

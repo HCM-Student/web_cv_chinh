@@ -5721,16 +5721,38 @@ a {
     margin-top: 0.5rem;
 }
 
-/* NEW Tag Styles */
+/* NEW Tag Styles - Mặc định cho trang tin tức (lớn) */
 .new-tag {
     position: absolute !important;
     top: 6px !important;
     left: 6px !important;
     background: #dc3545 !important;
     color: #fff !important;
+    padding: 6px 12px !important;
+    border-radius: 6px !important;
+    font-size: 12px !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2) !important;
+    display: inline-block !important;
+    line-height: 1.2 !important;
+    height: auto !important;
+    width: auto !important;
+    z-index: 10 !important;
+    pointer-events: none !important;
+    user-select: none !important;
+}
+
+/* NEW Tag Styles - Nhỏ hơn cho trang chủ (Tin tức & Sự kiện) */
+#news .new-tag {
     padding: 3px 8px !important;
-    border-radius: 4px !important;
     font-size: 9px !important;
+    border-radius: 4px !important;
+    top: 4px !important;
+    left: 4px !important;
+    background: #dc3545 !important;
+    color: #fff !important;
     font-weight: 700 !important;
     text-transform: uppercase !important;
     letter-spacing: 0.5px !important;

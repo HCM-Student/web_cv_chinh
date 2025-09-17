@@ -1022,6 +1022,9 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Bookmark functions
     function toggleBookmark() {
+        const bookmarkBtn = document.querySelector('.bookmark-btn');
+        if (!bookmarkBtn) return;
+        
         let bookmarks = JSON.parse(localStorage.getItem('articleBookmarks') || '[]');
         const bookmarkIndex = bookmarks.findIndex(b => b.id === articleId);
         
@@ -1029,8 +1032,10 @@ document.addEventListener('DOMContentLoaded', function() {
             // Remove bookmark
             bookmarks.splice(bookmarkIndex, 1);
             bookmarkBtn.innerHTML = '<i class="fas fa-bookmark"></i>';
-            bookmarkBtn.classList.remove('btn-danger');
-            bookmarkBtn.classList.add('btn-outline-danger');
+            if (bookmarkBtn.classList) {
+                bookmarkBtn.classList.remove('btn-danger');
+                bookmarkBtn.classList.add('btn-outline-danger');
+            }
             showNotification('Đã xóa khỏi dấu trang', 'success');
         } else {
             // Add bookmark
@@ -1041,8 +1046,10 @@ document.addEventListener('DOMContentLoaded', function() {
                 date: new Date().toISOString()
             });
             bookmarkBtn.innerHTML = '<i class="fas fa-bookmark"></i>';
-            bookmarkBtn.classList.remove('btn-outline-danger');
-            bookmarkBtn.classList.add('btn-danger');
+            if (bookmarkBtn.classList) {
+                bookmarkBtn.classList.remove('btn-outline-danger');
+                bookmarkBtn.classList.add('btn-danger');
+            }
             showNotification('Đã lưu vào dấu trang', 'success');
         }
         
@@ -1050,13 +1057,18 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     function checkBookmarkStatus() {
+        const bookmarkBtn = document.querySelector('.bookmark-btn');
+        if (!bookmarkBtn) return;
+        
         let bookmarks = JSON.parse(localStorage.getItem('articleBookmarks') || '[]');
         const isBookmarked = bookmarks.some(b => b.id === articleId);
         
         if (isBookmarked) {
             bookmarkBtn.innerHTML = '<i class="fas fa-bookmark"></i>';
-            bookmarkBtn.classList.remove('btn-outline-danger');
-            bookmarkBtn.classList.add('btn-danger');
+            if (bookmarkBtn.classList) {
+                bookmarkBtn.classList.remove('btn-outline-danger');
+                bookmarkBtn.classList.add('btn-danger');
+            }
         }
     }
     

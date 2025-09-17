@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using WEB_CV.Data;
 using WEB_CV.Models;
-using WEB_CV.Models.ViewModels; // nếu bạn đặt TinTucFilterVM trong Models/ViewModels
+using WEB_CV.Models.ViewModels;
 
 namespace WEB_CV.Controllers
 {
@@ -345,12 +345,120 @@ namespace WEB_CV.Controllers
             return View();
         }
 
-        [HttpGet, Route("Home/ThongBaoNoiBo"), Route("thong-bao-noi-bo")]
-        public IActionResult ThongBaoNoiBo()
+    [HttpGet, Route("Home/ThongBaoNoiBo"), Route("thong-bao-noi-bo")]
+    public async Task<IActionResult> ThongBaoNoiBo(string keyword = "", string fromDate = "", string toDate = "", int pageSize = 10, int page = 1, bool? isPinned = null)
+    {
+        ViewData["Title"] = "Thông báo nội bộ";
+
+        // Kiểm tra xem có thông báo nào không
+        var count = await _db.InternalNotices.CountAsync();
+        Console.WriteLine($"Số lượng thông báo trong database: {count}");
+        
+        // Nếu chưa có thông báo nào, tạo một thông báo mẫu
+        if (count == 0)
         {
-            ViewData["Title"] = "Thông báo nội bộ";
-            return View();
+            Console.WriteLine("Tạo thông báo mẫu...");
+            var thongBaoMau = new InternalNotice
+            {
+                Title = "Thông báo mẫu - Chào mừng đến với hệ thống",
+                Summary = "Đây là thông báo mẫu để test hệ thống thông báo nội bộ.",
+                Body = "<p>Xin chào các đồng chí!</p><p>Đây là thông báo mẫu để kiểm tra hệ thống thông báo nội bộ của Cục Chuyển đổi số.</p><p>Hệ thống đã hoạt động bình thường và sẵn sàng phục vụ.</p>",
+                PublishAt = DateTime.UtcNow,
+                ExpireAt = DateTime.UtcNow.AddDays(30),
+                IsActive = true,
+                IsPinned = true,
+                CreatedAt = DateTime.UtcNow,
+                UpdatedAt = DateTime.UtcNow,
+                CreatedByName = "Hệ thống"
+            };
+            
+            _db.InternalNotices.Add(thongBaoMau);
+            await _db.SaveChangesAsync();
+            Console.WriteLine("Đã tạo thông báo mẫu thành công!");
         }
+
+        // Tạo query cơ bản
+        var query = _db.InternalNotices.AsQueryable();
+
+        // Lọc theo trạng thái hoạt động
+        query = query.Where(tb => tb.IsActive);
+
+        // Tìm kiếm theo từ khóa
+        if (!string.IsNullOrWhiteSpace(keyword))
+        {
+            var searchTerm = keyword.ToLower();
+            query = query.Where(tb => 
+                tb.Title.ToLower().Contains(searchTerm) ||
+                (tb.Summary != null && tb.Summary.ToLower().Contains(searchTerm)) ||
+                (tb.Body != null && tb.Body.ToLower().Contains(searchTerm))
+            );
+        }
+
+        // Lọc theo ngày bắt đầu
+        if (!string.IsNullOrWhiteSpace(fromDate) && DateTime.TryParse(fromDate, out var from))
+        {
+            query = query.Where(tb => tb.PublishAt.Date >= from.Date);
+        }
+
+        // Lọc theo ngày kết thúc
+        if (!string.IsNullOrWhiteSpace(toDate) && DateTime.TryParse(toDate, out var to))
+        {
+            query = query.Where(tb => tb.PublishAt.Date <= to.Date);
+        }
+
+        // Lọc theo trạng thái ghim
+        if (isPinned.HasValue)
+        {
+            query = query.Where(tb => tb.IsPinned == isPinned.Value);
+        }
+
+        // Đếm tổng số kết quả
+        var totalCount = await query.CountAsync();
+
+        // Sắp xếp và phân trang
+        var notices = await query
+            .OrderByDescending(tb => tb.IsPinned)
+            .ThenByDescending(tb => tb.PublishAt)
+            .Skip((page - 1) * pageSize)
+            .Take(pageSize)
+            .ToListAsync();
+
+        // Tạo ViewModel
+        var searchVm = new ThongBaoNoiBoSearchVm
+        {
+            Keyword = keyword,
+            FromDate = !string.IsNullOrWhiteSpace(fromDate) && DateTime.TryParse(fromDate, out var fromDateParsed) ? fromDateParsed : null,
+            ToDate = !string.IsNullOrWhiteSpace(toDate) && DateTime.TryParse(toDate, out var toDateParsed) ? toDateParsed : null,
+            PageSize = pageSize,
+            Page = page,
+            IsPinned = isPinned,
+            Notices = notices,
+            TotalCount = totalCount
+        };
+
+        Console.WriteLine($"Số lượng thông báo sau filter: {notices.Count}");
+
+        return View(searchVm);
+    }
+
+    [HttpGet, Route("Home/ChiTietThongBaoNoiBo/{id}"), Route("thong-bao-noi-bo/{id}")]
+    public async Task<IActionResult> ChiTietThongBaoNoiBo(int id)
+    {
+        Console.WriteLine($"Trying to get notice with ID: {id}");
+        
+        var thongBao = await _db.InternalNotices
+            .FirstOrDefaultAsync(tb => tb.Id == id && tb.IsActive);
+
+        if (thongBao == null)
+        {
+            Console.WriteLine($"Notice with ID {id} not found or not active");
+            return NotFound();
+        }
+
+        Console.WriteLine($"Found notice: {thongBao.Title}");
+        ViewData["Title"] = thongBao.Title;
+        return View(thongBao);
+    }
 
     }
 }

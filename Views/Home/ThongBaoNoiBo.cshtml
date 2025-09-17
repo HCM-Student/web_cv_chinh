@@ -1,17 +1,539 @@
+@using WEB_CV.Models
+@using WEB_CV.Models.ViewModels
+@model ThongBaoNoiBoSearchVm
 @{
     ViewData["Title"] = "Thông báo nội bộ";
+    var nowUtc = DateTime.UtcNow;
 }
 
-<div class="container py-5">
-    <div class="row">
-        <div class="col-12">
-            <h1 class="display-4 fw-bold text-primary mb-4">Thông báo nội bộ</h1>
-            <p class="lead">Các thông báo và văn bản nội bộ của Cục Chuyển đổi số.</p>
-            
-            <div class="alert alert-info">
-                <i class="fas fa-info-circle me-2"></i>
-                Nội dung chi tiết về thông báo nội bộ sẽ được cập nhật sớm nhất.
-            </div>
+@{
+    Layout = "_Layout";
+}
+
+@section Styles{
+<style>
+:root{
+  --primary: #0d56b3;
+  --primary-dark: #0a4a98;
+  --secondary: #6c757d;
+  --success: #28a745;
+  --info: #17a2b8;
+  --warning: #ffc107;
+  --danger: #dc3545;
+  --light: #f8f9fa;
+  --dark: #343a40;
+  --border: #dee2e6;
+  --shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075);
+  --shadow-lg: 0 1rem 3rem rgba(0, 0, 0, 0.175);
+}
+
+/* HERO SECTION - Simplified */
+.hero-section {
+    background: var(--primary);
+    color: white;
+    padding: 1.5rem 0;
+    margin-bottom: 1.5rem;
+}
+
+.hero-section h1 {
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.hero-section .breadcrumb {
+    background: none;
+    padding: 0;
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+.hero-section .breadcrumb-item {
+    color: rgba(255,255,255,0.8);
+}
+
+.hero-section .breadcrumb-item.active {
+    color: white;
+}
+
+.hero-section .breadcrumb-item + .breadcrumb-item::before {
+    color: rgba(255,255,255,0.6);
+    content: "›";
+}
+
+/* NOTICE LIST - Clean & Simple */
+.notice-list {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    margin-bottom: 1.5rem;
+    overflow: hidden;
+}
+
+.notice-list-header {
+    background: #f8f9fa;
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.notice-list-header h2 {
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--dark);
+}
+
+       .notice-item {
+           padding: 1rem 1.5rem;
+           border-bottom: 1px solid #f0f0f0;
+           transition: background-color 0.2s ease;
+           display: flex;
+           flex-direction: column;
+       }
+
+       .notice-header {
+           display: flex;
+           justify-content: space-between;
+           align-items: flex-start;
+           margin-bottom: 0.5rem;
+       }
+
+.notice-item:last-child {
+    border-bottom: none;
+}
+
+.notice-item:hover {
+    background: #f8f9fa;
+}
+
+.notice-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--dark);
+    margin-bottom: 0.5rem;
+    line-height: 1.3;
+}
+
+.notice-title a {
+    color: var(--primary) !important;
+    text-decoration: none !important;
+    transition: color 0.2s ease;
+}
+
+.notice-title a:hover {
+    color: var(--primary-dark) !important;
+    text-decoration: underline !important;
+}
+
+.notice-date {
+    font-size: 0.85rem;
+    color: var(--secondary);
+    margin-bottom: 0.5rem;
+}
+
+       .notice-badges {
+           display: flex;
+           gap: 0.4rem;
+           flex-wrap: wrap;
+       }
+
+.badge {
+    font-size: 0.7rem;
+    padding: 0.25rem 0.6rem;
+    border-radius: 12px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+
+.badge-pinned {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.badge-new {
+    background: #d1ecf1;
+    color: #0c5460;
+}
+
+.badge-expired {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+/* PAGINATION - Simplified */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 1rem;
+    background: #f8f9fa;
+    border-top: 1px solid var(--border);
+}
+
+.pagination .btn {
+    padding: 0.4rem 0.8rem;
+    border: 1px solid var(--border);
+    background: white;
+    color: var(--dark);
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: 500;
+    font-size: 0.9rem;
+    transition: all 0.2s ease;
+}
+
+.pagination .btn:hover {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+}
+
+.pagination .btn.active {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+}
+
+/* SEARCH FORM - Clean & Compact */
+.search-section {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    padding: 1.5rem;
+}
+
+.search-section h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--dark);
+    margin-bottom: 1rem;
+}
+
+.search-form {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr auto auto;
+    gap: 0.8rem;
+    align-items: end;
+}
+
+.form-group {
+    margin-bottom: 0;
+}
+
+.form-group label {
+    font-weight: 500;
+    color: var(--dark);
+    margin-bottom: 0.3rem;
+    display: block;
+    font-size: 0.9rem;
+}
+
+.form-control {
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 0.6rem;
+    font-size: 0.9rem;
+    transition: border-color 0.2s ease;
+}
+
+.form-control:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 0.1rem rgba(13, 86, 179, 0.15);
+}
+
+.btn-search {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 0.6rem 1.5rem;
+    border-radius: 6px;
+    font-weight: 500;
+    font-size: 0.9rem;
+    transition: background-color 0.2s ease;
+}
+
+.btn-search:hover {
+    background: var(--primary-dark);
+}
+
+.btn-help {
+    background: var(--info);
+    color: white;
+    border: none;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 0.8rem;
+    transition: background-color 0.2s ease;
+}
+
+.btn-help:hover {
+    background: #138496;
+}
+
+/* RESPONSIVE - Simplified */
+       @@media (max-width: 768px) {
+           .search-form {
+               grid-template-columns: 1fr;
+               gap: 0.8rem;
+           }
+           
+           .hero-section h1 {
+               font-size: 1.5rem;
+           }
+           
+           .notice-item {
+               padding: 0.8rem 1rem;
+           }
+           
+           .notice-header {
+               flex-direction: column;
+               align-items: flex-start;
+               gap: 0.5rem;
+           }
+           
+           .notice-badges {
+               align-self: flex-end;
+           }
+           
+           .search-section {
+               padding: 1rem;
+           }
+       }
+
+@@media (max-width: 576px) {
+    .hero-section {
+        padding: 1rem 0;
+    }
+    
+    .hero-section h1 {
+        font-size: 1.3rem;
+    }
+    
+    .notice-list-header {
+        padding: 0.8rem 1rem;
+    }
+    
+    .notice-item {
+        padding: 0.7rem 1rem;
+    }
+    
+    .search-section {
+        padding: 0.8rem;
+    }
+}
+
+/* EMPTY STATE - Simplified */
+.empty-state {
+    text-align: center;
+    padding: 2rem 1rem;
+    color: var(--secondary);
+}
+
+.empty-state i {
+    font-size: 3rem;
+    color: var(--border);
+    margin-bottom: 0.8rem;
+}
+
+.empty-state h4 {
+    font-size: 1.1rem;
+    margin-bottom: 0.4rem;
+    color: var(--dark);
+}
+
+.empty-state p {
+    font-size: 0.9rem;
+    margin: 0;
+}
+</style>
+}
+
+<!-- HERO SECTION -->
+<section class="hero-section">
+    <div class="container">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home")">Trang chủ</a></li>
+                <li class="breadcrumb-item active">Thông báo nội bộ</li>
+            </ol>
+        </nav>
+        <h1>Thông báo nội bộ</h1>
+        <p class="mb-0">Các thông báo và văn bản nội bộ của Cục Chuyển đổi số</p>
+    </div>
+</section>
+
+<div class="container">
+    <!-- NOTICE LIST -->
+    <div class="notice-list">
+        <div class="notice-list-header">
+            <h2>Danh sách thông báo</h2>
         </div>
+        
+        @if (Model == null || !Model.Notices.Any())
+        {
+            <div class="empty-state">
+                <i class="bi bi-inbox"></i>
+                <h4>Chưa có thông báo nào</h4>
+                <p>Hiện tại chưa có thông báo nội bộ nào được đăng.</p>
+            </div>
+        }
+        else
+        {
+            @foreach (var notice in Model.Notices)
+            {
+                var isExpired = notice.ExpireAt.HasValue && notice.ExpireAt.Value < nowUtc;
+                var isNew = (nowUtc - notice.PublishAt).TotalDays <= 3;
+                
+                <div class="notice-item">
+                    <div class="notice-header">
+                        <div class="notice-title">
+                            <a href="@Url.Action("ChiTietThongBaoNoiBo", "Home", new { id = notice.Id })" 
+                               title="Click để xem chi tiết thông báo ID: @notice.Id">
+                                @notice.Title
+                            </a>
+                        </div>
+                        <div class="notice-badges">
+                            @if (isExpired)
+                            {
+                                <span class="badge badge-expired">
+                                    <i class="bi bi-clock-history me-1"></i>Hết hạn
+                                </span>
+                            }
+                            @if (isNew && notice.IsActive && !isExpired)
+                            {
+                                <span class="badge badge-new">
+                                    <i class="bi bi-star me-1"></i>Mới
+                                </span>
+                            }
+                            @if (notice.IsPinned)
+                            {
+                                <span class="badge badge-pinned">
+                                    <i class="bi bi-pin-angle me-1"></i>Ghim
+                                </span>
+                            }
+                        </div>
+                    </div>
+                    
+                    <div class="notice-date">
+                        <i class="bi bi-calendar3 me-1"></i>
+                        @notice.PublishAt.ToLocalTime().ToString("dd/MM/yyyy")
+                        @if (notice.ExpireAt.HasValue)
+                        {
+                            <span class="ms-3">
+                                <i class="bi bi-clock me-1"></i>
+                                Hết hạn: @notice.ExpireAt.Value.ToLocalTime().ToString("dd/MM/yyyy")
+                            </span>
+                        }
+                    </div>
+                </div>
+            }
+            
+            <!-- PAGINATION -->
+            <div class="pagination">
+                <a href="#" class="btn">Đầu</a>
+                <a href="#" class="btn active">1</a>
+                <a href="#" class="btn">Cuối</a>
+            </div>
+        }
+    </div>
+
+    <!-- SEARCH FORM -->
+    <div class="search-section">
+        <h3>Tìm kiếm thông tin</h3>
+        <form class="search-form" method="get" action="@Url.Action("ThongBaoNoiBo", "Home")">
+            <div class="form-group">
+                <label for="keyword">Từ khóa</label>
+                <input type="text" class="form-control" id="keyword" name="keyword" 
+                       value="@Model?.Keyword" placeholder="Nhập từ khóa tìm kiếm">
+            </div>
+            
+            <div class="form-group">
+                <label for="fromDate">Từ ngày</label>
+                <input type="date" class="form-control" id="fromDate" name="fromDate" 
+                       value="@Model?.FromDate?.ToString("yyyy-MM-dd")">
+            </div>
+            
+            <div class="form-group">
+                <label for="toDate">Đến ngày</label>
+                <input type="date" class="form-control" id="toDate" name="toDate" 
+                       value="@Model?.ToDate?.ToString("yyyy-MM-dd")">
+            </div>
+            
+            <div class="form-group">
+                <label for="pageSize">Bản ghi</label>
+                <select class="form-control" id="pageSize" name="pageSize">
+                    <option value="5" selected="@(Model?.PageSize == 5)">5</option>
+                    <option value="10" selected="@(Model?.PageSize == 10)">10</option>
+                    <option value="20" selected="@(Model?.PageSize == 20)">20</option>
+                    <option value="50" selected="@(Model?.PageSize == 50)">50</option>
+                </select>
+            </div>
+            
+            <button type="button" class="btn-help" title="Trợ giúp" onclick="showHelp()">
+                <i class="bi bi-question"></i>
+            </button>
+            
+            <button type="submit" class="btn-search">
+                <i class="bi bi-search me-2"></i>Tìm kiếm
+            </button>
+        </form>
     </div>
 </div>
+
+@section Scripts{
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Date validation for HTML5 date inputs
+    const fromDateInput = document.getElementById('fromDate');
+    const toDateInput = document.getElementById('toDate');
+    
+    // Validate date range
+    function validateDateRange() {
+        const fromDate = new Date(fromDateInput.value);
+        const toDate = new Date(toDateInput.value);
+        
+        if (fromDateInput.value && toDateInput.value) {
+            if (fromDate > toDate) {
+                toDateInput.setCustomValidity('Ngày kết thúc phải sau ngày bắt đầu');
+                toDateInput.classList.add('is-invalid');
+            } else {
+                toDateInput.setCustomValidity('');
+                toDateInput.classList.remove('is-invalid');
+            }
+        } else {
+            toDateInput.setCustomValidity('');
+            toDateInput.classList.remove('is-invalid');
+        }
+    }
+    
+    fromDateInput.addEventListener('change', validateDateRange);
+    toDateInput.addEventListener('change', validateDateRange);
+    
+    // Notice item click handlers
+    document.querySelectorAll('.notice-item .notice-title a').forEach(link => {
+        link.addEventListener('click', function(e) {
+            console.log('Notice clicked:', this.textContent);
+            console.log('Link href:', this.href);
+            console.log('Link title:', this.title);
+            // Let the link work normally - don't prevent default
+        });
+    });
+});
+
+// Help function
+function showHelp() {
+    alert('Hướng dẫn sử dụng:\n\n' +
+          '• Từ khóa: Tìm kiếm trong tiêu đề, tóm tắt và nội dung thông báo\n' +
+          '• Từ ngày/Đến ngày: Lọc theo khoảng thời gian đăng thông báo\n' +
+          '• Bản ghi: Số lượng thông báo hiển thị trên mỗi trang\n' +
+          '• Định dạng ngày: Sử dụng date picker (ví dụ: 2025-09-17)');
+}
+</script>
+}
