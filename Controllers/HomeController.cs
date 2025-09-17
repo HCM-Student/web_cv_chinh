@@ -316,5 +316,41 @@ namespace WEB_CV.Controllers
             return View();
         }
 
+        // ===== DANH MỤC PAGES =====
+        [HttpGet, Route("Home/DauTuDauThau"), Route("dau-tu-dau-thau")]
+        public IActionResult DauTuDauThau()
+        {
+            ViewData["Title"] = "Đầu tư, đấu thầu";
+            return View();
+        }
+
+        [HttpGet, Route("Home/DuAnDauTu"), Route("du-an-dau-tu")]
+        public IActionResult DuAnDauTu()
+        {
+            ViewData["Title"] = "Dự án đầu tư";
+            return View();
+        }
+
+        [HttpGet, Route("Home/ThongTinDauThau"), Route("thong-tin-dau-thau")]
+        public IActionResult ThongTinDauThau()
+        {
+            ViewData["Title"] = "Thông tin đấu thầu";
+            return View();
+        }
+
+        [HttpGet, Route("Home/SanPham"), Route("san-pham")]
+        public IActionResult SanPham()
+        {
+            ViewData["Title"] = "Sản phẩm";
+            return View();
+        }
+
+        [HttpGet, Route("Home/ThongBaoNoiBo"), Route("thong-bao-noi-bo")]
+        public IActionResult ThongBaoNoiBo()
+        {
+            ViewData["Title"] = "Thông báo nội bộ";
+            return View();
+        }
+
     }
 }

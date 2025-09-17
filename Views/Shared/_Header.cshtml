@@ -91,6 +91,36 @@
           </ul>
         </li>
 
+        <!-- DANH MỤC (dropdown với submenu) -->
+        <li class="nav-item dropdown">
+          <a id="catDropdown"
+             class="nav-link dropdown-toggle @(currentController=="Home" && (currentAction=="DauTuDauThau" || currentAction=="DuAnDauTu" || currentAction=="ThongTinDauThau" || currentAction=="SanPham" || currentAction=="ThongBaoNoiBo") ? "active" : "")"
+             href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Danh mục
+            <svg class="chev" width="14" height="14" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </a>
+          <ul class="dropdown-menu" aria-labelledby="catDropdown">
+            <li class="dropdown-item-has-sub">
+              <a class="dropdown-item @(currentController=="Home" && currentAction=="DauTuDauThau" ? "active" : "")"
+                 asp-controller="Home" asp-action="DauTuDauThau">Đầu tư, đấu thầu</a>
+              <!-- Submenu bên trái -->
+              <ul class="dropdown-submenu">
+                <li><a class="dropdown-item @(currentController=="Home" && currentAction=="DuAnDauTu" ? "active" : "")"
+                       asp-controller="Home" asp-action="DuAnDauTu">Dự án đầu tư</a></li>
+                <li><a class="dropdown-item @(currentController=="Home" && currentAction=="ThongTinDauThau" ? "active" : "")"
+                       asp-controller="Home" asp-action="ThongTinDauThau">Thông tin đấu thầu</a></li>
+              </ul>
+            </li>
+            <li><a class="dropdown-item @(currentController=="Home" && currentAction=="SanPham" ? "active" : "")"
+                   asp-controller="Home" asp-action="SanPham">Sản phẩm</a></li>
+            <li><a class="dropdown-item @(currentController=="Home" && currentAction=="ThongBaoNoiBo" ? "active" : "")"
+                   asp-controller="Home" asp-action="ThongBaoNoiBo">Thông báo nội bộ</a></li>
+          </ul>
+        </li>
+
         <!-- DỊCH VỤ (dropdown) -->
         <li class="nav-item dropdown">
           <a id="serviceDropdown"
@@ -268,6 +298,7 @@ document.addEventListener('DOMContentLoaded', function () {
   window.addEventListener('scroll', update, { passive: true });
   window.addEventListener('resize', update);
 });
+
 </script>
 
 <!-- FORM ẨN LOGOUT -->

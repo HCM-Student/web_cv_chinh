@@ -252,8 +252,12 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxEYW5oQmFEb25WaS5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/acer/Downloads/web_cv_chinh/Views/Home/GioiThieu.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxHaW9pVGhpZXUuY3NodG1s
+[C:/Users/acer/Downloads/web_cv_chinh/Views/Home/DauTuDauThau.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxEYXVUdURhdVRoYXUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/acer/Downloads/web_cv_chinh/Views/Home/DuAnDauTu.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxEdUFuRGF1VHUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/acer/Downloads/web_cv_chinh/Views/Home/GioiThieuChung.cshtml]
@@ -278,6 +282,18 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/acer/Downloads/web_cv_chinh/Views/Home/QuaTrinhPhatTrien.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxRdWFUcmluaFBoYXRUcmllbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/acer/Downloads/web_cv_chinh/Views/Home/SanPham.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxTYW5QaGFtLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/acer/Downloads/web_cv_chinh/Views/Home/ThongBaoNoiBo.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxUaG9uZ0Jhb05vaUJvLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/acer/Downloads/web_cv_chinh/Views/Home/ThongTinDauThau.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxUaG9uZ1RpbkRhdVRoYXUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/acer/Downloads/web_cv_chinh/Views/Home/TinTuc.cshtml]
