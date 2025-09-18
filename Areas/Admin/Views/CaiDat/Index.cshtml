@@ -1,4 +1,5 @@
 @using WEB_CV.Models
+@using WEB_CV.Services.Backup
 @{
     ViewData["Title"] = "Cài đặt hệ thống";
     var caiDatChung = ViewBag.CaiDatChung as CaiDatChungVM;
@@ -6,6 +7,15 @@
     var caiDatEmail = ViewBag.CaiDatEmail as CaiDatEmailVM;
     var caiDatGiaoDien = ViewBag.CaiDatGiaoDien as CaiDatGiaoDienVM;
     var caiDatBackup = ViewBag.CaiDatBackup as CaiDatBackupVM;
+    var backupSettings = ViewBag.BackupSettings as BackupSettings;
+    var backupHistory = ViewBag.BackupHistory as List<BackupRecord>;
+    
+    string human(long bytes) {
+        string[] sizes = { "B", "KB", "MB", "GB", "TB" };
+        double len = bytes; int order = 0;
+        while (len >= 1024 && order < sizes.Length - 1) { order++; len /= 1024; }
+        return string.Format("{0:0.##} {1}", len, sizes[order]);
+    }
 }
 
 <div class="settings-container">
@@ -507,37 +517,65 @@
                         <div class="settings-card-body">
                             <div class="settings-section">
                                 <h6 class="section-title">Tự động backup</h6>
-                                <div class="row g-3">
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="form-label">Tần suất backup</label>
-                                            <select class="form-select">
-                                                <option>Hàng ngày</option>
-                                                <option selected>Hàng tuần</option>
-                                                <option>Hàng tháng</option>
-                                                <option>Tắt tự động</option>
+                                <form asp-action="SaveBackupSettings" method="post">
+                                    <div class="row g-3">
+                                        <div class="col-md-3">
+                                            <label class="form-label">Tần suất</label>
+                                            <select class="form-select" name="Frequency">
+                                                @if (backupSettings?.Frequency == "Daily")
+                                                {
+                                                    <option value="Daily" selected>Daily</option>
+                                                    <option value="Weekly">Weekly</option>
+                                                    <option value="Monthly">Monthly</option>
+                                                }
+                                                else if (backupSettings?.Frequency == "Monthly")
+                                                {
+                                                    <option value="Daily">Daily</option>
+                                                    <option value="Weekly">Weekly</option>
+                                                    <option value="Monthly" selected>Monthly</option>
+                                                }
+                                                else
+                                                {
+                                                    <option value="Daily">Daily</option>
+                                                    <option value="Weekly" selected>Weekly</option>
+                                                    <option value="Monthly">Monthly</option>
+                                                }
                                             </select>
                                         </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
+                                        <div class="col-md-3">
                                             <label class="form-label">Giờ thực hiện</label>
-                                            <input type="time" class="form-control" value="02:00">
+                                            <input class="form-control" name="TimeOfDay" value="@(backupSettings?.TimeOfDay ?? "02:00")" placeholder="02:00" />
+                                            <small class="text-muted">Định dạng 24h HH:mm</small>
                                         </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
-                                            <label class="form-label">Số lượng backup giữ lại</label>
-                                            <input type="number" class="form-control" value="10" min="1" max="50">
+                                        <div class="col-md-2">
+                                            <label class="form-label">Số lượng giữ lại</label>
+                                            <input class="form-control" name="RetentionCount" value="@(backupSettings?.RetentionCount ?? 10)" type="number" min="1" />
                                         </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="form-group">
+                                        <div class="col-md-4">
                                             <label class="form-label">Thư mục lưu trữ</label>
-                                            <input type="text" class="form-control" value="/backups/" placeholder="/path/to/backups/">
+                                            <input class="form-control" name="StoragePath" value="@(backupSettings?.StoragePath ?? "backups")" />
                                         </div>
                                     </div>
-                                </div>
+
+                                    <div class="row g-3 mt-2">
+                                        <div class="col-md-12">
+                                            <label class="form-label">Thư mục đưa vào backup (mỗi mục một dòng)</label>
+                                            <textarea class="form-control" rows="2" name="IncludeFolders">@string.Join("\n", backupSettings?.IncludeFolders ?? new List<string> { "wwwroot" })</textarea>
+                                            <small class="text-muted">Mặc định: wwwroot. Có thể thêm "App_Data", "Uploads"…</small>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-check form-switch mt-3">
+                                        <input class="form-check-input" type="checkbox" id="enabledSwitch" name="Enabled" value="true" @(backupSettings?.Enabled == true ? "checked" : "") />
+                                        <label class="form-check-label" for="enabledSwitch">Bật tự động backup</label>
+                                    </div>
+
+                                    <div class="settings-actions mt-4">
+                                        <button type="submit" class="btn btn-primary">
+                                            <i class="fas fa-save me-2"></i>Lưu cài đặt backup
+                                        </button>
+                                    </div>
+                                </form>
                             </div>
 
                             <div class="settings-section mt-4">
@@ -545,25 +583,34 @@
                                 <div class="backup-actions">
                                     <div class="row g-3">
                                         <div class="col-md-4">
-                                            <button class="btn btn-primary w-100" onclick="createFullBackup()">
-                                                <i class="fas fa-download me-2"></i>
-                                                <div>Backup toàn bộ</div>
-                                                <small class="d-block mt-1 opacity-75">Database + Files</small>
-                                            </button>
+                                            <form asp-action="CreateBackup" asp-antiforgery="true" method="post" class="d-inline w-100">
+                                                <input type="hidden" name="type" value="full" />
+                                                <button class="btn btn-primary w-100" type="submit">
+                                                    <i class="fas fa-download me-2"></i>
+                                                    <div>Backup toàn bộ</div>
+                                                    <small class="d-block mt-1 opacity-75">Database + Files</small>
+                                                </button>
+                                            </form>
                                         </div>
                                         <div class="col-md-4">
-                                            <button class="btn btn-outline-primary w-100" onclick="createDBBackup()">
-                                                <i class="fas fa-database me-2"></i>
-                                                <div>Backup Database</div>
-                                                <small class="d-block mt-1 opacity-75">Chỉ dữ liệu</small>
-                                            </button>
+                                            <form asp-action="CreateBackup" asp-antiforgery="true" method="post" class="d-inline w-100">
+                                                <input type="hidden" name="type" value="database" />
+                                                <button class="btn btn-outline-primary w-100" type="submit">
+                                                    <i class="fas fa-database me-2"></i>
+                                                    <div>Backup Database</div>
+                                                    <small class="d-block mt-1 opacity-75">Chỉ dữ liệu</small>
+                                                </button>
+                                            </form>
                                         </div>
                                         <div class="col-md-4">
-                                            <button class="btn btn-outline-primary w-100" onclick="createFilesBackup()">
-                                                <i class="fas fa-folder me-2"></i>
-                                                <div>Backup Files</div>
-                                                <small class="d-block mt-1 opacity-75">Chỉ tệp tin</small>
-                                            </button>
+                                            <form asp-action="CreateBackup" asp-antiforgery="true" method="post" class="d-inline w-100">
+                                                <input type="hidden" name="type" value="files" />
+                                                <button class="btn btn-outline-primary w-100" type="submit">
+                                                    <i class="fas fa-folder me-2"></i>
+                                                    <div>Backup Files</div>
+                                                    <small class="d-block mt-1 opacity-75">Chỉ tệp tin</small>
+                                                </button>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
@@ -572,69 +619,48 @@
                             <div class="settings-section mt-4">
                                 <h6 class="section-title">Lịch sử backup</h6>
                                 <div class="backup-history">
-                                    <div class="backup-item">
-                                        <div class="backup-info">
-                                            <div class="backup-name">full_backup_2025_03_09_02_00.zip</div>
-                                            <div class="backup-details">
-                                                <span class="backup-size">125.4 MB</span>
-                                                <span class="backup-date">09/03/2025 02:00</span>
-                                                <span class="backup-type badge bg-primary">Tự động</span>
+                                    @if (backupHistory != null && backupHistory.Any())
+                                    {
+                                        @foreach (var item in backupHistory)
+                                        {
+                                            <div class="backup-item">
+                                                <div class="backup-info">
+                                                    <div class="backup-name">@item.FileName</div>
+                                                    <div class="backup-details">
+                                                        <span class="backup-size">@human(item.SizeBytes)</span>
+                                                        <span class="backup-date">@item.CreatedAt.ToString("dd/MM/yyyy HH:mm")</span>
+                                                        <span class="backup-type badge @(item.Type == "full" ? "bg-primary" : item.Type == "db" ? "bg-info" : "bg-secondary")">
+                                                            @(item.Type == "full" ? "Full" : item.Type == "db" ? "DB" : "Files")
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                                <div class="backup-actions">
+                                                    <a class="btn btn-sm btn-outline-success" asp-action="DownloadBackup" asp-route-fileName="@item.FileName" title="Tải xuống">
+                                                        <i class="fas fa-download"></i>
+                                                    </a>
+                                                    <form class="d-inline" asp-action="RestoreBackup" method="post">
+                                                        <input type="hidden" name="fileName" value="@item.FileName" />
+                                                        <button class="btn btn-sm btn-outline-warning" onclick="return confirm('Khôi phục file này? Ứng dụng có thể cần khởi động lại.');" title="Khôi phục">
+                                                            <i class="fas fa-undo"></i>
+                                                        </button>
+                                                    </form>
+                                                    <form class="d-inline" asp-action="DeleteBackup" method="post">
+                                                        <input type="hidden" name="fileName" value="@item.FileName" />
+                                                        <button class="btn btn-sm btn-outline-danger" onclick="return confirm('Xoá file này?');" title="Xoá">
+                                                            <i class="fas fa-trash"></i>
+                                                        </button>
+                                                    </form>
+                                                </div>
                                             </div>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        <div class="text-center text-muted py-4">
+                                            <i class="fas fa-database fa-3x mb-3"></i>
+                                            <p>Chưa có backup nào được tạo</p>
                                         </div>
-                                        <div class="backup-actions">
-                                            <button class="btn btn-sm btn-outline-success" onclick="downloadBackup('full_backup_2025_03_09_02_00.zip')">
-                                                <i class="fas fa-download"></i>
-                                            </button>
-                                            <button class="btn btn-sm btn-outline-warning" onclick="restoreBackup('full_backup_2025_03_09_02_00.zip')">
-                                                <i class="fas fa-undo"></i>
-                                            </button>
-                                            <button class="btn btn-sm btn-outline-danger" onclick="deleteBackup('full_backup_2025_03_09_02_00.zip')">
-                                                <i class="fas fa-trash"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div class="backup-item">
-                                        <div class="backup-info">
-                                            <div class="backup-name">db_backup_2025_03_08_14_30.sql</div>
-                                            <div class="backup-details">
-                                                <span class="backup-size">45.2 MB</span>
-                                                <span class="backup-date">08/03/2025 14:30</span>
-                                                <span class="backup-type badge bg-secondary">Thủ công</span>
-                                            </div>
-                                        </div>
-                                        <div class="backup-actions">
-                                            <button class="btn btn-sm btn-outline-success">
-                                                <i class="fas fa-download"></i>
-                                            </button>
-                                            <button class="btn btn-sm btn-outline-warning">
-                                                <i class="fas fa-undo"></i>
-                                            </button>
-                                            <button class="btn btn-sm btn-outline-danger">
-                                                <i class="fas fa-trash"></i>
-                                            </button>
-                                        </div>
-                                    </div>
-                                    <div class="backup-item">
-                                        <div class="backup-info">
-                                            <div class="backup-name">full_backup_2025_03_02_02_00.zip</div>
-                                            <div class="backup-details">
-                                                <span class="backup-size">118.7 MB</span>
-                                                <span class="backup-date">02/03/2025 02:00</span>
-                                                <span class="backup-type badge bg-primary">Tự động</span>
-                                            </div>
-                                        </div>
-                                        <div class="backup-actions">
-                                            <button class="btn btn-sm btn-outline-success">
-                                                <i class="fas fa-download"></i>
-                                            </button>
-                                            <button class="btn btn-sm btn-outline-warning">
-                                                <i class="fas fa-undo"></i>
-                                            </button>
-                                            <button class="btn btn-sm btn-outline-danger">
-                                                <i class="fas fa-trash"></i>
-                                            </button>
-                                        </div>
-                                    </div>
+                                    }
                                 </div>
                             </div>
                         </div>
@@ -1434,76 +1460,7 @@ function showNotification(message, type = 'info') {
     }, 5000);
 }
 
-// Backup functions
-async function createFullBackup() {
-    if (confirm('Tạo backup toàn bộ hệ thống? Quá trình này có thể mất vài phút.')) {
-        const btn = event.target;
-        btn.disabled = true;
-        btn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Đang backup...';
-        
-        try {
-            const response = await fetch('/Admin/CaiDat/CreateBackup?type=full', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            });
-            
-            const result = await response.json();
-            
-            if (result.success) {
-                showNotification(result.message, 'success');
-            } else {
-                showNotification(result.message, 'error');
-            }
-        } catch (error) {
-            showNotification('Có lỗi xảy ra khi tạo backup', 'error');
-        } finally {
-            btn.disabled = false;
-            btn.innerHTML = '<i class="fas fa-download me-2"></i><div>Backup toàn bộ</div><small class="d-block mt-1 opacity-75">Database + Files</small>';
-        }
-    }
-}
-
-function createDBBackup() {
-    const btn = event.target;
-    btn.disabled = true;
-    btn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Đang backup...';
-    
-    setTimeout(() => {
-        btn.disabled = false;
-        btn.innerHTML = '<i class="fas fa-database me-2"></i><div>Backup Database</div><small class="d-block mt-1 opacity-75">Chỉ dữ liệu</small>';
-        alert('Backup database hoàn tất!');
-    }, 3000);
-}
-
-function createFilesBackup() {
-    const btn = event.target;
-    btn.disabled = true;
-    btn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Đang backup...';
-    
-    setTimeout(() => {
-        btn.disabled = false;
-        btn.innerHTML = '<i class="fas fa-folder me-2"></i><div>Backup Files</div><small class="d-block mt-1 opacity-75">Chỉ tệp tin</small>';
-        alert('Backup files hoàn tất!');
-    }, 4000);
-}
-
-function downloadBackup(filename) {
-    alert('Đang tải file: ' + filename);
-}
-
-function restoreBackup(filename) {
-    if (confirm('Khôi phục từ backup: ' + filename + '?\nLưu ý: Thao tác này sẽ ghi đè dữ liệu hiện tại!')) {
-        alert('Đang khôi phục từ backup...');
-    }
-}
-
-function deleteBackup(filename) {
-    if (confirm('Xóa backup: ' + filename + '?')) {
-        alert('Đã xóa backup!');
-    }
-}
+// Backup functions - now handled by form submission
 
 // System functions
 async function refreshSystemInfo() {
@@ -1599,4 +1556,6 @@ function updateSystemInfoDisplay(data) {
     const dbStatusElements = document.querySelectorAll('[data-info="dbstatus"]');
     dbStatusElements.forEach(el => el.textContent = data.databaseStatus);
 }
+</script>
+
 </script>

@@ -12,6 +12,8 @@ using WEB_CV.Data;
 using WEB_CV.Models;
 using WEB_CV.Models.Options;
 using WEB_CV.Services;
+using WEB_CV.Services.Backup;
+using WEB_CV.Background;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -75,6 +77,10 @@ builder.Services.AddScoped<ISEOAnalysisService, SEOAnalysisService>();
 builder.Services.AddScoped<IOnlineUserService, OnlineUserService>();
 builder.Services.AddScoped<IScheduledPublishingService, ScheduledPublishingService>();
 builder.Services.AddScoped<ISiteCounter, SiteCounter>();
+
+// Backup services
+builder.Services.AddSingleton<IBackupService, BackupService>();
+builder.Services.AddHostedService<BackupScheduler>();
 
 // Configuration options
 builder.Services.Configure<WebsiteLinksOptions>(

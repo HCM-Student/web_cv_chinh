@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WEB_CV.Models;
 using WEB_CV.Services;
+using WEB_CV.Services.Backup;
 
 namespace WEB_CV.Areas.Admin.Controllers
 {
@@ -10,10 +11,12 @@ namespace WEB_CV.Areas.Admin.Controllers
     public class CaiDatController : Controller
     {
         private readonly ICaiDatService _caiDatService;
+        private readonly IBackupService _backupService;
 
-        public CaiDatController(ICaiDatService caiDatService)
+        public CaiDatController(ICaiDatService caiDatService, IBackupService backupService)
         {
             _caiDatService = caiDatService;
+            _backupService = backupService;
         }
 
         public async Task<IActionResult> Index()
@@ -26,6 +29,10 @@ namespace WEB_CV.Areas.Admin.Controllers
             ViewBag.CaiDatEmail = await _caiDatService.GetCaiDatEmailAsync();
             ViewBag.CaiDatGiaoDien = await _caiDatService.GetCaiDatGiaoDienAsync();
             ViewBag.CaiDatBackup = await _caiDatService.GetCaiDatBackupAsync();
+            
+            // Load backup settings and history
+            ViewBag.BackupSettings = _backupService.GetSettings();
+            ViewBag.BackupHistory = _backupService.GetBackupHistory().ToList();
             
             return View();
         }
@@ -186,37 +193,107 @@ namespace WEB_CV.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        public async Task<IActionResult> SaveBackupSettings(BackupSettings model)
+        {
+            try
+            {
+                // Parse IncludeFolders từ textarea
+                var foldersRaw = (Request.Form["IncludeFolders"].ToString() ?? "");
+                model.IncludeFolders = foldersRaw
+                    .Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries)
+                    .Select(s => s.Trim())
+                    .Where(s => !string.IsNullOrWhiteSpace(s))
+                    .ToList();
+
+                _backupService.SaveSettings(model);
+                TempData["SuccessMessage"] = "Cài đặt backup đã được lưu thành công!";
+            }
+            catch (Exception ex)
+            {
+                TempData["ErrorMessage"] = $"Có lỗi xảy ra: {ex.Message}";
+            }
+            
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
         public async Task<IActionResult> CreateBackup(string type = "full")
         {
             try
             {
-                // Simulate backup creation with progress
-                var backupTypes = new Dictionary<string, string>
+                string fileName;
+                string message;
+                
+                switch (type.ToLower())
                 {
-                    ["full"] = "Backup toàn bộ hệ thống",
-                    ["database"] = "Backup cơ sở dữ liệu", 
-                    ["files"] = "Backup files và media"
-                };
+                    case "full":
+                        fileName = await _backupService.BackupFullAsync();
+                        message = "Backup toàn bộ đã được tạo thành công!";
+                        break;
+                    case "database":
+                        fileName = await _backupService.BackupDatabaseAsync();
+                        message = "Backup cơ sở dữ liệu đã được tạo thành công!";
+                        break;
+                    case "files":
+                        fileName = await _backupService.BackupFilesAsync();
+                        message = "Backup files đã được tạo thành công!";
+                        break;
+                    default:
+                        TempData["ErrorMessage"] = "Loại backup không hợp lệ!";
+                        return RedirectToAction("Index");
+                }
                 
-                var backupTypeName = backupTypes.ContainsKey(type) ? backupTypes[type] : $"Backup {type}";
-                
-                // Simulate backup process
-                await Task.Delay(3000);
-                
-                var timestamp = DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss");
-                var fileName = $"backup_{type}_{timestamp}.zip";
-                
-                return Json(new { 
-                    success = true, 
-                    message = $"{backupTypeName} đã được tạo thành công! File: {fileName}",
-                    fileName = fileName,
-                    size = "15.2 MB"
-                });
+                TempData["SuccessMessage"] = message;
+                return RedirectToAction("Index");
             }
             catch (Exception ex)
             {
-                return Json(new { success = false, message = $"Có lỗi xảy ra khi tạo backup: {ex.Message}" });
+                TempData["ErrorMessage"] = $"Có lỗi xảy ra khi tạo backup: {ex.Message}";
+                return RedirectToAction("Index");
             }
+        }
+
+        [HttpGet]
+        public IActionResult DownloadBackup(string fileName)
+        {
+            var path = _backupService.GetBackupFilePath(fileName);
+            if (path == null) return NotFound();
+            return PhysicalFile(path, "application/octet-stream", fileName);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> RestoreBackup(string fileName, string mode = "Auto")
+        {
+            try
+            {
+                if (!Enum.TryParse<RestoreMode>(mode, out var m)) m = RestoreMode.Auto;
+                await _backupService.RestoreAsync(fileName, m);
+                TempData["SuccessMessage"] = "Khôi phục thành công. Có thể cần khởi động lại ứng dụng.";
+            }
+            catch (Exception ex)
+            {
+                TempData["ErrorMessage"] = $"Có lỗi xảy ra khi khôi phục: {ex.Message}";
+            }
+            
+            return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public IActionResult DeleteBackup(string fileName)
+        {
+            try
+            {
+                if (_backupService.DeleteBackup(fileName))
+                    TempData["SuccessMessage"] = "Đã xoá bản sao lưu.";
+                else
+                    TempData["ErrorMessage"] = "Không tìm thấy file.";
+            }
+            catch (Exception ex)
+            {
+                TempData["ErrorMessage"] = $"Có lỗi xảy ra: {ex.Message}";
+            }
+            
+            return RedirectToAction("Index");
         }
 
         [HttpGet]

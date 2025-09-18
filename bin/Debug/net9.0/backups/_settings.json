@@ -1,0 +1,10 @@
+{
+  "Enabled": false,
+  "Frequency": "Monthly",
+  "TimeOfDay": "02:00",
+  "RetentionCount": 10,
+  "StoragePath": "backups",
+  "IncludeFolders": [
+    "wwwroot"
+  ]
+}
