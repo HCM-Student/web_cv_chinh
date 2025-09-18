@@ -1,17 +1,96 @@
 @{
     ViewData["Title"] = "Dự án đầu tư";
 }
-
-<div class="container py-5">
-    <div class="row">
-        <div class="col-12">
-            <h1 class="display-4 fw-bold text-primary mb-4">Dự án đầu tư</h1>
-            <p class="lead">Danh sách các dự án đầu tư đang triển khai và đã hoàn thành.</p>
-            
-            <div class="alert alert-info">
-                <i class="fas fa-info-circle me-2"></i>
-                Nội dung chi tiết về các dự án đầu tư sẽ được cập nhật sớm nhất.
+<section class="container my-4">
+    <div class="card shadow-sm">
+        <div class="card-header bg-light">
+            <strong>Trang chủ / Dự án đầu tư</strong>
+        </div>
+        <div class="card-body">
+            <div class="row g-3">
+                <div class="col-md-3">
+                    <label class="form-label">Lĩnh vực</label>
+                    <select class="form-select">
+                        <option value="">--Chọn lĩnh vực--</option>
+                        <option>Đất đai</option>
+                        <option>Môi trường</option>
+                        <option>KTTV</option>
+                        <option>Biển & Hải đảo</option>
+                        <option>Tài nguyên nước</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">Cơ quan</label>
+                    <select id="agencyFilter" class="form-select" data-coquan>
+                        <option value="">--Chọn cơ quan--</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">Tình trạng</label>
+                    <select class="form-select">
+                        <option value="">--Chọn tình trạng dự án--</option>
+                        <option>Chuẩn bị đầu tư</option>
+                        <option>Đang thực hiện</option>
+                        <option>Đã hoàn thành</option>
+                        <option>Tạm dừng</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    <label class="form-label">Tìm kiếm</label>
+                    <div class="d-flex gap-2">
+                        <input type="text" class="form-control" placeholder="Nhập từ khóa">
+                        <button class="btn btn-primary">Tìm kiếm</button>
+                    </div>
+                </div>
             </div>
+
+            <div class="table-responsive mt-4">
+                <table class="table table-hover align-middle">
+                    <thead>
+                        <tr class="table-primary">
+                            <th style="min-width: 360px;">Tên dự án</th>
+                            <th>Loại dự án</th>
+                            <th>Cơ quan chủ quản</th>
+                            <th>Tình trạng dự án</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @* Dữ liệu mẫu để bám layout; khi nối DB sẽ render từ Model *@
+                        <tr>
+                            <td class="text-primary fw-semibold">Xây dựng hệ thống thông tin quản lý cán bộ, công chức viên chức ngành TNMT</td>
+                            <td>CNTT</td>
+                            <td>Bộ Tài nguyên và Môi trường</td>
+                            <td>Đang thực hiện</td>
+                        </tr>
+                        <tr>
+                            <td class="text-primary fw-semibold">Dự án xây dựng hệ thống báo cáo chỉ tiêu thống kê ngành TN&MT</td>
+                            <td>Chuyển đổi số</td>
+                            <td>Cục CNTT & Dữ liệu TN&MT</td>
+                            <td>Chuẩn bị đầu tư</td>
+                        </tr>
+                        <tr>
+                            <td class="text-primary fw-semibold">Phát triển ứng dụng phần mềm mã nguồn mở trong ngành TN&MT</td>
+                            <td>Ứng dụng</td>
+                            <td>Văn phòng Bộ</td>
+                            <td>Đã hoàn thành</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <nav class="d-flex justify-content-end">
+                <ul class="pagination mb-0">
+                    <li class="page-item disabled"><span class="page-link">Đầu</span></li>
+                    <li class="page-item active"><span class="page-link">1</span></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item"><a class="page-link" href="#">Cuối</a></li>
+                </ul>
+            </nav>
         </div>
     </div>
-</div>
+</section>
+
+@section Scripts{
+    <script src="~/js/agencies.js" asp-append-version="true"></script>
+}

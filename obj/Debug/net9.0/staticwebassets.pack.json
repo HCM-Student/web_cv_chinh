@@ -61,6 +61,10 @@
       "PackagePath": "staticwebassets\\css\\site.css"
     },
     {
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\data\\agencies.json",
+      "PackagePath": "staticwebassets\\data\\agencies.json"
+    },
+    {
       "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\favicon.ico",
       "PackagePath": "staticwebassets\\favicon.ico"
     },
@@ -219,6 +223,10 @@
     {
       "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\img\\trang-chu-gioi-thieu-min-1.png",
       "PackagePath": "staticwebassets\\img\\trang-chu-gioi-thieu-min-1.png"
+    },
+    {
+      "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\js\\agencies.js",
+      "PackagePath": "staticwebassets\\js\\agencies.js"
     },
     {
       "Id": "C:\\Users\\acer\\Downloads\\web_cv_chinh\\wwwroot\\js\\site.js",
