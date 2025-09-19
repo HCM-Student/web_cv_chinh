@@ -190,7 +190,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @{ int nguoiDungIndex = Model.Count(); }
+                        @{ int nguoiDungIndex = 1; }
                         @foreach (var item in Model)
                         {
                             <tr>
@@ -277,7 +277,7 @@
                                     </div>
                                 </td>
                             </tr>
-                            nguoiDungIndex--;
+                            nguoiDungIndex++;
                         }
                     </tbody>
                 </table>

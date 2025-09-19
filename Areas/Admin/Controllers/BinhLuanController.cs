@@ -37,7 +37,7 @@ namespace WEB_CV.Areas.Admin.Controllers
             }
 
             var comments = await query
-                .OrderByDescending(b => b.Ngay)
+                .OrderBy(b => b.Id)
                 .ToListAsync();
 
             ViewBag.TrangThai = trangThai;

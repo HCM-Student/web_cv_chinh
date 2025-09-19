@@ -138,7 +138,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @{ int chuyenMucIndex = Model.Count(); }
+                        @{ int chuyenMucIndex = 1; }
                         @foreach (var item in Model)
                         {
                             var baiVietCount = Context.BaiViets.Count(b => b.ChuyenMucId == item.Id);
@@ -205,7 +205,7 @@
                                     </div>
                                 </td>
                             </tr>
-                            chuyenMucIndex--;
+                            chuyenMucIndex++;
                         }
                     </tbody>
                 </table>

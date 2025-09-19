@@ -22,7 +22,7 @@ namespace WEB_CV.Areas.Admin.Controllers
             if (!string.IsNullOrWhiteSpace(q))
                 query = query.Where(x => x.Ten.Contains(q));
 
-            var list = await query.OrderBy(x => x.Ten).ToListAsync();
+            var list = await query.OrderBy(x => x.Id).ToListAsync();
             ViewBag.Q = q;
             return View(list);
         }

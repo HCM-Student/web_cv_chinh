@@ -160,7 +160,7 @@
         
         <!-- Grid View -->
         <div class="posts-grid" id="gridView">
-            @{ int index = Model.Count(); }
+            @{ int index = 1; }
             @foreach (var item in Model)
             {
                 <div class="post-item">
@@ -235,7 +235,7 @@
                         </div>
                     </div>
                 </div>
-                index--;
+                index++;
             }
         </div>
 
@@ -255,7 +255,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @{ int tableIndex = Model.Count(); }
+                        @{ int tableIndex = 1; }
                         @foreach (var item in Model)
                         {
                             <tr>
@@ -321,7 +321,7 @@
                                     </div>
                                 </td>
                             </tr>
-                            tableIndex--;
+                            tableIndex++;
                         }
                     </tbody>
                 </table>

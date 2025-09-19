@@ -24,7 +24,7 @@ namespace WEB_CV.Areas.Admin.Controllers
         // GET: Admin/NguoiDung
         public async Task<IActionResult> Index()
         {
-            var nguoiDungs = await _context.NguoiDungs.ToListAsync();
+            var nguoiDungs = await _context.NguoiDungs.OrderBy(x => x.Id).ToListAsync();
             return View(nguoiDungs);
         }
 

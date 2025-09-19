@@ -218,7 +218,7 @@ namespace WEB_CV.Areas.Admin.Controllers
             var query = _db.BaiViets
                 .Include(x => x.ChuyenMuc)
                 .Include(x => x.TacGia)
-                .OrderByDescending(x => x.NgayDang)
+                .OrderBy(x => x.Id)
                 .AsQueryable();
 
             if (!string.IsNullOrWhiteSpace(q))
