@@ -36,6 +36,19 @@ public class ChatController : Controller
             .Select(u => new { Id = u.Id.ToString(), UserName = u.HoTen, Avatar = u.Avatar })
             .ToListAsync();
         ViewBag.Users = users;
+        
+        // Set room display name
+        if (room.StartsWith("dm:"))
+        {
+            var ids = room.Replace("dm:", "").Split(":");
+            var otherId = ids[0] == meId ? ids[1] : ids[0];
+            var otherUser = users.FirstOrDefault(u => u.Id == otherId);
+            ViewBag.RoomDisplayName = otherUser?.UserName ?? "Unknown User";
+        }
+        else
+        {
+            ViewBag.RoomDisplayName = room;
+        }
 
         // Lấy 100 tin gần nhất của room với thông tin avatar
         var msgs = await _db.ChatMessages

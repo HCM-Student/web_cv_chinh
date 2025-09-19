@@ -1,8 +1,0 @@
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle @(currentController=="Services" && (currentAction=="LidarAndModeling" || currentAction=="GIS" || currentAction=="SurveyServices") ? "active" : "")" href="#" id="svcDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Chuyên môn</a>
-                    <ul class="dropdown-menu" aria-labelledby="svcDropdown">
-                        <li><a class="dropdown-item" asp-controller="Services" asp-action="LidarAndModeling">LiDAR &amp; 3D</a></li>
-                        <li><a class="dropdown-item" asp-controller="Services" asp-action="GIS">GIS</a></li>
-                        <li><a class="dropdown-item" asp-controller="Services" asp-action="SurveyServices">Khảo sát</a></li>
-                    </ul>
-                </li>

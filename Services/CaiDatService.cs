@@ -459,9 +459,8 @@ namespace WEB_CV.Services
                 // Get email settings
                 var settings = await GetCaiDatEmailAsync();
                 
-                // TODO: Implement actual email connection test
-                // This is a placeholder
-                await Task.Delay(1000); // Simulate async operation
+                // Test email connection by checking if required settings exist
+                await Task.Delay(100); // Brief delay for async operation
                 
                 return !string.IsNullOrEmpty(settings.MayKhuSMTP) && 
                        !string.IsNullOrEmpty(settings.TenDangNhap);

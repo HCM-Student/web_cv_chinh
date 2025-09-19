@@ -50,14 +50,16 @@
     <section class="col-lg-9">
       <div class="card shadow-sm chat-card">
         <div class="card-header d-flex justify-content-between align-items-center">
-          <div class="fw-bold">
+          <div class="fw-bold d-flex align-items-center">
             @if (room.StartsWith("dm:"))
             {
-              <i class="bi bi-person-circle me-2"></i>@ViewBag.RoomDisplayName
+              <i class="bi bi-person-circle me-2 text-primary"></i>
+              <span>@ViewBag.RoomDisplayName</span>
             }
             else
             {
-              <text># @ViewBag.RoomDisplayName</text>
+              <i class="bi bi-hash me-2 text-success"></i>
+              <span>@ViewBag.RoomDisplayName</span>
             }
           </div>
           <div class="small text-muted" id="typing">
