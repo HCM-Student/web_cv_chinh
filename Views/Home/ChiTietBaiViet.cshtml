@@ -189,7 +189,7 @@
             
             <!-- ===================== SIDEBAR ===================== -->
             <div class="col-lg-4">
-                <aside class="article-sidebar">
+                <aside class="article-sidebar latest-sticky">
                     <!-- Bài viết liên quan -->
                     @if (Model.BaiVietLienQuan.Any())
                     {
@@ -473,6 +473,25 @@
         </div>
     </div>
 </section>
+
+<style>
+/* ===== Sticky Sidebar ===== */
+/* Chỉ sticky trên màn hình >=992px để tránh đè mobile */
+@@media (min-width: 992px){
+  .latest-sticky{
+    position: sticky;
+    top: 88px;               /* khoảng cách dưới header fixed (chỉnh theo header của bạn) */
+  }
+}
+
+/* Gợi ý: nếu danh sách dài quá, cho nội bộ cuộn */
+@@media (min-width: 992px){
+  .latest-sticky .sidebar-widget{
+    max-height: calc(100vh - 120px);  /* tuỳ chỉnh */
+    overflow: auto;
+  }
+}
+</style>
 
 <script>
 // Chức năng đếm lượt xem khi người dùng đọc bài viết

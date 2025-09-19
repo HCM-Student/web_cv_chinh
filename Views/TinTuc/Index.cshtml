@@ -151,6 +151,23 @@
 .card-article .excerpt{ color:#6c757d; font-size:.975rem }
 
 .sidebar .widget .item-title{ font-weight:600; line-height:1.25 }
+
+/* ===== Sticky Sidebar ===== */
+/* Chỉ sticky trên màn hình >=992px để tránh đè mobile */
+@@media (min-width: 992px){
+  .sidebar-sticky{
+    position: sticky;
+    top: 88px;               /* khoảng cách dưới header fixed (chỉnh theo header của bạn) */
+  }
+}
+
+/* Gợi ý: nếu danh sách dài quá, cho nội bộ cuộn */
+@@media (min-width: 992px){
+  .sidebar-sticky .widget{
+    max-height: calc(100vh - 120px);  /* tuỳ chỉnh */
+    overflow: auto;
+  }
+}
 </style>
 }
 
