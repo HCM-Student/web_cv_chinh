@@ -9,124 +9,573 @@
 
 <style>
 :root{
-  --brand: var(--bs-primary, #2563eb);
-  --ring: rgba(37,99,235,.2);
+  --brand: #0061ff;
+  --brand-light: rgba(0, 97, 255, 0.1);
+  --ring: rgba(0, 97, 255, 0.2);
   --card: #ffffff;
   --border: #e5e7eb;
-  --muted: #6b7280;
+  --muted: #64748b;
+  --success: #10b981;
+  --danger: #ef4444;
+  --dark: #1e293b;
+  --light-bg: #f8fafc;
 }
 
-/* Header */
-.media-head .btn{ border-radius: 999px; }
-.media-head .input-group .form-control{ border-radius: 999px; }
-.media-head .input-group-text{ border-radius: 999px; }
+/* Header Section */
+.page-header {
+  background: linear-gradient(135deg, var(--brand) 0%, #0052d4 100%);
+  padding: 2rem 2rem 1rem;
+  margin: -2rem -2rem 2rem;
+  color: white;
+  border-radius: 0 0 24px 24px;
+}
+
+.page-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0 0 0.5rem 0;
+  display: flex;
+  align-items: center;
+  letter-spacing: -0.5px;
+}
+
+.page-subtitle {
+  font-size: 1rem;
+  opacity: 0.9;
+  margin: 0;
+}
+
+/* Stats Cards */
+.stats-section {
+  margin-bottom: 2rem;
+}
+
+.stat-card {
+  background: white;
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid var(--border);
+  height: 100%;
+}
+
+.stat-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.12);
+}
+
+.stat-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.bg-primary { background: linear-gradient(135deg, var(--brand), #0052d4); }
+.bg-success { background: linear-gradient(135deg, var(--success), #059669); }
+.bg-info { background: linear-gradient(135deg, #06b6d4, #0891b2); }
+.bg-warning { background: linear-gradient(135deg, #f59e0b, #d97706); }
+
+.stat-number {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--dark);
+  margin: 0 0 0.25rem 0;
+}
+
+.stat-label {
+  color: var(--muted);
+  font-size: 0.9rem;
+  font-weight: 500;
+  margin: 0;
+}
+
+/* Toolbar */
+.media-toolbar {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  margin-bottom: 2rem;
+  border: 1px solid var(--border);
+}
+
+.toolbar-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--dark);
+  margin: 0 0 1rem 0;
+}
+
+.media-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+}
+
+.search-group {
+  position: relative;
+  min-width: 300px;
+  flex: 1;
+}
+
+.search-icon {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--muted);
+  z-index: 2;
+}
+
+.search-input {
+  width: 100%;
+  padding: 0.75rem 1rem 0.75rem 2.75rem;
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+  background: var(--light-bg);
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--brand);
+  box-shadow: 0 0 0 3px var(--ring);
+  background: white;
+}
+
+.btn-group-custom {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.btn-modern {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  border: 2px solid transparent;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.btn-primary-modern {
+  background: linear-gradient(135deg, var(--brand), #0052d4);
+  color: white;
+  box-shadow: 0 4px 14px rgba(0, 97, 255, 0.3);
+}
+
+.btn-primary-modern:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 97, 255, 0.4);
+  color: white;
+}
+
+.btn-outline-modern {
+  background: white;
+  color: var(--dark);
+  border-color: var(--border);
+}
+
+.btn-outline-modern:hover {
+  background: var(--brand-light);
+  border-color: var(--brand);
+  color: var(--brand);
+  transform: translateY(-1px);
+}
+
+.btn-outline-modern:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-danger-modern {
+  background: white;
+  color: var(--danger);
+  border-color: rgba(239, 68, 68, 0.3);
+}
+
+.btn-danger-modern:hover {
+  background: rgba(239, 68, 68, 0.1);
+  border-color: var(--danger);
+  color: var(--danger);
+}
 
 /* Breadcrumb */
-.media-crumb{
-  background: #fff; border:1px solid var(--border);
-  border-radius: 999px; padding: .35rem .8rem;
-  box-shadow: 0 .25rem .75rem rgba(0,0,0,.04);
+.media-breadcrumb {
+  background: white;
+  padding: 1rem 1.5rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  margin-bottom: 1.5rem;
+  border: 1px solid var(--border);
 }
 
-/* Grid */
-.media-grid{
-  display:grid; gap:14px;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+.breadcrumb-modern {
+  margin: 0;
+  padding: 0;
+  background: none;
 }
 
-.tile{
-  position:relative; background:var(--card);
-  border:1px solid var(--border); border-radius:16px;
-  overflow:hidden; transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+.breadcrumb-modern .breadcrumb-item {
+  font-size: 0.9rem;
 }
-.tile:hover{
-  transform: translateY(-2px);
-  box-shadow: 0 12px 28px rgba(0,0,0,.06);
-  border-color: #d7dbe3;
+
+.breadcrumb-modern .breadcrumb-item a {
+  color: var(--brand);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
 }
-.tile.selected{
-  outline: 3px solid var(--brand); outline-offset: 0;
+
+.breadcrumb-modern .breadcrumb-item a:hover {
+  color: #0052d4;
+}
+
+.breadcrumb-modern .breadcrumb-item.active {
+  color: var(--dark);
+  font-weight: 600;
+}
+
+/* Grid Container */
+.media-container {
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  border: 1px solid var(--border);
+  overflow: hidden;
+}
+
+.media-grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  padding: 1.5rem;
+}
+
+/* Media Tiles */
+.tile {
+  position: relative;
+  background: white;
+  border: 2px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+}
+
+.tile:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.12);
+  border-color: var(--brand);
+}
+
+.tile.selected {
+  border-color: var(--brand);
   box-shadow: 0 0 0 4px var(--ring);
+  transform: translateY(-2px);
 }
 
-/* Thumb */
-.tile-thumb{
-  position:relative; width:100%; aspect-ratio:1/1; background:#f3f4f6;
-  display:flex; align-items:center; justify-content:center;
-}
-.tile-thumb img{ width:100%; height:100%; object-fit:cover; }
-
-/* Overlay actions (hover) */
-.tile-actions{
-  position:absolute; left:.5rem; right:.5rem; bottom:.5rem;
-  display:flex; gap:.45rem; justify-content:center;
-  opacity:0; transform: translateY(4px);
-  transition: .15s ease;
-}
-.tile:hover .tile-actions{ opacity:1; transform:none; }
-.tile-actions .btn{
-  padding:.35rem .6rem; border-radius:999px;
-  backdrop-filter: blur(3px);
+.tile-thumb {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1/1;
+  background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
 }
 
-/* Info */
-.tile-info{ padding:.65rem .75rem; border-top:1px solid var(--border); background:#fff; }
-.tile-name{ font-weight:600; font-size:.95rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
-.tile-sub{ color:var(--muted); font-size:.8rem; }
+.tile-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
 
-/* Ẩn input của FilePond (vì đã gắn vào label) */
-#uploader{ display:none; }
+.tile:hover .tile-thumb img {
+  transform: scale(1.05);
+}
 
-/* Empty */
-.media-empty{
-  border:1px dashed var(--border); border-radius:16px; background:#fff;
-  padding:48px; text-align:center; color:var(--muted);
+.tile-actions {
+  position: absolute;
+  left: 0.75rem;
+  right: 0.75rem;
+  bottom: 0.75rem;
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  opacity: 0;
+  transform: translateY(8px);
+  transition: all 0.3s ease;
+}
+
+.tile:hover .tile-actions {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.tile-actions .btn {
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.tile-info {
+  padding: 1rem;
+  border-top: 1px solid var(--border);
+  background: white;
+}
+
+.tile-name {
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: var(--dark);
+  margin-bottom: 0.25rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tile-sub {
+  color: var(--muted);
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+/* Folder specific styles */
+.folder-tile .tile-thumb {
+  background: linear-gradient(135deg, #fbbf24, #f59e0b);
+}
+
+.folder-icon {
+  font-size: 3rem;
+  color: white;
+  opacity: 0.9;
+}
+
+.file-icon-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+  border-radius: 8px;
+}
+
+/* Empty State */
+.media-empty {
+  text-align: center;
+  padding: 4rem 2rem;
+  color: var(--muted);
+}
+
+.empty-icon {
+  font-size: 4rem;
+  color: var(--border);
+  margin-bottom: 1rem;
+}
+
+.empty-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--dark);
+  margin-bottom: 0.5rem;
+}
+
+.empty-text {
+  font-size: 0.95rem;
+  color: var(--muted);
+}
+
+/* FilePond custom styling */
+.filepond--root {
+  font-family: 'Inter', sans-serif;
+}
+
+#uploader {
+  display: none;
+}
+
+/* Notifications */
+.notification {
+  position: fixed;
+  top: 2rem;
+  right: 2rem;
+  z-index: 9999;
+  min-width: 300px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+  border-radius: 12px;
+}
+
+/* Responsive */
+@@media (max-width: 768px) {
+  .media-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .search-group {
+    min-width: auto;
+  }
+  
+  .btn-group-custom {
+    justify-content: center;
+  }
+  
+  .media-grid {
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 1rem;
+    padding: 1rem;
+  }
+  
+  .page-header {
+    padding: 1.5rem 1rem 1rem;
+    margin: -2rem -2rem 1.5rem;
+  }
+  
+  .page-title {
+    font-size: 1.5rem;
+  }
 }
 </style>
 
-<div class="container-fluid py-4">
-  <!-- Header -->
-  <div class="d-flex flex-wrap align-items-center justify-content-between mb-3 media-head">
-    <div class="pe-3">
-      <h4 class="fw-bold mb-1">Thư viện media</h4>
-      <div class="text-muted small">Quản lý ảnh & tệp trong <code>/wwwroot/media</code></div>
-    </div>
-
-    <div class="d-flex flex-wrap align-items-center gap-2">
-      <div class="input-group me-1" style="max-width:280px">
-        <span class="input-group-text bg-white border-end-0"><i class="fas fa-search"></i></span>
-        <input id="search" class="form-control border-start-0" placeholder="Tìm tên file hoặc thư mục...">
+<div class="admin-media-page">
+  <!-- Header Section -->
+  <div class="page-header">
+    <div class="d-flex justify-content-between align-items-center">
+      <div>
+        <h1 class="page-title">
+          <i class="fas fa-images me-2"></i>
+          Thư viện Media
+        </h1>
+        <p class="page-subtitle">Quản lý ảnh, video và tệp đính kèm trong <code>/wwwroot/media</code></p>
       </div>
+      <div class="d-flex gap-2">
+        <button class="btn btn-outline-light" onclick="refreshStats()">
+          <i class="fas fa-sync-alt me-1"></i>
+          Làm mới
+        </button>
+      </div>
+    </div>
+  </div>
 
-      <button id="btnNewFolder" class="btn btn-outline-secondary">
-        <i class="fas fa-folder-plus me-1"></i> Thư mục mới
-      </button>
-      <button id="btnRename" class="btn btn-outline-secondary" disabled>
-        <i class="fas fa-i-cursor me-1"></i> Đổi tên
-      </button>
-      <button id="btnDelete" class="btn btn-outline-danger" disabled>
-        <i class="fas fa-trash me-1"></i> Xoá
-      </button>
+  <!-- Stats Cards -->
+  <div class="stats-section">
+    <div class="row g-3">
+      <div class="col-md-3">
+        <div class="stat-card">
+          <div class="stat-icon bg-primary">
+            <i class="fas fa-file"></i>
+          </div>
+          <h3 class="stat-number" id="totalFiles">0</h3>
+          <p class="stat-label">Tổng số tệp</p>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="stat-card">
+          <div class="stat-icon bg-success">
+            <i class="fas fa-images"></i>
+          </div>
+          <h3 class="stat-number" id="totalImages">0</h3>
+          <p class="stat-label">Hình ảnh</p>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="stat-card">
+          <div class="stat-icon bg-info">
+            <i class="fas fa-folder"></i>
+          </div>
+          <h3 class="stat-number" id="totalFolders">0</h3>
+          <p class="stat-label">Thư mục</p>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="stat-card">
+          <div class="stat-icon bg-warning">
+            <i class="fas fa-hdd"></i>
+          </div>
+          <h3 class="stat-number" id="totalSize">0 MB</h3>
+          <p class="stat-label">Dung lượng</p>
+        </div>
+      </div>
+    </div>
+  </div>
 
-      <label class="btn btn-primary mb-0">
-        <i class="fas fa-upload me-1"></i> Tải lên
-        <input type="file" id="uploader" name="files" multiple />
-      </label>
+  <!-- Toolbar -->
+  <div class="media-toolbar">
+    <h3 class="toolbar-title">Công cụ quản lý</h3>
+    <div class="media-actions">
+      <div class="search-group">
+        <i class="fas fa-search search-icon"></i>
+        <input id="search" class="search-input" placeholder="Tìm kiếm tên file hoặc thư mục..." />
+      </div>
+      
+      <div class="btn-group-custom">
+        <label class="btn-modern btn-primary-modern">
+          <i class="fas fa-upload"></i>
+          Tải lên
+          <input type="file" id="uploader" name="files" multiple />
+        </label>
+        
+        <button id="btnNewFolder" class="btn-modern btn-outline-modern">
+          <i class="fas fa-folder-plus"></i>
+          Thư mục mới
+        </button>
+        
+        <button id="btnRename" class="btn-modern btn-outline-modern" disabled>
+          <i class="fas fa-edit"></i>
+          Đổi tên
+        </button>
+        
+        <button id="btnDelete" class="btn-modern btn-danger-modern" disabled>
+          <i class="fas fa-trash"></i>
+          Xóa
+        </button>
+      </div>
     </div>
   </div>
 
   <!-- Breadcrumb -->
-  <nav class="media-crumb mb-3" aria-label="breadcrumb">
-    <ol id="crumb" class="breadcrumb mb-0 small"><!-- render ở JS --></ol>
+  <nav class="media-breadcrumb" aria-label="breadcrumb">
+    <ol id="crumb" class="breadcrumb-modern"><!-- render ở JS --></ol>
   </nav>
 
-  <!-- Grid -->
-  <div id="grid" class="media-grid"></div>
-
-  <div id="emptyState" class="media-empty d-none">
-    <i class="fas fa-images fa-2x mb-2"></i>
-    <p class="mb-1">Thư mục trống</p>
-    <div class="text-muted small">Tải lên tệp hoặc tạo thư mục mới</div>
+  <!-- Media Grid -->
+  <div class="media-container">
+    <div id="grid" class="media-grid"></div>
+    
+    <div id="emptyState" class="media-empty d-none">
+      <i class="fas fa-folder-open empty-icon"></i>
+      <h3 class="empty-title">Thư mục trống</h3>
+      <p class="empty-text">Tải lên tệp tin hoặc tạo thư mục mới để bắt đầu</p>
+      <div class="mt-3">
+        <label class="btn-modern btn-primary-modern">
+          <i class="fas fa-upload me-1"></i>
+          Tải lên tệp tin
+          <input type="file" multiple style="display: none;" onchange="handleEmptyUpload(this)" />
+        </label>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -134,20 +583,106 @@
 /* ===== State & helpers ===== */
 let currentFolder = "";
 let selectedEl = null;
-const grid  = document.getElementById('grid');
+const grid = document.getElementById('grid');
 const crumb = document.getElementById('crumb');
 const empty = document.getElementById('emptyState');
 
 const api = (url, opt={}) => fetch(url, opt).then(r => r.ok ? r.json() : Promise.reject(r));
 const esc = s => (s||"").replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 
-/* Bootstrap tooltips */
+/* Helper functions */
+function getFileIcon(fileName, contentType) {
+  const ext = fileName.split('.').pop()?.toLowerCase();
+  let iconClass = 'fas fa-file';
+  let bgColor = '#6b7280';
+  
+  if (contentType) {
+    if (contentType.startsWith('image/')) {
+      iconClass = 'fas fa-image';
+      bgColor = '#10b981';
+    } else if (contentType.startsWith('video/')) {
+      iconClass = 'fas fa-video';
+      bgColor = '#f59e0b';
+    } else if (contentType.startsWith('audio/')) {
+      iconClass = 'fas fa-music';
+      bgColor = '#8b5cf6';
+    } else if (contentType.includes('pdf')) {
+      iconClass = 'fas fa-file-pdf';
+      bgColor = '#ef4444';
+    } else if (contentType.includes('word')) {
+      iconClass = 'fas fa-file-word';
+      bgColor = '#3b82f6';
+    } else if (contentType.includes('excel') || contentType.includes('spreadsheet')) {
+      iconClass = 'fas fa-file-excel';
+      bgColor = '#10b981';
+    }
+  }
+  
+  return `<div class="file-icon-placeholder" style="background: ${bgColor}; color: white;"><i class="${iconClass}"></i></div>`;
+}
+
+function updateStats(items) {
+  const stats = {
+    files: items.filter(i => i.type === 'file').length,
+    images: items.filter(i => i.type === 'file' && i.contentType && i.contentType.startsWith('image/')).length,
+    folders: items.filter(i => i.type === 'folder').length,
+    totalSize: items.filter(i => i.type === 'file').reduce((sum, i) => sum + (i.size || 0), 0)
+  };
+  
+  document.getElementById('totalFiles').textContent = stats.files;
+  document.getElementById('totalImages').textContent = stats.images;
+  document.getElementById('totalFolders').textContent = stats.folders;
+  document.getElementById('totalSize').textContent = formatSize(stats.totalSize);
+}
+
+function refreshStats() {
+  load(document.getElementById('search').value || '');
+}
+
+function handleEmptyUpload(input) {
+  if (input.files && input.files.length > 0) {
+    // Trigger the main uploader
+    const mainUploader = document.getElementById('uploader');
+    mainUploader.files = input.files;
+    pond.addFiles(Array.from(input.files));
+  }
+}
+
+/* Enhanced notifications */
+function showNotification(message, type = 'success') {
+  // Create notification element
+  const notification = document.createElement('div');
+  notification.className = `alert alert-${type} alert-dismissible fade show notification`;
+  notification.innerHTML = `
+    ${message}
+    <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+  `;
+  
+  document.body.appendChild(notification);
+  
+  // Auto remove after 5 seconds
+  setTimeout(() => {
+    if (notification.parentNode) {
+      notification.remove();
+    }
+  }, 5000);
+}
+
+// Enhanced tooltip initialization
 function initTooltips(){
-  if (window.bootstrap?.Tooltip){
-    document.querySelectorAll('[title]').forEach(el=>{
-      const prev = bootstrap.Tooltip.getInstance(el);
-      if (prev) prev.dispose();
-      new bootstrap.Tooltip(el, { boundary: document.body, placement: 'top' });
+  if (typeof bootstrap !== 'undefined' && bootstrap.Tooltip){
+    // Dispose existing tooltips
+    document.querySelectorAll('[title], [data-bs-title]').forEach(el => {
+      const existingTooltip = bootstrap.Tooltip.getInstance(el);
+      if (existingTooltip) {
+        existingTooltip.dispose();
+      }
+      // Create new tooltip
+      new bootstrap.Tooltip(el, { 
+        boundary: document.body, 
+        placement: 'top',
+        trigger: 'hover focus'
+      });
     });
   }
 }
@@ -157,20 +692,44 @@ FilePond.registerPlugin(FilePondPluginImagePreview);
 const pond = FilePond.create(document.getElementById('uploader'), {
   name: 'files',
   labelIdle: "Kéo & thả hoặc <span class='filepond--label-action'>chọn file</span>",
-  server: { process: { url: `/Admin/Media/Upload?folder=${encodeURIComponent(currentFolder)}`, onload: () => load() } }
+  server: { 
+    process: { 
+      url: `/Admin/Media/Upload?folder=${encodeURIComponent(currentFolder)}`, 
+      onload: () => {
+        showNotification('<i class="fas fa-check me-2"></i>Tải lên thành công!', 'success');
+        load();
+      }
+    } 
+  }
 });
+
 function refreshPondServer(){
-  pond.setOptions({ server:{ process:{ url:`/Admin/Media/Upload?folder=${encodeURIComponent(currentFolder)}`, onload:()=>load() } }});
+  pond.setOptions({ 
+    server:{ 
+      process:{ 
+        url:`/Admin/Media/Upload?folder=${encodeURIComponent(currentFolder)}`, 
+        onload:() => {
+          showNotification('<i class="fas fa-check me-2"></i>Tải lên thành công!', 'success');
+          load();
+        }
+      }
+    }
+  });
 }
 
 /* ===== Breadcrumb render ===== */
 function renderCrumb(folder){
   const parts = (folder||"").split('/').filter(Boolean);
-  let html = `<li class="breadcrumb-item"><a href="#" data-folder="">media</a></li>`;
+  let html = `<li class="breadcrumb-item"><a href="#" data-folder=""><i class="fas fa-home me-1"></i>Media Root</a></li>`;
   let path = "";
   for(const p of parts){
     path += (path?'/':'') + p;
-    html += `<li class="breadcrumb-item"><a href="#" data-folder="${path}">${esc(p)}</a></li>`;
+    const isLast = path === folder;
+    if(isLast){
+      html += `<li class="breadcrumb-item active">${esc(p)}</li>`;
+    } else {
+      html += `<li class="breadcrumb-item"><a href="#" data-folder="${path}">${esc(p)}</a></li>`;
+    }
   }
   crumb.innerHTML = html;
   crumb.querySelectorAll('a[data-folder]').forEach(a=>{
@@ -201,23 +760,23 @@ function renderGrid(items){
     div.dataset.type = it.type;
 
     if(it.type === 'folder'){
+      div.classList.add('folder-tile');
       div.innerHTML = `
         <div class="tile-thumb">
-          <img alt="folder"
-               src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Crect width='200' height='140' y='30' rx='16' fill='%23EAB308'/%3E%3C/svg%3E">
+          <i class="fas fa-folder folder-icon"></i>
         </div>
         <div class="tile-info">
-          <div class="tile-name">📁 ${esc(it.name)}</div>
+          <div class="tile-name">${esc(it.name)}</div>
           <div class="tile-sub">Thư mục</div>
         </div>
         <div class="tile-actions">
-          <button class="btn btn-light border btn-sm shadow-sm"
+          <button class="btn btn-primary btn-sm"
                   title="Mở thư mục"
                   onclick="openFolder('${it.path}')">
             <i class="fas fa-folder-open"></i>
           </button>
-          <button class="btn btn-light border btn-sm shadow-sm"
-                  title="Xoá"
+          <button class="btn btn-danger btn-sm"
+                  title="Xóa thư mục"
                   onclick="deletePath('${it.path}')">
             <i class="fas fa-trash"></i>
           </button>
@@ -226,30 +785,35 @@ function renderGrid(items){
     }else{
       const thumb = (it.contentType && it.contentType.startsWith('image/'))
         ? it.url
-        : "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Crect width='200' height='200' rx='16' fill='%23e5e7eb'/%3E%3Ctext x='50%25' y='55%25' text-anchor='middle' font-size='48' fill='%239ca3af'%3E%F0%9F%93%84%3C/text%3E%3C/svg%3E";
+        : getFileIcon(it.name, it.contentType);
       const size = formatSize(it.size);
+      const isImage = it.contentType && it.contentType.startsWith('image/');
+      
       div.innerHTML = `
         <div class="tile-thumb">
-          <img src="${thumb}" alt="${esc(it.name)}"
-               onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 200 200%22%3E%3Crect width=%22200%22 height=%22200%22 rx=%2216%22 fill=%22%23e5e7eb%22/%3E%3C/svg%3E'">
+          ${isImage ? 
+            `<img src="${thumb}" alt="${esc(it.name)}" loading="lazy"
+                 onerror="this.outerHTML='<div class=\\"file-icon-placeholder\\"><i class=\\"fas fa-image\\"></i></div>'">` :
+            thumb
+          }
         </div>
         <div class="tile-info">
-          <div class="tile-name">${esc(it.name)}</div>
+          <div class="tile-name" title="${esc(it.name)}">${esc(it.name)}</div>
           <div class="tile-sub">${size}</div>
         </div>
         <div class="tile-actions">
-          <button class="btn btn-light border btn-sm shadow-sm"
-                  title="Copy link"
+          <button class="btn btn-info btn-sm"
+                  title="Sao chép đường dẫn"
                   onclick="copyUrl('${it.url}')">
-            <i class="fas fa-link"></i>
+            <i class="fas fa-copy"></i>
           </button>
-          <a class="btn btn-light border btn-sm shadow-sm"
-             title="Xem"
+          <a class="btn btn-success btn-sm"
+             title="Xem tệp"
              href="${it.url}" target="_blank" rel="noopener">
-            <i class="fas fa-eye"></i>
+            <i class="fas fa-external-link-alt"></i>
           </a>
-          <button class="btn btn-light border btn-sm shadow-sm"
-                  title="Xoá"
+          <button class="btn btn-danger btn-sm"
+                  title="Xóa tệp"
                   onclick="deletePath('${it.path}')">
             <i class="fas fa-trash"></i>
           </button>
@@ -260,6 +824,9 @@ function renderGrid(items){
     grid.appendChild(div);
   }
 
+  // Update statistics
+  updateStats(items);
+  
   // bật tooltip sau khi render
   initTooltips();
 }
@@ -274,13 +841,20 @@ function selectTile(el){
 
 /* ===== Actions ===== */
 async function load(q=""){
-  const data = await api(`/Admin/Media/List?folder=${encodeURIComponent(currentFolder)}&q=${encodeURIComponent(q)}`);
-  renderCrumb(currentFolder);
-  renderGrid(data.items || []);
-  refreshPondServer();
+  try {
+    const data = await api(`/Admin/Media/List?folder=${encodeURIComponent(currentFolder)}&q=${encodeURIComponent(q)}`);
+    renderCrumb(currentFolder);
+    renderGrid(data.items || []);
+    refreshPondServer();
+  } catch (error) {
+    showNotification('<i class="fas fa-exclamation-triangle me-2"></i>Lỗi khi tải dữ liệu', 'danger');
+  }
 }
 
-function openFolder(p){ currentFolder = p || ""; load(document.getElementById('search').value || ""); }
+function openFolder(p){ 
+  currentFolder = p || ""; 
+  load(document.getElementById('search').value || ""); 
+}
 
 function formatSize(bytes){
   if(!bytes && bytes!==0) return '';
@@ -289,31 +863,44 @@ function formatSize(bytes){
 }
 
 function copyUrl(url){
-  navigator.clipboard.writeText(location.origin + url).then(()=> {
-    (window.toastr?.success && toastr.success('Đã copy link!')) || alert('Đã copy link!');
+  const fullUrl = location.origin + url;
+  navigator.clipboard.writeText(fullUrl).then(()=> {
+    showNotification(`<i class="fas fa-check me-2"></i>Đã sao chép đường dẫn: <code>${fullUrl}</code>`, 'success');
+  }).catch(() => {
+    showNotification('<i class="fas fa-exclamation-triangle me-2"></i>Không thể sao chép đường dẫn', 'warning');
   });
 }
 
 async function deletePath(path){
-  if(!confirm('Bạn chắc chắn muốn xoá?')) return;
-  await api('/Admin/Media/Delete', {
-    method:'POST',
-    headers:{'Content-Type':'application/x-www-form-urlencoded'},
-    body:`path=${encodeURIComponent(path)}`
-  });
-  load();
+  if(!confirm('Bạn chắc chắn muốn xóa?')) return;
+  try {
+    await api('/Admin/Media/Delete', {
+      method:'POST',
+      headers:{'Content-Type':'application/x-www-form-urlencoded'},
+      body:`path=${encodeURIComponent(path)}`
+    });
+    showNotification('<i class="fas fa-check me-2"></i>Đã xóa thành công!', 'success');
+    load();
+  } catch (error) {
+    showNotification('<i class="fas fa-exclamation-triangle me-2"></i>Lỗi khi xóa', 'danger');
+  }
 }
 
 /* Toolbar buttons */
 document.getElementById('btnNewFolder').onclick = async ()=>{
   const name = prompt('Tên thư mục mới:');
   if(!name) return;
-  await api('/Admin/Media/CreateFolder',{
-    method:'POST',
-    headers:{'Content-Type':'application/x-www-form-urlencoded'},
-    body:`name=${encodeURIComponent(name)}&parent=${encodeURIComponent(currentFolder)}`
-  });
-  load();
+  try {
+    await api('/Admin/Media/CreateFolder',{
+      method:'POST',
+      headers:{'Content-Type':'application/x-www-form-urlencoded'},
+      body:`name=${encodeURIComponent(name)}&parent=${encodeURIComponent(currentFolder)}`
+    });
+    showNotification('<i class="fas fa-check me-2"></i>Đã tạo thư mục thành công!', 'success');
+    load();
+  } catch (error) {
+    showNotification('<i class="fas fa-exclamation-triangle me-2"></i>Lỗi khi tạo thư mục', 'danger');
+  }
 };
 
 document.getElementById('btnRename').onclick = async ()=>{
@@ -321,12 +908,17 @@ document.getElementById('btnRename').onclick = async ()=>{
   const currentName = selectedEl.querySelector('.tile-name')?.textContent?.trim() ?? '';
   const newName = prompt('Đổi tên thành:', currentName.replace(/^📁\s*/, ''));
   if(!newName) return;
-  await api('/Admin/Media/Rename',{
-    method:'POST',
-    headers:{'Content-Type':'application/x-www-form-urlencoded'},
-    body:`path=${encodeURIComponent(selectedEl.dataset.path)}&newName=${encodeURIComponent(newName)}`
-  });
-  load();
+  try {
+    await api('/Admin/Media/Rename',{
+      method:'POST',
+      headers:{'Content-Type':'application/x-www-form-urlencoded'},
+      body:`path=${encodeURIComponent(selectedEl.dataset.path)}&newName=${encodeURIComponent(newName)}`
+    });
+    showNotification('<i class="fas fa-check me-2"></i>Đã đổi tên thành công!', 'success');
+    load();
+  } catch (error) {
+    showNotification('<i class="fas fa-exclamation-triangle me-2"></i>Lỗi khi đổi tên', 'danger');
+  }
 };
 
 document.getElementById('btnDelete').onclick = async ()=>{

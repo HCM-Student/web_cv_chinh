@@ -23,6 +23,14 @@ namespace WEB_CV.Areas.Admin.Controllers
                 .Include(b => b.BaiViet)
                 .AsQueryable();
 
+            // Calculate stats
+            var allComments = await _context.BinhLuans.ToListAsync();
+            ViewBag.TotalComments = allComments.Count;
+            ViewBag.PendingComments = allComments.Count(c => c.TrangThai == 0);
+            ViewBag.ApprovedComments = allComments.Count(c => c.TrangThai == 1);
+            ViewBag.RejectedComments = allComments.Count(c => c.TrangThai == 2);
+            ViewBag.TodayComments = allComments.Count(c => c.Ngay.Date == DateTime.Today);
+
             if (trangThai.HasValue)
             {
                 query = query.Where(b => b.TrangThai == trangThai.Value);
