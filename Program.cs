@@ -13,6 +13,7 @@ using WEB_CV.Models;
 using WEB_CV.Models.Options;
 using WEB_CV.Services;
 using WEB_CV.Services.Backup;
+using WEB_CV.Services.AI;
 using WEB_CV.Background;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -89,6 +90,7 @@ builder.Services.Configure<WebsiteLinksOptions>(
 // AI Services
 builder.Services.AddHttpClient<IAIWritingService, AIWritingService>();
 builder.Services.AddScoped<IAIWritingService, AIWritingService>();
+builder.Services.AddHttpClient<IProtonxSearch, ProtonxSearch>();
 builder.Services.AddHttpContextAccessor();
 
 // Background services
