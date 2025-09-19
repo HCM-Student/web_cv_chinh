@@ -209,7 +209,7 @@
                   <i class="fas fa-bookmark me-2"></i>Dấu trang của tôi
                 </a></li>
               }
-              @if (User.IsInRole("Admin") || User.IsInRole("Staff"))
+              @if (User.IsInRole("Admin") || User.IsInRole("TruongPhongPhatTrien") || User.IsInRole("TruongPhongNhanSu") || User.IsInRole("TruongPhongDuLieu") || User.IsInRole("Staff"))
               {
                 <li><hr class="dropdown-divider" /></li>
                 <li class="px-3 pt-1 pb-1 text-muted small">Nội bộ</li>
@@ -221,12 +221,13 @@
                 </a></li>
               }
               
+              @* Quản trị cho Admin *@
               @if (User.IsInRole("Admin"))
               {
                 <li><hr class="dropdown-divider" /></li>
-                <li class="px-3 pt-1 pb-1 text-muted small">Quản trị</li>
-                <li><a class="dropdown-item" asp-area="Admin" asp-controller="Dashboard" asp-action="Index">
-                  <i class="fas fa-tachometer-alt me-2"></i>Bảng điều khiển
+                <li class="px-3 pt-1 pb-1 text-muted small">🔧 Quản trị hệ thống</li>
+                <li><a class="dropdown-item bg-primary text-white" asp-area="Admin" asp-controller="Dashboard" asp-action="Index">
+                  <i class="fas fa-home me-2"></i>🏠 Quay về Admin
                 </a></li>
                 <li><a class="dropdown-item" asp-area="Admin" asp-controller="BaiViet" asp-action="Index">
                   <i class="fas fa-newspaper me-2"></i>Bài viết
@@ -237,8 +238,50 @@
                 <li><a class="dropdown-item" asp-area="Admin" asp-controller="BinhLuan" asp-action="Index">
                   <i class="fas fa-comments me-2"></i>Quản lý bình luận
                 </a></li>
-                <li><a class="dropdown-item" asp-area="Admin" asp-controller="LichCongTac" asp-action="Index">
-                  <i class="bi bi-calendar3-week me-2"></i>Quản lý lịch công tác
+                <li><a class="dropdown-item" asp-area="Admin" asp-controller="CaiDat" asp-action="Index">
+                  <i class="fas fa-cog me-2"></i>Cài đặt hệ thống
+                </a></li>
+              }
+              
+              @* Quản lý cho Trưởng phòng phát triển *@
+              @if (User.IsInRole("TruongPhongPhatTrien"))
+              {
+                <li><hr class="dropdown-divider" /></li>
+                <li class="px-3 pt-1 pb-1 text-muted small">💻 Quản lý phát triển</li>
+                <li><a class="dropdown-item bg-success text-white" asp-area="Admin" asp-controller="Dashboard" asp-action="Index">
+                  <i class="fas fa-home me-2"></i>🏠 Quay về Admin
+                </a></li>
+                <li><a class="dropdown-item" asp-area="Admin" asp-controller="BaiViet" asp-action="Index">
+                  <i class="fas fa-file-code me-2"></i>Quản lý nội dung
+                </a></li>
+                <li><a class="dropdown-item" asp-area="Admin" asp-controller="SEO" asp-action="Index">
+                  <i class="fas fa-search me-2"></i>SEO & Analytics
+                </a></li>
+                <li><a class="dropdown-item" asp-area="Admin" asp-controller="Ai" asp-action="Index">
+                  <i class="fas fa-robot me-2"></i>Công cụ AI
+                </a></li>
+              }
+              
+              @* Quản lý cho Trưởng phòng nhân sự *@
+              @if (User.IsInRole("TruongPhongNhanSu"))
+              {
+                <li><hr class="dropdown-divider" /></li>
+                <li class="px-3 pt-1 pb-1 text-muted small">👥 Quản lý nhân sự</li>
+                <li><a class="dropdown-item bg-info text-white" asp-area="Admin" asp-controller="NguoiDung" asp-action="Index">
+                  <i class="fas fa-home me-2"></i>🏠 Quản lý nhân sự
+                </a></li>
+                <li><a class="dropdown-item" asp-area="Admin" asp-controller="NguoiDung" asp-action="Create">
+                  <i class="fas fa-user-plus me-2"></i>Thêm nhân viên mới
+                </a></li>
+              }
+              
+              @* Quản lý cho Trưởng phòng dữ liệu *@
+              @if (User.IsInRole("TruongPhongDuLieu"))
+              {
+                <li><hr class="dropdown-divider" /></li>
+                <li class="px-3 pt-1 pb-1 text-muted small">💾 Quản lý dữ liệu</li>
+                <li><a class="dropdown-item bg-dark text-white" asp-area="Admin" asp-controller="Media" asp-action="Index">
+                  <i class="fas fa-home me-2"></i>🏠 Quản lý Media
                 </a></li>
               }
               <li><hr class="dropdown-divider" /></li>

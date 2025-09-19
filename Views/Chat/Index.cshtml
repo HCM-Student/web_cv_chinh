@@ -1,10 +1,10 @@
 @model IEnumerable<WEB_CV.Models.ChatMessage>
 @{
   Layout = "_Layout";
-  var meId = (string)ViewBag.MeId;
-  var meName = (string)ViewBag.MeName;
-  var room = (string)ViewBag.Room;
-  var users = (IEnumerable<dynamic>)ViewBag.Users;
+  var meId = (string?)ViewBag.MeId ?? "";
+  var meName = (string?)ViewBag.MeName ?? "Unknown";
+  var room = (string?)ViewBag.Room ?? "general";
+  var users = (IEnumerable<dynamic>?)ViewBag.Users ?? new List<dynamic>();
 }
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
 
@@ -66,10 +66,11 @@
             </span>
           </div>
         </div>
-          <div class="chat-body" id="messages">
+        
+        <div class="chat-body" id="messages">
             @foreach (var m in Model)
             {
-              <div class="msg @(m.SenderId==meId?"me":"other")">
+              <div class="msg @(m.SenderId==meId?"me":"other")" data-id="@m.Id">
                 @if (m.SenderId != meId)
                 {
                   <div class="msg-avatar">
@@ -99,24 +100,24 @@
                     }
                     @if (!string.IsNullOrWhiteSpace(m.ImageUrl))
                     {
-                      <img class="msg-image" src="@m.ImageUrl" alt="image"/>
+                      <img class="msg-image" src="@m.ImageUrl" alt="image" />
                     }
                     <div class="msg-time">
-                      <span class="time">@m.CreatedAt.ToLocalTime().ToString("HH:mm")</span>
+                      <span class="time">@m.CreatedAt.ToString("HH:mm")</span>
                       @if (m.SenderId == meId && room.StartsWith("dm:"))
                       {
                         <span class="status">
-                          @switch (m.Status)
+                          @if (m.Status == WEB_CV.Models.MessageStatus.Seen)
                           {
-                            case WEB_CV.Models.MessageStatus.Sent:
-                              @:<i class="bi bi-check2"></i><span class="status-text">Đã gửi</span>
-                              break;
-                            case WEB_CV.Models.MessageStatus.Delivered:
-                              @:<i class="bi bi-check2-all"></i><span class="status-text">Đã nhận</span>
-                              break;
-                            case WEB_CV.Models.MessageStatus.Seen:
-                              @:<i class="bi bi-check2-all text-primary"></i><span class="status-text">Đã xem</span>
-                              break;
+                            <i class="bi bi-check2-all text-primary"></i><span class="status-text">Đã xem</span>
+                          }
+                          else if (m.Status == WEB_CV.Models.MessageStatus.Delivered)
+                          {
+                            <i class="bi bi-check2-all"></i><span class="status-text">Đã nhận</span>
+                          }
+                          else
+                          {
+                            <i class="bi bi-check2"></i><span class="status-text">Đã gửi</span>
                           }
                         </span>
                       }
@@ -126,13 +127,27 @@
                 @if (m.SenderId == meId)
                 {
                   <div class="msg-avatar">
-                    <i class="bi bi-person-circle"></i>
+                    @{
+                      var userAvatars = ViewBag.UserAvatars as Dictionary<string, string>;
+                      var myAvatar = userAvatars?.GetValueOrDefault(m.SenderId);
+                    }
+                    @if (!string.IsNullOrEmpty(myAvatar))
+                    {
+                      <img src="@myAvatar" alt="@m.SenderName" class="avatar-img">
+                    }
+                    else
+                    {
+                      <i class="bi bi-person-circle"></i>
+                    }
                   </div>
                 }
               </div>
             }
           </div>
-        <div class="chat-input">
+
+        <!-- Form nhập liệu -->
+        <div class="card-footer">
+          <!-- Upload form ẩn -->
           <form id="uploadForm" enctype="multipart/form-data" class="d-none">
             @Html.AntiForgeryToken()
             <input id="fileInput" name="file" type="file" accept="image/*"/>
@@ -146,7 +161,7 @@
           <button id="send" class="btn btn-primary"><i class="bi bi-send"></i></button>
         </div>
 
-        <!-- Image Preview Area -->
+        <!-- Preview ảnh -->
         <div id="imagePreview" class="image-preview" style="display: none;">
           <div class="preview-container">
             <img id="previewImg" src="" alt="Preview" />
@@ -160,176 +175,246 @@
   </div>
 </div>
 
+<!-- Hidden form for CSRF token -->
+@Html.AntiForgeryToken()
+
 <!-- Upload Progress Indicator -->
 <div id="uploadProgress" class="upload-progress">
   <i class="bi bi-cloud-upload me-2"></i>
   <span>Đang upload ảnh...</span>
 </div>
 
-@section Styles{
 <style>
-.chat-card{height:72vh;display:flex;flex-direction:column}
-.chat-body{flex:1;overflow:auto;padding:1rem;background:#f8fafc}
+.chat-card {
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+}
 
-/* Message container */
-.msg{display:flex;margin-bottom:1rem;align-items:flex-end;gap:0.5rem}
-.msg.me{flex-direction:row-reverse;justify-content:flex-start}
-.msg.other{flex-direction:row;justify-content:flex-start}
+.chat-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1rem;
+  max-height: calc(80vh - 120px);
+  background: #f8f9fa;
+}
 
-/* Avatar */
-.msg-avatar{width:32px;height:32px;border-radius:50%;background:#e9ecef;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.msg-avatar i{font-size:1.2rem;color:#6c757d}
+.msg {
+  display: flex;
+  margin-bottom: 1rem;
+  align-items: flex-end;
+}
 
-/* Message content */
-.msg-content{max-width:70%;min-width:120px}
-.msg-name{font-size:0.75rem;color:#6c757d;margin-bottom:0.25rem;font-weight:500}
+.msg.me {
+  flex-direction: row-reverse;
+}
 
-/* Message bubble */
-.msg-bubble{background:#fff;border:1px solid #e5e7eb;border-radius:1rem;padding:0.75rem 1rem;position:relative;box-shadow:0 1px 3px rgba(0,0,0,0.1);transition:all 0.2s ease}
-.msg.me .msg-bubble{background:linear-gradient(135deg, #007bff, #0056b3);color:#fff;border-color:#007bff;margin-left:auto;box-shadow:0 2px 8px rgba(0,123,255,0.3)}
-.msg.other .msg-bubble{background:#fff;color:#333;border-color:#e5e7eb;box-shadow:0 1px 3px rgba(0,0,0,0.1)}
-
-/* Hover effects */
-.msg-bubble:hover{transform:translateY(-1px);box-shadow:0 2px 8px rgba(0,0,0,0.15)}
-.msg.me .msg-bubble:hover{box-shadow:0 4px 12px rgba(0,123,255,0.4)}
-
-/* Message text */
-.msg-text{word-wrap:break-word;line-height:1.4}
-
-/* Message image */
-.msg-image{max-width:320px;border-radius:10px;display:block;margin-top:8px;border:1px solid #e9ecef}
-
-/* Message time and status */
-.msg-time{display:flex;justify-content:space-between;align-items:center;margin-top:0.5rem;font-size:0.7rem;opacity:0.8}
-.msg.me .msg-time{color:rgba(255,255,255,0.8)}
-.msg.other .msg-time{color:#6c757d}
-
-.status{display:flex;align-items:center;gap:0.25rem}
-.status i{font-size:0.8rem}
-.status-text{font-size:0.65rem}
-
-/* Chat input */
-.chat-input{display:flex;gap:.5rem;padding:.75rem;border-top:1px solid #eee;background:#fff;align-items:center;box-shadow:0 -2px 10px rgba(0,0,0,0.1)}
-.chat-input input{flex:1;border-radius:1.5rem;border:1px solid #ddd;padding:0.75rem 1rem;outline:none;transition:all 0.2s ease;font-size:0.9rem}
-.chat-input input:focus{border-color:#007bff;box-shadow:0 0 0 3px rgba(0,123,255,0.1)}
-.chat-input button{border-radius:50%;width:40px;height:40px;display:flex;align-items:center;justify-content:center;background:#007bff;border:none;color:white;transition:all 0.2s ease}
-.chat-input button:hover{background:#0056b3;transform:scale(1.05)}
-.chat-input button:active{transform:scale(0.95)}
-
-/* Typing indicator */
-.typing-indicator{color:#007bff;font-style:italic;animation:pulse 1.5s infinite}
-@@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.5}}
-
-/* Avatar styles */
-.user-avatar, .msg-avatar {
-  width: 32px;
-  height: 32px;
+.msg-avatar {
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
-  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #f8f9fa;
+  margin: 0 8px;
+  background: #e9ecef;
   flex-shrink: 0;
 }
 
 .avatar-img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
   border-radius: 50%;
+  object-fit: cover;
 }
 
-.user-avatar i, .msg-avatar i {
-  font-size: 1.5rem;
+.msg-content {
+  max-width: 70%;
+  display: flex;
+  flex-direction: column;
+}
+
+.msg.me .msg-content {
+  align-items: flex-end;
+}
+
+.msg-name {
+  font-size: 0.8rem;
   color: #6c757d;
+  margin-bottom: 4px;
+  font-weight: 500;
 }
 
-/* Scrollbar */
-.chat-body::-webkit-scrollbar{width:6px}
-.chat-body::-webkit-scrollbar-track{background:#f1f1f1;border-radius:3px}
-.chat-body::-webkit-scrollbar-thumb{background:#c1c1c1;border-radius:3px}
-.chat-body::-webkit-scrollbar-thumb:hover{background:#a8a8a8}
-
-/* Animation for new messages */
-.msg{animation:slideIn 0.3s ease-out}
-@@keyframes slideIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
-
-/* Drag & Drop styles */
-.chat-body.drag-over, .chat-input.drag-over {
-  background-color: #e3f2fd !important;
-  border: 2px dashed #2196f3 !important;
-  transition: all 0.2s ease;
+.msg-bubble {
+  background: white;
+  padding: 8px 12px;
+  border-radius: 18px;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+  position: relative;
+  word-wrap: break-word;
+  word-break: break-word;
 }
 
-/* Upload progress indicator */
+.msg.me .msg-bubble {
+  background: #007bff;
+  color: white;
+}
+
+.msg-text {
+  margin: 0;
+  line-height: 1.4;
+}
+
+.msg-image {
+  max-width: 100%;
+  max-height: 300px;
+  border-radius: 8px;
+  margin: 4px 0;
+  object-fit: contain;
+  display: block;
+}
+
+.msg-time {
+  font-size: 0.7rem;
+  color: #6c757d;
+  margin-top: 4px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.msg.me .msg-time {
+  color: rgba(255,255,255,0.7);
+}
+
+.status {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.status-text {
+  font-size: 0.65rem;
+}
+
+.card-footer {
+  background: white;
+  border-top: 1px solid #dee2e6;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+#msg {
+  flex: 1;
+  border-radius: 20px;
+  border: 1px solid #dee2e6;
+  padding: 8px 16px;
+  resize: none;
+}
+
+#msg:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 0 0.2rem rgba(0,123,255,0.25);
+}
+
+#send {
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#btnImage {
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.image-preview {
+  position: absolute;
+  bottom: 100%;
+  left: 0;
+  right: 0;
+  background: white;
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  padding: 8px;
+  margin-bottom: 8px;
+}
+
+.preview-container {
+  position: relative;
+  display: inline-block;
+}
+
+.preview-container img {
+  max-width: 200px;
+  max-height: 150px;
+  border-radius: 4px;
+}
+
+#removeImage {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .upload-progress {
   position: fixed;
   top: 20px;
   right: 20px;
   background: #007bff;
   color: white;
-  padding: 10px 15px;
-  border-radius: 5px;
-  z-index: 1000;
+  padding: 8px 16px;
+  border-radius: 20px;
   display: none;
+  z-index: 1000;
 }
 
-/* Image Preview Styles */
-.image-preview {
-  background: #f8f9fa;
-  border: 1px solid #dee2e6;
-  border-radius: 8px;
-  padding: 12px;
-  margin-top: 8px;
-  animation: slideDown 0.3s ease-out;
+.chat-body::-webkit-scrollbar {
+  width: 6px;
 }
 
-.preview-container {
-  position: relative;
-  display: inline-block;
-  margin-bottom: 8px;
+.chat-body::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 3px;
 }
 
-.preview-container img {
-  max-width: 200px;
-  max-height: 150px;
-  border-radius: 6px;
-  border: 1px solid #ddd;
-  object-fit: cover;
+.chat-body::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 3px;
 }
 
-.preview-container .btn {
-  position: absolute;
-  top: -8px;
-  right: -8px;
-  width: 24px;
-  height: 24px;
-  border-radius: 50%;
-  padding: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 12px;
+.chat-body::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
 }
 
-
-@@keyframes slideDown {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
+/* Mobile responsive - removed for now */
 </style>
-}
+
 @section Scripts{
 <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/8.0.0/signalr.min.js"></script>
 <script>
-const meId = "@meId", room = "@room";
+// Chat variables  
+const meId = "@meId", meName = "@meName", room = "@room";
+let currentImageFile = null;
+
+// DOM elements
 const hub = new signalR.HubConnectionBuilder().withUrl("/hubs/chat").build();
 const list = document.getElementById("messages");
 const input = document.getElementById("msg");
@@ -341,15 +426,9 @@ const imagePreview = document.getElementById("imagePreview");
 const previewImg = document.getElementById("previewImg");
 const removeImage = document.getElementById("removeImage");
 
-// Biến lưu file ảnh đang preview
-let currentImageFile = null;
-
-// Event handlers
-removeImage.onclick = () => hideImagePreview();
-
+// SignalR event handlers
 hub.on("message", m => append(m));
 hub.on("dm", m => {
-  // chỉ render nếu là DM hiện tại
   if (!room.startsWith("dm:")) return;
   const msgRoom = m.room;
   if (msgRoom === room) append(m);
@@ -365,62 +444,31 @@ hub.on("statusChanged", s => {
   }
 });
 
+// Start connection
 hub.start().then(() => {
   hub.invoke("JoinRoom", room);
-  // Nếu đang ở DM -> mark seen ngay
   if (room.startsWith("dm:")) {
     const ids = room.replace("dm:", "").split(":");
     const other = ids[0] === meId ? ids[1] : ids[0];
     hub.invoke("MarkSeen", other);
   }
+  // Auto scroll to bottom on load
+  setTimeout(() => {
+    if (list) list.scrollTop = list.scrollHeight;
+  }, 100);
 });
 
-// Khi quay lại tab -> đánh dấu đã xem
-document.addEventListener("visibilitychange", () => {
-  if (document.visibilityState === "visible" && room.startsWith("dm:")) {
-    const ids = room.replace("dm:", "").split(":");
-    const other = ids[0] === meId ? ids[1] : ids[0];
-    hub.invoke("MarkSeen", other);
-  }
-});
-
-// Xử lý drag & drop ảnh
-const chatBody = document.getElementById("messages");
-const chatInput = document.querySelector(".chat-input");
-
-// Thêm visual feedback khi drag over
-[chatBody, chatInput].forEach(element => {
-  element.addEventListener("dragover", (e) => {
-    e.preventDefault();
-    element.style.backgroundColor = "#e3f2fd";
-    element.style.border = "2px dashed #2196f3";
-  });
-
-  element.addEventListener("dragleave", (e) => {
-    e.preventDefault();
-    element.style.backgroundColor = "";
-    element.style.border = "";
-  });
-
-  element.addEventListener("drop", (e) => {
-    e.preventDefault();
-    element.style.backgroundColor = "";
-    element.style.border = "";
-
-    const files = e.dataTransfer.files;
-    if (files.length > 0) {
-      const file = files[0];
-      if (file.type.startsWith("image/")) {
-        showImagePreview(file);
-      } else {
-        alert("Chỉ cho phép kéo thả file ảnh");
-      }
-    }
+// Event handlers
+document.querySelectorAll(".dm-open").forEach(a=>{
+  a.addEventListener("click", ()=> {
+    const to = a.dataset.id;
+    const name = a.dataset.name;
+    const dmRoom = "dm:" + (meId < to ? meId + ":" + to : to + ":" + meId);
+    window.location.href = "@Url.Action("Index")" + "?room=" + encodeURIComponent(dmRoom);
   });
 });
 
 btnImage.onclick = () => fileInput.click();
-
 fileInput.addEventListener("change", (e) => {
   if (!fileInput.files || fileInput.files.length === 0) return;
   const file = fileInput.files[0];
@@ -431,18 +479,14 @@ fileInput.addEventListener("change", (e) => {
 btnSend.onclick = async () => {
   const text = input.value.trim();
   const imageFile = currentImageFile;
-  
   if (!text && !imageFile) return;
   
   if (imageFile) {
-    // Có ảnh preview, upload và gửi kèm text
     await uploadAndSendImage(imageFile, text);
     hideImagePreview();
   } else {
-    // Chỉ có text
     await sendMessage(text, null);
   }
-  
   input.value = "";
 };
 
@@ -451,53 +495,25 @@ input.addEventListener("keydown", async (e) => {
     e.preventDefault();
     const text = input.value.trim();
     const imageFile = currentImageFile;
-    
     if (!text && !imageFile) return;
     
     if (imageFile) {
-      // Có ảnh preview, upload và gửi kèm text
       await uploadAndSendImage(imageFile, text);
       hideImagePreview();
     } else {
-      // Chỉ có text
       await sendMessage(text, null);
     }
-    
     input.value = "";
   }
 });
 
-// Xử lý paste hình ảnh
-input.addEventListener("paste", (e) => {
-  const items = e.clipboardData?.items;
-  if (!items) return;
-  
-  for (let i = 0; i < items.length; i++) {
-    const item = items[i];
-    if (item.type.startsWith("image/")) {
-      e.preventDefault();
-      const file = item.getAsFile();
-      if (file) {
-        showImagePreview(file);
-      }
-      break;
-    }
-  }
-});
-
-document.querySelectorAll(".dm-open").forEach(a=>{
-  a.addEventListener("click", ()=> {
-    const to = a.dataset.id;
-    const name = a.dataset.name;
-    const dmRoom = "dm:" + (meId < to ? meId + ":" + to : to + ":" + meId);
-    
-    // Chuyển đến room chat riêng tư
-    window.location.href = "@Url.Action("Index")" + "?room=" + encodeURIComponent(dmRoom);
-  });
-});
+removeImage.onclick = () => hideImagePreview();
 
 async function sendMessage(text, imageUrl) {
   if (!text && !imageUrl) return;
+  
+  console.log('📤 Sending:', { text, imageUrl, room });
+  
   if (room.startsWith("dm:")) {
     const ids = room.replace("dm:", "").split(":");
     const other = ids[0] === meId ? ids[1] : ids[0];
@@ -507,23 +523,29 @@ async function sendMessage(text, imageUrl) {
   }
 }
 
-// Hiển thị preview ảnh
+// Khi quay lại tab -> đánh dấu đã xem
+document.addEventListener("visibilitychange", () => {
+  if (document.visibilityState === "visible" && room.startsWith("dm:")) {
+    const ids = room.replace("dm:", "").split(":");
+    const other = ids[0] === meId ? ids[1] : ids[0];
+    hub.invoke("MarkSeen", other);
+  }
+});
+
+// Utility functions
 function showImagePreview(file) {
-  // Kiểm tra loại file
   const okTypes = ["image/png", "image/jpeg", "image/gif", "image/webp"];
   if (!okTypes.includes(file.type)) {
     alert("Chỉ cho phép upload ảnh (PNG, JPEG, GIF, WEBP)");
     return;
   }
 
-  // Kiểm tra kích thước file (tối đa 5MB)
   const maxSize = 5 * 1024 * 1024; // 5MB
   if (file.size > maxSize) {
     alert("Kích thước file quá lớn. Tối đa 5MB");
     return;
   }
 
-  // Lưu file và hiển thị preview
   currentImageFile = file;
   const reader = new FileReader();
   reader.onload = (e) => {
@@ -534,18 +556,18 @@ function showImagePreview(file) {
   reader.readAsDataURL(file);
 }
 
-// Ẩn preview ảnh
 function hideImagePreview() {
   currentImageFile = null;
   imagePreview.style.display = "none";
   previewImg.src = "";
 }
 
-// Upload và gửi ảnh
 async function uploadAndSendImage(file, text = "") {
   const formData = new FormData();
   formData.append("file", file);
-  formData.append("__RequestVerificationToken", document.querySelector('input[name="__RequestVerificationToken"]').value);
+  
+  const token = document.querySelector('input[name="__RequestVerificationToken"]');
+  if (token) formData.append("__RequestVerificationToken", token.value);
 
   btnImage.disabled = btnSend.disabled = true;
   uploadProgress.style.display = "block";
@@ -563,7 +585,6 @@ async function uploadAndSendImage(file, text = "") {
     }
     
     const data = await resp.json();
-    // Gửi tin với imageUrl và text
     await sendMessage(text, data.url);
   } catch (err) {
     alert(err.message || "Lỗi upload ảnh");
@@ -572,8 +593,10 @@ async function uploadAndSendImage(file, text = "") {
     uploadProgress.style.display = "none";
   }
 }
+
 function append(m) {
-  // m: {id, room, senderId, senderName, senderAvatar, content, imageUrl, createdAt, status?}
+  if (!list) return;
+  
   const mine = m.senderId === meId;
   const item = document.createElement("div");
   item.className = "msg" + (mine ? " me" : " other");
@@ -581,10 +604,9 @@ function append(m) {
 
   const avatar = `<div class="msg-avatar">${m.senderAvatar ? `<img src="${m.senderAvatar}" alt="${m.senderName}" class="avatar-img">` : `<i class="bi bi-person-circle"></i>`}</div>`;
   const name = !mine ? `<div class="msg-name">${m.senderName}</div>` : "";
-  const textHtml = m.content ? `<div class="msg-text"></div>` : "";
+  const textHtml = m.content ? `<div class="msg-text">${m.content}</div>` : "";
   const imgHtml = m.imageUrl ? `<img class="msg-image" src="${m.imageUrl}" alt="image"/>` : "";
-  const statusHtml = (mine && room.startsWith("dm:"))
-    ? `<span class="status">${renderStatus(m.status)}</span>` : "";
+  const statusHtml = (mine && room.startsWith("dm:")) ? `<span class="status">${renderStatus(m.status)}</span>` : "";
 
   if (mine) {
     item.innerHTML = `
@@ -616,23 +638,44 @@ function append(m) {
       </div>
     `;
   }
-
-  if (m.content) item.querySelector(".msg-text").textContent = m.content;
+  
   list.appendChild(item);
   list.scrollTop = list.scrollHeight;
 }
 
 function renderStatus(status) {
-  switch ((status || "Sent")) {
+  switch (status || "Sent") {
     case "Delivered": return `<i class="bi bi-check2-all"></i><span class="status-text">Đã nhận</span>`;
     case "Seen": return `<i class="bi bi-check2-all text-primary"></i><span class="status-text">Đã xem</span>`;
     default: return `<i class="bi bi-check2"></i><span class="status-text">Đã gửi</span>`;
   }
 }
-function formatTime(iso){
-  try{ return new Date(iso).toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'}); }catch{ return ""; }
+
+function formatTime(iso) {
+  try { 
+    return new Date(iso).toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'}); 
+  } catch { 
+    return ""; 
+  }
 }
+
+// Xử lý paste hình ảnh
+input.addEventListener("paste", (e) => {
+  const items = e.clipboardData?.items;
+  if (!items) return;
+  
+  for (let i = 0; i < items.length; i++) {
+    const item = items[i];
+    if (item.type.startsWith("image/")) {
+      e.preventDefault();
+      const file = item.getAsFile();
+      if (file) {
+        showImagePreview(file);
+      }
+      break;
+    }
+  }
+});
+
 </script>
 }
-
-

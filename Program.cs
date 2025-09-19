@@ -153,10 +153,14 @@ app.UseMiddleware<WEB_CV.Middleware.OnlineUserTrackingMiddleware>();
 app.UseAuthentication();
 app.UseAuthorization();
 
-// Bảo vệ khu admin: tất cả controller trong /Admin yêu cầu Admin role
+// Bảo vệ khu admin: tất cả controller trong /Admin yêu cầu Admin hoặc trưởng phòng roles
 app.Use(async (ctx, next) =>
 {
-    if (ctx.Request.Path.StartsWithSegments("/admin") && !ctx.User.IsInRole("Admin"))
+    if (ctx.Request.Path.StartsWithSegments("/admin") && 
+        !ctx.User.IsInRole("Admin") && 
+        !ctx.User.IsInRole("TruongPhongPhatTrien") && 
+        !ctx.User.IsInRole("TruongPhongNhanSu") && 
+        !ctx.User.IsInRole("TruongPhongDuLieu"))
     {
         ctx.Response.StatusCode = 403; // Forbidden
         return;

@@ -7,7 +7,7 @@ using WEB_CV.Services.Backup;
 namespace WEB_CV.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin,TruongPhongPhatTrien")]
     public class CaiDatController : Controller
     {
         private readonly ICaiDatService _caiDatService;

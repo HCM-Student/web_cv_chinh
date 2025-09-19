@@ -123,6 +123,43 @@
         </div>
     </div>
 
+    <!-- New Roles Stats -->
+    <div class="row g-3 mb-4">
+        <div class="col-md-4">
+            <div class="stat-card">
+                <div class="stat-icon bg-primary">
+                    <i class="fas fa-code"></i>
+                </div>
+                <div class="stat-content">
+                    <h3 class="stat-number">@Model.Count(u => u.VaiTro == "TruongPhongPhatTrien")</h3>
+                    <p class="stat-label">Trưởng phòng phát triển</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="stat-card">
+                <div class="stat-icon bg-secondary">
+                    <i class="fas fa-users"></i>
+                </div>
+                <div class="stat-content">
+                    <h3 class="stat-number">@Model.Count(u => u.VaiTro == "TruongPhongNhanSu")</h3>
+                    <p class="stat-label">Trưởng phòng nhân sự</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="stat-card">
+                <div class="stat-icon bg-dark">
+                    <i class="fas fa-database"></i>
+                </div>
+                <div class="stat-content">
+                    <h3 class="stat-number">@Model.Count(u => u.VaiTro == "TruongPhongDuLieu")</h3>
+                    <p class="stat-label">Trưởng phòng dữ liệu</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Search and Filter -->
     <div class="card mb-4">
         <div class="card-body">
@@ -142,6 +179,10 @@
                         <select class="form-select" id="roleFilter">
                             <option value="">Tất cả</option>
                             <option value="Admin">Quản trị viên</option>
+                            <option value="TruongPhongPhatTrien">Trưởng phòng phát triển</option>
+                            <option value="TruongPhongNhanSu">Trưởng phòng nhân sự</option>
+                            <option value="TruongPhongDuLieu">Trưởng phòng dữ liệu</option>
+                            <option value="Staff">Cán bộ nhân viên</option>
                             <option value="User">Người dùng</option>
                         </select>
                     </div>
@@ -224,6 +265,24 @@
                                             <i class="fas fa-crown me-1"></i>Quản trị viên
                                         </span>
                                     }
+                                    else if (item.VaiTro == "TruongPhongPhatTrien")
+                                    {
+                                        <span class="badge bg-primary">
+                                            <i class="fas fa-code me-1"></i>Trưởng phòng phát triển
+                                        </span>
+                                    }
+                                    else if (item.VaiTro == "TruongPhongNhanSu")
+                                    {
+                                        <span class="badge bg-secondary">
+                                            <i class="fas fa-users me-1"></i>Trưởng phòng nhân sự
+                                        </span>
+                                    }
+                                    else if (item.VaiTro == "TruongPhongDuLieu")
+                                    {
+                                        <span class="badge bg-dark">
+                                            <i class="fas fa-database me-1"></i>Trưởng phòng dữ liệu
+                                        </span>
+                                    }
                                     else if (item.VaiTro == "Staff")
                                     {
                                         <span class="badge bg-success">
@@ -264,7 +323,9 @@
                                         </a>
                                         @if (item.VaiTro != "Admin")
                                         {
-                                            <button class="btn btn-sm btn-outline-danger" onclick="confirmDelete(@item.Id, '@item.HoTen')" title="Xóa tài khoản">
+                                            <button class="btn btn-sm btn-outline-danger" 
+                                                    onclick="simpleConfirmDelete(@item.Id, '@Html.Raw(Html.Encode(item.HoTen).Replace("'", "\\'"))')" 
+                                                    title="Xóa tài khoản">
                                                 <i class="fas fa-trash"></i>
                                             </button>
                                         }
@@ -287,7 +348,7 @@
 </div>
 
 <!-- Delete Confirmation Modal -->
-<div class="modal fade" id="deleteModal" tabindex="-1">
+<div class="modal fade" id="deleteModal" tabindex="-1" style="display: block; visibility: visible;">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -297,7 +358,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
             </div>
             <div class="modal-body">
-                <p>Bạn có chắc chắn muốn xóa tài khoản <strong id="userNameToDelete"></strong>?</p>
+                <p>Bạn có chắc chắn muốn xóa tài khoản <strong id="userNameToDelete">Test Name</strong>?</p>
                 <p class="text-danger small">Hành động này không thể hoàn tác!</p>
             </div>
             <div class="modal-footer">
@@ -307,6 +368,29 @@
         </div>
     </div>
 </div>
+
+<!-- Fallback: Simple JavaScript confirm if modal fails -->
+<script>
+// Global flag to check if modal system is working
+let modalSystemWorking = false;
+
+// Test modal system on page load
+document.addEventListener('DOMContentLoaded', function() {
+    const testModal = document.getElementById('deleteModal');
+    const testElement = document.getElementById('userNameToDelete');
+    
+    if (testModal && testElement) {
+        modalSystemWorking = true;
+        console.log('✅ Modal system working properly');
+        // Hide the modal initially
+        testModal.style.display = 'none';
+        testModal.style.visibility = 'hidden';
+    } else {
+        modalSystemWorking = false;
+        console.error('❌ Modal system not working');
+    }
+});
+</script>
 
 <style>
 .admin-page {
@@ -480,17 +564,38 @@ body {
 <script>
 let userIdToDelete = null;
 
-// Search and filter functionality
-document.getElementById('searchInput').addEventListener('keyup', filterTable);
-document.getElementById('roleFilter').addEventListener('change', filterTable);
-document.getElementById('statusFilter').addEventListener('change', filterTable);
+// Search and filter functionality - Wait for DOM
+document.addEventListener('DOMContentLoaded', function() {
+    const searchInput = document.getElementById('searchInput');
+    const roleFilter = document.getElementById('roleFilter');
+    const statusFilter = document.getElementById('statusFilter');
+    
+    if (searchInput) {
+        searchInput.addEventListener('keyup', filterTable);
+    }
+    if (roleFilter) {
+        roleFilter.addEventListener('change', filterTable);
+    }
+    if (statusFilter) {
+        statusFilter.addEventListener('change', filterTable);
+    }
+});
 
 function filterTable() {
-    const searchTerm = document.getElementById('searchInput').value.toLowerCase();
-    const roleFilter = document.getElementById('roleFilter').value;
-    const statusFilter = document.getElementById('statusFilter').value;
-    
+    const searchInput = document.getElementById('searchInput');
+    const roleSelect = document.getElementById('roleFilter');
+    const statusSelect = document.getElementById('statusFilter');
     const table = document.getElementById('usersTable');
+    
+    // Safety checks
+    if (!searchInput || !roleSelect || !statusSelect || !table) {
+        console.error('Filter elements not found');
+        return;
+    }
+    
+    const searchTerm = searchInput.value.toLowerCase();
+    const roleFilter = roleSelect.value;
+    const statusFilter = statusSelect.value;
     const rows = table.querySelectorAll('tbody tr');
     
     rows.forEach(row => {
@@ -500,7 +605,13 @@ function filterTable() {
         const status = row.cells[5].textContent;
         
         const matchesSearch = name.includes(searchTerm) || email.includes(searchTerm);
-        const matchesRole = roleFilter === '' || role.includes(roleFilter === 'Admin' ? 'Quản trị viên' : 'Người dùng');
+        const matchesRole = roleFilter === '' || role.includes(
+            roleFilter === 'Admin' ? 'Quản trị viên' : 
+            roleFilter === 'TruongPhongPhatTrien' ? 'Trưởng phòng phát triển' :
+            roleFilter === 'TruongPhongNhanSu' ? 'Trưởng phòng nhân sự' :
+            roleFilter === 'TruongPhongDuLieu' ? 'Trưởng phòng dữ liệu' :
+            roleFilter === 'Staff' ? 'Cán bộ nhân viên' : 'Người dùng'
+        );
         const matchesStatus = statusFilter === '' || 
             (statusFilter === 'true' && status.includes('Hoạt động')) ||
             (statusFilter === 'false' && status.includes('Tạm khóa'));
@@ -514,23 +625,51 @@ function filterTable() {
 }
 
 function clearFilters() {
-    document.getElementById('searchInput').value = '';
-    document.getElementById('roleFilter').value = '';
-    document.getElementById('statusFilter').value = '';
+    const searchInput = document.getElementById('searchInput');
+    const roleFilter = document.getElementById('roleFilter');
+    const statusFilter = document.getElementById('statusFilter');
+    
+    if (searchInput) searchInput.value = '';
+    if (roleFilter) roleFilter.value = '';
+    if (statusFilter) statusFilter.value = '';
+    
     filterTable();
 }
 
-// Delete functionality
-function confirmDelete(id, name) {
-    userIdToDelete = id;
-    document.getElementById('userNameToDelete').textContent = name;
-    const modal = new bootstrap.Modal(document.getElementById('deleteModal'));
-    modal.show();
+// SIMPLE AND WORKING Delete functionality
+function simpleConfirmDelete(id, name) {
+    console.log('🚀 Simple confirm delete called:', id, name);
+    
+    // Use simple but effective confirm dialog
+    const confirmed = confirm(
+        `Bạn có chắc chắn muốn xóa tài khoản "${name}"?\n\n` + 
+        `⚠️ Hành động này không thể hoàn tác!\n` +
+        `📝 Tất cả bài viết của user sẽ được chuyển cho Admin.`
+    );
+    
+    if (confirmed) {
+        console.log('✅ User confirmed deletion');
+        deleteUser(id);
+    } else {
+        console.log('❌ User cancelled deletion');
+    }
 }
 
-document.getElementById('confirmDeleteBtn').addEventListener('click', function() {
-    if (userIdToDelete) {
-        deleteUser(userIdToDelete);
+// Keep the old function for compatibility but make it work
+function confirmDelete(id, name) {
+    // Just use the simple version
+    simpleConfirmDelete(id, name);
+}
+
+// Wait for DOM to be ready before attaching events
+document.addEventListener('DOMContentLoaded', function() {
+    const confirmBtn = document.getElementById('confirmDeleteBtn');
+    if (confirmBtn) {
+        confirmBtn.addEventListener('click', function() {
+            if (userIdToDelete) {
+                deleteUser(userIdToDelete);
+            }
+        });
     }
 });
 

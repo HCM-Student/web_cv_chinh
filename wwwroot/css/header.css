@@ -442,6 +442,136 @@
   padding: 0 !important;
 }
 
+/* ============================
+   DROPDOWN USER MENU STYLING (WEBSITE HEADER)
+   ============================ */
 
+/* Enhanced dropdown styling for website header */
+.navbar .dropdown-menu {
+  min-width: 300px;
+  padding: 0.5rem 0;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+  border: 1px solid rgba(0,0,0,0.05);
+  background: white;
+  z-index: 1050;
+}
 
+.navbar .dropdown-header {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #6c757d;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.5rem 1rem 0.25rem 1rem;
+  margin-top: 0.25rem;
+  background: transparent;
+}
 
+.navbar .dropdown-item {
+  padding: 0.6rem 1rem;
+  font-size: 0.875rem;
+  transition: all 0.2s ease;
+  border-radius: 8px;
+  margin: 2px 8px;
+  color: #495057;
+}
+
+.navbar .dropdown-item:hover,
+.navbar .dropdown-item:focus {
+  background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+  color: #495057;
+  transform: translateX(2px);
+}
+
+/* Special styling for "Quay về" buttons in website header */
+.navbar .dropdown-item.bg-primary {
+  background: linear-gradient(135deg, #007bff, #0056b3) !important;
+  color: white !important;
+  font-weight: 600;
+  border-radius: 8px;
+  margin: 4px 8px;
+  box-shadow: 0 2px 8px rgba(0,123,255,0.3);
+}
+
+.navbar .dropdown-item.bg-success {
+  background: linear-gradient(135deg, #28a745, #1e7e34) !important;
+  color: white !important;
+  font-weight: 600;
+  border-radius: 8px;
+  margin: 4px 8px;
+  box-shadow: 0 2px 8px rgba(40,167,69,0.3);
+}
+
+.navbar .dropdown-item.bg-info {
+  background: linear-gradient(135deg, #17a2b8, #117a8b) !important;
+  color: white !important;
+  font-weight: 600;
+  border-radius: 8px;
+  margin: 4px 8px;
+  box-shadow: 0 2px 8px rgba(23,162,184,0.3);
+}
+
+.navbar .dropdown-item.bg-dark {
+  background: linear-gradient(135deg, #343a40, #23272b) !important;
+  color: white !important;
+  font-weight: 600;
+  border-radius: 8px;
+  margin: 4px 8px;
+  box-shadow: 0 2px 8px rgba(52,58,64,0.3);
+}
+
+.navbar .dropdown-item.bg-primary:hover,
+.navbar .dropdown-item.bg-success:hover,
+.navbar .dropdown-item.bg-info:hover,
+.navbar .dropdown-item.bg-dark:hover {
+  transform: translateX(4px) scale(1.03);
+  box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+  color: white !important;
+}
+
+.navbar .dropdown-divider {
+  margin: 0.5rem 1rem;
+  border-color: rgba(0,0,0,0.08);
+}
+
+/* Icon styling in dropdown */
+.navbar .dropdown-item i {
+  width: 18px;
+  text-align: center;
+  opacity: 0.8;
+}
+
+.navbar .dropdown-item:hover i {
+  opacity: 1;
+}
+
+/* Avatar chip styling enhancement */
+.avatar-chip {
+  border-radius: 25px !important;
+  background: rgba(255, 255, 255, 0.95) !important;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+  padding: 0.5rem 1rem !important;
+  font-weight: 500;
+  color: #495057 !important;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.avatar-chip:hover {
+  background: white !important;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  transform: translateY(-1px);
+  color: var(--primary-color) !important;
+}
+
+/* Responsive adjustments */
+@media (max-width: 991.98px) {
+  .navbar .dropdown-menu {
+    min-width: 250px;
+  }
+  
+  .navbar .dropdown-item {
+    padding: 0.7rem 1rem;
+  }
+}

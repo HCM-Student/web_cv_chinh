@@ -9,7 +9,7 @@ using WEB_CV.Models.Account;
 namespace WEB_CV.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin,TruongPhongPhatTrien,TruongPhongNhanSu")]
     public class NguoiDungController : Controller
     {
         private readonly NewsDbContext _context;
@@ -214,13 +214,62 @@ namespace WEB_CV.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var nguoiDung = await _context.NguoiDungs.FindAsync(id);
-            if (nguoiDung != null)
+            try
             {
+                var nguoiDung = await _context.NguoiDungs.FindAsync(id);
+                if (nguoiDung == null)
+                {
+                    TempData["ErrorMessage"] = "Không tìm thấy người dùng";
+                    return RedirectToAction(nameof(Index));
+                }
+
+                // Kiểm tra xem có phải admin không
+                if (nguoiDung.VaiTro == "Admin")
+                {
+                    TempData["ErrorMessage"] = "Không thể xóa tài khoản Admin";
+                    return RedirectToAction(nameof(Index));
+                }
+
+                // Kiểm tra và xử lý bài viết của user này
+                var userPosts = await _context.BaiViets
+                    .Where(b => b.TacGiaId == id)
+                    .ToListAsync();
+
+                if (userPosts.Any())
+                {
+                    // Tìm admin đầu tiên để reassign bài viết
+                    var adminUser = await _context.NguoiDungs
+                        .FirstOrDefaultAsync(u => u.VaiTro == "Admin");
+
+                    if (adminUser == null)
+                    {
+                        TempData["ErrorMessage"] = "Không tìm thấy admin để chuyển giao bài viết";
+                        return RedirectToAction(nameof(Index));
+                    }
+
+                    // Reassign tất cả bài viết cho admin
+                    foreach (var post in userPosts)
+                    {
+                        post.TacGiaId = adminUser.Id;
+                    }
+
+                    _context.BaiViets.UpdateRange(userPosts);
+                }
+
                 _context.NguoiDungs.Remove(nguoiDung);
+                await _context.SaveChangesAsync();
+
+                var message = userPosts.Any() 
+                    ? $"Đã xóa người dùng '{nguoiDung.HoTen}' và chuyển {userPosts.Count} bài viết cho Admin!" 
+                    : $"Đã xóa người dùng '{nguoiDung.HoTen}' thành công!";
+
+                TempData["SuccessMessage"] = message;
+            }
+            catch (Exception ex)
+            {
+                TempData["ErrorMessage"] = $"Lỗi khi xóa người dùng: {ex.Message}";
             }
 
-            await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
@@ -275,10 +324,39 @@ namespace WEB_CV.Areas.Admin.Controllers
                     return Json(new { success = false, message = "Không thể xóa tài khoản Admin" });
                 }
 
+                // Kiểm tra và xử lý bài viết của user này
+                var userPosts = await _context.BaiViets
+                    .Where(b => b.TacGiaId == id)
+                    .ToListAsync();
+
+                if (userPosts.Any())
+                {
+                    // Tìm admin đầu tiên để reassign bài viết
+                    var adminUser = await _context.NguoiDungs
+                        .FirstOrDefaultAsync(u => u.VaiTro == "Admin");
+
+                    if (adminUser == null)
+                    {
+                        return Json(new { success = false, message = "Không tìm thấy admin để chuyển giao bài viết" });
+                    }
+
+                    // Reassign tất cả bài viết cho admin
+                    foreach (var post in userPosts)
+                    {
+                        post.TacGiaId = adminUser.Id;
+                    }
+
+                    _context.BaiViets.UpdateRange(userPosts);
+                }
+
                 _context.NguoiDungs.Remove(nguoiDung);
                 await _context.SaveChangesAsync();
 
-                return Json(new { success = true, message = $"Đã xóa người dùng '{nguoiDung.HoTen}' thành công!" });
+                var message = userPosts.Any() 
+                    ? $"Đã xóa người dùng '{nguoiDung.HoTen}' và chuyển {userPosts.Count} bài viết cho Admin!" 
+                    : $"Đã xóa người dùng '{nguoiDung.HoTen}' thành công!";
+
+                return Json(new { success = true, message = message });
             }
             catch (Exception ex)
             {
@@ -293,6 +371,15 @@ namespace WEB_CV.Areas.Admin.Controllers
         {
             try
             {
+                // Tìm admin đầu tiên để reassign bài viết
+                var adminUser = await _context.NguoiDungs
+                    .FirstOrDefaultAsync(u => u.VaiTro == "Admin");
+
+                if (adminUser == null)
+                {
+                    return Json(new { success = false, message = "Không tìm thấy admin để chuyển giao bài viết" });
+                }
+
                 // Xóa tất cả tài khoản không phải Admin
                 var nonAdminUsers = await _context.NguoiDungs
                     .Where(u => u.VaiTro != "Admin")
@@ -301,16 +388,33 @@ namespace WEB_CV.Areas.Admin.Controllers
                 var adminCount = await _context.NguoiDungs
                     .CountAsync(u => u.VaiTro == "Admin");
 
+                // Reassign tất cả bài viết của non-admin users cho admin
+                var nonAdminUserIds = nonAdminUsers.Select(u => u.Id).ToList();
+                var postsToReassign = await _context.BaiViets
+                    .Where(b => nonAdminUserIds.Contains(b.TacGiaId))
+                    .ToListAsync();
+
+                foreach (var post in postsToReassign)
+                {
+                    post.TacGiaId = adminUser.Id;
+                }
+
+                if (postsToReassign.Any())
+                {
+                    _context.BaiViets.UpdateRange(postsToReassign);
+                }
+
                 if (nonAdminUsers.Any())
                 {
                     _context.NguoiDungs.RemoveRange(nonAdminUsers);
                     await _context.SaveChangesAsync();
                 }
 
-                return Json(new { 
-                    success = true, 
-                    message = $"Đã xóa {nonAdminUsers.Count} tài khoản test. Giữ lại {adminCount} tài khoản Admin." 
-                });
+                var message = postsToReassign.Any() 
+                    ? $"Đã xóa {nonAdminUsers.Count} tài khoản test và chuyển {postsToReassign.Count} bài viết cho Admin. Giữ lại {adminCount} tài khoản Admin."
+                    : $"Đã xóa {nonAdminUsers.Count} tài khoản test. Giữ lại {adminCount} tài khoản Admin.";
+
+                return Json(new { success = true, message = message });
             }
             catch (Exception ex)
             {
@@ -324,6 +428,16 @@ namespace WEB_CV.Areas.Admin.Controllers
         {
             try
             {
+                // Tìm admin đầu tiên để reassign bài viết
+                var adminUser = await _context.NguoiDungs
+                    .FirstOrDefaultAsync(u => u.VaiTro == "Admin");
+
+                if (adminUser == null)
+                {
+                    TempData["ErrorMessage"] = "Không tìm thấy admin để chuyển giao bài viết";
+                    return RedirectToAction(nameof(Index));
+                }
+
                 // Xóa tất cả tài khoản không phải Admin
                 var nonAdminUsers = await _context.NguoiDungs
                     .Where(u => u.VaiTro != "Admin")
@@ -332,13 +446,33 @@ namespace WEB_CV.Areas.Admin.Controllers
                 var adminCount = await _context.NguoiDungs
                     .CountAsync(u => u.VaiTro == "Admin");
 
+                // Reassign tất cả bài viết của non-admin users cho admin
+                var nonAdminUserIds = nonAdminUsers.Select(u => u.Id).ToList();
+                var postsToReassign = await _context.BaiViets
+                    .Where(b => nonAdminUserIds.Contains(b.TacGiaId))
+                    .ToListAsync();
+
+                foreach (var post in postsToReassign)
+                {
+                    post.TacGiaId = adminUser.Id;
+                }
+
+                if (postsToReassign.Any())
+                {
+                    _context.BaiViets.UpdateRange(postsToReassign);
+                }
+
                 if (nonAdminUsers.Any())
                 {
                     _context.NguoiDungs.RemoveRange(nonAdminUsers);
                     await _context.SaveChangesAsync();
                 }
 
-                TempData["SuccessMessage"] = $"Đã xóa {nonAdminUsers.Count} tài khoản test. Giữ lại {adminCount} tài khoản Admin.";
+                var message = postsToReassign.Any() 
+                    ? $"Đã xóa {nonAdminUsers.Count} tài khoản test và chuyển {postsToReassign.Count} bài viết cho Admin. Giữ lại {adminCount} tài khoản Admin."
+                    : $"Đã xóa {nonAdminUsers.Count} tài khoản test. Giữ lại {adminCount} tài khoản Admin.";
+
+                TempData["SuccessMessage"] = message;
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception ex)

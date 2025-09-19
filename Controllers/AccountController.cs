@@ -70,12 +70,28 @@ namespace WEB_CV.Controllers
             if (!string.IsNullOrEmpty(vm.ReturnUrl) && Url.IsLocalUrl(vm.ReturnUrl))
                 return LocalRedirect(vm.ReturnUrl);
 
-            // 👉 Admin: bay thẳng vào khu vực quản trị (Bài Viết). Muốn vào Dashboard thì đổi controller = "Dashboard"
-            if (string.Equals(user.VaiTro, "Admin", StringComparison.OrdinalIgnoreCase))
-                return RedirectToAction("Index", "BaiViet", new { area = "Admin" });
-
-            // User thường
-            return RedirectToAction("Index", "Home");
+            // Redirect dựa trên vai trò
+            switch (user.VaiTro?.ToLowerInvariant())
+            {
+                case "admin":
+                    return RedirectToAction("Index", "Dashboard", new { area = "Admin" });
+                    
+                case "truongphongphattrien":
+                    // Trưởng phòng phát triển có full quyền admin - vào Dashboard
+                    return RedirectToAction("Index", "Dashboard", new { area = "Admin" });
+                    
+                case "truongphongnhansu":
+                    // Trưởng phòng nhân sự chỉ quản lý người dùng
+                    return RedirectToAction("Index", "NguoiDung", new { area = "Admin" });
+                    
+                case "truongphongdulieu":
+                    // Trưởng phòng dữ liệu chỉ quản lý media
+                    return RedirectToAction("Index", "Media", new { area = "Admin" });
+                    
+                default:
+                    // User thường
+                    return RedirectToAction("Index", "Home");
+            }
         }
 
         [HttpGet, AllowAnonymous]

@@ -8,7 +8,7 @@ using WEB_CV.Models.ViewModels;
 
 namespace WEB_CV.Controllers
 {
-    [Authorize(Roles = "Admin,Staff")]
+    [Authorize(Roles = "Admin,TruongPhongPhatTrien,TruongPhongNhanSu,TruongPhongDuLieu,Staff")]
     public class LichCongTacController : Controller
     {
         private readonly NewsDbContext _db;

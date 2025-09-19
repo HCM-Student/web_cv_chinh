@@ -76,6 +76,130 @@
     </style>
     
     @await RenderSectionAsync("Styles", required: false)
+    
+    <!-- Dropdown Menu Styling -->
+    <style>
+        /* Enhanced dropdown styling */
+        .dropdown-menu {
+            min-width: 280px;
+            padding: 0.5rem 0;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        .dropdown-header {
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #6c757d;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding: 0.5rem 1rem 0.25rem 1rem;
+            margin-top: 0.25rem;
+            background: transparent;
+        }
+        
+        .dropdown-item {
+            padding: 0.5rem 1rem;
+            font-size: 0.875rem;
+            transition: all 0.2s ease;
+            border-radius: 8px;
+            margin: 2px 8px;
+        }
+        
+        .dropdown-item:hover,
+        .dropdown-item:focus {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            color: #495057;
+            transform: translateX(2px);
+        }
+        
+        .dropdown-item.text-danger:hover {
+            background: linear-gradient(135deg, #f8d7da, #f5c6cb);
+            color: #721c24;
+        }
+        
+        /* Special styling for "Quay về" buttons */
+        .dropdown-item.bg-primary {
+            background: linear-gradient(135deg, #007bff, #0056b3) !important;
+            color: white !important;
+            font-weight: 600;
+            border-radius: 6px;
+            margin: 4px 8px;
+        }
+        
+        .dropdown-item.bg-success {
+            background: linear-gradient(135deg, #28a745, #1e7e34) !important;
+            color: white !important;
+            font-weight: 600;
+            border-radius: 6px;
+            margin: 4px 8px;
+        }
+        
+        .dropdown-item.bg-info {
+            background: linear-gradient(135deg, #17a2b8, #117a8b) !important;
+            color: white !important;
+            font-weight: 600;
+            border-radius: 6px;
+            margin: 4px 8px;
+        }
+        
+        .dropdown-item.bg-dark {
+            background: linear-gradient(135deg, #343a40, #23272b) !important;
+            color: white !important;
+            font-weight: 600;
+            border-radius: 6px;
+            margin: 4px 8px;
+        }
+        
+        .dropdown-item.bg-primary:hover,
+        .dropdown-item.bg-success:hover,
+        .dropdown-item.bg-info:hover,
+        .dropdown-item.bg-dark:hover {
+            transform: translateX(4px) scale(1.02);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        .dropdown-divider {
+            margin: 0.5rem 1rem;
+            border-color: rgba(0,0,0,0.08);
+        }
+        
+        /* Icon styling */
+        .dropdown-item i {
+            width: 16px;
+            text-align: center;
+            opacity: 0.7;
+        }
+        
+        .dropdown-item:hover i {
+            opacity: 1;
+        }
+        
+        /* Topbar user styling */
+        .topbar-user .btn {
+            background: transparent;
+            border: none;
+            color: #495057;
+            font-weight: 500;
+            padding: 0.5rem 0.75rem;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+        }
+        
+        .topbar-user .btn:hover {
+            background: rgba(0,123,255,0.1);
+            color: #007bff;
+        }
+        
+        .topbar-avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            margin-right: 0.5rem;
+            border: 2px solid #e9ecef;
+        }
+    </style>
 </head>
 <body class="admin-body">
     <!-- Admin Sidebar -->
@@ -90,7 +214,21 @@
             <img src="~/img/logo.png" alt="Logo" class="user-avatar">
             <div class="user-info">
                 <div class="user-name">@User.Identity?.Name</div>
-                <div class="user-role">Quản trị viên</div>
+                <div class="user-role">
+                    @{
+                        var role = User.FindFirst(System.Security.Claims.ClaimTypes.Role)?.Value ?? "User";
+                        var roleDisplay = role switch
+                        {
+                            "Admin" => "Quản trị viên",
+                            "TruongPhongPhatTrien" => "Trưởng phòng phát triển",
+                            "TruongPhongNhanSu" => "Trưởng phòng nhân sự",
+                            "TruongPhongDuLieu" => "Trưởng phòng dữ liệu",
+                            "Staff" => "Cán bộ",
+                            _ => "Người dùng"
+                        };
+                    }
+                    @roleDisplay
+                </div>
             </div>
         </div>
 
@@ -98,6 +236,9 @@
             <div class="nav-section">
                 <div class="nav-section-title">MAIN MENU</div>
                 <ul class="nav flex-column">
+                    @* Dashboard - Admin và TruongPhongPhatTrien *@
+                    @if (User.IsInRole("Admin") || User.IsInRole("TruongPhongPhatTrien"))
+                    {
                     <li class="nav-item">
                         <a class="nav-link" asp-area="Admin" asp-controller="Dashboard" asp-action="Index">
                             <span class="nav-icon">
@@ -107,6 +248,11 @@
                             <span class="nav-badge badge bg-primary">New</span>
                         </a>
                     </li>
+                    }
+                    
+                    @* Bài viết - Admin và TruongPhongPhatTrien *@
+                    @if (User.IsInRole("Admin") || User.IsInRole("TruongPhongPhatTrien"))
+                    {
                     <li class="nav-item">
                         <a class="nav-link" asp-area="Admin" asp-controller="BaiViet" asp-action="Index">
                             <span class="nav-icon">
@@ -115,6 +261,11 @@
                             <span class="nav-text">Bài viết</span>
                         </a>
                     </li>
+                    }
+                    
+                    @* Media - Admin, TruongPhongPhatTrien và TruongPhongDuLieu *@
+                    @if (User.IsInRole("Admin") || User.IsInRole("TruongPhongPhatTrien") || User.IsInRole("TruongPhongDuLieu"))
+                    {
                     <li class="nav-item">
                         <a class="nav-link" asp-area="Admin" asp-controller="Media" asp-action="Index">
                             <span class="nav-icon">
@@ -123,6 +274,11 @@
                             <span class="nav-text">Media</span>
                         </a>
                     </li>
+                    }
+                    
+                    @* Sự kiện - Admin và TruongPhongPhatTrien *@
+                    @if (User.IsInRole("Admin") || User.IsInRole("TruongPhongPhatTrien"))
+                    {
                     <li class="nav-item">
                         <a class="nav-link" asp-area="Admin" asp-controller="SuKien" asp-action="Index">
                             <span class="nav-icon">
@@ -131,6 +287,11 @@
                             <span class="nav-text">Sự kiện</span>
                         </a>
                     </li>
+                    }
+                    
+                    @* Chuyên mục - Admin và TruongPhongPhatTrien *@
+                    @if (User.IsInRole("Admin") || User.IsInRole("TruongPhongPhatTrien"))
+                    {
                     <li class="nav-item">
                         <a class="nav-link" asp-area="Admin" asp-controller="ChuyenMuc" asp-action="Index">
                             <span class="nav-icon">
@@ -139,6 +300,11 @@
                             <span class="nav-text">Chuyên mục</span>
                         </a>
                     </li>
+                    }
+                    
+                    @* Người dùng - Admin, TruongPhongPhatTrien và TruongPhongNhanSu *@
+                    @if (User.IsInRole("Admin") || User.IsInRole("TruongPhongPhatTrien") || User.IsInRole("TruongPhongNhanSu"))
+                    {
                     <li class="nav-item">
                         <a class="nav-link" asp-area="Admin" asp-controller="NguoiDung" asp-action="Index">
                             <span class="nav-icon">
@@ -147,6 +313,11 @@
                             <span class="nav-text">Người dùng</span>
                         </a>
                     </li>
+                    }
+                    
+                    @* Bình luận - Admin và TruongPhongPhatTrien *@
+                    @if (User.IsInRole("Admin") || User.IsInRole("TruongPhongPhatTrien"))
+                    {
                     <li class="nav-item">
                         <a class="nav-link" asp-area="Admin" asp-controller="BinhLuan" asp-action="Index">
                             <span class="nav-icon">
@@ -155,6 +326,11 @@
                             <span class="nav-text">Quản lý bình luận</span>
                         </a>
                     </li>
+                    }
+                    
+                    @* Liên hệ - Admin và TruongPhongPhatTrien *@
+                    @if (User.IsInRole("Admin") || User.IsInRole("TruongPhongPhatTrien"))
+                    {
                     <li class="nav-item">
                         <a class="nav-link" asp-area="Admin" asp-controller="LienHe" asp-action="Index">
                             <span class="nav-icon">
@@ -163,6 +339,24 @@
                             <span class="nav-text">Liên hệ</span>
                         </a>
                     </li>
+                    }
+                    
+                    @* Chat nội bộ - tất cả trưởng phòng *@
+                    @if (User.IsInRole("Admin") || User.IsInRole("TruongPhongPhatTrien") || User.IsInRole("TruongPhongNhanSu") || User.IsInRole("TruongPhongDuLieu"))
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Chat" asp-action="Index">
+                                <span class="nav-icon">
+                                    <i class="fas fa-comment-dots"></i>
+                                </span>
+                                <span class="nav-text">Chat nội bộ</span>
+                            </a>
+                        </li>
+                    }
+                    
+                    @* Thông báo nội bộ - Admin, TruongPhongPhatTrien và Staff *@
+                    @if (User.IsInRole("Admin") || User.IsInRole("TruongPhongPhatTrien") || User.IsInRole("Staff"))
+                    {
                     <li class="nav-item">
                         <a class="nav-link" asp-area="Admin" asp-controller="ThongBaoNoiBo" asp-action="Index">
                             <span class="nav-icon">
@@ -171,20 +365,29 @@
                             <span class="nav-text">Thông báo nội bộ</span>
                         </a>
                     </li>
+                    }
+                    
+                    @* Lịch công tác - tất cả trưởng phòng *@
+                    @if (User.IsInRole("Admin") || User.IsInRole("TruongPhongPhatTrien") || User.IsInRole("TruongPhongNhanSu") || User.IsInRole("TruongPhongDuLieu"))
+                    {
                     <li class="nav-item">
-                        <a class="nav-link" asp-area="Admin" asp-controller="LichCongTac" asp-action="Index">
+                            <a class="nav-link" asp-area="" asp-controller="LichCongTac" asp-action="Index">
                             <span class="nav-icon">
                                 <i class="fas fa-calendar-alt"></i>
                             </span>
                             <span class="nav-text">Lịch công tác</span>
                         </a>
                     </li>
+                    }
                 </ul>
             </div>
 
             <div class="nav-section">
                 <div class="nav-section-title">SYSTEM</div>
                 <ul class="nav flex-column">
+                    @* Cài đặt - chỉ Admin và TruongPhongPhatTrien *@
+                    @if (User.IsInRole("Admin") || User.IsInRole("TruongPhongPhatTrien"))
+                    {
                     <li class="nav-item">
                         <a class="nav-link" asp-area="Admin" asp-controller="CaiDat" asp-action="Index">
                             <span class="nav-icon">
@@ -193,6 +396,9 @@
                             <span class="nav-text">Cài đặt</span>
                         </a>
                     </li>
+                    }
+                    
+                    @* Xem website - tất cả roles *@
                     <li class="nav-item">
                         <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">
                             <span class="nav-icon">
@@ -252,10 +458,60 @@
                             @User.Identity?.Name
                         </button>
                         <ul class="dropdown-menu dropdown-menu-end">
-                            <li><a class="dropdown-item" asp-area="Admin" asp-controller="Profile" asp-action="Index"><i class="fas fa-user me-2"></i>Hồ sơ</a></li>
+                            @* Hồ sơ cá nhân - tất cả roles *@
+                            <li><a class="dropdown-item" asp-area="Admin" asp-controller="Profile" asp-action="Index"><i class="fas fa-user me-2"></i>Hồ sơ cá nhân</a></li>
+                            <li><a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="Edit"><i class="fas fa-edit me-2"></i>Chỉnh sửa hồ sơ</a></li>
+                            <li><a class="dropdown-item" asp-area="" asp-controller="Account" asp-action="ChangePassword"><i class="fas fa-key me-2"></i>Đổi mật khẩu</a></li>
+                            <li><a class="dropdown-item" asp-area="" asp-controller="BinhLuan" asp-action="MyComments"><i class="fas fa-comments me-2"></i>Bình luận của tôi</a></li>
+                            <li><a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Bookmarks"><i class="fas fa-bookmark me-2"></i>Dấu trang của tôi</a></li>
+                            
+                            @* Tùy chọn riêng cho Admin *@
+                            @if (User.IsInRole("Admin"))
+                            {
+                                <li><hr class="dropdown-divider"></li>
+                                <li class="dropdown-header">🔧 Quản trị hệ thống</li>
+                                <li><a class="dropdown-item bg-primary text-white" asp-area="Admin" asp-controller="Dashboard" asp-action="Index"><i class="fas fa-home me-2"></i>🏠 Quay về Admin</a></li>
+                                <li><a class="dropdown-item" asp-area="Admin" asp-controller="CaiDat" asp-action="Index"><i class="fas fa-cog me-2"></i>Cài đặt hệ thống</a></li>
+                                <li><a class="dropdown-item" asp-area="Admin" asp-controller="NguoiDung" asp-action="Index"><i class="fas fa-users-cog me-2"></i>Quản lý người dùng</a></li>
+                                <li><a class="dropdown-item" asp-area="Admin" asp-controller="BaoCao" asp-action="Index"><i class="fas fa-chart-bar me-2"></i>Báo cáo tổng hợp</a></li>
+                            }
+                            
+                            @* Tùy chọn cho Trưởng phòng phát triển *@
+                            @if (User.IsInRole("TruongPhongPhatTrien"))
+                            {
+                                <li><hr class="dropdown-divider"></li>
+                                <li class="dropdown-header">💻 Quản lý phát triển</li>
+                                <li><a class="dropdown-item bg-success text-white" asp-area="Admin" asp-controller="Dashboard" asp-action="Index"><i class="fas fa-home me-2"></i>🏠 Quay về Admin</a></li>
+                                <li><a class="dropdown-item" asp-area="Admin" asp-controller="BaiViet" asp-action="Index"><i class="fas fa-file-code me-2"></i>Quản lý nội dung</a></li>
+                                <li><a class="dropdown-item" asp-area="Admin" asp-controller="SEO" asp-action="Index"><i class="fas fa-search me-2"></i>SEO & Analytics</a></li>
+                                <li><a class="dropdown-item" asp-area="Admin" asp-controller="Ai" asp-action="Index"><i class="fas fa-robot me-2"></i>Công cụ AI</a></li>
+                            }
+                            
+                            @* Tùy chọn cho Trưởng phòng nhân sự *@
+                            @if (User.IsInRole("TruongPhongNhanSu"))
+                            {
+                                <li><hr class="dropdown-divider"></li>
+                                <li class="dropdown-header">👥 Quản lý nhân sự</li>
+                                <li><a class="dropdown-item bg-info text-white" asp-area="Admin" asp-controller="NguoiDung" asp-action="Index"><i class="fas fa-home me-2"></i>🏠 Quản lý nhân sự</a></li>
+                                <li><a class="dropdown-item" asp-area="Admin" asp-controller="NguoiDung" asp-action="Create"><i class="fas fa-user-plus me-2"></i>Thêm nhân viên mới</a></li>
+                            }
+                            
+                            @* Tùy chọn cho Trưởng phòng dữ liệu *@
+                            @if (User.IsInRole("TruongPhongDuLieu"))
+                            {
+                                <li><hr class="dropdown-divider"></li>
+                                <li class="dropdown-header">💾 Quản lý dữ liệu</li>
+                                <li><a class="dropdown-item bg-dark text-white" asp-area="Admin" asp-controller="Media" asp-action="Index"><i class="fas fa-home me-2"></i>🏠 Quản lý Media</a></li>
+                            }
+                            
+                            @* Chung cho tất cả *@
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" asp-area="" asp-controller="Chat" asp-action="Index"><i class="fas fa-comment-dots me-2"></i>Chat nội bộ</a></li>
+                            <li><a class="dropdown-item" asp-area="" asp-controller="LichCongTac" asp-action="Index"><i class="fas fa-calendar me-2"></i>Lịch công tác</a></li>
+                            <li><a class="dropdown-item" asp-area="" asp-controller="Home" asp-action="Index"><i class="fas fa-globe me-2"></i>Xem website</a></li>
                             <li><hr class="dropdown-divider"></li>
                             <li>
-                                <a class="dropdown-item" href="javascript:void(0)" onclick="document.getElementById('logout-form').submit();">
+                                <a class="dropdown-item text-danger" href="javascript:void(0)" onclick="document.getElementById('logout-form').submit();">
                                     <i class="fas fa-sign-out-alt me-2"></i>Đăng xuất
                                 </a>
                             </li>

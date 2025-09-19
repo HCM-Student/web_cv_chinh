@@ -1,9 +1,11 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using WEB_CV.Services.AI;
 
 namespace WEB_CV.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin,TruongPhongPhatTrien")]
     public class AiController : Controller
     {
         private readonly IProtonxSearch _ai;

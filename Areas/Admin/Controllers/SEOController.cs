@@ -5,7 +5,7 @@ using WEB_CV.Services;
 namespace WEB_CV.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin,TruongPhongPhatTrien")]
     public class SEOController : Controller
     {
         private readonly ISEOAnalysisService _seoService;

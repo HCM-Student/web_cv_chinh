@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using WEB_CV.Data;
@@ -6,6 +7,7 @@ using WEB_CV.Models;
 namespace WEB_CV.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin,TruongPhongPhatTrien")]
     public class BinhLuanController : Controller
     {
         private readonly NewsDbContext _context;

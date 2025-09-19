@@ -9,7 +9,7 @@ using WEB_CV.Models;
 namespace WEB_CV.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles = "Admin")]
+    [Authorize(Roles = "Admin,TruongPhongPhatTrien")]
     public class ChuyenMucController : Controller
     {
         private readonly NewsDbContext _db;

@@ -7,7 +7,7 @@ using WEB_CV.Models;
 
 namespace WEB_CV.Controllers;
 
-[Authorize(Roles = "Admin,Staff")]
+[Authorize(Roles = "Admin,TruongPhongPhatTrien,TruongPhongNhanSu,TruongPhongDuLieu,Staff")]
 public class ChatController : Controller
 {
     private readonly NewsDbContext _db;
@@ -22,12 +22,16 @@ public class ChatController : Controller
     public async Task<IActionResult> Index(string room = "general")
     {
         var meId = User.FindFirstValue(ClaimTypes.NameIdentifier) ?? "";
+        var meName = User.FindFirstValue(ClaimTypes.Name) ?? "Unknown";
         ViewBag.MeId = meId;
+        ViewBag.MeName = meName;
         ViewBag.Room = room;
 
-        // Danh sách user để mở DM
+        // Danh sách user để mở DM - tất cả vai trò quan trọng
         var users = await _db.NguoiDungs
-            .Where(u => u.VaiTro == "Admin" || u.VaiTro == "Staff")
+            .Where(u => u.VaiTro == "Admin" || u.VaiTro == "TruongPhongPhatTrien" || 
+                       u.VaiTro == "TruongPhongNhanSu" || u.VaiTro == "TruongPhongDuLieu" || 
+                       u.VaiTro == "Staff")
             .OrderBy(u => u.HoTen)
             .Select(u => new { Id = u.Id.ToString(), UserName = u.HoTen, Avatar = u.Avatar })
             .ToListAsync();

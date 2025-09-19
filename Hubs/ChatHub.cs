@@ -8,7 +8,7 @@ using WEB_CV.Models;
 
 namespace WEB_CV.Hubs;
 
-[Authorize(Roles = "Admin,Staff")]
+[Authorize(Roles = "Admin,TruongPhongPhatTrien,TruongPhongNhanSu,TruongPhongDuLieu,Staff")]
 public class ChatHub : Hub
 {
     private readonly NewsDbContext _db;
